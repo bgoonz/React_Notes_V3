@@ -171,7 +171,7 @@ ReactDOM is a Renderer
 
 ![](.gitbook/assets/image%20%2810%29.png)
 
-We want to store some piece of data that will change over time... we want to store state about what language the user selects and what they type into the form... both of which are subject to change over time.
+#### We want to store some piece of data that will change over time... we want to store state about what language the user selects and what they type into the form... both of which are subject to change over time.
 
 
 
