@@ -154,7 +154,7 @@ To create a production build, use yarn build.
 
 ```
 
-
+![](.gitbook/assets/image%20%286%29.png)
 
 
 
