@@ -2,5 +2,5 @@
 
 * [Introduction](README.md)
 * [index](index.md)
-* [Installing NodeJS](untitled.md)
+* [Generating React Project](untitled.md)
 
