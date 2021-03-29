@@ -149,5 +149,75 @@ If a given tag is a component react will walk through the contents of that tag..
 
 ![](.gitbook/assets/image%20%288%29.png)
 
+![](.gitbook/assets/image%20%289%29.png)
+
+#### First argument to ReactDOM.render\(
+
+#### -----&gt; is App component or app function...we are telling react that we want to import all the code used in the app.js file.
+
+#### Second argument is a reference to where we want to show the component with respect to root in index.html \(where to display\)
+
+#### Difference between react and reactDOM?
+
+![](.gitbook/assets/image%20%2810%29.png)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
