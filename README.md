@@ -4,7 +4,7 @@ description: First React Project
 
 # Introduction
 
-
+## Introduction
 
 ```text
 t|15:03:54|bryan@LAPTOP-9LGJ3JGS:[react-translator] react-translator_exitstatus:0__________________________________________________________o>
@@ -30,7 +30,7 @@ tree
 
 ### Index.html
 
-```html
+```markup
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -83,10 +83,9 @@ tree
     -->
   </body>
 </html>
-
 ```
 
-# App.js:
+## App.js:
 
 ```javascript
 import "./styles.css";
@@ -108,7 +107,6 @@ export default function App() {
     </div>
   );
 }
-
 ```
 
 ### Index.js
@@ -119,16 +117,9 @@ import ReactDOM from "react-dom";
 import App from "./App";
 
 ReactDOM.render(<App />, document.getElementById("root"));
-
 ```
 
-
-
 ![](.gitbook/assets/image%20%284%29.png)
-
-
-
-
 
 ![](.gitbook/assets/image%20%282%29.png)
 
@@ -142,41 +133,9 @@ If a given tag is a component react will walk through the contents of that tag..
 
 ![](.gitbook/assets/image%20%286%29.png)
 
-
-
-
-
 ![](.gitbook/assets/image.png)
 
 ![](.gitbook/assets/image%20%288%29.png)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
