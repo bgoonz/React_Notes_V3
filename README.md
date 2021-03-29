@@ -130,28 +130,6 @@ ReactDOM.render(<App />, document.getElementById("root"));
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ![](.gitbook/assets/image%20%282%29.png)
 
 ![](.gitbook/assets/react1.png)
