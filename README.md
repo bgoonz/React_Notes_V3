@@ -117,13 +117,25 @@ import ReactDOM from "react-dom";
 import App from "./App";
 
 ReactDOM.render(<App />, document.getElementById("root"));
+
+
 ```
 
+
+
+
+
 ![](.gitbook/assets/image%20%284%29.png)
+
+
 
 ![](.gitbook/assets/image%20%282%29.png)
 
 ![](.gitbook/assets/react1.png)
+
+
+
+
 
 If a given tag is a component react will walk through the contents of that tag... and evaluate if it is a vanilla html component... if react decides it is not it will parse through the react component and inspect it's children components.
 
