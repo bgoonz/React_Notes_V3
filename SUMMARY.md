@@ -1,5 +1,6 @@
 # Table of contents
 
 * [Introduction](README.md)
-* [index](scope-and-closures.md)
+* [index](index.md)
+* [Untitled](untitled.md)
 
