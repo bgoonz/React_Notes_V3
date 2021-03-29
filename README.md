@@ -30,7 +30,7 @@ tree
 
 ### Index.html
 
-```markup
+```html
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -86,7 +86,7 @@ tree
 
 ```
 
-{% embed url="https://App.js" %}
+# App.js:
 
 ```javascript
 import "./styles.css";
