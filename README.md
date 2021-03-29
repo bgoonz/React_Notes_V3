@@ -143,7 +143,7 @@ If a given tag is a component react will walk through the contents of that tag..
 
 ![](.gitbook/assets/image%20%283%29.png)
 
-![](.gitbook/assets/image%20%286%29%20%281%29%20%282%29.png)
+![](.gitbook/assets/image%20%286%29%20%281%29%20%282%29%20%282%29.png)
 
 ![](.gitbook/assets/image.png)
 
@@ -178,6 +178,8 @@ ReactDOM is a Renderer
 
 
 
+
+![](.gitbook/assets/image%20%2820%29.png)
 
 
 
