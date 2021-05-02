@@ -141,7 +141,11 @@ Inside that directory, you can run several commands:
 
   yarn eject
     Removes this tool and copies build dependencies, configuration files
+<<<<<<< HEAD
     and scripts into the app directory. If you do this, you can't go back!
+=======
+    and scripts into the app directory. If you do this, you can’t go back!
+>>>>>>> ace4f24c30dd772f3a1c56c7392c3eef123bb0c2
 
 We suggest that you begin by typing:
 
@@ -183,3 +187,7 @@ To create a production build, use yarn build.
 
 
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> ace4f24c30dd772f3a1c56c7392c3eef123bb0c2

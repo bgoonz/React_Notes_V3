@@ -16,10 +16,18 @@
   "dependencies": {
     "@docusaurus/core": "2.0.0-alpha.72",
     "@docusaurus/preset-classic": "2.0.0-alpha.72",
+<<<<<<< HEAD
     "@mdx-js/react": "^1.6.21",
     "clsx": "^1.1.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1"
+=======
+    "@mdx-js/react": "1.6.22",
+    "clsx": "1.1.1",
+    "react": "17.0.2",
+    "react-dom": "17.0.2"
+
+>>>>>>> ace4f24c30dd772f3a1c56c7392c3eef123bb0c2
   },
   "browserslist": {
     "production": [
