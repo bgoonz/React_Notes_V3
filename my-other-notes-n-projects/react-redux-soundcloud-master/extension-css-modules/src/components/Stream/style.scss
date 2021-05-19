@@ -1,0 +1,38 @@
+@import '../../styles/custom';
+
+.track {
+  display: flex;
+  flex-direction: column;
+  padding: $padding / 2;
+  margin: $padding / 2;
+  border: 1px solid #3A3A3A;
+
+  button {
+    margin: ($padding / 2) 0;
+  }
+}
+
+.button {
+  display: inline-block;
+  background: transparent;
+  border: 1px solid $mainColor;
+  line-height: $padding;
+  color: $mainColor;
+  border-radius: 5px;
+  padding: ($padding / 4) ($padding / 2);
+  cursor: pointer;
+
+  &:hover {
+    transition: 1s ease;
+    background-color: $mainColor;
+    color: #FFFFFF;
+  }
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.large {
+  height: 60px;
+}
