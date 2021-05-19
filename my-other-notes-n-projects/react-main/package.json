@@ -6,8 +6,8 @@
   "main": "index.js",
   "dependencies": {
     "react-router-dom": "4.1.1",
-    "react-dom": "15.5.3",
-    "react": "15.5.3"
+    "react-dom": "15.7.0",
+    "react": "15.7.0"
   },
   "devDependencies": {
     "react-scripts": "1.0.0"
