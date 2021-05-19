@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "@material-ui/core": "^3.9.3",
-    "auth0-js": "^9.10.2",
+    "auth0-js": "9.16.0",
     "axios": "^0.18.0",
     "history": "^4.9.0",
     "loadash": "^1.0.0",
