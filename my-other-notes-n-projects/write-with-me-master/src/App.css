@@ -1,0 +1,36 @@
+p, span {
+  font-family: 'Oswald', sans-serif;
+}
+
+h1, h2, h3, h4, h5 {
+  font-family: 'Francois One', sans-serif;
+}
+
+blockquote {
+  border-left: 4px solid black;
+  padding-left: 10px;
+}
+
+pre {
+  background-color: #ededed;
+  padding: 20px;
+}
+
+h1 {
+  margin-bottom: 5px;
+  font-size: 50px;
+}
+
+h2 {
+  font-size: 40px;
+  margin: 8px 0px 5px;
+}
+
+h3 {
+  font-size: 32px;
+}
+
+p {
+  margin-top: 2px;
+  margin-bottom: 2px;
+}
