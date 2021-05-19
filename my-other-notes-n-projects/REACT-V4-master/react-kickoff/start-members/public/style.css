@@ -1,0 +1,29 @@
+.member {
+    margin: 1em;
+    padding: 1em;
+    border: solid 1px #ACACAC;
+    height: 80px;
+    width: 25em;
+    cursor: pointer;
+}
+
+.member img {
+    float: left;
+    margin: 0 10px 0 0;
+    border: solid 1px black;
+}
+
+.member h1,
+.member p {
+    margin: 0;
+    padding: 0;
+}
+
+.member.selected {
+    background-color: #FFF1AD;
+}
+
+#members {
+    float: left;
+}
+
