@@ -6,7 +6,7 @@
     "@material-ui/core": "^3.9.3",
     "auth0-js": "^9.10.2",
     "axios": "^0.18.0",
-    "history": "^4.9.0",
+    "history": "5.0.0",
     "loadash": "^1.0.0",
     "moment": "^2.24.0",
     "react": "^16.8.6",
