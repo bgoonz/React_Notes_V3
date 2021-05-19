@@ -1,0 +1,1964 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+ <link rel="stylesheet" href="./toc.css">
+ <link rel="stylesheet" href="./readme.css">
+  <link rel="stylesheet" href="./boot.css">
+  <link rel="stylesheet"
+    href="https://raw.githubusercontent.com/bgoonz/styling-templates/master/mixu-bootstrap/assets/css/bootstrap.css">
+
+<script async src="./toc.js"></script>
+
+
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="Author" content="Bryan Guner">
+
+<title> directory </title>
+
+
+</head>
+
+<body>
+    <h5>Automatic Table of Contents</h5>
+    <div id="ToC" class="my_class"> </div>
+  <div class="mume markdown-preview  ">
+
+    <div class="markdown-body">
+      <h1># A journey through my experiences learning React.js and the tools I discover along the way!</h1>
+      <script>
+        var inscrybmde = new InscrybMDE();
+      </script>
+      <h2><a href="#react-mental-models"></a>React Mental Models</h2>
+      <p>React helps us build complex, interactive UIs more easily than ever before. It also encourages us to write code
+        in a certain way, guiding us to create apps that are simpler to navigate and understand.</p>
+      <p><img
+          src="https://obedparla.com/static/c9f28303d7dad2744b40d64b0ab33358/9aabf/react-mental-model-illustration.jpg"
+          alt="An abstract model inside a mind looking at the React logo"></p>
+      <p>React itself is a mental model with a simple idea at its core: encapsulate portions of your app that rely on
+        similar logic and UI and React will make sure that portion is always up kept up to date.</p>
+      <p>Whether you&apos;ve been working with React for years or are just starting, having a clear mental model is the
+        best way to feel confident working with it. So for me to transfer my mental models to you I&apos;ll start from
+        first-principles and build on top of them.</p>
+      <h2><a href="#its-functions-all-the-way-down"></a>It&apos;s functions all the way down</h2>
+      <p>Let&apos;s start by modeling the basic building blocks of JavaScript and React: functions.</p>
+      <ul>
+        <li>A React component is just a function</li>
+        <li>Components containing other components are functions calling other functions</li>
+        <li>Props are the function&apos;s arguments</li>
+      </ul>
+      <p>This is hidden away by JSX, the markup language React uses. Strip away JSX and React is a bunch of functions
+        calling one another. JSX is in itself an applied mental model that makes using React simpler and more intuitive.
+      </p>
+      <p>Let&apos;s look at each part individually.</p>
+      <h3><a href="#a-component-is-a-function-that-returns-jsx"></a>A component is a function that returns JSX</h3>
+      <p>React is used with JSX&#x2014;JavaScript XML&#x2014;a way to write what seems as HTML with all of
+        JavaScript&apos;s power. JSX offers a great applied mental model for using nested functions in a way that feels
+        intuitive.</p>
+      <p>Let&apos;s ignore class components and focus on the far more common functional components. A
+        <em>functional</em> component is a function that behaves exactly like any other JavaScript function. React
+        components always return JSX which is then executed and turned into HTML.
+      </p>
+      <p>This is what simple JSX looks like:</p>
+      <pre class="language-js">    <span const</span> <span ><span class="token maybe-class-name">Li</span></span> <span class="token operator">=</span> <span class="token parameter">props</span> <span class="token arrow operator">=&gt;</span> <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span> <span class="token spread"><span class="token punctuation">{</span><span class="token punctuation">...</span><span class="token attr-value">props</span><span class="token punctuation">}</span></span><span class="token punctuation">&gt;</span></span><span class="token punctuation">{</span>props<span class="token punctuation">.</span><span class="token property-access">children</span><span class="token punctuation">}</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">&gt;</span></span><span class="token punctuation">;</span>
+    
+    <span class="token keyword module">export</span> <span const</span> <span ><span class="token maybe-class-name">RickRoll</span></span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token arrow operator">=&gt;</span> <span class="token punctuation">(</span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">className</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&apos;</span>wrapper<span class="token punctuation">&apos;</span></span><span class="token punctuation">&gt;</span></span>
+          <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>ul</span><span class="token punctuation">&gt;</span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">Li</span></span> <span class="token attr-name">color</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span><span class="token string">&apos;red&apos;</span><span class="token punctuation">}</span></span><span class="token punctuation">&gt;</span></span><span class="token maybe-class-name">Never</span> give you up<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">Li</span></span><span class="token punctuation">&gt;</span></span>
+          <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>ul</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+    <span class="token punctuation">)</span><span class="token punctuation">;</span>
+</pre>
+      <p>Which compiled into pure JavaScript by Babel:</p>
+      <pre class="language-js">    <span const</span> <span ><span class="token maybe-class-name">Li</span></span> <span class="token operator">=</span> <span class="token parameter">props</span> <span class="token arrow operator">=&gt;</span> <span class="token maybe-class-name">React</span><span class="token punctuation">.</span><span class="token method function property-access">createElement</span><span class="token punctuation">(</span><span class="token string">&apos;li&apos;</span><span class="token punctuation">,</span> props<span class="token punctuation">,</span> props<span class="token punctuation">.</span><span class="token property-access">children</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    
+    <span class="token keyword module">export</span> <span const</span> <span ><span class="token maybe-class-name">RickRoll</span></span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token arrow operator">=&gt;</span>
+      <span class="token maybe-class-name">React</span><span class="token punctuation">.</span><span class="token method function property-access">createElement</span><span class="token punctuation">(</span>
+        <span class="token string">&apos;div&apos;</span><span class="token punctuation">,</span>
+        <span class="token keyword null nil">null</span><span class="token punctuation">,</span>
+        <span class="token maybe-class-name">React</span><span class="token punctuation">.</span><span class="token method function property-access">createElement</span><span class="token punctuation">(</span>
+          <span class="token string">&apos;div&apos;</span><span class="token punctuation">,</span>
+          <span class="token punctuation">{</span>
+            className<span class="token operator">:</span> <span class="token string">&apos;wrapper&apos;</span><span class="token punctuation">,</span>
+          <span class="token punctuation">}</span><span class="token punctuation">,</span>
+          <span class="token maybe-class-name">React</span><span class="token punctuation">.</span><span class="token method function property-access">createElement</span><span class="token punctuation">(</span>
+            <span class="token string">&apos;ul&apos;</span><span class="token punctuation">,</span>
+            <span class="token keyword null nil">null</span><span class="token punctuation">,</span>
+            <span class="token maybe-class-name">React</span><span class="token punctuation">.</span><span class="token method function property-access">createElement</span><span class="token punctuation">(</span>
+              <span class="token maybe-class-name">Li</span><span class="token punctuation">,</span>
+              <span class="token punctuation">{</span>
+                color<span class="token operator">:</span> <span class="token string">&apos;red&apos;</span><span class="token punctuation">,</span>
+              <span class="token punctuation">}</span><span class="token punctuation">,</span>
+              <span class="token string">&apos;Never give you up&apos;</span><span class="token punctuation">,</span>
+            <span class="token punctuation">)</span><span class="token punctuation">,</span>
+          <span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token punctuation">)</span><span class="token punctuation">,</span>
+      <span class="token punctuation">)</span><span class="token punctuation">;</span>
+</pre>
+      <p>Now, notice how each component is a function calling another function, and each new component is the third
+        argument for the <code class="language-javascript">React.createElement</code> function. Whenever you write a
+        component, it&apos;s useful to
+        keep in mind that it&apos;s a normal JavaScript function.</p>
+      <p>An important feature of React is that a component can have many children but only one parent. I found this a
+        confusing until I realized it&apos;s the same logic HTML has, where each element must be inside other elements,
+        and can have many children. You can notice this in the code above, where there&apos;s only one parent
+        <code class="language-javascript">div</code> containing all the children.
+      </p>
+      <h3><a href="#components-props-are-the-same-as-a-functions-arguments"></a>component&apos;s props are the same as a
+        function&apos;s arguments</h3>
+      <p>When using a function we can use arguments to share information with that function. For React components we
+        call these arguments <code class="language-javascript">props</code> (funny story, I didn&apos;t realize props is
+        short for
+        <em>properties</em> for a long time).
+      </p>
+      <p>Under the hood, props behave <em>exactly</em> like function arguments, the differences are that we interact
+        with them through the nicer interface of JSX, and that React gives extra functionality to props such as
+        <code class="language-javascript">children</code> .
+      </p>
+      <h2><a href="#creating-a-mental-model-around-functions"></a>Creating a mental model around functions</h2>
+      <p>Using this knowledge let&apos;s craft a mental model to intuitively understand functions!</p>
+      <p>When I think about a function I imagine it as a box, and that box will do something whenever it&apos;s called.
+        It could return a value or not:</p>
+      <pre data-role="codeBlock" data-info="js" class="language-javascript">    <span function</span> <span class="token function">sum</span><span class="token punctuation">(</span><span class="token parameter">a<span class="token punctuation">,</span> b</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword control-flow">return</span> a <span class="token operator">+</span> b<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span><span class="token function">sum</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">,</span> <span class="token number">20</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span function</span> <span class="token function">logSum</span><span class="token punctuation">(</span><span class="token parameter">a<span class="token punctuation">,</span> b</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span>a <span class="token operator">+</span> b<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+</pre>
+      <p>Since a component is a fancy function, that makes a component a box as well, with <code
+          class="language-javascript">props</code> as the
+        ingredients the box needs to create the output.</p>
+      <p><img src="https://obedparla.com/static/1078eb1563b832008167b49c2b8edb11/ce2e0/a-plus-b-box.jpg"
+          alt="A plus B in a box with props explaining a mental model for JavaScript functions"></p>
+      <p>When a component is executed it will run whatever logic it has, if any, and evaluate its JSX. Any tags will
+        become HTML and any component will be executed, and the process is repeated until reaching the last component in
+        the chain of children.</p>
+      <p>Since a component can have many children but only one parent I imagine multiple components as a set of boxes,
+        one inside another. Each box must be contained within a bigger box and can have many smaller boxes inside.</p>
+      <p><img src="https://obedparla.com/static/cf7892f6a3db2815d6c502fe74538e4a/1df45/box-inside-box.jpg"
+          alt="One big box with many smaller boxes inside and text saying &quot;it&apos;s a box in another box&quot;">
+      </p>
+      <p>But the mental model of a box representing a component is not complete without understanding how it can
+        interact with other boxes.</p>
+      <h2><a href="#how-to-think-about-closures"></a><br>
+        How To Think About Closures</h2>
+      <p>Closures are a core concept in JavaScript. They enable complex functionality in the language, they&apos;re
+        super important to understand to have a good mental model around React.</p>
+      <p>They&apos;re also one of the features newcomers struggle with the most, so instead of explaining the
+        technicalities I&apos;ll demonstrate the mental model I have around closures.</p>
+      <p>The basic description of a closure is that it&apos;s a function. I imagine it as a box that keeps what&apos;s
+        inside of it from spilling out, while allowing the things outside of it from entering, like a semi-permeable
+        box. But spilling out where?</p>
+      <p>While the closure itself is a box, any closure will be inside bigger boxes, with the outermost box being the
+        Window object.</p>
+      <p><img src="https://obedparla.com/static/952aebfcba6f1850f93b3bf6d15392f3/ce2e0/closures_window.jpg"
+          alt="A box describing a mental model of a javascript closure, showing Window, scripts and React apps"></p>
+      <blockquote>
+        <p>The window object encapsulates everything else</p>
+      </blockquote>
+      <h3><a href="#but-what-is-a-closure"></a>But what <em>is</em> a closure?</h3>
+      <p>A closure is a feature of JavaScript functions. If you&apos;re using a function, you&apos;re using a closure.
+      </p>
+      <p>As I&apos;ve mentioned, a function is a box and that makes a closure a box too. Considering that each function
+        can contain many others inside of it, then the closure is the ability of a function to use the information
+        outside of it, while keeping the information it has inside from &quot;spilling out&quot;, or being used by the
+        outer function.</p>
+      <p>Speaking in terms of my mental model: I imagine the functions as boxes within boxes, and each smaller box can
+        see the information of the outer box, or parent, but the big box cannot see the smaller one&apos;s information.
+        That&apos;s as simple and accurate an explanation of closures as I can make.</p>
+   
+      <p>&quot;Each function can only access its own</p>
+      <p><img src="https://obedparla.com/static/96f403cd585425c1057214447165bbbe/01d85/data-flow.jpg"
+          alt="(information and the parent&apos;s&quot;)"></p>
+      <p>Each function can only access its own information and the parent&apos;s</p>
+      <p>Closures are important because they can be exploited to create some powerful mechanics and React takes full
+        advantage of this.</p>
+      <h3><a href="#closures-in-react"></a>Closures in React</h3>
+      <p>Each React component is also a closure. Within components, you can only pass props down from parent to child
+        and the parent cannot see what&apos;s inside the child, this is an intended feature to make our app&apos;s data
+        flow simpler to trace. To find where data comes from, we usually need to go up the tree to find which parent is
+        sending it down.</p>
+      <p>A great example of closures in React is updating a parent&apos;s state through a child component. You&apos;ve
+        probably done this without realizing you were messing around with closures.</p>
+      <p>To start, we know the parent can&apos;t access the child&apos;s information directly, but the child can access
+        the parent&apos;s. So we send down that info from parent to child through <code
+          class="language-javascript">props</code> . In this case, the
+        information takes the shape of a function that updates the parent&apos;s state.</p>
+      <pre class="language-js">    <span const</span> <span ><span class="token maybe-class-name">Parent</span></span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token arrow operator">=&gt;</span> <span class="token punctuation">{</span>
+      <span const</span> <span class="token punctuation">[</span>count<span class="token punctuation">,</span> setCount<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">useState</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    
+      <span class="token keyword control-flow">return</span> <span class="token punctuation">(</span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span><span class="token punctuation">&gt;</span></span>
+          <span class="token maybe-class-name">The</span> count is <span class="token punctuation">{</span>count<span class="token punctuation">}</span>
+          <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span><span class="token punctuation">&gt;</span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">ChildButtons</span></span> <span class="token attr-name">onClick</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span>setCount<span class="token punctuation">}</span></span> <span class="token attr-name">count</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span>count<span class="token punctuation">}</span></span> <span class="token punctuation">/&gt;</span></span>
+          <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+      <span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">;</span>
+    
+    <span const</span> <span ><span class="token maybe-class-name">ChildButtons</span></span> <span class="token operator">=</span> <span class="token parameter">props</span> <span class="token arrow operator">=&gt;</span> <span class="token punctuation">(</span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span> <span class="token attr-name">onClick</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token arrow operator">=&gt;</span> props<span class="token punctuation">.</span><span class="token method function property-access">onClick</span><span class="token punctuation">(</span>props<span class="token punctuation">.</span><span class="token property-access">count</span> <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">}</span></span><span class="token punctuation">&gt;</span></span>
+          <span class="token maybe-class-name">Increase</span> count
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>button</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span> <span class="token attr-name">onClick</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token arrow operator">=&gt;</span> props<span class="token punctuation">.</span><span class="token method function property-access">onClick</span><span class="token punctuation">(</span>props<span class="token punctuation">.</span><span class="token property-access">count</span> <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">}</span></span><span class="token punctuation">&gt;</span></span>
+          <span class="token maybe-class-name">Decrease</span> count
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>button</span><span class="token punctuation">&gt;</span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+    <span class="token punctuation">)</span><span class="token punctuation">;</span>
+</pre>
+      <p>When an <code class="language-javascript">onClick</code> happens in a <code
+          class="language-javascript">button</code> , that will execute the function received from
+        props <code class="language-javascript">props.onClick</code> , and update the value using <code
+          class="language-javascript">props.count</code> .</p>
+      <p>The insight here lies in the way we&apos;re updating a parent&apos;s state through a child, in this case, the
+        <code class="language-javascript">props.onClick</code> function. The reason this works is that the function was
+        <em>declared</em> within the
+        <code class="language-javascript">Parent</code> component&apos;s scope, within its closure, so it will have
+        access to the parent&apos;s
+        information. Once that function is called in a child, it still lives in the same closure.
+      </p>
+      <p>This can be hard to grasp, so the way I imagine it is as a &quot;tunnel&quot; between closures. Each has its
+        own scope, but we can create a one-way communication tunnel that connects both.</p>
+      <p>Once we understand how closures affect our components, we can take the next big step: React state.</p>
+      <h2><a href="#fitting-reacts-state-into-our-mental-model"></a>Fitting React&apos;s State Into Our Mental Model
+      </h2>
+      <p>React&apos;s philosophy is simple: it handles <em>when</em> and <em>how</em> to render elements, and developers
+        control <em>what</em> to render. State is our tool to decide that what.</p>
+      <p>When state changes, its component renders and therefore re-executes all the code within. We do this to show
+        new, updated information to the user.</p>
+      <p>In my mental model state is like a special property inside the box. It&apos;s independent of everything else
+        that happens within it. It will get a default value on the first render and always be up to date with the latest
+        value.</p>
+      <p>Each variable and function is created on every render, which means their values are also brand new. Even if a
+        variable&apos;s value never changes, it is recalculated and reassigned every time. That&apos;s not the case with
+        state, it only changes when there&apos;s a request for it to change via a <code class="language-javascript">set
+          state</code> event.</p>
+      <p><img src="https://obedparla.com/static/acd86ef0ea8a3fe610df603769e68ad9/44313/state-in-box.jpg"
+          alt="React component state visualized as a part of a bigger box with props coming in from outside"></p>
+      <p>State is a special, independent part of the box; with props coming from outside</p>
+      <p>State follows a simple rule: Whenever it changes it will re-rendered the component and its children. Props
+        follow the same logic, if a prop changes, the component will re-render, however, we can control state by
+        modifying it, props are more static and usually change as a reaction to a state change.</p>
+      <h1>the-rendering-mental-model-understanding-reacts-magic</h1>
+      <blockquote>
+        <p>The Rendering Mental Model: understanding React&apos;s magic</p>
+      </blockquote>
+      <hr>
+      <p>I consider rendering to be React&apos;s most confusing part because a lot of things happen during rendering
+        that sometimes isn&apos;t obvious by looking at the code. That&apos;s why having a clear mental model helps.</p>
+      <p>The way I imagine rendering with my imaginary boxes is two-fold: the first render brings the box into
+        existence, that&apos;s when the state is initialized. The second part is when it re-renders, that&apos;s the box
+        being recycled, most of it is brand new but some important elements of it remain namely state.</p>
+      <p>On every render, everything inside a component is created, including variables and functions, that&apos;s why
+        we can have variables storing a calculation&apos;s results, since they will be recalculated on every render.
+        It&apos;s also why functions are not reliable as values, due to their reference (the function&apos;s value, per
+        se) being different every render.</p>
+      <pre class="language-js">    <span const</span> <span ><span class="token maybe-class-name">Thumbnail</span></span> <span class="token operator">=</span> <span class="token parameter">props</span> <span class="token arrow operator">=&gt;</span> <span class="token punctuation">(</span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span><span class="token punctuation">&gt;</span></span>
+        <span class="token punctuation">{</span>props<span class="token punctuation">.</span><span class="token property-access">withIcon</span> <span class="token operator">&amp;&amp;</span> <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">AmazingIcon</span></span> <span class="token punctuation">/&gt;</span></span><span class="token punctuation">}</span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>img</span> <span class="token attr-name">src</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span>props<span class="token punctuation">.</span><span class="token property-access">imgUrl</span><span class="token punctuation">}</span></span> <span class="token attr-name">alt</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span>props<span class="token punctuation">.</span><span class="token property-access">alt</span><span class="token punctuation">}</span></span> <span class="token punctuation">/&gt;</span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+    <span class="token punctuation">)</span><span class="token punctuation">;</span>
+</pre>
+      <p>The above will give a different result depending on the props the component receives. The reason React
+        <em>must</em> re-render on every prop change is that it wants to keep the user up to date with the latest
+        information.
+      </p>
+      <p>However, the state doesn&apos;t change on re-renders, its value is maintained. That&apos;s why the box is
+        &quot;recycled&quot; instead of created brand new every time. Internally, React is keeping track of each box and
+        making sure its state is always consistent. That&apos;s how React knows when to update a component.</p>
+      <p><img src="https://obedparla.com/static/78de62863da9bd4c40c588c294167031/7efee/react-rendering-mental-model.jpg"
+          alt="Mental model of a React component re-rendering when props change"></p>
+      <blockquote>
+        <p>&quot;When props (or state) changes, a new render happens and the component&apos;s output can
+          change&quot;)]<br>
+          <img
+            src="https://obedparla.com/static/78de62863da9bd4c40c588c294167031/ea2ac/react-rendering-mental-model.jpg"
+            alt>
+        </p>
+      </blockquote>
+      <p>When props (or state) changes, a new render happens and the component&apos;s output can change</p>
+      <p>By imagining a box being recycled I can understand what&apos;s going on inside of it. For simple components,
+        it&apos;s easy to grasp, but the more complex a component becomes, the more props it receives, the more state it
+        maintains, the more useful a clear mental model becomes.</p>
+      <h2><a href="#a-complete-react-mental-model-putting-it-all-together"></a>A complete React mental model: Putting it
+        all together.</h2>
+      <p>Now that I&apos;ve explained all the different parts of the puzzle separately, let&apos;s put it all together.
+        Here&apos;s the complete mental model I use for React components, directly translated from how I imagine them
+        into words.</p>
+      <p>I imagine a React component as a box that contains all of its information within its walls, including its
+        children, which are more boxes.</p>
+      <p>And like a box in the real world, it can have other boxes inside of it and these boxes can, in turn, contain
+        more boxes. That way each box/component must have a single parent, and a parent can have many children.</p>
+      <p><img src="https://obedparla.com/static/d6c8afaef3597fd26d9174e070be1ce3/ce2e0/react-mental-model-basic.jpg"
+          alt="Basic representation of a React component as a mental model using boxes"></p>
+      <p><img src="https://obedparla.com/static/d6c8afaef3597fd26d9174e070be1ce3/ce2e0/react-mental-model-basic.jpg"
+          alt="(&quot;The basic representation of a React component&quot;)"></p>
+      <blockquote>
+        <p>The basic representation of a React component</p>
+      </blockquote>
+      <p>The boxes are semi-permeable, meaning they never leak anything to the outside but can use information from the
+        outside as if it belonged to them. I imagine like this to represent how closures work in JavaScript.</p>
+      <p>In React the way to share information between components is called <code
+          class="language-javascript">props</code> , the same idea applies
+        to function and then it&apos;s called <code class="language-javascript">arguments</code> , they both work in the
+        same way but with a
+        different syntax.</p>
+      <p>Within components, information can only travel <em>down</em> from parents to children. In other words, children
+        can access their parent&apos;s data and state, but not the other way around, and the way we share that
+        information is through <code class="language-javascript">props</code> .</p>
+      <p>I imagine this directional sharing of information as boxes within boxes. With the inner-most box being able to
+        absorb the parent&apos;s data.</p>
+      <p><img src="https://obedparla.com/static/a3471b4d03d16406ea159b3bc3f3e218/ce2e0/data-sharing-model.jpg"
+          alt=" React Mental model of data sharing between components visualized as information flowing downward "></p>
+      <p>Data is shared from parent to child</p>
+      <p>The box must first be created though, and this happens on <code class="language-javascript">render</code> ,
+        where the default value is
+        given to <code class="language-javascript">state</code> and just like with functions, all the code within the
+        component is executed. In my
+        mental model, this is equivalent to the box being <em>created</em>.</p>
+      <p>Subsequent renders, or <code class="language-javascript">re-renders</code> , execute all the code in the
+        component again, recalculating
+        variables, recreating functions, and so on. Everything except for <code class="language-javascript">state</code>
+        is brand new on each
+        render. State&apos;s value is maintained across renders is updated only through a <code
+          class="language-javascript">set</code> method.</p>
+      <p>In my mental model, I see re-rendering as recycling the box since most of it is recreated, but it&apos;s still
+        the same box due to React keeping track of the component&apos;s state.</p>
+      <p>When a box is recycled all the boxes within it, its children, are also recycled. This can happen because the
+        component&apos;s state was modified or a prop changed.</p>
+      <p><img
+          src="https://obedparla.com/static/267768646d810a0032728d222c3f13a5/7efee/react-rendering-mental-model-full.jpg"
+          alt="Mental model of a React component re-rendering when props or state change"></p>
+      <p>Mental model of a React component re-rendering when props or state change</p>
+      <p>Remember that a state or prop changing means the information the user sees is outdated, and React always wants
+        to keep the UI updated so it re-renders the component that must show the new data.</p>
+      <h2>---<a href="#react-mental-models"></a>React Mental Models</h2>
+      <p>React helps us build complex, interactive UIs more easily than ever before. It also encourages us to write code
+        in a certain way, guiding us to create apps that are simpler to navigate and understand.</p>
+      <p><img
+          src="https://obedparla.com/static/c9f28303d7dad2744b40d64b0ab33358/9aabf/react-mental-model-illustration.jpg"
+          alt="An abstract model inside a mind looking at the React logo"></p>
+      <p>React itself is a mental model with a simple idea at its core: encapsulate portions of your app that rely on
+        similar logic and UI and React will make sure that portion is always up kept up to date.</p>
+      <p>Whether you&apos;ve been working with React for years or are just starting, having a clear mental model is the
+        best way to feel confident working with it. So for me to transfer my mental models to you I&apos;ll start from
+        first-principles and build on top of them.</p>
+      <h2><a href="#its-functions-all-the-way-down"></a>It&apos;s functions all the way down</h2>
+      <p>Let&apos;s start by modeling the basic building blocks of JavaScript and React: functions.</p>
+      <ul>
+        <li>A React component is just a function</li>
+        <li>Components containing other components are functions calling other functions</li>
+        <li>Props are the function&apos;s arguments</li>
+      </ul>
+      <p>This is hidden away by JSX, the markup language React uses. Strip away JSX and React is a bunch of functions
+        calling one another. JSX is in itself an applied mental model that makes using React simpler and more intuitive.
+      </p>
+      <p>Let&apos;s look at each part individually.</p>
+      <h3><a href="#a-component-is-a-function-that-returns-jsx"></a>A component is a function that returns JSX</h3>
+      <p>React is used with JSX&#x2014;JavaScript XML&#x2014;a way to write what seems as HTML with all of
+        JavaScript&apos;s power. JSX offers a great applied mental model for using nested functions in a way that feels
+        intuitive.</p>
+      <p>Let&apos;s ignore class components and focus on the far more common functional components. A
+        <em>functional</em> component is a function that behaves exactly like any other JavaScript function. React
+        components always return JSX which is then executed and turned into HTML.
+      </p>
+      <p>This is what simple JSX looks like:</p>
+      <pre class="language-js">    <span const</span> <span ><span class="token maybe-class-name">Li</span></span> <span class="token operator">=</span> <span class="token parameter">props</span> <span class="token arrow operator">=&gt;</span> <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span> <span class="token spread"><span class="token punctuation">{</span><span class="token punctuation">...</span><span class="token attr-value">props</span><span class="token punctuation">}</span></span><span class="token punctuation">&gt;</span></span><span class="token punctuation">{</span>props<span class="token punctuation">.</span><span class="token property-access">children</span><span class="token punctuation">}</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">&gt;</span></span><span class="token punctuation">;</span>
+    
+    <span class="token keyword module">export</span> <span const</span> <span ><span class="token maybe-class-name">RickRoll</span></span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token arrow operator">=&gt;</span> <span class="token punctuation">(</span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">className</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&apos;</span>wrapper<span class="token punctuation">&apos;</span></span><span class="token punctuation">&gt;</span></span>
+          <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>ul</span><span class="token punctuation">&gt;</span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">Li</span></span> <span class="token attr-name">color</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span><span class="token string">&apos;red&apos;</span><span class="token punctuation">}</span></span><span class="token punctuation">&gt;</span></span><span class="token maybe-class-name">Never</span> give you up<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">Li</span></span><span class="token punctuation">&gt;</span></span>
+          <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>ul</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+    <span class="token punctuation">)</span><span class="token punctuation">;</span>
+</pre>
+      <p>Which compiled into pure JavaScript by Babel:</p>
+      <pre class="language-js">    <span const</span> <span ><span class="token maybe-class-name">Li</span></span> <span class="token operator">=</span> <span class="token parameter">props</span> <span class="token arrow operator">=&gt;</span> <span class="token maybe-class-name">React</span><span class="token punctuation">.</span><span class="token method function property-access">createElement</span><span class="token punctuation">(</span><span class="token string">&apos;li&apos;</span><span class="token punctuation">,</span> props<span class="token punctuation">,</span> props<span class="token punctuation">.</span><span class="token property-access">children</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    
+    <span class="token keyword module">export</span> <span const</span> <span ><span class="token maybe-class-name">RickRoll</span></span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token arrow operator">=&gt;</span>
+      <span class="token maybe-class-name">React</span><span class="token punctuation">.</span><span class="token method function property-access">createElement</span><span class="token punctuation">(</span>
+        <span class="token string">&apos;div&apos;</span><span class="token punctuation">,</span>
+        <span class="token keyword null nil">null</span><span class="token punctuation">,</span>
+        <span class="token maybe-class-name">React</span><span class="token punctuation">.</span><span class="token method function property-access">createElement</span><span class="token punctuation">(</span>
+          <span class="token string">&apos;div&apos;</span><span class="token punctuation">,</span>
+          <span class="token punctuation">{</span>
+            className<span class="token operator">:</span> <span class="token string">&apos;wrapper&apos;</span><span class="token punctuation">,</span>
+          <span class="token punctuation">}</span><span class="token punctuation">,</span>
+          <span class="token maybe-class-name">React</span><span class="token punctuation">.</span><span class="token method function property-access">createElement</span><span class="token punctuation">(</span>
+            <span class="token string">&apos;ul&apos;</span><span class="token punctuation">,</span>
+            <span class="token keyword null nil">null</span><span class="token punctuation">,</span>
+            <span class="token maybe-class-name">React</span><span class="token punctuation">.</span><span class="token method function property-access">createElement</span><span class="token punctuation">(</span>
+              <span class="token maybe-class-name">Li</span><span class="token punctuation">,</span>
+              <span class="token punctuation">{</span>
+                color<span class="token operator">:</span> <span class="token string">&apos;red&apos;</span><span class="token punctuation">,</span>
+              <span class="token punctuation">}</span><span class="token punctuation">,</span>
+              <span class="token string">&apos;Never give you up&apos;</span><span class="token punctuation">,</span>
+            <span class="token punctuation">)</span><span class="token punctuation">,</span>
+          <span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token punctuation">)</span><span class="token punctuation">,</span>
+      <span class="token punctuation">)</span><span class="token punctuation">;</span>
+</pre>
+      <p>Now, notice how each component is a function calling another function, and each new component is the third
+        argument for the <code class="language-javascript">React.createElement</code> function. Whenever you write a
+        component, it&apos;s useful to
+        keep in mind that it&apos;s a normal JavaScript function.</p>
+      <p>An important feature of React is that a component can have many children but only one parent. I found this a
+        confusing until I realized it&apos;s the same logic HTML has, where each element must be inside other elements,
+        and can have many children. You can notice this in the code above, where there&apos;s only one parent
+        <code class="language-javascript">div</code> containing all the children.
+      </p>
+      <h3><a href="#components-props-are-the-same-as-a-functions-arguments"></a>component&apos;s props are the same as a
+        function&apos;s arguments</h3>
+      <p>When using a function we can use arguments to share information with that function. For React components we
+        call these arguments <code class="language-javascript">props</code> (funny story, I didn&apos;t realize props is
+        short for
+        <em>properties</em> for a long time).
+      </p>
+      <p>Under the hood, props behave <em>exactly</em> like function arguments, the differences are that we interact
+        with them through the nicer interface of JSX, and that React gives extra functionality to props such as
+        <code class="language-javascript">children</code> .
+      </p>
+      <h2><a href="#creating-a-mental-model-around-functions"></a>Creating a mental model around functions</h2>
+      <p>Using this knowledge let&apos;s craft a mental model to intuitively understand functions!</p>
+      <p>When I think about a function I imagine it as a box, and that box will do something whenever it&apos;s called.
+        It could return a value or not:</p>
+      <pre data-role="codeBlock" data-info="js" class="language-javascript">    <span function</span> <span class="token function">sum</span><span class="token punctuation">(</span><span class="token parameter">a<span class="token punctuation">,</span> b</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword control-flow">return</span> a <span class="token operator">+</span> b<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span><span class="token function">sum</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">,</span> <span class="token number">20</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span function</span> <span class="token function">logSum</span><span class="token punctuation">(</span><span class="token parameter">a<span class="token punctuation">,</span> b</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span>a <span class="token operator">+</span> b<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+</pre>
+      <p>Since a component is a fancy function, that makes a component a box as well, with <code
+          class="language-javascript">props</code> as the
+        ingredients the box needs to create the output.</p>
+      <p><img src="https://obedparla.com/static/1078eb1563b832008167b49c2b8edb11/ce2e0/a-plus-b-box.jpg"
+          alt="A plus B in a box with props explaining a mental model for JavaScript functions"></p>
+      <p><img src="https://obedparla.com/static/1078eb1563b832008167b49c2b8edb11/ce2e0/a-plus-b-box.jpg"
+          alt="(&quot; &quot;)"></p>
+      <p>When a component is executed it will run whatever logic it has, if any, and evaluate its JSX. Any tags will
+        become HTML and any component will be executed, and the process is repeated until reaching the last component in
+        the chain of children.</p>
+      <p>Since a component can have many children but only one parent I imagine multiple components as a set of boxes,
+        one inside another. Each box must be contained within a bigger box and can have many smaller boxes inside.</p>
+      <p><img src="https://obedparla.com/static/cf7892f6a3db2815d6c502fe74538e4a/1df45/box-inside-box.jpg"
+          alt="One big box with many smaller boxes inside and text saying &quot;it&apos;s a box in another box&quot;">
+      </p>
+      <p>But the mental model of a box representing a component is not complete without understanding how it can
+        interact with other boxes.</p>
+      <h2><a href="#how-to-think-about-closures"></a><br>
+        How To Think About Closures</h2>
+      <p>Closures are a core concept in JavaScript. They enable complex functionality in the language, they&apos;re
+        super important to understand to have a good mental model around React.</p>
+      <p>They&apos;re also one of the features newcomers struggle with the most, so instead of explaining the
+        technicalities I&apos;ll demonstrate the mental model I have around closures.</p>
+      <p>The basic description of a closure is that it&apos;s a function. I imagine it as a box that keeps what&apos;s
+        inside of it from spilling out, while allowing the things outside of it from entering, like a semi-permeable
+        box. But spilling out where?</p>
+      <p>While the closure itself is a box, any closure will be inside bigger boxes, with the outermost box being the
+        Window object.</p>
+      <p><img src="https://obedparla.com/static/952aebfcba6f1850f93b3bf6d15392f3/ce2e0/closures_window.jpg"
+          alt="A box describing a mental model of a javascript closure, showing Window, scripts and React apps"></p>
+      <blockquote>
+        <p>The window object encapsulates everything else</p>
+      </blockquote>
+      <h3><a href="#but-what-is-a-closure"></a>But what <em>is</em> a closure?</h3>
+      <p>A closure is a feature of JavaScript functions. If you&apos;re using a function, you&apos;re using a closure.
+      </p>
+      <p>As I&apos;ve mentioned, a function is a box and that makes a closure a box too. Considering that each function
+        can contain many others inside of it, then the closure is the ability of a function to use the information
+        outside of it, while keeping the information it has inside from &quot;spilling out&quot;, or being used by the
+        outer function.</p>
+      <p>Speaking in terms of my mental model: I imagine the functions as boxes within boxes, and each smaller box can
+        see the information of the outer box, or parent, but the big box cannot see the smaller one&apos;s information.
+        That&apos;s as simple and accurate an explanation of closures as I can make.</p>
+      <p><img src="https://obedparla.com/static/96f403cd585425c1057214447165bbbe/7efee/data-flow.jpg"
+          alt="Visual representation of closures and the sharing of information between functions in a mental model, from a box view and a tree view">
+      </p>
+      <p>&quot;Each function can only access its own</p>
+      <p>Each function can only access its own information and the parent&apos;s</p>
+      <p>Closures are important because they can be exploited to create some powerful mechanics and React takes full
+        advantage of this.</p>
+      <h3><a href="#closures-in-react"></a>Closures in React</h3>
+      <p>Each React component is also a closure. Within components, you can only pass props down from parent to child
+        and the parent cannot see what&apos;s inside the child, this is an intended feature to make our app&apos;s data
+        flow simpler to trace. To find where data comes from, we usually need to go up the tree to find which parent is
+        sending it down.</p>
+      <p>A great example of closures in React is updating a parent&apos;s state through a child component. You&apos;ve
+        probably done this without realizing you were messing around with closures.</p>
+      <p>To start, we know the parent can&apos;t access the child&apos;s information directly, but the child can access
+        the parent&apos;s. So we send down that info from parent to child through <code
+          class="language-javascript">props</code> . In this case, the
+        information takes the shape of a function that updates the parent&apos;s state.</p>
+      <pre class="language-js">    <span const</span> <span ><span class="token maybe-class-name">Parent</span></span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token arrow operator">=&gt;</span> <span class="token punctuation">{</span>
+      <span const</span> <span class="token punctuation">[</span>count<span class="token punctuation">,</span> setCount<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">useState</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    
+      <span class="token keyword control-flow">return</span> <span class="token punctuation">(</span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span><span class="token punctuation">&gt;</span></span>
+          <span class="token maybe-class-name">The</span> count is <span class="token punctuation">{</span>count<span class="token punctuation">}</span>
+          <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span><span class="token punctuation">&gt;</span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">ChildButtons</span></span> <span class="token attr-name">onClick</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span>setCount<span class="token punctuation">}</span></span> <span class="token attr-name">count</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span>count<span class="token punctuation">}</span></span> <span class="token punctuation">/&gt;</span></span>
+          <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+      <span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">;</span>
+    
+    <span const</span> <span ><span class="token maybe-class-name">ChildButtons</span></span> <span class="token operator">=</span> <span class="token parameter">props</span> <span class="token arrow operator">=&gt;</span> <span class="token punctuation">(</span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span> <span class="token attr-name">onClick</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token arrow operator">=&gt;</span> props<span class="token punctuation">.</span><span class="token method function property-access">onClick</span><span class="token punctuation">(</span>props<span class="token punctuation">.</span><span class="token property-access">count</span> <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">}</span></span><span class="token punctuation">&gt;</span></span>
+          <span class="token maybe-class-name">Increase</span> count
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>button</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span> <span class="token attr-name">onClick</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token arrow operator">=&gt;</span> props<span class="token punctuation">.</span><span class="token method function property-access">onClick</span><span class="token punctuation">(</span>props<span class="token punctuation">.</span><span class="token property-access">count</span> <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">}</span></span><span class="token punctuation">&gt;</span></span>
+          <span class="token maybe-class-name">Decrease</span> count
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>button</span><span class="token punctuation">&gt;</span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+    <span class="token punctuation">)</span><span class="token punctuation">;</span>
+</pre>
+      <p>When an <code class="language-javascript">onClick</code> happens in a <code
+          class="language-javascript">button</code> , that will execute the function received from
+        props <code class="language-javascript">props.onClick</code> , and update the value using <code
+          class="language-javascript">props.count</code> .</p>
+      <p>The insight here lies in the way we&apos;re updating a parent&apos;s state through a child, in this case, the
+        <code class="language-javascript">props.onClick</code> function. The reason this works is that the function was
+        <em>declared</em> within the
+        <code class="language-javascript">Parent</code> component&apos;s scope, within its closure, so it will have
+        access to the parent&apos;s
+        information. Once that function is called in a child, it still lives in the same closure.
+      </p>
+      <p>This can be hard to grasp, so the way I imagine it is as a &quot;tunnel&quot; between closures. Each has its
+        own scope, but we can create a one-way communication tunnel that connects both.</p>
+      <p>Once we understand how closures affect our components, we can take the next big step: React state.</p>
+      <h2><a href="#fitting-reacts-state-into-our-mental-model"></a>Fitting React&apos;s State Into Our Mental Model
+      </h2>
+      <p>React&apos;s philosophy is simple: it handles <em>when</em> and <em>how</em> to render elements, and developers
+        control <em>what</em> to render. State is our tool to decide that what.</p>
+      <p>When state changes, its component renders and therefore re-executes all the code within. We do this to show
+        new, updated information to the user.</p>
+      <p>In my mental model state is like a special property inside the box. It&apos;s independent of everything else
+        that happens within it. It will get a default value on the first render and always be up to date with the latest
+        value.</p>
+      <p>Each variable and function is created on every render, which means their values are also brand new. Even if a
+        variable&apos;s value never changes, it is recalculated and reassigned every time. That&apos;s not the case with
+        state, it only changes when there&apos;s a request for it to change via a <code class="language-javascript">set
+          state</code> event.</p>
+      <p><img src="https://obedparla.com/static/acd86ef0ea8a3fe610df603769e68ad9/44313/state-in-box.jpg"
+          alt="React component state visualized as a part of a bigger box with props coming in from outside"></p>
+      <p>State is a special, independent part of the box; with props coming from outside</p>
+      <p>State follows a simple rule: Whenever it changes it will re-rendered the component and its children. Props
+        follow the same logic, if a prop changes, the component will re-render, however, we can control state by
+        modifying it, props are more static and usually change as a reaction to a state change.</p>
+      <h1>the-rendering-mental-model-understanding-reacts-magic</h1>
+      <blockquote>
+        <p>The Rendering Mental Model: understanding React&apos;s magic</p>
+      </blockquote>
+      <hr>
+      <p>I consider rendering to be React&apos;s most confusing part because a lot of things happen during rendering
+        that sometimes isn&apos;t obvious by looking at the code. That&apos;s why having a clear mental model helps.</p>
+      <p>The way I imagine rendering with my imaginary boxes is two-fold: the first render brings the box into
+        existence, that&apos;s when the state is initialized. The second part is when it re-renders, that&apos;s the box
+        being recycled, most of it is brand new but some important elements of it remain namely state.</p>
+      <p>On every render, everything inside a component is created, including variables and functions, that&apos;s why
+        we can have variables storing a calculation&apos;s results, since they will be recalculated on every render.
+        It&apos;s also why functions are not reliable as values, due to their reference (the function&apos;s value, per
+        se) being different every render.</p>
+      <pre class="language-js">    <span const</span> <span ><span class="token maybe-class-name">Thumbnail</span></span> <span class="token operator">=</span> <span class="token parameter">props</span> <span class="token arrow operator">=&gt;</span> <span class="token punctuation">(</span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span><span class="token punctuation">&gt;</span></span>
+        <span class="token punctuation">{</span>props<span class="token punctuation">.</span><span class="token property-access">withIcon</span> <span class="token operator">&amp;&amp;</span> <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">AmazingIcon</span></span> <span class="token punctuation">/&gt;</span></span><span class="token punctuation">}</span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>img</span> <span class="token attr-name">src</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span>props<span class="token punctuation">.</span><span class="token property-access">imgUrl</span><span class="token punctuation">}</span></span> <span class="token attr-name">alt</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span>props<span class="token punctuation">.</span><span class="token property-access">alt</span><span class="token punctuation">}</span></span> <span class="token punctuation">/&gt;</span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+    <span class="token punctuation">)</span><span class="token punctuation">;</span>
+</pre>
+      <p>The above will give a different result depending on the props the component receives. The reason React
+        <em>must</em> re-render on every prop change is that it wants to keep the user up to date with the latest
+        information.
+      </p>
+      <p>However, the state doesn&apos;t change on re-renders, its value is maintained. That&apos;s why the box is
+        &quot;recycled&quot; instead of created brand new every time. Internally, React is keeping track of each box and
+        making sure its state is always consistent. That&apos;s how React knows when to update a component.</p>
+      <p><img src="https://obedparla.com/static/78de62863da9bd4c40c588c294167031/7efee/react-rendering-mental-model.jpg"
+          alt="Mental model of a React component re-rendering when props change"></p>
+      <blockquote>
+        <p>&quot;When props (or state) changes, a new render happens and the component&apos;s output can
+          change&quot;)]<br>
+          <img
+            src="https://obedparla.com/static/78de62863da9bd4c40c588c294167031/ea2ac/react-rendering-mental-model.jpg"
+            alt>
+        </p>
+      </blockquote>
+      <p>When props (or state) changes, a new render happens and the component&apos;s output can change</p>
+      <p>By imagining a box being recycled I can understand what&apos;s going on inside of it. For simple components,
+        it&apos;s easy to grasp, but the more complex a component becomes, the more props it receives, the more state it
+        maintains, the more useful a clear mental model becomes.</p>
+      <h2><a href="#a-complete-react-mental-model-putting-it-all-together"></a>A complete React mental model: Putting it
+        all together.</h2>
+      <p>Now that I&apos;ve explained all the different parts of the puzzle separately, let&apos;s put it all together.
+        Here&apos;s the complete mental model I use for React components, directly translated from how I imagine them
+        into words.</p>
+      <p>I imagine a React component as a box that contains all of its information within its walls, including its
+        children, which are more boxes.</p>
+      <p>And like a box in the real world, it can have other boxes inside of it and these boxes can, in turn, contain
+        more boxes. That way each box/component must have a single parent, and a parent can have many children.</p>
+      <p><img src="https://obedparla.com/static/d6c8afaef3597fd26d9174e070be1ce3/ce2e0/react-mental-model-basic.jpg"
+          alt="Basic representation of a React component as a mental model using boxes"></p>
+      <p><img src="https://obedparla.com/static/d6c8afaef3597fd26d9174e070be1ce3/ce2e0/react-mental-model-basic.jpg"
+          alt="(&quot;The basic representation of a React component&quot;)"></p>
+      <blockquote>
+        <p>The basic representation of a React component</p>
+      </blockquote>
+      <p>The boxes are semi-permeable, meaning they never leak anything to the outside but can use information from the
+        outside as if it belonged to them. I imagine like this to represent how closures work in JavaScript.</p>
+      <p>In React the way to share information between components is called <code
+          class="language-javascript">props</code> , the same idea applies
+        to function and then it&apos;s called <code class="language-javascript">arguments</code> , they both work in the
+        same way but with a
+        different syntax.</p>
+      <p>Within components, information can only travel <em>down</em> from parents to children. In other words, children
+        can access their parent&apos;s data and state, but not the other way around, and the way we share that
+        information is through <code class="language-javascript">props</code> .</p>
+      <p>I imagine this directional sharing of information as boxes within boxes. With the inner-most box being able to
+        absorb the parent&apos;s data.</p>
+      <p><img src="https://obedparla.com/static/a3471b4d03d16406ea159b3bc3f3e218/ce2e0/data-sharing-model.jpg"
+          alt=" React Mental model of data sharing between components visualized as information flowing downward "></p>
+      <p>Data is shared from parent to child</p>
+      <p>The box must first be created though, and this happens on <code class="language-javascript">render</code> ,
+        where the default value is
+        given to <code class="language-javascript">state</code> and just like with functions, all the code within the
+        component is executed. In my
+        mental model, this is equivalent to the box being <em>created</em>.</p>
+      <p>Subsequent renders, or <code class="language-javascript">re-renders</code> , execute all the code in the
+        component again, recalculating
+        variables, recreating functions, and so on. Everything except for <code class="language-javascript">state</code>
+        is brand new on each
+        render. State&apos;s value is maintained across renders is updated only through a <code
+          class="language-javascript">set</code> method.</p>
+      <p>In my mental model, I see re-rendering as recycling the box since most of it is recreated, but it&apos;s still
+        the same box due to React keeping track of the component&apos;s state.</p>
+      <p>When a box is recycled all the boxes within it, its children, are also recycled. This can happen because the
+        component&apos;s state was modified or a prop changed.</p>
+      <p><img
+          src="https://obedparla.com/static/267768646d810a0032728d222c3f13a5/7efee/react-rendering-mental-model-full.jpg"
+          alt="Mental model of a React component re-rendering when props or state change"></p>
+      <p>Mental model of a React component re-rendering when props or state change</p>
+      <p>Remember that a state or prop changing means the information the user sees is outdated, and React always wants
+        to keep the UI updated so it re-renders the component that must show the new data.</p>
+      <hr>
+      <hr>
+      <h1>REACT RESOURCES:</h1>
+      <ul>
+        <li><a href="#a-journey-through-my-experiences-learning-reactjs-and-the-tools-i-discover-along-the-way">A
+            journey through my experiences learning React.js and the tools I discover along the way!</a>
+          <ul>
+            <li><a href="#react">React</a>
+              <ul>
+                <li><a href="#react-general-resources">React General Resources</a></li>
+                <li><a href="#react-community">React Community</a></li>
+                <li><a href="#react-online-playgrounds">React Online Playgrounds</a></li>
+                <li><a href="#react-tutorials">React Tutorials</a>
+                  <ul>
+                    <li><a href="#react-general-tutorials">React General Tutorials</a></li>
+                    <li><a href="#react-hooks">React Hooks</a></li>
+                    <li><a href="#react-and-typescript">React and TypeScript</a></li>
+                    <li><a href="#react-performance">React Performance</a></li>
+                    <li><a href="#react-internals">React Internals</a></li>
+                    <li><a href="#react-interview-questions">React Interview Questions</a></li>
+                  </ul>
+                </li>
+                <li><a href="#react-tools">React Tools</a>
+                  <ul>
+                    <li><a href="#react-development-tools">React Development Tools</a></li>
+                    <li><a href="#react-frameworks">React Frameworks</a></li>
+                    <li><a href="#react-styling">React Styling</a></li>
+                    <li><a href="#react-routing">React Routing</a></li>
+                    <li><a href="#react-component-libraries">React Component Libraries</a></li>
+                    <li><a href="#react-awesome-components">React Awesome Components</a></li>
+                    <li><a href="#react-for-command-line">React for Command Line</a></li>
+                    <li><a href="#react-testing">React Testing</a></li>
+                    <li><a href="#react-libraries">React Libraries</a></li>
+                    <li><a href="#react-integration">React Integration</a></li>
+                    <li><a href="#react-state-management">React State Management</a></li>
+                    <li><a href="#react-ar-and-vr">React AR and VR</a></li>
+                    <li><a href="#react-renderers">React Renderers</a></li>
+                    <li><a href="#forms">Forms</a></li>
+                    <li><a href="#autocomplete">Autocomplete</a></li>
+                    <li><a href="#graphics">Graphics</a></li>
+                    <li><a href="#data-managing">Data Managing</a></li>
+                    <li><a href="#maps">Maps</a></li>
+                    <li><a href="#charts">Charts</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+            <li><a href="#react-native">React Native</a>
+              <ul>
+                <li><a href="#react-native-general-resources">React Native General Resources</a></li>
+                <li><a href="#react-native-tutorials">React Native Tutorials</a></li>
+                <li><a href="#react-native-development-tools">React Native Development Tools</a></li>
+                <li><a href="#react-native-sample-apps">React Native Sample Apps</a></li>
+                <li><a href="#react-native-boilerplates">React Native Boilerplates</a></li>
+                <li><a href="#react-native-awesome-components">React Native Awesome Components</a></li>
+                <li><a href="#react-native-libraries">React Native Libraries</a></li>
+              </ul>
+            </li>
+            <li><a href="#redux">Redux</a>
+              <ul>
+                <li><a href="#redux-general-resources">Redux General Resources</a></li>
+                <li><a href="#redux-tools">Redux Tools</a></li>
+                <li><a href="#redux-tutorials">Redux Tutorials</a></li>
+              </ul>
+            </li>
+            <li><a href="#mobx">MobX</a>
+              <ul>
+                <li><a href="#mobx-general-resources">MobX General Resources</a></li>
+                <li><a href="#mobx-tools">MobX Tools</a></li>
+                <li><a href="#mobx-tutorials">MobX Tutorials</a></li>
+              </ul>
+            </li>
+            <li><a href="#graphql">GraphQL</a>
+              <ul>
+                <li><a href="#graphql-spec">GraphQL Spec</a></li>
+                <li><a href="#graphql-tools">GraphQL Tools</a></li>
+                <li><a href="#graphql-tutorials">GraphQL Tutorials</a></li>
+                <li><a href="#graphql-implementations">GraphQL Implementations</a></li>
+                <li><a href="#server-integration">Server Integration</a></li>
+                <li><a href="#database-integration">Database Integration</a></li>
+              </ul>
+            </li>
+            <li><a href="#relay">Relay</a>
+              <ul>
+                <li><a href="#relay-general-resources">Relay General Resources</a></li>
+                <li><a href="#relay-tutorials">Relay Tutorials</a></li>
+                <li><a href="#relay-tools">Relay Tools</a></li>
+              </ul>
+            </li>
+            <li><a href="#apollo">Apollo</a>
+              <ul>
+                <li><a href="#apollo-general-resources">Apollo General Resources</a></li>
+                <li><a href="#apollo-tools">Apollo Tools</a></li>
+              </ul>
+            </li>
+            <li><a href="#videos">Videos</a>
+              <ul>
+                <li><a href="#reactjsvideoscom">reactjsvideos.com</a></li>
+                <li><a href="#important-talks">Important Talks</a></li>
+                <li><a href="#reactjs-conf-2015-playlist">React.js Conf 2015 Playlist</a></li>
+                <li><a href="#reacteurope-conf-2015-day-1-playlist">ReactEurope Conf 2015 Day 1 Playlist</a></li>
+                <li><a href="#reacteurope-conf-2015-day-2-playlist">ReactEurope Conf 2015 Day 2 Playlist</a></li>
+                <li><a href="#reactrally-conf-2015-playlist">ReactRally Conf 2015 Playlist</a></li>
+                <li><a href="#reactjs-conf-2016-playlist">React.js Conf 2016 Playlist</a></li>
+                <li><a href="#react-amsterdam-2016-playlist">React Amsterdam 2016 Playlist</a></li>
+                <li><a href="#reacteurope-conf-2016-day-1-playlist">ReactEurope Conf 2016 Day 1 Playlist</a></li>
+                <li><a href="#reacteurope-conf-2016-day-2-playlist">ReactEurope Conf 2016 Day 2 Playlist</a></li>
+                <li><a href="#reactrally-conf-2016-playlist">ReactRally Conf 2016 Playlist</a></li>
+                <li><a href="#reactjs-amsterdam-2018-playlist">React.js Amsterdam 2018 Playlist</a></li>
+                <li><a href="#video-tutorials">Video Tutorials</a></li>
+              </ul>
+            </li>
+            <li><a href="#demo-react-apps">Demo React Apps</a></li>
+            <li><a href="#real-react-apps">Real React Apps</a></li>
+          </ul>
+        </li>
+      </ul>
+      <hr>
+      <h3>React</h3>
+      <blockquote>
+        <p>JavaScript Library for building User Interfaces</p>
+      </blockquote>
+      <h4>React General Resources</h4>
+      <ul>
+        <li><a href="https://reactjs.org/">React Official Website</a></li>
+        <li><a href="https://reactjs.org/docs">React Documentation</a></li>
+        <li><a href="https://github.com/facebook/react">React GitHub</a></li>
+      </ul>
+      <h4>React Community</h4>
+      <ul>
+        <li><a href="http://www.reactiflux.com/">Reactiflux Discord Channel</a></li>
+        <li><a href="http://stackoverflow.com/questions/tagged/reactjs">React StackOverflow</a></li>
+        <li><a href="https://twitter.com/reactjs">React Twitter</a></li>
+      </ul>
+      <h4>React Online Playgrounds</h4>
+      <ul>
+        <li><a href="https://reactjs.org/redirect-to-codepen/hello-world">CodePen</a></li>
+        <li><a href="https://codesandbox.io/s/new">CodeSandbox</a></li>
+        <li><a href="https://jsfiddle.net/boilerplate/react-jsx">JSFiddle</a></li>
+      </ul>
+      <h4>React Tutorials</h4>
+      <h5>React General Tutorials</h5>
+      <ul>
+        <li><a href="https://facebook.github.io/react/docs/tutorial.html">React Official Tutorial</a></li>
+        <li><a href="https://code.visualstudio.com/docs/nodejs/reactjs-tutorial">Using React in Visual Studio Code</a>
+        </li>
+        <li><a href="https://scrimba.com/g/glearnreact">Scrimba - Learn React for free interactively</a></li>
+        <li><a href="https://learn.freecodecamp.org/front-end-libraries/react">FreeCodeCamp React Challenges</a></li>
+        <li><a href="https://devhints.io/react">React Cheatsheet</a></li>
+        <li><a href="https://reactpatterns.com/">React Patterns</a></li>
+        <li><a href="https://flow.org/en/docs/react/">Setup Flow with React</a></li>
+      </ul>
+      <h5>React Hooks</h5>
+      <ul>
+        <li><a href="https://reactjs.org/docs/hooks-intro.html">React Hooks</a></li>
+        <li><a
+            href="https://medium.com/octopus-labs-london/replacing-redux-with-react-hooks-and-context-part-1-11b72ffdb533">Replacing
+            Redux with React Hooks and Context</a></li>
+        <li><a
+            href="https://blog.logrocket.com/react-hooks-cheat-sheet-unlock-solutions-to-common-problems-af4caf699e70/">React
+            Hooks cheat sheet: Unlock solutions to common problems</a></li>
+        <li><a href="https://www.robinwieruch.de/react-hooks-fetch-data/">How to fetch data with React Hooks?</a></li>
+        <li><a href="https://usehooks.com/">Easy to understand React Hook recipes</a></li>
+        <li><a href="https://github.com/rehooks/awesome-react-hooks">Awesome React Hooks</a></li>
+        <li><a
+            href="https://www.cometchat.com/tutorials/building-a-chat-app-with-react-hooks-a-pragmatic-example/">Build a
+            React chat app with Hooks, a pragmatic example</a></li>
+      </ul>
+      <h5>React and TypeScript</h5>
+      <ul>
+        <li><a href="https://www.typescriptlang.org/docs/handbook/react-&amp;-webpack.html">TypeScript, React and
+            Webpack</a></li>
+        <li><a href="https://www.typescriptlang.org/docs/handbook/jsx.html">JSX in TypeScript</a></li>
+        <li><a href="https://github.com/typescript-cheatsheets/react-typescript-cheatsheet">Cheatsheets for experienced
+            React developers getting started with TypeScript</a></li>
+        <li><a href="https://reactbyexample.github.io/">React by Example</a></li>
+      </ul>
+      <h5>React Performance</h5>
+      <ul>
+        <li><a href="https://reactjs.org/docs/optimizing-performance.html">React Optimizing Performance</a></li>
+        <li><a href="https://reactjs.org/blog/2018/09/10/introducing-the-react-profiler.html">Introducing the React
+            Profiler</a></li>
+        <li><a href="https://evilmartians.com/chronicles/optimizing-react-virtual-dom-explained">Optimizing React:
+            Virtual DOM explained</a></li>
+        <li><a href="https://www.simform.com/react-performance/">A Definitive Guide to Optimize Major Performance issues
+            in React</a></li>
+        <li><a
+            href="https://medium.com/@paularmstrong/twitter-lite-and-high-performance-react-progressive-web-apps-at-scale-d28a00e780a3">Twitter
+            Lite and High Performance React Progressive Web Apps at Scale</a></li>
+        <li><a
+            href="https://www.netlify.com/blog/2018/08/29/using-the-react-devtools-profiler-to-diagnose-react-app-performance-issues/">Using
+            the React DevTools Profiler to Diagnose React App Performance Issues</a></li>
+        <li><a href="https://www.codementor.io/blizzerand/top-5-practices-to-boost-react-performance-jv6zr89ep">Top 5
+            Practices to Boost React Performance</a></li>
+        <li><a
+            href="https://medium.com/dailyjs/react-is-slow-react-is-fast-optimizing-react-apps-in-practice-394176a11fba">React
+            is Slow, React is Fast: Optimizing react Apps in Practice</a></li>
+        <li><a href="https://addyosmani.com/blog/react-window/">Rendering large lists with react-window</a></li>
+      </ul>
+      <h5>React Internals</h5>
+      <ul>
+        <li><a href="https://reactjs.org/docs/reconciliation.html">Reconciliation</a></li>
+        <li><a href="https://github.com/acdlite/react-fiber-architecture">React Fiber Architecture</a></li>
+        <li><a
+            href="https://engineering.hexacta.com/didact-learning-how-react-works-by-building-it-from-scratch-51007984e5c5">Build
+            your own React</a></li>
+        <li><a
+            href="https://medium.com/react-in-depth/inside-fiber-in-depth-overview-of-the-new-reconciliation-algorithm-in-react-e1c04700ef6e">Inside
+            Fiber: In-depth overview of the new reconciliation algorithm in React</a></li>
+        <li><a href="https://github.com/Bogdan-Lyashenko/Under-the-hood-ReactJS">Entire React code base explanation by
+            visual block schemes</a></li>
+      </ul>
+      <h5>React Interview Questions</h5>
+      <ul>
+        <li><a href="https://www.toptal.com/react/interview-questions">13 Essential React Interview Questions</a></li>
+        <li><a href="https://github.com/sudheerj/reactjs-interview-questions">List of React interview Questions and
+            Answers</a></li>
+      </ul>
+      <h4>React Tools</h4>
+      <h5>React Development Tools</h5>
+      <ul>
+        <li><a href="https://github.com/facebook/create-react-app">create-react-app</a> - Set up a modern Web app by
+          running one command</li>
+        <li><a href="https://github.com/kriasoft/react-starter-kit">react-starter-kit</a> - Isomorphic Web app
+          boilerplate</li>
+        <li><a href="https://github.com/facebook/react-devtools">react-devtools</a> - Inspection of React component
+          hierarchy in the Chrome and Firefox Developer Tools</li>
+        <li><a href="https://github.com/gaearon/react-hot-loader">react-hot-loader</a> - Tweak React components in real
+          time</li>
+        <li><a href="https://github.com/jamiebuilds/react-loadable">react-loadable</a> - A higher order component for
+          loading components with promises</li>
+        <li><a href="https://github.com/smooth-code/loadable-components">loadable-components</a> - React code splitting
+          made easy</li>
+        <li><a href="https://github.com/skellock/reactotron">reactotron</a> - A desktop app for inspecting your React
+          and React Native projects</li>
+        <li><a href="https://github.com/storybookjs/storybook">storybook</a> - UI component dev &amp; test</li>
+        <li><a href="https://github.com/doczjs/docz">docz</a> - Zero Config, live-reloading documentation with Markdown
+          + JSX</li>
+        <li><a href="https://github.com/styleguidist/react-styleguidist">react-styleguidist</a> - Isolated React
+          component development environment with a living style guide</li>
+        <li><a href="https://github.com/react-cosmos/react-cosmos">react-cosmos</a> - Dev tool for creating reusable
+          React components</li>
+        <li><a href="https://github.com/yannickcr/eslint-plugin-react">eslint-plugin-react</a> - React specific linting
+          rules for ESLint</li>
+        <li><a href="https://github.com/evcohen/eslint-plugin-jsx-a11y">eslint-plugin-jsx-a11y</a> - Static AST checker
+          for a11y rules on JSX elements</li>
+        <li><a href="https://github.com/dequelabs/axe-core-npm">@axe-core/react</a> - Accessibility auditing for React
+          applications</li>
+        <li><a href="https://codesandbox.io/s/new">codesandbox</a> - An online IDE for rapid React development with
+          integrated React DevTools.</li>
+        <li><a href="https://github.com/dataformsjs/dataformsjs/blob/master/docs/jsx-loader.md">DataFormsJS JSX
+            Loader</a> - Small JavaScript Compiler for quickly converting JSX to JS directly on a web page</li>
+        <li><a href="https://github.com/welldone-software/why-did-you-render">Why Did You Render</a> - Monkey patches
+          React to notify you about avoidable re-renders.</li>
+        <li><a href="https://divjoy.com">Divjoy</a> - React codebase and UI generator to speed up development (paid)
+        </li>
+      </ul>
+      <h5>React Frameworks</h5>
+      <ul>
+        <li><a href="https://github.com/vercel/next.js">next.js</a> - The React Framework</li>
+        <li><a href="https://github.com/gatsbyjs/gatsby">gatsby.js</a> - Free and open source framework based on React
+        </li>
+        <li><a href="https://github.com/marmelab/react-admin">react-admin</a> - Frontend Framework for building B2B
+          applications on top of REST/GraphQL APIs</li>
+        <li><a href="https://remix.run/">remix</a> - Finally, a killer React framework from the creators of React Router
+        </li>
+        <li><a href="https://github.com/alephjs/aleph.js">aleph.js</a> - The React Framework in Deno</li>
+      </ul>
+      <h5>React Styling</h5>
+      <ul>
+        <li><a href="https://github.com/styled-components/styled-components">styled-components</a> - Visual primitives
+          for the component age</li>
+        <li><a href="https://github.com/emotion-js/emotion">emotion</a> - Library designed for writing CSS styles with
+          JavaScript</li>
+        <li><a href="https://github.com/FormidableLabs/radium">radium</a> - A toolchain for React component styling</li>
+        <li><a href="https://github.com/cssinjs/jss">jss</a> - Authoring tool for CSS</li>
+        <li><a href="https://github.com/Khan/aphrodite">aphrodite</a> - Framework-agnostic CSS-in-JS with support for
+          server-side rendering, browser prefixing, and minimum CSS generation</li>
+      </ul>
+      <h5>React Routing</h5>
+      <ul>
+        <li><a href="https://github.com/ReactTraining/react-router">react-router</a> - Declarative routing for React
+        </li>
+        <li><a href="https://github.com/frontarm/navi">navi</a> - Declarative, asynchronous routing for React</li>
+        <li><a href="https://github.com/pshrmn/curi">curi</a> - JavaScript router for single-page applications</li>
+        <li><a href="https://github.com/reach/router">reach</a> - Next Generation Routing for React</li>
+        <li><a href="https://github.com/kriasoft/universal-router">universal-router</a> - A simple middleware-style
+          router for isomorphic JavaScript web apps</li>
+      </ul>
+      <h5>React Component Libraries</h5>
+      <ul>
+        <li><a href="https://github.com/mui-org/material-ui">material-ui</a> - React components for faster and easier
+          web development</li>
+        <li><a href="https://github.com/ant-design/ant-design">ant-design</a> - A design system with values of Nature
+          and Determinacy</li>
+        <li><a href="https://github.com/palantir/blueprint">blueprint</a> - A React-based UI toolkit for the webs</li>
+        <li><a href="https://github.com/microsoft/fluentui">Fluent UI</a> - A set of React components for building
+          Microsoft web experiences</li>
+        <li><a href="https://github.com/react-bootstrap/react-bootstrap">react-bootstrap</a> - Bootstrap components
+          built with React</li>
+        <li><a href="https://github.com/reactstrap/reactstrap">reactstrap</a> - Simple React Bootstrap 4 components</li>
+        <li><a href="https://github.com/Semantic-Org/Semantic-UI-React">semantic-ui-react</a> - The official
+          Semantic-UI-React integration</li>
+        <li><a href="https://github.com/segmentio/evergreen">evergreen</a> - Evergreen React UI Framework by Segment
+        </li>
+        <li><a href="https://github.com/grommet/grommet">grommet</a> - A react-based framework that provides
+          accessibility, modularity, responsiveness, and theming in a tidy package</li>
+        <li><a href="https://github.com/chakra-ui/chakra-ui/">chakra-ui</a> - Simple, Modular &amp; Accessible UI
+          Components for your React Applications</li>
+        <li><a href="https://github.com/rebassjs/rebass">rebass</a> - React primitive UI components built with
+          styled-system</li>
+        <li><a href="https://github.com/FortAwesome/react-fontawesome">react-fontawesome</a> - Font Awesome 5 component
+          library for React</li>
+        <li><a href="https://github.com/reakit/reakit">reakit</a> - Accessible, Composable and Customizable components
+          for React</li>
+        <li><a href="https://github.com/rsuite/rsuite">rsuite</a> - A suite of React components</li>
+        <li><a href="https://bitbucket.org/atlassian/atlaskit-mk-2">atlaskit</a> - Atlassian&apos;s official UI library,
+          built according to the Atlassian Design Guidelines.</li>
+        <li><a href="https://github.com/uber/baseweb">baseweb</a> - Base Web is a foundation for initiating, evolving,
+          and unifying web products.</li>
+        <li><a href="https://github.com/primefaces/primereact">primereact</a> - A complete UI Framework for React with
+          50+ components featuring material, bootstrap and custom themes.</li>
+        <li><a href="https://github.com/couds/react-bulma-components">react-bulma-components</a> - React components for
+          Bulma framework</li>
+        <li><a href="https://github.com/kulakowka/react-bulma">react-bulma</a> - React.js components for Modern CSS
+          framework based on Flexbox</li>
+        <li><a href="https://github.com/dfee/rbx">rbx</a> - The Comprehensive Bulma UI Framework for React</li>
+        <li><a href="https://github.com/fibo/trunx">trunx</a> - Super Saiyan React components, son of awesome Bulma,
+          implemented in TypeScript</li>
+        <li><a href="https://github.com/emortlock/tailwind-react-ui">tailwind-react-ui</a> - React utility component
+          primitives &amp; UI framework for use with Tailwind CSS</li>
+        <li><a href="https://github.com/knipferrc/tails-ui">tails-ui</a> - Clean UI based on tailwindcss</li>
+        <li><a href="https://github.com/geist-org/react">geist-org/react</a> - Modern and minimalist React UI library,
+          originating from Vercel&apos;s design</li>
+        <li><a href="https://github.com/elastic/eui">elastic ui framework</a> - The Elastic UI Framework is a collection
+          of React UI components for quickly building user interfaces at Elastic.</li>
+        <li><a href="https://bumbag.style/">bugbag react ui kit</a> - Bumbag is a friendly React UI Kit suitable for
+          MVPs or large-scale applications.</li>
+        <li><a href="https://github.com/JetBrains/ring-ui">ring-ui</a> - JetBrains Web UI components</li>
+        <li><a href="https://github.com/alibaba/ChatUI">ChatUI</a> - The UI design language and React library for
+          Conversational UI</li>
+      </ul>
+      <h5>React Awesome Components</h5>
+      <ul>
+        <li><a href="https://github.com/brillout/awesome-react-components">Awesome React Components list</a></li>
+        <li><a href="https://github.com/JedWatson/react-select">react-select</a> - The Select Component for React</li>
+        <li><a href="https://github.com/atlassian/react-beautiful-dnd">react-beautiful-dnd</a> - Beautiful and
+          accessible drag and drop for lists with React</li>
+        <li><a href="https://github.com/react-dnd/react-dnd">react-dnd</a> - Drag and Drop for React</li>
+        <li><a href="https://github.com/strml/react-grid-layout">react-grid-layout</a> - A draggable and resizable grid
+          layout with responsive breakpoints</li>
+        <li><a href="https://github.com/tannerlinsley/react-table/">react-table</a> - A lightweight, fast and extendable
+          datagrid for React</li>
+        <li><a href="https://github.com/adazzle/react-data-grid">react-data-grid</a> - Excel-like grid component built
+          with React</li>
+        <li><a href="https://github.com/mzabriskie/react-draggable">react-draggable</a> - React draggable component</li>
+        <li><a href="https://github.com/bokuweb/react-resizable-and-movable">react-resizable-and-movable</a> - A
+          resizable and draggable component for React</li>
+        <li><a href="https://github.com/strml/react-resizable">react-resizable</a> - A simple React component that is
+          resizable with a handle</li>
+        <li><a href="https://github.com/bokuweb/react-resizable-box">react-resizable-box</a> - A resizable component for
+          React</li>
+        <li><a href="https://github.com/axmz/react-searchbox-awesome">react-searchbox-awesome</a> - Minimalistic
+          searchbox</li>
+        <li><a href="https://github.com/bokuweb/react-sortable-pane">react-sortable-pane</a> - A sortable and resizable
+          pane component for React</li>
+        <li><a href="https://github.com/aeagle/react-spaces">react-spaces</a> - Nestable resizable, anchored, scrollable
+          components</li>
+        <li><a href="https://github.com/airbnb/react-dates">react-dates</a> - An easily internationalizable,
+          mobile-friendly datepicker library for the web</li>
+        <li><a href="https://github.com/intljusticemission/react-big-calendar">react-big-calendar</a> - Calendar
+          component</li>
+        <li><a href="https://github.com/Hacker0x01/react-datepicker/">react-datepicker</a> - ReactJS Datepicker</li>
+        <li><a href="https://github.com/orgsync/react-list">react-list</a> - A versatile infinite scroll React component
+        </li>
+        <li><a href="https://github.com/yahoo/react-intl">react-intl</a> - Internationalize React apps</li>
+        <li><a href="https://github.com/i18next/react-i18next">react-i18next</a> - Internationalization for React done
+          right</li>
+        <li><a href="https://github.com/davidtheclark/react-aria-modal">react-aria-modal</a> - A fully accessible React
+          modal</li>
+        <li><a href="https://github.com/greena13/react-hotkeys">react-hotkeys</a> - Declarative hotkey and focus area
+          management for React</li>
+        <li><a href="https://github.com/glortho/react-keydown">react-keydown</a> - Lightweight keydown wrapper for React
+          components</li>
+        <li><a href="https://github.com/gilbarbara/react-joyride">react-joyride</a> - Create guided tours for your apps
+        </li>
+        <li><a href="https://github.com/bvaughn/react-virtualized">react-virtualized</a> - React components for
+          efficiently rendering large lists and tabular data</li>
+        <li><a href="https://github.com/bvaughn/react-window">react-window</a> - React components for efficiently
+          rendering large lists and tabular data</li>
+        <li><a href="https://github.com/text-mask/text-mask">react-text-mask</a> - Input mask for React</li>
+        <li><a href="https://github.com/dvtng/react-loading-skeleton">react-loading-skeleton</a> - Create skeleton
+          screens that automatically adapt to your app</li>
+        <li><a href="https://github.com/KyleAMathews/react-spinkit">react-spinkit</a> - A collection of loading
+          indicators animated with CSS for React</li>
+        <li><a href="https://github.com/airbnb/rheostat">rheostat</a> - Accessible slider component built with React
+        </li>
+        <li><a href="https://github.com/zpao/qrcode.react">qrcode.react</a> - QR component for use with React</li>
+        <li><a href="https://github.com/pierpo/react-archer">react-archer</a> - Draw arrows between React elements</li>
+        <li><a href="https://github.com/phuoc-ng/react-pdf-viewer">react-pdf-viewer</a> - A PDF viewer made for React
+        </li>
+        <li><a href="https://github.com/mkosir/react-parallax-tilt">react-parallax-tilt</a> - Easily apply tilt hover
+          effect on React components</li>
+        <li><a
+            href="https://github.com/matteobruni/tsparticles/blob/master/components/react/README.md">react-tsparticles</a>
+          - A component to easily add Particles animations to your React application</li>
+        <li><a href="https://www.react-spring.io/">react-spring</a> - Spring-physics based animation library for React
+          applications.</li>
+        <li><a href="https://www.framer.com/motion/">framer-motion</a> - A React library to power production-ready
+          animations.</li>
+        <li><a href="https://github.com/springload/react-accessible-accordion">react-accessible-accordion</a> - React
+          Component for creating an &apos;Accordion&apos; that adheres to the WAI ARIA spec for accessibility.</li>
+        <li><a href="https://github.com/parsable/react-truncate-markup">react-truncate-markup</a> - React component for
+          truncating JSX markup.</li>
+        <li><a href="https://github.com/reactivestack/cookies">react-cookie</a> - Universal cookies for React.</li>
+        <li><a href="https://github.com/akiran/react-slick">react-slick</a> - Carousel component built with React.</li>
+        <li><a href="https://github.com/alinemorelli/react-gtm">react-gtm-module</a> - Google Tag Manager Module for
+          React.</li>
+        <li><a href="https://github.com/duskload/react-device-detect">react-device-detect</a> - Detect device for React.
+        </li>
+      </ul>
+      <h5>React for Command Line</h5>
+      <ul>
+        <li><a href="https://github.com/vadimdemedes/ink">ink</a> - React for interactive command-line apps</li>
+        <li><a href="https://github.com/Yomguithereal/react-blessed">react-blessed</a> - A React renderer for blessed
+          terminal interface library</li>
+      </ul>
+      <h5>React Testing</h5>
+      <ul>
+        <li><a href="https://github.com/facebook/jest">jest</a> - Delightful JavaScript Testing Framework</li>
+        <li><a href="https://github.com/airbnb/enzyme">enzyme</a> - JavaScript Testing utilities for React</li>
+        <li><a href="https://github.com/testing-library/react-testing-library">react-testing-library</a> - Simple and
+          complete React DOM testing utilities</li>
+        <li><a href="https://github.com/mpeyper/react-hooks-testing-library">react-hooks-testing-library</a> - React
+          hooks testing utilities that encourage good testing practices</li>
+        <li><a href="https://github.com/Raathigesh/majestic">majestic</a> - Zero config GUI for Jest</li>
+      </ul>
+      <h5>React Libraries</h5>
+      <ul>
+        <li><a href="https://github.com/Metroxe/react-border-wrapper">react-border-wrapper</a> - A wrapper for placing
+          elements along div borders in React.</li>
+        <li><a href="https://github.com/reactjs/react-magic">react-magic</a> - Automatically AJAXify plain HTML with the
+          power of React</li>
+        <li><a href="https://github.com/react-toolbox/react-toolbox">react-toolbox</a> - A set of React components
+          implementing Google&apos;s Material Design specification</li>
+        <li><a href="https://github.com/gcanti/tcomb-react">tcomb-react</a> - Library allowing you to check all the
+          props of your React components</li>
+        <li><a href="https://github.com/wearefractal/react-responsive">react-responsive</a> - Media queries in react for
+          responsive design</li>
+        <li><a href="https://github.com/dustingetz/react-cursor">react-cursor</a> - Functional state management
+          abstraction for use with Facebook React</li>
+        <li><a href="https://github.com/touchstonejs/touchstonejs">Touchstonejs</a> - React.js powered UI framework for
+          developing beautiful hybrid mobile apps.</li>
+        <li><a href="http://elemental-ui.com/">Elemental</a> - A UI Toolkit for React.js Websites and Apps</li>
+        <li><a href="https://github.com/swipely/state-trooper">StateTrooper</a> - Centrally manage state for React
+          applications with CSP</li>
+        <li><a href="https://git.io/preact">Preact</a> - Fast 3kb React alternative with the same ES6 API.</li>
+        <li><a href="https://github.com/muut/riotjs">riotjs</a> - A React-like, 3.5KB user interface library</li>
+        <li><a href="https://github.com/Wildhoney/Maple.js">Maple.js</a> - Bringing the concept of web-components to
+          React</li>
+        <li><a href="https://github.com/yahoo/react-i13n">react-i13n</a> - A performant, scalable and pluggable approach
+          to instrumenting your React application</li>
+        <li><a href="https://github.com/gorangajic/react-icons">react-icons</a> - svg react icons of popular icon packs
+        </li>
+        <li><a href="https://github.com/lunahq/react-open-doodles">react-open-doodles</a> - Awesome free illustrations
+          as react components.</li>
+        <li><a href="https://github.com/Wildhoney/Keo">Keo</a> - Plain functions for a more functional Deku approach to
+          creating React components, with functional goodies such as pipe, memoize, etc...</li>
+        <li><a href="https://github.com/teambit/bit">Bit</a> - A virtual repository for managing and using react and
+          other web components across applications</li>
+        <li><a href="https://atlaskit.atlassian.com/">AtlasKit</a> - Atlassian&apos;s React UI library</li>
+        <li><a href="https://github.com/appbaseio/reactivesearch">ReactiveSearch</a> - UI components library for
+          Elasticsearch</li>
+        <li><a href="https://github.com/ianstormtaylor/slate">Slate</a> - A completely customizable framework for
+          building rich text editors.</li>
+        <li><a href="https://github.com/TechniqueSoftware/react-json-schema">react-json-schema</a> - Construct React
+          elements from JSON by mapping JSON definitions to React components that you expose.</li>
+        <li><a href="https://github.com/tvler/compose-state">compose-state</a> - Compose multiple setState or
+          getDerivedStateFromProps updaters in React</li>
+        <li><a href="https://github.com/typicode/react-lodash">react-lodash</a> - Lodash as React components</li>
+        <li><a href="https://github.com/nfl/react-helmet">react-helmet</a> - A document head manager for React</li>
+        <li><a href="https://github.com/cs01/stator">Stator</a> - Simple, plain JavaScript state management with
+          built-in support for React</li>
+        <li><a href="https://github.com/Autodesk/clearx">ClearX</a> - Fast &amp; Effortless State management for React
+          with zero learning curve. ClearX gives great flexibility in separation of concerns for your React applications
+        </li>
+        <li><a href="https://github.com/stereobooster/react-snap">react-snap</a> - Zero-configuration framework-agnostic
+          static prerendering for SPAs</li>
+        <li><a href="https://github.com/facebook/draft-js">Draft.js</a> - A React framework for building text editors
+        </li>
+        <li><a href="https://github.com/fanduel-oss/refract">refract</a> - Harness the power of reactive programming to
+          supercharge your components</li>
+        <li><a href="https://github.com/gabrielbull/react-desktop">react-desktop</a> - OS X and Windows UI components
+          built with React</li>
+        <li><a href="https://github.com/LouisBarranqueiro/reapop">Reapop</a> - A React &amp; Redux notifications system
+        </li>
+        <li><a href="https://github.com/sindresorhus/react-extras">react-extras</a> - Useful components and utilities
+          for working with React</li>
+        <li><a href="https://github.com/algolia/react-instantsearch">react-instantsearch</a> - Lightning-fast search for
+          React and React Native applications, by Algolia</li>
+        <li><a href="https://github.com/transloadit/uppy">uppy</a> - The next open source file uploader for web browsers
+        </li>
+        <li><a href="https://github.com/chenglou/react-motion">react-motion</a> - A spring that solves your animation
+          problems</li>
+        <li><a href="https://github.com/dunglas/react-esi">react-esi</a> - React Edge Side Includes</li>
+        <li><a href="https://github.com/avkonst/hookstate">hookstate</a> - Modern, very fast and extendable state
+          management for React that is based on hooks</li>
+        <li><a href="https://github.com/universal-model/universal-model-react">universal-model-react</a> - Unified state
+          management solution for React</li>
+      </ul>
+      <h5>React Integration</h5>
+      <ul>
+        <li><a href="https://reasonml.github.io/reason-react/">ReasonReact</a></li>
+        <li><a href="https://github.com/reactjs/react-rails">React Rails</a></li>
+        <li><a href="https://github.com/reactjs/React.NET">ReactJS. NET</a></li>
+        <li><a href="https://github.com/swannodette/om">om</a> - ClojureScript interface</li>
+        <li><a href="https://github.com/reagent-project/reagent">Reagent</a> - A minimalistic ClojureScript interface to
+          React.js</li>
+        <li><a href="https://github.com/reactjs/express-react-views">Express React views</a></li>
+        <li><a href="https://github.com/reactjs/react-page-middleware">React Page Middleware</a></li>
+        <li><a href="https://github.com/davidchang/ngReact">ngReact</a> - React Components in Angular</li>
+        <li><a href="https://github.com/jsdf/coffee-react-transform">coffee-react-transform</a> - Provides React JSX
+          support for Coffeescript</li>
+        <li><a href="https://github.com/jsdf/sprockets-coffee-react">sprockets-coffee-react</a> - Sprockets preprocessor
+          for CJSX</li>
+        <li><a href="https://github.com/snd/react-kup">react-kup</a> - A simple, non-intrusive alternative to jsx for
+          coffeescript</li>
+        <li><a href="https://github.com/ssorallen/turbo-react">turbo-react</a> - Combine Turbolinks and React to apply
+          DOM diffs</li>
+        <li><a href="https://github.com/jamesmacaulay/react-bacon">react-bacon</a> - A little module for using React
+          with Bacon.js</li>
+        <li><a href="https://github.com/insin/msx">msx</a> - React&apos;s JSX Transformer, tweaked to output calls to
+          Mithril</li>
+        <li><a href="https://github.com/beanworks/React.withBackbone">React.withBackbone</a> - React 16 ready backbone
+          binding</li>
+        <li><a href="https://github.com/magalhas/backbone-react-component">Backbone React Component</a></li>
+        <li><a href="https://github.com/jhudson8/react-backbone">react-backbone</a> - Backbone-aware mixins for react
+        </li>
+        <li><a href="https://github.com/Volicon/NestedReact/">NestedReact</a> - transparent integration with Backbone
+          Views and NestedTypes models</li>
+        <li><a href="https://github.com/jhudson8/backbone-reaction">backbone-reaction</a> - React, Backbone and then
+          some</li>
+        <li><a href="https://github.com/usepropeller/react.backbone">react.backbone</a> - Plugin for React to make
+          Backbone migration easier</li>
+        <li><a href="https://github.com/andrejewski/reactbone">reactbone</a> - React extensions for Backbone</li>
+        <li><a href="https://github.com/securingsincity/backbone-react-ui">backbone-react-ui</a> - React components for
+          use with backbone and backbone paginator</li>
+        <li><a href="https://github.com/jhudson8/react-events">react-events</a> - Declarative managed event bindings for
+          react components</li>
+        <li><a href="https://github.com/jhudson8/react-mixin-manager">react-mixin-manager</a> - React mixin registration
+          manager</li>
+        <li><a href="https://github.com/hzdg/gsap-react-plugin">gsap-react-plugin</a> - A GSAP plugin for tweening
+          React.js component state</li>
+        <li><a href="https://github.com/plaxdan/react-topcoat">react-topcoat by @plaxdan</a> - Topcoat CSS components
+          built with the React library</li>
+        <li><a href="https://github.com/arnemart/react-topcoat">react-topcoat by @arnemart</a> - A collection of React
+          components for Topcoat</li>
+        <li><a href="https://github.com/andreypopp/reactdown">reactdown</a> - Write React components using markdown
+          syntax</li>
+        <li><a href="https://github.com/ForbesLindesay/react-jade">react-jade</a> - Compile Jade to React JavaScript
+        </li>
+        <li><a href="https://github.com/duncanbeevers/jade-react">jade-react</a> - Compile Jade templates to React. DOM
+          expressions</li>
+        <li><a href="https://github.com/duncanbeevers/gulp-jade-react">gulp-jade-react</a> - Compile Jade templates into
+          React de-sugared JSX with Gulp</li>
+        <li><a href="https://github.com/ddispaltro/sbt-reactjs">sbt-reactjs</a> - React SBT Plugin using npm</li>
+        <li><a href="https://github.com/japgolly/scalajs-react">scalajs-react</a> - A guilty affair between Scala.js and
+          Facebook&apos;s React</li>
+        <li><a href="https://github.com/vjeux/react-xtags/">react-xtags</a> - Using React to implement xtags</li>
+        <li><a href="https://github.com/KnisterPeter/jreact">jreact</a> - React on server-side Java (with Rhino or
+          Nashorn)</li>
+        <li><a href="https://github.com/lantiga/react.hiccup">React.hiccup</a> - A complete replacement for JSX written
+          in sweet.js</li>
+        <li><a href="https://github.com/ssorallen/react-play">react-play</a> - Rendering React components in the Play
+          Framework with JDK8&apos;s Nashorn</li>
+        <li><a href="https://github.com/fdecampredon/rx-react">rx-react</a> - Utilities to works with React in a RxJS
+        </li>
+        <li><a href="https://github.com/vojtajina/react-with-di">react-with-di</a> - A hacked prototype of React.js with
+          DI</li>
+        <li><a href="https://github.com/firebase/reactfire">reactfire</a> - ReactJS mixin for easy Firebase integration
+        </li>
+        <li><a href="https://github.com/AndersDJohnson/firedux">firedux</a> - Firebase + Redux for ReactJS</li>
+        <li><a href="https://github.com/tleunen/react-clickdrag-mixin">react-clickdrag-mixin</a> - ClickDrag mixin for
+          React component</li>
+        <li><a href="https://github.com/keystonejs/keystone/issues/503">Rewrite the Admin UI of KeystoneJS in React</a>
+        </li>
+        <li><a href="https://github.com/eiriklv/react-masonry-mixin">react-masonry-mixin</a> - Standalone mixin for
+          Masonry (@desandro)</li>
+        <li><a href="https://github.com/eiriklv/react-packery-mixin">react-packery-mixin</a> - Standalone mixin for
+          Packery (Metafizzy)</li>
+        <li><a href="https://github.com/paramaggarwal/react-dropzone">react-dropzone</a> - Simple HTML5 drag-drop zone
+          with React.js.</li>
+        <li><a href="https://github.com/ngokevin/aframe">aframe-react</a> - A-Frame VR + React</li>
+        <li><a href="https://github.com/react-spring/react-three-fiber">react-three-fiber</a> - A react reconciler for
+          threejs (web and react-native)</li>
+        <li><a href="https://github.com/Izzimach/react-three">react-three</a> - React bindings to create and control a
+          3D scene using three.js</li>
+        <li><a href="https://github.com/toxicFork/react-three-renderer">react-three-renderer</a> - Render into a
+          three.js canvas using React</li>
+        <li><a href="https://github.com/fritx/react-threejs">react-threejs</a> - Simplest bindings between React &amp;
+          Three.js</li>
+        <li><a href="https://github.com/paulcollett/react-masonry-css">react-masonry-css</a> - Fast Masonry layout
+          powered by CSS, dependency free</li>
+        <li><a href="https://github.com/appleboy/react-recaptcha">react-captcha</a> - A react.js reCAPTCHA for Google
+        </li>
+        <li><a href="https://github.com/sarneeh/reaptcha">reaptcha</a> - Clean, modern and simple React wrapper for
+          Google reCAPTCHA</li>
+        <li><a href="https://github.com/douglasjunior/react-recaptcha-that-works">react-recaptcha-that-works</a> - A
+          reCAPTCHA bridge for React that works</li>
+        <li><a href="https://github.com/ckeditor/ckeditor4-react">ckeditor4-react</a> - An official CKEditor 4 rich text
+          editor component for React</li>
+        <li><a href="https://github.com/ckeditor/ckeditor5-react">ckeditor5-react</a> - An official CKEditor 5 rich text
+          editor component for React</li>
+      </ul>
+      <h5>React State Management</h5>
+      <ul>
+        <li><a href="#redux">redux</a></li>
+        <li><a href="#mobx">mobx</a></li>
+        <li><a href="http://facebook.github.io/flux/">flux</a></li>
+        <li><a href="https://github.com/facebookexperimental/Recoil">recoil</a></li>
+        <li><a href="https://github.com/davidkpiano/xstate">xState</a></li>
+        <li><a href="https://react-query.tanstack.com/">react-query</a></li>
+      </ul>
+      <h5>React AR and VR</h5>
+      <ul>
+        <li><a href="https://facebook.github.io/react-360/">React 360</a> - Create exciting 360 and VR experiences using
+          React</li>
+        <li><a href="https://viromedia.com/viroreact/">Viro React</a> - Platform for rapidly building AR/VR applications
+          using React Native</li>
+      </ul>
+      <h5>React Renderers</h5>
+      <ul>
+        <li><a href="https://github.com/vadimdemedes/ink">ink</a> - React for interactive command-line apps</li>
+        <li><a href="https://github.com/airbnb/react-sketchapp">React Sketch.app</a> - Render React components to Sketch
+        </li>
+        <li><a href="https://github.com/react-figma/react-figma">React Figma</a> - A React renderer for Figma</li>
+        <li><a href="https://github.com/pmndrs/react-three-fiber">react-three-fiber</a> - A React renderer for Three.js
+          (web and react-native)</li>
+        <li><a href="https://facebook.github.io/react-360/">React 360</a></li>
+        <li><a href="https://github.com/pmndrs/react-nil">react-nil</a> - A react null renderer</li>
+        <li><a href="https://github.com/diegomura/react-pdf">React PDF</a> - Create PDF files using React</li>
+        <li><a href="https://github.com/iamdustan/react-hardware">React Hardware</a> - A React renderer for Hardware
+        </li>
+      </ul>
+      <h5>Forms</h5>
+      <ul>
+        <li><a href="http://facebook.github.io/react/docs/forms.html">React Forms</a></li>
+        <li><a href="https://github.com/jquense/react-formal">react-formal</a> - Better form validation and value
+          management for React, Provides minimal wiring</li>
+        <li><a href="https://github.com/prometheusresearch/react-forms">react-forms</a> - Forms library for React</li>
+        <li><a href="https://github.com/Volicon/valuelink">valuelink</a> - Full-featured two-way data binding with
+          extended React links</li>
+        <li><a href="https://github.com/wingspan/wingspan-forms">wingspan-forms</a> - A dynamic form library for
+          Facebook React</li>
+        <li><a href="https://github.com/insin/newforms">newforms</a> - Isomorphic form-handling for React</li>
+        <li><a href="https://github.com/zackify/formjs">formjs</a> - A form generator for Reactjs</li>
+        <li><a href="https://github.com/quri/react-form-builder">react-form-builder</a> - A Form Builder for React.js
+        </li>
+        <li><a href="https://github.com/AppliedMathematicsANU/plexus-form">plexus-form</a> - A dynamic form component
+          for react using JSON-Schema</li>
+        <li><a href="https://github.com/gcanti/tcomb-form">tcomb-form</a> - UI library for developing forms writing less
+          code</li>
+        <li><a href="https://github.com/christianalfoni/formsy-react">formsy-react</a> - A form input builder and
+          validator for React JS</li>
+        <li><a href="http://jamesknelson.com/learn-raw-react-ridiculously-simple-forms/">Learn Raw React</a> -
+          Ridiculously Simple Forms</li>
+        <li><a href="https://github.com/andrewhathaway/Winterfell">Winterfell</a> - Generate complex, validated and
+          extendable JSON-based forms in React</li>
+        <li><a href="https://github.com/redux-autoform/redux-autoform">Redux-Autoform</a> - Create Redux-Forms
+          dynamically out of metadata</li>
+        <li><a href="https://github.com/vazco/uniforms">uniforms</a> - Bunch of React components and helpers to easily
+          generate and validate forms</li>
+        <li><a href="https://github.com/jaredpalmer/formik">formik</a> - Forms in React, without tears</li>
+        <li><a href="https://github.com/zero-plus-x/neoform">NeoForm</a> - Modular HOCs for form state management and
+          validation</li>
+        <li><a href="https://github.com/mozilla-services/react-jsonschema-form">react-jsonschema-form</a> - A React
+          component for building Web forms from JSON Schema</li>
+        <li><a href="https://github.com/JamesWatling/react-native-list-view-select">List View Select</a> - A Toggleable
+          select box for React Native with native components</li>
+        <li><a href="https://github.com/final-form/react-final-form">Final Form &#x1F3C1;</a> -</li>
+        <li><a href="https://github.com/indix/formland">formland</a> - A simple, super-flexible, extensible config based
+          form generator</li>
+        <li><a href="https://github.com/bietkul/react-reactive-form">react-reactive-form</a> - Angular like reactive
+          forms in React</li>
+        <li><a href="https://github.com/Rocketseat/unform">unform</a> - ReactJS form library to create uncontrolled form
+          structures with nested fields, validations and much more!</li>
+        <li><a href="https://github.com/react-hook-form/react-hook-form">react-hook-form</a> - Performant, flexible and
+          extensible forms with easy to use validation</li>
+      </ul>
+      <h5>Autocomplete</h5>
+      <ul>
+        <li><a href="https://github.com/rackt/react-autocomplete">react-autocomplete by @rackt</a> - WAI-ARIA compliant
+          React autocomplete</li>
+        <li><a href="https://github.com/moroshko/react-autosuggest">react-autosuggest by @moroshko</a> - WAI-ARIA
+          compliant React autosuggest component</li>
+        <li><a href="https://github.com/eliseumds/react-autocomplete">react-autocomplete by @eliseumds</a> - Just
+          tasting some ReactJS + RxJS</li>
+        <li><a href="https://github.com/prometheusresearch/react-autocomplete">react-autocomplete by
+            @prometheusresearch</a> - Autocomplete widget based on React</li>
+        <li><a href="https://github.com/gragland/instatype">instatype by @gragland</a> - Simple react autocomplete
+          component</li>
+        <li><a href="https://github.com/paypal/downshift">downshift</a> - &#x1F3CE; Primitives to build simple,
+          flexible, WAI-ARIA compliant enhanced input React components</li>
+        <li><a href="https://github.com/ericgio/react-bootstrap-typeahead">React Bootstrap Typeahead</a> - A React-based
+          typeahead that relies on Bootstrap for styling and was originally inspired by Twitter&apos;s typeahead.js.
+        </li>
+      </ul>
+      <h5>Graphics</h5>
+      <ul>
+        <li><a href="https://github.com/facebook/react-art">react-art</a> - React Bridge to the ART Drawing Library</li>
+        <li><a href="https://github.com/Flipboard/react-canvas">react-canvas</a> - High performance
+          <code class="language-javascript">&lt;canvas&gt;</code> rendering for React components
+        </li>
+        <li><a href="https://github.com/pilwon/react-famous">react-famous</a> - Complex 3D animations UI at 60 FPS with
+          <a href="http://Famo.us">Famo.us</a>
+        </li>
+        <li><a href="https://github.com/freiksenet/react-kinetic">react-kinetic</a> - HTML5 Canvas via KineticJS using
+          React</li>
+        <li><a href="https://github.com/gorangajic/react-svg-morph">react-svg-morph</a> - morph your svg components one
+          into another</li>
+        <li><a href="https://github.com/kmkzt/react-hooks-svgdrawing">react-hooks-svgdrawing</a> - SVG Drawing with
+          React hooks</li>
+        <li><a href="https://github.com/chrvadala/react-svg-pan-zoom">react-svg-pan-zoom</a> - A React component that
+          adds pan and zoom features to SVG.</li>
+      </ul>
+      <h5>Data Managing</h5>
+      <ul>
+        <li><a href="https://github.com/immutable-js/immutable-js">Immutable.js</a> - Immutable Data Collections for
+          Javascript</li>
+        <li><a href="https://github.com/mquan/cortex">cortex</a> - A javascript library for centrally managing data with
+          React</li>
+        <li><a href="https://github.com/wereHamster/avers">avers</a> - A modern client-side model abstraction library
+        </li>
+        <li><a href="https://github.com/entrendipity/imvvm">imvvm</a> - Immutable Model-View-ViewModel for React</li>
+        <li><a href="https://github.com/moreartyjs/moreartyjs">morearty.js</a> - Better state management for React in
+          pure JavaScript</li>
+        <li><a href="https://github.com/josephsavona/valuable">valuable</a> - An immutable data store for React</li>
+        <li><a href="https://github.com/ericclemmons/react-resolver">react-resolver</a> - Isomorphic library to
+          recursively lazy-load data for React components</li>
+        <li><a href="https://github.com/arqex/freezer">freezer-js</a> - Lightweight and reactive immutable data
+          structure for React</li>
+        <li><a href="#mobx">MobX</a> - Simple, scalable state management</li>
+        <li><a href="https://github.com/Yomguithereal/baobab">baobab</a> - JavaScript persistent and optionally
+          immutable data tree with cursors</li>
+        <li><a href="https://github.com/Yomguithereal/baobab-react">baobab-react</a> - React integration for Baobab</li>
+        <li><a href="https://github.com/omniscientjs/immstruct">immstruct</a> - Immutable data structures with history
+          for top-to-bottom properties in component based libraries like React</li>
+        <li><a href="https://github.com/rtfeldman/seamless-immutable">seamless-immutable</a> - Immutable data structures
+          for JavaScript which are backwards-compatible with normal JS Arrays and Objects</li>
+        <li><a href="http://tydel.js.org">tydel</a> - Typed Models and Collections, with React bindings</li>
+        <li><a href="https://github.com/philpl/extendable-immutable">extendable-immutable</a> - Extend any Immutable.js
+          data structure</li>
+        <li><a href="https://github.com/vesparny/statty">statty</a> - A tiny and unobtrusive state management library
+          for React and Preact apps</li>
+        <li><a href="https://github.com/hydux/hydux">Hydux</a> - An Elm-Like state manager for React with
+          &quot;batteries included&quot;</li>
+        <li><a href="https://github.com/Microsoft/ReSub">ReSub</a> - A library for writing better React components and
+          data stores</li>
+        <li><a href="https://proppyjs.com">ProppyJS</a> - A tiny library for functional props composition</li>
+        <li><a href="https://github.com/Nozbe/WatermelonDB">WatermelonDB</a> - &#x1F349; Next-gen database for powerful
+          React and React Native apps that scales to 10, 000s of records and remains fast</li>
+        <li><a href="https://github.com/pubkey/rxdb">RxDB</a> - A realtime Database for JavaScript Applications</li>
+        <li><a href="https://github.com/zerobias/effector">Effector</a> - Fast and powerful reactive state manager. Lets
+          you write simple, fast and type safe code and manage reactive state with ease.</li>
+        <li><a href="https://github.com/CharlesStover/reactn">reactn</a> - React, but with built-in global state
+          management</li>
+        <li><a href="https://github.com/immerjs/immer">immer</a> - Create the next immutable state by mutating the
+          current one</li>
+      </ul>
+      <h5>Maps</h5>
+      <ul>
+        <li><a href="https://github.com/pieterv/react-googlemaps">react-googlemaps</a> - React interface to Google maps
+        </li>
+        <li><a href="https://github.com/matnel/react-maps">react-maps</a> - A map component for React</li>
+        <li><a href="https://github.com/tomchentw/react-google-maps">react-google-maps</a> - React.js Google Maps
+          integration component</li>
+        <li><a href="https://github.com/MicheleBertoli/react-gmaps">react-gmaps</a> - A Google Maps component for
+          React.js</li>
+        <li><a href="https://github.com/uber/react-map-gl">react-map-gl</a> - A React wrapper for MapboxGL-js plus
+          overlay API</li>
+        <li><a href="https://github.com/istarkov/google-map-react">google-map-react</a> - Isomorphic google map React
+          component</li>
+        <li><a href="https://github.com/alex3165/react-mapbox-gl">react-mapbox-gl</a> - A mapbox-gl-js wrapper to make
+          the API react friendly</li>
+        <li>[google-maps-react](<a href="https://github.com/fullstackreact/">https://github.com/fullstackreact/</a> - A
+          declarative Google Map React component using React, lazy-loading dependencies, current-location finder and a
+          test-driven approach by the Fullstack React team.google-maps-react)</li>
+        <li><a href="https://react-leaflet.js.org/">react-leaflet</a> - React components for Leaflet maps</li>
+        <li><a href="https://github.com/terrestris/react-geo">react-geo</a> - A set of geo-related components using
+          react, antd, and ol</li>
+        <li><a href="https://github.com/mariusandra/pigeon-maps">pigeon-maps</a> - ReactJS maps without external
+          dependencies</li>
+      </ul>
+      <h5>Charts</h5>
+      <ul>
+        <li><a href="https://devexpress.github.io/devextreme-reactive/react/chart/">DevExtreme React Chart</a> -
+          High-performance plugin-based React chart for Bootstrap and Material Design</li>
+        <li><a href="https://github.com/jhudson8/react-chartjs">react-chartjs</a> - Common react charting components
+          using chart.js</li>
+        <li><a href="https://github.com/rrag/react-stockcharts">react-stockcharts</a> - Highly customizable stock charts
+          with ReactJS and d3</li>
+        <li><a href="http://numberpicture.com/build">Number Picture</a> - Low-level building blocks for constructing
+          animated visualizations with React &amp; D3.</li>
+        <li><a href="https://github.com/FormidableLabs/victory">Victory</a> - A collection of composable React
+          components for building interactive data visualizations</li>
+        <li><a href="https://github.com/recharts/recharts">Recharts</a> - A charting library built on D3 with an awesome
+          declarative API</li>
+        <li><a href="https://github.com/apexcharts/react-apexcharts">React-ApexCharts</a> - React component for
+          ApexCharts (An Interactive SVG Chart Library)</li>
+        <li><a href="https://github.com/reaviz/reaviz">reaviz</a> - React Data Visualization Library based on D3.js</li>
+        <li><a href="https://github.com/uber/react-vis">react-vis</a> - A React visualization library designed with the
+          following principles in mind: React-friendly, high-level and customizable, expressive, and industry-strong.
+        </li>
+        <li><a href="https://github.com/plouc/nivo">nivo</a> - It provides a rich set of data visualization components,
+          built on top of the D3 and React libraries.</li>
+        <li><a href="https://github.com/hshoff/vx">vx</a> - A collection of reusable low-level visualization components.
+          It combines the power of D3 to generate your visualization with the benefits of React for updating the DOM.
+        </li>
+        <li><a href="https://github.com/hustcc/echarts-for-react">echarts-for-react</a> - A very simple ECharts wrapper
+          for React.</li>
+        <li><a href="https://github.com/kis/chartify">Chartify</a> - React plugin for building charts using CSS.</li>
+        <li><a href="https://github.com/nteract/semiotic">Semiotic</a> - A data visualization framework combining React
+          and D3.</li>
+        <li><a href="https://github.com/chartshq/react-muze">react-muze</a> - React wrapper for <a
+            href="https://muzejs.org/">muze</a> (free data visualization library for creating exploratory data
+          visualizations in browser, using WebAssembly)</li>
+        <li><a href="https://github.com/reaviz/reaflow/">reaflow</a> - Diagram editor for React</li>
+      </ul>
+      <hr>
+      <h3>React Native</h3>
+      <blockquote>
+        <p>Framework for building native apps using React</p>
+      </blockquote>
+      <h4>React Native General Resources</h4>
+      <ul>
+        <li><a href="https://facebook.github.io/react-native/">React Native Official Site</a></li>
+        <li><a href="https://github.com/facebook/react-native">React Native GitHub</a></li>
+        <li><a href="http://brentvatne.ca/react-native-newsletter/">React Native Newsletter</a></li>
+        <li><a href="https://rnplay.org/">React Native Playground</a></li>
+        <li><a href="https://github.com/jondot/awesome-react-native">React Native Awesome List</a></li>
+        <li><a href="http://stackoverflow.com/questions/tagged/react-native">React Native StackOverflow</a></li>
+        <li><a href="https://devchat.tv/react-native-radio/">React Native Radio</a></li>
+      </ul>
+      <h4>React Native Tutorials</h4>
+      <ul>
+        <li><a href="https://facebook.github.io/react-native/docs/tutorial.html">React Native Tutorial</a></li>
+        <li><a href="http://www.raywenderlich.com/99473/introducing-react-native-building-apps-javascript">Introducing
+            React Native: Building Apps with JavaScript</a></li>
+        <li><a href="http://www.appcoda.com/react-native-introduction/">Introduction to React Native: Building iOS Apps
+            with JavaScript</a></li>
+        <li><a href="https://medium.com/the-exponent-log/react-native-meets-async-functions-3e6f81111173">React Native
+            Meets Async Functions</a></li>
+        <li><a href="http://atticuswhite.com/blog/react-native-smart-mirror-lab/">Digital Smart Mirror lab with React
+            Native</a></li>
+        <li><a
+            href="https://www.smashingmagazine.com/2016/04/the-beauty-of-react-native-building-your-first-ios-app-with-javascript-part-1/">The
+            Beauty Of React Native: Building Your First iOS App With JavaScript (Part 1)</a></li>
+        <li><a href="https://www.smashingmagazine.com/2016/04/how-to-build-your-first-ios-app-with-javascript/">The
+            Beauty Of React Native: Building Your First iOS App With JavaScript (Part 2)</a></li>
+        <li><a href="https://medium.com/@yoniweisbrod/a-mini-course-on-react-native-flexbox-2832a1ccc6">A Mini-Course on
+            React Native Flexbox</a></li>
+        <li><a href="https://css-tricks.com/snippets/css/a-guide-to-flexbox/">A Complete Guide to Flexbox</a></li>
+        <li><a href="http://www.multunus.com/blog/2016/07/test-driving-react-native-applications/">Test driving react
+            native applications</a></li>
+        <li><a href="https://medium.com/@jan.hesters/using-typescript-with-react-native-946aa4b4ae6f">Using React Native
+            With TypeScript</a></li>
+      </ul>
+      <h4>React Native Development Tools</h4>
+      <ul>
+        <li><a href="https://github.com/microsoft/react-native-code-push">react-native-code-push</a> - React Native
+          module for CodePush</li>
+      </ul>
+      <h4>React Native Sample Apps</h4>
+      <ul>
+        <li><a href="https://github.com/iSimar/HackerNews-React-Native">HackerNews</a></li>
+        <li><a href="https://github.com/sonnylazuardi/ziliun-react-native">Ziliun</a></li>
+        <li><a href="https://github.com/7kfpun/FinanceReactNative">FinanceReactNative</a></li>
+        <li><a href="https://github.com/nashvail/SplashWalls">SplashWalls</a></li>
+        <li><a href="https://github.com/jbkuczma/NBAreact">NBAreact</a></li>
+        <li><a href="https://github.com/EarlGeorge/timetable">Bus Timetable</a></li>
+      </ul>
+      <h4>React Native Boilerplates</h4>
+      <ul>
+        <li><a href="https://github.com/react-community/create-react-native-app">Create React Native App</a> - Create a
+          React Native app on any OS with no build config, with or without Expo</li>
+        <li><a href="https://github.com/bartonhammond/snowflake">Snowflake</a> - React Native iOS &amp; Android with
+          Redux, <a href="http://Parse.com">Parse.com</a>, Jest (88% coverage)</li>
+        <li><a href="https://github.com/infinitered/ignite">Ignite</a> - The hottest CLI for React Native, boilerplates,
+          plugins, generators, and more!</li>
+        <li><a href="https://github.com/flatlogic/react-native-starter">React Native Starter Kit</a> - A powerful
+          starter project that bootstraps development of your mobile application</li>
+      </ul>
+      <h4>React Native Awesome Components</h4>
+      <ul>
+        <li><a href="https://expo.io/">Expo</a> - The Expo platform for making cross-platform mobile apps</li>
+        <li><a href="https://reactnavigation.org/">react-navigation</a> - Routing and navigation for your React Native
+          apps</li>
+        <li><a href="https://github.com/doefler/react-native-social-share">react-native-social-share</a> - Use the iOS
+          and Android native Twitter and Facebook share popup with React Native</li>
+        <li><a href="https://github.com/facebook/react-native-fbsdk">react-native-fbsdk</a> - A wrapper around the iOS
+          Facebook SDK</li>
+        <li><a href="https://github.com/Kureev/react-native-side-menu">react-native-side-menu</a> - Simple customizable
+          component to create side menu</li>
+        <li><a href="https://github.com/mapbox/react-native-mapbox-gl">react-native-mapbox-gl</a> - A Mapbox GL react
+          native module</li>
+        <li><a href="https://github.com/corymsmith/react-native-icons">react-native-icons</a> - Quick and easy icons in
+          React Native</li>
+        <li><a href="https://github.com/oblador/react-native-vector-icons">react-native-vector-icons</a> - 3000
+          Customizable Icons for React Native with support for NavBar/TabBar</li>
+        <li><a href="https://github.com/apptailor/react-native-google-signin">react-native-google-signin</a> - Google
+          Signin for React Native</li>
+        <li><a href="https://github.com/pankod/react-native-picker-modal-view">react-native-picker-modal-view</a></li>
+        <li><a href="https://github.com/FaridSafi/react-native-gifted-chat">react-native-gifted-chat</a> - The most
+          complete chat UI for React Native</li>
+        <li><a href="https://github.com/DylanVann/react-native-fast-image">react-native-fast-image</a> - FastImage,
+          performant React Native image component</li>
+        <li><a href="https://github.com/Flipkart/recyclerlistview">recyclerlistview</a> - High performance listview for
+          React Native and web!</li>
+        <li><a href="https://github.com/bolan9999/react-native-largelist">react-native-largelist</a> - The best large
+          list component for React Native</li>
+        <li><a href="https://github.com/software-mansion/react-native-gesture-handler">react-native-gesture-handler</a>
+          - Declarative API exposing platform native touch and gesture system to React Native</li>
+        <li><a href="https://github.com/mfrachet/rn-placeholder">rn-placeholder</a> - Display some placeholder stuff
+          before rendering your text or media content in React Native</li>
+      </ul>
+      <h4>React Native Libraries</h4>
+      <ul>
+        <li><a href="https://github.com/getsentry/sentry-react-native">sentry-react-native</a> - Real-time crash
+          reporting for your web apps, mobile apps, and games.</li>
+        <li><a href="https://github.com/realm/realm-js">realm-js</a> - Realm is a mobile database: an alternative to
+          SQLite &amp; key-value stores</li>
+        <li><a href="https://github.com/react-native-community/react-native-device-info">react-native-device-info</a> -
+          Device Information for React Native iOS and Android</li>
+      </ul>
+      <h3>Redux</h3>
+      <blockquote>
+        <p>Predictable State Container for JavaScript Apps</p>
+      </blockquote>
+      <h4>Redux General Resources</h4>
+      <ul>
+        <li><a href="https://github.com/reactjs/redux">Redux GitHub</a></li>
+        <li><a href="http://redux.js.org/">Redux Official Site</a></li>
+        <li><a href="https://github.com/xgrommx/awesome-redux">Awesome Redux List</a></li>
+      </ul>
+      <h4>Redux Tools</h4>
+      <ul>
+        <li><a href="https://github.com/reactjs/react-redux">react-redux</a> - Official React bindings for Redux</li>
+        <li><a href="https://github.com/reduxjs/redux-devtools">redux-devtools</a> - DevTools for Redux with hot
+          reloading, action replay, and customizable UI</li>
+        <li><a href="https://github.com/reactjs/react-router-redux">react-router-redux</a> - Bindings to keep
+          react-router and redux in sync</li>
+        <li><a href="https://github.com/reduxjs/redux-toolkit">redux-toolkit</a> - The official, opinionated,
+          batteries-included toolset for efficient Redux development</li>
+        <li><a href="https://github.com/erikras/redux-form">redux-form</a> - A Higher Order Component using react-redux
+          to keep form state</li>
+        <li><a href="https://github.com/gaearon/redux-thunk">redux-thunk</a> - Thunk middleware for redux</li>
+        <li><a href="https://github.com/theaqua/redux-logger">redux-logger</a> - Logger middleware for redux</li>
+        <li><a href="https://github.com/reactjs/reselect">reselect</a> - Selector library for Redux</li>
+        <li><a href="https://github.com/paularmstrong/normalizr">normalizr</a> - Normalizes nested JSON according to a
+          schema</li>
+        <li><a href="https://github.com/yelouafi/redux-saga">redux-saga</a> - An alternative side effect model for Redux
+          apps</li>
+        <li><a href="https://github.com/matthieu-beteille/redux-data-fx">redux-data-fx</a> - Declarative Side Effects
+          for Redux</li>
+        <li><a href="https://github.com/redux-observable/redux-observable">redux-observable</a> - RxJS middleware for
+          Redux</li>
+        <li><a href="https://github.com/markdalgleish/redux-analytics">redux-analytics</a> - Analytics middleware for
+          Redux</li>
+        <li><a href="https://github.com/omnidan/redux-undo">redux-undo</a> - Higher order reducer to add undo/redo
+          functionality to redux state containers</li>
+        <li><a href="https://github.com/treasure-data/redux-search">redux-search</a> - Redux bindings for client-side
+          search</li>
+        <li><a href="https://github.com/arnaudbenard/redux-mock-store">redux-mock-store</a> - A mock store for your
+          testing your redux async action creators and middleware</li>
+        <li><a href="https://github.com/gajus/redux-immutable">redux-immutable</a> - Create an equivalent function of
+          Redux combineReducers that works with Immutable.js state</li>
+        <li><a href="https://github.com/derzunov/redux-react-i18n">redux-react-i18n</a> - An i18n solution for
+          redux/react</li>
+        <li><a href="https://github.com/razodeh/r16n/">R16N</a> - A redux/react I18n solution</li>
+        <li><a href="https://github.com/alnorris/redux-actiontyper">redux-actiontyper</a> - Helper to create less
+          verbose action types for Redux</li>
+        <li><a href="https://github.com/suyesh/redux-state-validator">redux-state-validator</a> - A simple redux
+          middleware to validate redux state values and object types using JSON Schema</li>
+        <li><a href="https://github.com/rt2zz/redux-persist">redux-persist</a> - Persist and rehydrate a redux store
+        </li>
+      </ul>
+      <h4>Redux Tutorials</h4>
+      <ul>
+        <li><a href="https://www.pluralsight.com/courses/react-redux-react-router-es6">Building Applications with React
+            and Redux in ES6</a></li>
+        <li><a href="https://egghead.io/series/getting-started-with-redux">Getting Started with Redux</a></li>
+        <li><a href="https://egghead.io/series/building-react-applications-with-idiomatic-redux">Building React
+            Applications with Idiomatic Redux</a></li>
+        <li><a href="https://github.com/happypoulp/redux-tutorial">Redux Tutorial</a></li>
+        <li><a
+            href="http://www.theodo.fr/blog/2016/03/getting-started-with-react-redux-and-immutable-a-test-driven-tutorial-part-1/">Getting
+            Started with React, Redux and Immutable: a Test-Driven Tutorial: Part 1</a></li>
+        <li><a
+            href="http://www.theodo.fr/blog/2016/03/getting-started-with-react-redux-and-immutable-a-test-driven-tutorial-part-2/">Getting
+            Started with React, Redux and Immutable: a Test-Driven Tutorial: Part 2</a></li>
+        <li><a href="http://teropa.info/blog/2015/09/10/full-stack-redux-tutorial.html">Full-Stack Redux Tutorial</a>
+        </li>
+        <li><a
+            href="https://www.codementor.io/reactjs/tutorial/redux-server-rendering-react-router-universal-web-app">Server-Side
+            Rendering with Redux and React-Router</a></li>
+        <li><a href="https://www.codementor.io/reactjs/tutorial/intro-to-react-redux-pros">Deep Introduction to
+            Redux</a></li>
+        <li><a href="https://www.codementor.io/reactjs/tutorial/redux-unit-test-mocha-mocking">Unit Testing Redux
+            Apps</a></li>
+        <li><a href="https://auth0.com/blog/2016/01/04/secure-your-react-and-redux-app-with-jwt-authentication/">Secure
+            Your React and Redux App with JWT Authentication</a></li>
+        <li><a href="http://joelhooks.com/blog/2016/03/20/build-an-image-gallery-using-redux-saga">Build an Image
+            Gallery Using React, Redux and redux-saga</a></li>
+        <li><a href="http://www.sohamkamani.com/blog/2016/06/05/redux-apis/">A simplified approach to calling APIs with
+            redux</a></li>
+        <li><a href="https://github.com/smanne/reduxnor">React Redux based blood donor demo application</a></li>
+        <li><a
+            href="https://www.youtube.com/watch?v=1w-oQ-i1XB8&amp;list=PLoYCgNOIyGABj2GQSlDRjgvXtqfDxKm5b&amp;index=15">LearnCode.academy
+            Redux Tutorials Series</a></li>
+        <li><a href="https://blog.isquaredsoftware.com/series/practical-redux/">Practical Redux</a></li>
+        <li><a href="https://daveceddia.com/redux-tutorial/">A Complete React Redux Tutorial for Beginners</a></li>
+      </ul>
+      <hr>
+      <h3>MobX</h3>
+      <blockquote>
+        <p>Simple, scalable state management for JavaScript Apps</p>
+      </blockquote>
+      <h4>MobX General Resources</h4>
+      <ul>
+        <li><a href="https://github.com/mobxjs/mobx">MobX GitHub</a></li>
+        <li><a href="https://mobxjs.github.io/mobx/">MobX Official Site</a></li>
+      </ul>
+      <h4>MobX Tools</h4>
+      <ul>
+        <li><a href="https://github.com/mobxjs/mobx-react">mobx-react</a> - React component wrapper for combining React
+          with MobX</li>
+      </ul>
+      <h4>MobX Tutorials</h4>
+      <ul>
+        <li><a href="https://mobxjs.github.io/mobx/getting-started.html">Ten minute introduction to MobX and React</a>
+        </li>
+        <li><a href="https://egghead.io/courses/manage-complex-state-in-react-apps-with-mobx">Manage Complex State in
+            React Apps with MobX</a></li>
+        <li><a href="http://www.robinwieruch.de/mobx-react">Refactor your application from Redux to MobX</a></li>
+        <li><a href="https://www.robinwieruch.de/redux-mobx-confusion/">Redux or MobX: An attempt to dissolve the
+            Confusion</a></li>
+      </ul>
+      <hr>
+      <h3>GraphQL</h3>
+      <blockquote>
+        <p>Query Language</p>
+      </blockquote>
+      <h4>GraphQL Spec</h4>
+      <ul>
+        <li><a href="http://graphql.org/">GraphQL Official Site</a></li>
+        <li><a href="https://github.com/graphql/graphql-spec/tree/master/spec">GraphQL Specification</a></li>
+        <li><a href="https://github.com/facebook/graphql">GraphQL Specification Repository</a></li>
+      </ul>
+      <h4>GraphQL Tools</h4>
+      <ul>
+        <li><a href="https://graphcms.com">GraphCMS - The GraphQL Headless CMS</a></li>
+        <li><a href="https://github.com/sarkistlt/graphql-auto-generating-cms">GraphQL CMS</a></li>
+        <li><a href="https://github.com/sarkistlt/mongoose-schema-to-graphql">Mongoose schema To GraphQL</a></li>
+        <li><a href="https://github.com/dacz/apollo-bridge-link">GraphQL bridge to REST API</a></li>
+        <li><a href="https://github.com/graphcool/graphql-playground">GraphQL Playground - GraphQL IDE for better
+            development workflows</a></li>
+      </ul>
+      <h4>GraphQL Tutorials</h4>
+      <ul>
+        <li><a href="http://facebook.github.io/react/blog/2015/05/01/graphql-introduction.html">GraphQL Introduction</a>
+        </li>
+        <li><a href="http://hueypetersen.com/posts/2015/02/02/first-thoughts-on-graph-ql/">First Thoughts on GraphQL</a>
+        </li>
+        <li><a href="http://hueypetersen.com/posts/2015/02/08/modeling-queries-graph-ql-like/">Modeling Queries in a
+            GraphQL Like Way</a></li>
+        <li><a href="http://hueypetersen.com/posts/2015/02/22/thin-and-graphy/">Thin and Graphy</a></li>
+        <li><a href="https://blog.risingstack.com/graphql-overview-getting-started-with-graphql-and-nodejs/">GraphQL
+            Overview - Getting Started with GraphQL and Node.js</a></li>
+        <li><a href="http://davidandsuzi.com/writing-a-basic-api-with-graphql/">Writing a Basic API with GraphQL</a>
+        </li>
+        <li><a href="https://www.reindex.io/blog/building-a-graphql-server-with-node-js-and-sql/">Building a GraphQL
+            Server with Node.js and SQL</a></li>
+        <li><a href="https://medium.com/the-graphqlhub/graphql-tour-variables-58c6abd10f56#.wj9dsgyoy">GraphQL Tour:
+            Variables</a></li>
+        <li><a href="https://howtographql.com/">How to Graphql - The Fullstack Tutorial for GraphQL</a></li>
+      </ul>
+      <h4>GraphQL Implementations</h4>
+      <ul>
+        <li><a href="https://github.com/graphql/graphql-js">graphql-js</a> - A reference implementation of GraphQL for
+          <strong>JavaScript</strong>
+        </li>
+        <li><a href="https://github.com/RickWong/react-transmit">react-transmit</a> - Relay-inspired library based on
+          <strong>JavaScript Promises</strong>
+        </li>
+        <li><a href="https://github.com/rmosolgo/graphql-ruby">graphql-ruby</a> - <strong>Ruby</strong> implementation
+          of Facebook&apos;s GraphQL</li>
+        <li><a href="https://github.com/andimarek/graphql-java">graphql-java</a> - GraphQL <strong>Java</strong>
+          implementation</li>
+        <li><a href="https://github.com/OlegIlyenko/sangria">sangria</a> - <strong>Scala</strong> GraphQL client and
+          server library</li>
+        <li><a href="https://github.com/webonyx/graphql-php">graphql-php</a> - A <strong>PHP</strong> port of GraphQL
+          reference implementation</li>
+        <li><a href="http://graphene-python.org/">graphene</a> - GraphQL in <strong>Python</strong> made simple</li>
+        <li><a href="https://github.com/dittos/graphqllib">graphqllib</a> - GraphQL implementation for
+          <strong>Python</strong>
+        </li>
+        <li><a href="https://github.com/graphql-dotnet/graphql-dotnet">graphql-dotnet</a> - GraphQL for <strong>.
+            NET</strong></li>
+        <li><a href="https://github.com/graphql-go/graphql">graphql-go</a> - GraphQL for Go/Golang</li>
+      </ul>
+      <h4>Server Integration</h4>
+      <ul>
+        <li><a href="https://github.com/graphql/express-graphql">express-graphql</a> - Create a GraphQL HTTP server with
+          <strong>Express</strong>
+        </li>
+        <li><a href="https://github.com/graphcool/graphql-yoga">graphql-yoga</a> - Easiest way to run a GraphQL server
+        </li>
+      </ul>
+      <h4>Database Integration</h4>
+      <ul>
+        <li><a href="https://hasura.io/">Hasura</a> - Instant Realtime GraphQL on Postgres</li>
+        <li><a href="https://www.prisma.io/">Prisma</a> - A performant open-source GraphQL ORM-like * layer doing the
+          heavy lifting in your GraphQL server.</li>
+        <li><a href="https://github.com/brysgo/graphql-bookshelf">graphql-bookshelf</a> - Some help defining GraphQL
+          schema around BookshelfJS models</li>
+        <li><a href="https://github.com/solidsnack/GraphpostgresQL">GraphpostgresQL</a> - GraphQL for
+          <strong>PostgreSQL</strong>
+        </li>
+        <li><a href="https://github.com/RisingStack/graffiti">graffiti</a> - Node.js GraphQL ORM</li>
+        <li><a href="https://github.com/vaffel/sql-to-graphql">sql-to-graphql</a> - Generate a GraphQL API based on your
+          SQL database structure</li>
+        <li><a href="https://github.com/mickhansen/graphql-sequelize">graphql-sequelize</a> - GraphQL &amp; Relay for
+          MySQL &amp; Postgres via Sequelize</li>
+      </ul>
+      <hr>
+      <h3>Relay</h3>
+      <blockquote>
+        <p>Data-Driven React Applications</p>
+      </blockquote>
+      <h4>Relay General Resources</h4>
+      <ul>
+        <li><a href="https://facebook.github.io/relay/">Relay Offical Site</a></li>
+        <li><a href="https://github.com/facebook/relay">Relay GitHub</a></li>
+      </ul>
+      <h4>Relay Tutorials</h4>
+      <ul>
+        <li><a href="https://facebook.github.io/relay/docs/en/introduction-to-relay.html">Official Relay Getting
+            Started</a></li>
+        <li><a href="http://sgwilym.github.io/relay-visual-learners/">Relay for Visual Learners</a></li>
+        <li><a href="https://auth0.com/blog/2015/10/06/getting-started-with-relay/">Getting Started with Relay</a></li>
+        <li><a href="https://medium.com/@cpojer/relay-and-routing-36b5439bad9">Relay and Routing</a></li>
+      </ul>
+      <h4>Relay Tools</h4>
+      <ul>
+        <li><a href="https://github.com/graphql/graphql-relay-js">graphql-relay-js</a> - A library to help construct a
+          graphql-js server supporting react-relay</li>
+        <li><a href="https://github.com/relay-tools/react-router-relay">react-router-relay</a> - Relay integration for
+          React Router</li>
+        <li><a href="https://github.com/relay-tools/relay-local-schema">relay-local-schema</a> - Use Relay without a
+          GraphQL server</li>
+        <li><a href="https://github.com/facebook/jscodeshift">relay-codemod</a> - Codemod scripts based for on
+          jsodeshift to update Relay APIs</li>
+      </ul>
+      <hr>
+      <h3>Apollo</h3>
+      <blockquote>
+        <p>Data stack based on GraphQL</p>
+      </blockquote>
+      <h4>Apollo General Resources</h4>
+      <ul>
+        <li><a href="http://www.apollostack.com/">Apollo Official Site</a></li>
+        <li><a href="https://github.com/apollostack">Apollo GitHub</a></li>
+        <li><a href="https://medium.com/apollo-stack">Apollo Blog</a></li>
+        <li><a href="https://apollostack.slack.com/">Apollo Slack</a></li>
+      </ul>
+      <h4>Apollo Tools</h4>
+      <ul>
+        <li><a href="https://github.com/Drawbotics/react-apollo-redux">react-apollo-redux - A small wrapper to
+            automatically dispatch actions in response to apollo mutations</a></li>
+      </ul>
+      <hr>
+      <h3>Videos</h3>
+      <h4><a href="https://www.reactjsvideos.com">reactjsvideos.com</a></h4>
+      <h4>Important Talks</h4>
+      <ul>
+        <li><a href="https://www.youtube.com/watch?v=x7cQ3mrcKaY">Pete Hunt: React: Rethinking best practices - JSConf
+            EU 2013</a></li>
+        <li><a href="https://www.youtube.com/watch?v=DgVS-zXgMTk">Pete Hunt: React: Rethinking Best Practices (updated)
+            - JSConf. Asia 2013</a></li>
+        <li><a href="https://www.youtube.com/watch?v=GW0rj4sNH2w">Tom Occhino and Jordan Walke: JS Apps at Facebook -
+            JSConfUS 2013</a></li>
+        <li><a href="http://blog.vjeux.com/2014/javascript/react-css-in-js-nationjs.html">React: CSS in JS</a></li>
+        <li><a href="https://www.youtube.com/watch?v=h3KksH8gfcQ">Pete Hunt: Be Predictable, Not Correct - Mountain West
+            JavaScript 2014</a></li>
+        <li><a href="https://www.youtube.com/watch?v=nYkdrAPrdcw">Hacker Way: Rethinking Web App Development at
+            Facebook</a></li>
+        <li><a href="https://www.youtube.com/watch?v=D-ioDiacTm8">Christopher Chedeau: Why does React Scale? -
+            JSConf2014</a></li>
+        <li><a href="https://www.youtube.com/watch?v=eCf5CquV_Bw">Christopher Chedeau: React&apos;s Architecture - OSCON
+            2014</a></li>
+        <li><a href="https://www.youtube.com/watch?v=IVvHPPcl2TM">Pete Hunt: React RESTful UI Rendering - Strange Loop
+            2014</a></li>
+        <li><a href="https://www.youtube.com/watch?v=VkTCL6Nqm6Y">Pete Hunt: How Instagram.com Works - OSCON 2014</a>
+        </li>
+        <li><a href="https://www.youtube.com/watch?v=i__969noyAM">Bill Fisher and Jing Chen: React and Flux - NewCircle
+            Training 2014</a></li>
+        <li><a href="https://www.youtube.com/watch?v=4anAwXYqLG8">Sebastian Markbage: Minimal API Surface Area - JSConf
+            EU 2014</a></li>
+        <li><a href="https://www.youtube.com/watch?v=M8x0bc81smU">Avik Chaudhuri: JavaScript Testing and Static Type
+            Systems at Scale - Scale 2014</a></li>
+        <li><a href="https://www.youtube.com/watch?v=X6YbAKiLCLU">React Native &amp; Relay: Bringing Modern Web
+            Techniques to Mobile - f8 2015)</a></li>
+        <li><a href="https://www.youtube.com/watch?v=LQFQl8EsV3k">Citrusbyte Presents GraphQL: A Horizontal Platform
+            with Nick Schrock</a></li>
+        <li><a href="https://www.youtube.com/watch?v=mmke4w4gc6c">Laney Kuenzel: Mutations and Subscriptions in Relay -
+            JSConf 2015</a></li>
+        <li><a href="https://www.youtube.com/watch?v=dpw9EHDh2bM">React Today and Tomorrow and 90% Cleaner React With
+            Hooks - React Conf 2018</a></li>
+        <li><a href="https://reactjs.org/community/conferences.html">React Conferences</a></li>
+        <li><a href="https://reactjs.org/community/videos.html">React Videos</a></li>
+        <li><a href="https://github.com/tiaanduplessis/awesome-react-talks">Awesome React Talks</a></li>
+      </ul>
+      <h4><a href="https://www.youtube.com/playlist?list=PLb0IAmt7-GS1cbw4qonlQztYV1TAW0sCr">React.js Conf 2015
+          Playlist</a></h4>
+      <h4><a href="https://www.youtube.com/playlist?list=PLCC436JpVnK0Phxld2dD4tM4xPMxJCiRD">ReactEurope Conf 2015 Day 1
+          Playlist</a></h4>
+      <h4><a href="https://www.youtube.com/playlist?list=PLCC436JpVnK3HvUSAHpt-LRJkIK8pQG6R">ReactEurope Conf 2015 Day 2
+          Playlist</a></h4>
+      <h4><a href="https://www.youtube.com/playlist?list=PLUD4kD-wL_zZhHy-G8hPNZTvx_M35loXQ">ReactRally Conf 2015
+          Playlist</a></h4>
+      <h4><a href="https://www.youtube.com/playlist?list=PLb0IAmt7-GS0M8Q95RIc2lOM6nc77q1IY">React.js Conf 2016
+          Playlist</a></h4>
+      <h4><a href="https://www.youtube.com/playlist?list=PLNBNS7NRGKMG3uLrm5fgY02hJ87Wzb4IU">React Amsterdam 2016
+          Playlist</a></h4>
+      <h4><a href="https://www.youtube.com/playlist?list=PLCC436JpVnK09bZeayg-KeLuHfHgc-tDa">ReactEurope Conf 2016 Day 1
+          Playlist</a></h4>
+      <h4><a href="https://www.youtube.com/playlist?list=PLCC436JpVnK0LTDKW3O_BGTZnrZ8dBAof">ReactEurope Conf 2016 Day 2
+          Playlist</a></h4>
+      <h4><a href="https://www.youtube.com/playlist?list=PLUD4kD-wL_zYSfU3tIYsb4WqfFQzO_EjQ">ReactRally Conf 2016
+          Playlist</a></h4>
+      <h4><a href="https://www.youtube.com/playlist?list=PLNBNS7NRGKMFi_glL49hsoyqu7dHTMnNm">React.js Amsterdam 2018
+          Playlist</a></h4>
+      <h4>Video Tutorials</h4>
+      <ul>
+        <li><a href="https://www.youtube.com/watch?v=G-aO5hzo1aw">Trying React Hooks for the first time with Dan
+            Abramov</a></li>
+      </ul>
+      <hr>
+      <h3>Demo React Apps</h3>
+      <ul>
+        <li><a href="https://github.com/clintonwoo/hackernews-react-graphql">hackernews-react-graphql</a> - Hacker News
+          clone rewritten with universal JavaScript, using React and GraphQL</li>
+        <li><a href="https://github.com/reduction-admin/react-reduction">react-reduction</a> - Free Admin Template Built
+          with React and Bootstrap4</li>
+        <li><a href="https://github.com/SKempin/reactjs-tmdb-app">reactjs-tmdb-app</a> - Responsive React The Movie
+          Database App</li>
+        <li><a href="https://github.com/jeffersonRibeiro/react-shopping-cart">react-shopping-cart</a> - Simple ecommerce
+          cart application built with React Redux</li>
+      </ul>
+      <hr>
+      <h3>Real React Apps</h3>
+      <ul>
+        <li><a href="https://github.com/elastic/kibana">kibana</a> - Your window into the Elastic Stack</li>
+        <li><a href="https://github.com/firefox-devtools/debugger">firefox debugger</a> - The Firefox debugger that
+          works anywhere</li>
+        <li><a href="https://github.com/withspectrum/spectrum">spectrum</a> &#x2013; Simple, powerful online communities
+        </li>
+        <li><a href="https://github.com/mattermost/mattermost-webapp">mattermost</a> - Open source Slack alternative
+        </li>
+        <li><a href="https://github.com/gaearon/overreacted.io">overreacted</a> - Personal blog by Dan Abramov</li>
+        <li><a href="https://github.com/captbaritone/winamp2-js">winamp2-js</a> - Winamp 2 reimplemented for the browser
+        </li>
+        <li><a href="https://github.com/dnote/dnote">dnote</a> - A command line notebook with multi-device sync and web
+          interface</li>
+      </ul>
+    </div>
+
+    
+    <h1>My Notes</h1>
+    <!-- Copy and Paste Me -->
+    <div class="glitch-embed-wrap" style="height: 420px; width: 100%;">
+      <iframe
+        src="https://glitch.com/embed/#!/embed/scrawny-coordinated-headlight?path=views/index.html&previewSize=100"
+        title="scrawny-coordinated-headlight on Glitch"
+        allow="geolocation; microphone; camera; midi; vr; encrypted-media"
+        style="height: 100%; width: 100%; border: 0;">
+      </iframe>
+    </div>
+    
+  </div>
+
+
+
+
+
+
+
+
+
+  
+
+
+</body>
+
+</html>

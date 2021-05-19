@@ -1,0 +1,87 @@
+{
+  "name": "actual-react-router-bootstrap",
+  "version": "1.0.0",
+  "description": "Integration between React-Router and React-Bootstrap",
+  "main": "./lib/index.js",
+  "scripts": {
+    "prepublish": "npm run build",
+    "build": "rimraf lib && babel src --out-dir=lib && webpack && webpack -p",
+    "test": "npm run lint && karma start --single-run",
+    "tdd": "karma start",
+    "visual-test": "open http://localhost:8080/ && webpack-dev-server --config webpack.visual.config.babel.js",
+    "lint": "eslint *.babel.js src tests",
+    "release": "release"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/FreeCodeCamp/actual-react-router-bootstrap.git"
+  },
+  "keywords": [
+    "react",
+    "react-router",
+    "react-bootstrap",
+    "rrtr"
+  ],
+  "author": {
+    "name": "Matt Smith",
+    "email": "mtscout6@gmail.com"
+  },
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/FreeCodeCamp/actual-react-router-bootstrap/issues"
+  },
+  "homepage": "https://github.com/FreeCodeCamp/actual-react-router-bootstrap",
+  "peerDependencies": {
+    "react": ">=0.14.0",
+    "react-router": ">=2.0.0"
+  },
+  "devDependencies": {
+    "babel": "^5.8.38",
+    "babel-core": "^5.8.38",
+    "babel-eslint": "^4.1.8",
+    "babel-loader": "^5.4.0",
+    "bootstrap": "^3.3.6",
+    "chai": "^3.5.0",
+    "colors": "^1.1.2",
+    "css-loader": "^0.23.1",
+    "es5-shim": "^4.5.7",
+    "eslint": "^1.10.3",
+    "eslint-config-airbnb": "^2.1.1",
+    "eslint-plugin-babel": "^3.2.0",
+    "eslint-plugin-mocha": "^1.1.0",
+    "eslint-plugin-react": "^3.16.1",
+    "file-loader": "^0.8.5",
+    "history": "^2.0.1",
+    "html-webpack-plugin": "^2.15.0",
+    "karma": "^0.13.22",
+    "karma-cli": "^0.1.2",
+    "karma-mocha": "^0.2.2",
+    "karma-mocha-reporter": "^2.0.0",
+    "karma-phantomjs-launcher": "^1.0.0",
+    "karma-sinon-chai": "^1.2.0",
+    "karma-sourcemap-loader": "^0.3.7",
+    "karma-webpack": "^1.7.0",
+    "less": "^2.6.1",
+    "less-loader": "^2.2.3",
+    "lodash": "^3.10.1",
+    "lolex": "^1.4.0",
+    "mocha": "^2.4.5",
+    "mt-changelog": "^0.6.2",
+    "node-libs-browser": "^1.0.0",
+    "phantomjs-prebuilt": "^2.1.7",
+    "react": "^15.0.0",
+    "react-bootstrap": "^0.28.5",
+    "react-dom": "^15.0.0",
+    "react-router": "^2.0.1",
+    "release-script": "^1.0.2",
+    "rimraf": "^2.5.2",
+    "shelljs": "^0.6.0",
+    "sinon": "^1.17.3",
+    "sinon-chai": "^2.8.0",
+    "style-loader": "^0.13.1",
+    "url-loader": "^0.5.7",
+    "webpack": "^1.12.14",
+    "webpack-dev-server": "^1.14.1",
+    "yargs": "^4.4.0"
+  }
+}
