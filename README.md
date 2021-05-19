@@ -1,14 +1,8 @@
-
----
-description: First React Project
----
-
-
-
-
 # Introduction
 
+### description: First React Project
 
+## Introduction
 
 ```text
 t|15:03:54|bryan@LAPTOP-9LGJ3JGS:[react-translator] react-translator_exitstatus:0__________________________________________________________o>
@@ -32,7 +26,7 @@ tree
 3 directories, 9 files
 ```
 
-### Index.html
+#### Index.html
 
 ```markup
 <!DOCTYPE html>
@@ -89,7 +83,7 @@ tree
 </html>
 ```
 
-## App.js:
+### App.js:
 
 ```javascript
 import "./styles.css";
@@ -113,7 +107,7 @@ export default function App() {
 }
 ```
 
-### Index.js
+#### Index.js
 
 ```javascript
 import React from "react";
@@ -121,70 +115,45 @@ import ReactDOM from "react-dom";
 import App from "./App";
 
 ReactDOM.render(<App />, document.getElementById("root"));
-
-
 ```
 
+![](.gitbook/assets/image%20%284%29%20%281%29.png)
 
-
-
-
-![](.gitbook/assets/image%20%284%29.png)
-
-
-
-![](.gitbook/assets/image%20%282%29.png)
+![](.gitbook/assets/image%20%282%29%20%282%29.png)
 
 ![](.gitbook/assets/react1.png)
-
-
-
-
 
 If a given tag is a component react will walk through the contents of that tag... and evaluate if it is a vanilla html component... if react decides it is not it will parse through the react component and inspect it's children components.
 
 ![](.gitbook/assets/image%20%287%29.png)
 
-![](.gitbook/assets/image%20%283%29.png)
+![](.gitbook/assets/image%20%283%29%20%281%29.png)
 
-![](.gitbook/assets/image%20%286%29%20%281%29%20%282%29%20%282%29.png)
+![](.gitbook/assets/image%20%286%29%20%281%29%20%282%29%20%282%29%20%282%29%20%282%29.png)
 
-![](.gitbook/assets/image.png)
+![](.gitbook/assets/image%20%2825%29.png)
 
 ![](.gitbook/assets/image%20%288%29.png)
 
 ![](.gitbook/assets/image%20%289%29.png)
 
-#### First argument to ReactDOM.render\(
+**First argument to ReactDOM.render\(**
 
-#### -----&gt; is App component or app function...we are telling react that we want to import all the code used in the app.js file.
+**-----&gt; is App component or app function...we are telling react that we want to import all the code used in the app.js file.**
 
-#### Second argument is a reference to where we want to show the component with respect to root in index.html \(where to display\)
+**Second argument is a reference to where we want to show the component with respect to root in index.html \(where to display\)**
 
-#### Difference between react and reactDOM?
+**Difference between react and reactDOM?**
 
 ![](.gitbook/assets/image%20%2811%29.png)
 
 ReactDOM is a Renderer
 
-
-
-## State System:
-
-
+### State System:
 
 ![](.gitbook/assets/image%20%2810%29.png)
 
-#### We want to store some piece of data that will change over time... we want to store state about what language the user selects and what they type into the form... both of which are subject to change over time.
-
-
-
-
-
-
+**We want to store some piece of data that will change over time... we want to store state about what language the user selects and what they type into the form... both of which are subject to change over time.**
 
 ![](.gitbook/assets/image%20%2820%29.png)
-
-
-
 
