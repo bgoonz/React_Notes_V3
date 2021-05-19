@@ -1,0 +1,89 @@
+{
+  "name": "mh-react-library",
+  "version": "0.0.4",
+  "description": "mh-react-library",
+  "main": "lib/main.js",
+  "files": [
+    "/lib"
+  ],
+  "peerDependencies": {
+    "react": "^16.13.1 || ^17",
+    "react-dom": "^16.13.1 || ^17"
+  },
+  "dependencies": {
+    "styled-components": "^5.0.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.12.10",
+    "@babel/eslint-parser": "^7.12.1",
+    "@babel/node": "^7.12.10",
+    "@babel/plugin-proposal-export-default-from": "^7.12.1",
+    "@babel/plugin-proposal-optional-chaining": "^7.12.7",
+    "@babel/plugin-transform-runtime": "^7.12.10",
+    "@babel/preset-env": "^7.12.11",
+    "@babel/preset-react": "^7.12.10",
+    "@babel/runtime": "^7.12.5",
+    "@rollup/plugin-babel": "^5.2.2",
+    "@rollup/plugin-commonjs": "^17.0.0",
+    "@rollup/plugin-node-resolve": "^11.1.0",
+    "@rollup/plugin-typescript": "^8.1.0",
+    "@storybook/addon-docs": "^6.1.15",
+    "@storybook/cli": "^6.1.15",
+    "@storybook/react": "^6.1.15",
+    "@storybook/source-loader": "^6.1.15",
+    "@types/jest": "^26.0.20",
+    "@types/node": "^14.11.2",
+    "@types/react": "^16.9.49",
+    "@types/react-dom": "^17.0.0",
+    "@types/styled-components": "^5.1.7",
+    "@typescript-eslint/eslint-plugin": "^4.14.1",
+    "@typescript-eslint/parser": "^4.14.1",
+    "@wessberg/rollup-plugin-ts": "^1.3.8",
+    "babel-jest": "^26.6.3",
+    "babel-plugin-module-resolver": "^4.1.0",
+    "eslint": "^7.18.0",
+    "eslint-config-airbnb": "^18.2.1",
+    "eslint-config-airbnb-typescript": "^12.0.0",
+    "eslint-config-prettier": "^7.2.0",
+    "eslint-import-resolver-babel-module": "^5.2.0",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-prettier": "^3.3.1",
+    "eslint-plugin-react": "^7.22.0",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "jest": "^26.6.3",
+    "postcss": "^8.2.4",
+    "prettier": "^2.2.1",
+    "prop-types": "15.7.2",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "rollup": "^2.38.0",
+    "rollup-plugin-peer-deps-external": "^2.2.4",
+    "rollup-plugin-postcss": "^4.0.0",
+    "rollup-plugin-terser": "^7.0.2",
+    "tslib": "^2.1.0",
+    "typescript": "^4.1.3"
+  },
+  "scripts": {
+    "prettier": "prettier 'src/**/*.{js,ts,tsx}'",
+    "prettier:write": "npm run prettier -- --write",
+    "prettier:check": "npm run prettier -- --check",
+    "lint": "eslint 'src/**/*.{js,ts,tsx}' --ignore-pattern .eslintignore --max-warnings 0",
+    "lint:check": "npm run lint",
+    "lint:fix": "npm run lint -- --fix",
+    "storybook:dev": "start-storybook --docs -s ./static -c .storybook -p 9001",
+    "storybook:build": "build-storybook --docs -s ./static -c .storybook -o dist",
+    "library:build": "rollup -c"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rwieruch/rwieruch-react-library.git"
+  },
+  "keywords": [],
+  "author": "Robin Wieruch <opensource@rwieruch.com> (https://www.robinwieruch.de)",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/rwieruch/rwieruch-react-library/issues"
+  },
+  "homepage": "https://github.com/rwieruch/rwieruch-react-library#readme"
+}

@@ -1,0 +1,13 @@
+@import '../node_modules/react-md/src/scss/react-md';
+@import 'variables';
+
+$md-primary-color: $green;
+$md-secondary-color: $red;
+
+@include react-md-everything;
+
+/* react-md overrides: Place common style overrides for react-md below */
+.md-card {
+  margin: 20px auto;
+  width: 70%;
+}

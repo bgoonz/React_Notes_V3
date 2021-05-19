@@ -1,0 +1,46 @@
+{
+  "dependencies": {
+    "node-sass": "^4.5.3",
+    "prop-types": "^15.5.8",
+    "react": "^15.5.4",
+    "react-addons-css-transition-group": "^15.5.2",
+    "react-addons-transition-group": "^15.5.2",
+    "react-dom": "^15.5.4",
+    "react-md": "^1.0.13",
+    "react-redux": "^5.0.3",
+    "react-router": "^4.1.1",
+    "react-router-dom": "^4.1.1",
+    "react-router-redux": "next",
+    "redux": "^3.6.0",
+    "redux-thunk": "^2.2.0",
+    "webfontloader": "^1.6.27"
+  },
+  "devDependencies": {
+    "custom-react-scripts": "^0.0.23",
+    "enzyme": "^2.8.2",
+    "eslint": "^3.19.0",
+    "eslint-plugin-babel": "^4.1.1",
+    "eslint-plugin-react": "^6.10.3",
+    "eslint-watch": "^3.1.0",
+    "husky": "^0.13.3",
+    "lint-staged": "^3.4.0",
+    "prettier": "^1.2.2",
+    "react-test-renderer": "^15.5.4"
+  },
+  "scripts": {
+    "build": "npm run lint && npm run test:once && react-scripts build",
+    "eject": "react-scripts eject",
+    "precommit": "lint-staged",
+    "start": "react-scripts start",
+    "lint": "eslint src/**/*.js",
+    "lint:watch": "esw -w src/**/*.js",
+    "test": "react-scripts test --env=jsdom",
+    "test:once": "CI=true react-scripts test --env=jsdom"
+  },
+  "lint-staged": {
+    "{src,__{test|mocks}__}/**/*.js": [
+      "prettier --single-quote --trailing-comma es5 --write",
+      "git add"
+    ]
+  }
+}

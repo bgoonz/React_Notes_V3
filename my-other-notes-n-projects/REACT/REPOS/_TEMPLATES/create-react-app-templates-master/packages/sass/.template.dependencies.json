@@ -1,0 +1,56 @@
+{
+  "dependencies": {
+    "enzyme": "^3.0.0",
+    "enzyme-adapter-react-16": "^1.0.0",
+    "eslint": "^4.7.2",
+    "eslint-config-prettier": "^2.3.0",
+    "eslint-plugin-babel": "^4.1.1",
+    "eslint-plugin-react": "^7.4.0",
+    "material-design-icons": "^3.0.1",
+    "node-sass-chokidar": "^0.0.3",
+    "npm-run-all": "^4.0.2",
+    "prop-types": "^15.5.8",
+    "react": "^16.0.0",
+    "react-addons-css-transition-group": "^15.5.2",
+    "react-addons-transition-group": "^15.5.2",
+    "react-dom": "^16.0.0",
+    "react-md": "^1.0.13",
+    "react-redux": "^5.0.3",
+    "react-router": "^4.1.1",
+    "react-router-dom": "^4.1.1",
+    "react-router-redux": "^5.0.0-alpha.6",
+    "react-test-renderer": "^16.0.0",
+    "redux": "^3.6.0",
+    "redux-thunk": "^2.2.0",
+    "webfontloader": "^1.6.27"
+  },
+  "devDependencies": {
+    "eslint-watch": "^3.1.0",
+    "husky": "^0.14.3",
+    "lint-staged": "^4.2.3",
+    "prettier": "^1.2.2",
+    "react-addons-test-utils": "^15.6.0"
+  },
+  "scripts": {
+    "start": "npm-run-all -p watch-css start-js",
+    "build":
+      "npm rebuild node-sass && yarn lint && yarn test:once && yarn build-css && react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject",
+    "build-css": "node-sass-chokidar src/ -o src/",
+    "lint": "eslint src/**/*.js",
+    "lint:watch": "esw -w src/**/*.js",
+    "precommit": "lint-staged",
+    "start-js": "react-scripts start",
+    "test:once":
+      "npm rebuild node-sass && yarn build-css && CI=true react-scripts test src/**/* --env=jsdom",
+    "watch-css":
+      "npm run build-css && node-sass-chokidar src/ -o src/ --watch --recursive"
+  },
+  "lint-staged": {
+    "{src,__{test|mocks}__}/**/*.js": [
+      "prettier --single-quote --trailing-comma es5 --write",
+      "git add"
+    ]
+  }
+}
