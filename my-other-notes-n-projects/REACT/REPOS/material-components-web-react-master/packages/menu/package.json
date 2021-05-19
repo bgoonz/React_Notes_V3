@@ -1,0 +1,31 @@
+{
+  "name": "@material/react-menu",
+  "version": "0.15.0",
+  "description": "Material Components React Menu",
+  "license": "MIT",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "keywords": [
+    "mdc web react",
+    "material components react",
+    "material design",
+    "menu"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/material-components/material-components-web-react.git",
+    "directory": "packages/menu"
+  },
+  "peerDependencies": {
+    "react": "^16.4.2"
+  },
+  "dependencies": {
+    "@material/menu": "^1.1.0",
+    "@material/react-list": "^0.15.0",
+    "@material/react-menu-surface": "^0.15.0",
+    "classnames": "^2.2.6"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "name": "@material/react-top-app-bar",
+  "version": "0.15.0",
+  "description": "Material Components React Top App Bar",
+  "license": "MIT",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "keywords": [
+    "mdc web react",
+    "material components react",
+    "material design",
+    "top app bar",
+    "topappbar"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/material-components/material-components-web-react.git",
+    "directory": "packages/top-app-bar"
+  },
+  "peerDependencies": {
+    "react": "^16.4.2"
+  },
+  "dependencies": {
+    "@material/react-ripple": "^0.15.0",
+    "@material/top-app-bar": "^1.1.0",
+    "classnames": "^2.2.6"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

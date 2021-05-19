@@ -1,0 +1,32 @@
+{
+  "name": "@material/react-drawer",
+  "version": "0.15.0",
+  "description": "Material Components React Drawer",
+  "license": "MIT",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "keywords": [
+    "mdc web react",
+    "material components react",
+    "material design",
+    "material drawer",
+    "materialdrawer"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/material-components/material-components-web-react.git",
+    "directory": "packages/drawer"
+  },
+  "peerDependencies": {
+    "react": "^16.4.2"
+  },
+  "dependencies": {
+    "@material/drawer": "^2.3.0",
+    "@material/list": "^2.3.0",
+    "classnames": "^2.2.6",
+    "focus-trap": "^5.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

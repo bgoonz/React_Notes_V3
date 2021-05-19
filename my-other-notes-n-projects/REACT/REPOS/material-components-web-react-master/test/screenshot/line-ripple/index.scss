@@ -1,0 +1,11 @@
+@import '../../../packages/line-ripple/index.scss';
+
+.line-ripple-container {
+  position: relative;
+  width: 200px;
+  height: 40px;
+}
+
+.mdc-line-ripple {
+  @include mdc-line-ripple-color(brown);
+}
