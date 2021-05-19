@@ -1,0 +1,26 @@
+{
+  "parser": "babel-eslint",
+  "globals": {
+    "require": false,
+    "module": false,
+    "global": false
+  },
+  "env": {
+    "es6": true,
+    "browser": true
+  },
+  "rules": {
+    "react/no-did-update-set-state": "off",
+    "flowtype/define-flow-type": 1
+  },
+  "extends": [
+    "seatgeek-standard",
+    "seatgeek-react-standard"
+  ],
+  "plugins": [
+    "react",
+    "prettier",
+    "flowtype"
+  ]
+}
+

@@ -1,0 +1,131 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`flowTypeHandler TypeAlias class definition for flow <0.53 ignores hash map entry 1`] = `
+Object {
+  "bar": Object {
+    "description": "",
+    "flowType": Object {},
+    "required": false,
+  },
+}
+`;
+
+exports[`flowTypeHandler TypeAlias class definition for flow >=0.53 with State ignores hash map entry 1`] = `
+Object {
+  "bar": Object {
+    "description": "",
+    "flowType": Object {},
+    "required": false,
+  },
+}
+`;
+
+exports[`flowTypeHandler TypeAlias class definition for flow >=0.53 without State ignores hash map entry 1`] = `
+Object {
+  "bar": Object {
+    "description": "",
+    "flowType": Object {},
+    "required": false,
+  },
+}
+`;
+
+exports[`flowTypeHandler TypeAlias class definition with inline props ignores hash map entry 1`] = `
+Object {
+  "bar": Object {
+    "description": "",
+    "flowType": Object {},
+    "required": false,
+  },
+}
+`;
+
+exports[`flowTypeHandler TypeAlias stateless component ignores hash map entry 1`] = `
+Object {
+  "bar": Object {
+    "description": "",
+    "flowType": Object {},
+    "required": false,
+  },
+}
+`;
+
+exports[`flowTypeHandler does support utility types inline 1`] = `
+Object {
+  "foo": Object {
+    "description": "",
+    "flowType": Object {},
+    "required": true,
+  },
+}
+`;
+
+exports[`flowTypeHandler imported prop types imported 1`] = `
+Object {
+  "abc": Object {
+    "description": "",
+    "flowType": Object {},
+    "required": true,
+  },
+  "bar": Object {
+    "description": "",
+    "flowType": Object {},
+    "required": false,
+  },
+  "def": Object {
+    "description": "",
+    "flowType": Object {},
+    "required": true,
+  },
+  "foo": Object {
+    "description": "",
+    "flowType": Object {},
+    "required": true,
+  },
+  "foobar": Object {
+    "description": "",
+    "flowType": Object {},
+    "required": true,
+  },
+  "hal": Object {
+    "description": "",
+    "flowType": Object {},
+    "required": true,
+  },
+}
+`;
+
+exports[`flowTypeHandler imported prop types type imported 1`] = `
+Object {
+  "abc": Object {
+    "description": "",
+    "flowType": Object {},
+    "required": true,
+  },
+  "bar": Object {
+    "description": "",
+    "flowType": Object {},
+    "required": false,
+  },
+  "def": Object {
+    "description": "",
+    "flowType": Object {},
+    "required": true,
+  },
+  "foo": Object {
+    "description": "",
+    "flowType": Object {},
+    "required": true,
+  },
+  "foobar": Object {
+    "description": "",
+    "flowType": Object {},
+    "required": true,
+  },
+  "hal": Object {
+    "description": "",
+    "flowType": Object {},
+    "required": true,
+  },
+}
+`;

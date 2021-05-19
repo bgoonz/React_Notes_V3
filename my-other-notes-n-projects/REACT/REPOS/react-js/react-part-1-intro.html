@@ -1,0 +1,108 @@
+<h1 id="intro-to-react">Intro to React</h1>
+<h3 id="projected-time">Projected Time</h3>
+<p>7 Hours 30 Minutes</p>
+<ul>
+<li>Lesson : 1 Hr</li>
+<li>Examples: 30-45 mins</li>
+<li>Guided Practice: 2 Hrs</li>
+<li>Independent Practice: 30-45 mins</li>
+<li>Challenge: 3 Hrs</li>
+</ul>
+<h3 id="prerequisites">Prerequisites</h3>
+<ul>
+<li><a href="../web/html.md">HTML</a></li>
+<li><a href="../javascript/javascript-7-oop.md">JavaScript 6 - OOP or above</a></li>
+</ul>
+<h3 id="motivation">Motivation</h3>
+<p>React makes it easy to update your HTML as data changes and build complex apps out of simple, reusable components.</p>
+<p>React is an open-source JavaScript library that is used for building user interfaces. It’s used for handling the view layer for web and mobile apps. React also allows us to create reusable UI components.</p>
+<p>React allows developers to create large web applications that can change data, without reloading the page. The main purpose of React is to be fast, scalable, and simple.</p>
+<p><a href="https://www.facebook.com">Facebook</a> created React as a framework to create reuseable components, like posts or comments, and allow the user see updates instantly. <a href="https://www.instagram.com/">Instagram</a> and <a href="https://www.airbnb.com/">Airbnb</a> use it too.</p>
+<h3 id="objectives">Objectives</h3>
+<p><strong>Participants will be able to:</strong></p>
+<ul>
+<li>Explain the Pros and Cons of using React instead of other tools, like jQuery.</li>
+<li>Create a simple React Component.</li>
+</ul>
+<h3 id="specific-things-to-learn">Specific Things to Learn</h3>
+<ul>
+<li>Why React?</li>
+<li>What is JSX and why is it different than HTML?</li>
+<li>Specifics about co-locating markup with logic in code.</li>
+</ul>
+<h3 id="lesson-materials">Lesson Materials</h3>
+<p>You will spend the day working through these materials.</p>
+<ol type="1">
+<li><a href="https://youtu.be/ycstRj2i66k">Introduction to React (video)</a></li>
+<li><a href="https://medium.freecodecamp.org/learn-react-js-in-5-minutes-526472d292f4">Learn React in 5 minutes (video)</a></li>
+<li><a href="https://docs.google.com/presentation/d/1Bswkl7e1kGVav7KFabHrBgXhRi7mlINTbinxnUcGDy8/edit?usp=sharing">Techtonica React slides</a></li>
+<li><a href="https://youtu.be/K_jS1anlVAM">Building your first component in React.js | Pluralsight (video)</a></li>
+<li><a href="https://facebook.github.io/react/index.html">Work through this React tutorial</a></li>
+<li><a href="http://codepen.io/marcacyr/pen/NAyqgX">CodePen for Hello World Example</a></li>
+<li><a href="http://codepen.io/marcacyr/pen/bZLVbj">CodePen Greeting with Input Example</a></li>
+<li><a href="http://codepen.io/marcacyr/pen/rLJVqR">CodePen for Counter Example</a></li>
+<li><a href="http://codepen.io/marcacyr/pen/KrQpYb">CodePen for List - Rendering using a loop in React</a></li>
+</ol>
+<h3 id="topics-to-learn-facilitate">Topics to learn &amp; Facilitate</h3>
+<ul>
+<li>React lets you generate HTML using JavaScript</li>
+<li>The HTML can change over time, unlike regular HTML</li>
+<li>No jQuery needed</li>
+</ul>
+<h3 id="examples">Examples</h3>
+<h4 id="codepen---hello-world-component">CodePen - Hello World component</h4>
+<p>In this CodePen, a basic Hello World component is rendered.<br />
+Try modifying line 5 of the JS file to see the changes made to the file rendered.<br />
+<a href="https://codepen.io/jamesjose03/pen/ExVjYBM">CodePen of Example 1</a></p>
+<h4 id="codepen---component-with-a-single-prop">CodePen - Component with a single prop</h4>
+<p>Properties are values that are passed to the component for various uses. Here, the component has a prop called name.<br />
+Try modifying line 12 of the JS file by changing the value ABC and view the changes made.<br />
+<a href="https://codepen.io/jamesjose03/pen/xxwGKvN">CodePen of Example 2</a></p>
+<h4 id="codepen---component-assigning-a-classname">CodePen - Component assigning a <code>className</code></h4>
+<p>React uses className instead of class for CSS styling and other purposes.<br />
+Here, the component has a className heading. Try applying various styles for the component by modifying the CSS file.<br />
+<a href="https://codepen.io/jamesjose03/pen/PoPqoqp">CodePen of Example 3</a></p>
+<h3 id="common-mistakes-misconceptions">Common Mistakes / Misconceptions</h3>
+<ol type="1">
+<li>In render functions, don’t forget to return JSX. You can return null for an empty output. Remove the return from a component in one of the CodePens and take note of the error message shown.</li>
+<li>Don’t forget that variables in JSX must be enclosed in brackets. Example: <code>&lt;div&gt;Hello {this.state.thing}&lt;/div&gt;</code></li>
+<li>The event system in React uses attributes you are likely familiar with from HTML, but they are written using camelCase. Example: <code>&lt;button onClick={function() { alert('hello!') }}&gt;I am a button&lt;/button&gt;</code></li>
+</ol>
+<h3 id="guided-practice">Guided Practice</h3>
+<ul>
+<li><a href="https://codepen.io/jamesjose03/pen/jOPRwVm">Rendering a List using map</a>
+<ul>
+<li>View the <a href="https://codepen.io/jamesjose03/pen/jOPRwVm">Codepen</a> which renders an Ordered List using React. Try to modify the code and work along with it.</li>
+<li>Here, a class component named <code>FriendsContainer</code> is declared from the lines 1 - 19.</li>
+<li>Every class component has a render function which returns the code to be rendered.</li>
+<li>A few variables are declared such as name, friends, listItem.</li>
+<li><code>name</code> is just a string. <code>friends</code> is a list of Strings. <code>listItem</code> maps each element of the friends list as <code>li</code> tags.</li>
+<li>Inside return, the list is rendered by using <code>{ variableName }</code> this helps React understand that it has to render the value of the variable there.</li>
+<li><code>ReactDOM.render()</code> is used to render the component at the div which has the id <code>app</code> in the HTML file.</li>
+<li>Use ES6 arrow function</li>
+<li>Use semantic HTML, like <code>&lt;ol&gt;</code></li>
+<li>If something is modified or updated, React needs to quickly figure out which element changed and where it needs to reflect that change. So, we have to set <code>key</code> attribute on the li of the list.
+<ul>
+<li>Eg: <code>&lt;li key={value}&gt;</code></li>
+</ul></li>
+<li>If the key property is not set, then the browser will give warning in the console.</li>
+</ul></li>
+</ul>
+<h3 id="independent-practice">Independent Practice</h3>
+<ul>
+<li><a href="https://codepen.io/jamesjose03/pen/jOPRwVm">Rendering a List using map</a></li>
+<li>Try rendering the List by using declaring another component and passing the list to it for rendering it there.</li>
+<li>Or try rendering the List in a different order by sorting it.</li>
+</ul>
+<h3 id="alternatives">Alternatives</h3>
+<ul>
+<li>Modify the props or components.</li>
+<li>Play along with the code, modify it and see the changes it makes.</li>
+<li>Try rendering a basic calculator which does only the basic operations.</li>
+</ul>
+<h3 id="challenge">Challenge</h3>
+<ol type="1">
+<li>Remove from list</li>
+<li>Putting two counters on the page</li>
+<li>Append to list using React</li>
+</ol>

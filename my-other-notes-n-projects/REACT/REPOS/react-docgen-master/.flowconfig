@@ -1,0 +1,13 @@
+[ignore]
+<PROJECT_ROOT>/dist/.*
+.*/__tests__/.*
+.*/__mocks__/.*
+
+[include]
+src/
+
+[libs]
+
+[options]
+
+suppress_comment= \\(.\\|\n\\)*\\$FlowIssue
