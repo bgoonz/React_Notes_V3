@@ -1,3 +1,7 @@
+---
+description: Intro to react
+---
+
 # README
 
 This demo consists of a series of code snippets that each demonstrate basic React concepts in relative isolation. Feel free to refer back to this repository when you need to revisit basic React concepts.
