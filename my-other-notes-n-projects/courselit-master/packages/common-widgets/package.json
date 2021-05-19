@@ -1,0 +1,52 @@
+{
+  "name": "@courselit/common-widgets",
+  "version": "0.13.2",
+  "description": "A collection of common widgets for CourseLit LMS",
+  "keywords": [
+    "widgets",
+    "lms",
+    "courselit",
+    "course"
+  ],
+  "author": "Rajat Saxena <social@rajats.xyz>",
+  "homepage": "https://github.com/codelitdev/courselit#readme",
+  "license": "MIT",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "directories": {
+    "lib": "src",
+    "test": "__tests__"
+  },
+  "files": [
+    "dist"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/codelitdev/courselit.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1",
+    "build": "tsc",
+    "prepublishOnly": "yarn run build"
+  },
+  "bugs": {
+    "url": "https://github.com/codelitdev/courselit/issues"
+  },
+  "peerDependencies": {
+    "@material-ui/core": "^4.8.1",
+    "@material-ui/styles": "^4.7.1",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-redux": "^7.2.1"
+  },
+  "devDependencies": {
+    "typescript": "^4.0.5"
+  },
+  "dependencies": {
+    "@courselit/components-library": "^0.13.2"
+  },
+  "gitHead": "e91494470733b09bc3e772a9079162a844b40d97"
+}

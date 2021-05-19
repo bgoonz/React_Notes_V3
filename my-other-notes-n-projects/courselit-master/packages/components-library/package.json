@@ -1,0 +1,52 @@
+{
+  "name": "@courselit/components-library",
+  "version": "0.13.2",
+  "description": "A library of React components for CourseLit LMS.",
+  "keywords": [
+    "react",
+    "components",
+    "courselit"
+  ],
+  "author": "Rajat Saxena <social@rajats.xyz>",
+  "homepage": "https://github.com/codelitdev/courselit#readme",
+  "license": "MIT",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "directories": {
+    "lib": "src",
+    "test": "__tests__"
+  },
+  "files": [
+    "dist"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/codelitdev/courselit.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1",
+    "build": "tsc",
+    "prepublishOnly": "yarn run build"
+  },
+  "bugs": {
+    "url": "https://github.com/codelitdev/courselit/issues"
+  },
+  "devDependencies": {
+    "@types/material-ui": "^0.21.8",
+    "@types/node": "^14.14.20",
+    "@types/react-redux": "^7.1.11",
+    "typescript": "^4.0.5"
+  },
+  "peerDependencies": {
+    "@material-ui/styles": "^4.7.1",
+    "react": "^16.13.1",
+    "react-redux": "^7.2.1"
+  },
+  "gitHead": "fca7d2f8455c835f1c185a1ebc8513c6269ebe5b",
+  "dependencies": {
+    "@courselit/rich-text": "^0.13.2"
+  }
+}
