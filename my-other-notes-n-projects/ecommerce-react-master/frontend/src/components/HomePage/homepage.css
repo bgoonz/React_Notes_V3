@@ -1,0 +1,13 @@
+.home-page {
+	height: 90vh;
+	width: 100%;
+	padding-top: 12vh;
+}
+
+.home-page-grid {
+	height: 90%;
+	width: 80%;
+	margin-left: 10%;
+	display: grid;
+	grid-template-columns: 25% 25% 25% 25%;
+}
