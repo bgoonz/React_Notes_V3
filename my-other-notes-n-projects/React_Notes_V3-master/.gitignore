@@ -1,0 +1,11 @@
+<<<<<<< HEAD
+node_modules/
+node_modules
+./**node_modules/
+**/node_modules
+=======
+*node_modules/
+node_modules
+./**node_modules/
+**/**node_modules
+>>>>>>> ace4f24c30dd772f3a1c56c7392c3eef123bb0c2
