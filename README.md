@@ -1,32 +1,30 @@
 # Introduction
 
+## Introduction
 
-
-
-
-## React – A JavaScript library for building user interfaces
+### React – A JavaScript library for building user interfaces
 
 > A JavaScript library for building user interfaces
 
-#### Declarative
+**Declarative**
 
 React makes it painless to create interactive UIs. Design simple views for each state in your application, and React will efficiently update and render just the right components when your data changes.
 
 Declarative views make your code more predictable and easier to debug.
 
-#### Component-Based
+**Component-Based**
 
 Build encapsulated components that manage their own state, then compose them to make complex UIs.
 
 Since component logic is written in JavaScript instead of templates, you can easily pass rich data through your app and keep state out of the DOM.
 
-#### Learn Once, Write Anywhere
+**Learn Once, Write Anywhere**
 
 We don’t make assumptions about the rest of your technology stack, so you can develop new features in React without rewriting existing code.
 
 React can also render on the server using Node and power mobile apps using [React Native](https://reactnative.dev/).
 
-#### A Simple Component
+**A Simple Component**
 
 React components implement a `render()` method that takes input data and returns what to display. This example uses an XML-like syntax called JSX. Input data that is passed into the component can be accessed by `render()` via `this.props`.
 
@@ -49,7 +47,7 @@ ReactDOM.render(
 );
 ```
 
-#### A Stateful Component
+**A Stateful Component**
 
 In addition to taking input data \(accessed via `this.props`\), a component can maintain internal state data \(accessed via `this.state`\). When a component’s state data changes, the rendered markup will be updated by re-invoking `render()`.
 
@@ -89,7 +87,7 @@ ReactDOM.render(
 );
 ```
 
-#### An Application
+**An Application**
 
 Using `props` and `state`, we can put together a small Todo application. This example uses `state` to track the current list of items as well as the text that the user has entered. Although event handlers appear to be rendered inline, they will be collected and implemented using event delegation.
 
@@ -162,7 +160,7 @@ ReactDOM.render(
 );
 ```
 
-#### A Component Using External Plugins
+**A Component Using External Plugins**
 
 React allows you to interface with other libraries and frameworks. This example uses **remarkable**, an external Markdown library, to convert the `<textarea>`’s value in real time.
 
@@ -211,13 +209,11 @@ ReactDOM.render(
 );
 ```
 
+#### description: First React Project
 
+### Introduction
 
-### description: First React Project
-
-## Introduction
-
-```js
+```javascript
 t|15:03:54|bryan@LAPTOP-9LGJ3JGS:[react-translator] react-translator_exitstatus:0__________________________________________________________o>
 
 tree 
@@ -239,7 +235,7 @@ tree
 3 directories, 9 files
 ```
 
-#### Index.html
+**Index.html**
 
 ```markup
 <!DOCTYPE html>
@@ -296,7 +292,7 @@ tree
 </html>
 ```
 
-### App.js:
+#### App.js:
 
 ```javascript
 import "./styles.css";
@@ -320,7 +316,7 @@ export default function App() {
 }
 ```
 
-#### Index.js
+**Index.js**
 
 ```javascript
 import React from "react";
@@ -362,7 +358,7 @@ If a given tag is a component react will walk through the contents of that tag..
 
 ReactDOM is a Renderer
 
-### State System:
+#### State System:
 
 ![](.gitbook/assets/image%20%2810%29.png)
 
@@ -370,10 +366,7 @@ ReactDOM is a Renderer
 
 ![](.gitbook/assets/image%20%2820%29.png)
 
-
-
-
-# README
+## README
 
 This demo consists of a series of code snippets that each demonstrate basic React concepts in relative isolation. Feel free to refer back to this repository when you need to revisit basic React concepts.
 
@@ -386,8 +379,6 @@ This demo consists of a series of code snippets that each demonstrate basic Reac
 
 {% tabs %}
 {% tab title="Basic React Component" %}
-
-
 * ex1 - A Basic React Component
 
 ```javascript
@@ -396,7 +387,6 @@ import React from 'react';
 const BasicComponent = () => <div>Hello World!</div>;
 
 export default BasicComponent;
-
 ```
 {% endtab %}
 
@@ -413,7 +403,6 @@ class BasicClassComponent extends Component {
 }
 
 export default BasicClassComponent;
-
 ```
 {% endtab %}
 
@@ -438,7 +427,6 @@ class ClassComponentWithState extends Component {
 }
 
 export default ClassComponentWithState;
-
 ```
 {% endtab %}
 
@@ -484,7 +472,6 @@ class ClassComponentUpdatingState extends Component {
 }
 
 export default ClassComponentUpdatingState;
-
 ```
 {% endtab %}
 
@@ -536,7 +523,6 @@ class ClassComponentIteratingState extends Component {
 }
 
 export default ClassComponentIteratingState;
-
 ```
 {% endtab %}
 
@@ -576,7 +562,6 @@ class ChildComponent extends Component {
 }
 
 export default ChildComponent;
-
 ```
 
 * parent:
@@ -634,7 +619,6 @@ class ParentComponent extends Component {
 }
 
 export default ParentComponent;
-
 ```
 {% endtab %}
 {% endtabs %}
@@ -643,28 +627,28 @@ export default ParentComponent;
 
 * What the general hierarchical component structure of your site will look like.
 
- _From there, it's a simple matter of copying the relevant HTML for that component and throwing it into the render method of your component file._
+  _From there, it's a simple matter of copying the relevant HTML for that component and throwing it into the render method of your component file._
 
- _Any methods that are needed for that component to function properly can added onto your new component._
+  _Any methods that are needed for that component to function properly can added onto your new component._
 
 `Once you've "component-ized" your HTML, you'll want to lay them out in the desired hierarchical structure, with children components being rendered by their parents, as well as ensuring that the parent components are passing down the necessary data as props to their children components.`
 
-**The key abstraction that React provides is that of a component.** 
+**The key abstraction that React provides is that of a component.**
 
-### To reiterate, a component is some thing that is being rendered in the browser.
+#### To reiterate, a component is some thing that is being rendered in the browser.
 
 _**- It could be a button, a form with a bunch of fields in it, a navigation bar at the top of the page, a single input field, etc.**_
 
- React doesn't place any restrictions on how large or small a component can be.
+React doesn't place any restrictions on how large or small a component can be.
 
- You _could_ have an entire static site encapsulated in a single React component, but that at that point you may as well not be using React.
+You _could_ have an entire static site encapsulated in a single React component, but that at that point you may as well not be using React.
 
- **So the first thing to remember about a component is that a component must** _**render**_ **something. If nothing is being rendered from a component, then React will throw an error.**
+**So the first thing to remember about a component is that a component must** _**render**_ **something. If nothing is being rendered from a component, then React will throw an error.**
 
 Let's write the most basic of components we can possibly write. Inside of `BasicComponent.js` , first import React at the top of the file. Our most basic of  
- components looks like this:
+components looks like this:
 
-```js
+```javascript
 import React from 'react';
 
 const BasicComponent = () => <div>Hello World!</div>;
@@ -673,27 +657,27 @@ export default BasicComponent;
 ```
 
 This is a component that simply returns a div tag with the words Hello World! inside. The last line simply exports our component so that it can be imported  
- by another file.
+by another file.
 
 Notice that this component looks exactly like an anonymous arrow function that we've named `BasicComponent` . In fact, that is literally what this is. Nothing  
- more, nothing less. The arrow function then is simply returning the div tag. When a component is written as a function like this one is, it is called a  
- _functional_ component.
+more, nothing less. The arrow function then is simply returning the div tag. When a component is written as a function like this one is, it is called a  
+_functional_ component.
 
 While a component can of course get a lot more complicated than this, fundamentally, all a component does is render some HTML.
 
 The basic component you wrote in the previous exercise is an example of a functional component, which is appropriate since that component is literally  
- nothing more than a function that returns some HTML. Functional components are great when all you want a component to do is to render some stuff; they  
- are really good at doing just that.
+nothing more than a function that returns some HTML. Functional components are great when all you want a component to do is to render some stuff; they  
+are really good at doing just that.
 
 Components can also be written as classes. For this exercise, we're going to write a class component that does exactly the same thing as the functional component we just wrote. We'll again need to import React at the top of the file, but we'll also need to add a little something. Our import statement will look like this:
 
-```js
+```javascript
 import React, { Component } from 'react';
 ```
 
 So, in addition to importing React, we're also importing the base Component class that is included in the React library. The export statement at the bottom of the file also stays, completely unchanged. Our class component will thus look like this:
 
-```js
+```javascript
 import React, { Component } from 'react';
 
 class BasicClassComponent extends Component {
@@ -721,7 +705,7 @@ Only class components have the ability to persist state, so if at any time you r
 
 Our class component with state will look a lot like the basic class component we just wrote, but with some extra stuff:
 
-```js
+```javascript
 import React, { Component } from 'react';
 
 class ClassComponentWithState extends Component {
@@ -748,7 +732,7 @@ The observant student may be wondering why the basic class component we wrote in
 
 Ok, now let's actually use this state object. One very common application of state objects in React components is to render the data being stored inside them within our component's render function. Let's change our current class component to do that.
 
-```js
+```javascript
 class ClassComponentWithState extends Component {
     constructor() {
         super();
@@ -771,7 +755,7 @@ So what's changed here? Well, we added a key-value pair to our state object insi
 
 With React's newest version, we can actually now add state to a component without explicitly defining a constructor on the class. We can refactor our class component to look like this:
 
-```js
+```javascript
 class ClassComponentWithState extends Component {
     state = {
         someData: 8
@@ -793,7 +777,7 @@ While being able to write our code in this way is nice and convenient, going for
 
 Great, so we can render some state that our component persists for us. However, we said an important use case of component state is to handle _dynamic_ data. A single static number isn't very dynamic at all. So now let's walk through how to update component state.
 
-```js
+```javascript
 import React, { Component } from 'react';
 
 class ClassComponentUpdatingState extends Component {
@@ -840,7 +824,7 @@ Another common state pattern you'll see being used in React components is iterat
 
 Additionally, we want to be able to easily update lists and have React re-render our updated list. We'll see how both of these are done and how they work together within a single component in order to create the behavior of a dynamic list.
 
-```js
+```javascript
 import React, { Component } from 'react';
 
 class ClassComponentIteratingState extends Component {
@@ -899,15 +883,15 @@ Looking at our render function, first note the `this.state.ingredients.map` call
 Then we have an HTML form which contains an input field. The purpose of this form is to allow a user to add new ingredients to the list. Note that we're passing our `addIngredient` method to the form's `onSubmit` handler. This means that our `addIngredient` method gets invoked whenever our form is submitted.
 
 Lastly, the input field has an `onChange` handler that invokes our `handleIngredientInput` method whenever there is some sort of change in the input field, namely when a user types into it. Notice that the `value` field in our input tag reads off of `this.state.newIngredient` in order to know what value to display. So when a user enters text into the input field, the `onChange` handler is invoked every time, which updates our `this.state.newIngredient` field, which the input field  
- then renders.
+then renders.
 
-## Parent and Child Components <a id="parent-and-child-components"></a>
+### Parent and Child Components <a id="parent-and-child-components"></a>
 
 Now let's get into talking about how to have components interact with each other. A single isolated component isn't going to do us much good. That being said, it's _possible_ to simply throw all of the HTML for a page into a single React component, though at that point that one component would be so bloated and monolithic that you might as well not have used React at all.
 
 The beauty of React lies in the fact that it allows us to compose modular components together. Let's start off with the component we just saw, but let's change its name to `ParentComponent` .
 
-```js
+```javascript
 import React, { Component } from 'react';
 import ChildComponent from './ChildComponent';
 
@@ -956,7 +940,7 @@ Note also that we're passing each ingredient as a 'thing' to the ChildComponent 
 
 Let's take a look now at the Child Component. It serves two purposes: 1\) to render the props data that it gets from a parent component, and 2\) to add the ability for a user to click on it and have it toggle a strikethrough, indicating that the item is 'complete'.
 
-```js
+```javascript
 import React, { Component } from 'react';
 
 class ChildComponent extends Component {
