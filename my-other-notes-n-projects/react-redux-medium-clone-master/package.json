@@ -1,0 +1,27 @@
+{
+  "name": "react-redux-realworld",
+  "version": "0.0.0",
+  "private": true,
+  "dependencies": {
+    "react": "17.0.1",
+    "redux": "3.7.2",
+    "marked": "0.3.6",
+    "react-dom": "17.0.1",
+    "prop-types": "15.5.10",
+    "superagent": "6.1.0",
+    "react-redux": "5.0.5",
+    "react-router": "5.2.0",
+    "redux-logger": "3.0.6",
+    "superagent-promise": "1.1.0",
+    "redux-devtools-extension": "2.13.2"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+  "devDependencies": {
+    "react-scripts": "latest"
+  }
+}
