@@ -4,11 +4,11 @@ description: First React Project
 ---
 
 
-hi
+
 
 # Introduction
 
-## Introduction
+
 
 ```text
 t|15:03:54|bryan@LAPTOP-9LGJ3JGS:[react-translator] react-translator_exitstatus:0__________________________________________________________o>
