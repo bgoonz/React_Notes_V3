@@ -1,0 +1,12 @@
+{
+  "name": "a-simple-react-router-v4-tutorial",
+  "version": "1.0.0",
+  "description": "https://blog.pshrmn.com/entry/simple-react-router-v4-tutorial/",
+  "keywords": [],
+  "main": "index.js",
+  "dependencies": {
+    "react-router-dom": "4.1.1",
+    "react-dom": "15.5.3",
+    "react": "15.5.3"
+  }
+}
