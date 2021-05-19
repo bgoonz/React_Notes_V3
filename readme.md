@@ -293,7 +293,7 @@ _**- It could be a button, a form with a bunch of fields in it, a navigation bar
 Let's write the most basic of components we can possibly write. Inside of `BasicComponent.js` , first import React at the top of the file. Our most basic of  
  components looks like this:
 
-```text
+```javascript
 import React from 'react';
 
 const BasicComponent = () => <div>Hello World!</div>;
