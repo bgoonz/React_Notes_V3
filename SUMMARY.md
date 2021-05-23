@@ -1,10 +1,12 @@
 # Table of contents
 
 * [Introduction](README.md)
-* [index](generating-react-project.md)
+* [Getting Started](generating-react-project.md)
 * [Exploring Create React App](exploring-create-react-app.md)
 * [Create React App Readme](create-react-app-readme.md)
-* [index](react-a-javascript-library-for-building-user-interfaces.md)
-* [README](readme-1.md)
-* [index](untitled.md)
+* [Add React To Website](react-a-javascript-library-for-building-user-interfaces.md)
+* [Demo Class Components](readme-1.md)
+* [Table Of Contents](untitled.md)
+* [React Notes Part 2](react-notes-part-2.md)
+* [React Notes Part 1](react-notes-part-1.md)
 

@@ -1,4 +1,4 @@
-# index
+# Getting Started
 
 > A JavaScript library for building user interfaces
 
