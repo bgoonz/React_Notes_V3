@@ -455,6 +455,51 @@ Additionally, we want to be able to easily update lists and have React re-render
 
 We’ll see how both of these are done and how they work together within a single component in order to create the behavior of a dynamic list.
 
+
+
+```jsx
+import React, { Component } from 'react';
+
+class ClassComponentIteratingState extends Component {
+    constructor() {
+        super();
+
+        this.state = {
+            ingredients: ['flour', 'eggs', 'milk', 'sugar', 'vanilla extract'],
+            newIngredient: ''
+        };
+    }
+
+    handleIngredientInput = (event) => {
+        this.setState({ newIngredient: event.target.value });
+    };
+
+    addIngredient = (event) => {
+        event.preventDefault();
+        const ingredientsList = this.state.ingredients;
+        ingredientsList.push(this.state.newIngredient);
+        this.setState({
+            newIngredient: '',
+            ingredients: ingredientsList
+        });
+    };
+
+    render() {
+        return (
+            <div>
+                {this.state.ingredients.map(ingredient => <div>{ingredient}</div>)}
+                <form onSubmit={this.addIngredient}>
+                    <input type="text" onChange={this.handleIngredientInput} placeholder="Add a new ingredient" value={this.state.newIngredient} />
+                </form>
+            </div>
+        );
+    }
+}
+
+export default ClassComponentIteratingState;
+
+```
+
 The first change to note is that our state object now has an ‘ingredients’ array, and a ‘newIngredient’ field that has been initialized to an empty string.
 
 The ingredients array contains the elements that we’ll want to render in our list.
@@ -481,7 +526,7 @@ This is because this method will be used upon submitting a form, and it turns ou
 
 > `event.preventDefault()` will prevent this default form behavior, meaning our form will only do what we want it to do when it is submitted.
 
-![](https://miro.medium.com/max/60/1*RN_y7Bk4tb-LLG8vNqGHHA.png?q=20)![](https://miro.medium.com/max/894/1*RN_y7Bk4tb-LLG8vNqGHHA.png)
+![](https://miro.medium.com/max/894/1*RN_y7Bk4tb-LLG8vNqGHHA.png)
 
 Next, we store a reference to `this.state.ingredients` in a variable called `ingredientsList` .
 
@@ -495,7 +540,11 @@ So all we have to do now is call `setState` appropriately in order to update the
 
 Additionally, we also set the `newIngredient` field back to an empty string in order to clear out the input field once we submit a new ingredient.
 
-Now it's ready to accept more user input!![](https://miro.medium.com/max/60/1*LXx7WeP_5wFRfYa45snSEA.png?q=20)![](https://miro.medium.com/max/478/1*LXx7WeP_5wFRfYa45snSEA.png)
+Now it's ready to accept more user input!
+
+![](https://miro.medium.com/max/60/1*LXx7WeP_5wFRfYa45snSEA.png?q=20)
+
+![](https://miro.medium.com/max/478/1*LXx7WeP_5wFRfYa45snSEA.png)
 
 Looking at our render function, first note the `this.state.ingredients.map` call.
 
@@ -509,7 +558,9 @@ The purpose of this form is to allow a user to add new ingredients to the list. 
 
 This means that our `addIngredient` method gets invoked whenever our form is submitted.
 
-Lastly, the input field has an `onChange` handler that invokes our `handleIngredientInput` method whenever there is some sort of change in the input field, namely when a user types into it.![](https://miro.medium.com/max/60/1*S7s9FfaPVlKGyaSwFeId_w.png?q=20)![](https://miro.medium.com/max/816/1*S7s9FfaPVlKGyaSwFeId_w.png)
+Lastly, the input field has an `onChange` handler that invokes our `handleIngredientInput` method whenever there is some sort of change in the input field, namely when a user types into it.![](https://miro.medium.com/max/60/1*S7s9FfaPVlKGyaSwFeId_w.png?q=20)
+
+![](https://miro.medium.com/max/816/1*S7s9FfaPVlKGyaSwFeId_w.png)
 
 Notice that the `value` field in our input tag reads off of `this.state.newIngredient` in order to know what value to display.
 
@@ -523,6 +574,49 @@ A single isolated component isn’t going to do us much good.
 >
 > Let’s start off with the component we just saw, but let’s change its name to _`ParentComponent`_ .
 
+```jsx
+import React, { Component } from 'react';
+import ChildComponent from './ChildComponent';
+
+class ParentComponent extends Component {
+    constructor() {
+        super();
+
+        this.state = {
+            ingredients: ['flour', 'eggs', 'milk', 'sugar', 'vanilla'],
+            newIngredient: ''
+        };
+    }
+
+    handleIngredientInput = (event) => {
+        this.setState({ newIngredient: event.target.value });
+    };
+
+    addIngredient = (event) => {
+        event.preventDefault();
+        const ingredientsList = this.state.ingredients;
+        ingredientsList.push(this.state.newIngredient);
+        this.setState({
+            newIngredient: '',
+            ingredients: ingredientsList
+        });
+    };
+
+    render() {
+        return (
+            <div>
+                {this.state.ingredients.map(ingredient => <ChildComponent thing={ingredient} />)}
+                <form onSubmit={this.addIngredient}>
+                    <input type="text" onChange={this.handleIngredientInput} placeholder="Add a new ingredient" value={this.state.newIngredient} />
+                </form>
+            </div>
+        );
+    }
+}
+
+export default ParentComponent;
+```
+
 The only two other differences in this component are that we’re importing a `ChildComponent` and then using it inside our `this.state.ingredients.map` call.
 
 `ChildComponent` is another React component.
@@ -531,7 +625,9 @@ Notice that we're using it just as if it were any other HTML tag.
 
 **This is how we lay out our component hierarchy: the ChildComponent is rendered within the ParentComponent.**
 
-We can see this to be the case if we open up the developer console and inspect these elements.![](https://miro.medium.com/max/2602/1*q_XLnJ2h1L5yZjNnSKzj5w.png)**child-left: parent-right**
+We can see this to be the case if we open up the developer console and inspect these elements.**child-left: parent-right**
+
+![](https://miro.medium.com/max/2602/1*q_XLnJ2h1L5yZjNnSKzj5w.png)
 
 Note also that we’re passing each ingredient as a ‘thing’ to the ChildComponent component.
 
@@ -543,6 +639,37 @@ Let’s take a look now at the Child Component. It serves two purposes:
 
 1. to render the props data that it gets from a parent component,
 2. to add the ability for a user to click on it and have it toggle a strikethrough, indicating that the item is ‘complete’.
+
+
+
+```jsx
+
+import React, { Component } from 'react';
+
+class ChildComponent extends Component {
+  constructor() {
+    super();
+    this.state = {
+      clicked: false
+    };
+  }
+
+  handleClick = () => {
+    this.setState({ clicked: !this.state.clicked });
+  };
+
+  render() {
+    const styles = this.state.clicked ? { textDecoration: 'line-through'} : { textDecoration: 'none' };
+    return (
+      <div style={styles} onClick={this.handleClick}>{this.props.thing}</div>
+    );
+  }
+}
+
+export default ChildComponent;
+
+
+```
 
 The overall structure of the child component is nothing we haven’t seen. It’s just another class component with its own s**tate object and a method called `handleClick` .**
 
@@ -617,6 +744,37 @@ Functional components are very useful in React, especially when you want to isol
 However, functional components cannot leverage the performance improvements and render optimizations that come with `React.PureComponent` since they are not classes by definition.
 
 If you want React to treat a functional component as a pure component, you’ll have to convert the functional component to a class component that extends `React.PureComponent`.
+
+
+
+```jsx
+
+function PercentageStat({ label, score = 0, total = Math.max(1, score) }) {
+  return (
+    <div>
+      <h6>{ label }</h6>
+      <span>{ Math.round(score / total * 100) }%</span>
+    </div>
+  )
+}
+
+
+// CONVERTED TO PURE COMPONENT
+class PercentageStat extends React.PureComponent {
+
+  render() {
+    const { label, score = 0, total = Math.max(1, score) } = this.props;
+
+    return (
+      <div>
+        <h6>{ label }</h6>
+        <span>{ Math.round(score / total * 100) }%</span>
+      </div>
+    )
+  }
+
+}
+```
 
 ## Reusability <a id="9c36"></a>
 
@@ -713,19 +871,43 @@ import React from 'react';class Hello extends React.Component {
 
 Small examples of data flow, see if you can get the code to work.
 
+[https://codepen.io/bgoonz/embed/WNpoLbg?default-tab=&theme-id=](https://codepen.io/bgoonz/embed/WNpoLbg?default-tab=&theme-id=)
+
+{% embed url="https://codepen.io/bgoonz/embed/BaWQGQp?default-tab=&theme-id=" %}
+
+
+
 ### 9. Creating lists with map <a id="6790"></a>
+
+{% embed url="https://codepen.io/bgoonz/embed/XWMNoJr?default-tab=&theme-id=" %}
+
+
 
 The parent component passes down to the child component as props.
 
 Using props to access names and map to loop through each list item. Then passing this by using props.
 
+{% embed url="https://codepen.io/bgoonz/embed/gOmLZbX?default-tab=&theme-id=" %}
+
+
+
+
+
 Checking data to see if Boolean is true then adding detail to the list.
+
+
+
+{% embed url="https://codepen.io/bgoonz/embed/WNpoLbg?default-tab=&theme-id=" %}
+
+
 
 ### 10. Prop types <a id="18ed"></a>
 
 PropTypes allow you to declare the type \(string, number, function, etc\) of each prop being passed to a component. Then if a prop passed in isn’t of the declared type you’ll get a warning in the console.
 
 ## Excerpt from the React website: <a id="7094"></a>
+
+
 
 ## React — A JavaScript library for building user interfaces <a id="5047"></a>
 
@@ -752,6 +934,15 @@ Using `props` and `state`, we can put together a small Todo application. This ex
 ### A Component Using External Plugins <a id="2276"></a>
 
 React allows you to interface with other libraries and frameworks. This example uses remarkable, an external Markdown library, to convert the `<textarea>`’s value in real time.
+
+
+
+## ALL CODE:
+
+```jsx
+
+
+```
 
 ## React Cheat Sheet: <a id="8738"></a>
 
