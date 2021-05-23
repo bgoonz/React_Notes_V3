@@ -1,5 +1,7 @@
 # Introduction
 
+### 
+
 ## Introduction
 
 ### React – A JavaScript library for building user interfaces
@@ -326,9 +328,9 @@ import App from "./App";
 ReactDOM.render(<App />, document.getElementById("root"));
 ```
 
-![](.gitbook/assets/image%20%284%29%20%282%29%20%282%29%20%282%29.png)
+![](.gitbook/assets/image%20%284%29%20%282%29%20%282%29%20%282%29%20%282%29%20%282%29%20%281%29.png)
 
-![](.gitbook/assets/image%20%282%29%20%282%29%20%282%29%20%282%29%20%282%29.png)
+![](.gitbook/assets/image%20%282%29%20%282%29%20%282%29%20%282%29%20%282%29%20%282%29.png)
 
 ![](.gitbook/assets/react1.png)
 
@@ -336,11 +338,11 @@ If a given tag is a component react will walk through the contents of that tag..
 
 ![](.gitbook/assets/image%20%287%29.png)
 
-![](.gitbook/assets/image%20%283%29%20%282%29%20%282%29%20%282%29.png)
+![](.gitbook/assets/image%20%283%29%20%282%29%20%282%29%20%282%29%20%282%29%20%282%29%20%281%29.png)
 
-![](.gitbook/assets/image%20%286%29%20%281%29%20%282%29%20%282%29%20%282%29%20%285%29%20%283%29.png)
+![](.gitbook/assets/image%20%286%29%20%281%29%20%282%29%20%282%29%20%282%29%20%285%29%20%284%29.png)
 
-![](.gitbook/assets/image%20%2825%29%20%282%29%20%282%29%20%281%29.png)
+![](.gitbook/assets/image%20%2825%29%20%282%29%20%282%29%20%282%29%20%282%29%20%283%29.png)
 
 ![](.gitbook/assets/image%20%288%29.png)
 
@@ -361,6 +363,10 @@ ReactDOM is a Renderer
 #### State System:
 
 ![](.gitbook/assets/image%20%2810%29.png)
+
+### 
+
+### Introduction
 
 **We want to store some piece of data that will change over time... we want to store state about what language the user selects and what they type into the form... both of which are subject to change over time.**
 
