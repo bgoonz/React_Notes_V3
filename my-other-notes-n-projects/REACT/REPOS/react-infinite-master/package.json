@@ -100,7 +100,7 @@
     "yargs": "^1.3.2"
   },
   "dependencies": {
-    "enzyme-adapter-react-16": "1.1.1",
+    "enzyme-adapter-react-16": "1.15.6",
     "lodash.isarray": "3.0.4",
     "lodash.isfinite": "3.2.0",
     "object-assign": "4.0.1"
