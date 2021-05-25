@@ -39,7 +39,7 @@
   },
   "dependencies": {
     "classnames": "^2.2.5",
-    "css-loader": "^0.23.1",
+    "css-loader": "^1.0.0",
     "react": "^15.1.0",
     "react-dom": "^15.1.0",
     "react-redux": "^4.4.5",
