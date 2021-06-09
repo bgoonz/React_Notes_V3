@@ -40,7 +40,7 @@
     "recharts": "^1.0.0-alpha.6",
     "redux": "^3.6.0",
     "redux-thunk": "^2.2.0",
-    "subscriptions-transport-ws": "^0.9.5"
+    "subscriptions-transport-ws": "^0.9.19"
   },
   "scripts": {
     "start": "NODE_PATH=../ react-scripts start",
