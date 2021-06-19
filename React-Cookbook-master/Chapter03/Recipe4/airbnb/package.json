@@ -12,7 +12,8 @@
     "prop-types": "^15.6.1",
     "react": "16.4.2",
     "react-dom": "16.4.2",
-    "react-scripts": "3.0.0"
+    "react-scripts": "4.0.0",
+    "snyk": "^1.639.0"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -22,6 +23,9 @@
     "lint": "eslint --ext .jsx,.js src",
     "postmerge": "npm install",
     "postrewrite": "npm install",
-    "precommit": "npm run lint"
-  }
+    "precommit": "npm run lint",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
+  },
+  "snyk": true
 }
