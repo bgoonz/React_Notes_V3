@@ -15,10 +15,11 @@
     "react-dom": "16.4.2",
     "react-redux": "^5.0.7",
     "react-router-dom": "^4.2.2",
-    "react-scripts": "3.0.0",
+    "react-scripts": "4.0.0",
     "redux": "^3.7.2",
     "redux-form": "^7.3.0",
-    "redux-thunk": "^2.2.0"
+    "redux-thunk": "^2.2.0",
+    "snyk": "^1.639.0"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -28,6 +29,9 @@
     "lint": "eslint --ext .jsx,.js src",
     "postmerge": "npm install",
     "postrewrite": "npm install",
-    "precommit": "npm run lint"
-  }
+    "precommit": "npm run lint",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
+  },
+  "snyk": true
 }
