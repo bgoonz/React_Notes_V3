@@ -1,0 +1,13 @@
+{
+  "name": "@reedsa/sass-template",
+  "version": "1.0.2",
+  "description": "Sass template for create-react-app",
+  "repository": "reedsa/create-react-app-templates",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/reedsa/create-react-app-templates/issues"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

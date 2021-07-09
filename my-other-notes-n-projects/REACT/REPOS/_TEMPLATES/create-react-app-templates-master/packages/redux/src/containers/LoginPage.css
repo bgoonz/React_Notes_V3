@@ -1,0 +1,9 @@
+.LoginPage-card.md-card {
+  width: 35%; }
+
+.LoginPage-card-text * > .rrm-btn-container {
+  display: flex;
+  justify-content: flex-end; }
+
+.LoginPage-login-button.rrm-btn {
+  margin: 20px 0 0; }

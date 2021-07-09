@@ -1,0 +1,38 @@
+{
+  "name": "@material/react-chips",
+  "version": "0.15.0",
+  "description": "Material Components React Chips",
+  "license": "MIT",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "keywords": [
+    "mdc web react",
+    "material components react",
+    "material design",
+    "material chip",
+    "materialchip",
+    "material chips",
+    "materialchips"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/material-components/material-components-web-react.git",
+    "directory": "packages/chips"
+  },
+  "peerDependencies": {
+    "react": "^16.4.2"
+  },
+  "dependencies": {
+    "@material/chips": "^2.3.0",
+    "@material/react-ripple": "^0.15.0",
+    "classnames": "^2.2.6",
+    "react-is": "^16.8.6"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "devDependencies": {
+    "@types/react": "^16.8.19",
+    "@types/react-is": "^16.7.1"
+  }
+}

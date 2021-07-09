@@ -1,0 +1,13 @@
+{
+  "name": "@reedsa/redux-template",
+  "version": "0.0.3",
+  "description": "Redux template for create-react-app",
+  "repository": "reedsa/create-react-app-templates",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/reedsa/create-react-app-templates/issues"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

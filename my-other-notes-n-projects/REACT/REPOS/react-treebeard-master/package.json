@@ -1,0 +1,77 @@
+{
+  "name": "react-treebeard",
+  "version": "3.2.4",
+  "description": "React Tree View Component",
+  "main": "index.js",
+  "scripts": {
+    "prepublish": "npm run build",
+    "build": "rimraf dist && babel src/ --out-dir dist/",
+    "test": "jest --config=jest.config.js",
+    "test:watch": "jest --config=jest.config.js --watch",
+    "test:coverage": "jest --config=jest.config.js --coverage",
+    "lint": "eslint .",
+    "example": "webpack-dev-server --content-base ./example/ --config ./example/webpack.config.js",
+    "build-example": "webpack --content-base ./example/ --config ./example/webpack.config.js --output ./dist/example.js"
+  },
+  "peerDependencies": {
+    "@babel/runtime": ">=7.0.0",
+    "@emotion/styled": "^10.0.10",
+    "prop-types": ">=15.7.2",
+    "react": ">=16.7.0",
+    "react-dom": ">=16.7.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/storybookjs/react-treebeard.git"
+  },
+  "keywords": [
+    "react",
+    "treeview",
+    "data-driven",
+    "customisable",
+    "fast"
+  ],
+  "author": "Alex Curtis",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/storybookjs/react-treebeard/issues"
+  },
+  "homepage": "https://github.com/storybooks/react-treebeard#readme",
+  "devDependencies": {
+    "@babel/cli": "7.13.16",
+    "@babel/core": "7.14.0",
+    "@babel/preset-env": "7.14.1",
+    "@babel/preset-react": "7.13.13",
+    "@babel/runtime": "7.14.0",
+    "@commitlint/cli": "^8.1.0",
+    "@commitlint/travis-cli": "^8.1.0",
+    "babel-eslint": "10.1.0",
+    "babel-jest": "^24.9.0",
+    "babel-loader": "8.2.2",
+    "babel-preset-react": "^6.24.1",
+    "enzyme": "^3.10.0",
+    "enzyme-adapter-react-16": "^1.14.0",
+    "enzyme-to-json": "^3.4.0",
+    "eslint": "^6.3.0",
+    "eslint-loader": "^3.0.0",
+    "eslint-plugin-react": "^7.14.3",
+    "husky": "^3.0.5",
+    "jest": "^24.9.0",
+    "lodash": "^4.17.20",
+    "prop-types": "^15.7.2",
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0",
+    "react-hot-loader": "^4.12.12",
+    "rimraf": "^3.0.0",
+    "webpack": "^4.39.3",
+    "webpack-cli": "^3.3.8",
+    "webpack-dev-server": "^3.8.0"
+  },
+  "dependencies": {
+    "@emotion/core": "^10.0.17",
+    "@emotion/styled": "^10.0.17",
+    "deep-equal": "^1.1.0",
+    "shallowequal": "^1.1.0",
+    "velocity-react": "^1.4.3"
+  }
+}

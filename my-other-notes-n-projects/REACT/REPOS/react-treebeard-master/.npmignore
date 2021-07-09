@@ -1,0 +1,10 @@
+**/.*/
+.*
+__tests__/
+coverage/
+example/
+node_modules/
+src/
+*.log
+commitlint.config.js
+jest.config.js

@@ -1,0 +1,16 @@
+sudo: false
+language: node_js
+node_js:
+  - lts/*
+cache:
+  directories:
+    - node_modules
+    - /home/travis/.cypress/Cypress
+env:
+  - TEST=1
+  - TYPECHECK=1
+  - LINT=1
+  - BROWSER=1
+script:
+  - ./config/travis/test.sh
+after_success: cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js

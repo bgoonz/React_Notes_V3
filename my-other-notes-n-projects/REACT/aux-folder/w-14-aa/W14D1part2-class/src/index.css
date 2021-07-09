@@ -1,0 +1,49 @@
+/* TODO Add site wide styles */
+
+a {
+  text-decoration: none;
+}
+ul {
+  list-style: none;
+}
+
+li {
+  display: inline;
+  padding: 10px;
+}
+
+.main {
+  border: 3px solid black;
+}
+
+.comp {
+  padding: 10px;
+  margin: 10px;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400;1,700&display=swap');
+*,
+body {
+  font-family: 'Open Sans', sans-serif;
+}
+
+.nav {
+  border: 2px solid red;
+}
+
+.black {
+  border: 1px solid black;
+}
+
+.orange {
+  border: 2px solid orange;
+}
+
+.purple {
+  border: 2px solid purple;
+  padding: 10px;
+}
+
+.active {
+  color: red;
+}

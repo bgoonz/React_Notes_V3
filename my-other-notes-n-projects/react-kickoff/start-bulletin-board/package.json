@@ -1,0 +1,24 @@
+{
+  "name": "react-bulletin-board",
+  "version": "0.1.0",
+  "description": "The React Bulletin Board upgrated to ES6",
+  "main": "app.js",
+  "dependencies": {
+    "bootstrap": "^3.3.5",
+    "express": "^4.13.1",
+    "jquery": "^2.1.4",
+    "jquery-ui": "^1.10.5",
+    "react": "^15.1.0"
+  },
+  "devDependencies": {
+    "webpack": "^1.10.1",
+    "babel-loader": "^5.3.1"
+  },
+  "scripts": {
+    "prestart": "node_modules/.bin/webpack --devtool source-map",
+    "start": "open http://localhost:3000 & node app-server.js",
+    "watch": "node_modules/.bin/webpack -w"
+  },
+  "author": "Alex Banks <alex@moonhighway.com> (http://www.moonhighway.com)",
+  "license": "MIT"
+}

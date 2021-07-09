@@ -1,0 +1,207 @@
+# CircleCI configuration for Spectrum 
+version: 2.1
+
+# Aliases
+aliases:
+
+  # Cache Management
+  - &restore-yarn-cache
+    keys:
+      - v1-yarn-{{ arch }}-{{ checksum "package.json" }}
+      - v1-yarn-{{ arch }}-
+
+  - &save-yarn-cache
+    paths:
+      - node_modules
+      - ~/.cache/yarn
+    key: v1-yarn-{{ arch }}-{{ checksum "package.json" }}
+
+  - &yarn
+    |
+      yarn
+      cd ./desktop && yarn && cd ..
+
+  - &install-rethinkdb
+    name: Install RethinkDB 2.3.5
+    command:
+      |
+        echo "deb http://download.rethinkdb.com/apt jessie main" | sudo tee /etc/apt/sources.list.d/rethinkdb.list
+        wget -qO- http://download.rethinkdb.com/apt/pubkey.gpg | sudo apt-key add -
+        sudo apt-get update
+        sudo apt-get install rethinkdb=2.3.5~0jessie
+
+  - &start-rethinkdb
+    name: Start RethinkDB
+    command: rethinkdb --bind all
+    background: true
+
+  - &setup-and-build-web
+    name: Setup and build web
+    command:
+      |
+        cp now-secrets.example.json now-secrets.json
+        yarn run build:web
+
+  - &build-api
+    name: Build API
+    command: yarn run build:api
+
+  - &start-api
+    name: Start the API in the background
+    command: yarn run start:api:test
+    background: true
+
+  - &start-web
+    name: Start web client in the background
+    command: yarn run dev:web
+    background: true
+
+defaults: &defaults
+  working_directory: ~/spectrum
+
+js_defaults: &js_defaults
+  <<: *defaults
+  docker:
+    - image: circleci/node:8
+
+jobs:
+
+  # Set up environment and install required dependencies
+  checkout_environment:
+    <<: *js_defaults
+    steps:
+      - checkout
+
+      - restore_cache: *restore-yarn-cache
+      - run: *yarn
+      - save_cache: *save-yarn-cache
+
+      - persist_to_workspace:
+          root: .
+          paths: .
+
+  build_web:
+    <<: *js_defaults
+    steps:
+      - attach_workspace:
+          at: ~/spectrum
+      - run: *setup-and-build-web
+      - run: *build-api
+      - persist_to_workspace:
+          root: .
+          paths:
+            - build-api
+            - build
+
+  test_unit:
+    <<: *defaults
+    docker:
+      - image: circleci/node:8
+      - image: redis:3.2.7
+      - image: rethinkdb:2.3.5
+    environment:
+      TERM: xterm
+    steps:
+      - attach_workspace:
+          at: ~/spectrum
+      - run: yarn run db:migrate
+      - run: yarn run db:seed
+      - run:
+          name: Run Unit Tests
+          command: yarn run test:ci
+
+
+  # Start db and servers, then run e2e and unit tests
+  test_integration:
+    <<: *defaults
+    docker:
+      - image: circleci/node:8-browsers
+      - image: redis:3.2.7
+      - image: cypress/base:6
+      - image: rethinkdb:2.3.5
+    parameters:
+      parallelism:
+        type: integer
+        default: 1
+        description: Number of boxes to use to run this job
+    parallelism: <<parameters.parallelism>>
+    environment:
+      TERM: xterm
+    steps:
+      - attach_workspace:
+          at: ~/spectrum
+      - run: yarn run db:migrate
+      - run: yarn run db:seed
+      - run: *start-api
+      - run: *start-web
+      # Wait for the API and webserver to start
+      - run: ./node_modules/.bin/wait-on http://localhost:3000 http://localhost:3001
+      - run:
+          name: Install Cypress
+          command: yarn run cypress:install
+      - run:
+          name: Run E2E Tests
+          command: |
+            if [ $CYPRESS_RECORD_KEY ]; then 
+              yarn run test:e2e -- --record --parallel
+            else
+              yarn run test:e2e
+            fi
+
+  # This runs after the above and is only here to hack around missing support for varying jobs based on external vs internal PRs
+  # See https://github.com/withspectrum/spectrum/pull/4820
+  test_e2e:
+    docker:
+      - image: cypress/base:10
+    steps:
+      - run: echo "pass"
+
+  # Run eslint, flow etc.
+  test_static_js:
+    <<: *js_defaults
+    steps:
+      - attach_workspace:
+          at: ~/spectrum
+      - run:
+          name: Run Flow
+          command: yarn run flow
+      - run:
+          name: Run ESLint
+          command: yarn run lint
+
+workflows:
+  test:
+    jobs:
+      - checkout_environment
+      - test_unit:
+          requires:
+            - checkout_environment
+      - test_static_js:
+          requires:
+            - checkout_environment
+      - build_web:
+          requires:
+            - checkout_environment
+      # Run pull requests from internal contributors in parallel
+      - test_integration:
+          name: test_e2e_internal
+          requires:
+            - build_web
+          parallelism: 8
+          filters:
+            branches:
+              ignore: /pull.*/
+      # Run pull requests from external contributors on one machine
+      - test_integration:
+          name: test_e2e_external
+          requires:
+            - build_web
+          parallelism: 1
+          filters:
+            branches:
+              only: /pull.*/
+      # If either of the test_e2e_* jobs pass, this one passes so we can mark it as required on GitHub
+      - test_e2e:
+          requires:
+            - test_e2e_internal
+            - test_e2e_external

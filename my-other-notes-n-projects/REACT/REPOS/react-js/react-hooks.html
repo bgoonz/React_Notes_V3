@@ -1,0 +1,235 @@
+<h1 id="react-pure-functions-and-hooks">React: Pure Functions and Hooks</h1>
+<h3 id="projected-time">Projected Time</h3>
+<p>Example: 80-100 minutes</p>
+<ul>
+<li>Lesson: 15-25 min</li>
+<li>Guided Practice: 15-25 min</li>
+<li>Independent Practice: 15-25 min</li>
+<li>Check for Understanding: 15 min</li>
+</ul>
+<h3 id="prerequisites">Prerequisites</h3>
+<ul>
+<li><a href="./react-part-3-component-hierarchies.md">React JS Part 3</a></li>
+</ul>
+<h3 id="motivation">Motivation</h3>
+<p>React is one of the most popular frameworks for front-end development. It is important to have a way to store and change component state that is efficient and easy to read. Components can have their own state, or use shared stateful logic. Before hooks, there were many different approaches to sharing stateful logic. Hooks are great because they introduce <em>one</em> common way to reuse code. See <a href="https://reactjs.org/docs/hooks-intro.html#complex-components-become-hard-to-understand">here</a> for more info</p>
+<h3 id="objectives">Objectives</h3>
+<p><strong>Participants will be able to:</strong></p>
+<ul>
+<li>Understand what pure functions and pure components are</li>
+<li>Understand and use the <code>useState</code> hook</li>
+<li>Understand and use the <code>useEffect</code> hook</li>
+<li>Understand the benefits of using hooks</li>
+</ul>
+<h3 id="specific-things-to-learn">Specific Things to Learn</h3>
+<p><em>Pure functions</em></p>
+<ul>
+<li>How are pure functions used in React?</li>
+<li>What is a pure component?</li>
+</ul>
+<p><em>React hooks</em></p>
+<ul>
+<li>What versions of react support hooks?</li>
+<li>Why use hooks?</li>
+<li>When to use <code>useState</code> hook - How can I store state and change state using <code>useState</code>?</li>
+<li>When to use <code>useEffect</code> hook - How does a component know when to apply an effect? - How can I use this with state from <code>useState</code>?</li>
+</ul>
+<h3 id="materials">Materials</h3>
+<ul>
+<li><a href="https://dev.to/keevcodes/pure-functions-in-react-2o7n">Pure functions in React</a></li>
+<li><a href="https://reactjs.org/docs/hooks-intro.html">Intro to React hooks</a></li>
+<li><a href="https://reactjs.org/docs/hooks-state.html">React hooks and state</a></li>
+</ul>
+<h3 id="lesson">Lesson</h3>
+<h4 id="what-are-pure-functions">What are pure functions?</h4>
+<p>Look at the functions in the <a href="https://dev.to/keevcodes/pure-functions-in-react-2o7n">pure functions article</a> (also copied below). Why is <code>multiply</code> <em>not</em> a pure function? Why is <code>multiplyNumber</code> a pure function?</p>
+<p><code>const globalNumber = 4; const multiply = (x) =&gt; {  return globalNumber *= x }</code></p>
+<pre><code>const multiplyNumber = (x) =&gt; {
+ return x * 2;
+}</code></pre>
+<p>Pure components, also called (Stateless)Functional Component, or <em>(S)FC</em> in React, are pure functions - they are components that do not store any internal state, and are pure with respect to their props. For example,</p>
+<pre><code>const HeadlineComponent = props =&gt; (&lt;h1&gt;{props.headline}&lt;/h1&gt;)</code></pre>
+<h4 id="why-were-hooks-introduced">Why were hooks introduced?</h4>
+<p>Read <a href="https://reactjs.org/docs/hooks-intro.html">Intro to react hooks</a> (5-10 minutes).</p>
+<p>Note: React hooks were introduced in version 16.8. Previous alternatives to hooks include <a href="https://reactjs.org/docs/render-props.html">render props</a>, <a href="https://reactjs.org/docs/higher-order-components.html">higher-order components</a> such as the HOC used to connect a component to <a href="https://code.likeagirl.io/how-to-create-a-connected-hoc-with-react-and-redux-8631f7b1497">the redux store</a>. Right now you don’t have to understand all of these alternatives in depth. The main point to note is there were a lot of solutions for the same problem.Hooks introduce <em>one</em> concept that solves these problems.</p>
+<h4 id="how-do-i-use-hooks">How do I use hooks?</h4>
+<ol type="1">
+<li>Read <a href="https://reactjs.org/docs/hooks-overview.html">Hooks Overview</a></li>
+<li>Walk through the examples on <a href="https://reactjs.org/docs/hooks-state.html">Using the State Hook</a> to understand the state hook and its Class equivalent (in the counter <code>Example</code> component ). Use <a href="https://codesandbox.io/s/techtonicahooks0-8uy6j">this code sandbox</a>, to play around with these two ways of creating the same functionality.</li>
+</ol>
+<p><em>Discuss with a partner:</em> How do hooks achieve the same logic as the class component? Can you see how the code with hooks is cleaner?</p>
+<h3 id="guided-practice">Guided Practice</h3>
+<p><strong>Goal: understand how we would use React hooks to implement a simple to-do list.</strong></p>
+<p>A user should be able to:</p>
+<ul>
+<li>Add items (via text input field)</li>
+<li>Press a button ‘All done’ which will clear all todo items, and a message on the top will say ‘Good job!’</li>
+<li>Press a button ‘Clear all’ which will clear all todo items</li>
+<li>When there are more than 5 items on the list, there should be a status message on the top that says ‘Try to complete current tasks before adding new ones!’ This will walk through one possible approach to solving this using React hooks. Note that there is no one right answer or one right approach!</li>
+</ul>
+<p>Please fork <a href="https://codesandbox.io/s/techtonicatodotemplate-conbd">this template</a> and follow along with this tutorial.</p>
+<ol start="0" type="1">
+<li><strong>What should the component look like?</strong> We can start with a ‘sketch’ of what our component might look like. This does not need UI or styling. We start with an outline so that we can think about what information and functionality this component will need.</li>
+</ol>
+<p>For example,</p>
+<pre><code>const TodoApp = () =&gt; {
+  return (
+    &lt;div&gt;
+      &lt;b&gt;status here&lt;/b&gt;
+      &lt;form&gt;
+        &lt;label&gt;
+          New item:
+          &lt;input type=&quot;text&quot; name=&quot;name&quot; /&gt;
+        &lt;/label&gt;
+        &lt;input type=&quot;submit&quot; value=&quot;Add&quot; /&gt;
+
+        &lt;div&gt;
+          &lt;button&gt; Clear all &lt;/button&gt;
+          &lt;button&gt; All done &lt;/button&gt;
+        &lt;/div&gt;
+      &lt;/form&gt;
+
+      &lt;h2&gt; My Todos:&lt;/h2&gt;
+      &lt;ul&gt;
+        &lt;li&gt;item1&lt;/li&gt;
+        &lt;li&gt;item2&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/div&gt;
+  );
+};
+</code></pre>
+<ol start="2" type="1">
+<li><strong>What information do we need? (aka what states do we need?)</strong></li>
+</ol>
+<p>We want to store a list of todos and a status message. We need to store the ‘new item’ value that the user is typing into the ‘Add todo’ input field</p>
+<p>At the top of the component we can use <code>useState</code> to do so:</p>
+<pre><code>const TodoApp = () =&gt; {
+  const [items, setItems] = useState([])
+  const [status, setStatus] = useState(&#39;&#39;)
+  const [newTodo, setNewTodo] = useState(&#39;&#39;);
+
+  return (...)
+  }</code></pre>
+<ol start="3" type="1">
+<li><strong>When should this information update?</strong> We now think about when we want these states to update.</li>
+</ol>
+<p><em>Adding a Todo</em></p>
+<ul>
+<li>When we type in the input field, we should store that value as ’newTodo`</li>
+<li>When we press the button add a todo item, the <code>items</code> list should update (that <code>newTodo</code> item should be appended to <code>items</code>)</li>
+<li>After we add this item, the input field should clear (<code>newTodo</code> should be reset to <code>''</code>)</li>
+</ul>
+<p><em>Clearing Todos</em></p>
+<ul>
+<li>When a user presses ‘all done’, <code>items</code> should be reset (set to <code>[]</code>), and <code>status</code> should be updated to be <code>Good Job!</code></li>
+<li>When the user presses ‘clear all’, <code>items</code> should be reset (set to <code>[]</code>)</li>
+</ul>
+<p><em>Too many items</em> When <code>items.length</code> is more than 5, the message should update to ‘Try to complete current tasks before adding new ones!’</p>
+<p>This could look like:</p>
+<pre><code>const TodoApp = () =&gt; {
+  const [items, setItems] = useState([&quot;Item one&quot;]);
+  const [status, setStatus] = useState(&quot;&quot;);
+  const [newTodo, setNewTodo] = useState(&quot;&quot;);
+
+  return (
+    &lt;div&gt;
+      &lt;b&gt;{status}&lt;/b&gt;
+      &lt;form
+        onSubmit={e =&gt; {
+          e.preventDefault();
+          // We want update items to be old items + a new item
+          // we do this with setItems
+          // We also want to reset the input field value
+          setItems([...items, newTodo]);
+          setNewTodo(&quot;&quot;);
+        }}
+      &gt;
+        &lt;label&gt;
+          New item:
+          &lt;input
+            type=&quot;text&quot;
+            name=&quot;name&quot;
+            value={newTodo}
+            onChange={e =&gt; setNewTodo(e.target.value)}
+          /&gt;
+        &lt;/label&gt;
+        &lt;input type=&quot;submit&quot; /&gt;
+
+        &lt;div&gt;
+          &lt;button
+            onClick={e =&gt; {
+              e.preventDefault();
+              setItems([]);
+            }}
+          &gt;
+            Clear all
+          &lt;/button&gt;
+          &lt;button
+            onClick={e =&gt; {
+              e.preventDefault();
+              setItems([]);
+          setStatus(&quot;Good job!&quot;);
+            }}
+          &gt;
+            All done
+          &lt;/button&gt;
+        &lt;/div&gt;
+      &lt;/form&gt;
+
+      &lt;h2&gt; My Todos:&lt;/h2&gt;
+      &lt;ul&gt;
+        {items.map(item =&gt; (
+          &lt;li&gt;{item}&lt;/li&gt;
+        ))}
+      &lt;/ul&gt;
+    &lt;/div&gt;
+  );
+};</code></pre>
+<p><strong>Are there side effects of any actions? We can use <code>useEffect</code> for this</strong> Yes! In this example, every time an item is added we want to check the length of <code>items</code>. If there are more than 5 items, we want to update <code>status</code> to ‘Try to complete current tasks before adding new ones!’</p>
+<pre><code>useEffect(()=&gt;{
+    if (items.length &gt; 5){
+      setStatus(&#39;Try to complete current tasks before adding new ones!&#39;)
+    }
+  }, [items])</code></pre>
+<p>Note the second argument is an optional array. This means that we only want the effect to run when <code>items</code> changes. This is because the status does not care about when other states update, such as <code>newTodo</code> .</p>
+<p>Bonus: Notice that after we press ‘All done’, the ‘Good Job!’ status will remain until we change it to ‘Try to complete current tasks before adding new ones!’ (and vise versa). This UI could be confusing for the user. Why would this be confusing, and how could we fix it? Discuss with a partner.</p>
+<p>A sample completed component is <a href="https://codesandbox.io/s/techtonicaexercisecompleted-f08z1">here</a>.</p>
+<h3 id="common-mistakes-misconceptions">Common Mistakes &amp; Misconceptions</h3>
+<p><strong>Infinite loops with <code>useEffect</code></strong> With no parameters, <code>useEffect</code> will update after every render (every time the state or props have changed). In some cases, this can lead to infinite loops. See <a href="%5Bhttps://medium.com/@andrewmyint/infinite-loop-inside-useeffect-react-hooks-6748de62871%5D(https://medium.com/@andrewmyint/infinite-loop-inside-useeffect-react-hooks-6748de62871)">this example</a> where there is an infinite loop when an API is called in <code>useEffect</code>. Calling the API updates the <code>name</code>, which triggers a re-render, which triggers <code>useEffect</code> to call the API, leading to an infinite loop.</p>
+<p><strong>Unnecessary updating</strong> It is often unnecessary to call <code>useEffect</code> after every re-render. For example, say you have a Yelp-like component. There is an API <code>getRestaurants</code> that you want to call every time the user changes the selected city, <code>city</code>. We can specify that we only want to call <code>getRestaurants</code> when the city changes with</p>
+<pre><code>useEffect(()=&gt;{
+getRestaurants(city)
+}, [city])</code></pre>
+<p>See <a href="https://reactjs.org/docs/hooks-effect.html#tip-optimizing-performance-by-skipping-effects">here</a> for more info.</p>
+<p><strong>Too many states</strong> If a component has multiple <code>states</code> and/or if the logic to update states becomes complex, it can become difficult to read and bloated. The <a href="%5Bhttps://reactjs.org/docs/hooks-reference.html#usereducer%5D(https://reactjs.org/docs/hooks-reference.html#usereducer)">useReducer hook</a>.</p>
+<h3 id="independent-practice">Independent Practice</h3>
+<p><strong><em>Book name generator</em></strong> Goal: A user should be able to enter a phrase, and below will see the Harry Potter title generated from that phrase. We want the title to be <code>"Harry Potter and the PHRASE_HERE"</code>. For example, if I enter ‘Goblet of Code’ into the Phrase input, I should see “The National best selling book is called: Harry Potter and the Goblet of Code”</p>
+<ol type="1">
+<li>Fork <a href="https://codesandbox.io/s/techtonicahpexercise-ezflq">this sandbox</a>.</li>
+<li>Look at the <code>App</code> component, but do <em>not</em> modify it. Look at what props are passed to the <code>TitleGenerator</code> component.</li>
+<li>Edit the <code>TitleGenerator</code> so that when the phrase input changes, the Harry Potter title changes and is printed below.</li>
+</ol>
+<h3 id="challenge">Challenge</h3>
+<p><strong><em>useReducer</em></strong> Goal: make a simple grocery price calculator using the <a href="https://reactjs.org/docs/hooks-reference.html#usereduce"><code>useReducer</code></a> hook. The user can enter an item price, a percentage discount, and select the number of items. They should see below what the final price will be. For example, if the item price is 10, discount is 50%, and there are 5 items, the final price should be 25 (10 _ .5 _ 5).</p>
+<ol type="1">
+<li>Fork <a href="https://codesandbox.io/s/techtonicacalculatortemplate-4tlnp">this sandbox</a>.</li>
+<li>Look at the <code>reducer</code> and <code>initialState</code>. The logic for updating <code>state.counter</code> is already implemented.</li>
+<li>How will you implement the logic for <code>itemPrice</code> and <code>discount</code>?</li>
+<li>How will you implement the logic for <code>totalPrice</code>? What actions should trigger <code>totalPrice</code> updating?</li>
+</ol>
+<h3 id="check-for-understanding">Check for Understanding</h3>
+<ol type="1">
+<li>Read <a href="https://blog.logrocket.com/react-hooks-cheat-sheet-unlock-solutions-to-common-problems-af4caf699e70/">this article</a>. Key takeaways:
+<ul>
+<li>Understand <code>useEffect</code> and <code>useState</code>, and <code>useReducer</code></li>
+<li>Understand effects with cleanups and skipping effects</li>
+</ul></li>
+<li>Bonus: look at <code>useContext</code> example and walk through it with a partner</li>
+</ol>
+<p>See <a href="%5Bhttps://reactjs.org/docs/hooks-reference.html%5D(https://reactjs.org/docs/hooks-reference.html)">Hooks API doc</a> for more info.</p>
+<h3 id="supplemental-materials">Supplemental Materials</h3>
+<ul>
+<li><a href="%5Bhttps://medium.com/better-programming/react-hooks-vs-classes-add2676a32f2%5D(https://medium.com/better-programming/react-hooks-vs-classes-add2676a32f2)">Hooks vs State</a> - Another similar article comparing hooks to state (7-12 minutes)</li>
+<li><a href="%5Bhttps://medium.com/@dan_abramov/making-sense-of-react-hooks-fdbde8803889%5D(https://medium.com/@dan_abramov/making-sense-of-react-hooks-fdbde8803889)">Medium article</a> written by members of the React team who created hooks! (10-15 minutes). Includes a <a href="%5Bhttps://www.youtube.com/watch?v=dpw9EHDh2bM%5D(https://www.youtube.com/watch?v=dpw9EHDh2bM)">video</a> of the team introducing the concept at React Conf.</li>
+</ul>
+<p>More examples: <em>Note</em>: There are many examples and tutorials around React and React hooks. Feel free to browse the interwebs to find resources that make sense to you! <a href="https://dev.to/jh3y/react-hooks-in-5-minutes-55ic">Using hooks to change background color</a> <a href="https://www.freecodecamp.org/news/lets-get-hooked-a-quick-introduction-to-react-hooks-9e8bc3fbaeac/">Intro to React Hooks</a> <a href="https://cobuildlab.com/development-blog/introduction-to-react-hooks-useReducer/">Intro to useReducer</a></p>

@@ -1,0 +1,12 @@
+type Post @model {
+  id: ID!
+  clientId: ID!
+  markdown: String!
+  title: String!
+  createdAt: String
+}
+
+type Subscription {
+  onUpdatePostWithId(id: ID!): Post
+    @aws_subscribe(mutations: ["updatePost"])
+}

@@ -1,0 +1,30 @@
+{
+  "name": "@material/react-notched-outline",
+  "version": "0.15.0",
+  "description": "Material Componens React Notched Outline",
+  "license": "MIT",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "keywords": [
+    "mdc web react",
+    "material components react",
+    "material design",
+    "notched outline",
+    "notchedoutline"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/material-components/material-components-web-react.git",
+    "directory": "packages/notched-outline"
+  },
+  "peerDependencies": {
+    "react": "^16.4.2"
+  },
+  "dependencies": {
+    "@material/notched-outline": "^1.1.1",
+    "classnames": "^2.2.6"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

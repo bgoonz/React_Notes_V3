@@ -1,0 +1,242 @@
+<h1 id="styling-in-react">Styling in React</h1>
+<h3 id="projected-time-1-hr">Projected Time : 1 hr</h3>
+<ul>
+<li>Lesson: 40 mins.</li>
+<li>Guided Practice: 20 mins.</li>
+</ul>
+<h3 id="prerequisites">Prerequisites</h3>
+<ul>
+<li><a href="/web/css.md">CSS Lesson</a></li>
+<li><a href="/web/bootstrap.md">Bootstrap Lesson</a></li>
+<li><a href="./react-part-1-intro.md">React Part 1 - Intro</a></li>
+</ul>
+<h3 id="motivation">Motivation</h3>
+<p>Styling has been one of the building blocks of web development. Cascading Style Sheets is a style sheet language used for describing the presentation of a document written in a markup language like HTML. React only provides a virtual DOM, whereas the presentation part still lies with CSS.</p>
+<h3 id="objectives">Objectives</h3>
+<ul>
+<li>Styling in React JSX.</li>
+<li>Inline styling and using external stylesheet.</li>
+<li>Bootstrap in React.</li>
+</ul>
+<h3 id="specific-things-to-learn">Specific Things To Learn</h3>
+<ul>
+<li>Defining styles as objects.</li>
+<li>Importing stylesheets into React application.</li>
+</ul>
+<h3 id="materials">Materials</h3>
+<ul>
+<li><a href="https://www.youtube.com/watch?v=j5P9FHiBVNo">Video: Styling of React App in 3 different ways</a> - Using inline CSS, external CSS and CSS modules.</li>
+<li><a href="https://www.youtube.com/watch?v=wdbzLi0tWq0">Video: Bootstrap in React</a> - Bootstrap in React can be used using CDN or by installing the package.</li>
+</ul>
+<h3 id="lesson">Lesson</h3>
+<ul>
+<li><a href="https://docs.google.com/presentation/d/15SRalCJq0HaZ7O8LIngmDVqxDSU0GBVzOhpF1Q0eQOw/edit#slide=id.g827758f8ad_0_333">Slides: CSS in React</a></li>
+</ul>
+<h3 id="guided-practice">Guided Practice</h3>
+<blockquote>
+<h4 id="lets-create-a-simple-div-and-style-it-using-inline-css-and-flexbox.-then-we-will-achieve-same-using-external-css-and-bootstrap-separately.">Let’s create a simple div, and style it using inline CSS and flexbox. Then we will achieve same using external CSS and Bootstrap separately.</h4>
+</blockquote>
+<ul>
+<li><p>First, we need to create a React application. - Create a React app using create React app command. <code>npx create-react-app</code>.</p>
+<ul>
+<li><p>This will create a simple React app , and now we will start making changes to this app. - First of all get rid of all the unnecessary stuff showing on DOM , remove all the lines in render of <code>App.js</code>. - Now we create a simple div <strong>parent div</strong> which will contain few div as <em>child</em> elements. - After creating that , your <code>App.js</code> will look like this - ``` import React from ‘react’; import ‘./App.css’;</p>
+<pre><code>        function App() {</code></pre>
+return (
+<div data-classname="App">
+{/_ Start Parent Div _/}
+<div>
+{/_ Start of Child Divs _/}
+<div>
+Child Div 1
+</div>
+<div>
+Child Div 2
+</div>
+<div>
+Child Div 3
+</div>
+<p>{/_ End of Child Divs _/}</p>
+</div>
+<p>{/_ End of Parent Div _/}</p>
+</div>
+<p>); }</p>
+<pre><code>        export default App;
+        ```</code></pre>
+<p>Now we will be adding CSS to this App to differentiate <strong>div</strong> and achieve this one by one using</p></li>
+</ul></li>
+<li>Inline CSS</li>
+<li>External CSS file and</li>
+<li><p>then by using Bootstrap.</p></li>
+</ul>
+<p>To Differentiate we will add background color simple padding and dividing <strong>parent div</strong> into <em>flex</em> box.</p>
+<h4 id="note---to-compare-the-changes-among-the-3-methods-of-css-create-a-separate-react-app.">Note - To compare the changes among the 3 methods of CSS, create a separate React app.</h4>
+<ol type="1">
+<li><p>Using inline CSS</p>
+<ol type="1">
+<li>Let us give a background color and some margin on top and bottom to parent element and make its display as flex. &gt; <code>&lt;div style={ { margin:"10px 0", backgroundColor:"orange", display:"flex"}} &gt;</code></li>
+<li>Now add <code>background-color</code> to each <strong>child div</strong> with some padding and flex basis. &gt; <code>&lt;div style={{flexBasis:"25%",padding:"10px",backgroundColor:"green"}}&gt;Child Div 1&lt;/div&gt;</code></li>
+<li>Your <code>App.js</code> will look like -</li>
+</ol>
+<pre><code>&lt;div className=&quot;App&quot;&gt;
+{/* Start of Parent Div */}
+  &lt;div style={{margin:&quot;10px 0&quot;,backgroundColor:&quot;orange&quot;,display:&quot;flex&quot;}}&gt;
+  {/* Start of Child Divs */}
+    &lt;div style={{flexBasis:&quot;25%&quot;,padding:&quot;10px&quot;,backgroundColor:&quot;green&quot;}}&gt;Child Div 1&lt;/div&gt;
+    &lt;div style= {{flexBasis:&quot;25%&quot;,padding:&quot;10px&quot;,backgroundColor:&quot;red&quot;}} &gt;Child Div 2&lt;/div&gt;
+    &lt;div style={{flexBasis:&quot;25%&quot;,padding:&quot;10px&quot;,backgroundColor:&quot;blue&quot;}}&gt;Child Div 3&lt;/div&gt;
+    &lt;/div&gt;
+    {/* End of Parent Div */}
+&lt;/div&gt;</code></pre></li>
+<li><p>Using external CSS</p>
+<ol type="1">
+<li><p>Create an external CSS file and add a parent class with same styling as you did in inline CSS. 2. Create a class for each <strong>child element</strong>. 3. Your CSS file will look like - - ``` .parent { margin: 10px 0; display: flex; width: 100vw; background-color: darkorange; } .child1 { flex-basis: 25%; max-width: 25%; padding: 10px; background-color: green; } .child2 { flex-basis: 25%; max-width: 25%; padding: 10px; background-color: red; }</p>
+<pre><code>      .child3 {
+        flex-basis: 25%;
+        max-width: 25%;
+        padding: 10px;
+        background-color: blue;
+      }</code></pre>
+<pre><code>.
+
+`
+.parent div {
+;
+;
+;
+}
+
+{
+;
+}
+
+{
+;
+}
+
+{
+;
+}
+
+`
+.
+`
+`
+`
+
+`
+;
+;
+&#39;
+{
+return (
+ &lt;div className=&quot;App&quot;&gt;
+}
+    &lt;div className=&quot;parent&quot;&gt;
+}
+&gt;
+&gt;
+&gt;
+}
+&gt;
+
+&gt;
+);
+}
+
+;
+
+`</code></pre></li>
+</ol></li>
+<li>Using Bootstrap
+<ol type="1">
+<li>Let’s add Bootstrap CDN in index.html file.</li>
+<li>Create a row and make child <strong>div</strong> as <code>col-3</code>.</li>
+<li>Since Bootstrap has different colors, we have to add <code>backgroundColor</code> as inline CSS to differentiate between child element <strong>div</strong>.</li>
+<li><code>App.js</code> will look like -</li>
+</ol>
+<ul>
+<li><pre><code>&lt;div className=&quot;App&quot;&gt;
+      {/* Start of Parent Div */}
+    &lt;div className=&quot;row mt-2 mb-2&quot; style={{backgroundColor:&quot;darkorange&quot;}}&gt;
+          {/* Start of Child Divs */}
+           &lt;div className=&quot;col-3 p-2&quot; style={{backgroundColor:&quot;green&quot;}}&gt;Child Div 1&lt;/div&gt;
+           &lt;div className=&quot;col-3 p-2&quot; style={{backgroundColor:&quot;red&quot;}}&gt;Child Div 2&lt;/div&gt;
+           &lt;div className=&quot;col-3 p-2&quot; style={{backgroundColor:&quot;blue&quot;}}&gt;Child Div 3&lt;/div&gt;
+           {/* End of Child Divs */}
+      &lt;/div&gt;
+      {/* End of Parent Div */}
+&lt;/div&gt;</code></pre></li>
+</ul></li>
+</ol>
+<h3 id="common-mistakes-and-misconceptions">Common Mistakes and Misconceptions</h3>
+<ul>
+<li><p>Combining different classes based on certain state/props.</p>
+<ul>
+<li>When a component is receiving a prop and depending upon the value of that prop the CSS is rendered.</li>
+<li>Let us take a component say <code>ButtonComp</code> which returns a button and adds a class <code>btn-class</code> as default class to the button in the component. Now if the component receives a prop as <code>color</code>, then an additional <code>error</code> class should be added to the button in that component.</li>
+<li>If color is received as prop by the component then <strong>className</strong> will be
+<ul>
+<li><blockquote>
+<p><code>className = "error btn-class"</code></p>
+</blockquote></li>
+</ul></li>
+<li>else
+<ul>
+<li><blockquote>
+<p><code>className = "btn-class"</code></p>
+</blockquote></li>
+</ul></li>
+<li><blockquote>
+<p><strong>Incorrect Way</strong> - <code>&lt;button className = { "btn-class" + this.props.color ? "error" : ""}&gt;ButtonComp &lt;/button&gt;</code></p>
+</blockquote>
+<ul>
+<li>Reason - ClassName only accepts a single string. The <code>+</code> operator before <code>this.props.color</code> will try to parse it to integer value. Therefore it always takes the <code>true</code> value and displays error class.</li>
+</ul></li>
+<li><blockquote>
+<p><strong>Incorrect Way</strong> - <code>&lt;button className = { &lt;button className = {this.props.color ? "error" : "" + "btn-class" }&gt;ButtonComp &lt;/button&gt;</code></p>
+</blockquote>
+<ul>
+<li>Reason - ClassName takes a single string. Hence in case if the component receives a prop as <em>color</em> <code>error</code> class will be displayed whereas if the <code>color</code> prop is not received by the component then an empty string <code>""</code> <code>+</code> <code>btn-class</code> makes the className as <code>btn-class</code>.</li>
+<li>But our requirement was to add <code>error</code> class along with <code>btn-class</code>.</li>
+</ul></li>
+<li><blockquote>
+<p><strong>Correct Way</strong> - <code>&lt;button className = {this.props.color ? "btn-class error" : "btn-class" }&gt;ButtonComp &lt;/button&gt;</code></p>
+</blockquote></li>
+<li>Or If we use backticks, same can be written as -</li>
+<li><blockquote>
+<p><strong>Correct Way</strong> - <code>&lt;button className = {`btn-class ${this.props.color ? "error" : ""}`}&gt;ButtonComp &lt;/button&gt;</code></p>
+</blockquote></li>
+</ul></li>
+<li><p>Wrong path provided while importing CSS.</p>
+<ul>
+<li><p>If the path provided for external CSS file or module in the JSX file is incorrect then React throws an error i.e it will not be able to build the webpack. The error will look like -</p>
+<ul>
+<li><blockquote>
+<p>Failed to compile.</p>
+</blockquote>
+<pre><code>
+  - &gt; ./src/App.js</code></pre></li>
+</ul></li>
+</ul></li>
+<li><p>CamelCase is supported in React for CSS styles. - Using <strong>class</strong> instead of <strong>className</strong> gives warning. - If any inline style property is used as <strong>two words</strong> like <strong>background-color</strong>, you will encounter an error. This is because these styles are not in a .css file. They are in JSX (Javascript extension for React), so it is actually a JS object; and JS cannot parse dashes. Also note the double curly-braces. The outer set of braces means “now instead of React JSX, what’s in these braces will be pure JavaScript.” <code>style={}</code>. Then inside is a JS object <code>{backgroundColor: “red”}</code>.</p>
+<pre><code>  - &gt; **Incorrect Way** - ``` &lt;button style={{background-color:&quot;red&quot; }}&gt; ```
+  - &gt; **Correct Way** -   ``` &lt;button style={{backgroundColor:&quot;red&quot;}} &gt; ```</code></pre></li>
+</ul>
+<h3 id="supplemental-materials">Supplemental Materials</h3>
+<ul>
+<li><p><a href="https://reactstrap.github.io/">React Strap</a> - Provides predefined components for React styled with Bootstrap.</p>
+<ul>
+<li>Why to choose Reactstrap ?
+<ul>
+<li>Directly use components instead of Bootstrap typing classes and passing attributes as props. - Closely relate Bootstrap to React. - Example - &gt; <code>&lt;Button color="danger"&gt;Danger!&lt;/Button&gt;</code></li>
+</ul></li>
+</ul></li>
+<li><a href="https://styled-components.com/docs/basics#getting-started">Styled Components</a> is the result of wondering how we could enhance CSS for styling React component systems.
+<ul>
+<li>Why to choose Styled Components ?
+<ul>
+<li>No class name bugs: styled-components generates unique class names for your styles. You never have to worry about duplication, overlap or misspellings.</li>
+<li>Simple dynamic styling: adapting the styling of a component based on its props or a global theme is simple and intuitive without having to manually manage dozens of classes. - Example <code>import styled from 'styled-components' const Button = styled.button` background: transparent; border-radius: 3px; border: 2px solid palevioletred; color: palevioletred; margin: 0 1em; padding: 0.25em 1em; `</code></li>
+</ul></li>
+</ul></li>
+</ul>

@@ -1,0 +1,11 @@
+.MenuDrawer-button.md-btn--icon {
+  width: 48px;
+  height: 48px;
+  padding: 10px; }
+
+.MenuDrawer-container {
+  min-width: 200px; }
+  .MenuDrawer-container * > .MenuDrawer-close-button.md-btn {
+    color: black; }
+  .MenuDrawer-container > ul.md-list.md-list--drawer {
+    padding: 8px 0; }

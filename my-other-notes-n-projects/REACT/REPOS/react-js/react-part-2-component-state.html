@@ -1,0 +1,251 @@
+<h1 id="react-part-2---component-state">React Part 2 - Component State</h1>
+<h2 id="projected-time">Projected Time</h2>
+<p>5 hours</p>
+<ul>
+<li>Lesson: 1 hour</li>
+<li>Guided Practice: 2 hour 30 mins</li>
+<li>Independent Practice: 1 hour 30 mins</li>
+</ul>
+<h3 id="prerequisites">Prerequisites</h3>
+<ul>
+<li><a href="./react-part-1-intro.md">React Part 1 - Intro</a></li>
+</ul>
+<h3 id="motivation">Motivation</h3>
+<p>In the <a href="./react-part-1-intro.md">React Intro</a>, we have discussed how React renders HTML.</p>
+<p>Now the problem arises: How do we store and change component information we want in the UI? For example, maybe you want a button’s background color to change once it’s been clicked. The solution is to use <code>state</code>.</p>
+<h3 id="objectives">Objectives</h3>
+<ul>
+<li>Component state</li>
+<li>State vs Props</li>
+<li>State is Immutable</li>
+</ul>
+<h3 id="lesson">Lesson</h3>
+<ul>
+<li><a href="https://www.youtube.com/watch?v=e5n9j9n83OM">Introduction to component state in React (video)</a></li>
+<li><a href="https://docs.google.com/presentation/d/1Trj_7vWYe79_mDboDxN9rdT94yjY5Dt55xtU1k3dUsw/edit?usp=sharing">Component state in React slides</a></li>
+</ul>
+<h3 id="common-mistakes-misconceptions">Common Mistakes &amp; Misconceptions</h3>
+<ol type="1">
+<li>The scope of the state is local to the component. This means that the state is restricted within the class only.</li>
+</ol>
+<ul>
+<li>Incorrect <code>javascript class Message extends React.Component { constructor(){ this.state = { message : "message" } } } console.log(this.state.message);</code></li>
+<li>Correct <code>javascript class Message extends React.Component { constructor(){ this.state = { message : "message" } } render(){ console.log(this.state.message); } }</code></li>
+</ul>
+<ol start="2" type="1">
+<li>Don’t forget to update state immutably.</li>
+</ol>
+<ul>
+<li><p>Incorrect</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">this</span>.<span class="va">state</span>.<span class="at">message</span> <span class="op">=</span> <span class="st">&#39;new message&#39;</span><span class="op">;</span></a></code></pre></div></li>
+<li><p>Correct</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb2-1" title="1"><span class="kw">this</span>.<span class="at">setState</span>(<span class="op">{</span></a>
+<a class="sourceLine" id="cb2-2" title="2">  <span class="dt">message</span><span class="op">:</span> <span class="st">&#39;new message&#39;</span></a>
+<a class="sourceLine" id="cb2-3" title="3"><span class="op">}</span>)<span class="op">;</span></a></code></pre></div></li>
+</ul>
+<ol start="3" type="1">
+<li>A component should not change or update its props. Props are values sent by parent component to child component and changing the props will cause inconsistency in prop data. Therefore, it is advisable not to change its own props.</li>
+</ol>
+<ul>
+<li><p>Incorrect</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb3-1" title="1"><span class="kw">this</span>.<span class="va">props</span>.<span class="at">message</span> <span class="op">=</span> <span class="st">&#39;new message&#39;</span><span class="op">;</span></a></code></pre></div>
+<ul>
+<li>Correct</li>
+</ul>
+<div class="sourceCode" id="cb4"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb4-1" title="1"><span class="kw">this</span>.<span class="at">setState</span>(<span class="op">{</span></a>
+<a class="sourceLine" id="cb4-2" title="2">  <span class="dt">message</span><span class="op">:</span> <span class="st">&#39;new message&#39;</span></a>
+<a class="sourceLine" id="cb4-3" title="3"><span class="op">}</span>)<span class="op">;</span></a></code></pre></div></li>
+</ul>
+<h3 id="guided-practice">Guided Practice</h3>
+<ul>
+<li><p>Define state.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb5-1" title="1">state <span class="op">=</span> <span class="op">{};</span></a></code></pre></div></li>
+<li><p>Initialize state inside class constructor.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb6-1" title="1"><span class="at">constructor</span>()<span class="op">{</span></a>
+<a class="sourceLine" id="cb6-2" title="2">  <span class="kw">this</span>.<span class="at">state</span> <span class="op">=</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb6-3" title="3">  <span class="dt">message</span><span class="op">:</span> <span class="st">&quot;Hello world&quot;</span></a>
+<a class="sourceLine" id="cb6-4" title="4">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb6-5" title="5"><span class="op">}</span></a></code></pre></div></li>
+<li>State should not be mutated directly. A copy of state should be created and then updated using <code>this.setState</code>
+<ul>
+<li><p>Incorrect way -</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb7-1" title="1"><span class="kw">this</span>.<span class="va">state</span>.<span class="at">message</span> <span class="op">=</span> <span class="st">&#39;new message&#39;</span><span class="op">;</span></a></code></pre></div></li>
+<li><p>Correct way -</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb8-1" title="1"><span class="kw">this</span>.<span class="at">setState</span>(<span class="op">{</span></a>
+<a class="sourceLine" id="cb8-2" title="2">  <span class="dt">message</span><span class="op">:</span> <span class="st">&#39;new message&#39;</span></a>
+<a class="sourceLine" id="cb8-3" title="3"><span class="op">}</span>)<span class="op">;</span></a></code></pre></div></li>
+</ul></li>
+<li><p>The important thing to remember about <code>setState</code> is that it causes the component to re-render. Well, in introduction to React, we have learnt that React follows a special path called the <strong>React cycle</strong>. So, when state is updated using <code>setState</code>, React goes into the <strong>React cycle</strong> and then the changes are compared to the previous <strong>React virtual DOM element</strong> and the changes are made accordingly and are reflected in the UI.</p></li>
+</ul>
+<p>Now let us understand the use of state with an example.<br />
+We will create an increment/decrement counter which includes click functionality and displaying that value. When we click on the increment button, 1 is added to the value and on clicking the decrement button, 1 is subtracted from the value. Initially, the value will be 0.</p>
+<ol type="1">
+<li>To create a counter, we will need a value which will change dynamically on clicking the increment/decrement button. Therefore we need to maintain a number inside state. Let us call that number as <em>value</em>. So we will define the state as -</li>
+</ol>
+<div class="sourceCode" id="cb9"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb9-1" title="1"><span class="at">constructor</span>()<span class="op">{</span></a>
+<a class="sourceLine" id="cb9-2" title="2">  <span class="kw">super</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb9-3" title="3">  <span class="kw">this</span>.<span class="at">state</span> <span class="op">=</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb9-4" title="4">    <span class="dt">value</span><span class="op">:</span> <span class="dv">0</span></a>
+<a class="sourceLine" id="cb9-5" title="5">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb9-6" title="6"><span class="op">}</span></a></code></pre></div>
+<ol start="2" type="1">
+<li>Now we will create two buttons which will perform the functionality.</li>
+</ol>
+<div class="sourceCode" id="cb10"><pre class="sourceCode html"><code class="sourceCode html"><a class="sourceLine" id="cb10-1" title="1"><span class="kw">&lt;button&gt;</span>Increment<span class="kw">&lt;/button&gt;</span> <span class="kw">&lt;button&gt;</span>Decrement<span class="kw">&lt;/button&gt;</span></a></code></pre></div>
+<ol start="3" type="1">
+<li>Create a simple tag to display the number i.e. the value defined in state.</li>
+</ol>
+<div class="sourceCode" id="cb11"><pre class="sourceCode html"><code class="sourceCode html"><a class="sourceLine" id="cb11-1" title="1"><span class="kw">&lt;p&gt;</span>{this.state.value}<span class="kw">&lt;/p&gt;</span></a></code></pre></div>
+<ol start="4" type="1">
+<li><p>That is all which will be displayed on the page. Now we need to implement the functionality when the buttons are clicked.</p></li>
+<li><p>So, let us create a function which will run when increment button is clicked. To increment the value in the state, we will take the previous value and add 1 to it by using <em>setState</em> function.</p></li>
+</ol>
+<div class="sourceCode" id="cb12"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb12-1" title="1">addValue <span class="op">=</span> () <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb12-2" title="2">  <span class="kw">this</span>.<span class="at">setState</span>(<span class="op">{</span></a>
+<a class="sourceLine" id="cb12-3" title="3">    <span class="dt">value</span><span class="op">:</span> <span class="kw">this</span>.<span class="va">state</span>.<span class="at">value</span> <span class="op">+</span> <span class="dv">1</span></a>
+<a class="sourceLine" id="cb12-4" title="4">  <span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb12-5" title="5"><span class="op">};</span></a></code></pre></div>
+<p><strong>Note:- setState is a predefined function in React which is used to update the state. The setState function has two function definitions i.e. it can either take an object as a parameter or a function as a parameter.</strong></p>
+<ul>
+<li>In the above instance of setState, an object has been passed as a parameter.</li>
+<li>In case where previous state of React is used to update the new state(just like the above instance), the correct way is to pass a function as a parameter which itself has previous state parameter so that, it can be used to update state.</li>
+</ul>
+<div class="sourceCode" id="cb13"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb13-1" title="1">addValue <span class="op">=</span> () <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb13-2" title="2">  <span class="kw">this</span>.<span class="at">setState</span>((prevState) <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb13-3" title="3">    <span class="cf">return</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb13-4" title="4">      <span class="dt">value</span><span class="op">:</span> <span class="va">prevState</span>.<span class="at">value</span> <span class="op">+</span> <span class="dv">1</span></a>
+<a class="sourceLine" id="cb13-5" title="5">    <span class="op">};</span></a>
+<a class="sourceLine" id="cb13-6" title="6">  <span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb13-7" title="7"><span class="op">};</span></a></code></pre></div>
+<p>For now, let us use the object instance only.</p>
+<ol start="6" type="1">
+<li>Similarly we will create a function which will decrement the value by 1.</li>
+</ol>
+<div class="sourceCode" id="cb14"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb14-1" title="1">subtractValue <span class="op">=</span> () <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb14-2" title="2">  <span class="kw">this</span>.<span class="at">setState</span>(<span class="op">{</span></a>
+<a class="sourceLine" id="cb14-3" title="3">    <span class="dt">value</span><span class="op">:</span> <span class="kw">this</span>.<span class="va">state</span>.<span class="at">value</span> <span class="op">-</span> <span class="dv">1</span></a>
+<a class="sourceLine" id="cb14-4" title="4">  <span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb14-5" title="5"><span class="op">};</span></a></code></pre></div>
+<ol start="7" type="1">
+<li>The functions have been created. Now, we just need to associate the functions we have created to the buttons i.e. set the <em>onClick</em> attribute to the button which we have created.</li>
+</ol>
+<div class="sourceCode" id="cb15"><pre class="sourceCode html"><code class="sourceCode html"><a class="sourceLine" id="cb15-1" title="1"><span class="kw">&lt;button</span><span class="ot"> onClick=</span><span class="st">&quot;{this.addValue}&quot;</span><span class="kw">&gt;</span>Increment<span class="kw">&lt;/button&gt;</span></a>
+<a class="sourceLine" id="cb15-2" title="2"><span class="kw">&lt;button</span><span class="ot"> onClick=</span><span class="st">&quot;{this.subtractValue}&quot;</span><span class="kw">&gt;</span>Decrement<span class="kw">&lt;/button&gt;</span></a></code></pre></div>
+<ol start="8" type="1">
+<li>Let us extend this example a bit more by adding lower and upper limit to the value. If the value is <em>0</em> , then we cannot reduce the value and when the value becomes <em>10</em>, we cannot increment the value.<br />
+Thiscanbedonebyhidingthebuttonsoncertainboundaryvalue.</li>
+</ol>
+<ul>
+<li>If the value is 0 then decrement button should not be displayed.</li>
+<li>Similarly we have to hide the increment button when value becomes 10.<br />
+<strong>Note:- In React, adding condition in JSX can be done using two ways i.e. either using ternary operator( when there is a true part and a false part, <code>?</code> ) or by using double ampersand(for single value true, <code>&amp;&amp;</code> ).</strong><br />
+Soweaddtheconditionstobuttonslike:-</li>
+</ul>
+<div class="sourceCode" id="cb16"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb16-1" title="1"><span class="op">{</span></a>
+<a class="sourceLine" id="cb16-2" title="2">  <span class="kw">this</span>.<span class="va">state</span>.<span class="at">value</span> <span class="op">&lt;</span> <span class="dv">10</span> <span class="op">&amp;&amp;</span> <span class="op">&lt;</span>button onClick<span class="op">={</span><span class="kw">this</span>.<span class="at">addValue</span><span class="op">}&gt;</span>Increment&lt;/button<span class="op">&gt;;</span></a>
+<a class="sourceLine" id="cb16-3" title="3"><span class="op">}</span></a>
+<a class="sourceLine" id="cb16-4" title="4"><span class="op">{</span></a>
+<a class="sourceLine" id="cb16-5" title="5">  <span class="kw">this</span>.<span class="va">state</span>.<span class="at">value</span> <span class="op">&gt;</span> <span class="dv">0</span> <span class="op">&amp;&amp;</span> (</a>
+<a class="sourceLine" id="cb16-6" title="6">    <span class="op">&lt;</span>button onClick<span class="op">={</span><span class="kw">this</span>.<span class="at">subtractValue</span><span class="op">}&gt;</span>Decrement&lt;/button<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb16-7" title="7">  )<span class="op">;</span></a>
+<a class="sourceLine" id="cb16-8" title="8"><span class="op">}</span></a></code></pre></div>
+<p>That’s all. We have completed our first application in React using React state. To see the complete code <a href="https://codepen.io/ashish24_nagpal/pen/jObzXzM">Codepen</a>.</p>
+<p><strong>Note :- Component will re-render itself only when its state is changed by the component itself and also when the props are changed by parent component. If a component changes its own <em>props</em> , then the component will not be re-rendered. Let us understand this with an example.</strong><br />
+Say there is a parent component called <code>App</code> and a <code>Message</code> child component which displays a certain message. <code>App</code> component has a property in state called <code>message</code> with initial value as <code>message</code>. This state property is passed as prop to <code>Message</code> component. <code>Message</code> component has its own state and a property <code>value</code> which is defined in it. There are 3 buttons :-</p>
+<ol type="1">
+<li>First button will be defined in <code>App</code> component which will change its state (<code>message</code>).</li>
+<li>Second button will be defined in <code>Message</code> component and it will change the state of <code>Message</code> component(<code>value</code>).</li>
+<li>Third button will be defined in <code>Message</code> component which will change its own props(<code>message</code> - passed by <code>App</code> component).</li>
+</ol>
+<ul>
+<li>Message Component</li>
+</ul>
+<div class="sourceCode" id="cb17"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb17-1" title="1"><span class="kw">class</span> Message <span class="kw">extends</span> <span class="va">React</span>.<span class="at">Component</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb17-2" title="2">  <span class="at">constructor</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb17-3" title="3">    <span class="kw">super</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb17-4" title="4">    <span class="kw">this</span>.<span class="at">state</span> <span class="op">=</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb17-5" title="5">      <span class="dt">value</span><span class="op">:</span> <span class="st">&#39;Hello&#39;</span></a>
+<a class="sourceLine" id="cb17-6" title="6">    <span class="op">};</span></a>
+<a class="sourceLine" id="cb17-7" title="7">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb17-8" title="8">  <span class="co">// Function which will change the state of Message Component</span></a>
+<a class="sourceLine" id="cb17-9" title="9">  changeState <span class="op">=</span> () <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb17-10" title="10">    <span class="kw">this</span>.<span class="at">setState</span>(<span class="op">{</span></a>
+<a class="sourceLine" id="cb17-11" title="11">      <span class="dt">value</span><span class="op">:</span> <span class="st">&#39;World&#39;</span></a>
+<a class="sourceLine" id="cb17-12" title="12">    <span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb17-13" title="13">  <span class="op">};</span></a>
+<a class="sourceLine" id="cb17-14" title="14">  <span class="co">// Function which will change the message prop</span></a>
+<a class="sourceLine" id="cb17-15" title="15">  changeProp <span class="op">=</span> () <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb17-16" title="16">    <span class="kw">this</span>.<span class="va">props</span>.<span class="at">message</span> <span class="op">=</span> <span class="st">&#39;Change Prop message&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb17-17" title="17">  <span class="op">};</span></a>
+<a class="sourceLine" id="cb17-18" title="18">  <span class="at">render</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb17-19" title="19">    <span class="cf">return</span> (</a>
+<a class="sourceLine" id="cb17-20" title="20">      <span class="op">&lt;</span>div<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb17-21" title="21">        <span class="op">&lt;</span>button onClick<span class="op">={</span><span class="kw">this</span>.<span class="at">changeState</span><span class="op">}&gt;</span> Change Message Comp state &lt;/button<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb17-22" title="22">        <span class="op">&lt;</span>button onClick<span class="op">={</span><span class="kw">this</span>.<span class="at">changeProp</span><span class="op">}&gt;</span> Change prop by Message Comp &lt;/button<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb17-23" title="23">        <span class="op">&lt;</span>p<span class="op">&gt;</span>Prop display <span class="op">{</span><span class="kw">this</span>.<span class="va">props</span>.<span class="at">message</span><span class="op">}</span>&lt;/p<span class="op">&gt;{</span><span class="st">&#39; &#39;</span><span class="op">}</span></a>
+<a class="sourceLine" id="cb17-24" title="24">        <span class="op">&lt;</span>p<span class="op">&gt;</span> Value display <span class="op">{</span><span class="kw">this</span>.<span class="va">state</span>.<span class="at">value</span><span class="op">}</span>&lt;/p<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb17-25" title="25">      &lt;/div<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb17-26" title="26">    )<span class="op">;</span></a>
+<a class="sourceLine" id="cb17-27" title="27">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb17-28" title="28"><span class="op">}</span></a></code></pre></div>
+<ul>
+<li>App Component</li>
+</ul>
+<div class="sourceCode" id="cb18"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb18-1" title="1"><span class="kw">class</span> App <span class="kw">extends</span> <span class="va">React</span>.<span class="at">Component</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb18-2" title="2">  <span class="at">constructor</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb18-3" title="3">    <span class="co">//Constructor</span></a>
+<a class="sourceLine" id="cb18-4" title="4">    <span class="kw">super</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb18-5" title="5">    <span class="kw">this</span>.<span class="at">state</span> <span class="op">=</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb18-6" title="6">      <span class="dt">message</span><span class="op">:</span> <span class="st">&#39;message&#39;</span> <span class="co">// message property defined in state</span></a>
+<a class="sourceLine" id="cb18-7" title="7">    <span class="op">};</span></a>
+<a class="sourceLine" id="cb18-8" title="8">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb18-9" title="9">  <span class="co">// This function will change the state of App Component</span></a>
+<a class="sourceLine" id="cb18-10" title="10">  changeState <span class="op">=</span> () <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb18-11" title="11">    <span class="kw">this</span>.<span class="at">setState</span>(<span class="op">{</span></a>
+<a class="sourceLine" id="cb18-12" title="12">      <span class="dt">message</span><span class="op">:</span> <span class="st">&#39;New Message&#39;</span></a>
+<a class="sourceLine" id="cb18-13" title="13">    <span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb18-14" title="14">  <span class="op">};</span></a>
+<a class="sourceLine" id="cb18-15" title="15">  <span class="at">render</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb18-16" title="16">    <span class="cf">return</span> (</a>
+<a class="sourceLine" id="cb18-17" title="17">      <span class="op">&lt;</span>div<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb18-18" title="18">        <span class="op">&lt;</span>button type<span class="op">=</span><span class="st">&quot;button&quot;</span> onClick<span class="op">={</span><span class="kw">this</span>.<span class="at">changeState</span><span class="op">}&gt;</span></a>
+<a class="sourceLine" id="cb18-19" title="19">          <span class="op">{</span><span class="st">&#39; &#39;</span><span class="op">}</span></a>
+<a class="sourceLine" id="cb18-20" title="20">          Change App Comp State</a>
+<a class="sourceLine" id="cb18-21" title="21">        &lt;/button<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb18-22" title="22">        <span class="op">&lt;</span>Message message<span class="op">={</span><span class="kw">this</span>.<span class="va">state</span>.<span class="at">message</span><span class="op">}</span> /&gt;</a>
+<a class="sourceLine" id="cb18-23" title="23">        <span class="op">{</span><span class="co">/* Message Component - prop passed as message */</span><span class="op">}</span></a>
+<a class="sourceLine" id="cb18-24" title="24">      &lt;/div<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb18-25" title="25">    )<span class="op">;</span></a>
+<a class="sourceLine" id="cb18-26" title="26">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb18-27" title="27"><span class="op">}</span></a></code></pre></div>
+<p>Now let us click this button in sequence defined -</p>
+<ol type="1">
+<li>Click on <code>Change App Comp State</code> button. We see that the value of <code>message</code> has been changed to <code>new message</code> as the state of <code>App</code> component changes. Here, the component is re-rendered and the value is passed as prop to <code>Message</code> component and the change is reflected.</li>
+<li>Now click on <code>Change Message Comp state</code> button. We see that the <code>value</code> is now <code>world</code>. Again the component changes its state and so it is re-rendered.</li>
+<li>Now click on <code>Change prop by Message Comp</code> button. We see that no change happens to the UI.</li>
+<li>Now again click on <code>Change Message Comp state</code> button. We see that the value of <code>message</code> prop has been changed to <code>Change Prop message</code>.</li>
+</ol>
+<p>How did this happen ?<br />
+Well, when we clicked on <code>Change prop by Message Comp</code> button the value of prop got changed. But since, changing its own prop component does not re-render itself, the changes were not displayed. Although the value of prop was changed to <em>Change Prop message</em>, it was not reflected. When we clicked on <code>Change Message Comp state</code> button, the state got updated and the component was re-rendered, therefore the prop changes were also reflected on the UI.</p>
+<p>One more thing to see here is that the prop <code>message</code> sent by <code>App</code> component had the value <em>message</em> first and then, it got changed to <em>new message</em>. But now <code>message</code> prop has value <em>Change Prop message</em>. This shows inconsistency. Therefore components follow the rule of pure functions which state that the props (parameters) received by component should not be updated.</p>
+<p>To see the complete code <a href="https://codepen.io/ashish24_nagpal/pen/oNjyeeo?editors=1111">Codepen</a></p>
+<h3 id="independent-practice">Independent Practice</h3>
+<p>For independent practice, let us create a simple game. Say you are a magician having a magic box and 3 random buttons. Out of 3, only 1 button is correct which reveals the text inside the magic box. Children will come to you and choose a button. If the button is correct, any random text which is present inside the box must be displayed and status message should be displayed as <em>you win</em>. If the button chosen is incorrect, then only one message should be displayed as <em>you lose</em>.<br />
+UI should contain -</p>
+<ul>
+<li>A div which is a magic box.</li>
+<li>3 buttons out of which only 1 is correct.</li>
+<li>A hidden text which will only be displayed when correct button is clicked.</li>
+<li>A message tag which will display the status of the game whether the person has <em>won</em> or <em>lost</em> the game.</li>
+<li>A reset button which will reset the state of the game.<br />
+**Hint:-1.Onlythosetagswhosestateischangingwillbekeptinstate.
+<ol start="2" type="1">
+<li>Use of conditions in React.**</li>
+</ol></li>
+</ul>
+<h3 id="supplemental-materials">Supplemental Materials</h3>
+<ul>
+<li><a href="https://css-tricks.com/understanding-react-setstate/">How setState works</a> - In depth knowledge of reconcilation process of React.</li>
+<li><a href="https://medium.com/@baphemot/understanding-reactjs-setstate-a4640451865b">Update state</a> - State can be updated in two ways, either by passing an object or by passing function as a parameter.</li>
+<li><a href="https://reactjs.org/docs/hooks-state.html">State in functional component</a> - So far, we have seen how to use state in class components. State can be defined in functional components as well by using additional package called Hooks.</li>
+</ul>
