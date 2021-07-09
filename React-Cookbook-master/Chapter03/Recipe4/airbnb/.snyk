@@ -5,4 +5,5 @@ ignore: {}
 patch:
   SNYK-JS-LODASH-567746:
     - react-scripts > optimize-css-assets-webpack-plugin > last-call-webpack-plugin > lodash:
-        patched: '2021-06-19T10:59:48.389Z'
+        patched: '2021-06-19T10:59:20.686Z'
+
