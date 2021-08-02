@@ -4,6 +4,6 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "devDependencies": {
-    "lerna": "^2.2.0"
+    "lerna": "2.2.0"
   }
 }
