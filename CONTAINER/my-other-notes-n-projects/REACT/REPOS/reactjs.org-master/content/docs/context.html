@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Context</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Context</h1>
+</header>
+<p>Context provides a way to pass data through the component tree without having to pass props down manually at every level.</p>
+<p>In a typical React application, data is passed top-down (parent to child) via props, but this can be cumbersome for certain types of props (e.g. locale preference, UI theme) that are required by many components within an application. Context provides a way to share values like these between components without having to explicitly pass a prop through every level of the tree.</p>
+<ul>
+<li><a href="#when-to-use-context">When to Use Context</a></li>
+<li><a href="#before-you-use-context">Before You Use Context</a></li>
+<li><a href="#api">API</a>
+<ul>
+<li><a href="#reactcreatecontext">React.createContext</a></li>
+<li><a href="#contextprovider">Context.Provider</a></li>
+<li><a href="#classcontexttype">Class.contextType</a></li>
+<li><a href="#contextconsumer">Context.Consumer</a></li>
+<li><a href="#contextdisplayname">Context.displayName</a></li>
+</ul></li>
+<li><a href="#examples">Examples</a>
+<ul>
+<li><a href="#dynamic-context">Dynamic Context</a></li>
+<li><a href="#updating-context-from-a-nested-component">Updating Context from a Nested Component</a></li>
+<li><a href="#consuming-multiple-contexts">Consuming Multiple Contexts</a></li>
+</ul></li>
+<li><a href="#caveats">Caveats</a></li>
+<li><a href="#legacy-api">Legacy API</a></li>
+</ul>
+<h2 id="when-to-use-context">When to Use Context</h2>
+<p>Context is designed to share data that can be considered “global” for a tree of React components, such as the current authenticated user, theme, or preferred language. For example, in the code below we manually thread through a “theme” prop in order to style the Button component:</p>
+<p><code>embed:context/motivation-problem.js</code></p>
+<p>Using context, we can avoid passing props through intermediate elements:</p>
+<p><code>embed:context/motivation-solution.js</code></p>
+<h2 id="before-you-use-context">Before You Use Context</h2>
+<p>Context is primarily used when some data needs to be accessible by <em>many</em> components at different nesting levels. Apply it sparingly because it makes component reuse more difficult.</p>
+<p><strong>If you only want to avoid passing some props through many levels, <a href="/docs/composition-vs-inheritance.html">component composition</a> is often a simpler solution than context.</strong></p>
+<p>For example, consider a <code>Page</code> component that passes a <code>user</code> and <code>avatarSize</code> prop several levels down so that deeply nested <code>Link</code> and <code>Avatar</code> components can read it:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb1-1" title="1"><span class="op">&lt;</span>Page user<span class="op">={</span>user<span class="op">}</span> avatarSize<span class="op">={</span>avatarSize<span class="op">}</span> /&gt;</a>
+<a class="sourceLine" id="cb1-2" title="2"><span class="co">// ... which renders ...</span></a>
+<a class="sourceLine" id="cb1-3" title="3"><span class="op">&lt;</span>PageLayout user<span class="op">={</span>user<span class="op">}</span> avatarSize<span class="op">={</span>avatarSize<span class="op">}</span> /&gt;</a>
+<a class="sourceLine" id="cb1-4" title="4"><span class="co">// ... which renders ...</span></a>
+<a class="sourceLine" id="cb1-5" title="5"><span class="op">&lt;</span>NavigationBar user<span class="op">={</span>user<span class="op">}</span> avatarSize<span class="op">={</span>avatarSize<span class="op">}</span> /&gt;</a>
+<a class="sourceLine" id="cb1-6" title="6"><span class="co">// ... which renders ...</span></a>
+<a class="sourceLine" id="cb1-7" title="7"><span class="op">&lt;</span>Link href<span class="op">={</span><span class="va">user</span>.<span class="at">permalink</span><span class="op">}&gt;</span></a>
+<a class="sourceLine" id="cb1-8" title="8">  <span class="op">&lt;</span>Avatar user<span class="op">={</span>user<span class="op">}</span> size<span class="op">={</span>avatarSize<span class="op">}</span> /&gt;</a>
+<a class="sourceLine" id="cb1-9" title="9">&lt;/Link<span class="op">&gt;</span></a></code></pre></div>
+<p>It might feel redundant to pass down the <code>user</code> and <code>avatarSize</code> props through many levels if in the end only the <code>Avatar</code> component really needs it. It’s also annoying that whenever the <code>Avatar</code> component needs more props from the top, you have to add them at all the intermediate levels too.</p>
+<p>One way to solve this issue <strong>without context</strong> is to <a href="/docs/composition-vs-inheritance.html#containment">pass down the <code>Avatar</code> component itself</a> so that the intermediate components don’t need to know about the <code>user</code> or <code>avatarSize</code> props:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb2-1" title="1"><span class="kw">function</span> <span class="at">Page</span>(props) <span class="op">{</span></a>
+<a class="sourceLine" id="cb2-2" title="2">  <span class="kw">const</span> user <span class="op">=</span> <span class="va">props</span>.<span class="at">user</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb2-3" title="3">  <span class="kw">const</span> userLink <span class="op">=</span> (</a>
+<a class="sourceLine" id="cb2-4" title="4">    <span class="op">&lt;</span>Link href<span class="op">={</span><span class="va">user</span>.<span class="at">permalink</span><span class="op">}&gt;</span></a>
+<a class="sourceLine" id="cb2-5" title="5">      <span class="op">&lt;</span>Avatar user<span class="op">={</span>user<span class="op">}</span> size<span class="op">={</span><span class="va">props</span>.<span class="at">avatarSize</span><span class="op">}</span> /&gt;</a>
+<a class="sourceLine" id="cb2-6" title="6">    &lt;/Link<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb2-7" title="7">  )<span class="op">;</span></a>
+<a class="sourceLine" id="cb2-8" title="8">  <span class="cf">return</span> <span class="op">&lt;</span>PageLayout userLink<span class="op">={</span>userLink<span class="op">}</span> /&gt;<span class="op">;</span></a>
+<a class="sourceLine" id="cb2-9" title="9"><span class="op">}</span></a>
+<a class="sourceLine" id="cb2-10" title="10"></a>
+<a class="sourceLine" id="cb2-11" title="11"><span class="co">// Now, we have:</span></a>
+<a class="sourceLine" id="cb2-12" title="12"><span class="op">&lt;</span>Page user<span class="op">={</span>user<span class="op">}</span> avatarSize<span class="op">={</span>avatarSize<span class="op">}</span> /&gt;</a>
+<a class="sourceLine" id="cb2-13" title="13"><span class="co">// ... which renders ...</span></a>
+<a class="sourceLine" id="cb2-14" title="14"><span class="op">&lt;</span>PageLayout userLink<span class="op">={</span>...<span class="op">}</span> /&gt;</a>
+<a class="sourceLine" id="cb2-15" title="15"><span class="co">// ... which renders ...</span></a>
+<a class="sourceLine" id="cb2-16" title="16"><span class="op">&lt;</span>NavigationBar userLink<span class="op">={</span>...<span class="op">}</span> /&gt;</a>
+<a class="sourceLine" id="cb2-17" title="17"><span class="co">// ... which renders ...</span></a>
+<a class="sourceLine" id="cb2-18" title="18"><span class="op">{</span><span class="va">props</span>.<span class="at">userLink</span><span class="op">}</span></a></code></pre></div>
+<p>With this change, only the top-most Page component needs to know about the <code>Link</code> and <code>Avatar</code> components’ use of <code>user</code> and <code>avatarSize</code>.</p>
+<p>This <em>inversion of control</em> can make your code cleaner in many cases by reducing the amount of props you need to pass through your application and giving more control to the root components. However, this isn’t the right choice in every case: moving more complexity higher in the tree makes those higher-level components more complicated and forces the lower-level components to be more flexible than you may want.</p>
+<p>You’re not limited to a single child for a component. You may pass multiple children, or even have multiple separate “slots” for children, <a href="/docs/composition-vs-inheritance.html#containment">as documented here</a>:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb3-1" title="1"><span class="kw">function</span> <span class="at">Page</span>(props) <span class="op">{</span></a>
+<a class="sourceLine" id="cb3-2" title="2">  <span class="kw">const</span> user <span class="op">=</span> <span class="va">props</span>.<span class="at">user</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb3-3" title="3">  <span class="kw">const</span> content <span class="op">=</span> <span class="op">&lt;</span>Feed user<span class="op">={</span>user<span class="op">}</span> /&gt;<span class="op">;</span></a>
+<a class="sourceLine" id="cb3-4" title="4">  <span class="kw">const</span> topBar <span class="op">=</span> (</a>
+<a class="sourceLine" id="cb3-5" title="5">    <span class="op">&lt;</span>NavigationBar<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb3-6" title="6">      <span class="op">&lt;</span>Link href<span class="op">={</span><span class="va">user</span>.<span class="at">permalink</span><span class="op">}&gt;</span></a>
+<a class="sourceLine" id="cb3-7" title="7">        <span class="op">&lt;</span>Avatar user<span class="op">={</span>user<span class="op">}</span> size<span class="op">={</span><span class="va">props</span>.<span class="at">avatarSize</span><span class="op">}</span> /&gt;</a>
+<a class="sourceLine" id="cb3-8" title="8">      &lt;/Link<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb3-9" title="9">    &lt;/NavigationBar<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb3-10" title="10">  )<span class="op">;</span></a>
+<a class="sourceLine" id="cb3-11" title="11">  <span class="cf">return</span> (</a>
+<a class="sourceLine" id="cb3-12" title="12">    <span class="op">&lt;</span>PageLayout</a>
+<a class="sourceLine" id="cb3-13" title="13">      topBar<span class="op">={</span>topBar<span class="op">}</span></a>
+<a class="sourceLine" id="cb3-14" title="14">      content<span class="op">={</span>content<span class="op">}</span></a>
+<a class="sourceLine" id="cb3-15" title="15">    /&gt;</a>
+<a class="sourceLine" id="cb3-16" title="16">  )<span class="op">;</span></a>
+<a class="sourceLine" id="cb3-17" title="17"><span class="op">}</span></a></code></pre></div>
+<p>This pattern is sufficient for many cases when you need to decouple a child from its immediate parents. You can take it even further with <a href="/docs/render-props.html">render props</a> if the child needs to communicate with the parent before rendering.</p>
+<p>However, sometimes the same data needs to be accessible by many components in the tree, and at different nesting levels. Context lets you “broadcast” such data, and changes to it, to all components below. Common examples where using context might be simpler than the alternatives include managing the current locale, theme, or a data cache.</p>
+<h2 id="api">API</h2>
+<h3 id="reactcreatecontext"><code>React.createContext</code></h3>
+<div class="sourceCode" id="cb4"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb4-1" title="1"><span class="kw">const</span> MyContext <span class="op">=</span> <span class="va">React</span>.<span class="at">createContext</span>(defaultValue)<span class="op">;</span></a></code></pre></div>
+<p>Creates a Context object. When React renders a component that subscribes to this Context object it will read the current context value from the closest matching <code>Provider</code> above it in the tree.</p>
+<p>The <code>defaultValue</code> argument is <strong>only</strong> used when a component does not have a matching Provider above it in the tree. This can be helpful for testing components in isolation without wrapping them. Note: passing <code>undefined</code> as a Provider value does not cause consuming components to use <code>defaultValue</code>.</p>
+<h3 id="contextprovider"><code>Context.Provider</code></h3>
+<div class="sourceCode" id="cb5"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb5-1" title="1"><span class="op">&lt;</span><span class="va">MyContext</span>.<span class="at">Provider</span> value<span class="op">={</span><span class="co">/* some value */</span><span class="op">}&gt;</span></a></code></pre></div>
+<p>Every Context object comes with a Provider React component that allows consuming components to subscribe to context changes.</p>
+<p>The Provider component accepts a <code>value</code> prop to be passed to consuming components that are descendants of this Provider. One Provider can be connected to many consumers. Providers can be nested to override values deeper within the tree.</p>
+<p>All consumers that are descendants of a Provider will re-render whenever the Provider’s <code>value</code> prop changes. The propagation from Provider to its descendant consumers (including <a href="#classcontexttype"><code>.contextType</code></a> and <a href="/docs/hooks-reference.html#usecontext"><code>useContext</code></a>) is not subject to the <code>shouldComponentUpdate</code> method, so the consumer is updated even when an ancestor component skips an update.</p>
+<p>Changes are determined by comparing the new and old values using the same algorithm as <a href="//developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is#Description"><code>Object.is</code></a>.</p>
+<blockquote>
+<p>Note</p>
+<p>The way changes are determined can cause some issues when passing objects as <code>value</code>: see <a href="#caveats">Caveats</a>.</p>
+</blockquote>
+<h3 id="classcontexttype"><code>Class.contextType</code></h3>
+<div class="sourceCode" id="cb6"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb6-1" title="1"><span class="kw">class</span> MyClass <span class="kw">extends</span> <span class="va">React</span>.<span class="at">Component</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb6-2" title="2">  <span class="at">componentDidMount</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb6-3" title="3">    <span class="kw">let</span> value <span class="op">=</span> <span class="kw">this</span>.<span class="at">context</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb6-4" title="4">    <span class="co">/* perform a side-effect at mount using the value of MyContext */</span></a>
+<a class="sourceLine" id="cb6-5" title="5">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb6-6" title="6">  <span class="at">componentDidUpdate</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb6-7" title="7">    <span class="kw">let</span> value <span class="op">=</span> <span class="kw">this</span>.<span class="at">context</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb6-8" title="8">    <span class="co">/* ... */</span></a>
+<a class="sourceLine" id="cb6-9" title="9">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb6-10" title="10">  <span class="at">componentWillUnmount</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb6-11" title="11">    <span class="kw">let</span> value <span class="op">=</span> <span class="kw">this</span>.<span class="at">context</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb6-12" title="12">    <span class="co">/* ... */</span></a>
+<a class="sourceLine" id="cb6-13" title="13">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb6-14" title="14">  <span class="at">render</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb6-15" title="15">    <span class="kw">let</span> value <span class="op">=</span> <span class="kw">this</span>.<span class="at">context</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb6-16" title="16">    <span class="co">/* render something based on the value of MyContext */</span></a>
+<a class="sourceLine" id="cb6-17" title="17">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb6-18" title="18"><span class="op">}</span></a>
+<a class="sourceLine" id="cb6-19" title="19"><span class="va">MyClass</span>.<span class="at">contextType</span> <span class="op">=</span> MyContext<span class="op">;</span></a></code></pre></div>
+<p>The <code>contextType</code> property on a class can be assigned a Context object created by <a href="#reactcreatecontext"><code>React.createContext()</code></a>. This lets you consume the nearest current value of that Context type using <code>this.context</code>. You can reference this in any of the lifecycle methods including the render function.</p>
+<blockquote>
+<p>Note:</p>
+<p>You can only subscribe to a single context using this API. If you need to read more than one see <a href="#consuming-multiple-contexts">Consuming Multiple Contexts</a>.</p>
+<p>If you are using the experimental <a href="https://babeljs.io/docs/plugins/transform-class-properties/">public class fields syntax</a>, you can use a <strong>static</strong> class field to initialize your <code>contextType</code>.</p>
+</blockquote>
+<div class="sourceCode" id="cb7"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb7-1" title="1"><span class="kw">class</span> MyClass <span class="kw">extends</span> <span class="va">React</span>.<span class="at">Component</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb7-2" title="2">  <span class="kw">static</span> contextType <span class="op">=</span> MyContext<span class="op">;</span></a>
+<a class="sourceLine" id="cb7-3" title="3">  <span class="at">render</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb7-4" title="4">    <span class="kw">let</span> value <span class="op">=</span> <span class="kw">this</span>.<span class="at">context</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb7-5" title="5">    <span class="co">/* render something based on the value */</span></a>
+<a class="sourceLine" id="cb7-6" title="6">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb7-7" title="7"><span class="op">}</span></a></code></pre></div>
+<h3 id="contextconsumer"><code>Context.Consumer</code></h3>
+<div class="sourceCode" id="cb8"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb8-1" title="1"><span class="op">&lt;</span><span class="va">MyContext</span>.<span class="at">Consumer</span><span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb8-2" title="2">  <span class="op">{</span>value <span class="kw">=&gt;</span> <span class="co">/* render something based on the context value */</span><span class="op">}</span></a>
+<a class="sourceLine" id="cb8-3" title="3">&lt;/<span class="va">MyContext</span>.<span class="at">Consumer</span><span class="op">&gt;</span></a></code></pre></div>
+<p>A React component that subscribes to context changes. This lets you subscribe to a context within a <a href="/docs/components-and-props.html#function-and-class-components">function component</a>.</p>
+<p>Requires a <a href="/docs/render-props.html#using-props-other-than-render">function as a child</a>. The function receives the current context value and returns a React node. The <code>value</code> argument passed to the function will be equal to the <code>value</code> prop of the closest Provider for this context above in the tree. If there is no Provider for this context above, the <code>value</code> argument will be equal to the <code>defaultValue</code> that was passed to <code>createContext()</code>.</p>
+<blockquote>
+<p>Note</p>
+<p>For more information about the ‘function as a child’ pattern, see <a href="/docs/render-props.html">render props</a>.</p>
+</blockquote>
+<h3 id="contextdisplayname"><code>Context.displayName</code></h3>
+<p>Context object accepts a <code>displayName</code> string property. React DevTools uses this string to determine what to display for the context.</p>
+<p>For example, the following component will appear as MyDisplayName in the DevTools:</p>
+<pre class="js{2}"><code>const MyContext = React.createContext(/* some value */);
+MyContext.displayName = &#39;MyDisplayName&#39;;
+
+&lt;MyContext.Provider&gt; // &quot;MyDisplayName.Provider&quot; in DevTools
+&lt;MyContext.Consumer&gt; // &quot;MyDisplayName.Consumer&quot; in DevTools</code></pre>
+<h2 id="examples">Examples</h2>
+<h3 id="dynamic-context">Dynamic Context</h3>
+<p>A more complex example with dynamic values for the theme:</p>
+<p><strong>theme-context.js</strong> <code>embed:context/theme-detailed-theme-context.js</code></p>
+<p><strong>themed-button.js</strong> <code>embed:context/theme-detailed-themed-button.js</code></p>
+<p><strong>app.js</strong> <code>embed:context/theme-detailed-app.js</code></p>
+<h3 id="updating-context-from-a-nested-component">Updating Context from a Nested Component</h3>
+<p>It is often necessary to update the context from a component that is nested somewhere deeply in the component tree. In this case you can pass a function down through the context to allow consumers to update the context:</p>
+<p><strong>theme-context.js</strong> <code>embed:context/updating-nested-context-context.js</code></p>
+<p><strong>theme-toggler-button.js</strong> <code>embed:context/updating-nested-context-theme-toggler-button.js</code></p>
+<p><strong>app.js</strong> <code>embed:context/updating-nested-context-app.js</code></p>
+<h3 id="consuming-multiple-contexts">Consuming Multiple Contexts</h3>
+<p>To keep context re-rendering fast, React needs to make each context consumer a separate node in the tree.</p>
+<p><code>embed:context/multiple-contexts.js</code></p>
+<p>If two or more context values are often used together, you might want to consider creating your own render prop component that provides both.</p>
+<h2 id="caveats">Caveats</h2>
+<p>Because context uses reference identity to determine when to re-render, there are some gotchas that could trigger unintentional renders in consumers when a provider’s parent re-renders. For example, the code below will re-render all consumers every time the Provider re-renders because a new object is always created for <code>value</code>:</p>
+<p><code>embed:context/reference-caveats-problem.js</code></p>
+<p>To get around this, lift the value into the parent’s state:</p>
+<p><code>embed:context/reference-caveats-solution.js</code></p>
+<h2 id="legacy-api">Legacy API</h2>
+<blockquote>
+<p>Note</p>
+<p>React previously shipped with an experimental context API. The old API will be supported in all 16.x releases, but applications using it should migrate to the new version. The legacy API will be removed in a future major React version. Read the <a href="/docs/legacy-context.html">legacy context docs here</a>.</p>
+</blockquote>
+</body>
+</html>

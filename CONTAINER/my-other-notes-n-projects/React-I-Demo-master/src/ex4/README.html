@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>README</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<h1 id="class-component-updating-state">Class Component Updating State</h1>
+<p>Great, so we can render some state that our component persists for us. However, we said an important use case of component state is to handle <em>dynamic</em> data. A single static number isn’t very dynamic at all. So now let’s walk through how to update component state.</p>
+<pre><code>import React, { Component } from &#39;react&#39;;
+
+class ClassComponentUpdatingState extends Component {
+  constructor() {
+    super();
+    this.state = {
+      aNumber: 8
+    };
+  }
+
+  increment = () =&gt; {
+    this.setState({ aNumber: ++this.state.aNumber });
+  };
+
+  decrement = () =&gt; {
+    this.setState({ aNumber: --this.state.aNumber });
+  };
+
+  render() {
+    return (
+      &lt;div&gt;
+        &lt;div&gt;{`Our number: ${this.state.aNumber}`}&lt;/div&gt;
+        &lt;button onClick={this.increment}&gt;+&lt;/button&gt;
+        &lt;button onClick={this.decrement}&gt;-&lt;/button&gt;
+      &lt;/div&gt;
+    );
+  }
+}
+
+export default ClassComponentUpdatingState;</code></pre>
+<p>Notice that we’ve added two methods to our class: <code>increment</code> and <code>decrement</code>. <code>increment</code> and <code>decrement</code> are methods that <em>we</em> are adding to our class component. Unlike the <code>render</code> method,<code>increment</code> and <code>decrement</code> were not already a part of our class component. This is why <code>increment</code> and <code>decrement</code> are written as arrow functions, so that they are automatically bound to our class component. This needs to happen so that we can call them later on. Again, there’s no crazy React black magic going on here, we simply added two methods to our class.</p>
+<p>The more interesting thing is what is going on within the bodies of these methods. Each calls this funky <code>setState</code>function. <code>setState</code> in fact <em>is</em> provided to us by React. It is the canonical way to update a component’s state. Actually, it’s the <em>only</em> way you should ever update a component’s state. It may seem more verbose than necessary, but there are good reasons for why you should be doing it this way. I’m not going to get into those reasons now. I’ll leave a <a href="https://reactjs.org/docs/react-component.html#setstate">link</a> to the official documentation on the <code>setState</code> function, although I’m pretty sure at this point it will probably just blow your mind and/or overwhelm you with jargon. So for now, take this as a case of “because I’m telling you so”.</p>
+<p>So the way to use <code>setState</code> to update a component’s state is to pass it an object with each of the state keys you wish to update, along with the updated value. In our <code>increment</code> method we said “I would like to update the <code>aNumber</code> property on my component state by adding one to it and then setting the new value as my new <code>aNumber</code>”. The same thing happens in our <code>decrement</code> method, only we’re subtracting instead of adding.</p>
+<p>Then the other new concept we’re running into here is how to actually call these methods we’ve added to our class. We added two HTML button tags within our <code>render</code> function, then in their respective <code>onClick</code> handlers, we specify the method that should be called whenever this button gets clicked. So whenever we click either of the buttons, our state gets updated appropriately and our component will re-render to show the correct value we’re expecting.</p>
+</body>
+</html>

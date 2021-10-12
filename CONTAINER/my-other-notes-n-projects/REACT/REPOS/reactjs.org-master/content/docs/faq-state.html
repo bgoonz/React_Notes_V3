@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Component State</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Component State</h1>
+</header>
+<h3 id="what-does-setstate-do">What does <code>setState</code> do?</h3>
+<p><code>setState()</code> schedules an update to a component’s <code>state</code> object. When state changes, the component responds by re-rendering.</p>
+<h3 id="what-is-the-difference-between-state-and-props">What is the difference between <code>state</code> and <code>props</code>?</h3>
+<p><a href="/docs/components-and-props.html"><code>props</code></a> (short for “properties”) and <a href="/docs/state-and-lifecycle.html"><code>state</code></a> are both plain JavaScript objects. While both hold information that influences the output of render, they are different in one important way: <code>props</code> get passed <em>to</em> the component (similar to function parameters) whereas <code>state</code> is managed <em>within</em> the component (similar to variables declared within a function).</p>
+<p>Here are some good resources for further reading on when to use <code>props</code> vs <code>state</code>: * <a href="https://github.com/uberVU/react-guide/blob/master/props-vs-state.md">Props vs State</a> * <a href="https://lucybain.com/blog/2016/react-state-vs-pros/">ReactJS: Props vs. State</a></p>
+<h3 id="why-is-setstate-giving-me-the-wrong-value">Why is <code>setState</code> giving me the wrong value?</h3>
+<p>In React, both <code>this.props</code> and <code>this.state</code> represent the <em>rendered</em> values, i.e. what’s currently on the screen.</p>
+<p>Calls to <code>setState</code> are asynchronous - don’t rely on <code>this.state</code> to reflect the new value immediately after calling <code>setState</code>. Pass an updater function instead of an object if you need to compute values based on the current state (see below for details).</p>
+<p>Example of code that will <em>not</em> behave as expected:</p>
+<pre class="jsx"><code>incrementCount() {
+  // Note: this will *not* work as intended.
+  this.setState({count: this.state.count + 1});
+}
+
+handleSomething() {
+  // Let&#39;s say `this.state.count` starts at 0.
+  this.incrementCount();
+  this.incrementCount();
+  this.incrementCount();
+  // When React re-renders the component, `this.state.count` will be 1, but you expected 3.
+
+  // This is because `incrementCount()` function above reads from `this.state.count`,
+  // but React doesn&#39;t update `this.state.count` until the component is re-rendered.
+  // So `incrementCount()` ends up reading `this.state.count` as 0 every time, and sets it to 1.
+
+  // The fix is described below!
+}</code></pre>
+<p>See below for how to fix this problem.</p>
+<h3 id="how-do-i-update-state-with-values-that-depend-on-the-current-state">How do I update state with values that depend on the current state?</h3>
+<p>Pass a function instead of an object to <code>setState</code> to ensure the call always uses the most updated version of state (see below).</p>
+<h3 id="what-is-the-difference-between-passing-an-object-or-a-function-in-setstate">What is the difference between passing an object or a function in <code>setState</code>?</h3>
+<p>Passing an update function allows you to access the current state value inside the updater. Since <code>setState</code> calls are batched, this lets you chain updates and ensure they build on top of each other instead of conflicting:</p>
+<pre class="jsx"><code>incrementCount() {
+  this.setState((state) =&gt; {
+    // Important: read `state` instead of `this.state` when updating.
+    return {count: state.count + 1}
+  });
+}
+
+handleSomething() {
+  // Let&#39;s say `this.state.count` starts at 0.
+  this.incrementCount();
+  this.incrementCount();
+  this.incrementCount();
+
+  // If you read `this.state.count` now, it would still be 0.
+  // But when React re-renders the component, it will be 3.
+}</code></pre>
+<p><a href="/docs/react-component.html#setstate">Learn more about setState</a></p>
+<h3 id="when-is-setstate-asynchronous">When is <code>setState</code> asynchronous?</h3>
+<p>Currently, <code>setState</code> is asynchronous inside event handlers.</p>
+<p>This ensures, for example, that if both <code>Parent</code> and <code>Child</code> call <code>setState</code> during a click event, <code>Child</code> isn’t re-rendered twice. Instead, React “flushes” the state updates at the end of the browser event. This results in significant performance improvements in larger apps.</p>
+<p>This is an implementation detail so avoid relying on it directly. In the future versions, React will batch updates by default in more cases.</p>
+<h3 id="why-doesnt-react-update-thisstate-synchronously">Why doesn’t React update <code>this.state</code> synchronously?</h3>
+<p>As explained in the previous section, React intentionally “waits” until all components call <code>setState()</code> in their event handlers before starting to re-render. This boosts performance by avoiding unnecessary re-renders.</p>
+<p>However, you might still be wondering why React doesn’t just update <code>this.state</code> immediately without re-rendering.</p>
+<p>There are two main reasons:</p>
+<ul>
+<li>This would break the consistency between <code>props</code> and <code>state</code>, causing issues that are very hard to debug.</li>
+<li>This would make some of the new features we’re working on impossible to implement.</li>
+</ul>
+<p>This <a href="https://github.com/facebook/react/issues/11527#issuecomment-360199710">GitHub comment</a> dives deep into the specific examples.</p>
+<h3 id="should-i-use-a-state-management-library-like-redux-or-mobx">Should I use a state management library like Redux or MobX?</h3>
+<p><a href="https://redux.js.org/faq/general#when-should-i-use-redux">Maybe.</a></p>
+<p>It’s a good idea to get to know React first, before adding in additional libraries. You can build quite complex applications using only React.</p>
+</body>
+</html>

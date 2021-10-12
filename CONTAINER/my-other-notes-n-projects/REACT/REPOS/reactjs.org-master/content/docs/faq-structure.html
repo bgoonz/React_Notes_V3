@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>File Structure</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">File Structure</h1>
+</header>
+<h3 id="is-there-a-recommended-way-to-structure-react-projects">Is there a recommended way to structure React projects?</h3>
+<p>React doesn’t have opinions on how you put files into folders. That said there are a few common approaches popular in the ecosystem you may want to consider.</p>
+<h4 id="grouping-by-features-or-routes">Grouping by features or routes</h4>
+<p>One common way to structure projects is to locate CSS, JS, and tests together inside folders grouped by feature or route.</p>
+<pre><code>common/
+  Avatar.js
+  Avatar.css
+  APIUtils.js
+  APIUtils.test.js
+feed/
+  index.js
+  Feed.js
+  Feed.css
+  FeedStory.js
+  FeedStory.test.js
+  FeedAPI.js
+profile/
+  index.js
+  Profile.js
+  ProfileHeader.js
+  ProfileHeader.css
+  ProfileAPI.js</code></pre>
+<p>The definition of a “feature” is not universal, and it is up to you to choose the granularity. If you can’t come up with a list of top-level folders, you can ask the users of your product what major parts it consists of, and use their mental model as a blueprint.</p>
+<h4 id="grouping-by-file-type">Grouping by file type</h4>
+<p>Another popular way to structure projects is to group similar files together, for example:</p>
+<pre><code>api/
+  APIUtils.js
+  APIUtils.test.js
+  ProfileAPI.js
+  UserAPI.js
+components/
+  Avatar.js
+  Avatar.css
+  Feed.js
+  Feed.css
+  FeedStory.js
+  FeedStory.test.js
+  Profile.js
+  ProfileHeader.js
+  ProfileHeader.css</code></pre>
+<p>Some people also prefer to go further, and separate components into different folders depending on their role in the application. For example, <a href="http://bradfrost.com/blog/post/atomic-web-design/">Atomic Design</a> is a design methodology built on this principle. Remember that it’s often more productive to treat such methodologies as helpful examples rather than strict rules to follow.</p>
+<h4 id="avoid-too-much-nesting">Avoid too much nesting</h4>
+<p>There are many pain points associated with deep directory nesting in JavaScript projects. It becomes harder to write relative imports between them, or to update those imports when the files are moved. Unless you have a very compelling reason to use a deep folder structure, consider limiting yourself to a maximum of three or four nested folders within a single project. Of course, this is only a recommendation, and it may not be relevant to your project.</p>
+<h4 id="dont-overthink-it">Don’t overthink it</h4>
+<p>If you’re just starting a project, <a href="https://en.wikipedia.org/wiki/Analysis_paralysis">don’t spend more than five minutes</a> on choosing a file structure. Pick any of the above approaches (or come up with your own) and start writing code! You’ll likely want to rethink it anyway after you’ve written some real code.</p>
+<p>If you feel completely stuck, start by keeping all files in a single folder. Eventually it will grow large enough that you will want to separate some files from the rest. By that time you’ll have enough knowledge to tell which files you edit together most often. In general, it is a good idea to keep files that often change together close to each other. This principle is called “colocation”.</p>
+<p>As projects grow larger, they often use a mix of both of the above approaches in practice. So choosing the “right” one in the beginning isn’t very important.</p>
+</body>
+</html>

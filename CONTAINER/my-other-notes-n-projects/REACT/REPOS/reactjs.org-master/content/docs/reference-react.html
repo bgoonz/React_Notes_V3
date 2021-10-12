@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>React Top-Level API</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">React Top-Level API</h1>
+</header>
+<p><code>React</code> is the entry point to the React library. If you load React from a <code>&lt;script&gt;</code> tag, these top-level APIs are available on the <code>React</code> global. If you use ES6 with npm, you can write <code>import React from 'react'</code>. If you use ES5 with npm, you can write <code>var React = require('react')</code>.</p>
+<h2 id="overview">Overview</h2>
+<h3 id="components">Components</h3>
+<p>React components let you split the UI into independent, reusable pieces, and think about each piece in isolation. React components can be defined by subclassing <code>React.Component</code> or <code>React.PureComponent</code>.</p>
+<ul>
+<li><a href="#reactcomponent"><code>React.Component</code></a></li>
+<li><a href="#reactpurecomponent"><code>React.PureComponent</code></a></li>
+</ul>
+<p>If you don’t use ES6 classes, you may use the <code>create-react-class</code> module instead. See <a href="/docs/react-without-es6.html">Using React without ES6</a> for more information.</p>
+<p>React components can also be defined as functions which can be wrapped:</p>
+<ul>
+<li><a href="#reactmemo"><code>React.memo</code></a></li>
+</ul>
+<h3 id="creating-react-elements">Creating React Elements</h3>
+<p>We recommend <a href="/docs/introducing-jsx.html">using JSX</a> to describe what your UI should look like. Each JSX element is just syntactic sugar for calling <a href="#createelement"><code>React.createElement()</code></a>. You will not typically invoke the following methods directly if you are using JSX.</p>
+<ul>
+<li><a href="#createelement"><code>createElement()</code></a></li>
+<li><a href="#createfactory"><code>createFactory()</code></a></li>
+</ul>
+<p>See <a href="/docs/react-without-jsx.html">Using React without JSX</a> for more information.</p>
+<h3 id="transforming-elements">Transforming Elements</h3>
+<p><code>React</code> provides several APIs for manipulating elements:</p>
+<ul>
+<li><a href="#cloneelement"><code>cloneElement()</code></a></li>
+<li><a href="#isvalidelement"><code>isValidElement()</code></a></li>
+<li><a href="#reactchildren"><code>React.Children</code></a></li>
+</ul>
+<h3 id="fragments">Fragments</h3>
+<p><code>React</code> also provides a component for rendering multiple elements without a wrapper.</p>
+<ul>
+<li><a href="#reactfragment"><code>React.Fragment</code></a></li>
+</ul>
+<h3 id="refs">Refs</h3>
+<ul>
+<li><a href="#reactcreateref"><code>React.createRef</code></a></li>
+<li><a href="#reactforwardref"><code>React.forwardRef</code></a></li>
+</ul>
+<h3 id="suspense">Suspense</h3>
+<p>Suspense lets components “wait” for something before rendering. Today, Suspense only supports one use case: <a href="/docs/code-splitting.html#reactlazy">loading components dynamically with <code>React.lazy</code></a>. In the future, it will support other use cases like data fetching.</p>
+<ul>
+<li><a href="#reactlazy"><code>React.lazy</code></a></li>
+<li><a href="#reactsuspense"><code>React.Suspense</code></a></li>
+</ul>
+<h3 id="hooks">Hooks</h3>
+<p><em>Hooks</em> are a new addition in React 16.8. They let you use state and other React features without writing a class. Hooks have a <a href="/docs/hooks-intro.html">dedicated docs section</a> and a separate API reference:</p>
+<ul>
+<li><a href="/docs/hooks-reference.html#basic-hooks">Basic Hooks</a>
+<ul>
+<li><a href="/docs/hooks-reference.html#usestate"><code>useState</code></a></li>
+<li><a href="/docs/hooks-reference.html#useeffect"><code>useEffect</code></a></li>
+<li><a href="/docs/hooks-reference.html#usecontext"><code>useContext</code></a></li>
+</ul></li>
+<li><a href="/docs/hooks-reference.html#additional-hooks">Additional Hooks</a>
+<ul>
+<li><a href="/docs/hooks-reference.html#usereducer"><code>useReducer</code></a></li>
+<li><a href="/docs/hooks-reference.html#usecallback"><code>useCallback</code></a></li>
+<li><a href="/docs/hooks-reference.html#usememo"><code>useMemo</code></a></li>
+<li><a href="/docs/hooks-reference.html#useref"><code>useRef</code></a></li>
+<li><a href="/docs/hooks-reference.html#useimperativehandle"><code>useImperativeHandle</code></a></li>
+<li><a href="/docs/hooks-reference.html#uselayouteffect"><code>useLayoutEffect</code></a></li>
+<li><a href="/docs/hooks-reference.html#usedebugvalue"><code>useDebugValue</code></a></li>
+</ul></li>
+</ul>
+<hr />
+<h2 id="reference">Reference</h2>
+<h3 id="reactcomponent"><code>React.Component</code></h3>
+<p><code>React.Component</code> is the base class for React components when they are defined using <a href="https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Classes">ES6 classes</a>:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">class</span> Greeting <span class="kw">extends</span> <span class="va">React</span>.<span class="at">Component</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb1-2" title="2">  <span class="at">render</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb1-3" title="3">    <span class="cf">return</span> <span class="op">&lt;</span>h1<span class="op">&gt;</span>Hello<span class="op">,</span> <span class="op">{</span><span class="kw">this</span>.<span class="va">props</span>.<span class="at">name</span><span class="op">}</span>&lt;/h1<span class="op">&gt;;</span></a>
+<a class="sourceLine" id="cb1-4" title="4">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb1-5" title="5"><span class="op">}</span></a></code></pre></div>
+<p>See the <a href="/docs/react-component.html">React.Component API Reference</a> for a list of methods and properties related to the base <code>React.Component</code> class.</p>
+<hr />
+<h3 id="reactpurecomponent"><code>React.PureComponent</code></h3>
+<p><code>React.PureComponent</code> is similar to <a href="#reactcomponent"><code>React.Component</code></a>. The difference between them is that <a href="#reactcomponent"><code>React.Component</code></a> doesn’t implement <a href="/docs/react-component.html#shouldcomponentupdate"><code>shouldComponentUpdate()</code></a>, but <code>React.PureComponent</code> implements it with a shallow prop and state comparison.</p>
+<p>If your React component’s <code>render()</code> function renders the same result given the same props and state, you can use <code>React.PureComponent</code> for a performance boost in some cases.</p>
+<blockquote>
+<p>Note</p>
+<p><code>React.PureComponent</code>’s <code>shouldComponentUpdate()</code> only shallowly compares the objects. If these contain complex data structures, it may produce false-negatives for deeper differences. Only extend <code>PureComponent</code> when you expect to have simple props and state, or use <a href="/docs/react-component.html#forceupdate"><code>forceUpdate()</code></a> when you know deep data structures have changed. Or, consider using <a href="https://facebook.github.io/immutable-js/">immutable objects</a> to facilitate fast comparisons of nested data.</p>
+<p>Furthermore, <code>React.PureComponent</code>’s <code>shouldComponentUpdate()</code> skips prop updates for the whole component subtree. Make sure all the children components are also “pure”.</p>
+</blockquote>
+<hr />
+<h3 id="reactmemo"><code>React.memo</code></h3>
+<div class="sourceCode" id="cb2"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb2-1" title="1"><span class="kw">const</span> MyComponent <span class="op">=</span> <span class="va">React</span>.<span class="at">memo</span>(<span class="kw">function</span> <span class="at">MyComponent</span>(props) <span class="op">{</span></a>
+<a class="sourceLine" id="cb2-2" title="2">  <span class="co">/* render using props */</span></a>
+<a class="sourceLine" id="cb2-3" title="3"><span class="op">}</span>)<span class="op">;</span></a></code></pre></div>
+<p><code>React.memo</code> is a <a href="/docs/higher-order-components.html">higher order component</a>.</p>
+<p>If your component renders the same result given the same props, you can wrap it in a call to <code>React.memo</code> for a performance boost in some cases by memoizing the result. This means that React will skip rendering the component, and reuse the last rendered result.</p>
+<p><code>React.memo</code> only checks for prop changes. If your function component wrapped in <code>React.memo</code> has a <a href="/docs/hooks-state.html"><code>useState</code></a> or <a href="/docs/hooks-reference.html#usecontext"><code>useContext</code></a> Hook in its implementation, it will still rerender when state or context change.</p>
+<p>By default it will only shallowly compare complex objects in the props object. If you want control over the comparison, you can also provide a custom comparison function as the second argument.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb3-1" title="1"><span class="kw">function</span> <span class="at">MyComponent</span>(props) <span class="op">{</span></a>
+<a class="sourceLine" id="cb3-2" title="2">  <span class="co">/* render using props */</span></a>
+<a class="sourceLine" id="cb3-3" title="3"><span class="op">}</span></a>
+<a class="sourceLine" id="cb3-4" title="4"><span class="kw">function</span> <span class="at">areEqual</span>(prevProps<span class="op">,</span> nextProps) <span class="op">{</span></a>
+<a class="sourceLine" id="cb3-5" title="5">  <span class="co">/*</span></a>
+<a class="sourceLine" id="cb3-6" title="6"><span class="co">  return true if passing nextProps to render would return</span></a>
+<a class="sourceLine" id="cb3-7" title="7"><span class="co">  the same result as passing prevProps to render,</span></a>
+<a class="sourceLine" id="cb3-8" title="8"><span class="co">  otherwise return false</span></a>
+<a class="sourceLine" id="cb3-9" title="9"><span class="co">  */</span></a>
+<a class="sourceLine" id="cb3-10" title="10"><span class="op">}</span></a>
+<a class="sourceLine" id="cb3-11" title="11"><span class="im">export</span> <span class="im">default</span> <span class="va">React</span>.<span class="at">memo</span>(MyComponent<span class="op">,</span> areEqual)<span class="op">;</span></a></code></pre></div>
+<p>This method only exists as a <strong><a href="/docs/optimizing-performance.html">performance optimization</a>.</strong> Do not rely on it to “prevent” a render, as this can lead to bugs.</p>
+<blockquote>
+<p>Note</p>
+<p>Unlike the <a href="/docs/react-component.html#shouldcomponentupdate"><code>shouldComponentUpdate()</code></a> method on class components, the <code>areEqual</code> function returns <code>true</code> if the props are equal and <code>false</code> if the props are not equal. This is the inverse from <code>shouldComponentUpdate</code>.</p>
+</blockquote>
+<hr />
+<h3 id="createelement"><code>createElement()</code></h3>
+<div class="sourceCode" id="cb4"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb4-1" title="1"><span class="va">React</span>.<span class="at">createElement</span>(</a>
+<a class="sourceLine" id="cb4-2" title="2">  type<span class="op">,</span></a>
+<a class="sourceLine" id="cb4-3" title="3">  [props]<span class="op">,</span></a>
+<a class="sourceLine" id="cb4-4" title="4">  [...<span class="at">children</span>]</a>
+<a class="sourceLine" id="cb4-5" title="5">)</a></code></pre></div>
+<p>Create and return a new <a href="/docs/rendering-elements.html">React element</a> of the given type. The type argument can be either a tag name string (such as <code>'div'</code> or <code>'span'</code>), a <a href="/docs/components-and-props.html">React component</a> type (a class or a function), or a <a href="#reactfragment">React fragment</a> type.</p>
+<p>Code written with <a href="/docs/introducing-jsx.html">JSX</a> will be converted to use <code>React.createElement()</code>. You will not typically invoke <code>React.createElement()</code> directly if you are using JSX. See <a href="/docs/react-without-jsx.html">React Without JSX</a> to learn more.</p>
+<hr />
+<h3 id="cloneelement"><code>cloneElement()</code></h3>
+<pre><code>React.cloneElement(
+  element,
+  [props],
+  [...children]
+)</code></pre>
+<p>Clone and return a new React element using <code>element</code> as the starting point. The resulting element will have the original element’s props with the new props merged in shallowly. New children will replace existing children. <code>key</code> and <code>ref</code> from the original element will be preserved.</p>
+<p><code>React.cloneElement()</code> is almost equivalent to:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb6-1" title="1"><span class="op">&lt;</span><span class="va">element</span>.<span class="at">type</span> <span class="op">{</span>...<span class="va">element</span>.<span class="at">props</span><span class="op">}</span> <span class="op">{</span>...<span class="at">props</span><span class="op">}&gt;{</span>children<span class="op">}</span>&lt;/<span class="va">element</span>.<span class="at">type</span><span class="op">&gt;</span></a></code></pre></div>
+<p>However, it also preserves <code>ref</code>s. This means that if you get a child with a <code>ref</code> on it, you won’t accidentally steal it from your ancestor. You will get the same <code>ref</code> attached to your new element.</p>
+<p>This API was introduced as a replacement of the deprecated <code>React.addons.cloneWithProps()</code>.</p>
+<hr />
+<h3 id="createfactory"><code>createFactory()</code></h3>
+<div class="sourceCode" id="cb7"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb7-1" title="1"><span class="va">React</span>.<span class="at">createFactory</span>(type)</a></code></pre></div>
+<p>Return a function that produces React elements of a given type. Like <a href="#createelement"><code>React.createElement()</code></a>, the type argument can be either a tag name string (such as <code>'div'</code> or <code>'span'</code>), a <a href="/docs/components-and-props.html">React component</a> type (a class or a function), or a <a href="#reactfragment">React fragment</a> type.</p>
+<p>This helper is considered legacy, and we encourage you to either use JSX or use <code>React.createElement()</code> directly instead.</p>
+<p>You will not typically invoke <code>React.createFactory()</code> directly if you are using JSX. See <a href="/docs/react-without-jsx.html">React Without JSX</a> to learn more.</p>
+<hr />
+<h3 id="isvalidelement"><code>isValidElement()</code></h3>
+<div class="sourceCode" id="cb8"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb8-1" title="1"><span class="va">React</span>.<span class="at">isValidElement</span>(object)</a></code></pre></div>
+<p>Verifies the object is a React element. Returns <code>true</code> or <code>false</code>.</p>
+<hr />
+<h3 id="reactchildren"><code>React.Children</code></h3>
+<p><code>React.Children</code> provides utilities for dealing with the <code>this.props.children</code> opaque data structure.</p>
+<h4 id="reactchildrenmap"><code>React.Children.map</code></h4>
+<div class="sourceCode" id="cb9"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb9-1" title="1"><span class="va">React</span>.<span class="va">Children</span>.<span class="at">map</span>(children<span class="op">,</span> <span class="kw">function</span>[(thisArg)])</a></code></pre></div>
+<p>Invokes a function on every immediate child contained within <code>children</code> with <code>this</code> set to <code>thisArg</code>. If <code>children</code> is an array it will be traversed and the function will be called for each child in the array. If children is <code>null</code> or <code>undefined</code>, this method will return <code>null</code> or <code>undefined</code> rather than an array.</p>
+<blockquote>
+<p>Note</p>
+<p>If <code>children</code> is a <code>Fragment</code> it will be treated as a single child and not traversed.</p>
+</blockquote>
+<h4 id="reactchildrenforeach"><code>React.Children.forEach</code></h4>
+<div class="sourceCode" id="cb10"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb10-1" title="1"><span class="va">React</span>.<span class="va">Children</span>.<span class="at">forEach</span>(children<span class="op">,</span> <span class="kw">function</span>[(thisArg)])</a></code></pre></div>
+<p>Like <a href="#reactchildrenmap"><code>React.Children.map()</code></a> but does not return an array.</p>
+<h4 id="reactchildrencount"><code>React.Children.count</code></h4>
+<div class="sourceCode" id="cb11"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb11-1" title="1"><span class="va">React</span>.<span class="va">Children</span>.<span class="at">count</span>(children)</a></code></pre></div>
+<p>Returns the total number of components in <code>children</code>, equal to the number of times that a callback passed to <code>map</code> or <code>forEach</code> would be invoked.</p>
+<h4 id="reactchildrenonly"><code>React.Children.only</code></h4>
+<div class="sourceCode" id="cb12"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb12-1" title="1"><span class="va">React</span>.<span class="va">Children</span>.<span class="at">only</span>(children)</a></code></pre></div>
+<p>Verifies that <code>children</code> has only one child (a React element) and returns it. Otherwise this method throws an error.</p>
+<blockquote>
+<p>Note:</p>
+<p><code>React.Children.only()</code> does not accept the return value of <a href="#reactchildrenmap"><code>React.Children.map()</code></a> because it is an array rather than a React element.</p>
+</blockquote>
+<h4 id="reactchildrentoarray"><code>React.Children.toArray</code></h4>
+<div class="sourceCode" id="cb13"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb13-1" title="1"><span class="va">React</span>.<span class="va">Children</span>.<span class="at">toArray</span>(children)</a></code></pre></div>
+<p>Returns the <code>children</code> opaque data structure as a flat array with keys assigned to each child. Useful if you want to manipulate collections of children in your render methods, especially if you want to reorder or slice <code>this.props.children</code> before passing it down.</p>
+<blockquote>
+<p>Note:</p>
+<p><code>React.Children.toArray()</code> changes keys to preserve the semantics of nested arrays when flattening lists of children. That is, <code>toArray</code> prefixes each key in the returned array so that each element’s key is scoped to the input array containing it.</p>
+</blockquote>
+<hr />
+<h3 id="reactfragment"><code>React.Fragment</code></h3>
+<p>The <code>React.Fragment</code> component lets you return multiple elements in a <code>render()</code> method without creating an additional DOM element:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb14-1" title="1"><span class="at">render</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb14-2" title="2">  <span class="cf">return</span> (</a>
+<a class="sourceLine" id="cb14-3" title="3">    <span class="op">&lt;</span><span class="va">React</span>.<span class="at">Fragment</span><span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb14-4" title="4">      Some <span class="va">text</span>.</a>
+<a class="sourceLine" id="cb14-5" title="5">      <span class="op">&lt;</span>h2<span class="op">&gt;</span>A heading&lt;/h2<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb14-6" title="6">    &lt;/<span class="va">React</span>.<span class="at">Fragment</span><span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb14-7" title="7">  )<span class="op">;</span></a>
+<a class="sourceLine" id="cb14-8" title="8"><span class="op">}</span></a></code></pre></div>
+<p>You can also use it with the shorthand <code>&lt;&gt;&lt;/&gt;</code> syntax. For more information, see <a href="/blog/2017/11/28/react-v16.2.0-fragment-support.html">React v16.2.0: Improved Support for Fragments</a>.</p>
+<h3 id="reactcreateref"><code>React.createRef</code></h3>
+<p><code>React.createRef</code> creates a <a href="/docs/refs-and-the-dom.html">ref</a> that can be attached to React elements via the ref attribute. <code>embed:16-3-release-blog-post/create-ref-example.js</code></p>
+<h3 id="reactforwardref"><code>React.forwardRef</code></h3>
+<p><code>React.forwardRef</code> creates a React component that forwards the <a href="/docs/refs-and-the-dom.html">ref</a> attribute it receives to another component below in the tree. This technique is not very common but is particularly useful in two scenarios:</p>
+<ul>
+<li><a href="/docs/forwarding-refs.html#forwarding-refs-to-dom-components">Forwarding refs to DOM components</a></li>
+<li><a href="/docs/forwarding-refs.html#forwarding-refs-in-higher-order-components">Forwarding refs in higher-order-components</a></li>
+</ul>
+<p><code>React.forwardRef</code> accepts a rendering function as an argument. React will call this function with <code>props</code> and <code>ref</code> as two arguments. This function should return a React node.</p>
+<p><code>embed:reference-react-forward-ref.js</code></p>
+<p>In the above example, React passes a <code>ref</code> given to <code>&lt;FancyButton ref={ref}&gt;</code> element as a second argument to the rendering function inside the <code>React.forwardRef</code> call. This rendering function passes the <code>ref</code> to the <code>&lt;button ref={ref}&gt;</code> element.</p>
+<p>As a result, after React attaches the ref, <code>ref.current</code> will point directly to the <code>&lt;button&gt;</code> DOM element instance.</p>
+<p>For more information, see <a href="/docs/forwarding-refs.html">forwarding refs</a>.</p>
+<h3 id="reactlazy"><code>React.lazy</code></h3>
+<p><code>React.lazy()</code> lets you define a component that is loaded dynamically. This helps reduce the bundle size to delay loading components that aren’t used during the initial render.</p>
+<p>You can learn how to use it from our <a href="/docs/code-splitting.html#reactlazy">code splitting documentation</a>. You might also want to check out <a href="https://medium.com/@pomber/lazy-loading-and-preloading-components-in-react-16-6-804de091c82d">this article</a> explaining how to use it in more detail.</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb15-1" title="1"><span class="co">// This component is loaded dynamically</span></a>
+<a class="sourceLine" id="cb15-2" title="2"><span class="kw">const</span> SomeComponent <span class="op">=</span> <span class="va">React</span>.<span class="at">lazy</span>(() <span class="kw">=&gt;</span> <span class="im">import</span>(<span class="st">&#39;./SomeComponent&#39;</span>))<span class="op">;</span></a></code></pre></div>
+<p>Note that rendering <code>lazy</code> components requires that there’s a <code>&lt;React.Suspense&gt;</code> component higher in the rendering tree. This is how you specify a loading indicator.</p>
+<blockquote>
+<p><strong>Note</strong></p>
+<p>Using <code>React.lazy</code>with dynamic import requires Promises to be available in the JS environment. This requires a polyfill on IE11 and below.</p>
+</blockquote>
+<h3 id="reactsuspense"><code>React.Suspense</code></h3>
+<p><code>React.Suspense</code> lets you specify the loading indicator in case some components in the tree below it are not yet ready to render. Today, lazy loading components is the <strong>only</strong> use case supported by <code>&lt;React.Suspense&gt;</code>:</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb16-1" title="1"><span class="co">// This component is loaded dynamically</span></a>
+<a class="sourceLine" id="cb16-2" title="2"><span class="kw">const</span> OtherComponent <span class="op">=</span> <span class="va">React</span>.<span class="at">lazy</span>(() <span class="kw">=&gt;</span> <span class="im">import</span>(<span class="st">&#39;./OtherComponent&#39;</span>))<span class="op">;</span></a>
+<a class="sourceLine" id="cb16-3" title="3"></a>
+<a class="sourceLine" id="cb16-4" title="4"><span class="kw">function</span> <span class="at">MyComponent</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb16-5" title="5">  <span class="cf">return</span> (</a>
+<a class="sourceLine" id="cb16-6" title="6">    <span class="co">// Displays &lt;Spinner&gt; until OtherComponent loads</span></a>
+<a class="sourceLine" id="cb16-7" title="7">    <span class="op">&lt;</span><span class="va">React</span>.<span class="at">Suspense</span> fallback<span class="op">={&lt;</span>Spinner /<span class="op">&gt;}&gt;</span></a>
+<a class="sourceLine" id="cb16-8" title="8">      <span class="op">&lt;</span>div<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb16-9" title="9">        <span class="op">&lt;</span>OtherComponent /<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb16-10" title="10">      &lt;/div<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb16-11" title="11">    &lt;/<span class="va">React</span>.<span class="at">Suspense</span><span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb16-12" title="12">  )<span class="op">;</span></a>
+<a class="sourceLine" id="cb16-13" title="13"><span class="op">}</span></a></code></pre></div>
+<p>It is documented in our <a href="/docs/code-splitting.html#reactlazy">code splitting guide</a>. Note that <code>lazy</code> components can be deep inside the <code>Suspense</code> tree – it doesn’t have to wrap every one of them. The best practice is to place <code>&lt;Suspense&gt;</code> where you want to see a loading indicator, but to use <code>lazy()</code> wherever you want to do code splitting.</p>
+<p>While this is not supported today, in the future we plan to let <code>Suspense</code> handle more scenarios such as data fetching. You can read about this in <a href="/blog/2018/11/27/react-16-roadmap.html">our roadmap</a>.</p>
+<blockquote>
+<p>Note:</p>
+<p><code>React.lazy()</code> and <code>&lt;React.Suspense&gt;</code> are not yet supported by <code>ReactDOMServer</code>. This is a known limitation that will be resolved in the future.</p>
+</blockquote>
+</body>
+</html>

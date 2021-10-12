@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Rendering Elements</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Rendering Elements</h1>
+</header>
+<p>Elements are the smallest building blocks of React apps.</p>
+<p>An element describes what you want to see on the screen:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">const</span> element <span class="op">=</span> <span class="op">&lt;</span>h1<span class="op">&gt;</span>Hello<span class="op">,</span> world&lt;/h1<span class="op">&gt;;</span></a></code></pre></div>
+<p>Unlike browser DOM elements, React elements are plain objects, and are cheap to create. React DOM takes care of updating the DOM to match the React elements.</p>
+<blockquote>
+<p><strong>Note:</strong></p>
+<p>One might confuse elements with a more widely known concept of “components”. We will introduce components in the <a href="/docs/components-and-props.html">next section</a>. Elements are what components are “made of”, and we encourage you to read this section before jumping ahead.</p>
+</blockquote>
+<h2 id="rendering-an-element-into-the-dom">Rendering an Element into the DOM</h2>
+<p>Let’s say there is a <code>&lt;div&gt;</code> somewhere in your HTML file:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode html"><code class="sourceCode html"><a class="sourceLine" id="cb2-1" title="1"><span class="kw">&lt;div</span><span class="ot"> id=</span><span class="st">&quot;root&quot;</span><span class="kw">&gt;&lt;/div&gt;</span></a></code></pre></div>
+<p>We call this a “root” DOM node because everything inside it will be managed by React DOM.</p>
+<p>Applications built with just React usually have a single root DOM node. If you are integrating React into an existing app, you may have as many isolated root DOM nodes as you like.</p>
+<p>To render a React element into a root DOM node, pass both to <a href="/docs/react-dom.html#render"><code>ReactDOM.render()</code></a>:</p>
+<p><code>embed:rendering-elements/render-an-element.js</code></p>
+<p><a href="codepen://rendering-elements/render-an-element"></a></p>
+<p>It displays “Hello, world” on the page.</p>
+<h2 id="updating-the-rendered-element">Updating the Rendered Element</h2>
+<p>React elements are <a href="https://en.wikipedia.org/wiki/Immutable_object">immutable</a>. Once you create an element, you can’t change its children or attributes. An element is like a single frame in a movie: it represents the UI at a certain point in time.</p>
+<p>With our knowledge so far, the only way to update the UI is to create a new element, and pass it to <a href="/docs/react-dom.html#render"><code>ReactDOM.render()</code></a>.</p>
+<p>Consider this ticking clock example:</p>
+<p><code>embed:rendering-elements/update-rendered-element.js</code></p>
+<p><a href="codepen://rendering-elements/update-rendered-element"></a></p>
+<p>It calls <a href="/docs/react-dom.html#render"><code>ReactDOM.render()</code></a> every second from a <a href="https://developer.mozilla.org/en-US/docs/Web/API/WindowTimers/setInterval"><code>setInterval()</code></a> callback.</p>
+<blockquote>
+<p><strong>Note:</strong></p>
+<p>In practice, most React apps only call <a href="/docs/react-dom.html#render"><code>ReactDOM.render()</code></a> once. In the next sections we will learn how such code gets encapsulated into <a href="/docs/state-and-lifecycle.html">stateful components</a>.</p>
+<p>We recommend that you don’t skip topics because they build on each other.</p>
+</blockquote>
+<h2 id="react-only-updates-whats-necessary">React Only Updates What’s Necessary</h2>
+<p>React DOM compares the element and its children to the previous one, and only applies the DOM updates necessary to bring the DOM to the desired state.</p>
+<p>You can verify by inspecting the <a href="codepen://rendering-elements/update-rendered-element">last example</a> with the browser tools:</p>
+<figure>
+<img src="../images/docs/granular-dom-updates.gif" alt="DOM inspector showing granular updates" /><figcaption>DOM inspector showing granular updates</figcaption>
+</figure>
+<p>Even though we create an element describing the whole UI tree on every tick, only the text node whose contents have changed gets updated by React DOM.</p>
+<p>In our experience, thinking about how the UI should look at any given moment, rather than how to change it over time, eliminates a whole class of bugs.</p>
+</body>
+</html>

@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Using the State Hook</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Using the State Hook</h1>
+</header>
+<p><em>Hooks</em> are a new addition in React 16.8. They let you use state and other React features without writing a class.</p>
+<p>The <a href="/docs/hooks-intro.html">introduction page</a> used this example to get familiar with Hooks:</p>
+<pre class="js{4-5}"><code>import React, { useState } from &#39;react&#39;;
+
+function Example() {
+  // Declare a new state variable, which we&#39;ll call &quot;count&quot;
+  const [count, setCount] = useState(0);
+
+  return (
+    &lt;div&gt;
+      &lt;p&gt;You clicked {count} times&lt;/p&gt;
+      &lt;button onClick={() =&gt; setCount(count + 1)}&gt;
+        Click me
+      &lt;/button&gt;
+    &lt;/div&gt;
+  );
+}</code></pre>
+<p>We’ll start learning about Hooks by comparing this code to an equivalent class example.</p>
+<h2 id="equivalent-class-example">Equivalent Class Example</h2>
+<p>If you used classes in React before, this code should look familiar:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb2-1" title="1"><span class="kw">class</span> Example <span class="kw">extends</span> <span class="va">React</span>.<span class="at">Component</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb2-2" title="2">  <span class="at">constructor</span>(props) <span class="op">{</span></a>
+<a class="sourceLine" id="cb2-3" title="3">    <span class="kw">super</span>(props)<span class="op">;</span></a>
+<a class="sourceLine" id="cb2-4" title="4">    <span class="kw">this</span>.<span class="at">state</span> <span class="op">=</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb2-5" title="5">      <span class="dt">count</span><span class="op">:</span> <span class="dv">0</span></a>
+<a class="sourceLine" id="cb2-6" title="6">    <span class="op">};</span></a>
+<a class="sourceLine" id="cb2-7" title="7">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb2-8" title="8"></a>
+<a class="sourceLine" id="cb2-9" title="9">  <span class="at">render</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb2-10" title="10">    <span class="cf">return</span> (</a>
+<a class="sourceLine" id="cb2-11" title="11">      <span class="op">&lt;</span>div<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb2-12" title="12">        <span class="op">&lt;</span>p<span class="op">&gt;</span>You clicked <span class="op">{</span><span class="kw">this</span>.<span class="va">state</span>.<span class="at">count</span><span class="op">}</span> times&lt;/p<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb2-13" title="13">        <span class="op">&lt;</span>button onClick<span class="op">={</span>() <span class="kw">=&gt;</span> <span class="kw">this</span>.<span class="at">setState</span>(<span class="op">{</span> <span class="dt">count</span><span class="op">:</span> <span class="kw">this</span>.<span class="va">state</span>.<span class="at">count</span> <span class="op">+</span> <span class="dv">1</span> <span class="op">}</span>)<span class="op">}&gt;</span></a>
+<a class="sourceLine" id="cb2-14" title="14">          Click me</a>
+<a class="sourceLine" id="cb2-15" title="15">        &lt;/button<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb2-16" title="16">      &lt;/div<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb2-17" title="17">    )<span class="op">;</span></a>
+<a class="sourceLine" id="cb2-18" title="18">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb2-19" title="19"><span class="op">}</span></a></code></pre></div>
+<p>The state starts as <code>{ count: 0 }</code>, and we increment <code>state.count</code> when the user clicks a button by calling <code>this.setState()</code>. We’ll use snippets from this class throughout the page.</p>
+<blockquote>
+<p>Note</p>
+<p>You might be wondering why we’re using a counter here instead of a more realistic example. This is to help us focus on the API while we’re still making our first steps with Hooks.</p>
+</blockquote>
+<h2 id="hooks-and-function-components">Hooks and Function Components</h2>
+<p>As a reminder, function components in React look like this:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb3-1" title="1"><span class="kw">const</span> Example <span class="op">=</span> (props) <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb3-2" title="2">  <span class="co">// You can use Hooks here!</span></a>
+<a class="sourceLine" id="cb3-3" title="3">  <span class="cf">return</span> <span class="op">&lt;</span>div /<span class="op">&gt;;</span></a>
+<a class="sourceLine" id="cb3-4" title="4"><span class="op">}</span></a></code></pre></div>
+<p>or this:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb4-1" title="1"><span class="kw">function</span> <span class="at">Example</span>(props) <span class="op">{</span></a>
+<a class="sourceLine" id="cb4-2" title="2">  <span class="co">// You can use Hooks here!</span></a>
+<a class="sourceLine" id="cb4-3" title="3">  <span class="cf">return</span> <span class="op">&lt;</span>div /<span class="op">&gt;;</span></a>
+<a class="sourceLine" id="cb4-4" title="4"><span class="op">}</span></a></code></pre></div>
+<p>You might have previously known these as “stateless components”. We’re now introducing the ability to use React state from these, so we prefer the name “function components”.</p>
+<p>Hooks <strong>don’t</strong> work inside classes. But you can use them instead of writing classes.</p>
+<h2 id="whats-a-hook">What’s a Hook?</h2>
+<p>Our new example starts by importing the <code>useState</code> Hook from React:</p>
+<pre class="js{1}"><code>import React, { useState } from &#39;react&#39;;
+
+function Example() {
+  // ...
+}</code></pre>
+<p><strong>What is a Hook?</strong> A Hook is a special function that lets you “hook into” React features. For example, <code>useState</code> is a Hook that lets you add React state to function components. We’ll learn other Hooks later.</p>
+<p><strong>When would I use a Hook?</strong> If you write a function component and realize you need to add some state to it, previously you had to convert it to a class. Now you can use a Hook inside the existing function component. We’re going to do that right now!</p>
+<blockquote>
+<p>Note:</p>
+<p>There are some special rules about where you can and can’t use Hooks within a component. We’ll learn them in <a href="/docs/hooks-rules.html">Rules of Hooks</a>.</p>
+</blockquote>
+<h2 id="declaring-a-state-variable">Declaring a State Variable</h2>
+<p>In a class, we initialize the <code>count</code> state to <code>0</code> by setting <code>this.state</code> to <code>{ count: 0 }</code> in the constructor:</p>
+<pre class="js{4-6}"><code>class Example extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      count: 0
+    };
+  }</code></pre>
+<p>In a function component, we have no <code>this</code>, so we can’t assign or read <code>this.state</code>. Instead, we call the <code>useState</code> Hook directly inside our component:</p>
+<pre class="js{4,5}"><code>import React, { useState } from &#39;react&#39;;
+
+function Example() {
+  // Declare a new state variable, which we&#39;ll call &quot;count&quot;
+  const [count, setCount] = useState(0);</code></pre>
+<p><strong>What does calling <code>useState</code> do?</strong> It declares a “state variable”. Our variable is called <code>count</code> but we could call it anything else, like <code>banana</code>. This is a way to “preserve” some values between the function calls — <code>useState</code> is a new way to use the exact same capabilities that <code>this.state</code> provides in a class. Normally, variables “disappear” when the function exits but state variables are preserved by React.</p>
+<p><strong>What do we pass to <code>useState</code> as an argument?</strong> The only argument to the <code>useState()</code> Hook is the initial state. Unlike with classes, the state doesn’t have to be an object. We can keep a number or a string if that’s all we need. In our example, we just want a number for how many times the user clicked, so pass <code>0</code> as initial state for our variable. (If we wanted to store two different values in state, we would call <code>useState()</code> twice.)</p>
+<p><strong>What does <code>useState</code> return?</strong> It returns a pair of values: the current state and a function that updates it. This is why we write <code>const [count, setCount] = useState()</code>. This is similar to <code>this.state.count</code> and <code>this.setState</code> in a class, except you get them in a pair. If you’re not familiar with the syntax we used, we’ll come back to it <a href="/docs/hooks-state.html#tip-what-do-square-brackets-mean">at the bottom of this page</a>.</p>
+<p>Now that we know what the <code>useState</code> Hook does, our example should make more sense:</p>
+<pre class="js{4,5}"><code>import React, { useState } from &#39;react&#39;;
+
+function Example() {
+  // Declare a new state variable, which we&#39;ll call &quot;count&quot;
+  const [count, setCount] = useState(0);</code></pre>
+<p>We declare a state variable called <code>count</code>, and set it to <code>0</code>. React will remember its current value between re-renders, and provide the most recent one to our function. If we want to update the current <code>count</code>, we can call <code>setCount</code>.</p>
+<blockquote>
+<p>Note</p>
+<p>You might be wondering: why is <code>useState</code> not named <code>createState</code> instead?</p>
+<p>“Create” wouldn’t be quite accurate because the state is only created the first time our component renders. During the next renders, <code>useState</code> gives us the current state. Otherwise it wouldn’t be “state” at all! There’s also a reason why Hook names <em>always</em> start with <code>use</code>. We’ll learn why later in the <a href="/docs/hooks-rules.html">Rules of Hooks</a>.</p>
+</blockquote>
+<h2 id="reading-state">Reading State</h2>
+<p>When we want to display the current count in a class, we read <code>this.state.count</code>:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb9-1" title="1">  <span class="op">&lt;</span>p<span class="op">&gt;</span>You clicked <span class="op">{</span><span class="kw">this</span>.<span class="va">state</span>.<span class="at">count</span><span class="op">}</span> times&lt;/p<span class="op">&gt;</span></a></code></pre></div>
+<p>In a function, we can use <code>count</code> directly:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb10-1" title="1">  <span class="op">&lt;</span>p<span class="op">&gt;</span>You clicked <span class="op">{</span>count<span class="op">}</span> times&lt;/p<span class="op">&gt;</span></a></code></pre></div>
+<h2 id="updating-state">Updating State</h2>
+<p>In a class, we need to call <code>this.setState()</code> to update the <code>count</code> state:</p>
+<pre class="js{1}"><code>  &lt;button onClick={() =&gt; this.setState({ count: this.state.count + 1 })}&gt;
+    Click me
+  &lt;/button&gt;</code></pre>
+<p>In a function, we already have <code>setCount</code> and <code>count</code> as variables so we don’t need <code>this</code>:</p>
+<pre class="js{1}"><code>  &lt;button onClick={() =&gt; setCount(count + 1)}&gt;
+    Click me
+  &lt;/button&gt;</code></pre>
+<h2 id="recap">Recap</h2>
+<p>Let’s now <strong>recap what we learned line by line</strong> and check our understanding.</p>
+<!--
+  I'm not proud of this line markup. Please somebody fix this.
+  But if GitHub got away with it for years we can cheat.
+-->
+<pre class="js{1,4,9}"><code> 1:  import React, { useState } from &#39;react&#39;;
+ 2:
+ 3:  function Example() {
+ 4:    const [count, setCount] = useState(0);
+ 5:
+ 6:    return (
+ 7:      &lt;div&gt;
+ 8:        &lt;p&gt;You clicked {count} times&lt;/p&gt;
+ 9:        &lt;button onClick={() =&gt; setCount(count + 1)}&gt;
+10:         Click me
+11:        &lt;/button&gt;
+12:      &lt;/div&gt;
+13:    );
+14:  }</code></pre>
+<ul>
+<li><strong>Line 1:</strong> We import the <code>useState</code> Hook from React. It lets us keep local state in a function component.</li>
+<li><strong>Line 4:</strong> Inside the <code>Example</code> component, we declare a new state variable by calling the <code>useState</code> Hook. It returns a pair of values, to which we give names. We’re calling our variable <code>count</code> because it holds the number of button clicks. We initialize it to zero by passing <code>0</code> as the only <code>useState</code> argument. The second returned item is itself a function. It lets us update the <code>count</code> so we’ll name it <code>setCount</code>.</li>
+<li><strong>Line 9:</strong> When the user clicks, we call <code>setCount</code> with a new value. React will then re-render the <code>Example</code> component, passing the new <code>count</code> value to it.</li>
+</ul>
+<p>This might seem like a lot to take in at first. Don’t rush it! If you’re lost in the explanation, look at the code above again and try to read it from top to bottom. We promise that once you try to “forget” how state works in classes, and look at this code with fresh eyes, it will make sense.</p>
+<h3 id="tip-what-do-square-brackets-mean">Tip: What Do Square Brackets Mean?</h3>
+<p>You might have noticed the square brackets when we declare a state variable:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb14-1" title="1">  <span class="kw">const</span> [count<span class="op">,</span> setCount] <span class="op">=</span> <span class="at">useState</span>(<span class="dv">0</span>)<span class="op">;</span></a></code></pre></div>
+<p>The names on the left aren’t a part of the React API. You can name your own state variables:</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb15-1" title="1">  <span class="kw">const</span> [fruit<span class="op">,</span> setFruit] <span class="op">=</span> <span class="at">useState</span>(<span class="st">&#39;banana&#39;</span>)<span class="op">;</span></a></code></pre></div>
+<p>This JavaScript syntax is called <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment#Array_destructuring">“array destructuring”</a>. It means that we’re making two new variables <code>fruit</code> and <code>setFruit</code>, where <code>fruit</code> is set to the first value returned by <code>useState</code>, and <code>setFruit</code> is the second. It is equivalent to this code:</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb16-1" title="1">  <span class="kw">var</span> fruitStateVariable <span class="op">=</span> <span class="at">useState</span>(<span class="st">&#39;banana&#39;</span>)<span class="op">;</span> <span class="co">// Returns a pair</span></a>
+<a class="sourceLine" id="cb16-2" title="2">  <span class="kw">var</span> fruit <span class="op">=</span> fruitStateVariable[<span class="dv">0</span>]<span class="op">;</span> <span class="co">// First item in a pair</span></a>
+<a class="sourceLine" id="cb16-3" title="3">  <span class="kw">var</span> setFruit <span class="op">=</span> fruitStateVariable[<span class="dv">1</span>]<span class="op">;</span> <span class="co">// Second item in a pair</span></a></code></pre></div>
+<p>When we declare a state variable with <code>useState</code>, it returns a pair — an array with two items. The first item is the current value, and the second is a function that lets us update it. Using <code>[0]</code> and <code>[1]</code> to access them is a bit confusing because they have a specific meaning. This is why we use array destructuring instead.</p>
+<blockquote>
+<p>Note</p>
+<p>You might be curious how React knows which component <code>useState</code> corresponds to since we’re not passing anything like <code>this</code> back to React. We’ll answer <a href="/docs/hooks-faq.html#how-does-react-associate-hook-calls-with-components">this question</a> and many others in the FAQ section.</p>
+</blockquote>
+<h3 id="tip-using-multiple-state-variables">Tip: Using Multiple State Variables</h3>
+<p>Declaring state variables as a pair of <code>[something, setSomething]</code> is also handy because it lets us give <em>different</em> names to different state variables if we want to use more than one:</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb17-1" title="1"><span class="kw">function</span> <span class="at">ExampleWithManyStates</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb17-2" title="2">  <span class="co">// Declare multiple state variables!</span></a>
+<a class="sourceLine" id="cb17-3" title="3">  <span class="kw">const</span> [age<span class="op">,</span> setAge] <span class="op">=</span> <span class="at">useState</span>(<span class="dv">42</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb17-4" title="4">  <span class="kw">const</span> [fruit<span class="op">,</span> setFruit] <span class="op">=</span> <span class="at">useState</span>(<span class="st">&#39;banana&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb17-5" title="5">  <span class="kw">const</span> [todos<span class="op">,</span> setTodos] <span class="op">=</span> <span class="at">useState</span>([<span class="op">{</span> <span class="dt">text</span><span class="op">:</span> <span class="st">&#39;Learn Hooks&#39;</span> <span class="op">}</span>])<span class="op">;</span></a></code></pre></div>
+<p>In the above component, we have <code>age</code>, <code>fruit</code>, and <code>todos</code> as local variables, and we can update them individually:</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb18-1" title="1">  <span class="kw">function</span> <span class="at">handleOrangeClick</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb18-2" title="2">    <span class="co">// Similar to this.setState({ fruit: &#39;orange&#39; })</span></a>
+<a class="sourceLine" id="cb18-3" title="3">    <span class="at">setFruit</span>(<span class="st">&#39;orange&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb18-4" title="4">  <span class="op">}</span></a></code></pre></div>
+<p>You <strong>don’t have to</strong> use many state variables. State variables can hold objects and arrays just fine, so you can still group related data together. However, unlike <code>this.setState</code> in a class, updating a state variable always <em>replaces</em> it instead of merging it.</p>
+<p>We provide more recommendations on splitting independent state variables <a href="/docs/hooks-faq.html#should-i-use-one-or-many-state-variables">in the FAQ</a>.</p>
+<h2 id="next-steps">Next Steps</h2>
+<p>On this page we’ve learned about one of the Hooks provided by React, called <code>useState</code>. We’re also sometimes going to refer to it as the “State Hook”. It lets us add local state to React function components – which we did for the first time ever!</p>
+<p>We also learned a little bit more about what Hooks are. Hooks are functions that let you “hook into” React features from function components. Their names always start with <code>use</code>, and there are more Hooks we haven’t seen yet.</p>
+<p><strong>Now let’s continue by <a href="/docs/hooks-effect.html">learning the next Hook: <code>useEffect</code>.</a></strong> It lets you perform side effects in components, and is similar to lifecycle methods in classes.</p>
+</body>
+</html>

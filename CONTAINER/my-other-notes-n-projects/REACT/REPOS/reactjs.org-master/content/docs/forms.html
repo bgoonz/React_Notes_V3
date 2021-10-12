@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Forms</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Forms</h1>
+</header>
+<p>HTML form elements work a little bit differently from other DOM elements in React, because form elements naturally keep some internal state. For example, this form in plain HTML accepts a single name:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode html"><code class="sourceCode html"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">&lt;form&gt;</span></a>
+<a class="sourceLine" id="cb1-2" title="2">  <span class="kw">&lt;label&gt;</span></a>
+<a class="sourceLine" id="cb1-3" title="3">    Name:</a>
+<a class="sourceLine" id="cb1-4" title="4">    <span class="kw">&lt;input</span><span class="ot"> type=</span><span class="st">&quot;text&quot;</span><span class="ot"> name=</span><span class="st">&quot;name&quot;</span> <span class="kw">/&gt;</span></a>
+<a class="sourceLine" id="cb1-5" title="5">  <span class="kw">&lt;/label&gt;</span></a>
+<a class="sourceLine" id="cb1-6" title="6">  <span class="kw">&lt;input</span><span class="ot"> type=</span><span class="st">&quot;submit&quot;</span><span class="ot"> value=</span><span class="st">&quot;Submit&quot;</span> <span class="kw">/&gt;</span></a>
+<a class="sourceLine" id="cb1-7" title="7"><span class="kw">&lt;/form&gt;</span></a></code></pre></div>
+<p>This form has the default HTML form behavior of browsing to a new page when the user submits the form. If you want this behavior in React, it just works. But in most cases, it’s convenient to have a JavaScript function that handles the submission of the form and has access to the data that the user entered into the form. The standard way to achieve this is with a technique called “controlled components”.</p>
+<h2 id="controlled-components">Controlled Components</h2>
+<p>In HTML, form elements such as <code>&lt;input&gt;</code>, <code>&lt;textarea&gt;</code>, and <code>&lt;select&gt;</code> typically maintain their own state and update it based on user input. In React, mutable state is typically kept in the state property of components, and only updated with <a href="/docs/react-component.html#setstate"><code>setState()</code></a>.</p>
+<p>We can combine the two by making the React state be the “single source of truth”. Then the React component that renders a form also controls what happens in that form on subsequent user input. An input form element whose value is controlled by React in this way is called a “controlled component”.</p>
+<p>For example, if we want to make the previous example log the name when it is submitted, we can write the form as a controlled component:</p>
+<pre class="javascript{4,10-12,21,24}"><code>class NameForm extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {value: &#39;&#39;};
+
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleChange(event) {
+    this.setState({value: event.target.value});
+  }
+
+  handleSubmit(event) {
+    alert(&#39;A name was submitted: &#39; + this.state.value);
+    event.preventDefault();
+  }
+
+  render() {
+    return (
+      &lt;form onSubmit={this.handleSubmit}&gt;
+        &lt;label&gt;
+          Name:
+          &lt;input type=&quot;text&quot; value={this.state.value} onChange={this.handleChange} /&gt;
+        &lt;/label&gt;
+        &lt;input type=&quot;submit&quot; value=&quot;Submit&quot; /&gt;
+      &lt;/form&gt;
+    );
+  }
+}</code></pre>
+<p><a href="https://codepen.io/gaearon/pen/VmmPgp?editors=0010"><strong>Try it on CodePen</strong></a></p>
+<p>Since the <code>value</code> attribute is set on our form element, the displayed value will always be <code>this.state.value</code>, making the React state the source of truth. Since <code>handleChange</code> runs on every keystroke to update the React state, the displayed value will update as the user types.</p>
+<p>With a controlled component, the input’s value is always driven by the React state. While this means you have to type a bit more code, you can now pass the value to other UI elements too, or reset it from other event handlers.</p>
+<h2 id="the-textarea-tag">The textarea Tag</h2>
+<p>In HTML, a <code>&lt;textarea&gt;</code> element defines its text by its children:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode html"><code class="sourceCode html"><a class="sourceLine" id="cb3-1" title="1"><span class="kw">&lt;textarea&gt;</span></a>
+<a class="sourceLine" id="cb3-2" title="2">  Hello there, this is some text in a text area</a>
+<a class="sourceLine" id="cb3-3" title="3"><span class="kw">&lt;/textarea&gt;</span></a></code></pre></div>
+<p>In React, a <code>&lt;textarea&gt;</code> uses a <code>value</code> attribute instead. This way, a form using a <code>&lt;textarea&gt;</code> can be written very similarly to a form that uses a single-line input:</p>
+<pre class="javascript{4-6,12-14,26}"><code>class EssayForm extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      value: &#39;Please write an essay about your favorite DOM element.&#39;
+    };
+
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleChange(event) {
+    this.setState({value: event.target.value});
+  }
+
+  handleSubmit(event) {
+    alert(&#39;An essay was submitted: &#39; + this.state.value);
+    event.preventDefault();
+  }
+
+  render() {
+    return (
+      &lt;form onSubmit={this.handleSubmit}&gt;
+        &lt;label&gt;
+          Essay:
+          &lt;textarea value={this.state.value} onChange={this.handleChange} /&gt;
+        &lt;/label&gt;
+        &lt;input type=&quot;submit&quot; value=&quot;Submit&quot; /&gt;
+      &lt;/form&gt;
+    );
+  }
+}</code></pre>
+<p>Notice that <code>this.state.value</code> is initialized in the constructor, so that the text area starts off with some text in it.</p>
+<h2 id="the-select-tag">The select Tag</h2>
+<p>In HTML, <code>&lt;select&gt;</code> creates a drop-down list. For example, this HTML creates a drop-down list of flavors:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode html"><code class="sourceCode html"><a class="sourceLine" id="cb5-1" title="1"><span class="kw">&lt;select&gt;</span></a>
+<a class="sourceLine" id="cb5-2" title="2">  <span class="kw">&lt;option</span><span class="ot"> value=</span><span class="st">&quot;grapefruit&quot;</span><span class="kw">&gt;</span>Grapefruit<span class="kw">&lt;/option&gt;</span></a>
+<a class="sourceLine" id="cb5-3" title="3">  <span class="kw">&lt;option</span><span class="ot"> value=</span><span class="st">&quot;lime&quot;</span><span class="kw">&gt;</span>Lime<span class="kw">&lt;/option&gt;</span></a>
+<a class="sourceLine" id="cb5-4" title="4">  <span class="kw">&lt;option</span><span class="ot"> selected value=</span><span class="st">&quot;coconut&quot;</span><span class="kw">&gt;</span>Coconut<span class="kw">&lt;/option&gt;</span></a>
+<a class="sourceLine" id="cb5-5" title="5">  <span class="kw">&lt;option</span><span class="ot"> value=</span><span class="st">&quot;mango&quot;</span><span class="kw">&gt;</span>Mango<span class="kw">&lt;/option&gt;</span></a>
+<a class="sourceLine" id="cb5-6" title="6"><span class="kw">&lt;/select&gt;</span></a></code></pre></div>
+<p>Note that the Coconut option is initially selected, because of the <code>selected</code> attribute. React, instead of using this <code>selected</code> attribute, uses a <code>value</code> attribute on the root <code>select</code> tag. This is more convenient in a controlled component because you only need to update it in one place. For example:</p>
+<pre class="javascript{4,10-12,24}"><code>class FlavorForm extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {value: &#39;coconut&#39;};
+
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleChange(event) {
+    this.setState({value: event.target.value});
+  }
+
+  handleSubmit(event) {
+    alert(&#39;Your favorite flavor is: &#39; + this.state.value);
+    event.preventDefault();
+  }
+
+  render() {
+    return (
+      &lt;form onSubmit={this.handleSubmit}&gt;
+        &lt;label&gt;
+          Pick your favorite flavor:
+          &lt;select value={this.state.value} onChange={this.handleChange}&gt;
+            &lt;option value=&quot;grapefruit&quot;&gt;Grapefruit&lt;/option&gt;
+            &lt;option value=&quot;lime&quot;&gt;Lime&lt;/option&gt;
+            &lt;option value=&quot;coconut&quot;&gt;Coconut&lt;/option&gt;
+            &lt;option value=&quot;mango&quot;&gt;Mango&lt;/option&gt;
+          &lt;/select&gt;
+        &lt;/label&gt;
+        &lt;input type=&quot;submit&quot; value=&quot;Submit&quot; /&gt;
+      &lt;/form&gt;
+    );
+  }
+}</code></pre>
+<p><a href="https://codepen.io/gaearon/pen/JbbEzX?editors=0010"><strong>Try it on CodePen</strong></a></p>
+<p>Overall, this makes it so that <code>&lt;input type="text"&gt;</code>, <code>&lt;textarea&gt;</code>, and <code>&lt;select&gt;</code> all work very similarly - they all accept a <code>value</code> attribute that you can use to implement a controlled component.</p>
+<blockquote>
+<p>Note</p>
+<p>You can pass an array into the <code>value</code> attribute, allowing you to select multiple options in a <code>select</code> tag:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb7-1" title="1"><span class="op">&lt;</span>select multiple<span class="op">={</span><span class="kw">true</span><span class="op">}</span> value<span class="op">={</span>[<span class="st">&#39;B&#39;</span><span class="op">,</span> <span class="st">&#39;C&#39;</span>]<span class="op">}&gt;</span></a></code></pre></div>
+</blockquote>
+<h2 id="the-file-input-tag">The file input Tag</h2>
+<p>In HTML, an <code>&lt;input type="file"&gt;</code> lets the user choose one or more files from their device storage to be uploaded to a server or manipulated by JavaScript via the <a href="https://developer.mozilla.org/en-US/docs/Web/API/File/Using_files_from_web_applications">File API</a>.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode html"><code class="sourceCode html"><a class="sourceLine" id="cb8-1" title="1"><span class="kw">&lt;input</span><span class="ot"> type=</span><span class="st">&quot;file&quot;</span> <span class="kw">/&gt;</span></a></code></pre></div>
+<p>Because its value is read-only, it is an <strong>uncontrolled</strong> component in React. It is discussed together with other uncontrolled components <a href="/docs/uncontrolled-components.html#the-file-input-tag">later in the documentation</a>.</p>
+<h2 id="handling-multiple-inputs">Handling Multiple Inputs</h2>
+<p>When you need to handle multiple controlled <code>input</code> elements, you can add a <code>name</code> attribute to each element and let the handler function choose what to do based on the value of <code>event.target.name</code>.</p>
+<p>For example:</p>
+<pre class="javascript{15,18,28,37}"><code>class Reservation extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isGoing: true,
+      numberOfGuests: 2
+    };
+
+    this.handleInputChange = this.handleInputChange.bind(this);
+  }
+
+  handleInputChange(event) {
+    const target = event.target;
+    const value = target.type === &#39;checkbox&#39; ? target.checked : target.value;
+    const name = target.name;
+
+    this.setState({
+      [name]: value
+    });
+  }
+
+  render() {
+    return (
+      &lt;form&gt;
+        &lt;label&gt;
+          Is going:
+          &lt;input
+            name=&quot;isGoing&quot;
+            type=&quot;checkbox&quot;
+            checked={this.state.isGoing}
+            onChange={this.handleInputChange} /&gt;
+        &lt;/label&gt;
+        &lt;br /&gt;
+        &lt;label&gt;
+          Number of guests:
+          &lt;input
+            name=&quot;numberOfGuests&quot;
+            type=&quot;number&quot;
+            value={this.state.numberOfGuests}
+            onChange={this.handleInputChange} /&gt;
+        &lt;/label&gt;
+      &lt;/form&gt;
+    );
+  }
+}</code></pre>
+<p><a href="https://codepen.io/gaearon/pen/wgedvV?editors=0010"><strong>Try it on CodePen</strong></a></p>
+<p>Note how we used the ES6 <a href="https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Operators/Object_initializer#Computed_property_names">computed property name</a> syntax to update the state key corresponding to the given input name:</p>
+<pre class="js{2}"><code>this.setState({
+  [name]: value
+});</code></pre>
+<p>It is equivalent to this ES5 code:</p>
+<pre class="js{2}"><code>var partialState = {};
+partialState[name] = value;
+this.setState(partialState);</code></pre>
+<p>Also, since <code>setState()</code> automatically <a href="/docs/state-and-lifecycle.html#state-updates-are-merged">merges a partial state into the current state</a>, we only needed to call it with the changed parts.</p>
+<h2 id="controlled-input-null-value">Controlled Input Null Value</h2>
+<p>Specifying the value prop on a <a href="/docs/forms.html#controlled-components">controlled component</a> prevents the user from changing the input unless you desire so. If you’ve specified a <code>value</code> but the input is still editable, you may have accidentally set <code>value</code> to <code>undefined</code> or <code>null</code>.</p>
+<p>The following code demonstrates this. (The input is locked at first but becomes editable after a short delay.)</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb12-1" title="1"><span class="va">ReactDOM</span>.<span class="at">render</span>(<span class="op">&lt;</span>input value<span class="op">=</span><span class="st">&quot;hi&quot;</span> /&gt;<span class="op">,</span> mountNode)<span class="op">;</span></a>
+<a class="sourceLine" id="cb12-2" title="2"></a>
+<a class="sourceLine" id="cb12-3" title="3"><span class="at">setTimeout</span>(<span class="kw">function</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb12-4" title="4">  <span class="va">ReactDOM</span>.<span class="at">render</span>(<span class="op">&lt;</span>input value<span class="op">={</span><span class="kw">null</span><span class="op">}</span> /&gt;<span class="op">,</span> mountNode)<span class="op">;</span></a>
+<a class="sourceLine" id="cb12-5" title="5"><span class="op">},</span> <span class="dv">1000</span>)<span class="op">;</span></a></code></pre></div>
+<h2 id="alternatives-to-controlled-components">Alternatives to Controlled Components</h2>
+<p>It can sometimes be tedious to use controlled components, because you need to write an event handler for every way your data can change and pipe all of the input state through a React component. This can become particularly annoying when you are converting a preexisting codebase to React, or integrating a React application with a non-React library. In these situations, you might want to check out <a href="/docs/uncontrolled-components.html">uncontrolled components</a>, an alternative technique for implementing input forms.</p>
+<h2 id="fully-fledged-solutions">Fully-Fledged Solutions</h2>
+<p>If you’re looking for a complete solution including validation, keeping track of the visited fields, and handling form submission, <a href="https://jaredpalmer.com/formik">Formik</a> is one of the popular choices. However, it is built on the same principles of controlled components and managing state — so don’t neglect to learn them.</p>
+</body>
+</html>

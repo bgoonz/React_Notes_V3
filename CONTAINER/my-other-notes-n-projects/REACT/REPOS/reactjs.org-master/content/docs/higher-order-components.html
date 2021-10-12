@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Higher-Order Components</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Higher-Order Components</h1>
+</header>
+<p>A higher-order component (HOC) is an advanced technique in React for reusing component logic. HOCs are not part of the React API, per se. They are a pattern that emerges from React’s compositional nature.</p>
+<p>Concretely, <strong>a higher-order component is a function that takes a component and returns a new component.</strong></p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">const</span> EnhancedComponent <span class="op">=</span> <span class="at">higherOrderComponent</span>(WrappedComponent)<span class="op">;</span></a></code></pre></div>
+<p>Whereas a component transforms props into UI, a higher-order component transforms a component into another component.</p>
+<p>HOCs are common in third-party React libraries, such as Redux’s <a href="https://github.com/reduxjs/react-redux/blob/master/docs/api/connect.md#connect"><code>connect</code></a> and Relay’s <a href="http://facebook.github.io/relay/docs/en/fragment-container.html"><code>createFragmentContainer</code></a>.</p>
+<p>In this document, we’ll discuss why higher-order components are useful, and how to write your own.</p>
+<h2 id="use-hocs-for-cross-cutting-concerns">Use HOCs For Cross-Cutting Concerns</h2>
+<blockquote>
+<p><strong>Note</strong></p>
+<p>We previously recommended mixins as a way to handle cross-cutting concerns. We’ve since realized that mixins create more trouble than they are worth. <a href="/blog/2016/07/13/mixins-considered-harmful.html">Read more</a> about why we’ve moved away from mixins and how you can transition your existing components.</p>
+</blockquote>
+<p>Components are the primary unit of code reuse in React. However, you’ll find that some patterns aren’t a straightforward fit for traditional components.</p>
+<p>For example, say you have a <code>CommentList</code> component that subscribes to an external data source to render a list of comments:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb2-1" title="1"><span class="kw">class</span> CommentList <span class="kw">extends</span> <span class="va">React</span>.<span class="at">Component</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb2-2" title="2">  <span class="at">constructor</span>(props) <span class="op">{</span></a>
+<a class="sourceLine" id="cb2-3" title="3">    <span class="kw">super</span>(props)<span class="op">;</span></a>
+<a class="sourceLine" id="cb2-4" title="4">    <span class="kw">this</span>.<span class="at">handleChange</span> <span class="op">=</span> <span class="kw">this</span>.<span class="va">handleChange</span>.<span class="at">bind</span>(<span class="kw">this</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb2-5" title="5">    <span class="kw">this</span>.<span class="at">state</span> <span class="op">=</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb2-6" title="6">      <span class="co">// &quot;DataSource&quot; is some global data source</span></a>
+<a class="sourceLine" id="cb2-7" title="7">      <span class="dt">comments</span><span class="op">:</span> <span class="va">DataSource</span>.<span class="at">getComments</span>()</a>
+<a class="sourceLine" id="cb2-8" title="8">    <span class="op">};</span></a>
+<a class="sourceLine" id="cb2-9" title="9">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb2-10" title="10"></a>
+<a class="sourceLine" id="cb2-11" title="11">  <span class="at">componentDidMount</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb2-12" title="12">    <span class="co">// Subscribe to changes</span></a>
+<a class="sourceLine" id="cb2-13" title="13">    <span class="va">DataSource</span>.<span class="at">addChangeListener</span>(<span class="kw">this</span>.<span class="at">handleChange</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb2-14" title="14">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb2-15" title="15"></a>
+<a class="sourceLine" id="cb2-16" title="16">  <span class="at">componentWillUnmount</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb2-17" title="17">    <span class="co">// Clean up listener</span></a>
+<a class="sourceLine" id="cb2-18" title="18">    <span class="va">DataSource</span>.<span class="at">removeChangeListener</span>(<span class="kw">this</span>.<span class="at">handleChange</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb2-19" title="19">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb2-20" title="20"></a>
+<a class="sourceLine" id="cb2-21" title="21">  <span class="at">handleChange</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb2-22" title="22">    <span class="co">// Update component state whenever the data source changes</span></a>
+<a class="sourceLine" id="cb2-23" title="23">    <span class="kw">this</span>.<span class="at">setState</span>(<span class="op">{</span></a>
+<a class="sourceLine" id="cb2-24" title="24">      <span class="dt">comments</span><span class="op">:</span> <span class="va">DataSource</span>.<span class="at">getComments</span>()</a>
+<a class="sourceLine" id="cb2-25" title="25">    <span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb2-26" title="26">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb2-27" title="27"></a>
+<a class="sourceLine" id="cb2-28" title="28">  <span class="at">render</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb2-29" title="29">    <span class="cf">return</span> (</a>
+<a class="sourceLine" id="cb2-30" title="30">      <span class="op">&lt;</span>div<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb2-31" title="31">        <span class="op">{</span><span class="kw">this</span>.<span class="va">state</span>.<span class="va">comments</span>.<span class="at">map</span>((comment) <span class="kw">=&gt;</span> (</a>
+<a class="sourceLine" id="cb2-32" title="32">          <span class="op">&lt;</span>Comment comment<span class="op">={</span>comment<span class="op">}</span> key<span class="op">={</span><span class="va">comment</span>.<span class="at">id</span><span class="op">}</span> /&gt;</a>
+<a class="sourceLine" id="cb2-33" title="33">        ))<span class="op">}</span></a>
+<a class="sourceLine" id="cb2-34" title="34">      &lt;/div<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb2-35" title="35">    )<span class="op">;</span></a>
+<a class="sourceLine" id="cb2-36" title="36">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb2-37" title="37"><span class="op">}</span></a></code></pre></div>
+<p>Later, you write a component for subscribing to a single blog post, which follows a similar pattern:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb3-1" title="1"><span class="kw">class</span> BlogPost <span class="kw">extends</span> <span class="va">React</span>.<span class="at">Component</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb3-2" title="2">  <span class="at">constructor</span>(props) <span class="op">{</span></a>
+<a class="sourceLine" id="cb3-3" title="3">    <span class="kw">super</span>(props)<span class="op">;</span></a>
+<a class="sourceLine" id="cb3-4" title="4">    <span class="kw">this</span>.<span class="at">handleChange</span> <span class="op">=</span> <span class="kw">this</span>.<span class="va">handleChange</span>.<span class="at">bind</span>(<span class="kw">this</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb3-5" title="5">    <span class="kw">this</span>.<span class="at">state</span> <span class="op">=</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb3-6" title="6">      <span class="dt">blogPost</span><span class="op">:</span> <span class="va">DataSource</span>.<span class="at">getBlogPost</span>(<span class="va">props</span>.<span class="at">id</span>)</a>
+<a class="sourceLine" id="cb3-7" title="7">    <span class="op">};</span></a>
+<a class="sourceLine" id="cb3-8" title="8">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb3-9" title="9"></a>
+<a class="sourceLine" id="cb3-10" title="10">  <span class="at">componentDidMount</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb3-11" title="11">    <span class="va">DataSource</span>.<span class="at">addChangeListener</span>(<span class="kw">this</span>.<span class="at">handleChange</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb3-12" title="12">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb3-13" title="13"></a>
+<a class="sourceLine" id="cb3-14" title="14">  <span class="at">componentWillUnmount</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb3-15" title="15">    <span class="va">DataSource</span>.<span class="at">removeChangeListener</span>(<span class="kw">this</span>.<span class="at">handleChange</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb3-16" title="16">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb3-17" title="17"></a>
+<a class="sourceLine" id="cb3-18" title="18">  <span class="at">handleChange</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb3-19" title="19">    <span class="kw">this</span>.<span class="at">setState</span>(<span class="op">{</span></a>
+<a class="sourceLine" id="cb3-20" title="20">      <span class="dt">blogPost</span><span class="op">:</span> <span class="va">DataSource</span>.<span class="at">getBlogPost</span>(<span class="kw">this</span>.<span class="va">props</span>.<span class="at">id</span>)</a>
+<a class="sourceLine" id="cb3-21" title="21">    <span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb3-22" title="22">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb3-23" title="23"></a>
+<a class="sourceLine" id="cb3-24" title="24">  <span class="at">render</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb3-25" title="25">    <span class="cf">return</span> <span class="op">&lt;</span>TextBlock text<span class="op">={</span><span class="kw">this</span>.<span class="va">state</span>.<span class="at">blogPost</span><span class="op">}</span> /&gt;<span class="op">;</span></a>
+<a class="sourceLine" id="cb3-26" title="26">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb3-27" title="27"><span class="op">}</span></a></code></pre></div>
+<p><code>CommentList</code> and <code>BlogPost</code> aren’t identical — they call different methods on <code>DataSource</code>, and they render different output. But much of their implementation is the same:</p>
+<ul>
+<li>On mount, add a change listener to <code>DataSource</code>.</li>
+<li>Inside the listener, call <code>setState</code> whenever the data source changes.</li>
+<li>On unmount, remove the change listener.</li>
+</ul>
+<p>You can imagine that in a large app, this same pattern of subscribing to <code>DataSource</code> and calling <code>setState</code> will occur over and over again. We want an abstraction that allows us to define this logic in a single place and share it across many components. This is where higher-order components excel.</p>
+<p>We can write a function that creates components, like <code>CommentList</code> and <code>BlogPost</code>, that subscribe to <code>DataSource</code>. The function will accept as one of its arguments a child component that receives the subscribed data as a prop. Let’s call the function <code>withSubscription</code>:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb4-1" title="1"><span class="kw">const</span> CommentListWithSubscription <span class="op">=</span> <span class="at">withSubscription</span>(</a>
+<a class="sourceLine" id="cb4-2" title="2">  CommentList<span class="op">,</span></a>
+<a class="sourceLine" id="cb4-3" title="3">  (DataSource) <span class="kw">=&gt;</span> <span class="va">DataSource</span>.<span class="at">getComments</span>()</a>
+<a class="sourceLine" id="cb4-4" title="4">)<span class="op">;</span></a>
+<a class="sourceLine" id="cb4-5" title="5"></a>
+<a class="sourceLine" id="cb4-6" title="6"><span class="kw">const</span> BlogPostWithSubscription <span class="op">=</span> <span class="at">withSubscription</span>(</a>
+<a class="sourceLine" id="cb4-7" title="7">  BlogPost<span class="op">,</span></a>
+<a class="sourceLine" id="cb4-8" title="8">  (DataSource<span class="op">,</span> props) <span class="kw">=&gt;</span> <span class="va">DataSource</span>.<span class="at">getBlogPost</span>(<span class="va">props</span>.<span class="at">id</span>)</a>
+<a class="sourceLine" id="cb4-9" title="9">)<span class="op">;</span></a></code></pre></div>
+<p>The first parameter is the wrapped component. The second parameter retrieves the data we’re interested in, given a <code>DataSource</code> and the current props.</p>
+<p>When <code>CommentListWithSubscription</code> and <code>BlogPostWithSubscription</code> are rendered, <code>CommentList</code> and <code>BlogPost</code> will be passed a <code>data</code> prop with the most current data retrieved from <code>DataSource</code>:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb5-1" title="1"><span class="co">// This function takes a component...</span></a>
+<a class="sourceLine" id="cb5-2" title="2"><span class="kw">function</span> <span class="at">withSubscription</span>(WrappedComponent<span class="op">,</span> selectData) <span class="op">{</span></a>
+<a class="sourceLine" id="cb5-3" title="3">  <span class="co">// ...and returns another component...</span></a>
+<a class="sourceLine" id="cb5-4" title="4">  <span class="cf">return</span> <span class="kw">class</span> <span class="kw">extends</span> <span class="va">React</span>.<span class="at">Component</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb5-5" title="5">    <span class="at">constructor</span>(props) <span class="op">{</span></a>
+<a class="sourceLine" id="cb5-6" title="6">      <span class="kw">super</span>(props)<span class="op">;</span></a>
+<a class="sourceLine" id="cb5-7" title="7">      <span class="kw">this</span>.<span class="at">handleChange</span> <span class="op">=</span> <span class="kw">this</span>.<span class="va">handleChange</span>.<span class="at">bind</span>(<span class="kw">this</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb5-8" title="8">      <span class="kw">this</span>.<span class="at">state</span> <span class="op">=</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb5-9" title="9">        <span class="dt">data</span><span class="op">:</span> <span class="at">selectData</span>(DataSource<span class="op">,</span> props)</a>
+<a class="sourceLine" id="cb5-10" title="10">      <span class="op">};</span></a>
+<a class="sourceLine" id="cb5-11" title="11">    <span class="op">}</span></a>
+<a class="sourceLine" id="cb5-12" title="12"></a>
+<a class="sourceLine" id="cb5-13" title="13">    <span class="at">componentDidMount</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb5-14" title="14">      <span class="co">// ... that takes care of the subscription...</span></a>
+<a class="sourceLine" id="cb5-15" title="15">      <span class="va">DataSource</span>.<span class="at">addChangeListener</span>(<span class="kw">this</span>.<span class="at">handleChange</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb5-16" title="16">    <span class="op">}</span></a>
+<a class="sourceLine" id="cb5-17" title="17"></a>
+<a class="sourceLine" id="cb5-18" title="18">    <span class="at">componentWillUnmount</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb5-19" title="19">      <span class="va">DataSource</span>.<span class="at">removeChangeListener</span>(<span class="kw">this</span>.<span class="at">handleChange</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb5-20" title="20">    <span class="op">}</span></a>
+<a class="sourceLine" id="cb5-21" title="21"></a>
+<a class="sourceLine" id="cb5-22" title="22">    <span class="at">handleChange</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb5-23" title="23">      <span class="kw">this</span>.<span class="at">setState</span>(<span class="op">{</span></a>
+<a class="sourceLine" id="cb5-24" title="24">        <span class="dt">data</span><span class="op">:</span> <span class="at">selectData</span>(DataSource<span class="op">,</span> <span class="kw">this</span>.<span class="at">props</span>)</a>
+<a class="sourceLine" id="cb5-25" title="25">      <span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb5-26" title="26">    <span class="op">}</span></a>
+<a class="sourceLine" id="cb5-27" title="27"></a>
+<a class="sourceLine" id="cb5-28" title="28">    <span class="at">render</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb5-29" title="29">      <span class="co">// ... and renders the wrapped component with the fresh data!</span></a>
+<a class="sourceLine" id="cb5-30" title="30">      <span class="co">// Notice that we pass through any additional props</span></a>
+<a class="sourceLine" id="cb5-31" title="31">      <span class="cf">return</span> <span class="op">&lt;</span>WrappedComponent data<span class="op">={</span><span class="kw">this</span>.<span class="va">state</span>.<span class="at">data</span><span class="op">}</span> <span class="op">{</span>...<span class="va">this</span>.<span class="at">props</span><span class="op">}</span> /&gt;<span class="op">;</span></a>
+<a class="sourceLine" id="cb5-32" title="32">    <span class="op">}</span></a>
+<a class="sourceLine" id="cb5-33" title="33">  <span class="op">};</span></a>
+<a class="sourceLine" id="cb5-34" title="34"><span class="op">}</span></a></code></pre></div>
+<p>Note that a HOC doesn’t modify the input component, nor does it use inheritance to copy its behavior. Rather, a HOC <em>composes</em> the original component by <em>wrapping</em> it in a container component. A HOC is a pure function with zero side-effects.</p>
+<p>And that’s it! The wrapped component receives all the props of the container, along with a new prop, <code>data</code>, which it uses to render its output. The HOC isn’t concerned with how or why the data is used, and the wrapped component isn’t concerned with where the data came from.</p>
+<p>Because <code>withSubscription</code> is a normal function, you can add as many or as few arguments as you like. For example, you may want to make the name of the <code>data</code> prop configurable, to further isolate the HOC from the wrapped component. Or you could accept an argument that configures <code>shouldComponentUpdate</code>, or one that configures the data source. These are all possible because the HOC has full control over how the component is defined.</p>
+<p>Like components, the contract between <code>withSubscription</code> and the wrapped component is entirely props-based. This makes it easy to swap one HOC for a different one, as long as they provide the same props to the wrapped component. This may be useful if you change data-fetching libraries, for example.</p>
+<h2 id="dont-mutate-the-original-component-use-composition">Don’t Mutate the Original Component. Use Composition.</h2>
+<p>Resist the temptation to modify a component’s prototype (or otherwise mutate it) inside a HOC.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb6-1" title="1"><span class="kw">function</span> <span class="at">logProps</span>(InputComponent) <span class="op">{</span></a>
+<a class="sourceLine" id="cb6-2" title="2">  <span class="va">InputComponent</span>.<span class="va">prototype</span>.<span class="at">componentDidUpdate</span> <span class="op">=</span> <span class="kw">function</span>(prevProps) <span class="op">{</span></a>
+<a class="sourceLine" id="cb6-3" title="3">    <span class="va">console</span>.<span class="at">log</span>(<span class="st">&#39;Current props: &#39;</span><span class="op">,</span> <span class="kw">this</span>.<span class="at">props</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb6-4" title="4">    <span class="va">console</span>.<span class="at">log</span>(<span class="st">&#39;Previous props: &#39;</span><span class="op">,</span> prevProps)<span class="op">;</span></a>
+<a class="sourceLine" id="cb6-5" title="5">  <span class="op">};</span></a>
+<a class="sourceLine" id="cb6-6" title="6">  <span class="co">// The fact that we&#39;re returning the original input is a hint that it has</span></a>
+<a class="sourceLine" id="cb6-7" title="7">  <span class="co">// been mutated.</span></a>
+<a class="sourceLine" id="cb6-8" title="8">  <span class="cf">return</span> InputComponent<span class="op">;</span></a>
+<a class="sourceLine" id="cb6-9" title="9"><span class="op">}</span></a>
+<a class="sourceLine" id="cb6-10" title="10"></a>
+<a class="sourceLine" id="cb6-11" title="11"><span class="co">// EnhancedComponent will log whenever props are received</span></a>
+<a class="sourceLine" id="cb6-12" title="12"><span class="kw">const</span> EnhancedComponent <span class="op">=</span> <span class="at">logProps</span>(InputComponent)<span class="op">;</span></a></code></pre></div>
+<p>There are a few problems with this. One is that the input component cannot be reused separately from the enhanced component. More crucially, if you apply another HOC to <code>EnhancedComponent</code> that <em>also</em> mutates <code>componentDidUpdate</code>, the first HOC’s functionality will be overridden! This HOC also won’t work with function components, which do not have lifecycle methods.</p>
+<p>Mutating HOCs are a leaky abstraction—the consumer must know how they are implemented in order to avoid conflicts with other HOCs.</p>
+<p>Instead of mutation, HOCs should use composition, by wrapping the input component in a container component:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb7-1" title="1"><span class="kw">function</span> <span class="at">logProps</span>(WrappedComponent) <span class="op">{</span></a>
+<a class="sourceLine" id="cb7-2" title="2">  <span class="cf">return</span> <span class="kw">class</span> <span class="kw">extends</span> <span class="va">React</span>.<span class="at">Component</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb7-3" title="3">    <span class="at">componentDidUpdate</span>(prevProps) <span class="op">{</span></a>
+<a class="sourceLine" id="cb7-4" title="4">      <span class="va">console</span>.<span class="at">log</span>(<span class="st">&#39;Current props: &#39;</span><span class="op">,</span> <span class="kw">this</span>.<span class="at">props</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb7-5" title="5">      <span class="va">console</span>.<span class="at">log</span>(<span class="st">&#39;Previous props: &#39;</span><span class="op">,</span> prevProps)<span class="op">;</span></a>
+<a class="sourceLine" id="cb7-6" title="6">    <span class="op">}</span></a>
+<a class="sourceLine" id="cb7-7" title="7">    <span class="at">render</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb7-8" title="8">      <span class="co">// Wraps the input component in a container, without mutating it. Good!</span></a>
+<a class="sourceLine" id="cb7-9" title="9">      <span class="cf">return</span> <span class="op">&lt;</span>WrappedComponent <span class="op">{</span>...<span class="va">this</span>.<span class="at">props</span><span class="op">}</span> /&gt;<span class="op">;</span></a>
+<a class="sourceLine" id="cb7-10" title="10">    <span class="op">}</span></a>
+<a class="sourceLine" id="cb7-11" title="11">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb7-12" title="12"><span class="op">}</span></a></code></pre></div>
+<p>This HOC has the same functionality as the mutating version while avoiding the potential for clashes. It works equally well with class and function components. And because it’s a pure function, it’s composable with other HOCs, or even with itself.</p>
+<p>You may have noticed similarities between HOCs and a pattern called <strong>container components</strong>. Container components are part of a strategy of separating responsibility between high-level and low-level concerns. Containers manage things like subscriptions and state, and pass props to components that handle things like rendering UI. HOCs use containers as part of their implementation. You can think of HOCs as parameterized container component definitions.</p>
+<h2 id="convention-pass-unrelated-props-through-to-the-wrapped-component">Convention: Pass Unrelated Props Through to the Wrapped Component</h2>
+<p>HOCs add features to a component. They shouldn’t drastically alter its contract. It’s expected that the component returned from a HOC has a similar interface to the wrapped component.</p>
+<p>HOCs should pass through props that are unrelated to its specific concern. Most HOCs contain a render method that looks something like this:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb8-1" title="1"><span class="at">render</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb8-2" title="2">  <span class="co">// Filter out extra props that are specific to this HOC and shouldn&#39;t be</span></a>
+<a class="sourceLine" id="cb8-3" title="3">  <span class="co">// passed through</span></a>
+<a class="sourceLine" id="cb8-4" title="4">  <span class="kw">const</span> <span class="op">{</span> extraProp<span class="op">,</span> ...<span class="at">passThroughProps</span> <span class="op">}</span> <span class="op">=</span> <span class="kw">this</span>.<span class="at">props</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb8-5" title="5"></a>
+<a class="sourceLine" id="cb8-6" title="6">  <span class="co">// Inject props into the wrapped component. These are usually state values or</span></a>
+<a class="sourceLine" id="cb8-7" title="7">  <span class="co">// instance methods.</span></a>
+<a class="sourceLine" id="cb8-8" title="8">  <span class="kw">const</span> injectedProp <span class="op">=</span> someStateOrInstanceMethod<span class="op">;</span></a>
+<a class="sourceLine" id="cb8-9" title="9"></a>
+<a class="sourceLine" id="cb8-10" title="10">  <span class="co">// Pass props to wrapped component</span></a>
+<a class="sourceLine" id="cb8-11" title="11">  <span class="cf">return</span> (</a>
+<a class="sourceLine" id="cb8-12" title="12">    <span class="op">&lt;</span>WrappedComponent</a>
+<a class="sourceLine" id="cb8-13" title="13">      injectedProp<span class="op">={</span>injectedProp<span class="op">}</span></a>
+<a class="sourceLine" id="cb8-14" title="14">      <span class="op">{</span>...<span class="at">passThroughProps</span><span class="op">}</span></a>
+<a class="sourceLine" id="cb8-15" title="15">    /&gt;</a>
+<a class="sourceLine" id="cb8-16" title="16">  )<span class="op">;</span></a>
+<a class="sourceLine" id="cb8-17" title="17"><span class="op">}</span></a></code></pre></div>
+<p>This convention helps ensure that HOCs are as flexible and reusable as possible.</p>
+<h2 id="convention-maximizing-composability">Convention: Maximizing Composability</h2>
+<p>Not all HOCs look the same. Sometimes they accept only a single argument, the wrapped component:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb9-1" title="1"><span class="kw">const</span> NavbarWithRouter <span class="op">=</span> <span class="at">withRouter</span>(Navbar)<span class="op">;</span></a></code></pre></div>
+<p>Usually, HOCs accept additional arguments. In this example from Relay, a config object is used to specify a component’s data dependencies:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb10-1" title="1"><span class="kw">const</span> CommentWithRelay <span class="op">=</span> <span class="va">Relay</span>.<span class="at">createContainer</span>(Comment<span class="op">,</span> config)<span class="op">;</span></a></code></pre></div>
+<p>The most common signature for HOCs looks like this:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb11-1" title="1"><span class="co">// React Redux&#39;s `connect`</span></a>
+<a class="sourceLine" id="cb11-2" title="2"><span class="kw">const</span> ConnectedComment <span class="op">=</span> <span class="at">connect</span>(commentSelector<span class="op">,</span> commentActions)(CommentList)<span class="op">;</span></a></code></pre></div>
+<p><em>What?!</em> If you break it apart, it’s easier to see what’s going on.</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb12-1" title="1"><span class="co">// connect is a function that returns another function</span></a>
+<a class="sourceLine" id="cb12-2" title="2"><span class="kw">const</span> enhance <span class="op">=</span> <span class="at">connect</span>(commentListSelector<span class="op">,</span> commentListActions)<span class="op">;</span></a>
+<a class="sourceLine" id="cb12-3" title="3"><span class="co">// The returned function is a HOC, which returns a component that is connected</span></a>
+<a class="sourceLine" id="cb12-4" title="4"><span class="co">// to the Redux store</span></a>
+<a class="sourceLine" id="cb12-5" title="5"><span class="kw">const</span> ConnectedComment <span class="op">=</span> <span class="at">enhance</span>(CommentList)<span class="op">;</span></a></code></pre></div>
+<p>In other words, <code>connect</code> is a higher-order function that returns a higher-order component!</p>
+<p>This form may seem confusing or unnecessary, but it has a useful property. Single-argument HOCs like the one returned by the <code>connect</code> function have the signature <code>Component =&gt; Component</code>. Functions whose output type is the same as its input type are really easy to compose together.</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb13-1" title="1"><span class="co">// Instead of doing this...</span></a>
+<a class="sourceLine" id="cb13-2" title="2"><span class="kw">const</span> EnhancedComponent <span class="op">=</span> <span class="at">withRouter</span>(<span class="at">connect</span>(commentSelector)(WrappedComponent))</a>
+<a class="sourceLine" id="cb13-3" title="3"></a>
+<a class="sourceLine" id="cb13-4" title="4"><span class="co">// ... you can use a function composition utility</span></a>
+<a class="sourceLine" id="cb13-5" title="5"><span class="co">// compose(f, g, h) is the same as (...args) =&gt; f(g(h(...args)))</span></a>
+<a class="sourceLine" id="cb13-6" title="6"><span class="kw">const</span> enhance <span class="op">=</span> <span class="at">compose</span>(</a>
+<a class="sourceLine" id="cb13-7" title="7">  <span class="co">// These are both single-argument HOCs</span></a>
+<a class="sourceLine" id="cb13-8" title="8">  withRouter<span class="op">,</span></a>
+<a class="sourceLine" id="cb13-9" title="9">  <span class="at">connect</span>(commentSelector)</a>
+<a class="sourceLine" id="cb13-10" title="10">)</a>
+<a class="sourceLine" id="cb13-11" title="11"><span class="kw">const</span> EnhancedComponent <span class="op">=</span> <span class="at">enhance</span>(WrappedComponent)</a></code></pre></div>
+<p>(This same property also allows <code>connect</code> and other enhancer-style HOCs to be used as decorators, an experimental JavaScript proposal.)</p>
+<p>The <code>compose</code> utility function is provided by many third-party libraries including lodash (as <a href="https://lodash.com/docs/#flowRight"><code>lodash.flowRight</code></a>), <a href="https://redux.js.org/api/compose">Redux</a>, and <a href="https://ramdajs.com/docs/#compose">Ramda</a>.</p>
+<h2 id="convention-wrap-the-display-name-for-easy-debugging">Convention: Wrap the Display Name for Easy Debugging</h2>
+<p>The container components created by HOCs show up in the <a href="https://github.com/facebook/react-devtools">React Developer Tools</a> like any other component. To ease debugging, choose a display name that communicates that it’s the result of a HOC.</p>
+<p>The most common technique is to wrap the display name of the wrapped component. So if your higher-order component is named <code>withSubscription</code>, and the wrapped component’s display name is <code>CommentList</code>, use the display name <code>WithSubscription(CommentList)</code>:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb14-1" title="1"><span class="kw">function</span> <span class="at">withSubscription</span>(WrappedComponent) <span class="op">{</span></a>
+<a class="sourceLine" id="cb14-2" title="2">  <span class="kw">class</span> WithSubscription <span class="kw">extends</span> <span class="va">React</span>.<span class="at">Component</span> <span class="op">{</span><span class="co">/* ... */</span><span class="op">}</span></a>
+<a class="sourceLine" id="cb14-3" title="3">  <span class="va">WithSubscription</span>.<span class="at">displayName</span> <span class="op">=</span> <span class="vs">`WithSubscription(</span><span class="sc">${</span><span class="at">getDisplayName</span>(WrappedComponent)<span class="sc">}</span><span class="vs">)`</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb14-4" title="4">  <span class="cf">return</span> WithSubscription<span class="op">;</span></a>
+<a class="sourceLine" id="cb14-5" title="5"><span class="op">}</span></a>
+<a class="sourceLine" id="cb14-6" title="6"></a>
+<a class="sourceLine" id="cb14-7" title="7"><span class="kw">function</span> <span class="at">getDisplayName</span>(WrappedComponent) <span class="op">{</span></a>
+<a class="sourceLine" id="cb14-8" title="8">  <span class="cf">return</span> <span class="va">WrappedComponent</span>.<span class="at">displayName</span> <span class="op">||</span> <span class="va">WrappedComponent</span>.<span class="at">name</span> <span class="op">||</span> <span class="st">&#39;Component&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb14-9" title="9"><span class="op">}</span></a></code></pre></div>
+<h2 id="caveats">Caveats</h2>
+<p>Higher-order components come with a few caveats that aren’t immediately obvious if you’re new to React.</p>
+<h3 id="dont-use-hocs-inside-the-render-method">Don’t Use HOCs Inside the render Method</h3>
+<p>React’s diffing algorithm (called <a href="/docs/reconciliation.html">Reconciliation</a>) uses component identity to determine whether it should update the existing subtree or throw it away and mount a new one. If the component returned from <code>render</code> is identical (<code>===</code>) to the component from the previous render, React recursively updates the subtree by diffing it with the new one. If they’re not equal, the previous subtree is unmounted completely.</p>
+<p>Normally, you shouldn’t need to think about this. But it matters for HOCs because it means you can’t apply a HOC to a component within the render method of a component:</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb15-1" title="1"><span class="at">render</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb15-2" title="2">  <span class="co">// A new version of EnhancedComponent is created on every render</span></a>
+<a class="sourceLine" id="cb15-3" title="3">  <span class="co">// EnhancedComponent1 !== EnhancedComponent2</span></a>
+<a class="sourceLine" id="cb15-4" title="4">  <span class="kw">const</span> EnhancedComponent <span class="op">=</span> <span class="at">enhance</span>(MyComponent)<span class="op">;</span></a>
+<a class="sourceLine" id="cb15-5" title="5">  <span class="co">// That causes the entire subtree to unmount/remount each time!</span></a>
+<a class="sourceLine" id="cb15-6" title="6">  <span class="cf">return</span> <span class="op">&lt;</span>EnhancedComponent /<span class="op">&gt;;</span></a>
+<a class="sourceLine" id="cb15-7" title="7"><span class="op">}</span></a></code></pre></div>
+<p>The problem here isn’t just about performance — remounting a component causes the state of that component and all of its children to be lost.</p>
+<p>Instead, apply HOCs outside the component definition so that the resulting component is created only once. Then, its identity will be consistent across renders. This is usually what you want, anyway.</p>
+<p>In those rare cases where you need to apply a HOC dynamically, you can also do it inside a component’s lifecycle methods or its constructor.</p>
+<h3 id="static-methods-must-be-copied-over">Static Methods Must Be Copied Over</h3>
+<p>Sometimes it’s useful to define a static method on a React component. For example, Relay containers expose a static method <code>getFragment</code> to facilitate the composition of GraphQL fragments.</p>
+<p>When you apply a HOC to a component, though, the original component is wrapped with a container component. That means the new component does not have any of the static methods of the original component.</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb16-1" title="1"><span class="co">// Define a static method</span></a>
+<a class="sourceLine" id="cb16-2" title="2"><span class="va">WrappedComponent</span>.<span class="at">staticMethod</span> <span class="op">=</span> <span class="kw">function</span>() <span class="op">{</span><span class="co">/*...*/</span><span class="op">}</span></a>
+<a class="sourceLine" id="cb16-3" title="3"><span class="co">// Now apply a HOC</span></a>
+<a class="sourceLine" id="cb16-4" title="4"><span class="kw">const</span> EnhancedComponent <span class="op">=</span> <span class="at">enhance</span>(WrappedComponent)<span class="op">;</span></a>
+<a class="sourceLine" id="cb16-5" title="5"></a>
+<a class="sourceLine" id="cb16-6" title="6"><span class="co">// The enhanced component has no static method</span></a>
+<a class="sourceLine" id="cb16-7" title="7"><span class="kw">typeof</span> <span class="va">EnhancedComponent</span>.<span class="at">staticMethod</span> <span class="op">===</span> <span class="st">&#39;undefined&#39;</span> <span class="co">// true</span></a></code></pre></div>
+<p>To solve this, you could copy the methods onto the container before returning it:</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb17-1" title="1"><span class="kw">function</span> <span class="at">enhance</span>(WrappedComponent) <span class="op">{</span></a>
+<a class="sourceLine" id="cb17-2" title="2">  <span class="kw">class</span> Enhance <span class="kw">extends</span> <span class="va">React</span>.<span class="at">Component</span> <span class="op">{</span><span class="co">/*...*/</span><span class="op">}</span></a>
+<a class="sourceLine" id="cb17-3" title="3">  <span class="co">// Must know exactly which method(s) to copy :(</span></a>
+<a class="sourceLine" id="cb17-4" title="4">  <span class="va">Enhance</span>.<span class="at">staticMethod</span> <span class="op">=</span> <span class="va">WrappedComponent</span>.<span class="at">staticMethod</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb17-5" title="5">  <span class="cf">return</span> Enhance<span class="op">;</span></a>
+<a class="sourceLine" id="cb17-6" title="6"><span class="op">}</span></a></code></pre></div>
+<p>However, this requires you to know exactly which methods need to be copied. You can use <a href="https://github.com/mridgway/hoist-non-react-statics">hoist-non-react-statics</a> to automatically copy all non-React static methods:</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb18-1" title="1"><span class="im">import</span> hoistNonReactStatic <span class="im">from</span> <span class="st">&#39;hoist-non-react-statics&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb18-2" title="2"><span class="kw">function</span> <span class="at">enhance</span>(WrappedComponent) <span class="op">{</span></a>
+<a class="sourceLine" id="cb18-3" title="3">  <span class="kw">class</span> Enhance <span class="kw">extends</span> <span class="va">React</span>.<span class="at">Component</span> <span class="op">{</span><span class="co">/*...*/</span><span class="op">}</span></a>
+<a class="sourceLine" id="cb18-4" title="4">  <span class="at">hoistNonReactStatic</span>(Enhance<span class="op">,</span> WrappedComponent)<span class="op">;</span></a>
+<a class="sourceLine" id="cb18-5" title="5">  <span class="cf">return</span> Enhance<span class="op">;</span></a>
+<a class="sourceLine" id="cb18-6" title="6"><span class="op">}</span></a></code></pre></div>
+<p>Another possible solution is to export the static method separately from the component itself.</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb19-1" title="1"><span class="co">// Instead of...</span></a>
+<a class="sourceLine" id="cb19-2" title="2"><span class="va">MyComponent</span>.<span class="at">someFunction</span> <span class="op">=</span> someFunction<span class="op">;</span></a>
+<a class="sourceLine" id="cb19-3" title="3"><span class="im">export</span> <span class="im">default</span> MyComponent<span class="op">;</span></a>
+<a class="sourceLine" id="cb19-4" title="4"></a>
+<a class="sourceLine" id="cb19-5" title="5"><span class="co">// ...export the method separately...</span></a>
+<a class="sourceLine" id="cb19-6" title="6"><span class="im">export</span> <span class="op">{</span> someFunction <span class="op">};</span></a>
+<a class="sourceLine" id="cb19-7" title="7"></a>
+<a class="sourceLine" id="cb19-8" title="8"><span class="co">// ...and in the consuming module, import both</span></a>
+<a class="sourceLine" id="cb19-9" title="9"><span class="im">import</span> MyComponent<span class="op">,</span> <span class="op">{</span> someFunction <span class="op">}</span> <span class="im">from</span> <span class="st">&#39;./MyComponent.js&#39;</span><span class="op">;</span></a></code></pre></div>
+<h3 id="refs-arent-passed-through">Refs Aren’t Passed Through</h3>
+<p>While the convention for higher-order components is to pass through all props to the wrapped component, this does not work for refs. That’s because <code>ref</code> is not really a prop — like <code>key</code>, it’s handled specially by React. If you add a ref to an element whose component is the result of a HOC, the ref refers to an instance of the outermost container component, not the wrapped component.</p>
+<p>The solution for this problem is to use the <code>React.forwardRef</code> API (introduced with React 16.3). <a href="/docs/forwarding-refs.html">Learn more about it in the forwarding refs section</a>.</p>
+</body>
+</html>

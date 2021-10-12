@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>JSX In Depth</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">JSX In Depth</h1>
+</header>
+<p>Fundamentally, JSX just provides syntactic sugar for the <code>React.createElement(component, props, ...children)</code> function. The JSX code:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb1-1" title="1"><span class="op">&lt;</span>MyButton color<span class="op">=</span><span class="st">&quot;blue&quot;</span> shadowSize<span class="op">={</span><span class="dv">2</span><span class="op">}&gt;</span></a>
+<a class="sourceLine" id="cb1-2" title="2">  Click Me</a>
+<a class="sourceLine" id="cb1-3" title="3">&lt;/MyButton<span class="op">&gt;</span></a></code></pre></div>
+<p>compiles into:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb2-1" title="1"><span class="va">React</span>.<span class="at">createElement</span>(</a>
+<a class="sourceLine" id="cb2-2" title="2">  MyButton<span class="op">,</span></a>
+<a class="sourceLine" id="cb2-3" title="3">  <span class="op">{</span><span class="dt">color</span><span class="op">:</span> <span class="st">&#39;blue&#39;</span><span class="op">,</span> <span class="dt">shadowSize</span><span class="op">:</span> <span class="dv">2</span><span class="op">},</span></a>
+<a class="sourceLine" id="cb2-4" title="4">  <span class="st">&#39;Click Me&#39;</span></a>
+<a class="sourceLine" id="cb2-5" title="5">)</a></code></pre></div>
+<p>You can also use the self-closing form of the tag if there are no children. So:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb3-1" title="1"><span class="op">&lt;</span>div className<span class="op">=</span><span class="st">&quot;sidebar&quot;</span> /&gt;</a></code></pre></div>
+<p>compiles into:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb4-1" title="1"><span class="va">React</span>.<span class="at">createElement</span>(</a>
+<a class="sourceLine" id="cb4-2" title="2">  <span class="st">&#39;div&#39;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb4-3" title="3">  <span class="op">{</span><span class="dt">className</span><span class="op">:</span> <span class="st">&#39;sidebar&#39;</span><span class="op">}</span></a>
+<a class="sourceLine" id="cb4-4" title="4">)</a></code></pre></div>
+<p>If you want to test out how some specific JSX is converted into JavaScript, you can try out <a href="babel://jsx-simple-example">the online Babel compiler</a>.</p>
+<h2 id="specifying-the-react-element-type">Specifying The React Element Type</h2>
+<p>The first part of a JSX tag determines the type of the React element.</p>
+<p>Capitalized types indicate that the JSX tag is referring to a React component. These tags get compiled into a direct reference to the named variable, so if you use the JSX <code>&lt;Foo /&gt;</code> expression, <code>Foo</code> must be in scope.</p>
+<h3 id="react-must-be-in-scope">React Must Be in Scope</h3>
+<p>Since JSX compiles into calls to <code>React.createElement</code>, the <code>React</code> library must also always be in scope from your JSX code.</p>
+<p>For example, both of the imports are necessary in this code, even though <code>React</code> and <code>CustomButton</code> are not directly referenced from JavaScript:</p>
+<pre class="js{1,2,5}"><code>import React from &#39;react&#39;;
+import CustomButton from &#39;./CustomButton&#39;;
+
+function WarningButton() {
+  // return React.createElement(CustomButton, {color: &#39;red&#39;}, null);
+  return &lt;CustomButton color=&quot;red&quot; /&gt;;
+}</code></pre>
+<p>If you don’t use a JavaScript bundler and loaded React from a <code>&lt;script&gt;</code> tag, it is already in scope as the <code>React</code> global.</p>
+<h3 id="using-dot-notation-for-jsx-type">Using Dot Notation for JSX Type</h3>
+<p>You can also refer to a React component using dot-notation from within JSX. This is convenient if you have a single module that exports many React components. For example, if <code>MyComponents.DatePicker</code> is a component, you can use it directly from JSX with:</p>
+<pre class="js{10}"><code>import React from &#39;react&#39;;
+
+const MyComponents = {
+  DatePicker: function DatePicker(props) {
+    return &lt;div&gt;Imagine a {props.color} datepicker here.&lt;/div&gt;;
+  }
+}
+
+function BlueDatePicker() {
+  return &lt;MyComponents.DatePicker color=&quot;blue&quot; /&gt;;
+}</code></pre>
+<h3 id="user-defined-components-must-be-capitalized">User-Defined Components Must Be Capitalized</h3>
+<p>When an element type starts with a lowercase letter, it refers to a built-in component like <code>&lt;div&gt;</code> or <code>&lt;span&gt;</code> and results in a string <code>'div'</code> or <code>'span'</code> passed to <code>React.createElement</code>. Types that start with a capital letter like <code>&lt;Foo /&gt;</code> compile to <code>React.createElement(Foo)</code> and correspond to a component defined or imported in your JavaScript file.</p>
+<p>We recommend naming components with a capital letter. If you do have a component that starts with a lowercase letter, assign it to a capitalized variable before using it in JSX.</p>
+<p>For example, this code will not run as expected:</p>
+<pre class="js{3,4,10,11}"><code>import React from &#39;react&#39;;
+
+// Wrong! This is a component and should have been capitalized:
+function hello(props) {
+  // Correct! This use of &lt;div&gt; is legitimate because div is a valid HTML tag:
+  return &lt;div&gt;Hello {props.toWhat}&lt;/div&gt;;
+}
+
+function HelloWorld() {
+  // Wrong! React thinks &lt;hello /&gt; is an HTML tag because it&#39;s not capitalized:
+  return &lt;hello toWhat=&quot;World&quot; /&gt;;
+}</code></pre>
+<p>To fix this, we will rename <code>hello</code> to <code>Hello</code> and use <code>&lt;Hello /&gt;</code> when referring to it:</p>
+<pre class="js{3,4,10,11}"><code>import React from &#39;react&#39;;
+
+// Correct! This is a component and should be capitalized:
+function Hello(props) {
+  // Correct! This use of &lt;div&gt; is legitimate because div is a valid HTML tag:
+  return &lt;div&gt;Hello {props.toWhat}&lt;/div&gt;;
+}
+
+function HelloWorld() {
+  // Correct! React knows &lt;Hello /&gt; is a component because it&#39;s capitalized.
+  return &lt;Hello toWhat=&quot;World&quot; /&gt;;
+}</code></pre>
+<h3 id="choosing-the-type-at-runtime">Choosing the Type at Runtime</h3>
+<p>You cannot use a general expression as the React element type. If you do want to use a general expression to indicate the type of the element, just assign it to a capitalized variable first. This often comes up when you want to render a different component based on a prop:</p>
+<pre class="js{10,11}"><code>import React from &#39;react&#39;;
+import { PhotoStory, VideoStory } from &#39;./stories&#39;;
+
+const components = {
+  photo: PhotoStory,
+  video: VideoStory
+};
+
+function Story(props) {
+  // Wrong! JSX type can&#39;t be an expression.
+  return &lt;components[props.storyType] story={props.story} /&gt;;
+}</code></pre>
+<p>To fix this, we will assign the type to a capitalized variable first:</p>
+<pre class="js{10-12}"><code>import React from &#39;react&#39;;
+import { PhotoStory, VideoStory } from &#39;./stories&#39;;
+
+const components = {
+  photo: PhotoStory,
+  video: VideoStory
+};
+
+function Story(props) {
+  // Correct! JSX type can be a capitalized variable.
+  const SpecificStory = components[props.storyType];
+  return &lt;SpecificStory story={props.story} /&gt;;
+}</code></pre>
+<h2 id="props-in-jsx">Props in JSX</h2>
+<p>There are several different ways to specify props in JSX.</p>
+<h3 id="javascript-expressions-as-props">JavaScript Expressions as Props</h3>
+<p>You can pass any JavaScript expression as a prop, by surrounding it with <code>{}</code>. For example, in this JSX:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb11-1" title="1"><span class="op">&lt;</span>MyComponent foo<span class="op">={</span><span class="dv">1</span> <span class="op">+</span> <span class="dv">2</span> <span class="op">+</span> <span class="dv">3</span> <span class="op">+</span> <span class="dv">4</span><span class="op">}</span> /&gt;</a></code></pre></div>
+<p>For <code>MyComponent</code>, the value of <code>props.foo</code> will be <code>10</code> because the expression <code>1 + 2 + 3 + 4</code> gets evaluated.</p>
+<p><code>if</code> statements and <code>for</code> loops are not expressions in JavaScript, so they can’t be used in JSX directly. Instead, you can put these in the surrounding code. For example:</p>
+<pre class="js{3-7}"><code>function NumberDescriber(props) {
+  let description;
+  if (props.number % 2 == 0) {
+    description = &lt;strong&gt;even&lt;/strong&gt;;
+  } else {
+    description = &lt;i&gt;odd&lt;/i&gt;;
+  }
+  return &lt;div&gt;{props.number} is an {description} number&lt;/div&gt;;
+}</code></pre>
+<p>You can learn more about <a href="/docs/conditional-rendering.html">conditional rendering</a> and <a href="/docs/lists-and-keys.html">loops</a> in the corresponding sections.</p>
+<h3 id="string-literals">String Literals</h3>
+<p>You can pass a string literal as a prop. These two JSX expressions are equivalent:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb13-1" title="1"><span class="op">&lt;</span>MyComponent message<span class="op">=</span><span class="st">&quot;hello world&quot;</span> /&gt;</a>
+<a class="sourceLine" id="cb13-2" title="2"></a>
+<a class="sourceLine" id="cb13-3" title="3"><span class="op">&lt;</span>MyComponent message<span class="op">={</span><span class="st">&#39;hello world&#39;</span><span class="op">}</span> /&gt;</a></code></pre></div>
+<p>When you pass a string literal, its value is HTML-unescaped. So these two JSX expressions are equivalent:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb14-1" title="1"><span class="op">&lt;</span>MyComponent message<span class="op">=</span><span class="st">&quot;&amp;lt;3&quot;</span> /&gt;</a>
+<a class="sourceLine" id="cb14-2" title="2"></a>
+<a class="sourceLine" id="cb14-3" title="3"><span class="op">&lt;</span>MyComponent message<span class="op">={</span><span class="st">&#39;&lt;3&#39;</span><span class="op">}</span> /&gt;</a></code></pre></div>
+<p>This behavior is usually not relevant. It’s only mentioned here for completeness.</p>
+<h3 id="props-default-to-true">Props Default to “True”</h3>
+<p>If you pass no value for a prop, it defaults to <code>true</code>. These two JSX expressions are equivalent:</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb15-1" title="1"><span class="op">&lt;</span>MyTextBox autocomplete /<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb15-2" title="2"></a>
+<a class="sourceLine" id="cb15-3" title="3"><span class="op">&lt;</span>MyTextBox autocomplete<span class="op">={</span><span class="kw">true</span><span class="op">}</span> /&gt;</a></code></pre></div>
+<p>In general, we don’t recommend <em>not</em> passing a value for a prop, because it can be confused with the <a href="https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Operators/Object_initializer#New_notations_in_ECMAScript_2015">ES6 object shorthand</a> <code>{foo}</code> which is short for <code>{foo: foo}</code> rather than <code>{foo: true}</code>. This behavior is just there so that it matches the behavior of HTML.</p>
+<h3 id="spread-attributes">Spread Attributes</h3>
+<p>If you already have <code>props</code> as an object, and you want to pass it in JSX, you can use <code>...</code> as a “spread” operator to pass the whole props object. These two components are equivalent:</p>
+<pre class="js{7}"><code>function App1() {
+  return &lt;Greeting firstName=&quot;Ben&quot; lastName=&quot;Hector&quot; /&gt;;
+}
+
+function App2() {
+  const props = {firstName: &#39;Ben&#39;, lastName: &#39;Hector&#39;};
+  return &lt;Greeting {...props} /&gt;;
+}</code></pre>
+<p>You can also pick specific props that your component will consume while passing all other props using the spread operator.</p>
+<pre class="js{2}"><code>const Button = props =&gt; {
+  const { kind, ...other } = props;
+  const className = kind === &quot;primary&quot; ? &quot;PrimaryButton&quot; : &quot;SecondaryButton&quot;;
+  return &lt;button className={className} {...other} /&gt;;
+};
+
+const App = () =&gt; {
+  return (
+    &lt;div&gt;
+      &lt;Button kind=&quot;primary&quot; onClick={() =&gt; console.log(&quot;clicked!&quot;)}&gt;
+        Hello World!
+      &lt;/Button&gt;
+    &lt;/div&gt;
+  );
+};</code></pre>
+<p>In the example above, the <code>kind</code> prop is safely consumed and <em>is not</em> passed on to the <code>&lt;button&gt;</code> element in the DOM. All other props are passed via the <code>...other</code> object making this component really flexible. You can see that it passes an <code>onClick</code> and <code>children</code> props.</p>
+<p>Spread attributes can be useful but they also make it easy to pass unnecessary props to components that don’t care about them or to pass invalid HTML attributes to the DOM. We recommend using this syntax sparingly.</p>
+<h2 id="children-in-jsx">Children in JSX</h2>
+<p>In JSX expressions that contain both an opening tag and a closing tag, the content between those tags is passed as a special prop: <code>props.children</code>. There are several different ways to pass children:</p>
+<h3 id="string-literals-1">String Literals</h3>
+<p>You can put a string between the opening and closing tags and <code>props.children</code> will just be that string. This is useful for many of the built-in HTML elements. For example:</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb18-1" title="1"><span class="op">&lt;</span>MyComponent<span class="op">&gt;</span>Hello world<span class="op">!</span>&lt;/MyComponent<span class="op">&gt;</span></a></code></pre></div>
+<p>This is valid JSX, and <code>props.children</code> in <code>MyComponent</code> will simply be the string <code>"Hello world!"</code>. HTML is unescaped, so you can generally write JSX just like you would write HTML in this way:</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode html"><code class="sourceCode html"><a class="sourceLine" id="cb19-1" title="1"><span class="kw">&lt;div&gt;</span>This is valid HTML <span class="dv">&amp;amp;</span> JSX at the same time.<span class="kw">&lt;/div&gt;</span></a></code></pre></div>
+<p>JSX removes whitespace at the beginning and ending of a line. It also removes blank lines. New lines adjacent to tags are removed; new lines that occur in the middle of string literals are condensed into a single space. So these all render to the same thing:</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb20-1" title="1"><span class="op">&lt;</span>div<span class="op">&gt;</span>Hello World&lt;/div<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb20-2" title="2"></a>
+<a class="sourceLine" id="cb20-3" title="3"><span class="op">&lt;</span>div<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb20-4" title="4">  Hello World</a>
+<a class="sourceLine" id="cb20-5" title="5">&lt;/div<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb20-6" title="6"></a>
+<a class="sourceLine" id="cb20-7" title="7"><span class="op">&lt;</span>div<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb20-8" title="8">  Hello</a>
+<a class="sourceLine" id="cb20-9" title="9">  World</a>
+<a class="sourceLine" id="cb20-10" title="10">&lt;/div<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb20-11" title="11"></a>
+<a class="sourceLine" id="cb20-12" title="12"><span class="op">&lt;</span>div<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb20-13" title="13"></a>
+<a class="sourceLine" id="cb20-14" title="14">  Hello World</a>
+<a class="sourceLine" id="cb20-15" title="15">&lt;/div<span class="op">&gt;</span></a></code></pre></div>
+<h3 id="jsx-children">JSX Children</h3>
+<p>You can provide more JSX elements as the children. This is useful for displaying nested components:</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb21-1" title="1"><span class="op">&lt;</span>MyContainer<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb21-2" title="2">  <span class="op">&lt;</span>MyFirstComponent /<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb21-3" title="3">  <span class="op">&lt;</span>MySecondComponent /<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb21-4" title="4">&lt;/MyContainer<span class="op">&gt;</span></a></code></pre></div>
+<p>You can mix together different types of children, so you can use string literals together with JSX children. This is another way in which JSX is like HTML, so that this is both valid JSX and valid HTML:</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode html"><code class="sourceCode html"><a class="sourceLine" id="cb22-1" title="1"><span class="kw">&lt;div&gt;</span></a>
+<a class="sourceLine" id="cb22-2" title="2">  Here is a list:</a>
+<a class="sourceLine" id="cb22-3" title="3">  <span class="kw">&lt;ul&gt;</span></a>
+<a class="sourceLine" id="cb22-4" title="4">    <span class="kw">&lt;li&gt;</span>Item 1<span class="kw">&lt;/li&gt;</span></a>
+<a class="sourceLine" id="cb22-5" title="5">    <span class="kw">&lt;li&gt;</span>Item 2<span class="kw">&lt;/li&gt;</span></a>
+<a class="sourceLine" id="cb22-6" title="6">  <span class="kw">&lt;/ul&gt;</span></a>
+<a class="sourceLine" id="cb22-7" title="7"><span class="kw">&lt;/div&gt;</span></a></code></pre></div>
+<p>A React component can also return an array of elements:</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb23-1" title="1"><span class="at">render</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb23-2" title="2">  <span class="co">// No need to wrap list items in an extra element!</span></a>
+<a class="sourceLine" id="cb23-3" title="3">  <span class="cf">return</span> [</a>
+<a class="sourceLine" id="cb23-4" title="4">    <span class="co">// Don&#39;t forget the keys :)</span></a>
+<a class="sourceLine" id="cb23-5" title="5">    <span class="op">&lt;</span>li key<span class="op">=</span><span class="st">&quot;A&quot;</span><span class="op">&gt;</span>First item&lt;/li<span class="op">&gt;,</span></a>
+<a class="sourceLine" id="cb23-6" title="6">    <span class="op">&lt;</span>li key<span class="op">=</span><span class="st">&quot;B&quot;</span><span class="op">&gt;</span>Second item&lt;/li<span class="op">&gt;,</span></a>
+<a class="sourceLine" id="cb23-7" title="7">    <span class="op">&lt;</span>li key<span class="op">=</span><span class="st">&quot;C&quot;</span><span class="op">&gt;</span>Third item&lt;/li<span class="op">&gt;,</span></a>
+<a class="sourceLine" id="cb23-8" title="8">  ]<span class="op">;</span></a>
+<a class="sourceLine" id="cb23-9" title="9"><span class="op">}</span></a></code></pre></div>
+<h3 id="javascript-expressions-as-children">JavaScript Expressions as Children</h3>
+<p>You can pass any JavaScript expression as children, by enclosing it within <code>{}</code>. For example, these expressions are equivalent:</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb24-1" title="1"><span class="op">&lt;</span>MyComponent<span class="op">&gt;</span>foo&lt;/MyComponent<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb24-2" title="2"></a>
+<a class="sourceLine" id="cb24-3" title="3"><span class="op">&lt;</span>MyComponent<span class="op">&gt;{</span><span class="st">&#39;foo&#39;</span><span class="op">}</span>&lt;/MyComponent<span class="op">&gt;</span></a></code></pre></div>
+<p>This is often useful for rendering a list of JSX expressions of arbitrary length. For example, this renders an HTML list:</p>
+<pre class="js{2,9}"><code>function Item(props) {
+  return &lt;li&gt;{props.message}&lt;/li&gt;;
+}
+
+function TodoList() {
+  const todos = [&#39;finish doc&#39;, &#39;submit pr&#39;, &#39;nag dan to review&#39;];
+  return (
+    &lt;ul&gt;
+      {todos.map((message) =&gt; &lt;Item key={message} message={message} /&gt;)}
+    &lt;/ul&gt;
+  );
+}</code></pre>
+<p>JavaScript expressions can be mixed with other types of children. This is often useful in lieu of string templates:</p>
+<pre class="js{2}"><code>function Hello(props) {
+  return &lt;div&gt;Hello {props.addressee}!&lt;/div&gt;;
+}</code></pre>
+<h3 id="functions-as-children">Functions as Children</h3>
+<p>Normally, JavaScript expressions inserted in JSX will evaluate to a string, a React element, or a list of those things. However, <code>props.children</code> works just like any other prop in that it can pass any sort of data, not just the sorts that React knows how to render. For example, if you have a custom component, you could have it take a callback as <code>props.children</code>:</p>
+<pre class="js{4,13}"><code>// Calls the children callback numTimes to produce a repeated component
+function Repeat(props) {
+  let items = [];
+  for (let i = 0; i &lt; props.numTimes; i++) {
+    items.push(props.children(i));
+  }
+  return &lt;div&gt;{items}&lt;/div&gt;;
+}
+
+function ListOfTenThings() {
+  return (
+    &lt;Repeat numTimes={10}&gt;
+      {(index) =&gt; &lt;div key={index}&gt;This is item {index} in the list&lt;/div&gt;}
+    &lt;/Repeat&gt;
+  );
+}</code></pre>
+<p>Children passed to a custom component can be anything, as long as that component transforms them into something React can understand before rendering. This usage is not common, but it works if you want to stretch what JSX is capable of.</p>
+<h3 id="booleans-null-and-undefined-are-ignored">Booleans, Null, and Undefined Are Ignored</h3>
+<p><code>false</code>, <code>null</code>, <code>undefined</code>, and <code>true</code> are valid children. They simply don’t render. These JSX expressions will all render to the same thing:</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb28-1" title="1"><span class="op">&lt;</span>div /<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb28-2" title="2"></a>
+<a class="sourceLine" id="cb28-3" title="3"><span class="op">&lt;</span>div<span class="op">&gt;</span>&lt;/div<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb28-4" title="4"></a>
+<a class="sourceLine" id="cb28-5" title="5"><span class="op">&lt;</span>div<span class="op">&gt;{</span><span class="kw">false</span><span class="op">}</span>&lt;/div<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb28-6" title="6"></a>
+<a class="sourceLine" id="cb28-7" title="7"><span class="op">&lt;</span>div<span class="op">&gt;{</span><span class="kw">null</span><span class="op">}</span>&lt;/div<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb28-8" title="8"></a>
+<a class="sourceLine" id="cb28-9" title="9"><span class="op">&lt;</span>div<span class="op">&gt;{</span><span class="kw">undefined</span><span class="op">}</span>&lt;/div<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb28-10" title="10"></a>
+<a class="sourceLine" id="cb28-11" title="11"><span class="op">&lt;</span>div<span class="op">&gt;{</span><span class="kw">true</span><span class="op">}</span>&lt;/div<span class="op">&gt;</span></a></code></pre></div>
+<p>This can be useful to conditionally render React elements. This JSX renders the <code>&lt;Header /&gt;</code> component only if <code>showHeader</code> is <code>true</code>:</p>
+<pre class="js{2}"><code>&lt;div&gt;
+  {showHeader &amp;&amp; &lt;Header /&gt;}
+  &lt;Content /&gt;
+&lt;/div&gt;</code></pre>
+<p>One caveat is that some <a href="https://developer.mozilla.org/en-US/docs/Glossary/Falsy">“falsy” values</a>, such as the <code>0</code> number, are still rendered by React. For example, this code will not behave as you might expect because <code>0</code> will be printed when <code>props.messages</code> is an empty array:</p>
+<pre class="js{2}"><code>&lt;div&gt;
+  {props.messages.length &amp;&amp;
+    &lt;MessageList messages={props.messages} /&gt;
+  }
+&lt;/div&gt;</code></pre>
+<p>To fix this, make sure that the expression before <code>&amp;&amp;</code> is always boolean:</p>
+<pre class="js{2}"><code>&lt;div&gt;
+  {props.messages.length &gt; 0 &amp;&amp;
+    &lt;MessageList messages={props.messages} /&gt;
+  }
+&lt;/div&gt;</code></pre>
+<p>Conversely, if you want a value like <code>false</code>, <code>true</code>, <code>null</code>, or <code>undefined</code> to appear in the output, you have to <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String#String_conversion">convert it to a string</a> first:</p>
+<pre class="js{2}"><code>&lt;div&gt;
+  My JavaScript variable is {String(myVariable)}.
+&lt;/div&gt;</code></pre>
+</body>
+</html>

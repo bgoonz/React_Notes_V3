@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Don’t Call PropTypes Warning</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Don’t Call PropTypes Warning</h1>
+</header>
+<blockquote>
+<p>Note:</p>
+<p><code>React.PropTypes</code> has moved into a different package since React v15.5. Please use <a href="https://www.npmjs.com/package/prop-types">the <code>prop-types</code> library instead</a>.</p>
+<p>We provide <a href="/blog/2017/04/07/react-v15.5.0.html#migrating-from-react.proptypes">a codemod script</a> to automate the conversion.</p>
+</blockquote>
+<p>In a future major release of React, the code that implements PropType validation functions will be stripped in production. Once this happens, any code that calls these functions manually (that isn’t stripped in production) will throw an error.</p>
+<h3 id="declaring-proptypes-is-still-fine">Declaring PropTypes is still fine</h3>
+<p>The normal usage of PropTypes is still supported:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb1-1" title="1"><span class="va">Button</span>.<span class="at">propTypes</span> <span class="op">=</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb1-2" title="2">  <span class="dt">highlighted</span><span class="op">:</span> <span class="va">PropTypes</span>.<span class="at">bool</span></a>
+<a class="sourceLine" id="cb1-3" title="3"><span class="op">};</span></a></code></pre></div>
+<p>Nothing changes here.</p>
+<h3 id="dont-call-proptypes-directly">Don’t call PropTypes directly</h3>
+<p>Using PropTypes in any other way than annotating React components with them is no longer supported:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb2-1" title="1"><span class="kw">var</span> apiShape <span class="op">=</span> <span class="va">PropTypes</span>.<span class="at">shape</span>(<span class="op">{</span></a>
+<a class="sourceLine" id="cb2-2" title="2">  <span class="dt">body</span><span class="op">:</span> <span class="va">PropTypes</span>.<span class="at">object</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb2-3" title="3">  <span class="dt">statusCode</span><span class="op">:</span> <span class="va">PropTypes</span>.<span class="va">number</span>.<span class="at">isRequired</span></a>
+<a class="sourceLine" id="cb2-4" title="4"><span class="op">}</span>).<span class="at">isRequired</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb2-5" title="5"></a>
+<a class="sourceLine" id="cb2-6" title="6"><span class="co">// Not supported!</span></a>
+<a class="sourceLine" id="cb2-7" title="7"><span class="kw">var</span> error <span class="op">=</span> <span class="at">apiShape</span>(json<span class="op">,</span> <span class="st">&#39;response&#39;</span>)<span class="op">;</span></a></code></pre></div>
+<p>If you depend on using PropTypes like this, we encourage you to use or create a fork of PropTypes (such as <a href="https://github.com/aackerman/PropTypes">these</a> <a href="https://github.com/developit/proptypes">two</a> packages).</p>
+<p>If you don’t fix the warning, this code will crash in production with React 16.</p>
+<h3 id="if-you-dont-call-proptypes-directly-but-still-get-the-warning">If you don’t call PropTypes directly but still get the warning</h3>
+<p>Inspect the stack trace produced by the warning. You will find the component definition responsible for the PropTypes direct call. Most likely, the issue is due to third-party PropTypes that wrap React’s PropTypes, for example:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb3-1" title="1"><span class="va">Button</span>.<span class="at">propTypes</span> <span class="op">=</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb3-2" title="2">  <span class="dt">highlighted</span><span class="op">:</span> <span class="va">ThirdPartyPropTypes</span>.<span class="at">deprecated</span>(</a>
+<a class="sourceLine" id="cb3-3" title="3">    <span class="va">PropTypes</span>.<span class="at">bool</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb3-4" title="4">    <span class="st">&#39;Use `active` prop instead&#39;</span></a>
+<a class="sourceLine" id="cb3-5" title="5">  )</a>
+<a class="sourceLine" id="cb3-6" title="6"><span class="op">}</span></a></code></pre></div>
+<p>In this case, <code>ThirdPartyPropTypes.deprecated</code> is a wrapper calling <code>PropTypes.bool</code>. This pattern by itself is fine, but triggers a false positive because React thinks you are calling PropTypes directly. The next section explains how to fix this problem for a library implementing something like <code>ThirdPartyPropTypes</code>. If it’s not a library you wrote, you can file an issue against it.</p>
+<h3 id="fixing-the-false-positive-in-third-party-proptypes">Fixing the false positive in third party PropTypes</h3>
+<p>If you are an author of a third party PropTypes library and you let consumers wrap existing React PropTypes, they might start seeing this warning coming from your library. This happens because React doesn’t see a “secret” last argument that <a href="https://github.com/facebook/react/pull/7132">it passes</a> to detect manual PropTypes calls.</p>
+<p>Here is how to fix it. We will use <code>deprecated</code> from <a href="https://github.com/react-bootstrap/react-prop-types/blob/0d1cd3a49a93e513325e3258b28a82ce7d38e690/src/deprecated.js">react-bootstrap/react-prop-types</a> as an example. The current implementation only passes down the <code>props</code>, <code>propName</code>, and <code>componentName</code> arguments:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb4-1" title="1"><span class="im">export</span> <span class="im">default</span> <span class="kw">function</span> <span class="at">deprecated</span>(propType<span class="op">,</span> explanation) <span class="op">{</span></a>
+<a class="sourceLine" id="cb4-2" title="2">  <span class="cf">return</span> <span class="kw">function</span> <span class="at">validate</span>(props<span class="op">,</span> propName<span class="op">,</span> componentName) <span class="op">{</span></a>
+<a class="sourceLine" id="cb4-3" title="3">    <span class="cf">if</span> (props[propName] <span class="op">!=</span> <span class="kw">null</span>) <span class="op">{</span></a>
+<a class="sourceLine" id="cb4-4" title="4">      <span class="kw">const</span> message <span class="op">=</span> <span class="vs">`&quot;</span><span class="sc">${</span>propName<span class="sc">}</span><span class="vs">&quot; property of &quot;</span><span class="sc">${</span>componentName<span class="sc">}</span><span class="vs">&quot; has been deprecated.</span><span class="sc">\n${</span>explanation<span class="sc">}</span><span class="vs">`</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb4-5" title="5">      <span class="cf">if</span> (<span class="op">!</span>warned[message]) <span class="op">{</span></a>
+<a class="sourceLine" id="cb4-6" title="6">        <span class="at">warning</span>(<span class="kw">false</span><span class="op">,</span> message)<span class="op">;</span></a>
+<a class="sourceLine" id="cb4-7" title="7">        warned[message] <span class="op">=</span> <span class="kw">true</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb4-8" title="8">      <span class="op">}</span></a>
+<a class="sourceLine" id="cb4-9" title="9">    <span class="op">}</span></a>
+<a class="sourceLine" id="cb4-10" title="10"></a>
+<a class="sourceLine" id="cb4-11" title="11">    <span class="cf">return</span> <span class="at">propType</span>(props<span class="op">,</span> propName<span class="op">,</span> componentName)<span class="op">;</span></a>
+<a class="sourceLine" id="cb4-12" title="12">  <span class="op">};</span></a>
+<a class="sourceLine" id="cb4-13" title="13"><span class="op">}</span></a></code></pre></div>
+<p>In order to fix the false positive, make sure you pass <strong>all</strong> arguments down to the wrapped PropType. This is easy to do with the ES6 <code>...rest</code> notation:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb5-1" title="1"><span class="im">export</span> <span class="im">default</span> <span class="kw">function</span> <span class="at">deprecated</span>(propType<span class="op">,</span> explanation) <span class="op">{</span></a>
+<a class="sourceLine" id="cb5-2" title="2">  <span class="cf">return</span> <span class="kw">function</span> <span class="at">validate</span>(props<span class="op">,</span> propName<span class="op">,</span> componentName<span class="op">,</span> ...<span class="at">rest</span>) <span class="op">{</span> <span class="co">// Note ...rest here</span></a>
+<a class="sourceLine" id="cb5-3" title="3">    <span class="cf">if</span> (props[propName] <span class="op">!=</span> <span class="kw">null</span>) <span class="op">{</span></a>
+<a class="sourceLine" id="cb5-4" title="4">      <span class="kw">const</span> message <span class="op">=</span> <span class="vs">`&quot;</span><span class="sc">${</span>propName<span class="sc">}</span><span class="vs">&quot; property of &quot;</span><span class="sc">${</span>componentName<span class="sc">}</span><span class="vs">&quot; has been deprecated.</span><span class="sc">\n${</span>explanation<span class="sc">}</span><span class="vs">`</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb5-5" title="5">      <span class="cf">if</span> (<span class="op">!</span>warned[message]) <span class="op">{</span></a>
+<a class="sourceLine" id="cb5-6" title="6">        <span class="at">warning</span>(<span class="kw">false</span><span class="op">,</span> message)<span class="op">;</span></a>
+<a class="sourceLine" id="cb5-7" title="7">        warned[message] <span class="op">=</span> <span class="kw">true</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb5-8" title="8">      <span class="op">}</span></a>
+<a class="sourceLine" id="cb5-9" title="9">    <span class="op">}</span></a>
+<a class="sourceLine" id="cb5-10" title="10"></a>
+<a class="sourceLine" id="cb5-11" title="11">    <span class="cf">return</span> <span class="at">propType</span>(props<span class="op">,</span> propName<span class="op">,</span> componentName<span class="op">,</span> ...<span class="at">rest</span>)<span class="op">;</span> <span class="co">// and here</span></a>
+<a class="sourceLine" id="cb5-12" title="12">  <span class="op">};</span></a>
+<a class="sourceLine" id="cb5-13" title="13"><span class="op">}</span></a></code></pre></div>
+<p>This will silence the warning.</p>
+</body>
+</html>

@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>README</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<div data-align="center">
+<p><a href="https://spectrum.chat"><img src="./public/img/media.png" alt="Spectrum" /></a></p>
+<p>### Simple, powerful online communities.</p>
+</div>
+<p>This is the main monorepo codebase of <a href="https://spectrum.chat">Spectrum</a>. Every single line of code that’s not packaged into a reusable library is in this repository.</p>
+<h2 id="what-is-spectrum">What is Spectrum?</h2>
+<h3 id="vision">Vision</h3>
+<p>It is difficult to grow, manage and measure the impact of online communities. Community owners need modern, chat-based communities but are running into scaling issues when their community grows beyond a few hundred members. It becomes hard to keep track of who’s who, know what conversations are happening, and ensure that the community is staying healthy and productive.</p>
+<p><strong>Spectrum aims to be the best platform to build any kind of community online by combining the best of forums and real-time chat apps.</strong> With best-in-class moderation tooling, a single platform for all your communities, threaded conversations by default, community health monitoring, and much more to come we think that we will be able to help more people start and grow the best online communities.</p>
+<blockquote>
+<p>“[Spectrum] will take the place that Reddit used to have a long time ago for communities (especially tech) to freely share ideas and interact. Except realtime and trolling-free.”</p>
+<p>- <span class="citation" data-cites="rauchg">[Guillermo Rauch (@rauchg)]</span>(https://twitter.com/rauchg/status/930946768841228288)</p>
+</blockquote>
+<h3 id="status">Status</h3>
+<p>Spectrum has been in full-time development since March 2017 and is <a href="https://spectrum.chat/spectrum/general/spectrum-is-joining-github~1d3eb8ee-4c99-46c0-8daf-ca35a96be6ce">part of GitHub since November 2018</a>. See our current priorities and what we are working on in the <a href="https://github.com/withspectrum/spectrum/projects/23">main project board</a>.</p>
+<div data-align="center">
+<p><img height="50px" src="public/img/cluster-1.svg" /></p>
+</div>
+<h2 id="docs">Docs</h2>
+<ul>
+<li><a href="#contributing">Contributing</a>
+<ul>
+<li><a href="#ground-rules">Ground Rules</a></li>
+<li><a href="#codebase">Codebase</a>
+<ul>
+<li><a href="#technologies">Technologies</a></li>
+<li><a href="#folder-structure">Folder Structure</a></li>
+<li><a href="#code-style">Code Style</a></li>
+</ul></li>
+<li><a href="#first-time-setup">First time setup</a></li>
+<li><a href="#running-the-app-locally">Running the app locally</a></li>
+<li><a href="https://github.com/withspectrum/spectrum/projects/19">Roadmap</a></li>
+</ul></li>
+<li><a href="docs/">Technical</a>
+<ul>
+<li><a href="docs/testing/intro.md">Testing</a></li>
+<li><a href="docs/workers/background-jobs.md">Background Jobs</a></li>
+<li><a href="docs/deployments.md">Deployment</a></li>
+<li><a href="docs/backend/api/">API</a>
+<ul>
+<li><a href="docs/backend/api/fragments.md">Fragments</a></li>
+<li><a href="docs/backend/api/pagination.md">Pagination</a></li>
+<li><a href="docs/backend/api/testing.md">Testing</a></li>
+<li><a href="docs/backend/api/tips-and-tricks.md">Tips and Tricks</a></li>
+</ul></li>
+</ul></li>
+</ul>
+<h2 id="contributing">Contributing</h2>
+<p><strong>We heartily welcome any and all contributions that match our engineering standards!</strong></p>
+<p>That being said, this codebase isn’t your typical open source project because it’s not a library or package with a limited scope—it’s our entire product.</p>
+<h3 id="ground-rules">Ground Rules</h3>
+<h4 id="contributions-and-discussion-guidelines">Contributions and discussion guidelines</h4>
+<p>All conversations and communities on Spectrum agree to GitHub’s <a href="https://help.github.com/en/github/site-policy/github-community-guidelines">Community Guidelines</a> and <a href="https://help.github.com/en/github/site-policy/github-acceptable-use-policies">Acceptable Use Policies</a>. This code of conduct also applies to all conversations that happen within our contributor community here on GitHub. We expect discussions in issues and pull requests to stay positive, productive, and respectful. Remember: there are real people on the other side of that screen!</p>
+<h4 id="reporting-a-bug-or-discussing-a-feature-idea">Reporting a bug or discussing a feature idea</h4>
+<p>If you found a technical bug on Spectrum or have ideas for features we should implement, the issue tracker is the best place to share your ideas. Make sure to follow the issue template and you should be golden! (<a href="https://github.com/withspectrum/spectrum/issues/new">click here to open a new issue</a>)</p>
+<h4 id="fixing-a-bug-or-implementing-a-new-feature">Fixing a bug or implementing a new feature</h4>
+<p>If you find a bug on Spectrum and open a PR that fixes it we’ll review it as soon as possible to ensure it matches our engineering standards.</p>
+<p>If you want to implement a new feature, open an issue first to discuss what it’d look like and to ensure it fits in our roadmap and plans for the app (see <a href="https://github.com/withspectrum/spectrum/projects/23">the main project board</a> for planned and currently ongoing work).</p>
+<p>If you want to contribute but are unsure to start, we have <a href="https://github.com/withspectrum/spectrum/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22">a “good first issue” label</a> which is applied to newcomer-friendly issues. Take a look at <a href="https://github.com/withspectrum/spectrum/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22">the full list of good first issues</a> and pick something you like! There is also <a href="https://spectrum.chat/spectrum/open">an “open” channel in the Spectrum community on Spectrum</a> (how meta), if you run into troubles while trying to contribute that is the best place to talk to us.</p>
+<p>Want to fix a bug or implement an agreed-upon feature? Great, jump to the <a href="#first-time-setup">local setup instructions</a>!</p>
+<div data-align="center">
+<p><img height="70px" src="public/img/cluster-2.svg" /></p>
+</div>
+<h3 id="codebase">Codebase</h3>
+<h4 id="technologies">Technologies</h4>
+<p>With the ground rules out of the way, let’s talk about the coarse architecture of this mono repo:</p>
+<ul>
+<li><strong>Full-stack JavaScript</strong>: We use Node.js to power our servers, and React to power our frontend apps. Almost all of the code you’ll touch in this codebase will be JavaScript.</li>
+<li><strong>Background Jobs</strong>: We leverage background jobs (powered by <a href="https://github.com/OptimalBits/bull"><code>bull</code></a> and Redis) a lot. These jobs are handled by a handful of small worker servers, each with its own purpose.</li>
+</ul>
+<p>Here is a list of all the big technologies we use:</p>
+<ul>
+<li><strong>RethinkDB</strong>: Data storage</li>
+<li><strong>Redis</strong>: Background jobs and caching</li>
+<li><strong>GraphQL</strong>: API, powered by the entire Apollo toolchain</li>
+<li><strong>Flowtype</strong>: Type-safe JavaScript</li>
+<li><strong>PassportJS</strong>: Authentication</li>
+<li><strong>React</strong>: Frontend React app</li>
+</ul>
+<h4 id="folder-structure">Folder structure</h4>
+<div class="sourceCode" id="cb1"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb1-1" title="1"><span class="ex">spectrum/</span></a>
+<a class="sourceLine" id="cb1-2" title="2">├── <span class="ex">api</span>        <span class="co"># API server</span></a>
+<a class="sourceLine" id="cb1-3" title="3">├── <span class="ex">athena</span>     <span class="co"># Worker server (notifications and general processing)</span></a>
+<a class="sourceLine" id="cb1-4" title="4">├── <span class="ex">chronos</span>    <span class="co"># Worker server (cron jobs)</span></a>
+<a class="sourceLine" id="cb1-5" title="5">├── <span class="ex">desktop</span>    <span class="co"># desktop apps (build with electron)</span></a>
+<a class="sourceLine" id="cb1-6" title="6">├── <span class="ex">docs</span></a>
+<a class="sourceLine" id="cb1-7" title="7">├── <span class="ex">email-templates</span></a>
+<a class="sourceLine" id="cb1-8" title="8">├── <span class="ex">hermes</span>     <span class="co"># Worker server (email sending)</span></a>
+<a class="sourceLine" id="cb1-9" title="9">├── <span class="ex">hyperion</span>   <span class="co"># Rendering server</span></a>
+<a class="sourceLine" id="cb1-10" title="10">├── <span class="ex">mercury</span>    <span class="co"># Worker server (reputation)</span></a>
+<a class="sourceLine" id="cb1-11" title="11">├── <span class="ex">public</span>     <span class="co"># Public files used on the frontend</span></a>
+<a class="sourceLine" id="cb1-12" title="12">├── <span class="ex">shared</span>     <span class="co"># Shared JavaScript code</span></a>
+<a class="sourceLine" id="cb1-13" title="13">├── <span class="ex">src</span>        <span class="co"># Frontend SPA</span></a>
+<a class="sourceLine" id="cb1-14" title="14">└── <span class="ex">vulcan</span>     <span class="co"># Worker server (search indexing; syncing with Algolia)</span></a></code></pre></div>
+<details>
+<p><summary>Click to learn about the worker naming scheme</summary></p>
+<h4 id="naming-scheme">Naming Scheme</h4>
+<p>As you can see we follow a loose naming scheme based on ancient Greek, Roman, and philosophical figures that are somewhat related to what our servers do:</p>
+<ul>
+<li>Hyperion: (/haɪˈpɪəriən/) is one of the twelve Titan children of Gaia and Uranus.</li>
+<li>Athena (/əˈθiːnə/) is the goddess of wisdom, craft, and war.</li>
+<li>Hermes (/ˈhɜːrmiːz/) is the messenger god, moving between the worlds of the mortal and the divine.</li>
+<li>Chronos (/ˈkroʊnɒs/) is the personification of Time in pre-Socratic philosophy</li>
+<li>Mercury (/ˈmɜːrkjʊri/) is the patron god of financial gain, commerce, eloquence (and thus poetry), messages/communication (including divination), travelers, boundaries, luck, trickery and thieves</li>
+</ul>
+</details>
+<h4 id="code-style">Code Style</h4>
+<p>We run Prettier on-commit, which means you can write code in whatever style you want and it will be automatically formatted according to the common style when you run <code>git commit</code>. We also have ESLint set up, although we’ve disabled all stylistic rules since Prettier takes care of those.</p>
+<h5 id="rules">Rules</h5>
+<ul>
+<li><strong>All new <code>.js</code> files must be flow typed</strong>: Since we only introduced Flowtype after we finished building the first version of Spectrum, we enforce in CI that all new files added to the codebase are typed. (if you’ve never used Flowtype before that’s totally fine, just write your code in plain JS and let us know in the PR body, we can take care of it for you)</li>
+<li><strong>No <code>console.log</code>s in any file</strong>: We use the <code>debug</code> module across the codebase to log debugging information in development only. Never commit a file that contains a <code>console.log</code> as CI will fail your build. The only exceptions are errors, which you can log, but you have to use <code>console.error</code> to be explicit about it</li>
+</ul>
+<div data-align="center">
+<p><img height="70px" src="public/img/cluster-3.svg" /></p>
+</div>
+<h3 id="first-time-setup">First time setup</h3>
+<p>The first step to running Spectrum locally is downloading the code by cloning the repository:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb2-1" title="1"><span class="fu">git</span> clone git@github.com:withspectrum/spectrum.git</a></code></pre></div>
+<p>If you get <code>Permission denied</code> error using <code>ssh</code> refer <a href="https://help.github.com/articles/error-permission-denied-publickey/">here</a> or use <code>https</code> link as a fallback.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb3-1" title="1"><span class="fu">git</span> clone https://github.com/withspectrum/spectrum.git</a></code></pre></div>
+<h4 id="installation">Installation</h4>
+<p>Spectrum has four big installation steps:</p>
+<ol type="1">
+<li><strong>Install RethinkDB</strong>: See <a href="https://rethinkdb.com/docs/install/">the RethinkDB documentation</a> for instructions on installing it with your OS.</li>
+<li><strong>Install Redis</strong>: See <a href="https://redis.io/download">the Redis documentation</a> for instructions on installing it with your OS.</li>
+<li><strong>Install yarn</strong>: We use <a href="https://yarnpkg.com">yarn</a> to handle our JavaScript dependencies. (plain <code>npm</code> doesn’t work due to our monorepo setup) See <a href="https://yarnpkg.com/en/docs/install">the yarn documentation</a> for instructions on installing it.</li>
+<li><strong>Install the dependencies</strong>: Because it’s pretty tedious to install the dependencies for each worker individually we’ve created a script that goes through and runs <code>yarn install</code> for every worker for you: (this takes a couple minutes, so dive into the <a href="./docs">technical docs</a> in the meantime)</li>
+</ol>
+<div class="sourceCode" id="cb4"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb4-1" title="1"><span class="ex">node</span> shared/install-dependencies.js</a></code></pre></div>
+<p>You’ve now finished installing everything! Let’s migrate the database and you’ll be ready to go :100:</p>
+<h4 id="migrating-the-database">Migrating the database</h4>
+<p>When you first download the code and want to run it locally you have to migrate the database and seed it with test data. First, start rethinkdb in its own terminal tab:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb5-1" title="1"><span class="ex">rethinkdb</span></a></code></pre></div>
+<p>Then, in a new tab, run these commands:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb6-1" title="1"><span class="ex">yarn</span> run db:migrate</a>
+<a class="sourceLine" id="cb6-2" title="2"><span class="ex">yarn</span> run db:seed</a>
+<a class="sourceLine" id="cb6-3" title="3"><span class="co"># ⚠️ To empty the database (e.g. if there&#39;s faulty data) run yarn run db:drop</span></a></code></pre></div>
+<p>There’s a shortcut for dropping, migrating and seeding the database too:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb7-1" title="1"><span class="ex">yarn</span> run db:reset</a></code></pre></div>
+<p>The <code>testing</code> database used in end to end tests is managed separately. It is built, migrated, and seeded when you run:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb8-1" title="1"><span class="ex">yarn</span> run start:api:test</a></code></pre></div>
+<p>To drop the <code>testing</code> database, go to http://localhost:8080/#tables while <code>rethinkdb</code> is running, and click Delete Database on the appropriate database.</p>
+<h4 id="getting-the-secrets">Getting the secrets</h4>
+<p>While the app will run without any secrets set up, you won’t be able to sign in locally. To get that set up, copy the provided example secrets file to the real location:</p>
+<pre><code>cp now-secrets.example.json now-secrets.json</code></pre>
+<blockquote>
+<p>Note: If you’re an employee at Spectrum we’ve got a more complete list of secrets that also lets you upload images etc. in 1Password, search for “now-secrets.json” to find it.</p>
+</blockquote>
+<p>Now you’re ready to run the app locally and sign into your local instance!</p>
+<h3 id="running-the-app-locally">Running the app locally</h3>
+<h4 id="background-services">Background services</h4>
+<p>Whenever you want to run Spectrum locally you have to have RethinkDB and Redis running in the background. First start rethinkdb like we did to migrate the database:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb10-1" title="1"><span class="ex">rethinkdb</span></a></code></pre></div>
+<p>Then (without closing the rethinkdb tab!) open another tab and start Redis:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb11-1" title="1"><span class="ex">redis-server</span></a></code></pre></div>
+<h4 id="start-the-servers">Start the servers</h4>
+<p>Depending on what you’re trying to work on you’ll need to start different servers. Generally, all servers run in development mode by doing <code>yarn run dev:&lt;workername&gt;</code>, e.g. <code>yarn run dev:hermes</code> to start the email worker.</p>
+<p>No matter what you’re trying to do though, you’ll want to have the API running, so start that in a background tab:</p>
+<pre><code>yarn run dev:api</code></pre>
+<h4 id="develop-the-web-ui">Develop the web UI</h4>
+<p>To develop the frontend and web UI run</p>
+<pre><code>yarn run dev:web</code></pre>
+<h4 id="develop-the-desktop-app">Develop the desktop app</h4>
+<p>To develop the desktop app you have to have the dev web server running in the background (<code>yarn run dev:web</code>) and then, in another terminal tab, run:</p>
+<pre><code>yarn run dev:desktop</code></pre>
+<blockquote>
+<p>Note: If something didn’t work or you ran into troubles please submit PRs to improve this doc and keep it up to date!</p>
+</blockquote>
+<br /><br />
+
+<div data-align="center">
+<p><img height="200px" src="public/img/connect.svg" /></p>
+</div>
+<h2 id="github">GitHub</h2>
+<p>Spectrum is now part of GitHub. For code of conduct, please see <a href="https://help.github.com/en/github/site-policy/github-community-guidelines">GitHub’s Community Guidelines</a> and <a href="https://help.github.com/en/github/site-policy/github-acceptable-use-policies">Acceptable Use Policies</a>.</p>
+<h2 id="license">License</h2>
+<p>BSD 3-Clause, see the <a href="./LICENSE">LICENSE</a> file.</p>
+</body>
+</html>

@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>API-Documentation</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<h1 id="stand-in-content-below-need-to-replace"><strong>Stand in Content Below: Need to Replace</strong></h1>
+<p>The Bluebird API is organized around REST. Our API has predictable resource oriented URLs, accepts JSON-encoded request bodies, returns JSON-encoded responses, and uses standard HTTP response codes and verbs.</p>
+<p>API routes are not user-facing and should only be used by developers.</p>
+<p>Resources:</p>
+<ul>
+<li><a href="#users">Users</a></li>
+<li><a href="#chirps">Chirps</a></li>
+<li><a href="#likes">Likes</a></li>
+</ul>
+<hr />
+<h2 id="users">Users</h2>
+<p>Endpoints for the <code>Users</code> resource:</p>
+<ul>
+<li><a href="#log-in">Log In</a> - <code>POST /api/session</code></li>
+<li><a href="#sign-up">Sign Up</a> - <code>POST /api/users</code></li>
+<li><a href="#log-out">Log Out</a> - <code>DELETE /api/session</code></li>
+<li><a href="#retrieve-single-user">Retrieve Single User</a> - <code>GET /api/users/:id</code></li>
+</ul>
+<hr />
+<h3 id="log-in">Log In</h3>
+<p>Logs in an existing user</p>
+<h4 id="post-apisession"><code>POST /api/session</code></h4>
+<h4 id="body-parameters">Body Parameters</h4>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Parameter</th>
+<th style="text-align: left;">Type</th>
+<th style="text-align: left;">Description</th>
+<th style="text-align: left;">Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>credential</code></td>
+<td style="text-align: left;"><code>string</code></td>
+<td style="text-align: left;"><code>username</code> or <code>email</code> of the user logging in</td>
+<td style="text-align: left;">required</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>password</code></td>
+<td style="text-align: left;"><code>string</code></td>
+<td style="text-align: left;"><code>password</code> of the user logging in</td>
+<td style="text-align: left;">required</td>
+</tr>
+</tbody>
+</table>
+<h4 id="returns">Returns</h4>
+<p>Returns a <a href="#current-user-object">current user object</a> if successful and sets an HTTP-only auth cookie, and returns an error otherwise.</p>
+<hr />
+<h3 id="sign-up">Sign Up</h3>
+<p>Creates a new user</p>
+<h4 id="post-apiusers"><code>POST /api/users</code></h4>
+<h4 id="body-parameters-1">Body Parameters</h4>
+<table>
+<colgroup>
+<col style="width: 19%" />
+<col style="width: 9%" />
+<col style="width: 39%" />
+<col style="width: 31%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Parameter</th>
+<th style="text-align: left;">Type</th>
+<th style="text-align: left;">Description</th>
+<th style="text-align: left;">Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>username</code></td>
+<td style="text-align: left;"><code>string</code></td>
+<td style="text-align: left;">Desired <code>username</code> of the new user</td>
+<td style="text-align: left;">required</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>email</code></td>
+<td style="text-align: left;"><code>string</code></td>
+<td style="text-align: left;">Desired <code>email</code> of the new user</td>
+<td style="text-align: left;">required</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>password</code></td>
+<td style="text-align: left;"><code>string</code></td>
+<td style="text-align: left;">Desired <code>password</code> of the new user</td>
+<td style="text-align: left;">required</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>confirmPassword</code></td>
+<td style="text-align: left;"><code>string</code></td>
+<td style="text-align: left;">Repeated <code>password</code> of the new user</td>
+<td style="text-align: left;">required, same as <code>password</code></td>
+</tr>
+</tbody>
+</table>
+<h4 id="returns-1">Returns</h4>
+<p>Returns a <a href="#current-user-object">current user object</a> if successful and sets an HTTP-only auth cookie, and returns an error otherwise.</p>
+<hr />
+<h3 id="log-out">Log Out</h3>
+<p>Logs out the current user, <strong>requires authentication with a cookie</strong></p>
+<h4 id="delete-apisession"><code>DELETE /api/session</code></h4>
+<h4 id="returns-2">Returns</h4>
+<p>Returns a <a href="#success-message">success message</a> and remove the HTTP-only auth cookie if successful, and returns an error otherwise.</p>
+<hr />
+<h3 id="retrieve-single-user">Retrieve Single User</h3>
+<h4 id="get-apiusersid"><code>GET /api/users/:id</code></h4>
+<h4 id="path-parameters">Path Parameters</h4>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Parameter</th>
+<th style="text-align: left;">Type</th>
+<th style="text-align: left;">Description</th>
+<th style="text-align: left;">Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>id</code></td>
+<td style="text-align: left;"><code>ID</code></td>
+<td style="text-align: left;"><code>id</code> of the user</td>
+<td style="text-align: left;">required</td>
+</tr>
+</tbody>
+</table>
+<h4 id="returns-3">Returns</h4>
+<p>Returns a <a href="#user-object">user object</a> if successful, and returns an error otherwise.</p>
+<hr />
+<h2 id="chirps">Chirps</h2>
+<p>Endpoints for the <code>Chirps</code> resource:</p>
+<ul>
+<li><a href="#retrieve-all-chirps">Retrieve All Chirps</a> - <code>GET /api/chirps</code></li>
+<li><a href="#retrieve-a-single-chirp">Retrieve a Single Chirp</a> - <code>GET /api/chirps/:id</code></li>
+<li><a href="#create-a-chirp">Create a Chirp</a> - <code>POST /api/chirps</code></li>
+<li><a href="#edit-a-chirp">Edit a Chirp</a> - <code>PUT /api/chirps/:id</code></li>
+<li><a href="#delete-a-chirp">Delete a Chirp</a> - <code>DELETE /api/chirps/:id</code></li>
+</ul>
+<hr />
+<h3 id="retrieve-all-chirps">Retrieve All Chirps</h3>
+<p>Retrieves all the chirps</p>
+<h4 id="get-apichirps"><code>GET /api/chirps</code></h4>
+<h4 id="query-parameters">Query Parameters</h4>
+<p>Filters</p>
+<table>
+<colgroup>
+<col style="width: 7%" />
+<col style="width: 6%" />
+<col style="width: 57%" />
+<col style="width: 28%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Parameter</th>
+<th style="text-align: left;">Type</th>
+<th style="text-align: left;">Description</th>
+<th style="text-align: left;">Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>limit</code></td>
+<td style="text-align: left;"><code>number</code></td>
+<td style="text-align: left;"><code>limit</code> of how many chirps can be retrieved at one time</td>
+<td style="text-align: left;">optional, default of 20, max of 100</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>cursor</code></td>
+<td style="text-align: left;"><code>number</code></td>
+<td style="text-align: left;">a <code>cursor</code> for use in pagination, starting point of the list returned</td>
+<td style="text-align: left;">optional</td>
+</tr>
+</tbody>
+</table>
+<h4 id="returns-4">Returns</h4>
+<p>Returns an array of <a href="#chirp-object">chirp object</a>s if successful, and returns an error otherwise</p>
+<hr />
+<h3 id="retrieve-a-single-chirp">Retrieve a Single Chirp</h3>
+<p>Retrieves a single chirp with the specified id</p>
+<h4 id="get-apichirpsid"><code>GET /api/chirps/:id</code></h4>
+<h4 id="path-parameters-1">Path Parameters</h4>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Parameter</th>
+<th style="text-align: left;">Type</th>
+<th style="text-align: left;">Description</th>
+<th style="text-align: left;">Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>id</code></td>
+<td style="text-align: left;"><code>ID</code></td>
+<td style="text-align: left;"><code>id</code> of the chirp to retrieve</td>
+<td style="text-align: left;">required</td>
+</tr>
+</tbody>
+</table>
+<h4 id="returns-5">Returns</h4>
+<p>Returns a <a href="#chirp-object">chirp object</a> if successful, and returns an error otherwise.</p>
+<hr />
+<h3 id="create-a-chirp">Create a Chirp</h3>
+<p>Creates a new chirp for the current user, <strong>requires authentication with a cookie</strong></p>
+<h4 id="post-apichirps"><code>POST /api/chirps</code></h4>
+<h4 id="body-parameters-2">Body Parameters</h4>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Parameter</th>
+<th style="text-align: center;">Type</th>
+<th style="text-align: left;">Description</th>
+<th style="text-align: left;">Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>body</code></td>
+<td style="text-align: center;">non-empty <code>string</code></td>
+<td style="text-align: left;">message <code>body</code> of the chirp being created</td>
+<td style="text-align: left;">required</td>
+</tr>
+</tbody>
+</table>
+<h4 id="returns-6">Returns</h4>
+<p>Returns the created <a href="#chirp-object">chirp object</a> if successful, and returns an error otherwise.</p>
+<hr />
+<h3 id="edit-a-chirp">Edit a Chirp</h3>
+<p>Edits an existing chirp of the current user, <strong>requires authentication with a cookie</strong></p>
+<h4 id="put-apichirpsid"><code>PUT /api/chirps/:id</code></h4>
+<h4 id="path-parameters-2">Path Parameters</h4>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Parameter</th>
+<th style="text-align: left;">Type</th>
+<th style="text-align: left;">Description</th>
+<th style="text-align: left;">Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>id</code></td>
+<td style="text-align: left;"><code>ID</code></td>
+<td style="text-align: left;"><code>id</code> of the chirp to edit</td>
+<td style="text-align: left;">required</td>
+</tr>
+</tbody>
+</table>
+<h4 id="body-parameters-3">Body Parameters</h4>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Parameter</th>
+<th style="text-align: center;">Type</th>
+<th style="text-align: left;">Description</th>
+<th style="text-align: left;">Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>body</code></td>
+<td style="text-align: center;">non-empty <code>string</code></td>
+<td style="text-align: left;">message <code>body</code> of the chirp being edited</td>
+<td style="text-align: left;">required</td>
+</tr>
+</tbody>
+</table>
+<h4 id="returns-7">Returns</h4>
+<p>Returns the edited <a href="#chirp-object">chirp object</a> if successful, and returns an error otherwise.</p>
+<hr />
+<h3 id="delete-a-chirp">Delete a Chirp</h3>
+<p>Deletes an existing chirp of the current user, <strong>requires authentication with a cookie</strong></p>
+<h4 id="delete-apichirpsid"><code>DELETE /api/chirps/:id</code></h4>
+<h4 id="path-parameters-3">Path Parameters</h4>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Parameter</th>
+<th style="text-align: left;">Type</th>
+<th style="text-align: left;">Description</th>
+<th style="text-align: left;">Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>id</code></td>
+<td style="text-align: left;"><code>ID</code></td>
+<td style="text-align: left;"><code>id</code> of the chirp to edit</td>
+<td style="text-align: left;">required</td>
+</tr>
+</tbody>
+</table>
+<h4 id="returns-8">Returns</h4>
+<p>Returns a <a href="#success-message">success message</a> if successful, and returns an error otherwise.</p>
+<hr />
+<h2 id="likes">Likes</h2>
+<p>Endpoints for the <code>Likes</code> resource:</p>
+<ul>
+<li><a href="#like-a-chirp">Like a Chirp</a> - <code>POST /api/chirps/:id/likes</code></li>
+<li><a href="#unlike-a-chirp">Unlike a Chirp</a> - <code>DELETE /api/chirps/:id/likes</code></li>
+</ul>
+<hr />
+<h3 id="like-a-chirp">Like a Chirp</h3>
+<p>Creates a like between the current user and the specified chirp that the user has not liked yet and did not create, <strong>requires authentication with a cookie</strong></p>
+<h4 id="post-apichirpsidlikes"><code>POST /api/chirps/:id/likes</code></h4>
+<h4 id="path-parameters-4">Path Parameters</h4>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Parameter</th>
+<th style="text-align: left;">Type</th>
+<th style="text-align: left;">Description</th>
+<th style="text-align: left;">Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>id</code></td>
+<td style="text-align: left;"><code>ID</code></td>
+<td style="text-align: left;"><code>id</code> of the chirp to like</td>
+<td style="text-align: left;">required</td>
+</tr>
+</tbody>
+</table>
+<h4 id="returns-9">Returns</h4>
+<p>Returns the chirp liked as a <a href="#chirp-object">chirp object</a> with the <code>liked</code> key set to <code>true</code> if successful, and returns an error otherwise.</p>
+<hr />
+<h3 id="unlike-a-chirp">Unlike a Chirp</h3>
+<p>Deletes a like between the current user and the specified chirp that the user has liked and did not create, <strong>requires authentication with a cookie</strong></p>
+<h4 id="delete-apichirpsidlikes"><code>DELETE /api/chirps/:id/likes</code></h4>
+<h4 id="path-parameters-5">Path Parameters</h4>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Parameter</th>
+<th style="text-align: left;">Type</th>
+<th style="text-align: left;">Description</th>
+<th style="text-align: left;">Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>id</code></td>
+<td style="text-align: left;"><code>ID</code></td>
+<td style="text-align: left;"><code>id</code> of the chirp to unlike</td>
+<td style="text-align: left;">required</td>
+</tr>
+</tbody>
+</table>
+<h4 id="returns-10">Returns</h4>
+<p>Returns the chirp unliked as a <a href="#chirp-object">chirp object</a> with the <code>liked</code> key set to <code>false</code> if successful, and returns an error otherwise.</p>
+<hr />
+<h2 id="objects">Objects</h2>
+<h3 id="current-user-object">Current User Object</h3>
+<div class="sourceCode" id="cb1"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb1-1" title="1"><span class="fu">{</span></a>
+<a class="sourceLine" id="cb1-2" title="2">  <span class="dt">&quot;id&quot;</span><span class="fu">:</span> <span class="dv">1</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb1-3" title="3">  <span class="dt">&quot;username&quot;</span><span class="fu">:</span> <span class="st">&quot;zagreus&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb1-4" title="4">  <span class="dt">&quot;email&quot;</span><span class="fu">:</span> <span class="st">&quot;zagreus@bluebird.com&quot;</span></a>
+<a class="sourceLine" id="cb1-5" title="5"><span class="fu">}</span></a></code></pre></div>
+<h3 id="user-object">User Object</h3>
+<div class="sourceCode" id="cb2"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb2-1" title="1"><span class="fu">{</span></a>
+<a class="sourceLine" id="cb2-2" title="2">  <span class="dt">&quot;id&quot;</span><span class="fu">:</span> <span class="dv">1</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb2-3" title="3">  <span class="dt">&quot;username&quot;</span><span class="fu">:</span> <span class="st">&quot;zagreus&quot;</span></a>
+<a class="sourceLine" id="cb2-4" title="4"><span class="fu">}</span></a></code></pre></div>
+<h3 id="success-message">Success Message</h3>
+<div class="sourceCode" id="cb3"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb3-1" title="1"><span class="fu">{</span></a>
+<a class="sourceLine" id="cb3-2" title="2">  <span class="dt">&quot;message&quot;</span><span class="fu">:</span> <span class="st">&quot;success&quot;</span></a>
+<a class="sourceLine" id="cb3-3" title="3"><span class="fu">}</span></a></code></pre></div>
+<h3 id="chirp-object">Chirp Object</h3>
+<div class="sourceCode" id="cb4"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb4-1" title="1"><span class="fu">{</span></a>
+<a class="sourceLine" id="cb4-2" title="2">  <span class="dt">&quot;id&quot;</span><span class="fu">:</span> <span class="dv">41</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb4-3" title="3">  <span class="dt">&quot;body&quot;</span><span class="fu">:</span> <span class="st">&quot;Hello World!&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb4-4" title="4">  <span class="dt">&quot;authorId&quot;</span><span class="fu">:</span> <span class="dv">1</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb4-5" title="5">  <span class="dt">&quot;createdAt&quot;</span><span class="fu">:</span> <span class="st">&quot;2020-10-18T20:26:34.256Z&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb4-6" title="6">  <span class="dt">&quot;updatedAt&quot;</span><span class="fu">:</span> <span class="st">&quot;2020-10-18T20:26:34.256Z&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb4-7" title="7">  <span class="dt">&quot;Author&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb4-8" title="8">    <span class="dt">&quot;id&quot;</span><span class="fu">:</span> <span class="dv">1</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb4-9" title="9">    <span class="dt">&quot;username&quot;</span><span class="fu">:</span> <span class="st">&quot;zagreus&quot;</span></a>
+<a class="sourceLine" id="cb4-10" title="10">  <span class="fu">},</span></a>
+<a class="sourceLine" id="cb4-11" title="11">  <span class="dt">&quot;numLikes&quot;</span><span class="fu">:</span> <span class="dv">24</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb4-12" title="12">  <span class="dt">&quot;liked&quot;</span><span class="fu">:</span> <span class="kw">false</span></a>
+<a class="sourceLine" id="cb4-13" title="13"><span class="fu">}</span></a></code></pre></div>
+</body>
+</html>

@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Integrating with Other Libraries</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Integrating with Other Libraries</h1>
+</header>
+<p>React can be used in any web application. It can be embedded in other applications and, with a little care, other applications can be embedded in React. This guide will examine some of the more common use cases, focusing on integration with <a href="https://jquery.com/">jQuery</a> and <a href="https://backbonejs.org/">Backbone</a>, but the same ideas can be applied to integrating components with any existing code.</p>
+<h2 id="integrating-with-dom-manipulation-plugins">Integrating with DOM Manipulation Plugins</h2>
+<p>React is unaware of changes made to the DOM outside of React. It determines updates based on its own internal representation, and if the same DOM nodes are manipulated by another library, React gets confused and has no way to recover.</p>
+<p>This does not mean it is impossible or even necessarily difficult to combine React with other ways of affecting the DOM, you just have to be mindful of what each is doing.</p>
+<p>The easiest way to avoid conflicts is to prevent the React component from updating. You can do this by rendering elements that React has no reason to update, like an empty <code>&lt;div /&gt;</code>.</p>
+<h3 id="how-to-approach-the-problem">How to Approach the Problem</h3>
+<p>To demonstrate this, let’s sketch out a wrapper for a generic jQuery plugin.</p>
+<p>We will attach a <a href="/docs/refs-and-the-dom.html">ref</a> to the root DOM element. Inside <code>componentDidMount</code>, we will get a reference to it so we can pass it to the jQuery plugin.</p>
+<p>To prevent React from touching the DOM after mounting, we will return an empty <code>&lt;div /&gt;</code> from the <code>render()</code> method. The <code>&lt;div /&gt;</code> element has no properties or children, so React has no reason to update it, leaving the jQuery plugin free to manage that part of the DOM:</p>
+<pre class="js{3,4,8,12}"><code>class SomePlugin extends React.Component {
+  componentDidMount() {
+    this.$el = $(this.el);
+    this.$el.somePlugin();
+  }
+
+  componentWillUnmount() {
+    this.$el.somePlugin(&#39;destroy&#39;);
+  }
+
+  render() {
+    return &lt;div ref={el =&gt; this.el = el} /&gt;;
+  }
+}</code></pre>
+<p>Note that we defined both <code>componentDidMount</code> and <code>componentWillUnmount</code> <a href="/docs/react-component.html#the-component-lifecycle">lifecycle methods</a>. Many jQuery plugins attach event listeners to the DOM so it’s important to detach them in <code>componentWillUnmount</code>. If the plugin does not provide a method for cleanup, you will probably have to provide your own, remembering to remove any event listeners the plugin registered to prevent memory leaks.</p>
+<h3 id="integrating-with-jquery-chosen-plugin">Integrating with jQuery Chosen Plugin</h3>
+<p>For a more concrete example of these concepts, let’s write a minimal wrapper for the plugin <a href="https://harvesthq.github.io/chosen/">Chosen</a>, which augments <code>&lt;select&gt;</code> inputs.</p>
+<blockquote>
+<p><strong>Note:</strong></p>
+<p>Just because it’s possible, doesn’t mean that it’s the best approach for React apps. We encourage you to use React components when you can. React components are easier to reuse in React applications, and often provide more control over their behavior and appearance.</p>
+</blockquote>
+<p>First, let’s look at what Chosen does to the DOM.</p>
+<p>If you call it on a <code>&lt;select&gt;</code> DOM node, it reads the attributes off of the original DOM node, hides it with an inline style, and then appends a separate DOM node with its own visual representation right after the <code>&lt;select&gt;</code>. Then it fires jQuery events to notify us about the changes.</p>
+<p>Let’s say that this is the API we’re striving for with our <code>&lt;Chosen&gt;</code> wrapper React component:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb2-1" title="1"><span class="kw">function</span> <span class="at">Example</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb2-2" title="2">  <span class="cf">return</span> (</a>
+<a class="sourceLine" id="cb2-3" title="3">    <span class="op">&lt;</span>Chosen onChange<span class="op">={</span>value <span class="kw">=&gt;</span> <span class="va">console</span>.<span class="at">log</span>(value)<span class="op">}&gt;</span></a>
+<a class="sourceLine" id="cb2-4" title="4">      <span class="op">&lt;</span>option<span class="op">&gt;</span>vanilla&lt;/option<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb2-5" title="5">      <span class="op">&lt;</span>option<span class="op">&gt;</span>chocolate&lt;/option<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb2-6" title="6">      <span class="op">&lt;</span>option<span class="op">&gt;</span>strawberry&lt;/option<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb2-7" title="7">    &lt;/Chosen<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb2-8" title="8">  )<span class="op">;</span></a>
+<a class="sourceLine" id="cb2-9" title="9"><span class="op">}</span></a></code></pre></div>
+<p>We will implement it as an <a href="/docs/uncontrolled-components.html">uncontrolled component</a> for simplicity.</p>
+<p>First, we will create an empty component with a <code>render()</code> method where we return <code>&lt;select&gt;</code> wrapped in a <code>&lt;div&gt;</code>:</p>
+<pre class="js{4,5}"><code>class Chosen extends React.Component {
+  render() {
+    return (
+      &lt;div&gt;
+        &lt;select className=&quot;Chosen-select&quot; ref={el =&gt; this.el = el}&gt;
+          {this.props.children}
+        &lt;/select&gt;
+      &lt;/div&gt;
+    );
+  }
+}</code></pre>
+<p>Notice how we wrapped <code>&lt;select&gt;</code> in an extra <code>&lt;div&gt;</code>. This is necessary because Chosen will append another DOM element right after the <code>&lt;select&gt;</code> node we passed to it. However, as far as React is concerned, <code>&lt;div&gt;</code> always only has a single child. This is how we ensure that React updates won’t conflict with the extra DOM node appended by Chosen. It is important that if you modify the DOM outside of React flow, you must ensure React doesn’t have a reason to touch those DOM nodes.</p>
+<p>Next, we will implement the lifecycle methods. We need to initialize Chosen with the ref to the <code>&lt;select&gt;</code> node in <code>componentDidMount</code>, and tear it down in <code>componentWillUnmount</code>:</p>
+<pre class="js{2,3,7}"><code>componentDidMount() {
+  this.$el = $(this.el);
+  this.$el.chosen();
+}
+
+componentWillUnmount() {
+  this.$el.chosen(&#39;destroy&#39;);
+}</code></pre>
+<p><a href="https://codepen.io/gaearon/pen/qmqeQx?editors=0010"><strong>Try it on CodePen</strong></a></p>
+<p>Note that React assigns no special meaning to the <code>this.el</code> field. It only works because we have previously assigned this field from a <code>ref</code> in the <code>render()</code> method:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb5-1" title="1"><span class="op">&lt;</span>select className<span class="op">=</span><span class="st">&quot;Chosen-select&quot;</span> ref<span class="op">={</span>el <span class="kw">=&gt;</span> <span class="kw">this</span>.<span class="at">el</span> <span class="op">=</span> el<span class="op">}&gt;</span></a></code></pre></div>
+<p>This is enough to get our component to render, but we also want to be notified about the value changes. To do this, we will subscribe to the jQuery <code>change</code> event on the <code>&lt;select&gt;</code> managed by Chosen.</p>
+<p>We won’t pass <code>this.props.onChange</code> directly to Chosen because component’s props might change over time, and that includes event handlers. Instead, we will declare a <code>handleChange()</code> method that calls <code>this.props.onChange</code>, and subscribe it to the jQuery <code>change</code> event:</p>
+<pre class="js{5,6,10,14-16}"><code>componentDidMount() {
+  this.$el = $(this.el);
+  this.$el.chosen();
+
+  this.handleChange = this.handleChange.bind(this);
+  this.$el.on(&#39;change&#39;, this.handleChange);
+}
+
+componentWillUnmount() {
+  this.$el.off(&#39;change&#39;, this.handleChange);
+  this.$el.chosen(&#39;destroy&#39;);
+}
+
+handleChange(e) {
+  this.props.onChange(e.target.value);
+}</code></pre>
+<p><a href="https://codepen.io/gaearon/pen/bWgbeE?editors=0010"><strong>Try it on CodePen</strong></a></p>
+<p>Finally, there is one more thing left to do. In React, props can change over time. For example, the <code>&lt;Chosen&gt;</code> component can get different children if parent component’s state changes. This means that at integration points it is important that we manually update the DOM in response to prop updates, since we no longer let React manage the DOM for us.</p>
+<p>Chosen’s documentation suggests that we can use jQuery <code>trigger()</code> API to notify it about changes to the original DOM element. We will let React take care of updating <code>this.props.children</code> inside <code>&lt;select&gt;</code>, but we will also add a <code>componentDidUpdate()</code> lifecycle method that notifies Chosen about changes in the children list:</p>
+<pre class="js{2,3}"><code>componentDidUpdate(prevProps) {
+  if (prevProps.children !== this.props.children) {
+    this.$el.trigger(&quot;chosen:updated&quot;);
+  }
+}</code></pre>
+<p>This way, Chosen will know to update its DOM element when the <code>&lt;select&gt;</code> children managed by React change.</p>
+<p>The complete implementation of the <code>Chosen</code> component looks like this:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb8-1" title="1"><span class="kw">class</span> Chosen <span class="kw">extends</span> <span class="va">React</span>.<span class="at">Component</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb8-2" title="2">  <span class="at">componentDidMount</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb8-3" title="3">    <span class="kw">this</span>.<span class="at">$el</span> <span class="op">=</span> <span class="at">$</span>(<span class="kw">this</span>.<span class="at">el</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb8-4" title="4">    <span class="kw">this</span>.<span class="va">$el</span>.<span class="at">chosen</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb8-5" title="5"></a>
+<a class="sourceLine" id="cb8-6" title="6">    <span class="kw">this</span>.<span class="at">handleChange</span> <span class="op">=</span> <span class="kw">this</span>.<span class="va">handleChange</span>.<span class="at">bind</span>(<span class="kw">this</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb8-7" title="7">    <span class="kw">this</span>.<span class="va">$el</span>.<span class="at">on</span>(<span class="st">&#39;change&#39;</span><span class="op">,</span> <span class="kw">this</span>.<span class="at">handleChange</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb8-8" title="8">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb8-9" title="9">  </a>
+<a class="sourceLine" id="cb8-10" title="10">  <span class="at">componentDidUpdate</span>(prevProps) <span class="op">{</span></a>
+<a class="sourceLine" id="cb8-11" title="11">    <span class="cf">if</span> (<span class="va">prevProps</span>.<span class="at">children</span> <span class="op">!==</span> <span class="kw">this</span>.<span class="va">props</span>.<span class="at">children</span>) <span class="op">{</span></a>
+<a class="sourceLine" id="cb8-12" title="12">      <span class="kw">this</span>.<span class="va">$el</span>.<span class="at">trigger</span>(<span class="st">&quot;chosen:updated&quot;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb8-13" title="13">    <span class="op">}</span></a>
+<a class="sourceLine" id="cb8-14" title="14">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb8-15" title="15"></a>
+<a class="sourceLine" id="cb8-16" title="16">  <span class="at">componentWillUnmount</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb8-17" title="17">    <span class="kw">this</span>.<span class="va">$el</span>.<span class="at">off</span>(<span class="st">&#39;change&#39;</span><span class="op">,</span> <span class="kw">this</span>.<span class="at">handleChange</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb8-18" title="18">    <span class="kw">this</span>.<span class="va">$el</span>.<span class="at">chosen</span>(<span class="st">&#39;destroy&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb8-19" title="19">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb8-20" title="20">  </a>
+<a class="sourceLine" id="cb8-21" title="21">  <span class="at">handleChange</span>(e) <span class="op">{</span></a>
+<a class="sourceLine" id="cb8-22" title="22">    <span class="kw">this</span>.<span class="va">props</span>.<span class="at">onChange</span>(<span class="va">e</span>.<span class="va">target</span>.<span class="at">value</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb8-23" title="23">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb8-24" title="24"></a>
+<a class="sourceLine" id="cb8-25" title="25">  <span class="at">render</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb8-26" title="26">    <span class="cf">return</span> (</a>
+<a class="sourceLine" id="cb8-27" title="27">      <span class="op">&lt;</span>div<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb8-28" title="28">        <span class="op">&lt;</span>select className<span class="op">=</span><span class="st">&quot;Chosen-select&quot;</span> ref<span class="op">={</span>el <span class="kw">=&gt;</span> <span class="kw">this</span>.<span class="at">el</span> <span class="op">=</span> el<span class="op">}&gt;</span></a>
+<a class="sourceLine" id="cb8-29" title="29">          <span class="op">{</span><span class="kw">this</span>.<span class="va">props</span>.<span class="at">children</span><span class="op">}</span></a>
+<a class="sourceLine" id="cb8-30" title="30">        &lt;/select<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb8-31" title="31">      &lt;/div<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb8-32" title="32">    )<span class="op">;</span></a>
+<a class="sourceLine" id="cb8-33" title="33">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb8-34" title="34"><span class="op">}</span></a></code></pre></div>
+<p><a href="https://codepen.io/gaearon/pen/xdgKOz?editors=0010"><strong>Try it on CodePen</strong></a></p>
+<h2 id="integrating-with-other-view-libraries">Integrating with Other View Libraries</h2>
+<p>React can be embedded into other applications thanks to the flexibility of <a href="/docs/react-dom.html#render"><code>ReactDOM.render()</code></a>.</p>
+<p>Although React is commonly used at startup to load a single root React component into the DOM, <code>ReactDOM.render()</code> can also be called multiple times for independent parts of the UI which can be as small as a button, or as large as an app.</p>
+<p>In fact, this is exactly how React is used at Facebook. This lets us write applications in React piece by piece, and combine them with our existing server-generated templates and other client-side code.</p>
+<h3 id="replacing-string-based-rendering-with-react">Replacing String-Based Rendering with React</h3>
+<p>A common pattern in older web applications is to describe chunks of the DOM as a string and insert it into the DOM like so: <code>$el.html(htmlString)</code>. These points in a codebase are perfect for introducing React. Just rewrite the string based rendering as a React component.</p>
+<p>So the following jQuery implementation…</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb9-1" title="1"><span class="at">$</span>(<span class="st">&#39;#container&#39;</span>).<span class="at">html</span>(<span class="st">&#39;&lt;button id=&quot;btn&quot;&gt;Say Hello&lt;/button&gt;&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb9-2" title="2"><span class="at">$</span>(<span class="st">&#39;#btn&#39;</span>).<span class="at">click</span>(<span class="kw">function</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb9-3" title="3">  <span class="at">alert</span>(<span class="st">&#39;Hello!&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb9-4" title="4"><span class="op">}</span>)<span class="op">;</span></a></code></pre></div>
+<p>…could be rewritten using a React component:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb10-1" title="1"><span class="kw">function</span> <span class="at">Button</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb10-2" title="2">  <span class="cf">return</span> <span class="op">&lt;</span>button id<span class="op">=</span><span class="st">&quot;btn&quot;</span><span class="op">&gt;</span>Say Hello&lt;/button<span class="op">&gt;;</span></a>
+<a class="sourceLine" id="cb10-3" title="3"><span class="op">}</span></a>
+<a class="sourceLine" id="cb10-4" title="4"></a>
+<a class="sourceLine" id="cb10-5" title="5"><span class="va">ReactDOM</span>.<span class="at">render</span>(</a>
+<a class="sourceLine" id="cb10-6" title="6">  <span class="op">&lt;</span>Button /<span class="op">&gt;,</span></a>
+<a class="sourceLine" id="cb10-7" title="7">  <span class="va">document</span>.<span class="at">getElementById</span>(<span class="st">&#39;container&#39;</span>)<span class="op">,</span></a>
+<a class="sourceLine" id="cb10-8" title="8">  <span class="kw">function</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb10-9" title="9">    <span class="at">$</span>(<span class="st">&#39;#btn&#39;</span>).<span class="at">click</span>(<span class="kw">function</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb10-10" title="10">      <span class="at">alert</span>(<span class="st">&#39;Hello!&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb10-11" title="11">    <span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb10-12" title="12">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb10-13" title="13">)<span class="op">;</span></a></code></pre></div>
+<p>From here you could start moving more logic into the component and begin adopting more common React practices. For example, in components it is best not to rely on IDs because the same component can be rendered multiple times. Instead, we will use the <a href="/docs/handling-events.html">React event system</a> and register the click handler directly on the React <code>&lt;button&gt;</code> element:</p>
+<pre class="js{2,6,9}"><code>function Button(props) {
+  return &lt;button onClick={props.onClick}&gt;Say Hello&lt;/button&gt;;
+}
+
+function HelloButton() {
+  function handleClick() {
+    alert(&#39;Hello!&#39;);
+  }
+  return &lt;Button onClick={handleClick} /&gt;;
+}
+
+ReactDOM.render(
+  &lt;HelloButton /&gt;,
+  document.getElementById(&#39;container&#39;)
+);</code></pre>
+<p><a href="https://codepen.io/gaearon/pen/RVKbvW?editors=1010"><strong>Try it on CodePen</strong></a></p>
+<p>You can have as many such isolated components as you like, and use <code>ReactDOM.render()</code> to render them to different DOM containers. Gradually, as you convert more of your app to React, you will be able to combine them into larger components, and move some of the <code>ReactDOM.render()</code> calls up the hierarchy.</p>
+<h3 id="embedding-react-in-a-backbone-view">Embedding React in a Backbone View</h3>
+<p><a href="https://backbonejs.org/">Backbone</a> views typically use HTML strings, or string-producing template functions, to create the content for their DOM elements. This process, too, can be replaced with rendering a React component.</p>
+<p>Below, we will create a Backbone view called <code>ParagraphView</code>. It will override Backbone’s <code>render()</code> function to render a React <code>&lt;Paragraph&gt;</code> component into the DOM element provided by Backbone (<code>this.el</code>). Here, too, we are using <a href="/docs/react-dom.html#render"><code>ReactDOM.render()</code></a>:</p>
+<pre class="js{1,5,8,12}"><code>function Paragraph(props) {
+  return &lt;p&gt;{props.text}&lt;/p&gt;;
+}
+
+const ParagraphView = Backbone.View.extend({
+  render() {
+    const text = this.model.get(&#39;text&#39;);
+    ReactDOM.render(&lt;Paragraph text={text} /&gt;, this.el);
+    return this;
+  },
+  remove() {
+    ReactDOM.unmountComponentAtNode(this.el);
+    Backbone.View.prototype.remove.call(this);
+  }
+});</code></pre>
+<p><a href="https://codepen.io/gaearon/pen/gWgOYL?editors=0010"><strong>Try it on CodePen</strong></a></p>
+<p>It is important that we also call <code>ReactDOM.unmountComponentAtNode()</code> in the <code>remove</code> method so that React unregisters event handlers and other resources associated with the component tree when it is detached.</p>
+<p>When a component is removed <em>from within</em> a React tree, the cleanup is performed automatically, but because we are removing the entire tree by hand, we must call this method.</p>
+<h2 id="integrating-with-model-layers">Integrating with Model Layers</h2>
+<p>While it is generally recommended to use unidirectional data flow such as <a href="/docs/lifting-state-up.html">React state</a>, <a href="https://facebook.github.io/flux/">Flux</a>, or <a href="https://redux.js.org/">Redux</a>, React components can use a model layer from other frameworks and libraries.</p>
+<h3 id="using-backbone-models-in-react-components">Using Backbone Models in React Components</h3>
+<p>The simplest way to consume <a href="https://backbonejs.org/">Backbone</a> models and collections from a React component is to listen to the various change events and manually force an update.</p>
+<p>Components responsible for rendering models would listen to <code>'change'</code> events, while components responsible for rendering collections would listen for <code>'add'</code> and <code>'remove'</code> events. In both cases, call <a href="/docs/react-component.html#forceupdate"><code>this.forceUpdate()</code></a> to rerender the component with the new data.</p>
+<p>In the example below, the <code>List</code> component renders a Backbone collection, using the <code>Item</code> component to render individual items.</p>
+<pre class="js{1,7-9,12,16,24,30-32,35,39,46}"><code>class Item extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleChange = this.handleChange.bind(this);
+  }
+
+  handleChange() {
+    this.forceUpdate();
+  }
+
+  componentDidMount() {
+    this.props.model.on(&#39;change&#39;, this.handleChange);
+  }
+
+  componentWillUnmount() {
+    this.props.model.off(&#39;change&#39;, this.handleChange);
+  }
+
+  render() {
+    return &lt;li&gt;{this.props.model.get(&#39;text&#39;)}&lt;/li&gt;;
+  }
+}
+
+class List extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleChange = this.handleChange.bind(this);
+  }
+
+  handleChange() {
+    this.forceUpdate();
+  }
+
+  componentDidMount() {
+    this.props.collection.on(&#39;add&#39;, &#39;remove&#39;, this.handleChange);
+  }
+
+  componentWillUnmount() {
+    this.props.collection.off(&#39;add&#39;, &#39;remove&#39;, this.handleChange);
+  }
+
+  render() {
+    return (
+      &lt;ul&gt;
+        {this.props.collection.map(model =&gt; (
+          &lt;Item key={model.cid} model={model} /&gt;
+        ))}
+      &lt;/ul&gt;
+    );
+  }
+}</code></pre>
+<p><a href="https://codepen.io/gaearon/pen/GmrREm?editors=0010"><strong>Try it on CodePen</strong></a></p>
+<h3 id="extracting-data-from-backbone-models">Extracting Data from Backbone Models</h3>
+<p>The approach above requires your React components to be aware of the Backbone models and collections. If you later plan to migrate to another data management solution, you might want to concentrate the knowledge about Backbone in as few parts of the code as possible.</p>
+<p>One solution to this is to extract the model’s attributes as plain data whenever it changes, and keep this logic in a single place. The following is <a href="/docs/higher-order-components.html">a higher-order component</a> that extracts all attributes of a Backbone model into state, passing the data to the wrapped component.</p>
+<p>This way, only the higher-order component needs to know about Backbone model internals, and most components in the app can stay agnostic of Backbone.</p>
+<p>In the example below, we will make a copy of the model’s attributes to form the initial state. We subscribe to the <code>change</code> event (and unsubscribe on unmounting), and when it happens, we update the state with the model’s current attributes. Finally, we make sure that if the <code>model</code> prop itself changes, we don’t forget to unsubscribe from the old model, and subscribe to the new one.</p>
+<p>Note that this example is not meant to be exhaustive with regards to working with Backbone, but it should give you an idea for how to approach this in a generic way:</p>
+<pre class="js{1,5,10,14,16,17,22,26,32}"><code>function connectToBackboneModel(WrappedComponent) {
+  return class BackboneComponent extends React.Component {
+    constructor(props) {
+      super(props);
+      this.state = Object.assign({}, props.model.attributes);
+      this.handleChange = this.handleChange.bind(this);
+    }
+
+    componentDidMount() {
+      this.props.model.on(&#39;change&#39;, this.handleChange);
+    }
+
+    componentWillReceiveProps(nextProps) {
+      this.setState(Object.assign({}, nextProps.model.attributes));
+      if (nextProps.model !== this.props.model) {
+        this.props.model.off(&#39;change&#39;, this.handleChange);
+        nextProps.model.on(&#39;change&#39;, this.handleChange);
+      }
+    }
+
+    componentWillUnmount() {
+      this.props.model.off(&#39;change&#39;, this.handleChange);
+    }
+
+    handleChange(model) {
+      this.setState(model.changedAttributes());
+    }
+
+    render() {
+      const propsExceptModel = Object.assign({}, this.props);
+      delete propsExceptModel.model;
+      return &lt;WrappedComponent {...propsExceptModel} {...this.state} /&gt;;
+    }
+  }
+}</code></pre>
+<p>To demonstrate how to use it, we will connect a <code>NameInput</code> React component to a Backbone model, and update its <code>firstName</code> attribute every time the input changes:</p>
+<pre class="js{4,6,11,15,19-21}"><code>function NameInput(props) {
+  return (
+    &lt;p&gt;
+      &lt;input value={props.firstName} onChange={props.handleChange} /&gt;
+      &lt;br /&gt;
+      My name is {props.firstName}.
+    &lt;/p&gt;
+  );
+}
+
+const BackboneNameInput = connectToBackboneModel(NameInput);
+
+function Example(props) {
+  function handleChange(e) {
+    props.model.set(&#39;firstName&#39;, e.target.value);
+  }
+
+  return (
+    &lt;BackboneNameInput
+      model={props.model}
+      handleChange={handleChange}
+    /&gt;
+  );
+}
+
+const model = new Backbone.Model({ firstName: &#39;Frodo&#39; });
+ReactDOM.render(
+  &lt;Example model={model} /&gt;,
+  document.getElementById(&#39;root&#39;)
+);</code></pre>
+<p><a href="https://codepen.io/gaearon/pen/PmWwwa?editors=0010"><strong>Try it on CodePen</strong></a></p>
+<p>This technique is not limited to Backbone. You can use React with any model library by subscribing to its changes in the lifecycle methods and, optionally, copying the data into the local React state.</p>
+</body>
+</html>

@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>AJAX and APIs</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">AJAX and APIs</h1>
+</header>
+<h3 id="how-can-i-make-an-ajax-call">How can I make an AJAX call?</h3>
+<p>You can use any AJAX library you like with React. Some popular ones are <a href="https://github.com/axios/axios">Axios</a>, <a href="https://api.jquery.com/jQuery.ajax/">jQuery AJAX</a>, and the browser built-in <a href="https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API">window.fetch</a>.</p>
+<h3 id="where-in-the-component-lifecycle-should-i-make-an-ajax-call">Where in the component lifecycle should I make an AJAX call?</h3>
+<p>You should populate data with AJAX calls in the <a href="/docs/react-component.html#mounting"><code>componentDidMount</code></a> lifecycle method. This is so you can use <code>setState</code> to update your component when the data is retrieved.</p>
+<h3 id="example-using-ajax-results-to-set-local-state">Example: Using AJAX results to set local state</h3>
+<p>The component below demonstrates how to make an AJAX call in <code>componentDidMount</code> to populate local component state.</p>
+<p>The example API returns a JSON object like this:</p>
+<pre><code>{
+  &quot;items&quot;: [
+    { &quot;id&quot;: 1, &quot;name&quot;: &quot;Apples&quot;,  &quot;price&quot;: &quot;$2&quot; },
+    { &quot;id&quot;: 2, &quot;name&quot;: &quot;Peaches&quot;, &quot;price&quot;: &quot;$5&quot; }
+  ] 
+}</code></pre>
+<pre class="jsx"><code>class MyComponent extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      error: null,
+      isLoaded: false,
+      items: []
+    };
+  }
+
+  componentDidMount() {
+    fetch(&quot;https://api.example.com/items&quot;)
+      .then(res =&gt; res.json())
+      .then(
+        (result) =&gt; {
+          this.setState({
+            isLoaded: true,
+            items: result.items
+          });
+        },
+        // Note: it&#39;s important to handle errors here
+        // instead of a catch() block so that we don&#39;t swallow
+        // exceptions from actual bugs in components.
+        (error) =&gt; {
+          this.setState({
+            isLoaded: true,
+            error
+          });
+        }
+      )
+  }
+
+  render() {
+    const { error, isLoaded, items } = this.state;
+    if (error) {
+      return &lt;div&gt;Error: {error.message}&lt;/div&gt;;
+    } else if (!isLoaded) {
+      return &lt;div&gt;Loading...&lt;/div&gt;;
+    } else {
+      return (
+        &lt;ul&gt;
+          {items.map(item =&gt; (
+            &lt;li key={item.id}&gt;
+              {item.name} {item.price}
+            &lt;/li&gt;
+          ))}
+        &lt;/ul&gt;
+      );
+    }
+  }
+}</code></pre>
+<p>Here is the equivalent with <a href="https://reactjs.org/docs/hooks-intro.html">Hooks</a>:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb3-1" title="1"><span class="kw">function</span> <span class="at">MyComponent</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb3-2" title="2">  <span class="kw">const</span> [error<span class="op">,</span> setError] <span class="op">=</span> <span class="at">useState</span>(<span class="kw">null</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb3-3" title="3">  <span class="kw">const</span> [isLoaded<span class="op">,</span> setIsLoaded] <span class="op">=</span> <span class="at">useState</span>(<span class="kw">false</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb3-4" title="4">  <span class="kw">const</span> [items<span class="op">,</span> setItems] <span class="op">=</span> <span class="at">useState</span>([])<span class="op">;</span></a>
+<a class="sourceLine" id="cb3-5" title="5"></a>
+<a class="sourceLine" id="cb3-6" title="6">  <span class="co">// Note: the empty deps array [] means</span></a>
+<a class="sourceLine" id="cb3-7" title="7">  <span class="co">// this useEffect will run once</span></a>
+<a class="sourceLine" id="cb3-8" title="8">  <span class="co">// similar to componentDidMount()</span></a>
+<a class="sourceLine" id="cb3-9" title="9">  <span class="at">useEffect</span>(() <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb3-10" title="10">    <span class="at">fetch</span>(<span class="st">&quot;https://api.example.com/items&quot;</span>)</a>
+<a class="sourceLine" id="cb3-11" title="11">      .<span class="at">then</span>(res <span class="kw">=&gt;</span> <span class="va">res</span>.<span class="at">json</span>())</a>
+<a class="sourceLine" id="cb3-12" title="12">      .<span class="at">then</span>(</a>
+<a class="sourceLine" id="cb3-13" title="13">        (result) <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb3-14" title="14">          <span class="at">setIsLoaded</span>(<span class="kw">true</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb3-15" title="15">          <span class="at">setItems</span>(result)<span class="op">;</span></a>
+<a class="sourceLine" id="cb3-16" title="16">        <span class="op">},</span></a>
+<a class="sourceLine" id="cb3-17" title="17">        <span class="co">// Note: it&#39;s important to handle errors here</span></a>
+<a class="sourceLine" id="cb3-18" title="18">        <span class="co">// instead of a catch() block so that we don&#39;t swallow</span></a>
+<a class="sourceLine" id="cb3-19" title="19">        <span class="co">// exceptions from actual bugs in components.</span></a>
+<a class="sourceLine" id="cb3-20" title="20">        (error) <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb3-21" title="21">          <span class="at">setIsLoaded</span>(<span class="kw">true</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb3-22" title="22">          <span class="at">setError</span>(error)<span class="op">;</span></a>
+<a class="sourceLine" id="cb3-23" title="23">        <span class="op">}</span></a>
+<a class="sourceLine" id="cb3-24" title="24">      )</a>
+<a class="sourceLine" id="cb3-25" title="25">  <span class="op">},</span> [])</a>
+<a class="sourceLine" id="cb3-26" title="26"></a>
+<a class="sourceLine" id="cb3-27" title="27">  <span class="cf">if</span> (error) <span class="op">{</span></a>
+<a class="sourceLine" id="cb3-28" title="28">    <span class="cf">return</span> <span class="op">&lt;</span>div<span class="op">&gt;</span><span class="dt">Error</span><span class="op">:</span> <span class="op">{</span><span class="va">error</span>.<span class="at">message</span><span class="op">}</span>&lt;/div<span class="op">&gt;;</span></a>
+<a class="sourceLine" id="cb3-29" title="29">  <span class="op">}</span> <span class="cf">else</span> <span class="cf">if</span> (<span class="op">!</span>isLoaded) <span class="op">{</span></a>
+<a class="sourceLine" id="cb3-30" title="30">    <span class="cf">return</span> <span class="op">&lt;</span>div<span class="op">&gt;</span><span class="va">Loading</span>...&lt;/div<span class="op">&gt;;</span></a>
+<a class="sourceLine" id="cb3-31" title="31">  <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb3-32" title="32">    <span class="cf">return</span> (</a>
+<a class="sourceLine" id="cb3-33" title="33">      <span class="op">&lt;</span>ul<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb3-34" title="34">        <span class="op">{</span><span class="va">items</span>.<span class="at">map</span>(item <span class="kw">=&gt;</span> (</a>
+<a class="sourceLine" id="cb3-35" title="35">          <span class="op">&lt;</span>li key<span class="op">={</span><span class="va">item</span>.<span class="at">id</span><span class="op">}&gt;</span></a>
+<a class="sourceLine" id="cb3-36" title="36">            <span class="op">{</span><span class="va">item</span>.<span class="at">name</span><span class="op">}</span> <span class="op">{</span><span class="va">item</span>.<span class="at">price</span><span class="op">}</span></a>
+<a class="sourceLine" id="cb3-37" title="37">          &lt;/li<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb3-38" title="38">        ))<span class="op">}</span></a>
+<a class="sourceLine" id="cb3-39" title="39">      &lt;/ul<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb3-40" title="40">    )<span class="op">;</span></a>
+<a class="sourceLine" id="cb3-41" title="41">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb3-42" title="42"><span class="op">}</span></a></code></pre></div>
+</body>
+</html>

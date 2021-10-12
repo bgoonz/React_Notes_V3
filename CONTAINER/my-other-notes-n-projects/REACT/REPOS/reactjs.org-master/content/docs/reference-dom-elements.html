@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>DOM Elements</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">DOM Elements</h1>
+</header>
+<p>React implements a browser-independent DOM system for performance and cross-browser compatibility. We took the opportunity to clean up a few rough edges in browser DOM implementations.</p>
+<p>In React, all DOM properties and attributes (including event handlers) should be camelCased. For example, the HTML attribute <code>tabindex</code> corresponds to the attribute <code>tabIndex</code> in React. The exception is <code>aria-*</code> and <code>data-*</code> attributes, which should be lowercased. For example, you can keep <code>aria-label</code> as <code>aria-label</code>.</p>
+<h2 id="differences-in-attributes">Differences In Attributes</h2>
+<p>There are a number of attributes that work differently between React and HTML:</p>
+<h3 id="checked">checked</h3>
+<p>The <code>checked</code> attribute is supported by <code>&lt;input&gt;</code> components of type <code>checkbox</code> or <code>radio</code>. You can use it to set whether the component is checked. This is useful for building controlled components. <code>defaultChecked</code> is the uncontrolled equivalent, which sets whether the component is checked when it is first mounted.</p>
+<h3 id="classname">className</h3>
+<p>To specify a CSS class, use the <code>className</code> attribute. This applies to all regular DOM and SVG elements like <code>&lt;div&gt;</code>, <code>&lt;a&gt;</code>, and others.</p>
+<p>If you use React with Web Components (which is uncommon), use the <code>class</code> attribute instead.</p>
+<h3 id="dangerouslysetinnerhtml">dangerouslySetInnerHTML</h3>
+<p><code>dangerouslySetInnerHTML</code> is React’s replacement for using <code>innerHTML</code> in the browser DOM. In general, setting HTML from code is risky because it’s easy to inadvertently expose your users to a <a href="https://en.wikipedia.org/wiki/Cross-site_scripting">cross-site scripting (XSS)</a> attack. So, you can set HTML directly from React, but you have to type out <code>dangerouslySetInnerHTML</code> and pass an object with a <code>__html</code> key, to remind yourself that it’s dangerous. For example:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">function</span> <span class="at">createMarkup</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb1-2" title="2">  <span class="cf">return</span> <span class="op">{</span><span class="dt">__html</span><span class="op">:</span> <span class="st">&#39;First &amp;middot; Second&#39;</span><span class="op">};</span></a>
+<a class="sourceLine" id="cb1-3" title="3"><span class="op">}</span></a>
+<a class="sourceLine" id="cb1-4" title="4"></a>
+<a class="sourceLine" id="cb1-5" title="5"><span class="kw">function</span> <span class="at">MyComponent</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb1-6" title="6">  <span class="cf">return</span> <span class="op">&lt;</span>div dangerouslySetInnerHTML<span class="op">={</span><span class="at">createMarkup</span>()<span class="op">}</span> /&gt;<span class="op">;</span></a>
+<a class="sourceLine" id="cb1-7" title="7"><span class="op">}</span></a></code></pre></div>
+<h3 id="htmlfor">htmlFor</h3>
+<p>Since <code>for</code> is a reserved word in JavaScript, React elements use <code>htmlFor</code> instead.</p>
+<h3 id="onchange">onChange</h3>
+<p>The <code>onChange</code> event behaves as you would expect it to: whenever a form field is changed, this event is fired. We intentionally do not use the existing browser behavior because <code>onChange</code> is a misnomer for its behavior and React relies on this event to handle user input in real time.</p>
+<h3 id="selected">selected</h3>
+<p>If you want to mark an <code>&lt;option&gt;</code> as selected, reference the value of that option in the <code>value</code> of its <code>&lt;select&gt;</code> instead. Check out <a href="/docs/forms.html#the-select-tag">“The select Tag”</a> for detailed instructions.</p>
+<h3 id="style">style</h3>
+<blockquote>
+<p>Note</p>
+<p>Some examples in the documentation use <code>style</code> for convenience, but <strong>using the <code>style</code> attribute as the primary means of styling elements is generally not recommended.</strong> In most cases, <a href="#classname"><code>className</code></a> should be used to reference classes defined in an external CSS stylesheet. <code>style</code> is most often used in React applications to add dynamically-computed styles at render time. See also <a href="/docs/faq-styling.html">FAQ: Styling and CSS</a>.</p>
+</blockquote>
+<p>The <code>style</code> attribute accepts a JavaScript object with camelCased properties rather than a CSS string. This is consistent with the DOM <code>style</code> JavaScript property, is more efficient, and prevents XSS security holes. For example:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb2-1" title="1"><span class="kw">const</span> divStyle <span class="op">=</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb2-2" title="2">  <span class="dt">color</span><span class="op">:</span> <span class="st">&#39;blue&#39;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb2-3" title="3">  <span class="dt">backgroundImage</span><span class="op">:</span> <span class="st">&#39;url(&#39;</span> <span class="op">+</span> imgUrl <span class="op">+</span> <span class="st">&#39;)&#39;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb2-4" title="4"><span class="op">};</span></a>
+<a class="sourceLine" id="cb2-5" title="5"></a>
+<a class="sourceLine" id="cb2-6" title="6"><span class="kw">function</span> <span class="at">HelloWorldComponent</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb2-7" title="7">  <span class="cf">return</span> <span class="op">&lt;</span>div style<span class="op">={</span>divStyle<span class="op">}&gt;</span>Hello World<span class="op">!</span>&lt;/div<span class="op">&gt;;</span></a>
+<a class="sourceLine" id="cb2-8" title="8"><span class="op">}</span></a></code></pre></div>
+<p>Note that styles are not autoprefixed. To support older browsers, you need to supply corresponding style properties:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb3-1" title="1"><span class="kw">const</span> divStyle <span class="op">=</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb3-2" title="2">  <span class="dt">WebkitTransition</span><span class="op">:</span> <span class="st">&#39;all&#39;</span><span class="op">,</span> <span class="co">// note the capital &#39;W&#39; here</span></a>
+<a class="sourceLine" id="cb3-3" title="3">  <span class="dt">msTransition</span><span class="op">:</span> <span class="st">&#39;all&#39;</span> <span class="co">// &#39;ms&#39; is the only lowercase vendor prefix</span></a>
+<a class="sourceLine" id="cb3-4" title="4"><span class="op">};</span></a>
+<a class="sourceLine" id="cb3-5" title="5"></a>
+<a class="sourceLine" id="cb3-6" title="6"><span class="kw">function</span> <span class="at">ComponentWithTransition</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb3-7" title="7">  <span class="cf">return</span> <span class="op">&lt;</span>div style<span class="op">={</span>divStyle<span class="op">}&gt;</span>This should work cross<span class="op">-</span>browser&lt;/div<span class="op">&gt;;</span></a>
+<a class="sourceLine" id="cb3-8" title="8"><span class="op">}</span></a></code></pre></div>
+<p>Style keys are camelCased in order to be consistent with accessing the properties on DOM nodes from JS (e.g. <code>node.style.backgroundImage</code>). Vendor prefixes <a href="https://www.andismith.com/blogs/2012/02/modernizr-prefixed/">other than <code>ms</code></a> should begin with a capital letter. This is why <code>WebkitTransition</code> has an uppercase “W”.</p>
+<p>React will automatically append a “px” suffix to certain numeric inline style properties. If you want to use units other than “px”, specify the value as a string with the desired unit. For example:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb4-1" title="1"><span class="co">// Result style: &#39;10px&#39;</span></a>
+<a class="sourceLine" id="cb4-2" title="2"><span class="op">&lt;</span>div style<span class="op">={{</span> <span class="dt">height</span><span class="op">:</span> <span class="dv">10</span> <span class="op">}}&gt;</span></a>
+<a class="sourceLine" id="cb4-3" title="3">  Hello World<span class="op">!</span></a>
+<a class="sourceLine" id="cb4-4" title="4">&lt;/div<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb4-5" title="5"></a>
+<a class="sourceLine" id="cb4-6" title="6"><span class="co">// Result style: &#39;10%&#39;</span></a>
+<a class="sourceLine" id="cb4-7" title="7"><span class="op">&lt;</span>div style<span class="op">={{</span> <span class="dt">height</span><span class="op">:</span> <span class="st">&#39;10%&#39;</span> <span class="op">}}&gt;</span></a>
+<a class="sourceLine" id="cb4-8" title="8">  Hello World<span class="op">!</span></a>
+<a class="sourceLine" id="cb4-9" title="9">&lt;/div<span class="op">&gt;</span></a></code></pre></div>
+<p>Not all style properties are converted to pixel strings though. Certain ones remain unitless (eg <code>zoom</code>, <code>order</code>, <code>flex</code>). A complete list of unitless properties can be seen <a href="https://github.com/facebook/react/blob/4131af3e4bf52f3a003537ec95a1655147c81270/src/renderers/dom/shared/CSSProperty.js#L15-L59">here</a>.</p>
+<h3 id="suppresscontenteditablewarning">suppressContentEditableWarning</h3>
+<p>Normally, there is a warning when an element with children is also marked as <code>contentEditable</code>, because it won’t work. This attribute suppresses that warning. Don’t use this unless you are building a library like <a href="https://facebook.github.io/draft-js/">Draft.js</a> that manages <code>contentEditable</code> manually.</p>
+<h3 id="suppresshydrationwarning">suppressHydrationWarning</h3>
+<p>If you use server-side React rendering, normally there is a warning when the server and the client render different content. However, in some rare cases, it is very hard or impossible to guarantee an exact match. For example, timestamps are expected to differ on the server and on the client.</p>
+<p>If you set <code>suppressHydrationWarning</code> to <code>true</code>, React will not warn you about mismatches in the attributes and the content of that element. It only works one level deep, and is intended to be used as an escape hatch. Don’t overuse it. You can read more about hydration in the <a href="/docs/react-dom.html#hydrate"><code>ReactDOM.hydrate()</code> documentation</a>.</p>
+<h3 id="value">value</h3>
+<p>The <code>value</code> attribute is supported by <code>&lt;input&gt;</code>, <code>&lt;select&gt;</code> and <code>&lt;textarea&gt;</code> components. You can use it to set the value of the component. This is useful for building controlled components. <code>defaultValue</code> is the uncontrolled equivalent, which sets the value of the component when it is first mounted.</p>
+<h2 id="all-supported-html-attributes">All Supported HTML Attributes</h2>
+<p>As of React 16, any standard <a href="/blog/2017/09/08/dom-attributes-in-react-16.html">or custom</a> DOM attributes are fully supported.</p>
+<p>React has always provided a JavaScript-centric API to the DOM. Since React components often take both custom and DOM-related props, React uses the <code>camelCase</code> convention just like the DOM APIs:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb5-1" title="1"><span class="op">&lt;</span>div tabIndex<span class="op">={-</span><span class="dv">1</span><span class="op">}</span> /&gt;      <span class="co">// Just like node.tabIndex DOM API</span></a>
+<a class="sourceLine" id="cb5-2" title="2"><span class="op">&lt;</span>div className<span class="op">=</span><span class="st">&quot;Button&quot;</span> /&gt; <span class="co">// Just like node.className DOM API</span></a>
+<a class="sourceLine" id="cb5-3" title="3"><span class="op">&lt;</span>input readOnly<span class="op">={</span><span class="kw">true</span><span class="op">}</span> /&gt;  <span class="co">// Just like node.readOnly DOM API</span></a></code></pre></div>
+<p>These props work similarly to the corresponding HTML attributes, with the exception of the special cases documented above.</p>
+<p>Some of the DOM attributes supported by React include:</p>
+<pre><code>accept acceptCharset accessKey action allowFullScreen alt async autoComplete
+autoFocus autoPlay capture cellPadding cellSpacing challenge charSet checked
+cite classID className colSpan cols content contentEditable contextMenu controls
+controlsList coords crossOrigin data dateTime default defer dir disabled
+download draggable encType form formAction formEncType formMethod formNoValidate
+formTarget frameBorder headers height hidden high href hrefLang htmlFor
+httpEquiv icon id inputMode integrity is keyParams keyType kind label lang list
+loop low manifest marginHeight marginWidth max maxLength media mediaGroup method
+min minLength multiple muted name noValidate nonce open optimum pattern
+placeholder poster preload profile radioGroup readOnly rel required reversed
+role rowSpan rows sandbox scope scoped scrolling seamless selected shape size
+sizes span spellCheck src srcDoc srcLang srcSet start step style summary
+tabIndex target title type useMap value width wmode wrap</code></pre>
+<p>Similarly, all SVG attributes are fully supported:</p>
+<pre><code>accentHeight accumulate additive alignmentBaseline allowReorder alphabetic
+amplitude arabicForm ascent attributeName attributeType autoReverse azimuth
+baseFrequency baseProfile baselineShift bbox begin bias by calcMode capHeight
+clip clipPath clipPathUnits clipRule colorInterpolation
+colorInterpolationFilters colorProfile colorRendering contentScriptType
+contentStyleType cursor cx cy d decelerate descent diffuseConstant direction
+display divisor dominantBaseline dur dx dy edgeMode elevation enableBackground
+end exponent externalResourcesRequired fill fillOpacity fillRule filter
+filterRes filterUnits floodColor floodOpacity focusable fontFamily fontSize
+fontSizeAdjust fontStretch fontStyle fontVariant fontWeight format from fx fy
+g1 g2 glyphName glyphOrientationHorizontal glyphOrientationVertical glyphRef
+gradientTransform gradientUnits hanging horizAdvX horizOriginX ideographic
+imageRendering in in2 intercept k k1 k2 k3 k4 kernelMatrix kernelUnitLength
+kerning keyPoints keySplines keyTimes lengthAdjust letterSpacing lightingColor
+limitingConeAngle local markerEnd markerHeight markerMid markerStart
+markerUnits markerWidth mask maskContentUnits maskUnits mathematical mode
+numOctaves offset opacity operator order orient orientation origin overflow
+overlinePosition overlineThickness paintOrder panose1 pathLength
+patternContentUnits patternTransform patternUnits pointerEvents points
+pointsAtX pointsAtY pointsAtZ preserveAlpha preserveAspectRatio primitiveUnits
+r radius refX refY renderingIntent repeatCount repeatDur requiredExtensions
+requiredFeatures restart result rotate rx ry scale seed shapeRendering slope
+spacing specularConstant specularExponent speed spreadMethod startOffset
+stdDeviation stemh stemv stitchTiles stopColor stopOpacity
+strikethroughPosition strikethroughThickness string stroke strokeDasharray
+strokeDashoffset strokeLinecap strokeLinejoin strokeMiterlimit strokeOpacity
+strokeWidth surfaceScale systemLanguage tableValues targetX targetY textAnchor
+textDecoration textLength textRendering to transform u1 u2 underlinePosition
+underlineThickness unicode unicodeBidi unicodeRange unitsPerEm vAlphabetic
+vHanging vIdeographic vMathematical values vectorEffect version vertAdvY
+vertOriginX vertOriginY viewBox viewTarget visibility widths wordSpacing
+writingMode x x1 x2 xChannelSelector xHeight xlinkActuate xlinkArcrole
+xlinkHref xlinkRole xlinkShow xlinkTitle xlinkType xmlns xmlnsXlink xmlBase
+xmlLang xmlSpace y y1 y2 yChannelSelector z zoomAndPan</code></pre>
+<p>You may also use custom attributes as long as they’re fully lowercase.</p>
+</body>
+</html>

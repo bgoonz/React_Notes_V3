@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>README</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<h1 id="react-library">React Library</h1>
+<h2 id="setup">Setup</h2>
+<h3 id="installation">Installation</h3>
+<ul>
+<li><code>git clone</code> this repository</li>
+<li>first terminal: <code>cd demo &amp;&amp; npm install &amp;&amp; npm start</code></li>
+<li>second terminal: <code>cd library &amp;&amp; npm run library:build</code></li>
+</ul>
+<h3 id="publish">Publish</h3>
+<ul>
+<li>create account on https://www.npmjs.com</li>
+<li><code>npm login</code> on command line</li>
+<li>replace <code>rwieruch-react-library</code> in all files with <code>your-name-react-library</code></li>
+<li>first terminal: <code>cd library &amp;&amp; npm run library:build &amp;&amp; npm publish</code></li>
+<li>second terminal: <code>cd demo &amp;&amp; npm install your-name-react-library</code></li>
+</ul>
+<h3 id="update">Update</h3>
+<ul>
+<li>make changes in <em>/library</em></li>
+<li>increment <code>version</code> in <em>package.json</em></li>
+<li>first terminal: <code>cd library &amp;&amp; npm run library:build &amp;&amp; npm publish</code></li>
+<li>second terminal: <code>cd demo &amp;&amp; npm install your-name-react-library</code></li>
+</ul>
+<h2 id="tasks">Tasks</h2>
+<h3 id="webpack-to-rollup">Webpack to Rollup</h3>
+<ul>
+<li>The <em>/library</em> is build with Webpack and Babel. However, Rollup is the most popular choice when it comes to libraries. So exchange Webpack with Rollup, but keep and use the <em>.babelrc</em>.</li>
+</ul>
+<h3 id="code-splitting">Code Splitting</h3>
+<ul>
+<li>Webpack does code splitting at the moment. Rollup should do the same, so that the annotated // TODO imports in <em>/demo/src/App.js</em> work.</li>
+</ul>
+<h3 id="typescript">TypeScript</h3>
+<ul>
+<li>Make <em>/library</em> work with TypeScript and export the type definitions. Then convert <em>/demo</em> to TypeScript and use the typed library.</li>
+</ul>
+<h3 id="css-modules-instead-of-styled-components">CSS Modules instead of Styled Components</h3>
+<ul>
+<li>Make <em>/library</em> work with CSS Modules instead of TypeSript. The crucial file that needs to work is <em>/library/src/Data/Item/index.js</em> with its <em>theme</em> and <em>offset</em>. So injecting CSS from the outside needs to work (<em>theme</em>) and setting dynamic values (<em>offset</em>) should work too.</li>
+</ul>
+<h3 id="npm-link">NPM Link</h3>
+<ul>
+<li>Use NPM linking, so that /library can be used like a library in /demo, but without installing it via npm.</li>
+</ul>
+</body>
+</html>

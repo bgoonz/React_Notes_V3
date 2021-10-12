@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>README</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<p>A fullstack React/express blog using React hooks</p>
+<p>This Project was bootstrapped with create-react-app</p>
+<p>download or git clone the project files.</p>
+<h2 id="cd-into-both-project-directories-in-2-different-terminal-windows-and-then-install-the-dependencies">cd into both Project Directories in 2 different terminal windows and then install the dependencies</h2>
+<p>The “Client” directory contains the React code. The “Server” directory contains the code for the node.js express server. This project requries a PSQL database to run. This project also requires setting up an app on auth0.</p>
+<p>For intructions on installing PSQL visit the offical PSQL website: <br /> https://www.postgresql.org/</p>
+<h4 id="st-window">1st window</h4>
+<p><code>cd Client</code></p>
+<h4 id="nd-window">2nd window</h4>
+<p><code>cd Server</code></p>
+<h4 id="st-window-1">1st window</h4>
+<p><code>npm install</code></p>
+<h4 id="nd-window-1">2nd window</h4>
+<p><code>npm install</code></p>
+<p><br /></p>
+<h3 id="run-both-the-server-and-client-at-the-same-time">Run both the server and client at the same time</h3>
+<h4 id="st-window-2">1st window</h4>
+<p><code>npm start</code> (runs react at localhost:3000)</p>
+<h4 id="nd-window-2">2nd window</h4>
+<p><code>npm run devstart</code> (devstart runs nodemon at localhost:5000)</p>
+<h3 id="set-up-psql">Set up PSQL</h3>
+<ol>
+<li>
+Open the PSQL shell and login to PSQL
+</li>
+<li>
+Create a new PSQL database if you have not already done so.
+</li>
+<li>
+Simply copy the SQL code in the Server/main/schema.sql file and paste it in as commands into the PSQL shell.
+</li>
+<li>
+In the Server/main/db.js file replace the code with the login info for your own PSQL database.
+</li>
+<li>
+After setting up the PSQL database and making the required adjustments in the db.js file, the app will be fully functional.
+</li>
+</ol>
+<h3 id="optional-set-up-auth0">(Optional) Set up auth0</h3>
+<p>You can optionally create your own auth0 app and subsitute the credentials in the Client/utils/auth.js file. You can also just use the default credentials I have provided.</p>
+</body>
+</html>

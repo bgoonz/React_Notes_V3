@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Hooks at a Glance</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Hooks at a Glance</h1>
+</header>
+<p><em>Hooks</em> are a new addition in React 16.8. They let you use state and other React features without writing a class.</p>
+<p>Hooks are <a href="/docs/hooks-intro.html#no-breaking-changes">backwards-compatible</a>. This page provides an overview of Hooks for experienced React users. This is a fast-paced overview. If you get confused, look for a yellow box like this:</p>
+<blockquote>
+<p>Detailed Explanation</p>
+<p>Read the <a href="/docs/hooks-intro.html#motivation">Motivation</a> to learn why we’re introducing Hooks to React.</p>
+</blockquote>
+<p><strong>↑↑↑ Each section ends with a yellow box like this.</strong> They link to detailed explanations.</p>
+<h2 id="state-hook">📌 State Hook</h2>
+<p>This example renders a counter. When you click the button, it increments the value:</p>
+<pre class="js{1,4,5}"><code>import React, { useState } from &#39;react&#39;;
+
+function Example() {
+  // Declare a new state variable, which we&#39;ll call &quot;count&quot;
+  const [count, setCount] = useState(0);
+
+  return (
+    &lt;div&gt;
+      &lt;p&gt;You clicked {count} times&lt;/p&gt;
+      &lt;button onClick={() =&gt; setCount(count + 1)}&gt;
+        Click me
+      &lt;/button&gt;
+    &lt;/div&gt;
+  );
+}</code></pre>
+<p>Here, <code>useState</code> is a <em>Hook</em> (we’ll talk about what this means in a moment). We call it inside a function component to add some local state to it. React will preserve this state between re-renders. <code>useState</code> returns a pair: the <em>current</em> state value and a function that lets you update it. You can call this function from an event handler or somewhere else. It’s similar to <code>this.setState</code> in a class, except it doesn’t merge the old and new state together. (We’ll show an example comparing <code>useState</code> to <code>this.state</code> in <a href="/docs/hooks-state.html">Using the State Hook</a>.)</p>
+<p>The only argument to <code>useState</code> is the initial state. In the example above, it is <code>0</code> because our counter starts from zero. Note that unlike <code>this.state</code>, the state here doesn’t have to be an object – although it can be if you want. The initial state argument is only used during the first render.</p>
+<h4 id="declaring-multiple-state-variables">Declaring multiple state variables</h4>
+<p>You can use the State Hook more than once in a single component:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb2-1" title="1"><span class="kw">function</span> <span class="at">ExampleWithManyStates</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb2-2" title="2">  <span class="co">// Declare multiple state variables!</span></a>
+<a class="sourceLine" id="cb2-3" title="3">  <span class="kw">const</span> [age<span class="op">,</span> setAge] <span class="op">=</span> <span class="at">useState</span>(<span class="dv">42</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb2-4" title="4">  <span class="kw">const</span> [fruit<span class="op">,</span> setFruit] <span class="op">=</span> <span class="at">useState</span>(<span class="st">&#39;banana&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb2-5" title="5">  <span class="kw">const</span> [todos<span class="op">,</span> setTodos] <span class="op">=</span> <span class="at">useState</span>([<span class="op">{</span> <span class="dt">text</span><span class="op">:</span> <span class="st">&#39;Learn Hooks&#39;</span> <span class="op">}</span>])<span class="op">;</span></a>
+<a class="sourceLine" id="cb2-6" title="6">  <span class="co">// ...</span></a>
+<a class="sourceLine" id="cb2-7" title="7"><span class="op">}</span></a></code></pre></div>
+<p>The <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment#Array_destructuring">array destructuring</a> syntax lets us give different names to the state variables we declared by calling <code>useState</code>. These names aren’t a part of the <code>useState</code> API. Instead, React assumes that if you call <code>useState</code> many times, you do it in the same order during every render. We’ll come back to why this works and when this is useful later.</p>
+<h4 id="but-what-is-a-hook">But what is a Hook?</h4>
+<p>Hooks are functions that let you “hook into” React state and lifecycle features from function components. Hooks don’t work inside classes – they let you use React without classes. (We <a href="/docs/hooks-intro.html#gradual-adoption-strategy">don’t recommend</a> rewriting your existing components overnight but you can start using Hooks in the new ones if you’d like.)</p>
+<p>React provides a few built-in Hooks like <code>useState</code>. You can also create your own Hooks to reuse stateful behavior between different components. We’ll look at the built-in Hooks first.</p>
+<blockquote>
+<p>Detailed Explanation</p>
+<p>You can learn more about the State Hook on a dedicated page: <a href="/docs/hooks-state.html">Using the State Hook</a>.</p>
+</blockquote>
+<h2 id="effect-hook">⚡️ Effect Hook</h2>
+<p>You’ve likely performed data fetching, subscriptions, or manually changing the DOM from React components before. We call these operations “side effects” (or “effects” for short) because they can affect other components and can’t be done during rendering.</p>
+<p>The Effect Hook, <code>useEffect</code>, adds the ability to perform side effects from a function component. It serves the same purpose as <code>componentDidMount</code>, <code>componentDidUpdate</code>, and <code>componentWillUnmount</code> in React classes, but unified into a single API. (We’ll show examples comparing <code>useEffect</code> to these methods in <a href="/docs/hooks-effect.html">Using the Effect Hook</a>.)</p>
+<p>For example, this component sets the document title after React updates the DOM:</p>
+<pre class="js{1,6-10}"><code>import React, { useState, useEffect } from &#39;react&#39;;
+
+function Example() {
+  const [count, setCount] = useState(0);
+
+  // Similar to componentDidMount and componentDidUpdate:
+  useEffect(() =&gt; {
+    // Update the document title using the browser API
+    document.title = `You clicked ${count} times`;
+  });
+
+  return (
+    &lt;div&gt;
+      &lt;p&gt;You clicked {count} times&lt;/p&gt;
+      &lt;button onClick={() =&gt; setCount(count + 1)}&gt;
+        Click me
+      &lt;/button&gt;
+    &lt;/div&gt;
+  );
+}</code></pre>
+<p>When you call <code>useEffect</code>, you’re telling React to run your “effect” function after flushing changes to the DOM. Effects are declared inside the component so they have access to its props and state. By default, React runs the effects after every render – <em>including</em> the first render. (We’ll talk more about how this compares to class lifecycles in <a href="/docs/hooks-effect.html">Using the Effect Hook</a>.)</p>
+<p>Effects may also optionally specify how to “clean up” after them by returning a function. For example, this component uses an effect to subscribe to a friend’s online status, and cleans up by unsubscribing from it:</p>
+<pre class="js{10-16}"><code>import React, { useState, useEffect } from &#39;react&#39;;
+
+function FriendStatus(props) {
+  const [isOnline, setIsOnline] = useState(null);
+
+  function handleStatusChange(status) {
+    setIsOnline(status.isOnline);
+  }
+
+  useEffect(() =&gt; {
+    ChatAPI.subscribeToFriendStatus(props.friend.id, handleStatusChange);
+
+    return () =&gt; {
+      ChatAPI.unsubscribeFromFriendStatus(props.friend.id, handleStatusChange);
+    };
+  });
+
+  if (isOnline === null) {
+    return &#39;Loading...&#39;;
+  }
+  return isOnline ? &#39;Online&#39; : &#39;Offline&#39;;
+}</code></pre>
+<p>In this example, React would unsubscribe from our <code>ChatAPI</code> when the component unmounts, as well as before re-running the effect due to a subsequent render. (If you want, there’s a way to <a href="/docs/hooks-effect.html#tip-optimizing-performance-by-skipping-effects">tell React to skip re-subscribing</a> if the <code>props.friend.id</code> we passed to <code>ChatAPI</code> didn’t change.)</p>
+<p>Just like with <code>useState</code>, you can use more than a single effect in a component:</p>
+<pre class="js{3,8}"><code>function FriendStatusWithCounter(props) {
+  const [count, setCount] = useState(0);
+  useEffect(() =&gt; {
+    document.title = `You clicked ${count} times`;
+  });
+
+  const [isOnline, setIsOnline] = useState(null);
+  useEffect(() =&gt; {
+    ChatAPI.subscribeToFriendStatus(props.friend.id, handleStatusChange);
+    return () =&gt; {
+      ChatAPI.unsubscribeFromFriendStatus(props.friend.id, handleStatusChange);
+    };
+  });
+
+  function handleStatusChange(status) {
+    setIsOnline(status.isOnline);
+  }
+  // ...</code></pre>
+<p>Hooks let you organize side effects in a component by what pieces are related (such as adding and removing a subscription), rather than forcing a split based on lifecycle methods.</p>
+<blockquote>
+<p>Detailed Explanation</p>
+<p>You can learn more about <code>useEffect</code> on a dedicated page: <a href="/docs/hooks-effect.html">Using the Effect Hook</a>.</p>
+</blockquote>
+<h2 id="rules-of-hooks">✌️ Rules of Hooks</h2>
+<p>Hooks are JavaScript functions, but they impose two additional rules:</p>
+<ul>
+<li>Only call Hooks <strong>at the top level</strong>. Don’t call Hooks inside loops, conditions, or nested functions.</li>
+<li>Only call Hooks <strong>from React function components</strong>. Don’t call Hooks from regular JavaScript functions. (There is just one other valid place to call Hooks – your own custom Hooks. We’ll learn about them in a moment.)</li>
+</ul>
+<p>We provide a <a href="https://www.npmjs.com/package/eslint-plugin-react-hooks">linter plugin</a> to enforce these rules automatically. We understand these rules might seem limiting or confusing at first, but they are essential to making Hooks work well.</p>
+<blockquote>
+<p>Detailed Explanation</p>
+<p>You can learn more about these rules on a dedicated page: <a href="/docs/hooks-rules.html">Rules of Hooks</a>.</p>
+</blockquote>
+<h2 id="building-your-own-hooks">💡 Building Your Own Hooks</h2>
+<p>Sometimes, we want to reuse some stateful logic between components. Traditionally, there were two popular solutions to this problem: <a href="/docs/higher-order-components.html">higher-order components</a> and <a href="/docs/render-props.html">render props</a>. Custom Hooks let you do this, but without adding more components to your tree.</p>
+<p>Earlier on this page, we introduced a <code>FriendStatus</code> component that calls the <code>useState</code> and <code>useEffect</code> Hooks to subscribe to a friend’s online status. Let’s say we also want to reuse this subscription logic in another component.</p>
+<p>First, we’ll extract this logic into a custom Hook called <code>useFriendStatus</code>:</p>
+<pre class="js{3}"><code>import React, { useState, useEffect } from &#39;react&#39;;
+
+function useFriendStatus(friendID) {
+  const [isOnline, setIsOnline] = useState(null);
+
+  function handleStatusChange(status) {
+    setIsOnline(status.isOnline);
+  }
+
+  useEffect(() =&gt; {
+    ChatAPI.subscribeToFriendStatus(friendID, handleStatusChange);
+    return () =&gt; {
+      ChatAPI.unsubscribeFromFriendStatus(friendID, handleStatusChange);
+    };
+  });
+
+  return isOnline;
+}</code></pre>
+<p>It takes <code>friendID</code> as an argument, and returns whether our friend is online.</p>
+<p>Now we can use it from both components:</p>
+<pre class="js{2}"><code>function FriendStatus(props) {
+  const isOnline = useFriendStatus(props.friend.id);
+
+  if (isOnline === null) {
+    return &#39;Loading...&#39;;
+  }
+  return isOnline ? &#39;Online&#39; : &#39;Offline&#39;;
+}</code></pre>
+<pre class="js{2}"><code>function FriendListItem(props) {
+  const isOnline = useFriendStatus(props.friend.id);
+
+  return (
+    &lt;li style={{ color: isOnline ? &#39;green&#39; : &#39;black&#39; }}&gt;
+      {props.friend.name}
+    &lt;/li&gt;
+  );
+}</code></pre>
+<p>The state of each component is completely independent. Hooks are a way to reuse <em>stateful logic</em>, not state itself. In fact, each <em>call</em> to a Hook has a completely isolated state – so you can even use the same custom Hook twice in one component.</p>
+<p>Custom Hooks are more of a convention than a feature. If a function’s name starts with “<code>use</code>” and it calls other Hooks, we say it is a custom Hook. The <code>useSomething</code> naming convention is how our linter plugin is able to find bugs in the code using Hooks.</p>
+<p>You can write custom Hooks that cover a wide range of use cases like form handling, animation, declarative subscriptions, timers, and probably many more we haven’t considered. We are excited to see what custom Hooks the React community will come up with.</p>
+<blockquote>
+<p>Detailed Explanation</p>
+<p>You can learn more about custom Hooks on a dedicated page: <a href="/docs/hooks-custom.html">Building Your Own Hooks</a>.</p>
+</blockquote>
+<h2 id="other-hooks">🔌 Other Hooks</h2>
+<p>There are a few less commonly used built-in Hooks that you might find useful. For example, <a href="/docs/hooks-reference.html#usecontext"><code>useContext</code></a> lets you subscribe to React context without introducing nesting:</p>
+<pre class="js{2,3}"><code>function Example() {
+  const locale = useContext(LocaleContext);
+  const theme = useContext(ThemeContext);
+  // ...
+}</code></pre>
+<p>And <a href="/docs/hooks-reference.html#usereducer"><code>useReducer</code></a> lets you manage local state of complex components with a reducer:</p>
+<pre class="js{2}"><code>function Todos() {
+  const [todos, dispatch] = useReducer(todosReducer);
+  // ...</code></pre>
+<blockquote>
+<p>Detailed Explanation</p>
+<p>You can learn more about all the built-in Hooks on a dedicated page: <a href="/docs/hooks-reference.html">Hooks API Reference</a>.</p>
+</blockquote>
+<h2 id="next-steps">Next Steps</h2>
+<p>Phew, that was fast! If some things didn’t quite make sense or you’d like to learn more in detail, you can read the next pages, starting with the <a href="/docs/hooks-state.html">State Hook</a> documentation.</p>
+<p>You can also check out the <a href="/docs/hooks-reference.html">Hooks API reference</a> and the <a href="/docs/hooks-faq.html">Hooks FAQ</a>.</p>
+<p>Finally, don’t miss the <a href="/docs/hooks-intro.html">introduction page</a> which explains <em>why</em> we’re adding Hooks and how we’ll start using them side by side with classes – without rewriting our apps.</p>
+</body>
+</html>

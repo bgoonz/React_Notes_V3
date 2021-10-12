@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>pagination</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<p><a href="../../readme.md">Table of contents</a> / <a href="../intro.md">API</a> / <a href="./intro.md">GraphQL</a></p>
+<h1 id="pagination-with-graphql">Pagination with GraphQL</h1>
+<p>Even though there is no specific built-in way to paginate GraphQL queries there is a quasi-standard that most people (including us) follow called <a href="https://facebook.github.io/relay/graphql/connections.htm">Relay Connections Specification</a>. Rather than reading a spec that might not help you in pratical applications we recommend reading these two article to get a grasp of the why and how:</p>
+<ul>
+<li><a href="https://dev-blog.apollodata.com/understanding-pagination-rest-graphql-and-relay-b10f835549e7">Understanding pagination: REST, GraphQL and Relay</a>: Get a sense of the issues we’re facing with the app and how to solve them</li>
+<li><a href="https://dev-blog.apollodata.com/explaining-graphql-connections-c48b7c3d6976">Explaining GraphQL Connections</a>: We follow this specific structure to the dot. (with one tiny change in naming)</li>
+</ul>
+<h2 id="tldr">TL;DR</h2>
+<p>The TL;DR of how to use it is:</p>
+<pre class="graphql"><code>{
+  thread(id: &quot;some-thread-id&quot;) {
+    # Fetch the messages of a certain thread
+    messageConnection {
+      pageInfo {
+        # Do we have another page to fetch after this
+        hasNextPage
+      }
+      edges {
+        # Pass the cursor of the last message to messageConnections
+        # to fetch the next page
+        cursor
+        # The actual message:
+        node {
+          id
+          message {
+            content
+          }
+        }
+      }
+    }
+  }
+}</code></pre>
+<p>This query would get the first 10 (or less if there’s less in total) messages of that thread. To get the next page you have to take the <code>cursor</code> of the last message edge and pass that to messageConnections:</p>
+<pre class="graphql"><code>{
+  thread(id: &quot;some-thread-id&quot;) {
+    # Fetch the next messages after the last message in the thread
+    messageConnection(after: $lastMessageCursor) {
+      edges {
+        node {
+          message {
+            content
+          }
+        }
+      }
+    }
+  }
+}</code></pre>
+<blockquote>
+<p>Note: The cursor is an opaque data structure, meaning it might refer to something you understand or it might not. It’s also not promised to be consistent, especially between sessions, resources, etc. This boils down to <strong>do not use the cursor for anything other than passing it to the query for the next page</strong>, no matter if you want to use it for something else.</p>
+</blockquote>
+<p>To specify how many messages you want to load use the <code>first</code> parameter:</p>
+<pre class="graphql"><code>{
+  thread(id: &quot;some-thread-id&quot;) {
+    # Fetch the first 5 messages after the last message
+    messageConnection(first: 5, after: $lastMessageCursor) {
+      edges {
+        node {
+          message {
+            content
+          }
+        }
+      }
+    }
+  }
+}</code></pre>
+<blockquote>
+<p>Note: The default for <code>first</code> is normally 10, but might be changed depending on the resource being fetched. Make sure to check GraphiQL/the types to figure out what the default is.</p>
+</blockquote>
+<h2 id="naming-conventions">Naming conventions</h2>
+<p>Connections and edges have standard names and structures across all resources:</p>
+<pre class="graphql"><code># A connection of a story to messages
+type StoryMessagesConnection {
+  pageInfo: PageInfo!
+  edges: [StoryMessageEdge!]
+}
+
+# An edge from a story to a message
+type StoryMessageEdge {
+  cursor: String!
+  node: Message!
+}
+
+type Story {
+  messageConnection(first: Int = 10, after: String): StoryMessagesConnection!
+}</code></pre>
+<blockquote>
+<p>Note: This is where we diverge slightly from the article linked above, it recommends naming your edges in plural (<code>StoryMessagesEdge</code>) to make it consistent with the connection but we’ve found that the singular (<code>StoryMessageEdge</code>) makes it clear only a single resource is being fetched and think that’s more important.</p>
+</blockquote>
+</body>
+</html>

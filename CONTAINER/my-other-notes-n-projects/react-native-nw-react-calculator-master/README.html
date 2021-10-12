@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>README</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<h1 id="mobile-desktop-and-website-apps-with-the-same-code">Mobile, desktop and website Apps with the same code</h1>
+<p><a href="https://travis-ci.org/benoitvallon/react-native-nw-react-calculator"><img src="https://travis-ci.org/benoitvallon/react-native-nw-react-calculator.svg?branch=master" alt="Build Status" /></a> <a href="https://david-dm.org/benoitvallon/react-native-nw-react-calculator"><img src="https://david-dm.org/benoitvallon/react-native-nw-react-calculator.svg" alt="Dependency Status" /></a> <a href="https://david-dm.org/benoitvallon/react-native-nw-react-calculator#info=devDependencies"><img src="https://david-dm.org/benoitvallon/react-native-nw-react-calculator/dev-status.svg" alt="devDependency Status" /></a></p>
+<p>This project shows how the source code can be architectured to run on multiple devices. As of now, it is able to run as:</p>
+<ul>
+<li>iOS &amp; Android Apps (based on <a href="https://facebook.github.io/react-native">react-native</a>)</li>
+<li>a Desktop App based on <a href="http://nwjs.io">NW</a> or based on <a href="http://electron.atom.io">Electron</a></li>
+<li>a Website App in any browser (based on <a href="https://facebook.github.io/react">react</a>)</li>
+</ul>
+<p>A demo for the Website App is available <a href="http://benoitvallon.github.io/react-native-nw-react-calculator">here</a>.</p>
+<h2 id="screenshots">Screenshots</h2>
+<h3 id="mobile-apps-ios-android">Mobile Apps (iOS &amp; Android)</h3>
+<figure>
+<img src="images/mobile-apps.png" title="Mobile Apps" alt="Mobile Apps" /><figcaption>Mobile Apps</figcaption>
+</figure>
+<h3 id="desktop-apps-nw-electron">Desktop Apps (NW &amp; Electron)</h3>
+<figure>
+<img src="images/desktop-apps.png" title="Desktop App" alt="Desktop App" /><figcaption>Desktop App</figcaption>
+</figure>
+<h3 id="website-app">Website App</h3>
+<figure>
+<img src="images/website-app.png" title="Website App" alt="Website App" /><figcaption>Website App</figcaption>
+</figure>
+<h2 id="librariestools">Libraries/tools</h2>
+<p>This project uses libraries and tools like: - es6 syntax and <a href="https://babeljs.io">babel</a> - <a href="https://facebook.github.io/react">react</a> for the Website App and Desktop App, - <a href="https://facebook.github.io/react-native">react-native</a> for the iOS &amp; Android Apps - <a href="http://nwjs.io">NW</a> to package the Desktop App - <a href="http://electron.atom.io">Electron</a> to package the Desktop App - <a href="https://facebook.github.io/flux">flux</a> to organize the data flow management - <a href="https://github.com/webpack/css-loader">css-loader</a> to integrate the styles in the builds - <a href="http://gruntjs.com">grunt</a> to create the builds - <a href="https://webpack.github.io">webpack</a> to help during the development phase with hot reloading</p>
+<h2 id="basic-philosophy">Basic philosophy</h2>
+<p>All the code is contained in the <code>src</code> directory, especially the 3 main entry files that are used for the builds: - <code>index.ios.js</code> &amp; <code>index.android.js</code> are the ones used to build the iOS &amp; Android Apps - <code>index.js</code> is the one used to build the Website App and Desktop App as the code is strictly the same.</p>
+<h3 id="flux-architecture-actionsstores">Flux architecture actions/stores</h3>
+<p>All the <a href="https://facebook.github.io/flux">flux</a> architecture is share to 100% to all the different builds. This means that all the logic and data management code is done only once and reuse everywhere. This allows us to have an easy tests suite as well and to ensure that our code is working properly on all the devices.</p>
+<h3 id="components">Components</h3>
+<p>The real interest of the project is in how the components have been structured to shared most of their logic and only redefined what is specific to every device.</p>
+<p>Basically, every component has a main <code>Class</code> which inherits a base <code>Class</code> containing all the logic. Then, the main component import a different Render function which has been selected during the build. The file extension <code>.ios.js</code>, <code>.android.js</code> or <code>.js</code> is used by the build tool to import only the right file.</p>
+<p>The <code>.native.js</code> files contain code that is shared between both mobile platforms (iOS &amp; Android). Currently, the <code>.ios.js</code> and <code>.android.js</code> files compose this <code>.native.js</code> file since all code is shared right now. However, if a component needed to be different for platform specific reasons, that code would be included in the corresponding platform specific files.</p>
+<p>At the end, every component is defined by 6 files. If we look at the screen component, here is its structure.</p>
+<pre><code>Screen.js
+├── ScreenBase.js
+├── ScreenRender.ios.js (specific to iOS build
+├── ScreenRender.android.js (specific to Android build)
+├── ScreenRender.native.js (shared mobile app code - iOS &amp; Android)
+└── ScreenRender.js (used during Website and Desktop build)</code></pre>
+<p>And here is the main <code>Class</code> file which composes the files.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb2-1" title="1"><span class="st">&#39;use strict&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb2-2" title="2"></a>
+<a class="sourceLine" id="cb2-3" title="3"><span class="im">import</span> Base <span class="im">from</span> <span class="st">&#39;./ScreenBase&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb2-4" title="4"><span class="im">import</span> Render <span class="im">from</span> <span class="st">&#39;./ScreenRender&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb2-5" title="5"></a>
+<a class="sourceLine" id="cb2-6" title="6"><span class="im">export</span> <span class="im">default</span> <span class="kw">class</span> Screen <span class="kw">extends</span> Base <span class="op">{</span></a>
+<a class="sourceLine" id="cb2-7" title="7">  <span class="at">constructor</span> (props) <span class="op">{</span></a>
+<a class="sourceLine" id="cb2-8" title="8">    <span class="kw">super</span>(props)<span class="op">;</span></a>
+<a class="sourceLine" id="cb2-9" title="9">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb2-10" title="10"></a>
+<a class="sourceLine" id="cb2-11" title="11">  <span class="at">render</span> () <span class="op">{</span></a>
+<a class="sourceLine" id="cb2-12" title="12">    <span class="cf">return</span> <span class="va">Render</span>.<span class="at">call</span>(<span class="kw">this</span><span class="op">,</span> <span class="kw">this</span>.<span class="at">props</span><span class="op">,</span> <span class="kw">this</span>.<span class="at">state</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb2-13" title="13">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb2-14" title="14"><span class="op">}</span></a></code></pre></div>
+<h2 id="whats-next">What’s next</h2>
+<p>Here are some thoughts about what can come next:</p>
+<ul>
+<li>Make the Website App Isomorphic/Universal</li>
+</ul>
+<h2 id="thank-you-robert-for-your-awesome-design">Thank you Robert for your awesome design</h2>
+<p>I want to thank Robert O’Dowd who kindly authorized me the reuse his very beautiful design. The original design made by Robert was part of his project called “Simplifycation” visible <a href="https://dribbble.com/shots/1973851-Simplifycation">here</a>.</p>
+<h1 id="how-to-buildrun-the-projects">How to build/run the projects</h1>
+<h2 id="general-requirements-before-running-any-specific-project">General requirements before running any specific project</h2>
+<ul>
+<li><code>npm install</code> to install all the dependencies, React and React Native among others.</li>
+</ul>
+<h3 id="with-some-versions-of-npm-v3.3.10-v3.6.0">With some versions of npm (&gt;=v3.3.10 &lt;=v3.6.0)</h3>
+<p>Some builds from npm included bugs while <code>npm install</code>. So if you are using a npm version within the range form 3.3.10 to 3.6.0 included, you must run <code>npm install</code> twice. Those versions including npm v3.3.12 are the ones bundled by default with node from version v5.1.0 to v5.5.0.</p>
+<ul>
+<li><code>npm install npm</code></li>
+<li><code>npm install npm</code> run it twice, because of the packages won’t be installed after the first run <a href="https://github.com/npm/npm/issues/10985">#10985</a></li>
+</ul>
+<h2 id="the-mobile-apps-ios-android">The Mobile Apps (iOS &amp; Android)</h2>
+<h3 id="requirements-for-react-native">Requirements for React Native</h3>
+<h4 id="ios">iOS</h4>
+<ul>
+<li>OS X</li>
+<li>Xcode 6.3 or higher is recommended (Xcode only runs on Mac).</li>
+<li>Homebrew is the recommended way to install node, watchman, and flow.</li>
+<li><code>brew install node</code></li>
+<li><code>brew install watchman</code>. We recommend installing watchman, otherwise you might hit a node file watching bug.</li>
+<li><code>brew install flow</code>. If you want to use flow.</li>
+</ul>
+<h4 id="android">Android</h4>
+<ul>
+<li>Follow the official documentation guide here: http://facebook.github.io/react-native/docs/getting-started.html#android-setup (includes experimental Windows &amp; Linux support)</li>
+</ul>
+<h3 id="running-the-mobile-apps">Running the Mobile Apps</h3>
+<h4 id="ios-1">iOS</h4>
+<ul>
+<li>Open iosApp.xcodeproj and hit run in Xcode.</li>
+<li>Hit cmd+R in your iOS simulator to reload the app and see your change!</li>
+</ul>
+<h4 id="android-1">Android</h4>
+<ul>
+<li>Open an emulator. (Genymotion or run <code>android avd</code>)</li>
+<li>Run the <code>react-native run-android</code> in the root of this project.</li>
+<li>If trying to run on a device, read the following guide: http://facebook.github.io/react-native/docs/running-on-device-android.html#content</li>
+</ul>
+<p>Congratulations! You’ve just successfully run the project as an iOS or Android App.</p>
+<h2 id="the-website-app">The Website App</h2>
+<h3 id="requirements-for-react">Requirements for React</h3>
+<p>There isn’t any additional requirements since you already installed the deps with <code>npm install</code>.</p>
+<h3 id="quick-start">Quick start</h3>
+<ul>
+<li><code>npm run build</code> to build the project (at least the first time)</li>
+<li><code>npm run serve-web</code> to preview in the browser at http://localhost:8000/index.web.html or http://localhost:8000/webpack-dev-server/index.web.html with webpack-dev-server and hot reload enabled</li>
+</ul>
+<p>Congratulations! You’ve just successfully run the project as a Website App.</p>
+<h2 id="the-desktop-app">The Desktop App</h2>
+<p>You can either run the project with <a href="http://nwjs.io">NW</a> or <a href="http://electron.atom.io">electron</a>.</p>
+<h3 id="requirements-for-nw">Requirements for NW</h3>
+<p>To run the project, you are supposed to run something like:</p>
+<p><code>/path/to/nw .</code></p>
+<p>On OSX, the executable binary is in a hidden directory within the .app file. The easier solution to install it is to download the app on http://nwjs.io/ then copying it to your application folder. You will now be able to run:</p>
+<p><code>/Applications/nwjs.app/Contents/MacOS/nwjs .</code></p>
+<p>You can also setup an alias to call the binary.</p>
+<p><code>alias nw="/Applications/nwjs.app/Contents/MacOS/nwjs"</code></p>
+<h3 id="quick-start-with-nw">Quick start with NW</h3>
+<ul>
+<li><code>npm run build</code> to build the project (at least the first time)</li>
+<li><code>npm run serve-nw</code> to launch the desktop app and enable livereload</li>
+</ul>
+<p>Congratulations! You’ve just successfully run the project as a Desktop App.</p>
+<h3 id="quick-start-with-electron">Quick start with Electron</h3>
+<ul>
+<li><code>npm run build</code> to build the project (at least the first time)</li>
+<li><code>npm run serve-electron</code> to launch the desktop app and enable livereload</li>
+</ul>
+<p>Congratulations! You’ve just successfully run the project as a Desktop App.</p>
+<h1 id="run-the-tests">Run the tests</h1>
+<p>To run the tests, simply run:</p>
+<pre><code>npm test</code></pre>
+<figure>
+<img src="images/tests.png" title="Tests" alt="Tests" /><figcaption>Tests</figcaption>
+</figure>
+</body>
+</html>

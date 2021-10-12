@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>React.Component</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">React.Component</h1>
+</header>
+<p>This page contains a detailed API reference for the React component class definition. It assumes you’re familiar with fundamental React concepts, such as <a href="/docs/components-and-props.html">Components and Props</a>, as well as <a href="/docs/state-and-lifecycle.html">State and Lifecycle</a>. If you’re not, read them first.</p>
+<h2 id="overview">Overview</h2>
+<p>React lets you define components as classes or functions. Components defined as classes currently provide more features which are described in detail on this page. To define a React component class, you need to extend <code>React.Component</code>:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">class</span> Welcome <span class="kw">extends</span> <span class="va">React</span>.<span class="at">Component</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb1-2" title="2">  <span class="at">render</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb1-3" title="3">    <span class="cf">return</span> <span class="op">&lt;</span>h1<span class="op">&gt;</span>Hello<span class="op">,</span> <span class="op">{</span><span class="kw">this</span>.<span class="va">props</span>.<span class="at">name</span><span class="op">}</span>&lt;/h1<span class="op">&gt;;</span></a>
+<a class="sourceLine" id="cb1-4" title="4">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb1-5" title="5"><span class="op">}</span></a></code></pre></div>
+<p>The only method you <em>must</em> define in a <code>React.Component</code> subclass is called <a href="#render"><code>render()</code></a>. All the other methods described on this page are optional.</p>
+<p><strong>We strongly recommend against creating your own base component classes.</strong> In React components, <a href="/docs/composition-vs-inheritance.html">code reuse is primarily achieved through composition rather than inheritance</a>.</p>
+<blockquote>
+<p>Note:</p>
+<p>React doesn’t force you to use the ES6 class syntax. If you prefer to avoid it, you may use the <code>create-react-class</code> module or a similar custom abstraction instead. Take a look at <a href="/docs/react-without-es6.html">Using React without ES6</a> to learn more.</p>
+</blockquote>
+<h3 id="the-component-lifecycle">The Component Lifecycle</h3>
+<p>Each component has several “lifecycle methods” that you can override to run code at particular times in the process. <strong>You can use <a href="https://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/">this lifecycle diagram</a> as a cheat sheet.</strong> In the list below, commonly used lifecycle methods are marked as <strong>bold</strong>. The rest of them exist for relatively rare use cases.</p>
+<h4 id="mounting">Mounting</h4>
+<p>These methods are called in the following order when an instance of a component is being created and inserted into the DOM:</p>
+<ul>
+<li><a href="#constructor"><strong><code>constructor()</code></strong></a></li>
+<li><a href="#static-getderivedstatefromprops"><code>static getDerivedStateFromProps()</code></a></li>
+<li><a href="#render"><strong><code>render()</code></strong></a></li>
+<li><a href="#componentdidmount"><strong><code>componentDidMount()</code></strong></a></li>
+</ul>
+<blockquote>
+<p>Note:</p>
+<p>These methods are considered legacy and you should <a href="/blog/2018/03/27/update-on-async-rendering.html">avoid them</a> in new code:</p>
+<ul>
+<li><a href="#unsafe_componentwillmount"><code>UNSAFE_componentWillMount()</code></a></li>
+</ul>
+</blockquote>
+<h4 id="updating">Updating</h4>
+<p>An update can be caused by changes to props or state. These methods are called in the following order when a component is being re-rendered:</p>
+<ul>
+<li><a href="#static-getderivedstatefromprops"><code>static getDerivedStateFromProps()</code></a></li>
+<li><a href="#shouldcomponentupdate"><code>shouldComponentUpdate()</code></a></li>
+<li><a href="#render"><strong><code>render()</code></strong></a></li>
+<li><a href="#getsnapshotbeforeupdate"><code>getSnapshotBeforeUpdate()</code></a></li>
+<li><a href="#componentdidupdate"><strong><code>componentDidUpdate()</code></strong></a></li>
+</ul>
+<blockquote>
+<p>Note:</p>
+<p>These methods are considered legacy and you should <a href="/blog/2018/03/27/update-on-async-rendering.html">avoid them</a> in new code:</p>
+<ul>
+<li><a href="#unsafe_componentwillupdate"><code>UNSAFE_componentWillUpdate()</code></a></li>
+<li><a href="#unsafe_componentwillreceiveprops"><code>UNSAFE_componentWillReceiveProps()</code></a></li>
+</ul>
+</blockquote>
+<h4 id="unmounting">Unmounting</h4>
+<p>This method is called when a component is being removed from the DOM:</p>
+<ul>
+<li><a href="#componentwillunmount"><strong><code>componentWillUnmount()</code></strong></a></li>
+</ul>
+<h4 id="error-handling">Error Handling</h4>
+<p>These methods are called when there is an error during rendering, in a lifecycle method, or in the constructor of any child component.</p>
+<ul>
+<li><a href="#static-getderivedstatefromerror"><code>static getDerivedStateFromError()</code></a></li>
+<li><a href="#componentdidcatch"><code>componentDidCatch()</code></a></li>
+</ul>
+<h3 id="other-apis">Other APIs</h3>
+<p>Each component also provides some other APIs:</p>
+<ul>
+<li><a href="#setstate"><code>setState()</code></a></li>
+<li><a href="#forceupdate"><code>forceUpdate()</code></a></li>
+</ul>
+<h3 id="class-properties">Class Properties</h3>
+<ul>
+<li><a href="#defaultprops"><code>defaultProps</code></a></li>
+<li><a href="#displayname"><code>displayName</code></a></li>
+</ul>
+<h3 id="instance-properties">Instance Properties</h3>
+<ul>
+<li><a href="#props"><code>props</code></a></li>
+<li><a href="#state"><code>state</code></a></li>
+</ul>
+<hr />
+<h2 id="reference">Reference</h2>
+<h3 id="commonly-used-lifecycle-methods">Commonly Used Lifecycle Methods</h3>
+<p>The methods in this section cover the vast majority of use cases you’ll encounter creating React components. <strong>For a visual reference, check out <a href="https://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/">this lifecycle diagram</a>.</strong></p>
+<h3 id="render"><code>render()</code></h3>
+<div class="sourceCode" id="cb2"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb2-1" title="1"><span class="at">render</span>()</a></code></pre></div>
+<p>The <code>render()</code> method is the only required method in a class component.</p>
+<p>When called, it should examine <code>this.props</code> and <code>this.state</code> and return one of the following types:</p>
+<ul>
+<li><strong>React elements.</strong> Typically created via <a href="/docs/introducing-jsx.html">JSX</a>. For example, <code>&lt;div /&gt;</code> and <code>&lt;MyComponent /&gt;</code> are React elements that instruct React to render a DOM node, or another user-defined component, respectively.</li>
+<li><strong>Arrays and fragments.</strong> Let you return multiple elements from render. See the documentation on <a href="/docs/fragments.html">fragments</a> for more details.</li>
+<li><strong>Portals</strong>. Let you render children into a different DOM subtree. See the documentation on <a href="/docs/portals.html">portals</a> for more details.</li>
+<li><strong>String and numbers.</strong> These are rendered as text nodes in the DOM.</li>
+<li><strong>Booleans or <code>null</code></strong>. Render nothing. (Mostly exists to support <code>return test &amp;&amp; &lt;Child /&gt;</code> pattern, where <code>test</code> is boolean.)</li>
+</ul>
+<p>The <code>render()</code> function should be pure, meaning that it does not modify component state, it returns the same result each time it’s invoked, and it does not directly interact with the browser.</p>
+<p>If you need to interact with the browser, perform your work in <code>componentDidMount()</code> or the other lifecycle methods instead. Keeping <code>render()</code> pure makes components easier to think about.</p>
+<blockquote>
+<p>Note</p>
+<p><code>render()</code> will not be invoked if <a href="#shouldcomponentupdate"><code>shouldComponentUpdate()</code></a> returns false.</p>
+</blockquote>
+<hr />
+<h3 id="constructor"><code>constructor()</code></h3>
+<div class="sourceCode" id="cb3"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb3-1" title="1"><span class="at">constructor</span>(props)</a></code></pre></div>
+<p><strong>If you don’t initialize state and you don’t bind methods, you don’t need to implement a constructor for your React component.</strong></p>
+<p>The constructor for a React component is called before it is mounted. When implementing the constructor for a <code>React.Component</code> subclass, you should call <code>super(props)</code> before any other statement. Otherwise, <code>this.props</code> will be undefined in the constructor, which can lead to bugs.</p>
+<p>Typically, in React constructors are only used for two purposes:</p>
+<ul>
+<li>Initializing <a href="/docs/state-and-lifecycle.html">local state</a> by assigning an object to <code>this.state</code>.</li>
+<li>Binding <a href="/docs/handling-events.html">event handler</a> methods to an instance.</li>
+</ul>
+<p>You <strong>should not call <code>setState()</code></strong> in the <code>constructor()</code>. Instead, if your component needs to use local state, <strong>assign the initial state to <code>this.state</code></strong> directly in the constructor:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb4-1" title="1"><span class="at">constructor</span>(props) <span class="op">{</span></a>
+<a class="sourceLine" id="cb4-2" title="2">  <span class="kw">super</span>(props)<span class="op">;</span></a>
+<a class="sourceLine" id="cb4-3" title="3">  <span class="co">// Don&#39;t call this.setState() here!</span></a>
+<a class="sourceLine" id="cb4-4" title="4">  <span class="kw">this</span>.<span class="at">state</span> <span class="op">=</span> <span class="op">{</span> <span class="dt">counter</span><span class="op">:</span> <span class="dv">0</span> <span class="op">};</span></a>
+<a class="sourceLine" id="cb4-5" title="5">  <span class="kw">this</span>.<span class="at">handleClick</span> <span class="op">=</span> <span class="kw">this</span>.<span class="va">handleClick</span>.<span class="at">bind</span>(<span class="kw">this</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb4-6" title="6"><span class="op">}</span></a></code></pre></div>
+<p>Constructor is the only place where you should assign <code>this.state</code> directly. In all other methods, you need to use <code>this.setState()</code> instead.</p>
+<p>Avoid introducing any side-effects or subscriptions in the constructor. For those use cases, use <code>componentDidMount()</code> instead.</p>
+<blockquote>
+<p>Note</p>
+<p><strong>Avoid copying props into state! This is a common mistake:</strong></p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb5-1" title="1"><span class="at">constructor</span>(props) <span class="op">{</span></a>
+<a class="sourceLine" id="cb5-2" title="2"> <span class="kw">super</span>(props)<span class="op">;</span></a>
+<a class="sourceLine" id="cb5-3" title="3"> <span class="co">// Don&#39;t do this!</span></a>
+<a class="sourceLine" id="cb5-4" title="4"> <span class="kw">this</span>.<span class="at">state</span> <span class="op">=</span> <span class="op">{</span> <span class="dt">color</span><span class="op">:</span> <span class="va">props</span>.<span class="at">color</span> <span class="op">};</span></a>
+<a class="sourceLine" id="cb5-5" title="5"><span class="op">}</span></a></code></pre></div>
+<p>The problem is that it’s both unnecessary (you can use <code>this.props.color</code> directly instead), and creates bugs (updates to the <code>color</code> prop won’t be reflected in the state).</p>
+<p><strong>Only use this pattern if you intentionally want to ignore prop updates.</strong> In that case, it makes sense to rename the prop to be called <code>initialColor</code> or <code>defaultColor</code>. You can then force a component to “reset” its internal state by <a href="/blog/2018/06/07/you-probably-dont-need-derived-state.html#recommendation-fully-uncontrolled-component-with-a-key">changing its <code>key</code></a> when necessary.</p>
+<p>Read our <a href="/blog/2018/06/07/you-probably-dont-need-derived-state.html">blog post on avoiding derived state</a> to learn about what to do if you think you need some state to depend on the props.</p>
+</blockquote>
+<hr />
+<h3 id="componentdidmount"><code>componentDidMount()</code></h3>
+<div class="sourceCode" id="cb6"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb6-1" title="1"><span class="at">componentDidMount</span>()</a></code></pre></div>
+<p><code>componentDidMount()</code> is invoked immediately after a component is mounted (inserted into the tree). Initialization that requires DOM nodes should go here. If you need to load data from a remote endpoint, this is a good place to instantiate the network request.</p>
+<p>This method is a good place to set up any subscriptions. If you do that, don’t forget to unsubscribe in <code>componentWillUnmount()</code>.</p>
+<p>You <strong>may call <code>setState()</code> immediately</strong> in <code>componentDidMount()</code>. It will trigger an extra rendering, but it will happen before the browser updates the screen. This guarantees that even though the <code>render()</code> will be called twice in this case, the user won’t see the intermediate state. Use this pattern with caution because it often causes performance issues. In most cases, you should be able to assign the initial state in the <code>constructor()</code> instead. It can, however, be necessary for cases like modals and tooltips when you need to measure a DOM node before rendering something that depends on its size or position.</p>
+<hr />
+<h3 id="componentdidupdate"><code>componentDidUpdate()</code></h3>
+<div class="sourceCode" id="cb7"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb7-1" title="1"><span class="at">componentDidUpdate</span>(prevProps<span class="op">,</span> prevState<span class="op">,</span> snapshot)</a></code></pre></div>
+<p><code>componentDidUpdate()</code> is invoked immediately after updating occurs. This method is not called for the initial render.</p>
+<p>Use this as an opportunity to operate on the DOM when the component has been updated. This is also a good place to do network requests as long as you compare the current props to previous props (e.g. a network request may not be necessary if the props have not changed).</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb8-1" title="1"><span class="at">componentDidUpdate</span>(prevProps) <span class="op">{</span></a>
+<a class="sourceLine" id="cb8-2" title="2">  <span class="co">// Typical usage (don&#39;t forget to compare props):</span></a>
+<a class="sourceLine" id="cb8-3" title="3">  <span class="cf">if</span> (<span class="kw">this</span>.<span class="va">props</span>.<span class="at">userID</span> <span class="op">!==</span> <span class="va">prevProps</span>.<span class="at">userID</span>) <span class="op">{</span></a>
+<a class="sourceLine" id="cb8-4" title="4">    <span class="kw">this</span>.<span class="at">fetchData</span>(<span class="kw">this</span>.<span class="va">props</span>.<span class="at">userID</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb8-5" title="5">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb8-6" title="6"><span class="op">}</span></a></code></pre></div>
+<p>You <strong>may call <code>setState()</code> immediately</strong> in <code>componentDidUpdate()</code> but note that <strong>it must be wrapped in a condition</strong> like in the example above, or you’ll cause an infinite loop. It would also cause an extra re-rendering which, while not visible to the user, can affect the component performance. If you’re trying to “mirror” some state to a prop coming from above, consider using the prop directly instead. Read more about <a href="/blog/2018/06/07/you-probably-dont-need-derived-state.html">why copying props into state causes bugs</a>.</p>
+<p>If your component implements the <code>getSnapshotBeforeUpdate()</code> lifecycle (which is rare), the value it returns will be passed as a third “snapshot” parameter to <code>componentDidUpdate()</code>. Otherwise this parameter will be undefined.</p>
+<blockquote>
+<p>Note</p>
+<p><code>componentDidUpdate()</code> will not be invoked if <a href="#shouldcomponentupdate"><code>shouldComponentUpdate()</code></a> returns false.</p>
+</blockquote>
+<hr />
+<h3 id="componentwillunmount"><code>componentWillUnmount()</code></h3>
+<div class="sourceCode" id="cb9"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb9-1" title="1"><span class="at">componentWillUnmount</span>()</a></code></pre></div>
+<p><code>componentWillUnmount()</code> is invoked immediately before a component is unmounted and destroyed. Perform any necessary cleanup in this method, such as invalidating timers, canceling network requests, or cleaning up any subscriptions that were created in <code>componentDidMount()</code>.</p>
+<p>You <strong>should not call <code>setState()</code></strong> in <code>componentWillUnmount()</code> because the component will never be re-rendered. Once a component instance is unmounted, it will never be mounted again.</p>
+<hr />
+<h3 id="rarely-used-lifecycle-methods">Rarely Used Lifecycle Methods</h3>
+<p>The methods in this section correspond to uncommon use cases. They’re handy once in a while, but most of your components probably don’t need any of them. <strong>You can see most of the methods below on <a href="https://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/">this lifecycle diagram</a> if you click the “Show less common lifecycles” checkbox at the top of it.</strong></p>
+<h3 id="shouldcomponentupdate"><code>shouldComponentUpdate()</code></h3>
+<div class="sourceCode" id="cb10"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb10-1" title="1"><span class="at">shouldComponentUpdate</span>(nextProps<span class="op">,</span> nextState)</a></code></pre></div>
+<p>Use <code>shouldComponentUpdate()</code> to let React know if a component’s output is not affected by the current change in state or props. The default behavior is to re-render on every state change, and in the vast majority of cases you should rely on the default behavior.</p>
+<p><code>shouldComponentUpdate()</code> is invoked before rendering when new props or state are being received. Defaults to <code>true</code>. This method is not called for the initial render or when <code>forceUpdate()</code> is used.</p>
+<p>This method only exists as a <strong><a href="/docs/optimizing-performance.html">performance optimization</a>.</strong> Do not rely on it to “prevent” a rendering, as this can lead to bugs. <strong>Consider using the built-in <a href="/docs/react-api.html#reactpurecomponent"><code>PureComponent</code></a></strong> instead of writing <code>shouldComponentUpdate()</code> by hand. <code>PureComponent</code> performs a shallow comparison of props and state, and reduces the chance that you’ll skip a necessary update.</p>
+<p>If you are confident you want to write it by hand, you may compare <code>this.props</code> with <code>nextProps</code> and <code>this.state</code> with <code>nextState</code> and return <code>false</code> to tell React the update can be skipped. Note that returning <code>false</code> does not prevent child components from re-rendering when <em>their</em> state changes.</p>
+<p>We do not recommend doing deep equality checks or using <code>JSON.stringify()</code> in <code>shouldComponentUpdate()</code>. It is very inefficient and will harm performance.</p>
+<p>Currently, if <code>shouldComponentUpdate()</code> returns <code>false</code>, then <a href="#unsafe_componentwillupdate"><code>UNSAFE_componentWillUpdate()</code></a>, <a href="#render"><code>render()</code></a>, and <a href="#componentdidupdate"><code>componentDidUpdate()</code></a> will not be invoked. In the future React may treat <code>shouldComponentUpdate()</code> as a hint rather than a strict directive, and returning <code>false</code> may still result in a re-rendering of the component.</p>
+<hr />
+<h3 id="static-getderivedstatefromprops"><code>static getDerivedStateFromProps()</code></h3>
+<div class="sourceCode" id="cb11"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb11-1" title="1"><span class="kw">static</span> <span class="at">getDerivedStateFromProps</span>(props<span class="op">,</span> state)</a></code></pre></div>
+<p><code>getDerivedStateFromProps</code> is invoked right before calling the render method, both on the initial mount and on subsequent updates. It should return an object to update the state, or <code>null</code> to update nothing.</p>
+<p>This method exists for <a href="/blog/2018/06/07/you-probably-dont-need-derived-state.html#when-to-use-derived-state">rare use cases</a> where the state depends on changes in props over time. For example, it might be handy for implementing a <code>&lt;Transition&gt;</code> component that compares its previous and next children to decide which of them to animate in and out.</p>
+<p>Deriving state leads to verbose code and makes your components difficult to think about. <a href="/blog/2018/06/07/you-probably-dont-need-derived-state.html">Make sure you’re familiar with simpler alternatives:</a></p>
+<ul>
+<li><p>If you need to <strong>perform a side effect</strong> (for example, data fetching or an animation) in response to a change in props, use <a href="#componentdidupdate"><code>componentDidUpdate</code></a> lifecycle instead.</p></li>
+<li><p>If you want to <strong>re-compute some data only when a prop changes</strong>, <a href="/blog/2018/06/07/you-probably-dont-need-derived-state.html#what-about-memoization">use a memoization helper instead</a>.</p></li>
+<li><p>If you want to <strong>“reset” some state when a prop changes</strong>, consider either making a component <a href="/blog/2018/06/07/you-probably-dont-need-derived-state.html#recommendation-fully-controlled-component">fully controlled</a> or <a href="/blog/2018/06/07/you-probably-dont-need-derived-state.html#recommendation-fully-uncontrolled-component-with-a-key">fully uncontrolled with a <code>key</code></a> instead.</p></li>
+</ul>
+<p>This method doesn’t have access to the component instance. If you’d like, you can reuse some code between <code>getDerivedStateFromProps()</code> and the other class methods by extracting pure functions of the component props and state outside the class definition.</p>
+<p>Note that this method is fired on <em>every</em> render, regardless of the cause. This is in contrast to <code>UNSAFE_componentWillReceiveProps</code>, which only fires when the parent causes a re-render and not as a result of a local <code>setState</code>.</p>
+<hr />
+<h3 id="getsnapshotbeforeupdate"><code>getSnapshotBeforeUpdate()</code></h3>
+<div class="sourceCode" id="cb12"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb12-1" title="1"><span class="at">getSnapshotBeforeUpdate</span>(prevProps<span class="op">,</span> prevState)</a></code></pre></div>
+<p><code>getSnapshotBeforeUpdate()</code> is invoked right before the most recently rendered output is committed to e.g. the DOM. It enables your component to capture some information from the DOM (e.g. scroll position) before it is potentially changed. Any value returned by this lifecycle will be passed as a parameter to <code>componentDidUpdate()</code>.</p>
+<p>This use case is not common, but it may occur in UIs like a chat thread that need to handle scroll position in a special way.</p>
+<p>A snapshot value (or <code>null</code>) should be returned.</p>
+<p>For example:</p>
+<p><code>embed:react-component-reference/get-snapshot-before-update.js</code></p>
+<p>In the above examples, it is important to read the <code>scrollHeight</code> property in <code>getSnapshotBeforeUpdate</code> because there may be delays between “render” phase lifecycles (like <code>render</code>) and “commit” phase lifecycles (like <code>getSnapshotBeforeUpdate</code> and <code>componentDidUpdate</code>).</p>
+<hr />
+<h3 id="error-boundaries">Error boundaries</h3>
+<p><a href="/docs/error-boundaries.html">Error boundaries</a> are React components that catch JavaScript errors anywhere in their child component tree, log those errors, and display a fallback UI instead of the component tree that crashed. Error boundaries catch errors during rendering, in lifecycle methods, and in constructors of the whole tree below them.</p>
+<p>A class component becomes an error boundary if it defines either (or both) of the lifecycle methods <code>static getDerivedStateFromError()</code> or <code>componentDidCatch()</code>. Updating state from these lifecycles lets you capture an unhandled JavaScript error in the below tree and display a fallback UI.</p>
+<p>Only use error boundaries for recovering from unexpected exceptions; <strong>don’t try to use them for control flow.</strong></p>
+<p>For more details, see <a href="/blog/2017/07/26/error-handling-in-react-16.html"><em>Error Handling in React 16</em></a>.</p>
+<blockquote>
+<p>Note</p>
+<p>Error boundaries only catch errors in the components <strong>below</strong> them in the tree. An error boundary can’t catch an error within itself.</p>
+</blockquote>
+<h3 id="static-getderivedstatefromerror"><code>static getDerivedStateFromError()</code></h3>
+<div class="sourceCode" id="cb13"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb13-1" title="1"><span class="kw">static</span> <span class="at">getDerivedStateFromError</span>(error)</a></code></pre></div>
+<p>This lifecycle is invoked after an error has been thrown by a descendant component. It receives the error that was thrown as a parameter and should return a value to update state.</p>
+<pre class="js{7-10,13-16}"><code>class ErrorBoundary extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { hasError: false };
+  }
+
+  static getDerivedStateFromError(error) {
+    // Update state so the next render will show the fallback UI.
+    return { hasError: true };
+  }
+
+  render() {
+    if (this.state.hasError) {
+      // You can render any custom fallback UI
+      return &lt;h1&gt;Something went wrong.&lt;/h1&gt;;
+    }
+
+    return this.props.children;
+  }
+}</code></pre>
+<blockquote>
+<p>Note</p>
+<p><code>getDerivedStateFromError()</code> is called during the “render” phase, so side-effects are not permitted. For those use cases, use <code>componentDidCatch()</code> instead.</p>
+</blockquote>
+<hr />
+<h3 id="componentdidcatch"><code>componentDidCatch()</code></h3>
+<div class="sourceCode" id="cb15"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb15-1" title="1"><span class="at">componentDidCatch</span>(error<span class="op">,</span> info)</a></code></pre></div>
+<p>This lifecycle is invoked after an error has been thrown by a descendant component. It receives two parameters:</p>
+<ol type="1">
+<li><code>error</code> - The error that was thrown.</li>
+<li><code>info</code> - An object with a <code>componentStack</code> key containing <a href="/docs/error-boundaries.html#component-stack-traces">information about which component threw the error</a>.</li>
+</ol>
+<p><code>componentDidCatch()</code> is called during the “commit” phase, so side-effects are permitted. It should be used for things like logging errors:</p>
+<pre class="js{12-19}"><code>class ErrorBoundary extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { hasError: false };
+  }
+
+  static getDerivedStateFromError(error) {
+    // Update state so the next render will show the fallback UI.
+    return { hasError: true };
+  }
+
+  componentDidCatch(error, info) {
+    // Example &quot;componentStack&quot;:
+    //   in ComponentThatThrows (created by App)
+    //   in ErrorBoundary (created by App)
+    //   in div (created by App)
+    //   in App
+    logComponentStackToMyService(info.componentStack);
+  }
+
+  render() {
+    if (this.state.hasError) {
+      // You can render any custom fallback UI
+      return &lt;h1&gt;Something went wrong.&lt;/h1&gt;;
+    }
+
+    return this.props.children;
+  }
+}</code></pre>
+<p>Production and development builds of React slightly differ in the way <code>componentDidCatch()</code> handles errors.</p>
+<p>On development, the errors will bubble up to <code>window</code>, this means that any <code>window.onerror</code> or <code>window.addEventListener('error', callback)</code> will intercept the errors that have been caught by <code>componentDidCatch()</code>.</p>
+<p>On production, instead, the errors will not bubble up, which means any ancestor error handler will only receive errors not explicitly caught by <code>componentDidCatch()</code>.</p>
+<blockquote>
+<p>Note</p>
+<p>In the event of an error, you can render a fallback UI with <code>componentDidCatch()</code> by calling <code>setState</code>, but this will be deprecated in a future release. Use <code>static getDerivedStateFromError()</code> to handle fallback rendering instead.</p>
+</blockquote>
+<hr />
+<h3 id="legacy-lifecycle-methods">Legacy Lifecycle Methods</h3>
+<p>The lifecycle methods below are marked as “legacy”. They still work, but we don’t recommend using them in the new code. You can learn more about migrating away from legacy lifecycle methods in <a href="/blog/2018/03/27/update-on-async-rendering.html">this blog post</a>.</p>
+<h3 id="unsafe_componentwillmount"><code>UNSAFE_componentWillMount()</code></h3>
+<div class="sourceCode" id="cb17"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb17-1" title="1"><span class="at">UNSAFE_componentWillMount</span>()</a></code></pre></div>
+<blockquote>
+<p>Note</p>
+<p>This lifecycle was previously named <code>componentWillMount</code>. That name will continue to work until version 17. Use the <a href="https://github.com/reactjs/react-codemod#rename-unsafe-lifecycles"><code>rename-unsafe-lifecycles</code> codemod</a> to automatically update your components.</p>
+</blockquote>
+<p><code>UNSAFE_componentWillMount()</code> is invoked just before mounting occurs. It is called before <code>render()</code>, therefore calling <code>setState()</code> synchronously in this method will not trigger an extra rendering. Generally, we recommend using the <code>constructor()</code> instead for initializing state.</p>
+<p>Avoid introducing any side-effects or subscriptions in this method. For those use cases, use <code>componentDidMount()</code> instead.</p>
+<p>This is the only lifecycle method called on server rendering.</p>
+<hr />
+<h3 id="unsafe_componentwillreceiveprops"><code>UNSAFE_componentWillReceiveProps()</code></h3>
+<div class="sourceCode" id="cb18"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb18-1" title="1"><span class="at">UNSAFE_componentWillReceiveProps</span>(nextProps)</a></code></pre></div>
+<blockquote>
+<p>Note</p>
+<p>This lifecycle was previously named <code>componentWillReceiveProps</code>. That name will continue to work until version 17. Use the <a href="https://github.com/reactjs/react-codemod#rename-unsafe-lifecycles"><code>rename-unsafe-lifecycles</code> codemod</a> to automatically update your components.</p>
+</blockquote>
+<blockquote>
+<p>Note:</p>
+<p>Using this lifecycle method often leads to bugs and inconsistencies</p>
+<ul>
+<li>If you need to <strong>perform a side effect</strong> (for example, data fetching or an animation) in response to a change in props, use <a href="#componentdidupdate"><code>componentDidUpdate</code></a> lifecycle instead.</li>
+<li>If you used <code>componentWillReceiveProps</code> for <strong>re-computing some data only when a prop changes</strong>, <a href="/blog/2018/06/07/you-probably-dont-need-derived-state.html#what-about-memoization">use a memoization helper instead</a>.</li>
+<li>If you used <code>componentWillReceiveProps</code> to <strong>“reset” some state when a prop changes</strong>, consider either making a component <a href="/blog/2018/06/07/you-probably-dont-need-derived-state.html#recommendation-fully-controlled-component">fully controlled</a> or <a href="/blog/2018/06/07/you-probably-dont-need-derived-state.html#recommendation-fully-uncontrolled-component-with-a-key">fully uncontrolled with a <code>key</code></a> instead.</li>
+</ul>
+<p>For other use cases, <a href="/blog/2018/06/07/you-probably-dont-need-derived-state.html">follow the recommendations in this blog post about derived state</a>.</p>
+</blockquote>
+<p><code>UNSAFE_componentWillReceiveProps()</code> is invoked before a mounted component receives new props. If you need to update the state in response to prop changes (for example, to reset it), you may compare <code>this.props</code> and <code>nextProps</code> and perform state transitions using <code>this.setState()</code> in this method.</p>
+<p>Note that if a parent component causes your component to re-render, this method will be called even if props have not changed. Make sure to compare the current and next values if you only want to handle changes.</p>
+<p>React doesn’t call <code>UNSAFE_componentWillReceiveProps()</code> with initial props during <a href="#mounting">mounting</a>. It only calls this method if some of component’s props may update. Calling <code>this.setState()</code> generally doesn’t trigger <code>UNSAFE_componentWillReceiveProps()</code>.</p>
+<hr />
+<h3 id="unsafe_componentwillupdate"><code>UNSAFE_componentWillUpdate()</code></h3>
+<div class="sourceCode" id="cb19"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb19-1" title="1"><span class="at">UNSAFE_componentWillUpdate</span>(nextProps<span class="op">,</span> nextState)</a></code></pre></div>
+<blockquote>
+<p>Note</p>
+<p>This lifecycle was previously named <code>componentWillUpdate</code>. That name will continue to work until version 17. Use the <a href="https://github.com/reactjs/react-codemod#rename-unsafe-lifecycles"><code>rename-unsafe-lifecycles</code> codemod</a> to automatically update your components.</p>
+</blockquote>
+<p><code>UNSAFE_componentWillUpdate()</code> is invoked just before rendering when new props or state are being received. Use this as an opportunity to perform preparation before an update occurs. This method is not called for the initial render.</p>
+<p>Note that you cannot call <code>this.setState()</code> here; nor should you do anything else (e.g. dispatch a Redux action) that would trigger an update to a React component before <code>UNSAFE_componentWillUpdate()</code> returns.</p>
+<p>Typically, this method can be replaced by <code>componentDidUpdate()</code>. If you were reading from the DOM in this method (e.g. to save a scroll position), you can move that logic to <code>getSnapshotBeforeUpdate()</code>.</p>
+<blockquote>
+<p>Note</p>
+<p><code>UNSAFE_componentWillUpdate()</code> will not be invoked if <a href="#shouldcomponentupdate"><code>shouldComponentUpdate()</code></a> returns false.</p>
+</blockquote>
+<hr />
+<h2 id="other-apis-1">Other APIs</h2>
+<p>Unlike the lifecycle methods above (which React calls for you), the methods below are the methods <em>you</em> can call from your components.</p>
+<p>There are just two of them: <code>setState()</code> and <code>forceUpdate()</code>.</p>
+<h3 id="setstate"><code>setState()</code></h3>
+<div class="sourceCode" id="cb20"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb20-1" title="1"><span class="at">setState</span>(updater<span class="op">,</span> [callback])</a></code></pre></div>
+<p><code>setState()</code> enqueues changes to the component state and tells React that this component and its children need to be re-rendered with the updated state. This is the primary method you use to update the user interface in response to event handlers and server responses.</p>
+<p>Think of <code>setState()</code> as a <em>request</em> rather than an immediate command to update the component. For better perceived performance, React may delay it, and then update several components in a single pass. React does not guarantee that the state changes are applied immediately.</p>
+<p><code>setState()</code> does not always immediately update the component. It may batch or defer the update until later. This makes reading <code>this.state</code> right after calling <code>setState()</code> a potential pitfall. Instead, use <code>componentDidUpdate</code> or a <code>setState</code> callback (<code>setState(updater, callback)</code>), either of which are guaranteed to fire after the update has been applied. If you need to set the state based on the previous state, read about the <code>updater</code> argument below.</p>
+<p><code>setState()</code> will always lead to a re-render unless <code>shouldComponentUpdate()</code> returns <code>false</code>. If mutable objects are being used and conditional rendering logic cannot be implemented in <code>shouldComponentUpdate()</code>, calling <code>setState()</code> only when the new state differs from the previous state will avoid unnecessary re-renders.</p>
+<p>The first argument is an <code>updater</code> function with the signature:</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb21-1" title="1">(state<span class="op">,</span> props) <span class="kw">=&gt;</span> stateChange</a></code></pre></div>
+<p><code>state</code> is a reference to the component state at the time the change is being applied. It should not be directly mutated. Instead, changes should be represented by building a new object based on the input from <code>state</code> and <code>props</code>. For instance, suppose we wanted to increment a value in state by <code>props.step</code>:</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb22-1" title="1"><span class="kw">this</span>.<span class="at">setState</span>((state<span class="op">,</span> props) <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb22-2" title="2">  <span class="cf">return</span> <span class="op">{</span><span class="dt">counter</span><span class="op">:</span> <span class="va">state</span>.<span class="at">counter</span> <span class="op">+</span> <span class="va">props</span>.<span class="at">step</span><span class="op">};</span></a>
+<a class="sourceLine" id="cb22-3" title="3"><span class="op">}</span>)<span class="op">;</span></a></code></pre></div>
+<p>Both <code>state</code> and <code>props</code> received by the updater function are guaranteed to be up-to-date. The output of the updater is shallowly merged with <code>state</code>.</p>
+<p>The second parameter to <code>setState()</code> is an optional callback function that will be executed once <code>setState</code> is completed and the component is re-rendered. Generally we recommend using <code>componentDidUpdate()</code> for such logic instead.</p>
+<p>You may optionally pass an object as the first argument to <code>setState()</code> instead of a function:</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb23-1" title="1"><span class="at">setState</span>(stateChange[<span class="op">,</span> callback])</a></code></pre></div>
+<p>This performs a shallow merge of <code>stateChange</code> into the new state, e.g., to adjust a shopping cart item quantity:</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb24-1" title="1"><span class="kw">this</span>.<span class="at">setState</span>(<span class="op">{</span><span class="dt">quantity</span><span class="op">:</span> <span class="dv">2</span><span class="op">}</span>)</a></code></pre></div>
+<p>This form of <code>setState()</code> is also asynchronous, and multiple calls during the same cycle may be batched together. For example, if you attempt to increment an item quantity more than once in the same cycle, that will result in the equivalent of:</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb25-1" title="1"><span class="va">Object</span>.<span class="at">assign</span>(</a>
+<a class="sourceLine" id="cb25-2" title="2">  previousState<span class="op">,</span></a>
+<a class="sourceLine" id="cb25-3" title="3">  <span class="op">{</span><span class="dt">quantity</span><span class="op">:</span> <span class="va">state</span>.<span class="at">quantity</span> <span class="op">+</span> <span class="dv">1</span><span class="op">},</span></a>
+<a class="sourceLine" id="cb25-4" title="4">  <span class="op">{</span><span class="dt">quantity</span><span class="op">:</span> <span class="va">state</span>.<span class="at">quantity</span> <span class="op">+</span> <span class="dv">1</span><span class="op">},</span></a>
+<a class="sourceLine" id="cb25-5" title="5">  ...</a>
+<a class="sourceLine" id="cb25-6" title="6">)</a></code></pre></div>
+<p>Subsequent calls will override values from previous calls in the same cycle, so the quantity will only be incremented once. If the next state depends on the current state, we recommend using the updater function form, instead:</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb26-1" title="1"><span class="kw">this</span>.<span class="at">setState</span>((state) <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb26-2" title="2">  <span class="cf">return</span> <span class="op">{</span><span class="dt">quantity</span><span class="op">:</span> <span class="va">state</span>.<span class="at">quantity</span> <span class="op">+</span> <span class="dv">1</span><span class="op">};</span></a>
+<a class="sourceLine" id="cb26-3" title="3"><span class="op">}</span>)<span class="op">;</span></a></code></pre></div>
+<p>For more detail, see:</p>
+<ul>
+<li><a href="/docs/state-and-lifecycle.html">State and Lifecycle guide</a></li>
+<li><a href="https://stackoverflow.com/a/48610973/458193">In depth: When and why are <code>setState()</code> calls batched?</a></li>
+<li><a href="https://github.com/facebook/react/issues/11527#issuecomment-360199710">In depth: Why isn’t <code>this.state</code> updated immediately?</a></li>
+</ul>
+<hr />
+<h3 id="forceupdate"><code>forceUpdate()</code></h3>
+<div class="sourceCode" id="cb27"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb27-1" title="1"><span class="va">component</span>.<span class="at">forceUpdate</span>(callback)</a></code></pre></div>
+<p>By default, when your component’s state or props change, your component will re-render. If your <code>render()</code> method depends on some other data, you can tell React that the component needs re-rendering by calling <code>forceUpdate()</code>.</p>
+<p>Calling <code>forceUpdate()</code> will cause <code>render()</code> to be called on the component, skipping <code>shouldComponentUpdate()</code>. This will trigger the normal lifecycle methods for child components, including the <code>shouldComponentUpdate()</code> method of each child. React will still only update the DOM if the markup changes.</p>
+<p>Normally you should try to avoid all uses of <code>forceUpdate()</code> and only read from <code>this.props</code> and <code>this.state</code> in <code>render()</code>.</p>
+<hr />
+<h2 id="class-properties-1">Class Properties</h2>
+<h3 id="defaultprops"><code>defaultProps</code></h3>
+<p><code>defaultProps</code> can be defined as a property on the component class itself, to set the default props for the class. This is used for <code>undefined</code> props, but not for <code>null</code> props. For example:</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb28-1" title="1"><span class="kw">class</span> CustomButton <span class="kw">extends</span> <span class="va">React</span>.<span class="at">Component</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb28-2" title="2">  <span class="co">// ...</span></a>
+<a class="sourceLine" id="cb28-3" title="3"><span class="op">}</span></a>
+<a class="sourceLine" id="cb28-4" title="4"></a>
+<a class="sourceLine" id="cb28-5" title="5"><span class="va">CustomButton</span>.<span class="at">defaultProps</span> <span class="op">=</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb28-6" title="6">  <span class="dt">color</span><span class="op">:</span> <span class="st">&#39;blue&#39;</span></a>
+<a class="sourceLine" id="cb28-7" title="7"><span class="op">};</span></a></code></pre></div>
+<p>If <code>props.color</code> is not provided, it will be set by default to <code>'blue'</code>:</p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb29-1" title="1">  <span class="at">render</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb29-2" title="2">    <span class="cf">return</span> <span class="op">&lt;</span>CustomButton /<span class="op">&gt;</span> <span class="op">;</span> <span class="co">// props.color will be set to blue</span></a>
+<a class="sourceLine" id="cb29-3" title="3">  <span class="op">}</span></a></code></pre></div>
+<p>If <code>props.color</code> is set to <code>null</code>, it will remain <code>null</code>:</p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb30-1" title="1">  <span class="at">render</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb30-2" title="2">    <span class="cf">return</span> <span class="op">&lt;</span>CustomButton color<span class="op">={</span><span class="kw">null</span><span class="op">}</span> /&gt; <span class="op">;</span> <span class="co">// props.color will remain null</span></a>
+<a class="sourceLine" id="cb30-3" title="3">  <span class="op">}</span></a></code></pre></div>
+<hr />
+<h3 id="displayname"><code>displayName</code></h3>
+<p>The <code>displayName</code> string is used in debugging messages. Usually, you don’t need to set it explicitly because it’s inferred from the name of the function or class that defines the component. You might want to set it explicitly if you want to display a different name for debugging purposes or when you create a higher-order component, see <a href="/docs/higher-order-components.html#convention-wrap-the-display-name-for-easy-debugging">Wrap the Display Name for Easy Debugging</a> for details.</p>
+<hr />
+<h2 id="instance-properties-1">Instance Properties</h2>
+<h3 id="props"><code>props</code></h3>
+<p><code>this.props</code> contains the props that were defined by the caller of this component. See <a href="/docs/components-and-props.html">Components and Props</a> for an introduction to props.</p>
+<p>In particular, <code>this.props.children</code> is a special prop, typically defined by the child tags in the JSX expression rather than in the tag itself.</p>
+<h3 id="state"><code>state</code></h3>
+<p>The state contains data specific to this component that may change over time. The state is user-defined, and it should be a plain JavaScript object.</p>
+<p>If some value isn’t used for rendering or data flow (for example, a timer ID), you don’t have to put it in the state. Such values can be defined as fields on the component instance.</p>
+<p>See <a href="/docs/state-and-lifecycle.html">State and Lifecycle</a> for more information about the state.</p>
+<p>Never mutate <code>this.state</code> directly, as calling <code>setState()</code> afterwards may replace the mutation you made. Treat <code>this.state</code> as if it were immutable.</p>
+</body>
+</html>

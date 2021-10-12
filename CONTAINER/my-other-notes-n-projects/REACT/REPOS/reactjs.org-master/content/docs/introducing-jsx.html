@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Introducing JSX</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Introducing JSX</h1>
+</header>
+<p>Consider this variable declaration:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">const</span> element <span class="op">=</span> <span class="op">&lt;</span>h1<span class="op">&gt;</span>Hello<span class="op">,</span> world<span class="op">!</span>&lt;/h1<span class="op">&gt;;</span></a></code></pre></div>
+<p>This funny tag syntax is neither a string nor HTML.</p>
+<p>It is called JSX, and it is a syntax extension to JavaScript. We recommend using it with React to describe what the UI should look like. JSX may remind you of a template language, but it comes with the full power of JavaScript.</p>
+<p>JSX produces React “elements”. We will explore rendering them to the DOM in the <a href="/docs/rendering-elements.html">next section</a>. Below, you can find the basics of JSX necessary to get you started.</p>
+<h3 id="why-jsx">Why JSX?</h3>
+<p>React embraces the fact that rendering logic is inherently coupled with other UI logic: how events are handled, how the state changes over time, and how the data is prepared for display.</p>
+<p>Instead of artificially separating <em>technologies</em> by putting markup and logic in separate files, React <a href="https://en.wikipedia.org/wiki/Separation_of_concerns">separates <em>concerns</em></a> with loosely coupled units called “components” that contain both. We will come back to components in a <a href="/docs/components-and-props.html">further section</a>, but if you’re not yet comfortable putting markup in JS, <a href="https://www.youtube.com/watch?v=x7cQ3mrcKaY">this talk</a> might convince you otherwise.</p>
+<p>React <a href="/docs/react-without-jsx.html">doesn’t require</a> using JSX, but most people find it helpful as a visual aid when working with UI inside the JavaScript code. It also allows React to show more useful error and warning messages.</p>
+<p>With that out of the way, let’s get started!</p>
+<h3 id="embedding-expressions-in-jsx">Embedding Expressions in JSX</h3>
+<p>In the example below, we declare a variable called <code>name</code> and then use it inside JSX by wrapping it in curly braces:</p>
+<pre class="js{1,2}"><code>const name = &#39;Josh Perez&#39;;
+const element = &lt;h1&gt;Hello, {name}&lt;/h1&gt;;
+
+ReactDOM.render(
+  element,
+  document.getElementById(&#39;root&#39;)
+);</code></pre>
+<p>You can put any valid <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Expressions_and_Operators#Expressions">JavaScript expression</a> inside the curly braces in JSX. For example, <code>2 + 2</code>, <code>user.firstName</code>, or <code>formatName(user)</code> are all valid JavaScript expressions.</p>
+<p>In the example below, we embed the result of calling a JavaScript function, <code>formatName(user)</code>, into an <code>&lt;h1&gt;</code> element.</p>
+<pre class="js{12}"><code>function formatName(user) {
+  return user.firstName + &#39; &#39; + user.lastName;
+}
+
+const user = {
+  firstName: &#39;Harper&#39;,
+  lastName: &#39;Perez&#39;
+};
+
+const element = (
+  &lt;h1&gt;
+    Hello, {formatName(user)}!
+  &lt;/h1&gt;
+);
+
+ReactDOM.render(
+  element,
+  document.getElementById(&#39;root&#39;)
+);</code></pre>
+<p><a href="codepen://introducing-jsx"></a></p>
+<p>We split JSX over multiple lines for readability. While it isn’t required, when doing this, we also recommend wrapping it in parentheses to avoid the pitfalls of <a href="https://stackoverflow.com/q/2846283">automatic semicolon insertion</a>.</p>
+<h3 id="jsx-is-an-expression-too">JSX is an Expression Too</h3>
+<p>After compilation, JSX expressions become regular JavaScript function calls and evaluate to JavaScript objects.</p>
+<p>This means that you can use JSX inside of <code>if</code> statements and <code>for</code> loops, assign it to variables, accept it as arguments, and return it from functions:</p>
+<pre class="js{3,5}"><code>function getGreeting(user) {
+  if (user) {
+    return &lt;h1&gt;Hello, {formatName(user)}!&lt;/h1&gt;;
+  }
+  return &lt;h1&gt;Hello, Stranger.&lt;/h1&gt;;
+}</code></pre>
+<h3 id="specifying-attributes-with-jsx">Specifying Attributes with JSX</h3>
+<p>You may use quotes to specify string literals as attributes:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb5-1" title="1"><span class="kw">const</span> element <span class="op">=</span> <span class="op">&lt;</span>div tabIndex<span class="op">=</span><span class="st">&quot;0&quot;</span><span class="op">&gt;</span>&lt;/div<span class="op">&gt;;</span></a></code></pre></div>
+<p>You may also use curly braces to embed a JavaScript expression in an attribute:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb6-1" title="1"><span class="kw">const</span> element <span class="op">=</span> <span class="op">&lt;</span>img src<span class="op">={</span><span class="va">user</span>.<span class="at">avatarUrl</span><span class="op">}&gt;</span>&lt;/img<span class="op">&gt;;</span></a></code></pre></div>
+<p>Don’t put quotes around curly braces when embedding a JavaScript expression in an attribute. You should either use quotes (for string values) or curly braces (for expressions), but not both in the same attribute.</p>
+<blockquote>
+<p><strong>Warning:</strong></p>
+<p>Since JSX is closer to JavaScript than to HTML, React DOM uses <code>camelCase</code> property naming convention instead of HTML attribute names.</p>
+<p>For example, <code>class</code> becomes <a href="https://developer.mozilla.org/en-US/docs/Web/API/Element/className"><code>className</code></a> in JSX, and <code>tabindex</code> becomes <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/tabIndex"><code>tabIndex</code></a>.</p>
+</blockquote>
+<h3 id="specifying-children-with-jsx">Specifying Children with JSX</h3>
+<p>If a tag is empty, you may close it immediately with <code>/&gt;</code>, like XML:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb7-1" title="1"><span class="kw">const</span> element <span class="op">=</span> <span class="op">&lt;</span>img src<span class="op">={</span><span class="va">user</span>.<span class="at">avatarUrl</span><span class="op">}</span> /&gt;<span class="op">;</span></a></code></pre></div>
+<p>JSX tags may contain children:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb8-1" title="1"><span class="kw">const</span> element <span class="op">=</span> (</a>
+<a class="sourceLine" id="cb8-2" title="2">  <span class="op">&lt;</span>div<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb8-3" title="3">    <span class="op">&lt;</span>h1<span class="op">&gt;</span>Hello<span class="op">!</span>&lt;/h1<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb8-4" title="4">    <span class="op">&lt;</span>h2<span class="op">&gt;</span>Good to see you <span class="va">here</span>.&lt;/h2<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb8-5" title="5">  &lt;/div<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb8-6" title="6">)<span class="op">;</span></a></code></pre></div>
+<h3 id="jsx-prevents-injection-attacks">JSX Prevents Injection Attacks</h3>
+<p>It is safe to embed user input in JSX:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb9-1" title="1"><span class="kw">const</span> title <span class="op">=</span> <span class="va">response</span>.<span class="at">potentiallyMaliciousInput</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb9-2" title="2"><span class="co">// This is safe:</span></a>
+<a class="sourceLine" id="cb9-3" title="3"><span class="kw">const</span> element <span class="op">=</span> <span class="op">&lt;</span>h1<span class="op">&gt;{</span>title<span class="op">}</span>&lt;/h1<span class="op">&gt;;</span></a></code></pre></div>
+<p>By default, React DOM <a href="https://stackoverflow.com/questions/7381974/which-characters-need-to-be-escaped-on-html">escapes</a> any values embedded in JSX before rendering them. Thus it ensures that you can never inject anything that’s not explicitly written in your application. Everything is converted to a string before being rendered. This helps prevent <a href="https://en.wikipedia.org/wiki/Cross-site_scripting">XSS (cross-site-scripting)</a> attacks.</p>
+<h3 id="jsx-represents-objects">JSX Represents Objects</h3>
+<p>Babel compiles JSX down to <code>React.createElement()</code> calls.</p>
+<p>These two examples are identical:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb10-1" title="1"><span class="kw">const</span> element <span class="op">=</span> (</a>
+<a class="sourceLine" id="cb10-2" title="2">  <span class="op">&lt;</span>h1 className<span class="op">=</span><span class="st">&quot;greeting&quot;</span><span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb10-3" title="3">    Hello<span class="op">,</span> world<span class="op">!</span></a>
+<a class="sourceLine" id="cb10-4" title="4">  &lt;/h1<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb10-5" title="5">)<span class="op">;</span></a></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb11-1" title="1"><span class="kw">const</span> element <span class="op">=</span> <span class="va">React</span>.<span class="at">createElement</span>(</a>
+<a class="sourceLine" id="cb11-2" title="2">  <span class="st">&#39;h1&#39;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb11-3" title="3">  <span class="op">{</span><span class="dt">className</span><span class="op">:</span> <span class="st">&#39;greeting&#39;</span><span class="op">},</span></a>
+<a class="sourceLine" id="cb11-4" title="4">  <span class="st">&#39;Hello, world!&#39;</span></a>
+<a class="sourceLine" id="cb11-5" title="5">)<span class="op">;</span></a></code></pre></div>
+<p><code>React.createElement()</code> performs a few checks to help you write bug-free code but essentially it creates an object like this:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb12-1" title="1"><span class="co">// Note: this structure is simplified</span></a>
+<a class="sourceLine" id="cb12-2" title="2"><span class="kw">const</span> element <span class="op">=</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb12-3" title="3">  <span class="dt">type</span><span class="op">:</span> <span class="st">&#39;h1&#39;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb12-4" title="4">  <span class="dt">props</span><span class="op">:</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb12-5" title="5">    <span class="dt">className</span><span class="op">:</span> <span class="st">&#39;greeting&#39;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb12-6" title="6">    <span class="dt">children</span><span class="op">:</span> <span class="st">&#39;Hello, world!&#39;</span></a>
+<a class="sourceLine" id="cb12-7" title="7">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb12-8" title="8"><span class="op">};</span></a></code></pre></div>
+<p>These objects are called “React elements”. You can think of them as descriptions of what you want to see on the screen. React reads these objects and uses them to construct the DOM and keep it up to date.</p>
+<p>We will explore rendering React elements to the DOM in the <a href="/docs/rendering-elements.html">next section</a>.</p>
+<blockquote>
+<p><strong>Tip:</strong></p>
+<p>We recommend using the <a href="https://babeljs.io/docs/en/next/editors">“Babel” language definition</a> for your editor of choice so that both ES6 and JSX code is properly highlighted.</p>
+</blockquote>
+</body>
+</html>

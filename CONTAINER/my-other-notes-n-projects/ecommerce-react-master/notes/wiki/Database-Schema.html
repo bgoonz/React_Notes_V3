@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Database-Schema</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<figure>
+<img src="https://user-images.githubusercontent.com/67562159/105773249-999a6200-5f31-11eb-98f6-64eebf45566e.png" alt="RTC Size Table" /><figcaption>RTC Size Table</figcaption>
+</figure>
+<h2 id="users"><code>Users</code></h2>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">column name</th>
+<th style="text-align: center;">data type</th>
+<th style="text-align: left;">details</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>id</code></td>
+<td style="text-align: center;">integer</td>
+<td style="text-align: left;">not null, PK</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>username</code></td>
+<td style="text-align: center;">string</td>
+<td style="text-align: left;">not null, unique</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>email</code></td>
+<td style="text-align: center;">string</td>
+<td style="text-align: left;">not null, unique</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>hashedPassword</code></td>
+<td style="text-align: center;">string.binary</td>
+<td style="text-align: left;">not null</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>firstName</code></td>
+<td style="text-align: center;">string</td>
+<td style="text-align: left;">not null</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>lastName</code></td>
+<td style="text-align: center;">string</td>
+<td style="text-align: left;">not null</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>streetAddress</code></td>
+<td style="text-align: center;">string</td>
+<td style="text-align: left;">not null</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>city</code></td>
+<td style="text-align: center;">string</td>
+<td style="text-align: left;">not null</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>stateProvince</code></td>
+<td style="text-align: center;">string</td>
+<td style="text-align: left;">not null</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>country</code></td>
+<td style="text-align: center;">string</td>
+<td style="text-align: left;">not null</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>postalCode</code></td>
+<td style="text-align: center;">integer</td>
+<td style="text-align: left;">not null</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>createdAt</code></td>
+<td style="text-align: center;">datetime</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>updatedAt</code></td>
+<td style="text-align: center;">datetime</td>
+<td style="text-align: left;"></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Sequelize <code>hasMany</code> <code>Reviews</code> association</li>
+<li>Sequelize <code>hasMany</code> <code>Orders</code> association</li>
+</ul>
+<h2 id="reviews"><code>Reviews</code></h2>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">column name</th>
+<th style="text-align: center;">data type</th>
+<th style="text-align: left;">details</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>id</code></td>
+<td style="text-align: center;">integer</td>
+<td style="text-align: left;">not null, PK</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>rating</code></td>
+<td style="text-align: center;">integer</td>
+<td style="text-align: left;">not null</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>content</code></td>
+<td style="text-align: center;">textarea</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>userId</code></td>
+<td style="text-align: center;">integer</td>
+<td style="text-align: left;">not null, FK</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>productId</code></td>
+<td style="text-align: center;">integer</td>
+<td style="text-align: left;">not null, FK</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>createdAt</code></td>
+<td style="text-align: center;">datetime</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>updatedAt</code></td>
+<td style="text-align: center;">datetime</td>
+<td style="text-align: left;"></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><code>userId</code> references <code>Users</code> table</li>
+<li><code>productId</code> reference <code>Products</code> table</li>
+<li>Sequelize <code>belongsTo</code> <code>Users</code> association</li>
+<li>Sequelize <code>belongsTo</code> <code>Products</code> association</li>
+</ul>
+<h2 id="products"><code>Products</code></h2>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">column name</th>
+<th style="text-align: center;">data type</th>
+<th style="text-align: left;">details</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>id</code></td>
+<td style="text-align: center;">integer</td>
+<td style="text-align: left;">not null, PK</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>name</code></td>
+<td style="text-align: center;">string</td>
+<td style="text-align: left;">not null</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>description</code></td>
+<td style="text-align: center;">textarea</td>
+<td style="text-align: left;">not null</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>retailPrice</code></td>
+<td style="text-align: center;">numeric</td>
+<td style="text-align: left;">not null</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>productImg</code></td>
+<td style="text-align: center;">string</td>
+<td style="text-align: left;">not null</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>categoryId</code></td>
+<td style="text-align: center;">integer</td>
+<td style="text-align: left;">not null, FK</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>createdAt</code></td>
+<td style="text-align: center;">datetime</td>
+<td style="text-align: left;">not null</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>updatedAt</code></td>
+<td style="text-align: center;">datetime</td>
+<td style="text-align: left;">not null</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><code>categoryId</code> references <code>Categories</code> table</li>
+<li>Sequelize <code>belongsToMany</code> <code>Tags</code> association through <code>ProductTags</code> table</li>
+<li>Sequelize <code>belongsToMany</code> <code>Sizes</code> through <code>ProductSizes</code> table</li>
+<li>Sequelize <code>belongsTo</code> <code>Categories</code> association</li>
+<li>Sequelize <code>hasMany</code> <code>Reviews</code> association</li>
+<li>Sequelize <code>hasMany</code> <code>OrderItems</code> association</li>
+</ul>
+<h2 id="categories"><code>Categories</code></h2>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">column name</th>
+<th style="text-align: center;">data type</th>
+<th style="text-align: left;">details</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>id</code></td>
+<td style="text-align: center;">integer</td>
+<td style="text-align: left;">not null, PK</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>name</code></td>
+<td style="text-align: center;">string</td>
+<td style="text-align: left;">not null</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>createdAt</code></td>
+<td style="text-align: center;">datetime</td>
+<td style="text-align: left;">not null</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>updatedAt</code></td>
+<td style="text-align: center;">datetime</td>
+<td style="text-align: left;">not null</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Sequelize <code>hasMany</code> <code>Products</code> association</li>
+</ul>
+<h2 id="tags"><code>Tags</code></h2>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">column name</th>
+<th style="text-align: center;">data type</th>
+<th style="text-align: left;">details</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>id</code></td>
+<td style="text-align: center;">integer</td>
+<td style="text-align: left;">not null, PK</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>name</code></td>
+<td style="text-align: center;">string</td>
+<td style="text-align: left;">not null</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>createdAt</code></td>
+<td style="text-align: center;">datetime</td>
+<td style="text-align: left;">not null</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>updatedAt</code></td>
+<td style="text-align: center;">datetime</td>
+<td style="text-align: left;">not null</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Sequelize <code>belongsToMany</code> <code>Products</code> association through <code>ProductTags</code> table</li>
+</ul>
+<h2 id="producttags"><code>ProductTags</code></h2>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">column name</th>
+<th style="text-align: center;">data type</th>
+<th style="text-align: left;">details</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>id</code></td>
+<td style="text-align: center;">integer</td>
+<td style="text-align: left;">not null, PK</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>tagId</code></td>
+<td style="text-align: center;">integer</td>
+<td style="text-align: left;">not null</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>productId</code></td>
+<td style="text-align: center;">integer</td>
+<td style="text-align: left;">not null</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>createdAt</code></td>
+<td style="text-align: center;">datetime</td>
+<td style="text-align: left;">not null</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>updatedAt</code></td>
+<td style="text-align: center;">datetime</td>
+<td style="text-align: left;">not null</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><code>tagId</code> references <code>Tags</code> table</li>
+<li><code>productId</code> references <code>Products</code> table</li>
+</ul>
+<h2 id="sizes"><code>Sizes</code></h2>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">column name</th>
+<th style="text-align: center;">data type</th>
+<th style="text-align: left;">details</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>id</code></td>
+<td style="text-align: center;">integer</td>
+<td style="text-align: left;">not null, PK</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>size</code></td>
+<td style="text-align: center;">string</td>
+<td style="text-align: left;">not null</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>createdAt</code></td>
+<td style="text-align: center;">datetime</td>
+<td style="text-align: left;">not null</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>updatedAt</code></td>
+<td style="text-align: center;">datetime</td>
+<td style="text-align: left;">not null</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Sequelize <code>belongsToMany</code> <code>Products</code> association through <code>ProductSizes</code> table</li>
+</ul>
+<h2 id="productsizes"><code>ProductSizes</code></h2>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">column name</th>
+<th style="text-align: center;">data type</th>
+<th style="text-align: left;">details</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>id</code></td>
+<td style="text-align: center;">integer</td>
+<td style="text-align: left;">not null, PK</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>inventoryNum</code></td>
+<td style="text-align: center;">integer</td>
+<td style="text-align: left;">not null</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>productId</code></td>
+<td style="text-align: center;">integer</td>
+<td style="text-align: left;">not null</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>sizeId</code></td>
+<td style="text-align: center;">integer</td>
+<td style="text-align: left;">not null</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>createdAt</code></td>
+<td style="text-align: center;">datetime</td>
+<td style="text-align: left;">not null</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>updatedAt</code></td>
+<td style="text-align: center;">datetime</td>
+<td style="text-align: left;">not null</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><code>productId</code> references <code>Products</code> table</li>
+<li><code>sizeId</code> references <code>Sizes</code> table</li>
+</ul>
+<h2 id="orders"><code>Orders</code></h2>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">column name</th>
+<th style="text-align: center;">data type</th>
+<th style="text-align: left;">details</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>id</code></td>
+<td style="text-align: center;">integer</td>
+<td style="text-align: left;">not null, PK</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>startDate</code></td>
+<td style="text-align: center;">dateOnly</td>
+<td style="text-align: left;">not null</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>endDate</code></td>
+<td style="text-align: center;">dateOnly</td>
+<td style="text-align: left;">not null</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>orderTotal</code></td>
+<td style="text-align: center;">dateOnly</td>
+<td style="text-align: left;">not null</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>userId</code></td>
+<td style="text-align: center;">integer</td>
+<td style="text-align: left;">not null, FK</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>createdAt</code></td>
+<td style="text-align: center;">datetime</td>
+<td style="text-align: left;">not null</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>updatedAt</code></td>
+<td style="text-align: center;">datetime</td>
+<td style="text-align: left;">not null</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><code>userId</code> references <code>Users</code> table</li>
+<li>Sequelize <code>belongsTo</code> <code>Users</code> association</li>
+<li>Sequelize <code>belongsTo</code> <code>OrderItems</code> association</li>
+</ul>
+<h2 id="orderitems"><code>OrderItems</code></h2>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">column name</th>
+<th style="text-align: center;">data type</th>
+<th style="text-align: left;">details</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>id</code></td>
+<td style="text-align: center;">integer</td>
+<td style="text-align: left;">not null, PK</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>productQty</code></td>
+<td style="text-align: center;">integer</td>
+<td style="text-align: left;">not null</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>productPrice</code></td>
+<td style="text-align: center;">numeric</td>
+<td style="text-align: left;">not null</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>productId</code></td>
+<td style="text-align: center;">integer</td>
+<td style="text-align: left;">not null, FK</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>orderId</code></td>
+<td style="text-align: center;">integer</td>
+<td style="text-align: left;">not null, FK</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>createdAt</code></td>
+<td style="text-align: center;">datetime</td>
+<td style="text-align: left;">not null</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>updatedAt</code></td>
+<td style="text-align: center;">datetime</td>
+<td style="text-align: left;">not null</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><code>productId</code> references <code>Products</code> table</li>
+<li><code>orderId</code> references <code>Orders</code> table</li>
+<li>Sequelize <code>belongsTo</code> <code>Products</code> association</li>
+<li>Sequelize <code>belongsToMany</code> <code>Orders</code> association</li>
+</ul>
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>README</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<h1 id="class-component-iterating-state">Class Component Iterating State</h1>
+<p>Another common state pattern you’ll see being used in React components is iterating over an array in our state object and rendering each array element in its own tag. This is often used in order to render lists.</p>
+<p>Additionally, we want to be able to easily update lists and have React re-render our updated list. We’ll see how both of these are done and how they work together within a single component in order to create the behavior of a dynamic list.</p>
+<pre><code>import React, { Component } from &#39;react&#39;;
+
+class ClassComponentIteratingState extends Component {
+    constructor() {
+        super();
+
+        this.state = {
+            ingredients: [&#39;flour&#39;, &#39;eggs&#39;, &#39;milk&#39;, &#39;sugar&#39;, &#39;vanilla extract&#39;],
+            newIngredient: &#39;&#39;
+        };
+    }
+
+    handleIngredientInput = (event) =&gt; {
+        this.setState({ newIngredient: event.target.value });
+    };
+
+    addIngredient = (event) =&gt; {
+        event.preventDefault();
+        const ingredientsList = this.state.ingredients;
+        ingredientsList.push(this.state.newIngredient);
+        this.setState({
+            newIngredient: &#39;&#39;,
+            ingredients: ingredientsList
+        });
+    };
+
+    render() {
+        return (
+            &lt;div&gt;
+                {this.state.ingredients.map(ingredient =&gt; &lt;div&gt;{ingredient}&lt;/div&gt;)}
+                &lt;form onSubmit={this.addIngredient}&gt;
+                    &lt;input type=&quot;text&quot; onChange={this.handleIngredientInput} placeholder=&quot;Add a new ingredient&quot; value={this.state.newIngredient} /&gt;
+                &lt;/form&gt;
+            &lt;/div&gt;
+        );
+    }
+}
+
+export default ClassComponentIteratingState;</code></pre>
+<p>The first change to note is that our state object now has an ‘ingredients’ array, and a ‘newIngredient’ field that has been initialized to an empty string. The ingredients array contains the elements that we’ll want to render in our list. We’ll see shortly why the newIngredient field is needed.</p>
+<p>The <code>addIngredient</code> and <code>handleIngredientInput</code> methods we’ve added to our class receives a parameter called ‘event’. This event object is part of the browser’s API. When we interact with some DOM element, such as clicking on an HTML button, the function that is invoked upon that button being clicked actually receives the event object. So when we type some input into an input tag, we’re able grab each character that was typed into the input field through the event object paramter.</p>
+<p>The <code>handleIngredientInput</code> method is what gets invoked every time the user presses a key to enter text in the input box for adding a new ingredient. Every character the user types gets persisted in the <code>newIngredient</code> field on the state object. We’re able to grab the text in the input box using <code>event.target.value</code>, which holds the value of the string text that is currently in the input box. We use that to update our <code>newIngredient</code> string field.</p>
+<p>Breaking down the <code>addIngredient</code> method, we see this <code>event.preventDefault()</code> invocation. This is because this method will be used upon submitting a form, and it turns out that submitting a form triggers some default form behavior that we don’t want to trigger when we submit the form (namely refreshing the entire page). <code>event.preventDefault()</code> will prevent this default form behavior, meaning our form will only do what we want it to do when it is submitted.</p>
+<p>Next, we store a reference to <code>this.state.ingredients</code> in a variable called <code>ingredientsList</code>. So we now have a copy of the array that is stored in our state object. We want to update the copy of the ingredients array first instead of directly updating the actual array itself in state. This is a React best practice.</p>
+<p>Now we push whatever value is being stored at our <code>newIngredient</code> field onto the <code>ingredientsList</code> array so that our <code>ingredientsList</code> array is now more up-to-date than our <code>this.state.ingredients</code> array. So all we have to do now is call <code>setState</code> appropriately in order to update the value in our state object. Additionally, we also set the <code>newIngredient</code> field back to an empty string in order to clear out the input field once we submit a new ingredient. Now it’s ready to accept more user input!</p>
+<p>Looking at our render function, first note the <code>this.state.ingredients.map</code> call. This is looping through each ingredient in our <code>ingredients</code> array and returning each one within its own div tag. This is a very common syntax for rendering everything inside an array.</p>
+<p>Then we have an HTML form which contains an input field. The purpose of this form is to allow a user to add new ingredients to the list. Note that we’re passing our <code>addIngredient</code> method to the form’s <code>onSubmit</code> handler. This means that our <code>addIngredient</code> method gets invoked whenever our form is submitted.</p>
+<p>Lastly, the input field has an <code>onChange</code> handler that invokes our <code>handleIngredientInput</code> method whenever there is some sort of change in the input field, namely when a user types into it. Notice that the <code>value</code> field in our input tag reads off of <code>this.state.newIngredient</code> in order to know what value to display. So when a user enters text into the input field, the <code>onChange</code> handler is invoked every time, which updates our <code>this.state.newIngredient</code> field, which the input field then renders.</p>
+</body>
+</html>

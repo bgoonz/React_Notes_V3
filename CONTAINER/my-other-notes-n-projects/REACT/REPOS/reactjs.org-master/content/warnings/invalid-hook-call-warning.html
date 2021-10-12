@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Invalid Hook Call Warning</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Invalid Hook Call Warning</h1>
+</header>
+<p>You are probably here because you got the following error message:</p>
+<blockquote>
+<p>Hooks can only be called inside the body of a function component.</p>
+</blockquote>
+<p>There are three common reasons you might be seeing it:</p>
+<ol type="1">
+<li>You might have <strong>mismatching versions</strong> of React and React DOM.</li>
+<li>You might be <strong>breaking the <a href="/docs/hooks-rules.html">Rules of Hooks</a></strong>.</li>
+<li>You might have <strong>more than one copy of React</strong> in the same app.</li>
+</ol>
+<p>Let’s look at each of these cases.</p>
+<h2 id="mismatching-versions-of-react-and-react-dom">Mismatching Versions of React and React DOM</h2>
+<p>You might be using a version of <code>react-dom</code> (&lt; 16.8.0) or <code>react-native</code> (&lt; 0.59) that doesn’t yet support Hooks. You can run <code>npm ls react-dom</code> or <code>npm ls react-native</code> in your application folder to check which version you’re using. If you find more than one of them, this might also create problems (more on that below).</p>
+<h2 id="breaking-the-rules-of-hooks">Breaking the Rules of Hooks</h2>
+<p>You can only call Hooks <strong>while React is rendering a function component</strong>:</p>
+<ul>
+<li>✅ Call them at the top level in the body of a function component.</li>
+<li>✅ Call them at the top level in the body of a <a href="/docs/hooks-custom.html">custom Hook</a>.</li>
+</ul>
+<p><strong>Learn more about this in the <a href="/docs/hooks-rules.html">Rules of Hooks</a>.</strong></p>
+<pre class="js{2-3,8-9}"><code>function Counter() {
+  // ✅ Good: top-level in a function component
+  const [count, setCount] = useState(0);
+  // ...
+}
+
+function useWindowWidth() {
+  // ✅ Good: top-level in a custom Hook
+  const [width, setWidth] = useState(window.innerWidth);
+  // ...
+}</code></pre>
+<p>To avoid confusion, it’s <strong>not</strong> supported to call Hooks in other cases:</p>
+<ul>
+<li>🔴 Do not call Hooks in class components.</li>
+<li>🔴 Do not call in event handlers.</li>
+<li>🔴 Do not call Hooks inside functions passed to <code>useMemo</code>, <code>useReducer</code>, or <code>useEffect</code>.</li>
+</ul>
+<p>If you break these rules, you might see this error.</p>
+<pre class="js{3-4,11-12,20-21}"><code>function Bad1() {
+  function handleClick() {
+    // 🔴 Bad: inside an event handler (to fix, move it outside!)
+    const theme = useContext(ThemeContext);
+  }
+  // ...
+}
+
+function Bad2() {
+  const style = useMemo(() =&gt; {
+    // 🔴 Bad: inside useMemo (to fix, move it outside!)
+    const theme = useContext(ThemeContext);
+    return createStyle(theme);
+  });
+  // ...
+}
+
+class Bad3 extends React.Component {
+  render() {
+    // 🔴 Bad: inside a class component
+    useEffect(() =&gt; {})
+    // ...
+  }
+}</code></pre>
+<p>You can use the <a href="https://www.npmjs.com/package/eslint-plugin-react-hooks"><code>eslint-plugin-react-hooks</code> plugin</a> to catch some of these mistakes.</p>
+<blockquote>
+<p>Note</p>
+<p><a href="/docs/hooks-custom.html">Custom Hooks</a> <em>may</em> call other Hooks (that’s their whole purpose). This works because custom Hooks are also supposed to only be called while a function component is rendering.</p>
+</blockquote>
+<h2 id="duplicate-react">Duplicate React</h2>
+<p>In order for Hooks to work, the <code>react</code> import from your application code needs to resolve to the same module as the <code>react</code> import from inside the <code>react-dom</code> package.</p>
+<p>If these <code>react</code> imports resolve to two different exports objects, you will see this warning. This may happen if you <strong>accidentally end up with two copies</strong> of the <code>react</code> package.</p>
+<p>If you use Node for package management, you can run this check in your project folder:</p>
+<pre><code>npm ls react</code></pre>
+<p>If you see more than one React, you’ll need to figure out why this happens and fix your dependency tree. For example, maybe a library you’re using incorrectly specifies <code>react</code> as a dependency (rather than a peer dependency). Until that library is fixed, <a href="https://yarnpkg.com/lang/en/docs/selective-version-resolutions/">Yarn resolutions</a> is one possible workaround.</p>
+<p>You can also try to debug this problem by adding some logs and restarting your development server:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb4-1" title="1"><span class="co">// Add this in node_modules/react-dom/index.js</span></a>
+<a class="sourceLine" id="cb4-2" title="2"><span class="va">window</span>.<span class="at">React1</span> <span class="op">=</span> <span class="at">require</span>(<span class="st">&#39;react&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb4-3" title="3"></a>
+<a class="sourceLine" id="cb4-4" title="4"><span class="co">// Add this in your component file</span></a>
+<a class="sourceLine" id="cb4-5" title="5"><span class="at">require</span>(<span class="st">&#39;react-dom&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb4-6" title="6"><span class="va">window</span>.<span class="at">React2</span> <span class="op">=</span> <span class="at">require</span>(<span class="st">&#39;react&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb4-7" title="7"><span class="va">console</span>.<span class="at">log</span>(<span class="va">window</span>.<span class="at">React1</span> <span class="op">===</span> <span class="va">window</span>.<span class="at">React2</span>)<span class="op">;</span></a></code></pre></div>
+<p>If it prints <code>false</code> then you might have two Reacts and need to figure out why that happened. <a href="https://github.com/facebook/react/issues/13991">This issue</a> includes some common reasons encountered by the community.</p>
+<p>This problem can also come up when you use <code>npm link</code> or an equivalent. In that case, your bundler might “see” two Reacts — one in application folder and one in your library folder. Assuming <code>myapp</code> and <code>mylib</code> are sibling folders, one possible fix is to run <code>npm link ../myapp/node_modules/react</code> from <code>mylib</code>. This should make the library use the application’s React copy.</p>
+<blockquote>
+<p>Note</p>
+<p>In general, React supports using multiple independent copies on one page (for example, if an app and a third-party widget both use it). It only breaks if <code>require('react')</code> resolves differently between the component and the <code>react-dom</code> copy it was rendered with.</p>
+</blockquote>
+<h2 id="other-causes">Other Causes</h2>
+<p>If none of this worked, please comment in <a href="https://github.com/facebook/react/issues/13991">this issue</a> and we’ll try to help. Try to create a small reproducing example — you might discover the problem as you’re doing it.</p>
+</body>
+</html>

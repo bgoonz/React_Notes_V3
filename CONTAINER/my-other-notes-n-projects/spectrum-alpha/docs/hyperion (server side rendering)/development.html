@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>development</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<p><a href="../readme.md">Table of contents</a> / <a href="./intro.md">Hyperion</a></p>
+<h1 id="hyperion-development">Hyperion development</h1>
+<h3 id="normal-development-workflow">Normal development workflow</h3>
+<p>When you develop Spectrum you’re running two processes, <code>yarn run dev:web</code> for the frontend and <code>yarn run dev:api</code> for API, the GraphQL API. This means in your browser you access <code>localhost:3000</code>, which is a fully client-side React app, and that then fetches data from <code>localhost:3001/api</code>.</p>
+<p>In production, the client-side app is bundled and server-side rendered by Hyperion.</p>
+<p>This means we get the best development experience locally with hot module reloading etc, and in production we have single server responsible for serving files, rendering and the API.</p>
+<h3 id="when-developing-ssr">When developing SSR</h3>
+<p><strong>DO NOT USE THIS UNLESS YOU’RE DEVELOPING SSR</strong></p>
+<p>To test server-side rendering locally run the client and the API locally, and then start Hyperion with <code>yarn run dev:hyperion</code>. Open Hyperion’s URL, <code>http://localhost:3006</code> (instead of <code>:3000</code>), which will request the server-side rendered HTML from Hyperion rather than <code>webpack-dev-server</code>.</p>
+<p>The downside is that when you’re testing SSR and changing the frontend those changes won’t be reflected immediately. To get changes from the frontend when you’re requesting <code>localhost:3001</code> you have to:</p>
+<ol type="1">
+<li>Stop the <code>yarn run dev:web</code> process</li>
+<li>Run <code>yarn run dev:web</code></li>
+<li>Wait for the first compilation to complete</li>
+<li>Restart the <code>yarn run dev:hyperion</code> process by stopping and then starting it again</li>
+</ol>
+<h2 id="when-doing-all-other-client-development">When doing all other client development</h2>
+<p>Just stick to the normal workflow of <code>yarn run dev:web</code> and enjoy the hot reloading at <code>localhost:3000</code>!</p>
+</body>
+</html>

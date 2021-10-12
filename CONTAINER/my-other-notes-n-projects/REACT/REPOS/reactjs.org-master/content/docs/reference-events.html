@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>SyntheticEvent</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">SyntheticEvent</h1>
+</header>
+<p>This reference guide documents the <code>SyntheticEvent</code> wrapper that forms part of React’s Event System. See the <a href="/docs/handling-events.html">Handling Events</a> guide to learn more.</p>
+<h2 id="overview">Overview</h2>
+<p>Your event handlers will be passed instances of <code>SyntheticEvent</code>, a cross-browser wrapper around the browser’s native event. It has the same interface as the browser’s native event, including <code>stopPropagation()</code> and <code>preventDefault()</code>, except the events work identically across all browsers.</p>
+<p>If you find that you need the underlying browser event for some reason, simply use the <code>nativeEvent</code> attribute to get it. The synthetic events are different from, and do not map directly to, the browser’s native events. For example in <code>onMouseLeave</code> <code>event.nativeEvent</code> will point to a <code>mouseout</code> event. The specific mapping is not part of the public API and may change at any time. Every <code>SyntheticEvent</code> object has the following attributes:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb1-1" title="1">boolean bubbles</a>
+<a class="sourceLine" id="cb1-2" title="2">boolean cancelable</a>
+<a class="sourceLine" id="cb1-3" title="3">DOMEventTarget currentTarget</a>
+<a class="sourceLine" id="cb1-4" title="4">boolean defaultPrevented</a>
+<a class="sourceLine" id="cb1-5" title="5">number eventPhase</a>
+<a class="sourceLine" id="cb1-6" title="6">boolean isTrusted</a>
+<a class="sourceLine" id="cb1-7" title="7">DOMEvent nativeEvent</a>
+<a class="sourceLine" id="cb1-8" title="8"><span class="kw">void</span> <span class="at">preventDefault</span>()</a>
+<a class="sourceLine" id="cb1-9" title="9">boolean <span class="at">isDefaultPrevented</span>()</a>
+<a class="sourceLine" id="cb1-10" title="10"><span class="kw">void</span> <span class="at">stopPropagation</span>()</a>
+<a class="sourceLine" id="cb1-11" title="11">boolean <span class="at">isPropagationStopped</span>()</a>
+<a class="sourceLine" id="cb1-12" title="12"><span class="kw">void</span> <span class="at">persist</span>()</a>
+<a class="sourceLine" id="cb1-13" title="13">DOMEventTarget target</a>
+<a class="sourceLine" id="cb1-14" title="14">number timeStamp</a>
+<a class="sourceLine" id="cb1-15" title="15">string type</a></code></pre></div>
+<blockquote>
+<p>Note:</p>
+<p>As of v17, <code>e.persist()</code> doesn’t do anything because the <code>SyntheticEvent</code> is no longer <a href="/docs/legacy-event-pooling.html">pooled</a>.</p>
+</blockquote>
+<blockquote>
+<p>Note:</p>
+<p>As of v0.14, returning <code>false</code> from an event handler will no longer stop event propagation. Instead, <code>e.stopPropagation()</code> or <code>e.preventDefault()</code> should be triggered manually, as appropriate.</p>
+</blockquote>
+<h2 id="supported-events">Supported Events</h2>
+<p>React normalizes events so that they have consistent properties across different browsers.</p>
+<p>The event handlers below are triggered by an event in the bubbling phase. To register an event handler for the capture phase, append <code>Capture</code> to the event name; for example, instead of using <code>onClick</code>, you would use <code>onClickCapture</code> to handle the click event in the capture phase.</p>
+<ul>
+<li><a href="#clipboard-events">Clipboard Events</a></li>
+<li><a href="#composition-events">Composition Events</a></li>
+<li><a href="#keyboard-events">Keyboard Events</a></li>
+<li><a href="#focus-events">Focus Events</a></li>
+<li><a href="#form-events">Form Events</a></li>
+<li><a href="#generic-events">Generic Events</a></li>
+<li><a href="#mouse-events">Mouse Events</a></li>
+<li><a href="#pointer-events">Pointer Events</a></li>
+<li><a href="#selection-events">Selection Events</a></li>
+<li><a href="#touch-events">Touch Events</a></li>
+<li><a href="#ui-events">UI Events</a></li>
+<li><a href="#wheel-events">Wheel Events</a></li>
+<li><a href="#media-events">Media Events</a></li>
+<li><a href="#image-events">Image Events</a></li>
+<li><a href="#animation-events">Animation Events</a></li>
+<li><a href="#transition-events">Transition Events</a></li>
+<li><a href="#other-events">Other Events</a></li>
+</ul>
+<hr />
+<h2 id="reference">Reference</h2>
+<h3 id="clipboard-events">Clipboard Events</h3>
+<p>Event names:</p>
+<pre><code>onCopy onCut onPaste</code></pre>
+<p>Properties:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb3-1" title="1">DOMDataTransfer clipboardData</a></code></pre></div>
+<hr />
+<h3 id="composition-events">Composition Events</h3>
+<p>Event names:</p>
+<pre><code>onCompositionEnd onCompositionStart onCompositionUpdate</code></pre>
+<p>Properties:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb5-1" title="1">string data</a></code></pre></div>
+<hr />
+<h3 id="keyboard-events">Keyboard Events</h3>
+<p>Event names:</p>
+<pre><code>onKeyDown onKeyPress onKeyUp</code></pre>
+<p>Properties:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb7-1" title="1">boolean altKey</a>
+<a class="sourceLine" id="cb7-2" title="2">number charCode</a>
+<a class="sourceLine" id="cb7-3" title="3">boolean ctrlKey</a>
+<a class="sourceLine" id="cb7-4" title="4">boolean <span class="at">getModifierState</span>(key)</a>
+<a class="sourceLine" id="cb7-5" title="5">string key</a>
+<a class="sourceLine" id="cb7-6" title="6">number keyCode</a>
+<a class="sourceLine" id="cb7-7" title="7">string locale</a>
+<a class="sourceLine" id="cb7-8" title="8">number location</a>
+<a class="sourceLine" id="cb7-9" title="9">boolean metaKey</a>
+<a class="sourceLine" id="cb7-10" title="10">boolean repeat</a>
+<a class="sourceLine" id="cb7-11" title="11">boolean shiftKey</a>
+<a class="sourceLine" id="cb7-12" title="12">number which</a></code></pre></div>
+<p>The <code>key</code> property can take any of the values documented in the <a href="https://www.w3.org/TR/uievents-key/#named-key-attribute-values">DOM Level 3 Events spec</a>.</p>
+<hr />
+<h3 id="focus-events">Focus Events</h3>
+<p>Event names:</p>
+<pre><code>onFocus onBlur</code></pre>
+<p>These focus events work on all elements in the React DOM, not just form elements.</p>
+<p>Properties:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb9-1" title="1">DOMEventTarget relatedTarget</a></code></pre></div>
+<h4 id="onfocus">onFocus</h4>
+<p>The <code>onFocus</code> event is called when the element (or some element inside of it) receives focus. For example, it’s called when the user clicks on a text input.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb10-1" title="1"><span class="kw">function</span> <span class="at">Example</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb10-2" title="2">  <span class="cf">return</span> (</a>
+<a class="sourceLine" id="cb10-3" title="3">    <span class="op">&lt;</span>input</a>
+<a class="sourceLine" id="cb10-4" title="4">      onFocus<span class="op">={</span>(e) <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb10-5" title="5">        <span class="va">console</span>.<span class="at">log</span>(<span class="st">&#39;Focused on input&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb10-6" title="6">      <span class="op">}}</span></a>
+<a class="sourceLine" id="cb10-7" title="7">      placeholder<span class="op">=</span><span class="st">&quot;onFocus is triggered when you click this input.&quot;</span></a>
+<a class="sourceLine" id="cb10-8" title="8">    /&gt;</a>
+<a class="sourceLine" id="cb10-9" title="9">  )</a>
+<a class="sourceLine" id="cb10-10" title="10"><span class="op">}</span></a></code></pre></div>
+<h4 id="onblur">onBlur</h4>
+<p>The <code>onBlur</code> event handler is called when focus has left the element (or left some element inside of it). For example, it’s called when the user clicks outside of a focused text input.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb11-1" title="1"><span class="kw">function</span> <span class="at">Example</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb11-2" title="2">  <span class="cf">return</span> (</a>
+<a class="sourceLine" id="cb11-3" title="3">    <span class="op">&lt;</span>input</a>
+<a class="sourceLine" id="cb11-4" title="4">      onBlur<span class="op">={</span>(e) <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb11-5" title="5">        <span class="va">console</span>.<span class="at">log</span>(<span class="st">&#39;Triggered because this input lost focus&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb11-6" title="6">      <span class="op">}}</span></a>
+<a class="sourceLine" id="cb11-7" title="7">      placeholder<span class="op">=</span><span class="st">&quot;onBlur is triggered when you click this input and then you click outside of it.&quot;</span></a>
+<a class="sourceLine" id="cb11-8" title="8">    /&gt;</a>
+<a class="sourceLine" id="cb11-9" title="9">  )</a>
+<a class="sourceLine" id="cb11-10" title="10"><span class="op">}</span></a></code></pre></div>
+<h4 id="detecting-focus-entering-and-leaving">Detecting Focus Entering and Leaving</h4>
+<p>You can use the <code>currentTarget</code> and <code>relatedTarget</code> to differentiate if the focusing or blurring events originated from <em>outside</em> of the parent element. Here is a demo you can copy and paste that shows how to detect focusing a child, focusing the element itself, and focus entering or leaving the whole subtree.</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb12-1" title="1"><span class="kw">function</span> <span class="at">Example</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb12-2" title="2">  <span class="cf">return</span> (</a>
+<a class="sourceLine" id="cb12-3" title="3">    <span class="op">&lt;</span>div</a>
+<a class="sourceLine" id="cb12-4" title="4">      tabIndex<span class="op">={</span><span class="dv">1</span><span class="op">}</span></a>
+<a class="sourceLine" id="cb12-5" title="5">      onFocus<span class="op">={</span>(e) <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb12-6" title="6">        <span class="cf">if</span> (<span class="va">e</span>.<span class="at">currentTarget</span> <span class="op">===</span> <span class="va">e</span>.<span class="at">target</span>) <span class="op">{</span></a>
+<a class="sourceLine" id="cb12-7" title="7">          <span class="va">console</span>.<span class="at">log</span>(<span class="st">&#39;focused self&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb12-8" title="8">        <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb12-9" title="9">          <span class="va">console</span>.<span class="at">log</span>(<span class="st">&#39;focused child&#39;</span><span class="op">,</span> <span class="va">e</span>.<span class="at">target</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb12-10" title="10">        <span class="op">}</span></a>
+<a class="sourceLine" id="cb12-11" title="11">        <span class="cf">if</span> (<span class="op">!</span><span class="va">e</span>.<span class="va">currentTarget</span>.<span class="at">contains</span>(<span class="va">e</span>.<span class="at">relatedTarget</span>)) <span class="op">{</span></a>
+<a class="sourceLine" id="cb12-12" title="12">          <span class="co">// Not triggered when swapping focus between children</span></a>
+<a class="sourceLine" id="cb12-13" title="13">          <span class="va">console</span>.<span class="at">log</span>(<span class="st">&#39;focus entered self&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb12-14" title="14">        <span class="op">}</span></a>
+<a class="sourceLine" id="cb12-15" title="15">      <span class="op">}}</span></a>
+<a class="sourceLine" id="cb12-16" title="16">      onBlur<span class="op">={</span>(e) <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb12-17" title="17">        <span class="cf">if</span> (<span class="va">e</span>.<span class="at">currentTarget</span> <span class="op">===</span> <span class="va">e</span>.<span class="at">target</span>) <span class="op">{</span></a>
+<a class="sourceLine" id="cb12-18" title="18">          <span class="va">console</span>.<span class="at">log</span>(<span class="st">&#39;unfocused self&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb12-19" title="19">        <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb12-20" title="20">          <span class="va">console</span>.<span class="at">log</span>(<span class="st">&#39;unfocused child&#39;</span><span class="op">,</span> <span class="va">e</span>.<span class="at">target</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb12-21" title="21">        <span class="op">}</span></a>
+<a class="sourceLine" id="cb12-22" title="22">        <span class="cf">if</span> (<span class="op">!</span><span class="va">e</span>.<span class="va">currentTarget</span>.<span class="at">contains</span>(<span class="va">e</span>.<span class="at">relatedTarget</span>)) <span class="op">{</span></a>
+<a class="sourceLine" id="cb12-23" title="23">          <span class="co">// Not triggered when swapping focus between children</span></a>
+<a class="sourceLine" id="cb12-24" title="24">          <span class="va">console</span>.<span class="at">log</span>(<span class="st">&#39;focus left self&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb12-25" title="25">        <span class="op">}</span></a>
+<a class="sourceLine" id="cb12-26" title="26">      <span class="op">}}</span></a>
+<a class="sourceLine" id="cb12-27" title="27">    <span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb12-28" title="28">      <span class="op">&lt;</span>input id<span class="op">=</span><span class="st">&quot;1&quot;</span> /&gt;</a>
+<a class="sourceLine" id="cb12-29" title="29">      <span class="op">&lt;</span>input id<span class="op">=</span><span class="st">&quot;2&quot;</span> /&gt;</a>
+<a class="sourceLine" id="cb12-30" title="30">    &lt;/div<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb12-31" title="31">  )<span class="op">;</span></a>
+<a class="sourceLine" id="cb12-32" title="32"><span class="op">}</span></a></code></pre></div>
+<hr />
+<h3 id="form-events">Form Events</h3>
+<p>Event names:</p>
+<pre><code>onChange onInput onInvalid onReset onSubmit </code></pre>
+<p>For more information about the onChange event, see <a href="/docs/forms.html">Forms</a>.</p>
+<hr />
+<h3 id="generic-events">Generic Events</h3>
+<p>Event names:</p>
+<pre><code>onError onLoad</code></pre>
+<hr />
+<h3 id="mouse-events">Mouse Events</h3>
+<p>Event names:</p>
+<pre><code>onClick onContextMenu onDoubleClick onDrag onDragEnd onDragEnter onDragExit
+onDragLeave onDragOver onDragStart onDrop onMouseDown onMouseEnter onMouseLeave
+onMouseMove onMouseOut onMouseOver onMouseUp</code></pre>
+<p>The <code>onMouseEnter</code> and <code>onMouseLeave</code> events propagate from the element being left to the one being entered instead of ordinary bubbling and do not have a capture phase.</p>
+<p>Properties:</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb16-1" title="1">boolean altKey</a>
+<a class="sourceLine" id="cb16-2" title="2">number button</a>
+<a class="sourceLine" id="cb16-3" title="3">number buttons</a>
+<a class="sourceLine" id="cb16-4" title="4">number clientX</a>
+<a class="sourceLine" id="cb16-5" title="5">number clientY</a>
+<a class="sourceLine" id="cb16-6" title="6">boolean ctrlKey</a>
+<a class="sourceLine" id="cb16-7" title="7">boolean <span class="at">getModifierState</span>(key)</a>
+<a class="sourceLine" id="cb16-8" title="8">boolean metaKey</a>
+<a class="sourceLine" id="cb16-9" title="9">number pageX</a>
+<a class="sourceLine" id="cb16-10" title="10">number pageY</a>
+<a class="sourceLine" id="cb16-11" title="11">DOMEventTarget relatedTarget</a>
+<a class="sourceLine" id="cb16-12" title="12">number screenX</a>
+<a class="sourceLine" id="cb16-13" title="13">number screenY</a>
+<a class="sourceLine" id="cb16-14" title="14">boolean shiftKey</a></code></pre></div>
+<hr />
+<h3 id="pointer-events">Pointer Events</h3>
+<p>Event names:</p>
+<pre><code>onPointerDown onPointerMove onPointerUp onPointerCancel onGotPointerCapture
+onLostPointerCapture onPointerEnter onPointerLeave onPointerOver onPointerOut</code></pre>
+<p>The <code>onPointerEnter</code> and <code>onPointerLeave</code> events propagate from the element being left to the one being entered instead of ordinary bubbling and do not have a capture phase.</p>
+<p>Properties:</p>
+<p>As defined in the <a href="https://www.w3.org/TR/pointerevents/">W3 spec</a>, pointer events extend <a href="#mouse-events">Mouse Events</a> with the following properties:</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb18-1" title="1">number pointerId</a>
+<a class="sourceLine" id="cb18-2" title="2">number width</a>
+<a class="sourceLine" id="cb18-3" title="3">number height</a>
+<a class="sourceLine" id="cb18-4" title="4">number pressure</a>
+<a class="sourceLine" id="cb18-5" title="5">number tangentialPressure</a>
+<a class="sourceLine" id="cb18-6" title="6">number tiltX</a>
+<a class="sourceLine" id="cb18-7" title="7">number tiltY</a>
+<a class="sourceLine" id="cb18-8" title="8">number twist</a>
+<a class="sourceLine" id="cb18-9" title="9">string pointerType</a>
+<a class="sourceLine" id="cb18-10" title="10">boolean isPrimary</a></code></pre></div>
+<p>A note on cross-browser support:</p>
+<p>Pointer events are not yet supported in every browser (at the time of writing this article, supported browsers include: Chrome, Firefox, Edge, and Internet Explorer). React deliberately does not polyfill support for other browsers because a standard-conform polyfill would significantly increase the bundle size of <code>react-dom</code>.</p>
+<p>If your application requires pointer events, we recommend adding a third party pointer event polyfill.</p>
+<hr />
+<h3 id="selection-events">Selection Events</h3>
+<p>Event names:</p>
+<pre><code>onSelect</code></pre>
+<hr />
+<h3 id="touch-events">Touch Events</h3>
+<p>Event names:</p>
+<pre><code>onTouchCancel onTouchEnd onTouchMove onTouchStart</code></pre>
+<p>Properties:</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb21-1" title="1">boolean altKey</a>
+<a class="sourceLine" id="cb21-2" title="2">DOMTouchList changedTouches</a>
+<a class="sourceLine" id="cb21-3" title="3">boolean ctrlKey</a>
+<a class="sourceLine" id="cb21-4" title="4">boolean <span class="at">getModifierState</span>(key)</a>
+<a class="sourceLine" id="cb21-5" title="5">boolean metaKey</a>
+<a class="sourceLine" id="cb21-6" title="6">boolean shiftKey</a>
+<a class="sourceLine" id="cb21-7" title="7">DOMTouchList targetTouches</a>
+<a class="sourceLine" id="cb21-8" title="8">DOMTouchList touches</a></code></pre></div>
+<hr />
+<h3 id="ui-events">UI Events</h3>
+<p>Event names:</p>
+<pre><code>onScroll</code></pre>
+<blockquote>
+<p>Note</p>
+<p>Starting with React 17, the <code>onScroll</code> event <strong>does not bubble</strong> in React. This matches the browser behavior and prevents the confusion when a nested scrollable element fires events on a distant parent.</p>
+</blockquote>
+<p>Properties:</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb23-1" title="1">number detail</a>
+<a class="sourceLine" id="cb23-2" title="2">DOMAbstractView view</a></code></pre></div>
+<hr />
+<h3 id="wheel-events">Wheel Events</h3>
+<p>Event names:</p>
+<pre><code>onWheel</code></pre>
+<p>Properties:</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb25-1" title="1">number deltaMode</a>
+<a class="sourceLine" id="cb25-2" title="2">number deltaX</a>
+<a class="sourceLine" id="cb25-3" title="3">number deltaY</a>
+<a class="sourceLine" id="cb25-4" title="4">number deltaZ</a></code></pre></div>
+<hr />
+<h3 id="media-events">Media Events</h3>
+<p>Event names:</p>
+<pre><code>onAbort onCanPlay onCanPlayThrough onDurationChange onEmptied onEncrypted
+onEnded onError onLoadedData onLoadedMetadata onLoadStart onPause onPlay
+onPlaying onProgress onRateChange onSeeked onSeeking onStalled onSuspend
+onTimeUpdate onVolumeChange onWaiting</code></pre>
+<hr />
+<h3 id="image-events">Image Events</h3>
+<p>Event names:</p>
+<pre><code>onLoad onError</code></pre>
+<hr />
+<h3 id="animation-events">Animation Events</h3>
+<p>Event names:</p>
+<pre><code>onAnimationStart onAnimationEnd onAnimationIteration</code></pre>
+<p>Properties:</p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb29-1" title="1">string animationName</a>
+<a class="sourceLine" id="cb29-2" title="2">string pseudoElement</a>
+<a class="sourceLine" id="cb29-3" title="3">float elapsedTime</a></code></pre></div>
+<hr />
+<h3 id="transition-events">Transition Events</h3>
+<p>Event names:</p>
+<pre><code>onTransitionEnd</code></pre>
+<p>Properties:</p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb31-1" title="1">string propertyName</a>
+<a class="sourceLine" id="cb31-2" title="2">string pseudoElement</a>
+<a class="sourceLine" id="cb31-3" title="3">float elapsedTime</a></code></pre></div>
+<hr />
+<h3 id="other-events">Other Events</h3>
+<p>Event names:</p>
+<pre><code>onToggle</code></pre>
+</body>
+</html>

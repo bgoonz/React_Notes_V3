@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>How to Contribute</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">How to Contribute</h1>
+</header>
+<p>React is one of Facebook’s first open source projects that is both under very active development and is also being used to ship code to everybody on <a href="https://www.facebook.com">facebook.com</a>. We’re still working out the kinks to make contributing to this project as easy and transparent as possible, but we’re not quite there yet. Hopefully this document makes the process for contributing clear and answers some questions that you may have.</p>
+<h3 id="code-of-conduct"><a href="https://github.com/facebook/react/blob/master/CODE_OF_CONDUCT.md">Code of Conduct</a></h3>
+<p>Facebook has adopted the <a href="https://www.contributor-covenant.org/">Contributor Covenant</a> as its Code of Conduct, and we expect project participants to adhere to it. Please read <a href="https://github.com/facebook/react/blob/master/CODE_OF_CONDUCT.md">the full text</a> so that you can understand what actions will and will not be tolerated.</p>
+<h3 id="open-development">Open Development</h3>
+<p>All work on React happens directly on <a href="https://github.com/facebook/react">GitHub</a>. Both core team members and external contributors send pull requests which go through the same review process.</p>
+<h3 id="semantic-versioning">Semantic Versioning</h3>
+<p>React follows <a href="https://semver.org/">semantic versioning</a>. We release patch versions for critical bugfixes, minor versions for new features or non-essential changes, and major versions for any breaking changes. When we make breaking changes, we also introduce deprecation warnings in a minor version so that our users learn about the upcoming changes and migrate their code in advance. Learn more about our commitment to stability and incremental migration in <a href="/docs/faq-versioning.html">our versioning policy</a>.</p>
+<p>Every significant change is documented in the <a href="https://github.com/facebook/react/blob/master/CHANGELOG.md">changelog file</a>.</p>
+<h3 id="branch-organization">Branch Organization</h3>
+<p>Submit all changes directly to the <a href="https://github.com/facebook/react/tree/master"><code>master branch</code></a>. We don’t use separate branches for development or for upcoming releases. We do our best to keep <code>master</code> in good shape, with all tests passing.</p>
+<p>Code that lands in <code>master</code> must be compatible with the latest stable release. It may contain additional features, but no breaking changes. We should be able to release a new minor version from the tip of <code>master</code> at any time.</p>
+<h3 id="feature-flags">Feature Flags</h3>
+<p>To keep the <code>master</code> branch in a releasable state, breaking changes and experimental features must be gated behind a feature flag.</p>
+<p>Feature flags are defined in <a href="https://github.com/facebook/react/blob/master/packages/shared/ReactFeatureFlags.js"><code>packages/shared/ReactFeatureFlags.js</code></a>. Some builds of React may enable different sets of feature flags; for example, the React Native build may be configured differently than React DOM. These flags are found in <a href="https://github.com/facebook/react/tree/master/packages/shared/forks"><code>packages/shared/forks</code></a>. Feature flags are statically typed by Flow, so you can run <code>yarn flow</code> to confirm that you’ve updated all the necessary files.</p>
+<p>React’s build system will strip out disabled feature branches before publishing. A continuous integration job runs on every commit to check for changes in bundle size. You can use the change in size as a signal that a feature was gated correctly.</p>
+<h3 id="bugs">Bugs</h3>
+<h4 id="where-to-find-known-issues">Where to Find Known Issues</h4>
+<p>We are using <a href="https://github.com/facebook/react/issues">GitHub Issues</a> for our public bugs. We keep a close eye on this and try to make it clear when we have an internal fix in progress. Before filing a new task, try to make sure your problem doesn’t already exist.</p>
+<h4 id="reporting-new-issues">Reporting New Issues</h4>
+<p>The best way to get your bug fixed is to provide a reduced test case. This <a href="https://jsfiddle.net/Luktwrdm/">JSFiddle template</a> is a great starting point.</p>
+<h4 id="security-bugs">Security Bugs</h4>
+<p>Facebook has a <a href="https://www.facebook.com/whitehat/">bounty program</a> for the safe disclosure of security bugs. With that in mind, please do not file public issues; go through the process outlined on that page.</p>
+<h3 id="how-to-get-in-touch">How to Get in Touch</h3>
+<ul>
+<li>IRC: <a href="https://webchat.freenode.net/?channels=reactjs">#reactjs on freenode</a></li>
+<li><a href="/community/support.html#popular-discussion-forums">Discussion forums</a></li>
+</ul>
+<p>There is also <a href="https://www.reactiflux.com/">an active community of React users on the Discord chat platform</a> in case you need help with React.</p>
+<h3 id="proposing-a-change">Proposing a Change</h3>
+<p>If you intend to change the public API, or make any non-trivial changes to the implementation, we recommend <a href="https://github.com/facebook/react/issues/new">filing an issue</a>. This lets us reach an agreement on your proposal before you put significant effort into it.</p>
+<p>If you’re only fixing a bug, it’s fine to submit a pull request right away but we still recommend to file an issue detailing what you’re fixing. This is helpful in case we don’t accept that specific fix but want to keep track of the issue.</p>
+<h3 id="your-first-pull-request">Your First Pull Request</h3>
+<p>Working on your first Pull Request? You can learn how from this free video series:</p>
+<p><strong><a href="https://egghead.io/series/how-to-contribute-to-an-open-source-project-on-github">How to Contribute to an Open Source Project on GitHub</a></strong></p>
+<p>To help you get your feet wet and get you familiar with our contribution process, we have a list of <strong><a href="https://github.com/facebook/react/issues?q=is:open+is:issue+label:%22good+first+issue%22">good first issues</a></strong> that contain bugs that have a relatively limited scope. This is a great place to get started.</p>
+<p>If you decide to fix an issue, please be sure to check the comment thread in case somebody is already working on a fix. If nobody is working on it at the moment, please leave a comment stating that you intend to work on it so other people don’t accidentally duplicate your effort.</p>
+<p>If somebody claims an issue but doesn’t follow up for more than two weeks, it’s fine to take it over but you should still leave a comment.</p>
+<h3 id="sending-a-pull-request">Sending a Pull Request</h3>
+<p>The core team is monitoring for pull requests. We will review your pull request and either merge it, request changes to it, or close it with an explanation. For API changes we may need to fix our internal uses at Facebook.com, which could cause some delay. We’ll do our best to provide updates and feedback throughout the process.</p>
+<p><strong>Before submitting a pull request,</strong> please make sure the following is done:</p>
+<ol type="1">
+<li>Fork <a href="https://github.com/facebook/react">the repository</a> and create your branch from <code>master</code>.</li>
+<li>Run <code>yarn</code> in the repository root.</li>
+<li>If you’ve fixed a bug or added code that should be tested, add tests!</li>
+<li>Ensure the test suite passes (<code>yarn test</code>). Tip: <code>yarn test --watch TestName</code> is helpful in development.</li>
+<li>Run <code>yarn test --prod</code> to test in the production environment.</li>
+<li>If you need a debugger, run <code>yarn debug-test --watch TestName</code>, open <code>chrome://inspect</code>, and press “Inspect”.</li>
+<li>Format your code with <a href="https://github.com/prettier/prettier">prettier</a> (<code>yarn prettier</code>).</li>
+<li>Make sure your code lints (<code>yarn lint</code>). Tip: <code>yarn linc</code> to only check changed files.</li>
+<li>Run the <a href="https://flowtype.org/">Flow</a> typechecks (<code>yarn flow</code>).</li>
+<li>If you haven’t already, complete the CLA.</li>
+</ol>
+<h3 id="contributor-license-agreement-cla">Contributor License Agreement (CLA)</h3>
+<p>In order to accept your pull request, we need you to submit a CLA. You only need to do this once, so if you’ve done this for another Facebook open source project, you’re good to go. If you are submitting a pull request for the first time, just let us know that you have completed the CLA and we can cross-check with your GitHub username.</p>
+<p><strong><a href="https://code.facebook.com/cla">Complete your CLA here.</a></strong></p>
+<h3 id="contribution-prerequisites">Contribution Prerequisites</h3>
+<ul>
+<li>You have <a href="https://nodejs.org">Node</a> installed at v8.0.0+ and <a href="https://yarnpkg.com/en/">Yarn</a> at v1.2.0+.</li>
+<li>You have <a href="https://www.oracle.com/technetwork/java/javase/downloads/index.html">JDK</a> installed.</li>
+<li>You have <code>gcc</code> installed or are comfortable installing a compiler if needed. Some of our dependencies may require a compilation step. On OS X, the Xcode Command Line Tools will cover this. On Ubuntu, <code>apt-get install build-essential</code> will install the required packages. Similar commands should work on other Linux distros. Windows will require some additional steps, see the <a href="https://github.com/nodejs/node-gyp#installation"><code>node-gyp</code> installation instructions</a> for details.</li>
+<li>You are familiar with Git.</li>
+</ul>
+<h3 id="development-workflow">Development Workflow</h3>
+<p>After cloning React, run <code>yarn</code> to fetch its dependencies. Then, you can run several commands:</p>
+<ul>
+<li><code>yarn lint</code> checks the code style.</li>
+<li><code>yarn linc</code> is like <code>yarn lint</code> but faster because it only checks files that differ in your branch.</li>
+<li><code>yarn test</code> runs the complete test suite.</li>
+<li><code>yarn test --watch</code> runs an interactive test watcher.</li>
+<li><code>yarn test --prod</code> runs tests in the production environment.</li>
+<li><code>yarn test &lt;pattern&gt;</code> runs tests with matching filenames.</li>
+<li><code>yarn debug-test</code> is just like <code>yarn test</code> but with a debugger. Open <code>chrome://inspect</code> and press “Inspect”.</li>
+<li><code>yarn flow</code> runs the <a href="https://flowtype.org/">Flow</a> typechecks.</li>
+<li><code>yarn build</code> creates a <code>build</code> folder with all the packages.</li>
+<li><code>yarn build react/index,react-dom/index --type=UMD</code> creates UMD builds of just React and ReactDOM.</li>
+</ul>
+<p>We recommend running <code>yarn test</code> (or its variations above) to make sure you don’t introduce any regressions as you work on your change. However, it can be handy to try your build of React in a real project.</p>
+<p>First, run <code>yarn build</code>. This will produce pre-built bundles in <code>build</code> folder, as well as prepare npm packages inside <code>build/packages</code>.</p>
+<p>The easiest way to try your changes is to run <code>yarn build react/index,react-dom/index --type=UMD</code> and then open <code>fixtures/packaging/babel-standalone/dev.html</code>. This file already uses <code>react.development.js</code> from the <code>build</code> folder so it will pick up your changes.</p>
+<p>If you want to try your changes in your existing React project, you may copy <code>build/dist/react.development.js</code>, <code>build/dist/react-dom.development.js</code>, or any other build products into your app and use them instead of the stable version.</p>
+<p>If your project uses React from npm, you may delete <code>react</code> and <code>react-dom</code> in its dependencies and use <code>yarn link</code> to point them to your local <code>build</code> folder. Note that <strong>instead of <code>--type=UMD</code> you’ll want to pass <code>--type=NODE</code> when building</strong>. You’ll also need to build the <code>scheduler</code> package:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb1-1" title="1"><span class="bu">cd</span> ~/path_to_your_react_clone/</a>
+<a class="sourceLine" id="cb1-2" title="2"><span class="ex">yarn</span> build react/index,react-dom/index,scheduler --type=NODE</a>
+<a class="sourceLine" id="cb1-3" title="3"></a>
+<a class="sourceLine" id="cb1-4" title="4"><span class="bu">cd</span> build/node_modules/react</a>
+<a class="sourceLine" id="cb1-5" title="5"><span class="ex">yarn</span> link</a>
+<a class="sourceLine" id="cb1-6" title="6"><span class="bu">cd</span> build/node_modules/react-dom</a>
+<a class="sourceLine" id="cb1-7" title="7"><span class="ex">yarn</span> link</a>
+<a class="sourceLine" id="cb1-8" title="8"></a>
+<a class="sourceLine" id="cb1-9" title="9"><span class="bu">cd</span> ~/path/to/your/project</a>
+<a class="sourceLine" id="cb1-10" title="10"><span class="ex">yarn</span> link react react-dom</a></code></pre></div>
+<p>Every time you run <code>yarn build</code> in the React folder, the updated versions will appear in your project’s <code>node_modules</code>. You can then rebuild your project to try your changes.</p>
+<p>If some package is still missing (e.g. maybe you use <code>react-dom/server</code> in your project), you can always do a full build with <code>yarn build</code>. Note that running <code>yarn build</code> without options takes a long time.</p>
+<p>We still require that your pull request contains unit tests for any new functionality. This way we can ensure that we don’t break your code in the future.</p>
+<h3 id="style-guide">Style Guide</h3>
+<p>We use an automatic code formatter called <a href="https://prettier.io/">Prettier</a>. Run <code>yarn prettier</code> after making any changes to the code.</p>
+<p>Then, our linter will catch most issues that may exist in your code. You can check the status of your code styling by simply running <code>yarn linc</code>.</p>
+<p>However, there are still some styles that the linter cannot pick up. If you are unsure about something, looking at <a href="https://github.com/airbnb/javascript">Airbnb’s Style Guide</a> will guide you in the right direction.</p>
+<h3 id="request-for-comments-rfc">Request for Comments (RFC)</h3>
+<p>Many changes, including bug fixes and documentation improvements can be implemented and reviewed via the normal GitHub pull request workflow.</p>
+<p>Some changes though are “substantial”, and we ask that these be put through a bit of a design process and produce a consensus among the React core team.</p>
+<p>The “RFC” (request for comments) process is intended to provide a consistent and controlled path for new features to enter the project. You can contribute by visiting the <a href="https://github.com/reactjs/rfcs">rfcs repository</a>.</p>
+<h3 id="license">License</h3>
+<p>By contributing to React, you agree that your contributions will be licensed under its MIT license.</p>
+<h3 id="what-next">What Next?</h3>
+<p>Read the <a href="/docs/codebase-overview.html">next section</a> to learn how the codebase is organized.</p>
+</body>
+</html>

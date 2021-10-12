@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>User-Stories</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<h1 id="stand-in-content-below-need-to-replace"><strong>Stand in Content Below: Need to Replace</strong></h1>
+<h2 id="general-user-not-logged-in">General User Not Logged In</h2>
+<hr />
+<p>As an unauthorized user, I want to be able to access reviews for books, so that I can find the worst book to read without needing an account.</p>
+<h2 id="questions">Questions</h2>
+<ul>
+<li>what will unathorized users stil be able to do on the site?
+<ul>
+<li>they should be able to read reviews and comments but not create them</li>
+<li>they should be able to search books</li>
+</ul></li>
+<li>do we want them to see other user’s bookshelves if you yourself are not a user?
+<ul>
+<li>by default yes, but as a bonus feature users can set their profile to private so that only authorized users can see bookshelves</li>
+</ul></li>
+</ul>
+<h2 id="acceptance-criteria">Acceptance Criteria</h2>
+<ul>
+<li><p>given that we are an unathorized user</p>
+<ul>
+<li>when an unathorized user runs a search
+<ul>
+<li>then it should request information from the server on the ‘/search’ route</li>
+</ul></li>
+</ul></li>
+<li><p>given that we are an unathorized user</p>
+<ul>
+<li>when we select a book
+<ul>
+<li>then the server should activate the /books/:id route</li>
+</ul></li>
+</ul></li>
+</ul>
+<h1 id="login">Login</h1>
+<hr />
+<p>As an unauthorized user, I want to be able to login to the website via a form, so that I can access my private information.</p>
+<h2 id="login-questions">Login Questions</h2>
+<ul>
+<li><p>Will the user enter a username or an email address to login?</p>
+<ul>
+<li>User will login via email and password.</li>
+</ul></li>
+<li><p>What routes should we use for login?</p>
+<ul>
+<li>User will login via /login route</li>
+</ul></li>
+<li><p>Where should the user be redirected after login?</p>
+<ul>
+<li>User will be redirected to the “/” route</li>
+</ul></li>
+<li><p>Will we allow OAuth authentication via a third party?</p>
+<ul>
+<li>Not yet – we haven’t learned it</li>
+</ul></li>
+<li><p>What happens if the user doesn’t exist yet?</p>
+<ul>
+<li>Display the message User authentication failed. Please try again.</li>
+</ul></li>
+<li><p>What happens if the user enters the wrong password?</p>
+<ul>
+<li>Display the message User authentication failed. Please try again.</li>
+</ul></li>
+<li><p>Should this story include allowing a user to reset their password?</p>
+<ul>
+<li>Not yet – maybe in a future story</li>
+</ul></li>
+<li>Should logging in use session-based or use token-based authentication?
+<ul>
+<li>We will use token-based authorization for now</li>
+</ul></li>
+</ul>
+<h2 id="login-acceptance-criteria">Login Acceptance Criteria</h2>
+<ol type="1">
+<li><p><strong>Given</strong> that I’m a logged-out user</p>
+<ul>
+<li><strong>When</strong> I’m on the /login route</li>
+<li><strong>Then</strong> there will be a login form with an email and password field and a “Login” button to submit the form.</li>
+</ul></li>
+<li><p><strong>When</strong> I try to fill out the form with an invalid email and password combination and press Enter or press the “Login” button</p>
+<ul>
+<li><strong>Then</strong> at the top of the form, I will see a message User authentication failed. Please try again.</li>
+</ul></li>
+<li><p><strong>When</strong> I try to fill out the form with an email that doesn’t exist in the system and press Enter or press the “Login” button</p>
+<ul>
+<li><strong>Then</strong> at the top of the form, I will see a message User authentication failed. Please try again.</li>
+</ul></li>
+<li><p><strong>When</strong> I try to fill out the form with a valid email and password and press Enter or press the “Login” button</p>
+<ul>
+<li><strong>Then</strong> I will be redirected to the homepage at the “/” route.</li>
+</ul></li>
+<li><p><strong>Given</strong> that I am a logged-in user</p>
+<ul>
+<li><strong>When</strong> I refresh the homepage at the “/” route</li>
+<li><strong>Then</strong> I will still be logged in</li>
+</ul></li>
+<li><strong>Given</strong> that I am an unathorized user
+<ul>
+<li><strong>When</strong> I am at the “/login” route</li>
+<li><strong>Then</strong> I can click a button to register an account at the “/register” route</li>
+</ul></li>
+</ol>
+<h1 id="signup">Signup</h1>
+<hr />
+<p>As an unauthorized user, I want to be able to sign up for the website via a signup form, so that I can access Bad Reads.</p>
+<h2 id="signup-questions">Signup Questions</h2>
+<ul>
+<li><p>Will the user enter a username and an email address to signup?</p>
+<ul>
+<li>The user will need a username (alias) and an email address to signup</li>
+</ul></li>
+<li><p>Will we confirm their password during signup?</p>
+<ul>
+<li>Yes. We will require the user to enter their password twice.</li>
+</ul></li>
+<li><p>What routes should we use for signup?</p>
+<ul>
+<li>We will use “/register” route</li>
+</ul></li>
+<li><p>Where should the user be redirected after signup?</p>
+<ul>
+<li>The user should be redirected to “/” route</li>
+</ul></li>
+<li><p>Will we allow OAuth authentication via a third party?</p>
+<ul>
+<li>Not yet – maybe in a future story</li>
+</ul></li>
+<li><p>What happens if the user with the username or email already exists?</p>
+<ul>
+<li>If the username exists, the user will be prompted with a message that says “That username already exists, please choose another”</li>
+<li>If the email exists, the user will be prompted with a message that says “That email already exists, please choose another”</li>
+<li>The correct form fields will not reset except for the ones that drew an error</li>
+</ul></li>
+<li>What happens if the user enters the wrong password confirmation?
+<ul>
+<li>The user will be prompted with a message that says “Passwords must match, learn to read before proceeding. This website is lost on you.”</li>
+</ul></li>
+</ul>
+<h2 id="signup-acceptance-criteria">Signup Acceptance Criteria</h2>
+<ol type="1">
+<li><p><strong>Given</strong> that I’m a user who has not signed up yet and</p>
+<ul>
+<li><strong>When</strong> I’m on the /signup route</li>
+<li><strong>Then</strong> there will be a signup form with an email, username, and password field and a “Sign Up” button to submit the form.</li>
+</ul></li>
+<li><p><strong>When</strong> I try to fill out the form with an email or username that already exists with a valid password and press Enter or press the “Sign Up” button</p>
+<ul>
+<li><strong>Then</strong> at the top of the form, I will see a red message User with that email or username already exists.</li>
+</ul></li>
+<li><p><strong>When</strong> I try to fill out the form with a password shorter than 6 characters and press Enter or press the “Sign Up” button</p>
+<ul>
+<li><strong>Then</strong> at the top of the form, I will see a red message Password must be at least 6 characters long.</li>
+</ul></li>
+<li><p><strong>When</strong> I try to fill out the form with a valid email, username, and password and press Enter or press the “Sign Up” button</p>
+<ul>
+<li><strong>Then</strong> I will be redirected to the homepage at the / route.</li>
+</ul></li>
+<li><strong>Given</strong> that I am a user that just signed up
+<ul>
+<li><strong>When</strong> I refresh the homepage at the / route</li>
+<li><strong>Then</strong> I will still be logged in</li>
+</ul></li>
+</ol>
+<h1 id="demo-user">Demo User</h1>
+<hr />
+<p>As a first-time user who just wants to demo Bluebird, I want to be able to try out the site with a demo user login via a single button click on the login and signup form, so that I can access Bluebird without having to go through the trouble of creating a new account.</p>
+<h2 id="demo-user-questions">Demo User Questions</h2>
+<ul>
+<li><p>Will the user enter a username or an email address to login?</p>
+<ul>
+<li>User will login via email ‘demo@demo.com’ and password ‘password’</li>
+</ul></li>
+<li><p>What routes should we use for login?</p>
+<ul>
+<li>User will login via /login route</li>
+</ul></li>
+<li><p>Where should the user be redirected after login?</p>
+<ul>
+<li>User will be redirected to the “/” route</li>
+</ul></li>
+<li><p>Will we allow OAuth authentication via a third party?</p>
+<ul>
+<li>Not yet – we haven’t learned it</li>
+</ul></li>
+<li><p>What happens if the user doesn’t exist yet?</p>
+<ul>
+<li>Display the message User authentication failed. Please try again.</li>
+</ul></li>
+<li><p>What happens if the user enters the wrong password?</p>
+<ul>
+<li>Display the message User authentication failed. Please try again.</li>
+</ul></li>
+<li><p>Should this story include allowing a user to reset their password?</p>
+<ul>
+<li>Not yet – maybe in a future story</li>
+</ul></li>
+<li>Should logging in use session-based or use token-based authentication?
+<ul>
+<li>We will use token-based authorization for now</li>
+</ul></li>
+</ul>
+<h2 id="demo-user-acceptance-criteria">Demo User Acceptance Criteria</h2>
+<ol type="1">
+<li><p><strong>Given</strong> that I’m a logged-out user</p>
+<ul>
+<li><strong>When</strong> I’m on the /login route</li>
+<li><strong>Then</strong> there will be a login form with an email and password field and a “Login” button to submit the form.</li>
+</ul></li>
+<li><p><strong>Given</strong> that I am a logged-in user</p>
+<ul>
+<li><strong>When</strong> I refresh the homepage at the “/” route</li>
+<li><strong>Then</strong> I will still be logged in</li>
+</ul></li>
+</ol>
+<h1 id="logout">Logout</h1>
+<hr />
+<p>As a logged-in user, I want to logout via a button on the navigation bar, so that I can hide my account information to the rest of the users on this device.</p>
+<h2 id="logout-questions">Logout Questions</h2>
+<ul>
+<li><p>how will the user logout?</p>
+<ul>
+<li>by clicking a logout button</li>
+</ul></li>
+<li><p>where will the user redirect after logging out?</p>
+<ul>
+<li>redirect to the root ‘/’ route as an unathorized user</li>
+</ul></li>
+</ul>
+<h2 id="logout-acceptance-criteria">Logout Acceptance Criteria</h2>
+<ol type="1">
+<li><p><strong>Given</strong> that im a logged-in user</p>
+<ul>
+<li><strong>When</strong> I hit the logout button</li>
+<li><strong>Then</strong> the server will activate the ‘/logout’ path and redirect to home page as unathorized user</li>
+</ul></li>
+<li><p><strong>Given</strong> that im a logged-in user</p>
+<ul>
+<li><strong>When</strong> I hit the logout button</li>
+<li><strong>Then</strong> the server will redirect to the root ‘/’ route</li>
+</ul></li>
+</ol>
+<h1 id="books">Books</h1>
+<hr />
+<h2 id="book-questions">Book Questions</h2>
+<ul>
+<li><p>who will be able to search up books?</p>
+<ul>
+<li>everybody regardless of user authentication</li>
+</ul></li>
+<li><p>what route should we use for books?</p>
+<ul>
+<li>link to a page about the book ‘/get-book/:id’ from the Book Table</li>
+</ul></li>
+<li><p>what should books display?</p>
+<ul>
+<li>image of the title, book cover(bonus), user reviews, releaseDate, pageCount, publisher, author, genre, rating, description/synopsis
+<ul>
+<li>which are all contained in the book table</li>
+</ul></li>
+</ul></li>
+<li><p>what will happen if someone searches for a book that doesnt exist?</p>
+<ul>
+<li>will display custom error message ‘this book does not exist’</li>
+</ul></li>
+</ul>
+<h2 id="book-acceptance-criteria">Book Acceptance Criteria</h2>
+<ol type="1">
+<li><p><strong>Given</strong> that a user wants to find a book</p>
+<ul>
+<li>when the book is searched for and it exists</li>
+<li>then the book will show up in search results</li>
+</ul></li>
+<li><p><strong>Given</strong> that a user wants to find a book</p>
+<ul>
+<li>when the book is opened</li>
+<li>then it will display the pertinent information such as title, user reviews, releaste date, page count, author, genre, rating, description</li>
+</ul></li>
+<li><p><strong>Given</strong> that a uses searches for a book that doesnt exist</p>
+<ul>
+<li>when the book is searched for</li>
+<li>then a error message saying the book does not exist shows up instead of a book</li>
+</ul></li>
+</ol>
+<h1 id="bookshelves">Bookshelves</h1>
+<hr />
+<h2 id="bookshelf-questions">Bookshelf Questions</h2>
+<ul>
+<li><p>who will be able to access bookshelves</p>
+<ul>
+<li>authenticated users</li>
+</ul></li>
+<li><p>what route should we use for bookshelves?</p>
+<ul>
+<li>link to a /get-user-books/:userId</li>
+</ul></li>
+<li><p>what should bookshelves display?</p>
+<ul>
+<li>the books that you save or mark as well as the user’s ratings, ‘read’ status, reviews and optionally date read</li>
+</ul></li>
+<li><p>what will happen if user wants to delete a book off their bookshelf?</p>
+<ul>
+<li>when deleted, the website will send a delete request</li>
+</ul></li>
+<li><p>what will happen if user wants to edit or change shelf or change rating of a book off their bookshelf?</p>
+<ul>
+<li>the website will do a patch request</li>
+</ul></li>
+<li><p>what will happen if user adds a book to their bookshelf?</p>
+<ul>
+<li>the website will use a post(?) request to connect the book to their bookshelf</li>
+</ul></li>
+<li><p>what if users want to organize their books by category or shelf?</p>
+<ul>
+<li>the database will SELECT (all books) ORDER BY (category or shelf or genre or etc)</li>
+</ul></li>
+</ul>
+<h2 id="bookshelf-acceptance-criteria">Bookshelf Acceptance Criteria</h2>
+<ol type="1">
+<li><p><strong>Given</strong> that a user wants to add a book to their bookshelf</p>
+<ul>
+<li>when the book is added to bookshelf</li>
+<li>then the website does a patch(?) request</li>
+</ul></li>
+<li><p><strong>Given</strong> that a user wants to access their bookshelf</p>
+<ul>
+<li>when the user clicks on their bookshelf link</li>
+<li>then the website redirects to /get-user-books/:userId</li>
+</ul></li>
+<li><p><strong>Given</strong> that a user wants to delete a book off of their bookshelf</p>
+<ul>
+<li>when the user deletes the book they no longer want from their bookshelf</li>
+<li>then badreads will make a delete request and delete that book from the bookself</li>
+</ul></li>
+<li><p><strong>Given</strong> that a user wants to edit their rating/review/shelf</p>
+<ul>
+<li>when the user tries to delete any of these things</li>
+<li>then the bookshelf will patch the new information over the existing information displayed on the bookshelf</li>
+</ul></li>
+<li><p><strong>Given</strong> that a user wants to sort their books by rating/shelf</p>
+<ul>
+<li>when the user sorts the bookshelf by these criteria</li>
+<li>then SELECT (all books) ORDER BY (rating/shelf)</li>
+</ul></li>
+</ol>
+<h1 id="ratings">Ratings</h1>
+<hr />
+<h2 id="rating-questions">Rating Questions</h2>
+<ul>
+<li><p>who will be able to create ratings</p>
+<ul>
+<li>authenticated users only</li>
+</ul></li>
+<li><p>where will ratings be displayed?</p>
+<ul>
+<li>ratings will be displayed on user bookshelves or displayed on the individual book (bookId)</li>
+</ul></li>
+<li><p>how will ratings be scaled?</p>
+<ul>
+<li>on a scale of 1-5 stars averaged to the nearest whole star</li>
+</ul></li>
+</ul>
+<h2 id="rating-acceptance-criteria">Rating Acceptance Criteria</h2>
+<ol type="1">
+<li><p><strong>Given</strong> that a user wants to create a rating for a book</p>
+<ul>
+<li>when a user creates a rating for a book</li>
+<li>then a rating will be created and the book is added to the user’s bookshelf if it doesn’t already exist</li>
+</ul></li>
+<li><p><strong>Given</strong> that someone wants to see reviews about a book</p>
+<ul>
+<li>when that someone goes to the book page</li>
+<li>then the average ratings</li>
+</ul></li>
+</ol>
+<h1 id="reviews">Reviews</h1>
+<hr />
+<p>As a user who wants to share my opinion on the quality of bad books, I want to be able to leave a review about books that I have read, so I can engage with the community of bad books readers.</p>
+<h2 id="review-questions">Review Questions</h2>
+<ul>
+<li>Who will be able to create reviews about bad books?
+<ul>
+<li>Authorized users will be able to create reviews about books they have read.</li>
+</ul></li>
+<li>Where will reviews be displayed
+<ul>
+<li>They will be displayed on the books page and on the individual users bookshelf.</li>
+</ul></li>
+<li>When you leave a review how long can it be?
+<ul>
+<li>No character limit on reviews.</li>
+</ul></li>
+<li>Are we moderating comments?
+<ul>
+<li>No Cursing. (bonus feature to implement profanity filter)</li>
+</ul></li>
+<li>How do you submit a review?
+<ul>
+<li>By pressing a submit button.</li>
+</ul></li>
+<li>After posting a review can you edit or delete it.
+<ul>
+<li>Yes, through an option on your personal page.</li>
+</ul></li>
+<li>What order should reviews be listed in?
+<ul>
+<li>They should be listed in most recent descending.</li>
+<li>Add other options to sort reviews as a bonus feature.</li>
+</ul></li>
+</ul>
+<h2 id="review-acceptance-criteria">Review Acceptance Criteria</h2>
+<ol type="1">
+<li><strong>Given</strong> that the user wants to leave a review
+<ul>
+<li><strong>when</strong> they create a review</li>
+<li><strong>then</strong> app.post() that method to the server and append the review to the list of reviews for the book as well as the users bookshelf.</li>
+</ul></li>
+<li><strong>Given</strong> that the user has not read a book
+<ul>
+<li><strong>when</strong> the user wants to review that book</li>
+<li><strong>then</strong> they cannot review that book. (or add a bonus feature that labels them a reviewer by book cover)</li>
+</ul></li>
+<li><strong>Given</strong> when a user posts a review
+<ul>
+<li><strong>when</strong> that user tries to include forbidden language</li>
+<li><strong>then</strong> that review will not be posted.</li>
+</ul></li>
+<li><strong>Given</strong> when a user reports a comment
+<ul>
+<li><strong>when</strong> 10 unique users report that comment</li>
+<li><strong>then</strong> that comment is removed.</li>
+</ul></li>
+</ol>
+</body>
+</html>

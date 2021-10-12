@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>importing-rethinkdb-backups</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<p><a href="../readme.md">Table of contents</a> / <a href="./index.md">Operations</a></p>
+<h1 id="importing-production-data-locally">Importing production data locally</h1>
+<p>Sometimes it’s useful to have production data running locally in rethinkdb for debugging and testing. To get production data running locally, follow these steps:</p>
+<ol type="1">
+<li>Go to http://localhost:8080/#tables and delete the local ‘spectrum’ table</li>
+<li>Log in to the Space Program AWS console</li>
+<li>Go to S3 &gt; Spectrum Backups &gt; Hourly</li>
+<li>Download the latest backup .tar.gz</li>
+<li>Unzip that backup onto your desktop</li>
+<li>Rename the unzipped directory to ‘prod-backup’</li>
+<li>In your terminal, run: <code>cd ~/Desktop &amp;&amp; rethinkdb import -d prod-backup</code></li>
+<li>The import will take a couple hours, at which point you can clear localstorage at localhost:3000 to re-authenticate</li>
+</ol>
+</body>
+</html>

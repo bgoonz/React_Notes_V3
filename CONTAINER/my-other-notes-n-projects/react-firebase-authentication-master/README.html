@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>README</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<h1 id="react-firebase-authentication">react-firebase-authentication</h1>
+<p><a href="https://travis-ci.org/the-road-to-react-with-firebase/react-firebase-authentication"><img src="https://travis-ci.org/the-road-to-react-with-firebase/react-firebase-authentication.svg?branch=master" alt="Build Status" /></a> <a href="https://slack-the-road-to-learn-react.wieruch.com/"><img src="https://slack-the-road-to-learn-react.wieruch.com/badge.svg" alt="Slack" /></a> <a href="https://greenkeeper.io/"><img src="https://badges.greenkeeper.io/the-road-to-react-with-firebase/react-firebase-authentication.svg" alt="Greenkeeper badge" /></a></p>
+<ul>
+<li><a href="https://www.robinwieruch.de/complete-firebase-authentication-react-tutorial/">Tutorial</a></li>
+</ul>
+<h2 id="variations">Variations</h2>
+<ul>
+<li><a href="https://github.com/the-road-to-react-with-firebase/react-redux-firebase-authentication">Redux Version</a></li>
+<li><a href="https://github.com/the-road-to-react-with-firebase/react-mobx-firebase-authentication">MobX Version</a></li>
+<li><a href="https://github.com/the-road-to-react-with-firebase/react-gatsby-firebase-authentication">Gatsby Version</a></li>
+<li><a href="https://github.com/the-road-to-react-with-firebase/react-firestore-authentication">Firestore Version</a></li>
+<li><a href="https://github.com/the-road-to-react-with-firebase/react-semantic-ui-firebase-authentication">Semantic UI Version</a></li>
+</ul>
+<h2 id="features">Features</h2>
+<ul>
+<li>uses:
+<ul>
+<li>only React (create-react-app)</li>
+<li>firebase</li>
+<li>react-router</li>
+</ul></li>
+<li>features:
+<ul>
+<li>Sign In</li>
+<li>Sign Up</li>
+<li>Sign Out</li>
+<li>Password Forget</li>
+<li>Password Change</li>
+<li>Verification Email</li>
+<li>Protected Routes with Authorization</li>
+<li>Roles-based Authorization</li>
+<li>Social Logins with Google, Facebook and Twitter</li>
+<li>Linking of Social Logins on Account dashboard</li>
+<li>Auth Persistence with Local Storage</li>
+<li>Database with Users and Messages</li>
+</ul></li>
+</ul>
+<h2 id="license">License</h2>
+<h3 id="commercial-license">Commercial license</h3>
+<p>If you want to use this starter project to develop commercial sites, themes, projects, and applications, the Commercial license is the appropriate license. With this option, your source code is kept proprietary. Purchase an commercial license for different team sizes:</p>
+<ul>
+<li><a href="https://gum.co/react-with-firebase-starter-pack-developer">1 Developer</a></li>
+<li><a href="https://gum.co/react-with-firebase-starter-pack-team">Team of up to 8 Developers</a></li>
+<li><a href="https://gum.co/react-with-firebase-starter-pack-organization">Unlimited Developers of an Organization</a></li>
+</ul>
+<p>It grants you also access to the other starter projects in this GitHub organization.</p>
+<h3 id="open-source-license">Open source license</h3>
+<p>If you are creating an open source application under a license compatible with the <a href="https://www.gnu.org/licenses/gpl-3.0.html">GNU GPL license v3</a>, you may use this starter project under the terms of the GPLv3.</p>
+<h2 id="installation">Installation</h2>
+<ul>
+<li><code>git clone git@github.com:the-road-to-react-with-firebase/react-firebase-authentication.git</code></li>
+<li><code>cd react-firebase-authentication</code></li>
+<li><code>npm install</code></li>
+<li><code>npm start</code></li>
+<li>visit http://localhost:3000</li>
+</ul>
+<p>Get an overview of Firebase, how to create a project, what kind of features Firebase offers, and how to navigate through the Firebase project dashboard in this <a href="https://www.robinwieruch.de/firebase-tutorial/">visual tutorial for Firebase</a>.</p>
+<h3 id="firebase-configuration">Firebase Configuration</h3>
+<ul>
+<li>copy/paste your configuration from your Firebase project’s dashboard into one of these files
+<ul>
+<li><em>src/components/Firebase/firebase.js</em> file</li>
+<li><em>.env</em> file</li>
+<li><em>.env.development</em> and <em>.env.production</em> files</li>
+</ul></li>
+</ul>
+<p>The <em>.env</em> or <em>.env.development</em> and <em>.env.production</em> files could look like the following then:</p>
+<pre><code>REACT_APP_API_KEY=AIzaSyBtxZ3phPeXcsZsRTySIXa7n33NtQ
+REACT_APP_AUTH_DOMAIN=react-firebase-s2233d64f8.firebaseapp.com
+REACT_APP_DATABASE_URL=https://react-firebase-s2233d64f8.firebaseio.com
+REACT_APP_PROJECT_ID=react-firebase-s2233d64f8
+REACT_APP_STORAGE_BUCKET=react-firebase-s2233d64f8.appspot.com
+REACT_APP_MESSAGING_SENDER_ID=701928454501</code></pre>
+<h3 id="activate-sign-in-methods">Activate Sign-In Methods</h3>
+<figure>
+<img src="https://user-images.githubusercontent.com/2479967/49687774-e0a31e80-fb42-11e8-9d8a-4b4c794134e6.jpg" alt="firebase-enable-google-social-login_640" /><figcaption>firebase-enable-google-social-login_640</figcaption>
+</figure>
+<ul>
+<li>Email/Password</li>
+<li><a href="https://www.robinwieruch.de/react-firebase-social-login/">Google</a></li>
+<li><a href="https://www.robinwieruch.de/firebase-facebook-login/">Facebook</a></li>
+<li><a href="https://www.robinwieruch.de/firebase-twitter-login/">Twitter</a></li>
+<li><a href="https://www.robinwieruch.de/react-firebase-social-login/">Troubleshoot</a></li>
+</ul>
+<h3 id="activate-verification-e-mail">Activate Verification E-Mail</h3>
+<ul>
+<li>add a redirect URL for redirecting a user after an email verification into one of these files
+<ul>
+<li><em>src/components/Firebase/firebase.js</em> file</li>
+<li><em>.env</em> file</li>
+<li><em>.env.development</em> and <em>.env.production</em> files</li>
+</ul></li>
+</ul>
+<p>The <em>.env</em> or <em>.env.development</em> and <em>.env.production</em> files could look like the following then (excl. the Firebase configuration).</p>
+<p><strong>Development:</strong></p>
+<pre><code>REACT_APP_CONFIRMATION_EMAIL_REDIRECT=http://localhost:3000</code></pre>
+<p><strong>Production:</strong></p>
+<pre><code>REACT_APP_CONFIRMATION_EMAIL_REDIRECT=https://mydomain.com</code></pre>
+<h3 id="security-rules">Security Rules</h3>
+<pre><code>{
+  &quot;rules&quot;: {
+    &quot;.read&quot;: false,
+    &quot;.write&quot;: false,
+    &quot;users&quot;: {
+      &quot;$uid&quot;: {
+        &quot;.read&quot;: &quot;$uid === auth.uid || root.child(&#39;users/&#39;+auth.uid).child(&#39;roles&#39;).hasChildren([&#39;ADMIN&#39;])&quot;,
+        &quot;.write&quot;: &quot;$uid === auth.uid || root.child(&#39;users/&#39;+auth.uid).child(&#39;roles&#39;).hasChildren([&#39;ADMIN&#39;])&quot;
+      },
+      &quot;.read&quot;: &quot;root.child(&#39;users/&#39;+auth.uid).child(&#39;roles&#39;).hasChildren([&#39;ADMIN&#39;])&quot;,
+      &quot;.write&quot;: &quot;root.child(&#39;users/&#39;+auth.uid).child(&#39;roles&#39;).hasChildren([&#39;ADMIN&#39;])&quot;
+    },
+    &quot;messages&quot;: {
+      &quot;.indexOn&quot;: [&quot;createdAt&quot;],
+      &quot;$uid&quot;: {
+        &quot;.write&quot;: &quot;data.exists() ? data.child(&#39;userId&#39;).val() === auth.uid : newData.child(&#39;userId&#39;).val() === auth.uid&quot;
+      },
+      &quot;.read&quot;: &quot;auth != null&quot;,
+      &quot;.write&quot;: &quot;auth != null&quot;,
+    },
+  }
+}</code></pre>
+</body>
+</html>

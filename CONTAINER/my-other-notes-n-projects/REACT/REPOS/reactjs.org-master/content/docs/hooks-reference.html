@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Hooks API Reference</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Hooks API Reference</h1>
+</header>
+<p><em>Hooks</em> are a new addition in React 16.8. They let you use state and other React features without writing a class.</p>
+<p>This page describes the APIs for the built-in Hooks in React.</p>
+<p>If you’re new to Hooks, you might want to check out <a href="/docs/hooks-overview.html">the overview</a> first. You may also find useful information in the <a href="/docs/hooks-faq.html">frequently asked questions</a> section.</p>
+<ul>
+<li><a href="#basic-hooks">Basic Hooks</a>
+<ul>
+<li><a href="#usestate"><code>useState</code></a></li>
+<li><a href="#useeffect"><code>useEffect</code></a></li>
+<li><a href="#usecontext"><code>useContext</code></a></li>
+</ul></li>
+<li><a href="#additional-hooks">Additional Hooks</a>
+<ul>
+<li><a href="#usereducer"><code>useReducer</code></a></li>
+<li><a href="#usecallback"><code>useCallback</code></a></li>
+<li><a href="#usememo"><code>useMemo</code></a></li>
+<li><a href="#useref"><code>useRef</code></a></li>
+<li><a href="#useimperativehandle"><code>useImperativeHandle</code></a></li>
+<li><a href="#uselayouteffect"><code>useLayoutEffect</code></a></li>
+<li><a href="#usedebugvalue"><code>useDebugValue</code></a></li>
+</ul></li>
+</ul>
+<h2 id="basic-hooks">Basic Hooks</h2>
+<h3 id="usestate"><code>useState</code></h3>
+<div class="sourceCode" id="cb1"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">const</span> [state<span class="op">,</span> setState] <span class="op">=</span> <span class="at">useState</span>(initialState)<span class="op">;</span></a></code></pre></div>
+<p>Returns a stateful value, and a function to update it.</p>
+<p>During the initial render, the returned state (<code>state</code>) is the same as the value passed as the first argument (<code>initialState</code>).</p>
+<p>The <code>setState</code> function is used to update the state. It accepts a new state value and enqueues a re-render of the component.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb2-1" title="1"><span class="at">setState</span>(newState)<span class="op">;</span></a></code></pre></div>
+<p>During subsequent re-renders, the first value returned by <code>useState</code> will always be the most recent state after applying updates.</p>
+<blockquote>
+<p>Note</p>
+<p>React guarantees that <code>setState</code> function identity is stable and won’t change on re-renders. This is why it’s safe to omit from the <code>useEffect</code> or <code>useCallback</code> dependency list.</p>
+</blockquote>
+<h4 id="functional-updates">Functional updates</h4>
+<p>If the new state is computed using the previous state, you can pass a function to <code>setState</code>. The function will receive the previous value, and return an updated value. Here’s an example of a counter component that uses both forms of <code>setState</code>:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb3-1" title="1"><span class="kw">function</span> <span class="at">Counter</span>(<span class="op">{</span>initialCount<span class="op">}</span>) <span class="op">{</span></a>
+<a class="sourceLine" id="cb3-2" title="2">  <span class="kw">const</span> [count<span class="op">,</span> setCount] <span class="op">=</span> <span class="at">useState</span>(initialCount)<span class="op">;</span></a>
+<a class="sourceLine" id="cb3-3" title="3">  <span class="cf">return</span> (</a>
+<a class="sourceLine" id="cb3-4" title="4">    <span class="op">&lt;&gt;</span></a>
+<a class="sourceLine" id="cb3-5" title="5">      <span class="dt">Count</span><span class="op">:</span> <span class="op">{</span>count<span class="op">}</span></a>
+<a class="sourceLine" id="cb3-6" title="6">      <span class="op">&lt;</span>button onClick<span class="op">={</span>() <span class="kw">=&gt;</span> <span class="at">setCount</span>(initialCount)<span class="op">}&gt;</span>Reset&lt;/button<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb3-7" title="7">      <span class="op">&lt;</span>button onClick<span class="op">={</span>() <span class="kw">=&gt;</span> <span class="at">setCount</span>(prevCount <span class="kw">=&gt;</span> prevCount <span class="op">-</span> <span class="dv">1</span>)<span class="op">}&gt;-</span>&lt;/button<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb3-8" title="8">      <span class="op">&lt;</span>button onClick<span class="op">={</span>() <span class="kw">=&gt;</span> <span class="at">setCount</span>(prevCount <span class="kw">=&gt;</span> prevCount <span class="op">+</span> <span class="dv">1</span>)<span class="op">}&gt;+</span>&lt;/button<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb3-9" title="9">    &lt;/<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb3-10" title="10">  )<span class="op">;</span></a>
+<a class="sourceLine" id="cb3-11" title="11"><span class="op">}</span></a></code></pre></div>
+<p>The “+” and “-” buttons use the functional form, because the updated value is based on the previous value. But the “Reset” button uses the normal form, because it always sets the count back to the initial value.</p>
+<p>If your update function returns the exact same value as the current state, the subsequent rerender will be skipped completely.</p>
+<blockquote>
+<p>Note</p>
+<p>Unlike the <code>setState</code> method found in class components, <code>useState</code> does not automatically merge update objects. You can replicate this behavior by combining the function updater form with object spread syntax:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb4-1" title="1"><span class="at">setState</span>(prevState <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb4-2" title="2">  <span class="co">// Object.assign would also work</span></a>
+<a class="sourceLine" id="cb4-3" title="3">  <span class="cf">return</span> <span class="op">{</span>...<span class="at">prevState</span><span class="op">,</span> ...<span class="at">updatedValues</span><span class="op">};</span></a>
+<a class="sourceLine" id="cb4-4" title="4"><span class="op">}</span>)<span class="op">;</span></a></code></pre></div>
+<p>Another option is <code>useReducer</code>, which is more suited for managing state objects that contain multiple sub-values.</p>
+</blockquote>
+<h4 id="lazy-initial-state">Lazy initial state</h4>
+<p>The <code>initialState</code> argument is the state used during the initial render. In subsequent renders, it is disregarded. If the initial state is the result of an expensive computation, you may provide a function instead, which will be executed only on the initial render:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb5-1" title="1"><span class="kw">const</span> [state<span class="op">,</span> setState] <span class="op">=</span> <span class="at">useState</span>(() <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb5-2" title="2">  <span class="kw">const</span> initialState <span class="op">=</span> <span class="at">someExpensiveComputation</span>(props)<span class="op">;</span></a>
+<a class="sourceLine" id="cb5-3" title="3">  <span class="cf">return</span> initialState<span class="op">;</span></a>
+<a class="sourceLine" id="cb5-4" title="4"><span class="op">}</span>)<span class="op">;</span></a></code></pre></div>
+<h4 id="bailing-out-of-a-state-update">Bailing out of a state update</h4>
+<p>If you update a State Hook to the same value as the current state, React will bail out without rendering the children or firing effects. (React uses the <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is#Description"><code>Object.is</code> comparison algorithm</a>.)</p>
+<p>Note that React may still need to render that specific component again before bailing out. That shouldn’t be a concern because React won’t unnecessarily go “deeper” into the tree. If you’re doing expensive calculations while rendering, you can optimize them with <code>useMemo</code>.</p>
+<h3 id="useeffect"><code>useEffect</code></h3>
+<div class="sourceCode" id="cb6"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb6-1" title="1"><span class="at">useEffect</span>(didUpdate)<span class="op">;</span></a></code></pre></div>
+<p>Accepts a function that contains imperative, possibly effectful code.</p>
+<p>Mutations, subscriptions, timers, logging, and other side effects are not allowed inside the main body of a function component (referred to as React’s <em>render phase</em>). Doing so will lead to confusing bugs and inconsistencies in the UI.</p>
+<p>Instead, use <code>useEffect</code>. The function passed to <code>useEffect</code> will run after the render is committed to the screen. Think of effects as an escape hatch from React’s purely functional world into the imperative world.</p>
+<p>By default, effects run after every completed render, but you can choose to fire them <a href="#conditionally-firing-an-effect">only when certain values have changed</a>.</p>
+<h4 id="cleaning-up-an-effect">Cleaning up an effect</h4>
+<p>Often, effects create resources that need to be cleaned up before the component leaves the screen, such as a subscription or timer ID. To do this, the function passed to <code>useEffect</code> may return a clean-up function. For example, to create a subscription:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb7-1" title="1"><span class="at">useEffect</span>(() <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb7-2" title="2">  <span class="kw">const</span> subscription <span class="op">=</span> <span class="va">props</span>.<span class="va">source</span>.<span class="at">subscribe</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb7-3" title="3">  <span class="cf">return</span> () <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb7-4" title="4">    <span class="co">// Clean up the subscription</span></a>
+<a class="sourceLine" id="cb7-5" title="5">    <span class="va">subscription</span>.<span class="at">unsubscribe</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb7-6" title="6">  <span class="op">};</span></a>
+<a class="sourceLine" id="cb7-7" title="7"><span class="op">}</span>)<span class="op">;</span></a></code></pre></div>
+<p>The clean-up function runs before the component is removed from the UI to prevent memory leaks. Additionally, if a component renders multiple times (as they typically do), the <strong>previous effect is cleaned up before executing the next effect</strong>. In our example, this means a new subscription is created on every update. To avoid firing an effect on every update, refer to the next section.</p>
+<h4 id="timing-of-effects">Timing of effects</h4>
+<p>Unlike <code>componentDidMount</code> and <code>componentDidUpdate</code>, the function passed to <code>useEffect</code> fires <strong>after</strong> layout and paint, during a deferred event. This makes it suitable for the many common side effects, like setting up subscriptions and event handlers, because most types of work shouldn’t block the browser from updating the screen.</p>
+<p>However, not all effects can be deferred. For example, a DOM mutation that is visible to the user must fire synchronously before the next paint so that the user does not perceive a visual inconsistency. (The distinction is conceptually similar to passive versus active event listeners.) For these types of effects, React provides one additional Hook called <a href="#uselayouteffect"><code>useLayoutEffect</code></a>. It has the same signature as <code>useEffect</code>, and only differs in when it is fired.</p>
+<p>Although <code>useEffect</code> is deferred until after the browser has painted, it’s guaranteed to fire before any new renders. React will always flush a previous render’s effects before starting a new update.</p>
+<h4 id="conditionally-firing-an-effect">Conditionally firing an effect</h4>
+<p>The default behavior for effects is to fire the effect after every completed render. That way an effect is always recreated if one of its dependencies changes.</p>
+<p>However, this may be overkill in some cases, like the subscription example from the previous section. We don’t need to create a new subscription on every update, only if the <code>source</code> prop has changed.</p>
+<p>To implement this, pass a second argument to <code>useEffect</code> that is the array of values that the effect depends on. Our updated example now looks like this:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb8-1" title="1"><span class="at">useEffect</span>(</a>
+<a class="sourceLine" id="cb8-2" title="2">  () <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb8-3" title="3">    <span class="kw">const</span> subscription <span class="op">=</span> <span class="va">props</span>.<span class="va">source</span>.<span class="at">subscribe</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb8-4" title="4">    <span class="cf">return</span> () <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb8-5" title="5">      <span class="va">subscription</span>.<span class="at">unsubscribe</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb8-6" title="6">    <span class="op">};</span></a>
+<a class="sourceLine" id="cb8-7" title="7">  <span class="op">},</span></a>
+<a class="sourceLine" id="cb8-8" title="8">  [<span class="va">props</span>.<span class="at">source</span>]<span class="op">,</span></a>
+<a class="sourceLine" id="cb8-9" title="9">)<span class="op">;</span></a></code></pre></div>
+<p>Now the subscription will only be recreated when <code>props.source</code> changes.</p>
+<blockquote>
+<p>Note</p>
+<p>If you use this optimization, make sure the array includes <strong>all values from the component scope (such as props and state) that change over time and that are used by the effect</strong>. Otherwise, your code will reference stale values from previous renders. Learn more about <a href="/docs/hooks-faq.html#is-it-safe-to-omit-functions-from-the-list-of-dependencies">how to deal with functions</a> and what to do when the <a href="/docs/hooks-faq.html#what-can-i-do-if-my-effect-dependencies-change-too-often">array values change too often</a>.</p>
+<p>If you want to run an effect and clean it up only once (on mount and unmount), you can pass an empty array (<code>[]</code>) as a second argument. This tells React that your effect doesn’t depend on <em>any</em> values from props or state, so it never needs to re-run. This isn’t handled as a special case – it follows directly from how the dependencies array always works.</p>
+<p>If you pass an empty array (<code>[]</code>), the props and state inside the effect will always have their initial values. While passing <code>[]</code> as the second argument is closer to the familiar <code>componentDidMount</code> and <code>componentWillUnmount</code> mental model, there are usually <a href="/docs/hooks-faq.html#is-it-safe-to-omit-functions-from-the-list-of-dependencies">better</a> <a href="/docs/hooks-faq.html#what-can-i-do-if-my-effect-dependencies-change-too-often">solutions</a> to avoid re-running effects too often. Also, don’t forget that React defers running <code>useEffect</code> until after the browser has painted, so doing extra work is less of a problem.</p>
+<p>We recommend using the <a href="https://github.com/facebook/react/issues/14920"><code>exhaustive-deps</code></a> rule as part of our <a href="https://www.npmjs.com/package/eslint-plugin-react-hooks#installation"><code>eslint-plugin-react-hooks</code></a> package. It warns when dependencies are specified incorrectly and suggests a fix.</p>
+</blockquote>
+<p>The array of dependencies is not passed as arguments to the effect function. Conceptually, though, that’s what they represent: every value referenced inside the effect function should also appear in the dependencies array. In the future, a sufficiently advanced compiler could create this array automatically.</p>
+<h3 id="usecontext"><code>useContext</code></h3>
+<div class="sourceCode" id="cb9"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb9-1" title="1"><span class="kw">const</span> value <span class="op">=</span> <span class="at">useContext</span>(MyContext)<span class="op">;</span></a></code></pre></div>
+<p>Accepts a context object (the value returned from <code>React.createContext</code>) and returns the current context value for that context. The current context value is determined by the <code>value</code> prop of the nearest <code>&lt;MyContext.Provider&gt;</code> above the calling component in the tree.</p>
+<p>When the nearest <code>&lt;MyContext.Provider&gt;</code> above the component updates, this Hook will trigger a rerender with the latest context <code>value</code> passed to that <code>MyContext</code> provider. Even if an ancestor uses <a href="/docs/react-api.html#reactmemo"><code>React.memo</code></a> or <a href="/docs/react-component.html#shouldcomponentupdate"><code>shouldComponentUpdate</code></a>, a rerender will still happen starting at the component itself using <code>useContext</code>.</p>
+<p>Don’t forget that the argument to <code>useContext</code> must be the <em>context object itself</em>:</p>
+<ul>
+<li><strong>Correct:</strong> <code>useContext(MyContext)</code></li>
+<li><strong>Incorrect:</strong> <code>useContext(MyContext.Consumer)</code></li>
+<li><strong>Incorrect:</strong> <code>useContext(MyContext.Provider)</code></li>
+</ul>
+<p>A component calling <code>useContext</code> will always re-render when the context value changes. If re-rendering the component is expensive, you can <a href="https://github.com/facebook/react/issues/15156#issuecomment-474590693">optimize it by using memoization</a>.</p>
+<blockquote>
+<p>Tip</p>
+<p>If you’re familiar with the context API before Hooks, <code>useContext(MyContext)</code> is equivalent to <code>static contextType = MyContext</code> in a class, or to <code>&lt;MyContext.Consumer&gt;</code>.</p>
+<p><code>useContext(MyContext)</code> only lets you <em>read</em> the context and subscribe to its changes. You still need a <code>&lt;MyContext.Provider&gt;</code> above in the tree to <em>provide</em> the value for this context.</p>
+</blockquote>
+<p><strong>Putting it together with Context.Provider</strong></p>
+<pre class="js{31-36}"><code>const themes = {
+  light: {
+    foreground: &quot;#000000&quot;,
+    background: &quot;#eeeeee&quot;
+  },
+  dark: {
+    foreground: &quot;#ffffff&quot;,
+    background: &quot;#222222&quot;
+  }
+};
+
+const ThemeContext = React.createContext(themes.light);
+
+function App() {
+  return (
+    &lt;ThemeContext.Provider value={themes.dark}&gt;
+      &lt;Toolbar /&gt;
+    &lt;/ThemeContext.Provider&gt;
+  );
+}
+
+function Toolbar(props) {
+  return (
+    &lt;div&gt;
+      &lt;ThemedButton /&gt;
+    &lt;/div&gt;
+  );
+}
+
+function ThemedButton() {
+  const theme = useContext(ThemeContext);
+
+  return (
+    &lt;button style={{ background: theme.background, color: theme.foreground }}&gt;
+      I am styled by theme context!
+    &lt;/button&gt;
+  );
+}</code></pre>
+<p>This example is modified for hooks from a previous example in the <a href="/docs/context.html">Context Advanced Guide</a>, where you can find more information about when and how to use Context.</p>
+<h2 id="additional-hooks">Additional Hooks</h2>
+<p>The following Hooks are either variants of the basic ones from the previous section, or only needed for specific edge cases. Don’t stress about learning them up front.</p>
+<h3 id="usereducer"><code>useReducer</code></h3>
+<div class="sourceCode" id="cb11"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb11-1" title="1"><span class="kw">const</span> [state<span class="op">,</span> dispatch] <span class="op">=</span> <span class="at">useReducer</span>(reducer<span class="op">,</span> initialArg<span class="op">,</span> init)<span class="op">;</span></a></code></pre></div>
+<p>An alternative to <a href="#usestate"><code>useState</code></a>. Accepts a reducer of type <code>(state, action) =&gt; newState</code>, and returns the current state paired with a <code>dispatch</code> method. (If you’re familiar with Redux, you already know how this works.)</p>
+<p><code>useReducer</code> is usually preferable to <code>useState</code> when you have complex state logic that involves multiple sub-values or when the next state depends on the previous one. <code>useReducer</code> also lets you optimize performance for components that trigger deep updates because <a href="/docs/hooks-faq.html#how-to-avoid-passing-callbacks-down">you can pass <code>dispatch</code> down instead of callbacks</a>.</p>
+<p>Here’s the counter example from the <a href="#usestate"><code>useState</code></a> section, rewritten to use a reducer:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb12-1" title="1"><span class="kw">const</span> initialState <span class="op">=</span> <span class="op">{</span><span class="dt">count</span><span class="op">:</span> <span class="dv">0</span><span class="op">};</span></a>
+<a class="sourceLine" id="cb12-2" title="2"></a>
+<a class="sourceLine" id="cb12-3" title="3"><span class="kw">function</span> <span class="at">reducer</span>(state<span class="op">,</span> action) <span class="op">{</span></a>
+<a class="sourceLine" id="cb12-4" title="4">  <span class="cf">switch</span> (<span class="va">action</span>.<span class="at">type</span>) <span class="op">{</span></a>
+<a class="sourceLine" id="cb12-5" title="5">    <span class="cf">case</span> <span class="st">&#39;increment&#39;</span><span class="op">:</span></a>
+<a class="sourceLine" id="cb12-6" title="6">      <span class="cf">return</span> <span class="op">{</span><span class="dt">count</span><span class="op">:</span> <span class="va">state</span>.<span class="at">count</span> <span class="op">+</span> <span class="dv">1</span><span class="op">};</span></a>
+<a class="sourceLine" id="cb12-7" title="7">    <span class="cf">case</span> <span class="st">&#39;decrement&#39;</span><span class="op">:</span></a>
+<a class="sourceLine" id="cb12-8" title="8">      <span class="cf">return</span> <span class="op">{</span><span class="dt">count</span><span class="op">:</span> <span class="va">state</span>.<span class="at">count</span> <span class="op">-</span> <span class="dv">1</span><span class="op">};</span></a>
+<a class="sourceLine" id="cb12-9" title="9">    <span class="cf">default</span><span class="op">:</span></a>
+<a class="sourceLine" id="cb12-10" title="10">      <span class="cf">throw</span> <span class="kw">new</span> <span class="at">Error</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb12-11" title="11">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb12-12" title="12"><span class="op">}</span></a>
+<a class="sourceLine" id="cb12-13" title="13"></a>
+<a class="sourceLine" id="cb12-14" title="14"><span class="kw">function</span> <span class="at">Counter</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb12-15" title="15">  <span class="kw">const</span> [state<span class="op">,</span> dispatch] <span class="op">=</span> <span class="at">useReducer</span>(reducer<span class="op">,</span> initialState)<span class="op">;</span></a>
+<a class="sourceLine" id="cb12-16" title="16">  <span class="cf">return</span> (</a>
+<a class="sourceLine" id="cb12-17" title="17">    <span class="op">&lt;&gt;</span></a>
+<a class="sourceLine" id="cb12-18" title="18">      <span class="dt">Count</span><span class="op">:</span> <span class="op">{</span><span class="va">state</span>.<span class="at">count</span><span class="op">}</span></a>
+<a class="sourceLine" id="cb12-19" title="19">      <span class="op">&lt;</span>button onClick<span class="op">={</span>() <span class="kw">=&gt;</span> <span class="at">dispatch</span>(<span class="op">{</span><span class="dt">type</span><span class="op">:</span> <span class="st">&#39;decrement&#39;</span><span class="op">}</span>)<span class="op">}&gt;-</span>&lt;/button<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb12-20" title="20">      <span class="op">&lt;</span>button onClick<span class="op">={</span>() <span class="kw">=&gt;</span> <span class="at">dispatch</span>(<span class="op">{</span><span class="dt">type</span><span class="op">:</span> <span class="st">&#39;increment&#39;</span><span class="op">}</span>)<span class="op">}&gt;+</span>&lt;/button<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb12-21" title="21">    &lt;/<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb12-22" title="22">  )<span class="op">;</span></a>
+<a class="sourceLine" id="cb12-23" title="23"><span class="op">}</span></a></code></pre></div>
+<blockquote>
+<p>Note</p>
+<p>React guarantees that <code>dispatch</code> function identity is stable and won’t change on re-renders. This is why it’s safe to omit from the <code>useEffect</code> or <code>useCallback</code> dependency list.</p>
+</blockquote>
+<h4 id="specifying-the-initial-state">Specifying the initial state</h4>
+<p>There are two different ways to initialize <code>useReducer</code> state. You may choose either one depending on the use case. The simplest way is to pass the initial state as a second argument:</p>
+<pre class="js{3}"><code>  const [state, dispatch] = useReducer(
+    reducer,
+    {count: initialCount}
+  );</code></pre>
+<blockquote>
+<p>Note</p>
+<p>React doesn’t use the <code>state = initialState</code> argument convention popularized by Redux. The initial value sometimes needs to depend on props and so is specified from the Hook call instead. If you feel strongly about this, you can call <code>useReducer(reducer, undefined, reducer)</code> to emulate the Redux behavior, but it’s not encouraged.</p>
+</blockquote>
+<h4 id="lazy-initialization">Lazy initialization</h4>
+<p>You can also create the initial state lazily. To do this, you can pass an <code>init</code> function as the third argument. The initial state will be set to <code>init(initialArg)</code>.</p>
+<p>It lets you extract the logic for calculating the initial state outside the reducer. This is also handy for resetting the state later in response to an action:</p>
+<pre class="js{1-3,11-12,19,24}"><code>function init(initialCount) {
+  return {count: initialCount};
+}
+
+function reducer(state, action) {
+  switch (action.type) {
+    case &#39;increment&#39;:
+      return {count: state.count + 1};
+    case &#39;decrement&#39;:
+      return {count: state.count - 1};
+    case &#39;reset&#39;:
+      return init(action.payload);
+    default:
+      throw new Error();
+  }
+}
+
+function Counter({initialCount}) {
+  const [state, dispatch] = useReducer(reducer, initialCount, init);
+  return (
+    &lt;&gt;
+      Count: {state.count}
+      &lt;button
+        onClick={() =&gt; dispatch({type: &#39;reset&#39;, payload: initialCount})}&gt;
+        Reset
+      &lt;/button&gt;
+      &lt;button onClick={() =&gt; dispatch({type: &#39;decrement&#39;})}&gt;-&lt;/button&gt;
+      &lt;button onClick={() =&gt; dispatch({type: &#39;increment&#39;})}&gt;+&lt;/button&gt;
+    &lt;/&gt;
+  );
+}</code></pre>
+<h4 id="bailing-out-of-a-dispatch">Bailing out of a dispatch</h4>
+<p>If you return the same value from a Reducer Hook as the current state, React will bail out without rendering the children or firing effects. (React uses the <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is#Description"><code>Object.is</code> comparison algorithm</a>.)</p>
+<p>Note that React may still need to render that specific component again before bailing out. That shouldn’t be a concern because React won’t unnecessarily go “deeper” into the tree. If you’re doing expensive calculations while rendering, you can optimize them with <code>useMemo</code>.</p>
+<h3 id="usecallback"><code>useCallback</code></h3>
+<div class="sourceCode" id="cb15"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb15-1" title="1"><span class="kw">const</span> memoizedCallback <span class="op">=</span> <span class="at">useCallback</span>(</a>
+<a class="sourceLine" id="cb15-2" title="2">  () <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb15-3" title="3">    <span class="at">doSomething</span>(a<span class="op">,</span> b)<span class="op">;</span></a>
+<a class="sourceLine" id="cb15-4" title="4">  <span class="op">},</span></a>
+<a class="sourceLine" id="cb15-5" title="5">  [a<span class="op">,</span> b]<span class="op">,</span></a>
+<a class="sourceLine" id="cb15-6" title="6">)<span class="op">;</span></a></code></pre></div>
+<p>Returns a <a href="https://en.wikipedia.org/wiki/Memoization">memoized</a> callback.</p>
+<p>Pass an inline callback and an array of dependencies. <code>useCallback</code> will return a memoized version of the callback that only changes if one of the dependencies has changed. This is useful when passing callbacks to optimized child components that rely on reference equality to prevent unnecessary renders (e.g. <code>shouldComponentUpdate</code>).</p>
+<p><code>useCallback(fn, deps)</code> is equivalent to <code>useMemo(() =&gt; fn, deps)</code>.</p>
+<blockquote>
+<p>Note</p>
+<p>The array of dependencies is not passed as arguments to the callback. Conceptually, though, that’s what they represent: every value referenced inside the callback should also appear in the dependencies array. In the future, a sufficiently advanced compiler could create this array automatically.</p>
+<p>We recommend using the <a href="https://github.com/facebook/react/issues/14920"><code>exhaustive-deps</code></a> rule as part of our <a href="https://www.npmjs.com/package/eslint-plugin-react-hooks#installation"><code>eslint-plugin-react-hooks</code></a> package. It warns when dependencies are specified incorrectly and suggests a fix.</p>
+</blockquote>
+<h3 id="usememo"><code>useMemo</code></h3>
+<div class="sourceCode" id="cb16"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb16-1" title="1"><span class="kw">const</span> memoizedValue <span class="op">=</span> <span class="at">useMemo</span>(() <span class="kw">=&gt;</span> <span class="at">computeExpensiveValue</span>(a<span class="op">,</span> b)<span class="op">,</span> [a<span class="op">,</span> b])<span class="op">;</span></a></code></pre></div>
+<p>Returns a <a href="https://en.wikipedia.org/wiki/Memoization">memoized</a> value.</p>
+<p>Pass a “create” function and an array of dependencies. <code>useMemo</code> will only recompute the memoized value when one of the dependencies has changed. This optimization helps to avoid expensive calculations on every render.</p>
+<p>Remember that the function passed to <code>useMemo</code> runs during rendering. Don’t do anything there that you wouldn’t normally do while rendering. For example, side effects belong in <code>useEffect</code>, not <code>useMemo</code>.</p>
+<p>If no array is provided, a new value will be computed on every render.</p>
+<p><strong>You may rely on <code>useMemo</code> as a performance optimization, not as a semantic guarantee.</strong> In the future, React may choose to “forget” some previously memoized values and recalculate them on next render, e.g. to free memory for offscreen components. Write your code so that it still works without <code>useMemo</code> — and then add it to optimize performance.</p>
+<blockquote>
+<p>Note</p>
+<p>The array of dependencies is not passed as arguments to the function. Conceptually, though, that’s what they represent: every value referenced inside the function should also appear in the dependencies array. In the future, a sufficiently advanced compiler could create this array automatically.</p>
+<p>We recommend using the <a href="https://github.com/facebook/react/issues/14920"><code>exhaustive-deps</code></a> rule as part of our <a href="https://www.npmjs.com/package/eslint-plugin-react-hooks#installation"><code>eslint-plugin-react-hooks</code></a> package. It warns when dependencies are specified incorrectly and suggests a fix.</p>
+</blockquote>
+<h3 id="useref"><code>useRef</code></h3>
+<div class="sourceCode" id="cb17"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb17-1" title="1"><span class="kw">const</span> refContainer <span class="op">=</span> <span class="at">useRef</span>(initialValue)<span class="op">;</span></a></code></pre></div>
+<p><code>useRef</code> returns a mutable ref object whose <code>.current</code> property is initialized to the passed argument (<code>initialValue</code>). The returned object will persist for the full lifetime of the component.</p>
+<p>A common use case is to access a child imperatively:</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb18-1" title="1"><span class="kw">function</span> <span class="at">TextInputWithFocusButton</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb18-2" title="2">  <span class="kw">const</span> inputEl <span class="op">=</span> <span class="at">useRef</span>(<span class="kw">null</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb18-3" title="3">  <span class="kw">const</span> onButtonClick <span class="op">=</span> () <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb18-4" title="4">    <span class="co">// `current` points to the mounted text input element</span></a>
+<a class="sourceLine" id="cb18-5" title="5">    <span class="va">inputEl</span>.<span class="va">current</span>.<span class="at">focus</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb18-6" title="6">  <span class="op">};</span></a>
+<a class="sourceLine" id="cb18-7" title="7">  <span class="cf">return</span> (</a>
+<a class="sourceLine" id="cb18-8" title="8">    <span class="op">&lt;&gt;</span></a>
+<a class="sourceLine" id="cb18-9" title="9">      <span class="op">&lt;</span>input ref<span class="op">={</span>inputEl<span class="op">}</span> type<span class="op">=</span><span class="st">&quot;text&quot;</span> /&gt;</a>
+<a class="sourceLine" id="cb18-10" title="10">      <span class="op">&lt;</span>button onClick<span class="op">={</span>onButtonClick<span class="op">}&gt;</span>Focus the input&lt;/button<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb18-11" title="11">    &lt;/<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb18-12" title="12">  )<span class="op">;</span></a>
+<a class="sourceLine" id="cb18-13" title="13"><span class="op">}</span></a></code></pre></div>
+<p>Essentially, <code>useRef</code> is like a “box” that can hold a mutable value in its <code>.current</code> property.</p>
+<p>You might be familiar with refs primarily as a way to <a href="/docs/refs-and-the-dom.html">access the DOM</a>. If you pass a ref object to React with <code>&lt;div ref={myRef} /&gt;</code>, React will set its <code>.current</code> property to the corresponding DOM node whenever that node changes.</p>
+<p>However, <code>useRef()</code> is useful for more than the <code>ref</code> attribute. It’s <a href="/docs/hooks-faq.html#is-there-something-like-instance-variables">handy for keeping any mutable value around</a> similar to how you’d use instance fields in classes.</p>
+<p>This works because <code>useRef()</code> creates a plain JavaScript object. The only difference between <code>useRef()</code> and creating a <code>{current: ...}</code> object yourself is that <code>useRef</code> will give you the same ref object on every render.</p>
+<p>Keep in mind that <code>useRef</code> <em>doesn’t</em> notify you when its content changes. Mutating the <code>.current</code> property doesn’t cause a re-render. If you want to run some code when React attaches or detaches a ref to a DOM node, you may want to use a <a href="/docs/hooks-faq.html#how-can-i-measure-a-dom-node">callback ref</a> instead.</p>
+<h3 id="useimperativehandle"><code>useImperativeHandle</code></h3>
+<div class="sourceCode" id="cb19"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb19-1" title="1"><span class="at">useImperativeHandle</span>(ref<span class="op">,</span> createHandle<span class="op">,</span> [deps])</a></code></pre></div>
+<p><code>useImperativeHandle</code> customizes the instance value that is exposed to parent components when using <code>ref</code>. As always, imperative code using refs should be avoided in most cases. <code>useImperativeHandle</code> should be used with <a href="/docs/react-api.html#reactforwardref"><code>forwardRef</code></a>:</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb20-1" title="1"><span class="kw">function</span> <span class="at">FancyInput</span>(props<span class="op">,</span> ref) <span class="op">{</span></a>
+<a class="sourceLine" id="cb20-2" title="2">  <span class="kw">const</span> inputRef <span class="op">=</span> <span class="at">useRef</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb20-3" title="3">  <span class="at">useImperativeHandle</span>(ref<span class="op">,</span> () <span class="kw">=&gt;</span> (<span class="op">{</span></a>
+<a class="sourceLine" id="cb20-4" title="4">    <span class="dt">focus</span><span class="op">:</span> () <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb20-5" title="5">      <span class="va">inputRef</span>.<span class="va">current</span>.<span class="at">focus</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb20-6" title="6">    <span class="op">}</span></a>
+<a class="sourceLine" id="cb20-7" title="7">  <span class="op">}</span>))<span class="op">;</span></a>
+<a class="sourceLine" id="cb20-8" title="8">  <span class="cf">return</span> <span class="op">&lt;</span>input ref<span class="op">={</span>inputRef<span class="op">}</span> ... /<span class="op">&gt;;</span></a>
+<a class="sourceLine" id="cb20-9" title="9"><span class="op">}</span></a>
+<a class="sourceLine" id="cb20-10" title="10">FancyInput <span class="op">=</span> <span class="at">forwardRef</span>(FancyInput)<span class="op">;</span></a></code></pre></div>
+<p>In this example, a parent component that renders <code>&lt;FancyInput ref={inputRef} /&gt;</code> would be able to call <code>inputRef.current.focus()</code>.</p>
+<h3 id="uselayouteffect"><code>useLayoutEffect</code></h3>
+<p>The signature is identical to <code>useEffect</code>, but it fires synchronously after all DOM mutations. Use this to read layout from the DOM and synchronously re-render. Updates scheduled inside <code>useLayoutEffect</code> will be flushed synchronously, before the browser has a chance to paint.</p>
+<p>Prefer the standard <code>useEffect</code> when possible to avoid blocking visual updates.</p>
+<blockquote>
+<p>Tip</p>
+<p>If you’re migrating code from a class component, note <code>useLayoutEffect</code> fires in the same phase as <code>componentDidMount</code> and <code>componentDidUpdate</code>. However, <strong>we recommend starting with <code>useEffect</code> first</strong> and only trying <code>useLayoutEffect</code> if that causes a problem.</p>
+<p>If you use server rendering, keep in mind that <em>neither</em> <code>useLayoutEffect</code> nor <code>useEffect</code> can run until the JavaScript is downloaded. This is why React warns when a server-rendered component contains <code>useLayoutEffect</code>. To fix this, either move that logic to <code>useEffect</code> (if it isn’t necessary for the first render), or delay showing that component until after the client renders (if the HTML looks broken until <code>useLayoutEffect</code> runs).</p>
+<p>To exclude a component that needs layout effects from the server-rendered HTML, render it conditionally with <code>showChild &amp;&amp; &lt;Child /&gt;</code> and defer showing it with <code>useEffect(() =&gt; { setShowChild(true); }, [])</code>. This way, the UI doesn’t appear broken before hydration.</p>
+</blockquote>
+<h3 id="usedebugvalue"><code>useDebugValue</code></h3>
+<div class="sourceCode" id="cb21"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb21-1" title="1"><span class="at">useDebugValue</span>(value)</a></code></pre></div>
+<p><code>useDebugValue</code> can be used to display a label for custom hooks in React DevTools.</p>
+<p>For example, consider the <code>useFriendStatus</code> custom Hook described in <a href="/docs/hooks-custom.html">“Building Your Own Hooks”</a>:</p>
+<pre class="js{6-8}"><code>function useFriendStatus(friendID) {
+  const [isOnline, setIsOnline] = useState(null);
+
+  // ...
+
+  // Show a label in DevTools next to this Hook
+  // e.g. &quot;FriendStatus: Online&quot;
+  useDebugValue(isOnline ? &#39;Online&#39; : &#39;Offline&#39;);
+
+  return isOnline;
+}</code></pre>
+<blockquote>
+<p>Tip</p>
+<p>We don’t recommend adding debug values to every custom Hook. It’s most valuable for custom Hooks that are part of shared libraries.</p>
+</blockquote>
+<h4 id="defer-formatting-debug-values">Defer formatting debug values</h4>
+<p>In some cases formatting a value for display might be an expensive operation. It’s also unnecessary unless a Hook is actually inspected.</p>
+<p>For this reason <code>useDebugValue</code> accepts a formatting function as an optional second parameter. This function is only called if the Hooks are inspected. It receives the debug value as a parameter and should return a formatted display value.</p>
+<p>For example a custom Hook that returned a <code>Date</code> value could avoid calling the <code>toDateString</code> function unnecessarily by passing the following formatter:</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb23-1" title="1"><span class="at">useDebugValue</span>(date<span class="op">,</span> date <span class="kw">=&gt;</span> <span class="va">date</span>.<span class="at">toDateString</span>())<span class="op">;</span></a></code></pre></div>
+</body>
+</html>

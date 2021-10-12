@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>deployments</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<p><a href="./readme.md">Table of contents</a></p>
+<h1 id="deployments">Deployments</h1>
+<p>We use <a href="https://now.sh"><code>now</code></a> by Vercel for all of our deployments.</p>
+<h3 id="installation">Installation</h3>
+<p>We recommend installing the <a href="http://vercel.co/download">now desktop app</a> as it’ll keep the command line tool up to date automatically!</p>
+<p>If you’d rather not install an app (or are using Windows Substem for Linux) you can also install now with npm:</p>
+<pre><code>npm install -g now</code></pre>
+<h3 id="naming-scheme">Naming scheme</h3>
+<p>All our workers are aliased to <code>&lt;workername&gt;.workers.spectrum.chat</code>, with the one exception being the API (the API server) which runs at <code>api.spectrum.chat</code>.</p>
+<h4 id="path-aliases">Path aliases</h4>
+<p><a href="https://vercel.co/docs/features/path-aliases">Now’s path alias feature</a> takes care of routing requests to the right workers. To see our current production aliases check the <code>rules.json</code> file in the root of the project.</p>
+<p>To deploy new rules, simply run the following command: (assuming <code>rules.json</code> has the changes)</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb2-1" title="1"><span class="ex">now</span> alias spectrum.chat -r rules.json</a></code></pre></div>
+<p>The same command with a different URL and slightly adapted rules can also be used to create an alpha/beta/staging/… version of the site.</p>
+<h3 id="frontend-and-hyperion">Frontend and Hyperion</h3>
+<p>Since the frontend is the part that changes the most often the repo is set up such that typing <code>now</code> in the root directory will deploy the frontend with hyperion. (the server-side rendering worker)</p>
+<h4 id="deploying">Deploying</h4>
+<p>First, make sure you’re in the Space Program <code>now</code> team:</p>
+<pre><code>now switch spaceprogram</code></pre>
+<blockquote>
+<p>Note: If you haven’t been added to the now team yet ask one of your coworkers to add you!</p>
+</blockquote>
+<p>Second, deploy a new version of the app:</p>
+<pre><code>now</code></pre>
+<p>This will do an <em>immutable deploy</em> of the hyperion and will return a unique URL that this specific version is accessible at. (something like <code>spectrum-grtertb34.now.sh</code>)</p>
+<p>Third, test that version of the app to make sure the new feature(s) work(s) as expected in production. Note that nobody except for people will access to the unique URL from the last step can access it at this point.</p>
+<p>Fourth, if you’re happy with the new feature(s) alias your unique URL to <code>hyperion.workers.spectrum.chat</code> to make it immediately available to all users:</p>
+<pre><code>now alias spectrum-grtertb34.now.sh hyperion.workers.spectrum.chat</code></pre>
+<p>And that’s it, you’ve now deployed a new version of hyperion and the frontend!</p>
+<h3 id="other-workers">Other workers</h3>
+<p>We use <a href="https://github.com/palmerhq/backpack"><code>backpack</code></a> to get a nice development setup and build process in place for our workers. Since this is a mono-repo and <code>now</code> doesn’t have any special functionality to handle monorepos we have to deploy the <em>built</em> version of the workers. (compared to the frontend deploy where you deploy the raw code which gets built on the server)</p>
+<h4 id="deploying-1">Deploying</h4>
+<p>First, build the worker you want to deploy to get a bundle with the newest code rather than deploying a stale version:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb6-1" title="1"><span class="ex">yarn</span> run build:<span class="op">&lt;</span>workername<span class="op">&gt;</span></a></code></pre></div>
+<blockquote>
+<p>Note: Replace <code>&lt;workername&gt;</code> with the name of the worker you want to deploy</p>
+</blockquote>
+<p>Then deploy the <code>build-&lt;workername&gt;</code> folder with <code>now</code>:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb7-1" title="1"><span class="ex">now</span> build-<span class="op">&lt;</span>workername<span class="op">&gt;</span></a></code></pre></div>
+<p>As an example, to deploy <code>athena</code> I’d run these commands:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb8-1" title="1"><span class="co"># First:  Build the worker</span></a>
+<a class="sourceLine" id="cb8-2" title="2"><span class="ex">yarn</span> run build:athena</a>
+<a class="sourceLine" id="cb8-3" title="3"><span class="co"># Second: Deploy the built bundle</span></a>
+<a class="sourceLine" id="cb8-4" title="4"><span class="ex">now</span> build-athena</a></code></pre></div>
+<p>This will give you an immutable deploy with a unique URL of this worker, something like <code>https://build-athena-ahsgut23sdyf.now.sh</code>.</p>
+<h4 id="replacing-the-old-deploy">Replacing the old deploy</h4>
+<p>Since we want to keep the workers alive even if nobody sends a request to their healthcheck endpoints we alias them to <code>&lt;workername&gt;.workers.spectrum.chat</code>. This ensures <code>now</code> overrides the older deploy and only the newest code is running.</p>
+<p>To alias your deploy run <code>now alias</code>:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb9-1" title="1"><span class="ex">now</span> alias <span class="op">&lt;</span>uniqueurl<span class="op">&gt;</span>.now.sh <span class="op">&lt;</span>workername<span class="op">&gt;</span>.workers.spectrum.chat</a></code></pre></div>
+<p>For example, for our <code>athena</code> deploy from above this would be:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb10-1" title="1"><span class="ex">now</span> alias build-athena-ahsgut23sdyf.now.sh athena.workers.spectrum.chat</a></code></pre></div>
+</body>
+</html>

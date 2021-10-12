@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Testing Overview</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Testing Overview</h1>
+</header>
+<p>You can test React components similar to testing other JavaScript code.</p>
+<p>There are a few ways to test React components. Broadly, they divide into two categories:</p>
+<ul>
+<li><strong>Rendering component trees</strong> in a simplified test environment and asserting on their output.</li>
+<li><strong>Running a complete app</strong> in a realistic browser environment (also known as “end-to-end” tests).</li>
+</ul>
+<p>This documentation section focuses on testing strategies for the first case. While full end-to-end tests can be very useful to prevent regressions to important workflows, such tests are not concerned with React components in particular, and are out of the scope of this section.</p>
+<h3 id="tradeoffs">Tradeoffs</h3>
+<p>When choosing testing tools, it is worth considering a few tradeoffs:</p>
+<ul>
+<li><strong>Iteration speed vs Realistic environment:</strong> Some tools offer a very quick feedback loop between making a change and seeing the result, but don’t model the browser behavior precisely. Other tools might use a real browser environment, but reduce the iteration speed and are flakier on a continuous integration server.</li>
+<li><strong>How much to mock:</strong> With components, the distinction between a “unit” and “integration” test can be blurry. If you’re testing a form, should its test also test the buttons inside of it? Or should a button component have its own test suite? Should refactoring a button ever break the form test?</li>
+</ul>
+<p>Different answers may work for different teams and products.</p>
+<h3 id="tools">Recommended Tools</h3>
+<p><strong><a href="https://facebook.github.io/jest/">Jest</a></strong> is a JavaScript test runner that lets you access the DOM via <a href="/docs/testing-environments.html#mocking-a-rendering-surface"><code>jsdom</code></a>. While jsdom is only an approximation of how the browser works, it is often good enough for testing React components. Jest provides a great iteration speed combined with powerful features like mocking <a href="/docs/testing-environments.html#mocking-modules">modules</a> and <a href="/docs/testing-environments.html#mocking-timers">timers</a> so you can have more control over how the code executes.</p>
+<p><strong><a href="https://testing-library.com/react">React Testing Library</a></strong> is a set of helpers that let you test React components without relying on their implementation details. This approach makes refactoring a breeze and also nudges you towards best practices for accessibility. Although it doesn’t provide a way to “shallowly” render a component without its children, a test runner like Jest lets you do this by <a href="/docs/testing-recipes.html#mocking-modules">mocking</a>.</p>
+<h3 id="learn-more">Learn More</h3>
+<p>This section is divided in two pages:</p>
+<ul>
+<li><a href="/docs/testing-recipes.html">Recipes</a>: Common patterns when writing tests for React components.</li>
+<li><a href="/docs/testing-environments.html">Environments</a>: What to consider when setting up a testing environment for React components.</li>
+</ul>
+</body>
+</html>

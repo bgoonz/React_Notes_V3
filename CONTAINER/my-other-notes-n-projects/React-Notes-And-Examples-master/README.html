@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>README</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<h1 id="notes">Notes</h1>
+<h2 id="react">React</h2>
+<blockquote>
+<p>React uses a syntax extension of JavaScript called JSX that allows you to write HTML directly within JavaScript</p>
+</blockquote>
+<blockquote>
+<p>because JSX is a syntactic extension of JavaScript, you can actually write JavaScript directly within JSX</p>
+</blockquote>
+<blockquote>
+<p>include the code you want to be treated as JavaScript within curly braces: { ‘this is treated as JavaScript code’ }</p>
+</blockquote>
+<blockquote>
+<p>JSX code must be compiled into JavaScript</p>
+</blockquote>
+<blockquote>
+<p>under the hood the challenges are calling ReactDOM.render(JSX, document.getElementById(‘root’))</p>
+</blockquote>
+<blockquote>
+<p>One important thing to know about nested JSX is that it must return a single element.</p>
+</blockquote>
+<blockquote>
+<p>For instance, several JSX elements written as siblings with no parent wrapper element will not transpile.</p>
+</blockquote>
+<h4 id="valid-jsx">Valid JSX:</h4>
+<pre class="text"><code>&lt;div&gt;
+  &lt;p&gt;Paragraph One&lt;/p&gt;
+  &lt;p&gt;Paragraph Two&lt;/p&gt;
+  &lt;p&gt;Paragraph Three&lt;/p&gt;
+&lt;/div&gt;</code></pre>
+<h4 id="invalid-jsx">Invalid JSX:</h4>
+<pre class="text"><code>&lt;p&gt;Paragraph One&lt;/p&gt;
+&lt;p&gt;Paragraph Two&lt;/p&gt;
+&lt;p&gt;Paragraph Three&lt;/p&gt;</code></pre>
+<p><strong>To put comments inside JSX, you use the syntax {/* */} to wrap around the comment text.</strong></p>
+<p><strong>To put comments inside JSX, you use the syntax {/* */} to wrap around the comment text.</strong></p>
+<p>The code editor has a JSX element similar to what you created in the last challenge. Add a comment somewhere within the provided div element, without modifying the existing h1 or p elements.</p>
+<pre class="text"><code>const JSX = (
+  &lt;div&gt;
+  {/* This is a comment */}
+    &lt;h1&gt;This is a block of JSX&lt;/h1&gt;
+    &lt;p&gt;Here&#39;s a subtitle&lt;/p&gt;
+  &lt;/div&gt;
+);</code></pre>
+<blockquote>
+<p>With React, we can render this JSX directly to the HTML DOM using React’s rendering API known as ReactDOM.</p>
+</blockquote>
+<blockquote>
+<p>ReactDOM offers a simple method to render React elements to the DOM which looks like this:</p>
+</blockquote>
+<p><code>ReactDOM.render(componentToRender, targetNode)</code></p>
+<ul>
+<li>the first argument is the React element or component that you want to render,</li>
+<li>and the second argument is the DOM node that you want to render the component to.</li>
+</ul>
+<blockquote>
+<p>ReactDOM.render() must be called after the JSX element declarations, just like how you must declare variables before using them.</p>
+</blockquote>
+<blockquote>
+<p>key difference in JSX is that you can no longer use the word class to define HTML classes.</p>
+</blockquote>
+<ul>
+<li>—&gt; This is because class is a reserved word in JavaScript. Instead, JSX uses className</li>
+</ul>
+<blockquote>
+<p>the naming convention for all HTML attributes and event references in JSX become camelCase</p>
+</blockquote>
+<blockquote>
+<p>a click event in JSX is onClick, instead of onclick. Likewise, onchange becomes onChange. While this is a subtle difference, it is an important one to keep in mind moving forward.</p>
+</blockquote>
+<h3 id="apply-a-class-of-mydiv-to-the-div-provided-in-the-jsx-code.">Apply a class of myDiv to the div provided in the JSX code.</h3>
+<ul>
+<li>The constant JSX should return a div element.</li>
+<li>The div should have a class of myDiv.</li>
+</ul>
+<pre class="text"><code>const JSX = (
+  &lt;div&gt;
+    &lt;h1&gt;Add a class to this div&lt;/h1&gt;
+  &lt;/div&gt;
+);</code></pre>
+<h4 id="ans">Ans:</h4>
+<pre class="text"><code>const JSX = (
+  &lt;div className=&quot;myDiv&quot;&gt;
+    &lt;h1&gt;Add a class to this div&lt;/h1&gt;
+  &lt;/div&gt;
+);</code></pre>
+<h2 id="react-learn-about-self-closing-jsx-tags">React: Learn About Self-Closing JSX Tags</h2>
+<p>-Another important way in which JSX differs from HTML is in the idea of the self-closing tag.</p>
+<blockquote>
+<p>In HTML, almost all tags have both an opening and closing tag: <code>&lt;div&gt;&lt;/div&gt;;</code> the closing tag always has a forward slash before the tag name that you are closing.</p>
+</blockquote>
+<blockquote>
+<p>there are special instances in HTML called “self-closing tags”, or tags that don’t require both an opening and closing tag before another tag can start.</p>
+</blockquote>
+<blockquote>
+<p>For example the line-break tag can be written as <code>&lt;br&gt;</code> or as <code>&lt;br /&gt;,</code> but should never be written as <code>&lt;br&gt;&lt;/br&gt;</code>, since it doesn’t contain any content.</p>
+</blockquote>
+<blockquote>
+<p>In JSX, the rules are a little different. Any JSX element can be written with a self-closing tag, and every element must be closed. The line-break tag, for example, must always be written as <code>&lt;br /&gt;</code> in order to be valid JSX that can be transpiled. A <code>&lt;div&gt;</code>, on the other hand, can be written as <code>&lt;div /&gt;</code> or<code>&lt;div&gt;&lt;/div&gt;</code>. The difference is that in the first syntax version there is no way to include anything in the <code>&lt;div /&gt;</code>.</p>
+</blockquote>
+<h3 id="fix-the-errors-in-the-code-editor-so-that-it-is-valid-jsx-and-successfully-transpiles.-make-sure-you-dont-change-any-of-the-content---you-only-need-to-close-tags-where-they-are-needed.">Fix the errors in the code editor so that it is valid JSX and successfully transpiles. Make sure you don’t change any of the content - you only need to close tags where they are needed.</h3>
+<pre class="text"><code>const JSX = (
+  &lt;div&gt;
+    &lt;h2&gt;Welcome to React!&lt;/h2&gt; &lt;br &gt;
+    &lt;p&gt;Be sure to close all tags!&lt;/p&gt;
+    &lt;hr &gt;
+  &lt;/div&gt;
+);</code></pre>
+<h3 id="ans-1">Ans:</h3>
+<pre class="text"><code>const JSX = (
+  &lt;div&gt;
+    &lt;h2&gt;Welcome to React!&lt;/h2&gt; &lt;br /&gt;
+    &lt;p&gt;Be sure to close all tags!&lt;/p&gt;
+    &lt;hr /&gt;
+  &lt;/div&gt;
+);</code></pre>
+<h3 id="react-create-a-stateless-functional-component">React: Create a Stateless Functional Component</h3>
+<blockquote>
+<p>There are two ways to create a React component. The first way is to use a JavaScript function.</p>
+</blockquote>
+<blockquote>
+<p>Defining a component in this way creates a stateless functional component.</p>
+</blockquote>
+<blockquote>
+<p>think of a stateless component as one that can receive data and render it, but does not manage or track changes to that data.</p>
+</blockquote>
+<p><strong>To create a component with a function, you simply write a JavaScript function that returns either JSX or null</strong></p>
+<ul>
+<li>React requires your function name to begin with a capital letter.</li>
+</ul>
+<blockquote>
+<p>Here’s an example of a stateless functional component that assigns an HTML class in JSX:</p>
+</blockquote>
+<pre class="text"><code>// After being transpiled, the &lt;div&gt; will have a CSS class of &#39;customClass&#39;
+const DemoComponent = function() {
+  return (
+    &lt;div className=&#39;customClass&#39; /&gt;
+  );
+};</code></pre>
+<blockquote>
+<p>Because a JSX component represents HTML, you could put several components together to create a more complex HTML page.</p>
+</blockquote>
+<h3 id="the-code-editor-has-a-function-called-mycomponent.-complete-this-function-so-it-returns-a-single-div-element-which-contains-some-string-of-text.">The code editor has a function called MyComponent. Complete this function so it returns a single div element which contains some string of text.</h3>
+<p>Note: The text is considered a child of the div element, so you will not be able to use a self-closing tag.</p>
+<pre class="text"><code>const MyComponent = function() {
+  // Change code below this line
+
+
+
+  // Change code above this line
+}</code></pre>
+<h3 id="ans-2">ANS:</h3>
+<pre class="text"><code>const MyComponent = function() {
+  // Change code below this line
+
+return (
+   &lt;div&gt; Some Text &lt;/div &gt;
+  );
+
+  // Change code above this line
+};</code></pre>
+<h2 id="react-create-a-react-component">React: Create a React Component</h2>
+<blockquote>
+<p>The other way to define a React component is with the ES6 class syntax. In the following example, Kitten extends React.Component:</p>
+</blockquote>
+<pre class="text"><code>class Kitten extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
+  render() {
+    return (
+      &lt;h1&gt;Hi&lt;/h1&gt;
+    );
+  }
+}</code></pre>
+<blockquote>
+<p>This creates an ES6 class Kitten which extends the React.Component class.</p>
+</blockquote>
+<blockquote>
+<p>So the Kitten class now has access to many useful React features, such as local state and lifecycle hooks.</p>
+</blockquote>
+<blockquote>
+<p>Also notice the Kitten class has a constructor defined within it that calls super()</p>
+</blockquote>
+<blockquote>
+<p>It uses super() to call the constructor of the parent class, in this case React.Component</p>
+</blockquote>
+<blockquote>
+<p>The constructor is a special method used during the initialization of objects that are created with the class keyword. It is best practice to call a component’s constructor with super, and pass props to both.</p>
+</blockquote>
+<blockquote>
+<p>This makes sure the component is initialized properly. For now, know that it is standard for this code to be included.</p>
+</blockquote>
+<h3 id="mycomponent-is-defined-in-the-code-editor-using-class-syntax.-finish-writing-the-render-method-so-it-returns-a-div-element-that-contains-an-h1-with-the-text-hello-react.">MyComponent is defined in the code editor using class syntax. Finish writing the render method so it returns a div element that contains an h1 with the text Hello React!.</h3>
+<pre class="text"><code>class MyComponent extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  render() {
+    // Change code below this line
+
+
+
+    // Change code above this line
+  }
+};</code></pre>
+<h3 id="ans-3">ANS:</h3>
+<pre class="text"><code>class MyComponent extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  render() {
+    // Change code below this line
+ return (
+   &lt;div&gt;
+      &lt;h1&gt;Hello React!&lt;/h1&gt;
+      &lt;/div&gt;
+    );
+
+
+    // Change code above this line
+  }
+};</code></pre>
+<h2 id="react-create-a-component-with-composition">React: Create a Component with Composition</h2>
+<blockquote>
+<p>Imagine you are building an App and have created three components, a Navbar, Dashboard, and Footer.</p>
+</blockquote>
+<blockquote>
+<p>To compose these components together, you could create an App parent component which renders each of these three components as children. To render a component as a child in a React component, you include the component name written as a custom HTML tag in the JSX.</p>
+</blockquote>
+<ul>
+<li>For example, in the render method you could write:</li>
+</ul>
+<pre class="text"><code>return (
+ &lt;App&gt;
+  &lt;Navbar /&gt;
+  &lt;Dashboard /&gt;
+  &lt;Footer /&gt;
+ &lt;/App&gt;
+)</code></pre>
+<blockquote>
+<p>When React encounters a custom HTML tag that references another component (a component name wrapped in &lt; /&gt; like in this example), it renders the markup for that component in the location of the tag. This should illustrate the parent/child relationship between the App component and the Navbar, Dashboard, and Footer.</p>
+</blockquote>
+<h2 id="challenge">Challenge:</h2>
+<blockquote>
+<p>In the code editor, there is a simple functional component called ChildComponent and a class component called ParentComponent. Compose the two together by rendering the ChildComponent within the ParentComponent. Make sure to close the ChildComponent tag with a forward slash.</p>
+</blockquote>
+<ul>
+<li>Note:<strong>ChildComponent is defined with an ES6 arrow function because this is a very common practice when using React</strong>.</li>
+<li>However, know that this is just a function.</li>
+</ul>
+<pre class="text"><code>const ChildComponent = () =&gt; {
+  return (
+    &lt;div&gt;
+      &lt;p&gt;I am the child&lt;/p&gt;
+    &lt;/div&gt;
+  );
+};
+
+class ParentComponent extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  render() {
+    return (
+      &lt;div&gt;
+        &lt;h1&gt;I am the parent&lt;/h1&gt;
+        { /* Change code below this line */ }
+
+
+        { /* Change code above this line */ }
+      &lt;/div&gt;
+    );
+  }
+};</code></pre>
+<p>⌛The React component should return a single div element. ⌛The component should return two nested elements. ⌛The component should return the ChildComponent as its second child.</p>
+<h3 id="ans-4">Ans:</h3>
+<pre class="text"><code>const ChildComponent = () =&gt; {
+  return (
+    &lt;div&gt;
+      &lt;p&gt;I am the child&lt;/p&gt;
+    &lt;/div&gt;
+  );
+};
+
+class ParentComponent extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  render() {
+    return (
+      &lt;div&gt;
+        &lt;h1&gt;I am the parent&lt;/h1&gt;
+        { /* Change code below this line */ }
+
+
+        { /* Change code above this line */ }
+      &lt;/div&gt;
+    );
+  }
+};</code></pre>
+<p>Working in code sandbox</p>
+<p>{% embed url=“https://codesandbox.io/s/twilight-snow-9c4uk?file=/src/App.js:0-569” %}</p>
+<h2 id="install-create-react-app">Install create-react-app <a id="React-ModernReactwithReduxUdemyCourse-Installcreate-react-app"></a></h2>
+<pre class="text"><code>npm install -g create-react-app</code></pre>
+<h2 id="create-template-project">Create template Project <a id="React-ModernReactwithReduxUdemyCourse-Recommendedmethodforgeneratingaproject."></a></h2>
+<pre class="text"><code>npx create-react-app &lt;my_app_name&gt;</code></pre>
+<p>or</p>
+<h2 id="start-the-browser">Start the Browser <a id="React-ModernReactwithReduxUdemyCourse-StarttheBrowser"></a></h2>
+<p>Change to the project directory:</p>
+<p>Start VsCode</p>
+<pre class="text"><code>code .</code></pre>
+<p>Open Browser</p>
+<pre class="text"><code>npm start</code></pre>
+<p>with run at:</p>
+<pre class="text"><code>localhost:3000</code></pre>
+<p>Press CTRL-C to stop the terminal.</p>
+<h2 id="minimal-react-application">Minimal React application <a id="React-ModernReactwithReduxUdemyCourse-MinimalReactapplication"></a></h2>
+<p>This application will display “Hi there!” in the browser.</p>
+<p>Delete all files from <code>src</code> directory</p>
+<p>Create a file with name index.js</p>
+<pre class="text"><code>//  Import React and ReactDOM libraries
+import React from &quot;react&quot;;
+import ReactDOM from &quot;react-dom&quot;;
+
+//  Create a React component
+const App = () =&gt; {
+  return &lt;div&gt;Hi there!&lt;/div&gt;;
+};
+//  Take te react component and show it on the screen
+ReactDOM.render(&lt;App /&gt;, document.querySelector(&quot;#root&quot;));</code></pre>
+<p>Note that the #root element is defined in index.html</p>
+<pre class="text"><code>&lt;body&gt;
+  &lt;noscript&gt;You need to enable JavaScript to run this app.&lt;/noscript&gt;
+  &lt;div id=&quot;root&quot;&gt;&lt;/div&gt;
+&lt;/body&gt;</code></pre>
+<h2 id="create-react-application">Create React Application <a id="React-TheCompleteGuideuDemyCourse-CreateReactApplication"></a></h2>
+<p>One time execution, command:</p>
+<pre class="text"><code>npm install create-react-app -g</code></pre>
+<p>To create a react application, switch to the project root directory and execute:</p>
+<pre class="text"><code>create-react-app &lt;app_name&gt; --scripts-version 1.1.5</code></pre>
+<p>Change to the project directory and execute command to start Browser which will reflect changes made to the application</p>
+<pre class="text"><code>npm start</code></pre>
+<p>In code sandbox if you get an error you can always hit the refresh button to make it go away.</p>
+<p><img src=".gitbook/assets/image.png" /></p>
+<p><img src=".gitbook/assets/image%20%282%29.png" /></p>
+<p><img src=".gitbook/assets/image%20%283%29.png" /></p>
+<p>App function is react component which is a js function that produces jsx and handels user events..</p>
+<p>All components are functions that return jsx</p>
+<p><img src=".gitbook/assets/image%20%281%29.png" /></p>
+<p><img src=".gitbook/assets/image%20%284%29.png" /></p>
+<p><img src=".gitbook/assets/image%20%285%29.png" /></p>
+<p><img src=".gitbook/assets/image%20%286%29.png" /></p>
+<p>Field Component</p>
+<pre class="text"><code>import React from &quot;react&quot;;
+
+export default ({ label, value, onChange }) =&gt; {
+  return (
+    &lt;div&gt;
+      &lt;label&gt;{label}&lt;/label&gt;
+      &lt;input
+        className=&quot;input&quot;
+        value={value}
+        onChange={e =&gt; onChange(e.target.value)}
+      /&gt;
+    &lt;/div&gt;
+  );
+};
+</code></pre>
+<p>After react moves through all the code that is returned from field component it moves on to the language component which once again is not a normal DOM element so it walks through the imported field jsx</p>
+<p>This is what happens every time your browser loads the page:</p>
+<p><img src=".gitbook/assets/image%20%287%29.png" /></p>
+<p>window makes http request to code sandbox</p>
+<p>from this request we get an index.html file to load and parse in the browser…</p>
+</body>
+</html>

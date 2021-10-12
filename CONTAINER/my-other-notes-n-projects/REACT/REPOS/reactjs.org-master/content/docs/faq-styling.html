@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Styling and CSS</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Styling and CSS</h1>
+</header>
+<h3 id="how-do-i-add-css-classes-to-components">How do I add CSS classes to components?</h3>
+<p>Pass a string as the <code>className</code> prop:</p>
+<pre class="jsx"><code>render() {
+  return &lt;span className=&quot;menu navigation-menu&quot;&gt;Menu&lt;/span&gt;
+}</code></pre>
+<p>It is common for CSS classes to depend on the component props or state:</p>
+<pre class="jsx"><code>render() {
+  let className = &#39;menu&#39;;
+  if (this.props.isActive) {
+    className += &#39; menu-active&#39;;
+  }
+  return &lt;span className={className}&gt;Menu&lt;/span&gt;
+}</code></pre>
+<blockquote>
+<p>Tip</p>
+<p>If you often find yourself writing code like this, <a href="https://www.npmjs.com/package/classnames#usage-with-reactjs">classnames</a> package can simplify it.</p>
+</blockquote>
+<h3 id="can-i-use-inline-styles">Can I use inline styles?</h3>
+<p>Yes, see the docs on styling <a href="/docs/dom-elements.html#style">here</a>.</p>
+<h3 id="are-inline-styles-bad">Are inline styles bad?</h3>
+<p>CSS classes are generally better for performance than inline styles.</p>
+<h3 id="what-is-css-in-js">What is CSS-in-JS?</h3>
+<p>“CSS-in-JS” refers to a pattern where CSS is composed using JavaScript instead of defined in external files.</p>
+<p><em>Note that this functionality is not a part of React, but provided by third-party libraries.</em> React does not have an opinion about how styles are defined; if in doubt, a good starting point is to define your styles in a separate <code>*.css</code> file as usual and refer to them using <a href="/docs/dom-elements.html#classname"><code>className</code></a>.</p>
+<h3 id="can-i-do-animations-in-react">Can I do animations in React?</h3>
+<p>React can be used to power animations. See <a href="https://reactcommunity.org/react-transition-group/">React Transition Group</a> and <a href="https://github.com/chenglou/react-motion">React Motion</a> or <a href="https://github.com/react-spring/react-spring">React Spring</a>, for example.</p>
+</body>
+</html>

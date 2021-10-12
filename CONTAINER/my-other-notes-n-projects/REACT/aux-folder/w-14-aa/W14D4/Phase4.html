@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Phase4</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<h1 id="phase-4---changing-navlinks-active-class">Phase 4 - Changing NavLink’s Active Class</h1>
+<p>You’ve already set up NavLink to <strong>bold</strong> the link text using the .active class in <code>src/index.css</code>. But what if you wanted this class to be something else? For instance, what if you want your main color links (Red, Green, Blue, Violet) to be styled differently when active than your sub-route links (Red Only, Add Orange, Add Yellow, etc.).</p>
+<p>You can set the class that React Router sets to an active <code>NavLink</code> by adding the <code>activeClassName</code> prop.</p>
+<p>For instance, when we are at a route matching the below <code>NavLink</code>’s <code>to</code> prop, the component will have a class of <code>.parent-active</code> applied:</p>
+<pre><code>&lt;NavLink to=&quot;/blue&quot; activeClassName=&quot;parent-active&quot; &gt;
+  Blue
+&lt;/NavLink&gt;</code></pre>
+<p>This allows us much more flexibility to style an active <code>NavLink</code>!</p>
+<p>Using the example above, add an <code>activeClassName</code> prop to each of your <code>NavLink</code>s in <code>src/components/Rainbow.js</code>. Now, add some CSS styling for that class in your <code>src/index.css</code> to distinguish your main and your sub-route links.</p>
+</body>
+</html>

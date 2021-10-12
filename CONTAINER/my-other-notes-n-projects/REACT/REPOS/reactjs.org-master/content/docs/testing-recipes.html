@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Testing Recipes</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Testing Recipes</h1>
+</header>
+<p>Common testing patterns for React components.</p>
+<blockquote>
+<p>Note:</p>
+<p>This page assumes you’re using <a href="https://jestjs.io/">Jest</a> as a test runner. If you use a different test runner, you may need to adjust the API, but the overall shape of the solution will likely be the same. Read more details on setting up a testing environment on the <a href="/docs/testing-environments.html">Testing Environments</a> page.</p>
+</blockquote>
+<p>On this page, we will primarily use function components. However, these testing strategies don’t depend on implementation details, and work just as well for class components too.</p>
+<ul>
+<li><a href="#setup--teardown">Setup/Teardown</a></li>
+<li><a href="#act"><code>act()</code></a></li>
+<li><a href="#rendering">Rendering</a></li>
+<li><a href="#data-fetching">Data Fetching</a></li>
+<li><a href="#mocking-modules">Mocking Modules</a></li>
+<li><a href="#events">Events</a></li>
+<li><a href="#timers">Timers</a></li>
+<li><a href="#snapshot-testing">Snapshot Testing</a></li>
+<li><a href="#multiple-renderers">Multiple Renderers</a></li>
+<li><a href="#something-missing">Something Missing?</a></li>
+</ul>
+<hr />
+<h3 id="setup--teardown">Setup/Teardown</h3>
+<p>For each test, we usually want to render our React tree to a DOM element that’s attached to <code>document</code>. This is important so that it can receive DOM events. When the test ends, we want to “clean up” and unmount the tree from the <code>document</code>.</p>
+<p>A common way to do it is to use a pair of <code>beforeEach</code> and <code>afterEach</code> blocks so that they’ll always run and isolate the effects of a test to itself:</p>
+<pre class="jsx"><code>import { unmountComponentAtNode } from &quot;react-dom&quot;;
+
+let container = null;
+beforeEach(() =&gt; {
+  // setup a DOM element as a render target
+  container = document.createElement(&quot;div&quot;);
+  document.body.appendChild(container);
+});
+
+afterEach(() =&gt; {
+  // cleanup on exiting
+  unmountComponentAtNode(container);
+  container.remove();
+  container = null;
+});</code></pre>
+<p>You may use a different pattern, but keep in mind that we want to execute the cleanup <em>even if a test fails</em>. Otherwise, tests can become “leaky”, and one test can change the behavior of another test. That makes them difficult to debug.</p>
+<hr />
+<h3 id="act"><code>act()</code></h3>
+<p>When writing UI tests, tasks like rendering, user events, or data fetching can be considered as “units” of interaction with a user interface. <code>react-dom/test-utils</code> provides a helper called <a href="/docs/test-utils.html#act"><code>act()</code></a> that makes sure all updates related to these “units” have been processed and applied to the DOM before you make any assertions:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb2-1" title="1"><span class="at">act</span>(() <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb2-2" title="2">  <span class="co">// render components</span></a>
+<a class="sourceLine" id="cb2-3" title="3"><span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb2-4" title="4"><span class="co">// make assertions</span></a></code></pre></div>
+<p>This helps make your tests run closer to what real users would experience when using your application. The rest of these examples use <code>act()</code> to make these guarantees.</p>
+<p>You might find using <code>act()</code> directly a bit too verbose. To avoid some of the boilerplate, you could use a library like <a href="https://testing-library.com/react">React Testing Library</a>, whose helpers are wrapped with <code>act()</code>.</p>
+<blockquote>
+<p>Note:</p>
+<p>The name <code>act</code> comes from the <a href="http://wiki.c2.com/?ArrangeActAssert">Arrange-Act-Assert</a> pattern.</p>
+</blockquote>
+<hr />
+<h3 id="rendering">Rendering</h3>
+<p>Commonly, you might want to test whether a component renders correctly for given props. Consider a simple component that renders a message based on a prop:</p>
+<pre class="jsx"><code>// hello.js
+
+import React from &quot;react&quot;;
+
+export default function Hello(props) {
+  if (props.name) {
+    return &lt;h1&gt;Hello, {props.name}!&lt;/h1&gt;;
+  } else {
+    return &lt;span&gt;Hey, stranger&lt;/span&gt;;
+  }
+}</code></pre>
+<p>We can write a test for this component:</p>
+<pre class="jsx{24-27}"><code>// hello.test.js
+
+import React from &quot;react&quot;;
+import { render, unmountComponentAtNode } from &quot;react-dom&quot;;
+import { act } from &quot;react-dom/test-utils&quot;;
+
+import Hello from &quot;./hello&quot;;
+
+let container = null;
+beforeEach(() =&gt; {
+  // setup a DOM element as a render target
+  container = document.createElement(&quot;div&quot;);
+  document.body.appendChild(container);
+});
+
+afterEach(() =&gt; {
+  // cleanup on exiting
+  unmountComponentAtNode(container);
+  container.remove();
+  container = null;
+});
+
+it(&quot;renders with or without a name&quot;, () =&gt; {
+  act(() =&gt; {
+    render(&lt;Hello /&gt;, container);
+  });
+  expect(container.textContent).toBe(&quot;Hey, stranger&quot;);
+
+  act(() =&gt; {
+    render(&lt;Hello name=&quot;Jenny&quot; /&gt;, container);
+  });
+  expect(container.textContent).toBe(&quot;Hello, Jenny!&quot;);
+
+  act(() =&gt; {
+    render(&lt;Hello name=&quot;Margaret&quot; /&gt;, container);
+  });
+  expect(container.textContent).toBe(&quot;Hello, Margaret!&quot;);
+});</code></pre>
+<hr />
+<h3 id="data-fetching">Data Fetching</h3>
+<p>Instead of calling real APIs in all your tests, you can mock requests with dummy data. Mocking data fetching with “fake” data prevents flaky tests due to an unavailable backend, and makes them run faster. Note: you may still want to run a subset of tests using an <a href="/docs/testing-environments.html#end-to-end-tests-aka-e2e-tests">“end-to-end”</a> framework that tells whether the whole app is working together.</p>
+<pre class="jsx"><code>// user.js
+
+import React, { useState, useEffect } from &quot;react&quot;;
+
+export default function User(props) {
+  const [user, setUser] = useState(null);
+
+  async function fetchUserData(id) {
+    const response = await fetch(&quot;/&quot; + id);
+    setUser(await response.json());
+  }
+
+  useEffect(() =&gt; {
+    fetchUserData(props.id);
+  }, [props.id]);
+
+  if (!user) {
+    return &quot;loading...&quot;;
+  }
+
+  return (
+    &lt;details&gt;
+      &lt;summary&gt;{user.name}&lt;/summary&gt;
+      &lt;strong&gt;{user.age}&lt;/strong&gt; years old
+      &lt;br /&gt;
+      lives in {user.address}
+    &lt;/details&gt;
+  );
+}</code></pre>
+<p>We can write tests for it:</p>
+<pre class="jsx{23-33,44-45}"><code>// user.test.js
+
+import React from &quot;react&quot;;
+import { render, unmountComponentAtNode } from &quot;react-dom&quot;;
+import { act } from &quot;react-dom/test-utils&quot;;
+import User from &quot;./user&quot;;
+
+let container = null;
+beforeEach(() =&gt; {
+  // setup a DOM element as a render target
+  container = document.createElement(&quot;div&quot;);
+  document.body.appendChild(container);
+});
+
+afterEach(() =&gt; {
+  // cleanup on exiting
+  unmountComponentAtNode(container);
+  container.remove();
+  container = null;
+});
+
+it(&quot;renders user data&quot;, async () =&gt; {
+  const fakeUser = {
+    name: &quot;Joni Baez&quot;,
+    age: &quot;32&quot;,
+    address: &quot;123, Charming Avenue&quot;
+  };
+
+  jest.spyOn(global, &quot;fetch&quot;).mockImplementation(() =&gt;
+    Promise.resolve({
+      json: () =&gt; Promise.resolve(fakeUser)
+    })
+  );
+
+  // Use the asynchronous version of act to apply resolved promises
+  await act(async () =&gt; {
+    render(&lt;User id=&quot;123&quot; /&gt;, container);
+  });
+
+  expect(container.querySelector(&quot;summary&quot;).textContent).toBe(fakeUser.name);
+  expect(container.querySelector(&quot;strong&quot;).textContent).toBe(fakeUser.age);
+  expect(container.textContent).toContain(fakeUser.address);
+
+  // remove the mock to ensure tests are completely isolated
+  global.fetch.mockRestore();
+});</code></pre>
+<hr />
+<h3 id="mocking-modules">Mocking Modules</h3>
+<p>Some modules might not work well inside a testing environment, or may not be as essential to the test itself. Mocking out these modules with dummy replacements can make it easier to write tests for your own code.</p>
+<p>Consider a <code>Contact</code> component that embeds a third-party <code>GoogleMap</code> component:</p>
+<pre class="jsx"><code>// map.js
+
+import React from &quot;react&quot;;
+
+import { LoadScript, GoogleMap } from &quot;react-google-maps&quot;;
+export default function Map(props) {
+  return (
+    &lt;LoadScript id=&quot;script-loader&quot; googleMapsApiKey=&quot;YOUR_API_KEY&quot;&gt;
+      &lt;GoogleMap id=&quot;example-map&quot; center={props.center} /&gt;
+    &lt;/LoadScript&gt;
+  );
+}
+
+// contact.js
+
+import React from &quot;react&quot;;
+import Map from &quot;./map&quot;;
+
+export default function Contact(props) {
+  return (
+    &lt;div&gt;
+      &lt;address&gt;
+        Contact {props.name} via{&quot; &quot;}
+        &lt;a data-testid=&quot;email&quot; href={&quot;mailto:&quot; + props.email}&gt;
+          email
+        &lt;/a&gt;
+        or on their &lt;a data-testid=&quot;site&quot; href={props.site}&gt;
+          website
+        &lt;/a&gt;.
+      &lt;/address&gt;
+      &lt;Map center={props.center} /&gt;
+    &lt;/div&gt;
+  );
+}</code></pre>
+<p>If we don’t want to load this component in our tests, we can mock out the dependency itself to a dummy component, and run our tests:</p>
+<pre class="jsx{10-18}"><code>// contact.test.js
+
+import React from &quot;react&quot;;
+import { render, unmountComponentAtNode } from &quot;react-dom&quot;;
+import { act } from &quot;react-dom/test-utils&quot;;
+
+import Contact from &quot;./contact&quot;;
+import MockedMap from &quot;./map&quot;;
+
+jest.mock(&quot;./map&quot;, () =&gt; {
+  return function DummyMap(props) {
+    return (
+      &lt;div data-testid=&quot;map&quot;&gt;
+        {props.center.lat}:{props.center.long}
+      &lt;/div&gt;
+    );
+  };
+});
+
+let container = null;
+beforeEach(() =&gt; {
+  // setup a DOM element as a render target
+  container = document.createElement(&quot;div&quot;);
+  document.body.appendChild(container);
+});
+
+afterEach(() =&gt; {
+  // cleanup on exiting
+  unmountComponentAtNode(container);
+  container.remove();
+  container = null;
+});
+
+it(&quot;should render contact information&quot;, () =&gt; {
+  const center = { lat: 0, long: 0 };
+  act(() =&gt; {
+    render(
+      &lt;Contact
+        name=&quot;Joni Baez&quot;
+        email=&quot;test@example.com&quot;
+        site=&quot;http://test.com&quot;
+        center={center}
+      /&gt;,
+      container
+    );
+  });
+
+  expect(
+    container.querySelector(&quot;[data-testid=&#39;email&#39;]&quot;).getAttribute(&quot;href&quot;)
+  ).toEqual(&quot;mailto:test@example.com&quot;);
+
+  expect(
+    container.querySelector(&#39;[data-testid=&quot;site&quot;]&#39;).getAttribute(&quot;href&quot;)
+  ).toEqual(&quot;http://test.com&quot;);
+
+  expect(container.querySelector(&#39;[data-testid=&quot;map&quot;]&#39;).textContent).toEqual(
+    &quot;0:0&quot;
+  );
+});</code></pre>
+<hr />
+<h3 id="events">Events</h3>
+<p>We recommend dispatching real DOM events on DOM elements, and then asserting on the result. Consider a <code>Toggle</code> component:</p>
+<pre class="jsx"><code>// toggle.js
+
+import React, { useState } from &quot;react&quot;;
+
+export default function Toggle(props) {
+  const [state, setState] = useState(false);
+  return (
+    &lt;button
+      onClick={() =&gt; {
+        setState(previousState =&gt; !previousState);
+        props.onChange(!state);
+      }}
+      data-testid=&quot;toggle&quot;
+    &gt;
+      {state === true ? &quot;Turn off&quot; : &quot;Turn on&quot;}
+    &lt;/button&gt;
+  );
+}</code></pre>
+<p>We could write tests for it:</p>
+<pre class="jsx{13-14,35,43}"><code>// toggle.test.js
+
+import React from &quot;react&quot;;
+import { render, unmountComponentAtNode } from &quot;react-dom&quot;;
+import { act } from &quot;react-dom/test-utils&quot;;
+
+import Toggle from &quot;./toggle&quot;;
+
+let container = null;
+beforeEach(() =&gt; {
+  // setup a DOM element as a render target
+  container = document.createElement(&quot;div&quot;);
+  document.body.appendChild(container);
+});
+
+afterEach(() =&gt; {
+  // cleanup on exiting
+  unmountComponentAtNode(container);
+  container.remove();
+  container = null;
+});
+
+it(&quot;changes value when clicked&quot;, () =&gt; {
+  const onChange = jest.fn();
+  act(() =&gt; {
+    render(&lt;Toggle onChange={onChange} /&gt;, container);
+  });
+
+  // get ahold of the button element, and trigger some clicks on it
+  const button = document.querySelector(&quot;[data-testid=toggle]&quot;);
+  expect(button.innerHTML).toBe(&quot;Turn on&quot;);
+
+  act(() =&gt; {
+    button.dispatchEvent(new MouseEvent(&quot;click&quot;, { bubbles: true }));
+  });
+
+  expect(onChange).toHaveBeenCalledTimes(1);
+  expect(button.innerHTML).toBe(&quot;Turn off&quot;);
+
+  act(() =&gt; {
+    for (let i = 0; i &lt; 5; i++) {
+      button.dispatchEvent(new MouseEvent(&quot;click&quot;, { bubbles: true }));
+    }
+  });
+
+  expect(onChange).toHaveBeenCalledTimes(6);
+  expect(button.innerHTML).toBe(&quot;Turn on&quot;);
+});</code></pre>
+<p>Different DOM events and their properties are described in <a href="https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent">MDN</a>. Note that you need to pass <code>{ bubbles: true }</code> in each event you create for it to reach the React listener because React automatically delegates events to the root.</p>
+<blockquote>
+<p>Note:</p>
+<p>React Testing Library offers a <a href="https://testing-library.com/docs/dom-testing-library/api-events">more concise helper</a> for firing events.</p>
+</blockquote>
+<hr />
+<h3 id="timers">Timers</h3>
+<p>Your code might use timer-based functions like <code>setTimeout</code> to schedule more work in the future. In this example, a multiple choice panel waits for a selection and advances, timing out if a selection isn’t made in 5 seconds:</p>
+<pre class="jsx"><code>// card.js
+
+import React, { useEffect } from &quot;react&quot;;
+
+export default function Card(props) {
+  useEffect(() =&gt; {
+    const timeoutID = setTimeout(() =&gt; {
+      props.onSelect(null);
+    }, 5000);
+    return () =&gt; {
+      clearTimeout(timeoutID);
+    };
+  }, [props.onSelect]);
+
+  return [1, 2, 3, 4].map(choice =&gt; (
+    &lt;button
+      key={choice}
+      data-testid={choice}
+      onClick={() =&gt; props.onSelect(choice)}
+    &gt;
+      {choice}
+    &lt;/button&gt;
+  ));
+}</code></pre>
+<p>We can write tests for this component by leveraging <a href="https://jestjs.io/docs/en/timer-mocks">Jest’s timer mocks</a>, and testing the different states it can be in.</p>
+<pre class="jsx{7,31,37,49,59}"><code>// card.test.js
+
+import React from &quot;react&quot;;
+import { render, unmountComponentAtNode } from &quot;react-dom&quot;;
+import { act } from &quot;react-dom/test-utils&quot;;
+
+import Card from &quot;./card&quot;;
+
+jest.useFakeTimers();
+
+let container = null;
+beforeEach(() =&gt; {
+  // setup a DOM element as a render target
+  container = document.createElement(&quot;div&quot;);
+  document.body.appendChild(container);
+});
+
+afterEach(() =&gt; {
+  // cleanup on exiting
+  unmountComponentAtNode(container);
+  container.remove();
+  container = null;
+});
+
+it(&quot;should select null after timing out&quot;, () =&gt; {
+  const onSelect = jest.fn();
+  act(() =&gt; {
+    render(&lt;Card onSelect={onSelect} /&gt;, container);
+  });
+
+  // move ahead in time by 100ms
+  act(() =&gt; {
+    jest.advanceTimersByTime(100);
+  });
+  expect(onSelect).not.toHaveBeenCalled();
+
+  // and then move ahead by 5 seconds
+  act(() =&gt; {
+    jest.advanceTimersByTime(5000);
+  });
+  expect(onSelect).toHaveBeenCalledWith(null);
+});
+
+it(&quot;should cleanup on being removed&quot;, () =&gt; {
+  const onSelect = jest.fn();
+  act(() =&gt; {
+    render(&lt;Card onSelect={onSelect} /&gt;, container);
+  });
+
+  act(() =&gt; {
+    jest.advanceTimersByTime(100);
+  });
+  expect(onSelect).not.toHaveBeenCalled();
+
+  // unmount the app
+  act(() =&gt; {
+    render(null, container);
+  });
+
+  act(() =&gt; {
+    jest.advanceTimersByTime(5000);
+  });
+  expect(onSelect).not.toHaveBeenCalled();
+});
+
+it(&quot;should accept selections&quot;, () =&gt; {
+  const onSelect = jest.fn();
+  act(() =&gt; {
+    render(&lt;Card onSelect={onSelect} /&gt;, container);
+  });
+
+  act(() =&gt; {
+    container
+      .querySelector(&quot;[data-testid=&#39;2&#39;]&quot;)
+      .dispatchEvent(new MouseEvent(&quot;click&quot;, { bubbles: true }));
+  });
+
+  expect(onSelect).toHaveBeenCalledWith(2);
+});</code></pre>
+<p>You can use fake timers only in some tests. Above, we enabled them by calling <code>jest.useFakeTimers()</code>. The main advantage they provide is that your test doesn’t actually have to wait five seconds to execute, and you also didn’t need to make the component code more convoluted just for testing.</p>
+<hr />
+<h3 id="snapshot-testing">Snapshot Testing</h3>
+<p>Frameworks like Jest also let you save “snapshots” of data with <a href="https://jestjs.io/docs/en/snapshot-testing"><code>toMatchSnapshot</code> / <code>toMatchInlineSnapshot</code></a>. With these, we can “save” the rendered component output and ensure that a change to it has to be explicitly committed as a change to the snapshot.</p>
+<p>In this example, we render a component and format the rendered HTML with the <a href="https://www.npmjs.com/package/pretty"><code>pretty</code></a> package, before saving it as an inline snapshot:</p>
+<pre class="jsx{29-31}"><code>// hello.test.js, again
+
+import React from &quot;react&quot;;
+import { render, unmountComponentAtNode } from &quot;react-dom&quot;;
+import { act } from &quot;react-dom/test-utils&quot;;
+import pretty from &quot;pretty&quot;;
+
+import Hello from &quot;./hello&quot;;
+
+let container = null;
+beforeEach(() =&gt; {
+  // setup a DOM element as a render target
+  container = document.createElement(&quot;div&quot;);
+  document.body.appendChild(container);
+});
+
+afterEach(() =&gt; {
+  // cleanup on exiting
+  unmountComponentAtNode(container);
+  container.remove();
+  container = null;
+});
+
+it(&quot;should render a greeting&quot;, () =&gt; {
+  act(() =&gt; {
+    render(&lt;Hello /&gt;, container);
+  });
+
+  expect(
+    pretty(container.innerHTML)
+  ).toMatchInlineSnapshot(); /* ... gets filled automatically by jest ... */
+
+  act(() =&gt; {
+    render(&lt;Hello name=&quot;Jenny&quot; /&gt;, container);
+  });
+
+  expect(
+    pretty(container.innerHTML)
+  ).toMatchInlineSnapshot(); /* ... gets filled automatically by jest ... */
+
+  act(() =&gt; {
+    render(&lt;Hello name=&quot;Margaret&quot; /&gt;, container);
+  });
+
+  expect(
+    pretty(container.innerHTML)
+  ).toMatchInlineSnapshot(); /* ... gets filled automatically by jest ... */
+});</code></pre>
+<p>It’s typically better to make more specific assertions than to use snapshots. These kinds of tests include implementation details so they break easily, and teams can get desensitized to snapshot breakages. Selectively <a href="#mocking-modules">mocking some child components</a> can help reduce the size of snapshots and keep them readable for the code review.</p>
+<hr />
+<h3 id="multiple-renderers">Multiple Renderers</h3>
+<p>In rare cases, you may be running a test on a component that uses multiple renderers. For example, you may be running snapshot tests on a component with <code>react-test-renderer</code>, that internally uses <code>ReactDOM.render</code> inside a child component to render some content. In this scenario, you can wrap updates with <code>act()</code>s corresponding to their renderers.</p>
+<pre class="jsx"><code>import { act as domAct } from &quot;react-dom/test-utils&quot;;
+import { act as testAct, create } from &quot;react-test-renderer&quot;;
+// ...
+let root;
+domAct(() =&gt; {
+  testAct(() =&gt; {
+    root = create(&lt;App /&gt;);
+  });
+});
+expect(root).toMatchSnapshot();</code></pre>
+<hr />
+<h3 id="something-missing">Something Missing?</h3>
+<p>If some common scenario is not covered, please let us know on the <a href="https://github.com/reactjs/reactjs.org/issues">issue tracker</a> for the documentation website.</p>
+</body>
+</html>

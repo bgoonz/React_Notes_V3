@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>deployment</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<h1 id="desktop-app-deployment">Desktop App Deployment</h1>
+<ol type="1">
+<li>Packages the desktop app for all operating systems and upload them to GitHub as a draft release with the following command:</li>
+</ol>
+<pre><code>GH_TOKEN=xyz123 yarn run release:desktop</code></pre>
+<blockquote>
+<p>Note: GH_TOKEN has to be a valid GitHub personal token. You can get one from your user settings. Note for employees: You will find the company GitHub token in 1Password under the entry for “Spectrum GitHub Bot”</p>
+</blockquote>
+<ol start="2" type="1">
+<li>You’ll then have a draft release on GitHub that looks something like this:</li>
+</ol>
+<figure>
+<img src="https://user-images.githubusercontent.com/7525670/40724411-4b5fe9ec-6421-11e8-8e4b-d0df96b46f72.png" alt="screen shot 2018-05-30 at 15 42 22" /><figcaption>screen shot 2018-05-30 at 15 42 22</figcaption>
+</figure>
+<ol start="3" type="1">
+<li><p>Go to that draft release, download the build for your OS and test the new version locally.</p></li>
+<li><p>If you’re happy with how it works, click the “Edit” button on the draft release and you get to this screen:</p></li>
+</ol>
+<figure>
+<img src="https://user-images.githubusercontent.com/7525670/40724488-77256642-6421-11e8-9911-999ed0fa5957.png" alt="screenshot-2018-5-30 withspectrum spectrum" /><figcaption>screenshot-2018-5-30 withspectrum spectrum</figcaption>
+</figure>
+<ol start="4" type="1">
+<li>Fill out the title and release notes of the release (like it’s already done above), then click “Publish release”.</li>
+</ol>
+<p>As soon as it’s published, the app will prompt existing users to upgrade to the newest version and download and install it for them.</p>
+</body>
+</html>

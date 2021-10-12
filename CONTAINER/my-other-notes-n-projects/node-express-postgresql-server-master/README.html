@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>README</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<h1 id="simple-node-with-express-postgresql-server">Simple Node with Express + PostgreSQL Server</h1>
+<p><a href="https://travis-ci.org/rwieruch/node-express-postgresql-server"><img src="https://travis-ci.org/rwieruch/node-express-postgresql-server.svg?branch=master" alt="Build Status" /></a> <a href="https://slack-the-road-to-learn-react.wieruch.com/"><img src="https://slack-the-road-to-learn-react.wieruch.com/badge.svg" alt="Slack" /></a> <a href="https://greenkeeper.io/"><img src="https://badges.greenkeeper.io/rwieruch/node-express-postgresql-server.svg" alt="Greenkeeper badge" /></a></p>
+<p>An easy way to get started with a Express server with PostgreSQL with Node.js. <a href="https://www.robinwieruch.de/postgres-express-setup-tutorial/">Read more about it.</a></p>
+<h2 id="features">Features</h2>
+<ul>
+<li>Express</li>
+<li>REST API</li>
+<li>PostgreSQL</li>
+</ul>
+<h2 id="requirements">Requirements</h2>
+<ul>
+<li><a href="https://nodejs.org/en/">node &amp; npm</a></li>
+<li><a href="https://www.robinwieruch.de/git-essential-commands/">git</a></li>
+</ul>
+<h2 id="installation">Installation</h2>
+<ul>
+<li><code>git clone git@github.com:rwieruch/node-express-postgresql-server.git</code></li>
+<li><code>cd node-express-postgresql-server</code></li>
+<li><code>npm install</code></li>
+<li><a href="https://www.robinwieruch.de/postgres-express-setup-tutorial/">start PostgreSQL</a></li>
+<li><code>npm start</code></li>
+<li>optional: include <em>.env</em> in your <em>.gitignore</em></li>
+</ul>
+<h3 id="get-routes">GET Routes</h3>
+<ul>
+<li>visit http://localhost:3000
+<ul>
+<li>/messages</li>
+<li>/messages/1</li>
+<li>/users</li>
+<li>/users/1</li>
+</ul></li>
+</ul>
+<h3 id="beyond-get-routes">Beyond GET Routes</h3>
+<h4 id="curl">CURL</h4>
+<ul>
+<li>Create a message with:
+<ul>
+<li><code>curl -X POST -H "Content-Type:application/json" http://localhost:3000/messages -d '{"text":"Hi again, World"}'</code></li>
+</ul></li>
+<li>Delete a message with:
+<ul>
+<li><code>curl -X DELETE -H "Content-Type:application/json" http://localhost:3000/messages/1</code></li>
+</ul></li>
+</ul>
+<h4 id="postman">Postman</h4>
+<ul>
+<li>Install <a href="https://www.getpostman.com/apps">Postman</a> to interact with REST API</li>
+<li>Create a message with:
+<ul>
+<li>URL: http://localhost:3000/messages</li>
+<li>Method: POST</li>
+<li>Body: raw + JSON (application/json)</li>
+<li>Body Content: <code>{ "text": "Hi again, World" }</code></li>
+</ul></li>
+<li>Delete a message with:
+<ul>
+<li>URL: http://localhost:3000/messages/1</li>
+<li>Method: DELETE</li>
+</ul></li>
+</ul>
+</body>
+</html>

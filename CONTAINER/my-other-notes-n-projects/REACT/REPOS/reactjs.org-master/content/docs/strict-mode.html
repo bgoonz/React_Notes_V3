@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Strict Mode</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Strict Mode</h1>
+</header>
+<p><code>StrictMode</code> is a tool for highlighting potential problems in an application. Like <code>Fragment</code>, <code>StrictMode</code> does not render any visible UI. It activates additional checks and warnings for its descendants.</p>
+<blockquote>
+<p>Note:</p>
+<p>Strict mode checks are run in development mode only; <em>they do not impact the production build</em>.</p>
+</blockquote>
+<p>You can enable strict mode for any part of your application. For example: <code>embed:strict-mode/enabling-strict-mode.js</code></p>
+<p>In the above example, strict mode checks will <em>not</em> be run against the <code>Header</code> and <code>Footer</code> components. However, <code>ComponentOne</code> and <code>ComponentTwo</code>, as well as all of their descendants, will have the checks.</p>
+<p><code>StrictMode</code> currently helps with: * <a href="#identifying-unsafe-lifecycles">Identifying components with unsafe lifecycles</a> * <a href="#warning-about-legacy-string-ref-api-usage">Warning about legacy string ref API usage</a> * <a href="#warning-about-deprecated-finddomnode-usage">Warning about deprecated findDOMNode usage</a> * <a href="#detecting-unexpected-side-effects">Detecting unexpected side effects</a> * <a href="#detecting-legacy-context-api">Detecting legacy context API</a></p>
+<p>Additional functionality will be added with future releases of React.</p>
+<h3 id="identifying-unsafe-lifecycles">Identifying unsafe lifecycles</h3>
+<p>As explained <a href="/blog/2018/03/27/update-on-async-rendering.html">in this blog post</a>, certain legacy lifecycle methods are unsafe for use in async React applications. However, if your application uses third party libraries, it can be difficult to ensure that these lifecycles aren’t being used. Fortunately, strict mode can help with this!</p>
+<p>When strict mode is enabled, React compiles a list of all class components using the unsafe lifecycles, and logs a warning message with information about these components, like so:</p>
+<p><img src="../images/blog/strict-mode-unsafe-lifecycles-warning.png" /></p>
+<p>Addressing the issues identified by strict mode <em>now</em> will make it easier for you to take advantage of concurrent rendering in future releases of React.</p>
+<h3 id="warning-about-legacy-string-ref-api-usage">Warning about legacy string ref API usage</h3>
+<p>Previously, React provided two ways for managing refs: the legacy string ref API and the callback API. Although the string ref API was the more convenient of the two, it had <a href="https://github.com/facebook/react/issues/1373">several downsides</a> and so our official recommendation was to <a href="/docs/refs-and-the-dom.html#legacy-api-string-refs">use the callback form instead</a>.</p>
+<p>React 16.3 added a third option that offers the convenience of a string ref without any of the downsides: <code>embed:16-3-release-blog-post/create-ref-example.js</code></p>
+<p>Since object refs were largely added as a replacement for string refs, strict mode now warns about usage of string refs.</p>
+<blockquote>
+<p><strong>Note:</strong></p>
+<p>Callback refs will continue to be supported in addition to the new <code>createRef</code> API.</p>
+<p>You don’t need to replace callback refs in your components. They are slightly more flexible, so they will remain as an advanced feature.</p>
+</blockquote>
+<p><a href="/docs/refs-and-the-dom.html">Learn more about the new <code>createRef</code> API here.</a></p>
+<h3 id="warning-about-deprecated-finddomnode-usage">Warning about deprecated findDOMNode usage</h3>
+<p>React used to support <code>findDOMNode</code> to search the tree for a DOM node given a class instance. Normally you don’t need this because you can <a href="/docs/refs-and-the-dom.html#creating-refs">attach a ref directly to a DOM node</a>.</p>
+<p><code>findDOMNode</code> can also be used on class components but this was breaking abstraction levels by allowing a parent to demand that certain children was rendered. It creates a refactoring hazard where you can’t change the implementation details of a component because a parent might be reaching into its DOM node. <code>findDOMNode</code> only returns the first child, but with the use of Fragments, it is possible for a component to render multiple DOM nodes. <code>findDOMNode</code> is a one time read API. It only gave you an answer when you asked for it. If a child component renders a different node, there is no way to handle this change. Therefore <code>findDOMNode</code> only worked if components always return a single DOM node that never changes.</p>
+<p>You can instead make this explicit by passing a ref to your custom component and pass that along to the DOM using <a href="/docs/forwarding-refs.html#forwarding-refs-to-dom-components">ref forwarding</a>.</p>
+<p>You can also add a wrapper DOM node in your component and attach a ref directly to it.</p>
+<pre class="javascript{4,7}"><code>class MyComponent extends React.Component {
+  constructor(props) {
+    super(props);
+    this.wrapper = React.createRef();
+  }
+  render() {
+    return &lt;div ref={this.wrapper}&gt;{this.props.children}&lt;/div&gt;;
+  }
+}</code></pre>
+<blockquote>
+<p>Note:</p>
+<p>In CSS, the <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/display#display_contents"><code>display: contents</code></a> attribute can be used if you don’t want the node to be part of the layout.</p>
+</blockquote>
+<h3 id="detecting-unexpected-side-effects">Detecting unexpected side effects</h3>
+<p>Conceptually, React does work in two phases: * The <strong>render</strong> phase determines what changes need to be made to e.g. the DOM. During this phase, React calls <code>render</code> and then compares the result to the previous render. * The <strong>commit</strong> phase is when React applies any changes. (In the case of React DOM, this is when React inserts, updates, and removes DOM nodes.) React also calls lifecycles like <code>componentDidMount</code> and <code>componentDidUpdate</code> during this phase.</p>
+<p>The commit phase is usually very fast, but rendering can be slow. For this reason, the upcoming concurrent mode (which is not enabled by default yet) breaks the rendering work into pieces, pausing and resuming the work to avoid blocking the browser. This means that React may invoke render phase lifecycles more than once before committing, or it may invoke them without committing at all (because of an error or a higher priority interruption).</p>
+<p>Render phase lifecycles include the following class component methods: * <code>constructor</code> * <code>componentWillMount</code> (or <code>UNSAFE_componentWillMount</code>) * <code>componentWillReceiveProps</code> (or <code>UNSAFE_componentWillReceiveProps</code>) * <code>componentWillUpdate</code> (or <code>UNSAFE_componentWillUpdate</code>) * <code>getDerivedStateFromProps</code> * <code>shouldComponentUpdate</code> * <code>render</code> * <code>setState</code> updater functions (the first argument)</p>
+<p>Because the above methods might be called more than once, it’s important that they do not contain side-effects. Ignoring this rule can lead to a variety of problems, including memory leaks and invalid application state. Unfortunately, it can be difficult to detect these problems as they can often be <a href="https://en.wikipedia.org/wiki/Deterministic_algorithm">non-deterministic</a>.</p>
+<p>Strict mode can’t automatically detect side effects for you, but it can help you spot them by making them a little more deterministic. This is done by intentionally double-invoking the following functions:</p>
+<ul>
+<li>Class component <code>constructor</code>, <code>render</code>, and <code>shouldComponentUpdate</code> methods</li>
+<li>Class component static <code>getDerivedStateFromProps</code> method</li>
+<li>Function component bodies</li>
+<li>State updater functions (the first argument to <code>setState</code>)</li>
+<li>Functions passed to <code>useState</code>, <code>useMemo</code>, or <code>useReducer</code></li>
+</ul>
+<blockquote>
+<p>Note:</p>
+<p>This only applies to development mode. <em>Lifecycles will not be double-invoked in production mode.</em></p>
+</blockquote>
+<p>For example, consider the following code: <code>embed:strict-mode/side-effects-in-constructor.js</code></p>
+<p>At first glance, this code might not seem problematic. But if <code>SharedApplicationState.recordEvent</code> is not <a href="https://en.wikipedia.org/wiki/Idempotence#Computer_science_meaning">idempotent</a>, then instantiating this component multiple times could lead to invalid application state. This sort of subtle bug might not manifest during development, or it might do so inconsistently and so be overlooked.</p>
+<p>By intentionally double-invoking methods like the component constructor, strict mode makes patterns like this easier to spot.</p>
+<blockquote>
+<p>Note:</p>
+<p>Starting with React 17, React automatically modifies the console methods like <code>console.log()</code> to silence the logs in the second call to lifecycle functions. However, it may cause undesired behavior in certain cases where <a href="https://github.com/facebook/react/issues/20090#issuecomment-715927125">a workaround can be used</a>.</p>
+</blockquote>
+<h3 id="detecting-legacy-context-api">Detecting legacy context API</h3>
+<p>The legacy context API is error-prone, and will be removed in a future major version. It still works for all 16.x releases but will show this warning message in strict mode:</p>
+<p><img src="../images/blog/warn-legacy-context-in-strict-mode.png" /></p>
+<p>Read the <a href="/docs/context.html">new context API documentation</a> to help migrate to the new version.</p>
+</body>
+</html>

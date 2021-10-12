@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Virtual DOM and Internals</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Virtual DOM and Internals</h1>
+</header>
+<h3 id="what-is-the-virtual-dom">What is the Virtual DOM?</h3>
+<p>The virtual DOM (VDOM) is a programming concept where an ideal, or “virtual”, representation of a UI is kept in memory and synced with the “real” DOM by a library such as ReactDOM. This process is called <a href="/docs/reconciliation.html">reconciliation</a>.</p>
+<p>This approach enables the declarative API of React: You tell React what state you want the UI to be in, and it makes sure the DOM matches that state. This abstracts out the attribute manipulation, event handling, and manual DOM updating that you would otherwise have to use to build your app.</p>
+<p>Since “virtual DOM” is more of a pattern than a specific technology, people sometimes say it to mean different things. In React world, the term “virtual DOM” is usually associated with <a href="/docs/rendering-elements.html">React elements</a> since they are the objects representing the user interface. React, however, also uses internal objects called “fibers” to hold additional information about the component tree. They may also be considered a part of “virtual DOM” implementation in React.</p>
+<h3 id="is-the-shadow-dom-the-same-as-the-virtual-dom">Is the Shadow DOM the same as the Virtual DOM?</h3>
+<p>No, they are different. The Shadow DOM is a browser technology designed primarily for scoping variables and CSS in web components. The virtual DOM is a concept implemented by libraries in JavaScript on top of browser APIs.</p>
+<h3 id="what-is-react-fiber">What is “React Fiber”?</h3>
+<p>Fiber is the new reconciliation engine in React 16. Its main goal is to enable incremental rendering of the virtual DOM. <a href="https://github.com/acdlite/react-fiber-architecture">Read more</a>.</p>
+</body>
+</html>

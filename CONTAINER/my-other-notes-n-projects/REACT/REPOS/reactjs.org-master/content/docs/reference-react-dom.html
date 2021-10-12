@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>ReactDOM</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">ReactDOM</h1>
+</header>
+<p>If you load React from a <code>&lt;script&gt;</code> tag, these top-level APIs are available on the <code>ReactDOM</code> global. If you use ES6 with npm, you can write <code>import ReactDOM from 'react-dom'</code>. If you use ES5 with npm, you can write <code>var ReactDOM = require('react-dom')</code>.</p>
+<h2 id="overview">Overview</h2>
+<p>The <code>react-dom</code> package provides DOM-specific methods that can be used at the top level of your app and as an escape hatch to get outside of the React model if you need to. Most of your components should not need to use this module.</p>
+<ul>
+<li><a href="#render"><code>render()</code></a></li>
+<li><a href="#hydrate"><code>hydrate()</code></a></li>
+<li><a href="#unmountcomponentatnode"><code>unmountComponentAtNode()</code></a></li>
+<li><a href="#finddomnode"><code>findDOMNode()</code></a></li>
+<li><a href="#createportal"><code>createPortal()</code></a></li>
+</ul>
+<h3 id="browser-support">Browser Support</h3>
+<p>React supports all popular browsers, including Internet Explorer 9 and above, although <a href="/docs/javascript-environment-requirements.html">some polyfills are required</a> for older browsers such as IE 9 and IE 10.</p>
+<blockquote>
+<p>Note</p>
+<p>We don’t support older browsers that don’t support ES5 methods, but you may find that your apps do work in older browsers if polyfills such as <a href="https://github.com/es-shims/es5-shim">es5-shim and es5-sham</a> are included in the page. You’re on your own if you choose to take this path.</p>
+</blockquote>
+<hr />
+<h2 id="reference">Reference</h2>
+<h3 id="render"><code>render()</code></h3>
+<div class="sourceCode" id="cb1"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb1-1" title="1"><span class="va">ReactDOM</span>.<span class="at">render</span>(element<span class="op">,</span> container[<span class="op">,</span> callback])</a></code></pre></div>
+<p>Render a React element into the DOM in the supplied <code>container</code> and return a <a href="/docs/more-about-refs.html">reference</a> to the component (or returns <code>null</code> for <a href="/docs/components-and-props.html#function-and-class-components">stateless components</a>).</p>
+<p>If the React element was previously rendered into <code>container</code>, this will perform an update on it and only mutate the DOM as necessary to reflect the latest React element.</p>
+<p>If the optional callback is provided, it will be executed after the component is rendered or updated.</p>
+<blockquote>
+<p>Note:</p>
+<p><code>ReactDOM.render()</code> controls the contents of the container node you pass in. Any existing DOM elements inside are replaced when first called. Later calls use React’s DOM diffing algorithm for efficient updates.</p>
+<p><code>ReactDOM.render()</code> does not modify the container node (only modifies the children of the container). It may be possible to insert a component to an existing DOM node without overwriting the existing children.</p>
+<p><code>ReactDOM.render()</code> currently returns a reference to the root <code>ReactComponent</code> instance. However, using this return value is legacy and should be avoided because future versions of React may render components asynchronously in some cases. If you need a reference to the root <code>ReactComponent</code> instance, the preferred solution is to attach a <a href="/docs/more-about-refs.html#the-ref-callback-attribute">callback ref</a> to the root element.</p>
+<p>Using <code>ReactDOM.render()</code> to hydrate a server-rendered container is deprecated and will be removed in React 17. Use <a href="#hydrate"><code>hydrate()</code></a> instead.</p>
+</blockquote>
+<hr />
+<h3 id="hydrate"><code>hydrate()</code></h3>
+<div class="sourceCode" id="cb2"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb2-1" title="1"><span class="va">ReactDOM</span>.<span class="at">hydrate</span>(element<span class="op">,</span> container[<span class="op">,</span> callback])</a></code></pre></div>
+<p>Same as <a href="#render"><code>render()</code></a>, but is used to hydrate a container whose HTML contents were rendered by <a href="/docs/react-dom-server.html"><code>ReactDOMServer</code></a>. React will attempt to attach event listeners to the existing markup.</p>
+<p>React expects that the rendered content is identical between the server and the client. It can patch up differences in text content, but you should treat mismatches as bugs and fix them. In development mode, React warns about mismatches during hydration. There are no guarantees that attribute differences will be patched up in case of mismatches. This is important for performance reasons because in most apps, mismatches are rare, and so validating all markup would be prohibitively expensive.</p>
+<p>If a single element’s attribute or text content is unavoidably different between the server and the client (for example, a timestamp), you may silence the warning by adding <code>suppressHydrationWarning={true}</code> to the element. It only works one level deep, and is intended to be an escape hatch. Don’t overuse it. Unless it’s text content, React still won’t attempt to patch it up, so it may remain inconsistent until future updates.</p>
+<p>If you intentionally need to render something different on the server and the client, you can do a two-pass rendering. Components that render something different on the client can read a state variable like <code>this.state.isClient</code>, which you can set to <code>true</code> in <code>componentDidMount()</code>. This way the initial render pass will render the same content as the server, avoiding mismatches, but an additional pass will happen synchronously right after hydration. Note that this approach will make your components slower because they have to render twice, so use it with caution.</p>
+<p>Remember to be mindful of user experience on slow connections. The JavaScript code may load significantly later than the initial HTML render, so if you render something different in the client-only pass, the transition can be jarring. However, if executed well, it may be beneficial to render a “shell” of the application on the server, and only show some of the extra widgets on the client. To learn how to do this without getting the markup mismatch issues, refer to the explanation in the previous paragraph.</p>
+<hr />
+<h3 id="unmountcomponentatnode"><code>unmountComponentAtNode()</code></h3>
+<div class="sourceCode" id="cb3"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb3-1" title="1"><span class="va">ReactDOM</span>.<span class="at">unmountComponentAtNode</span>(container)</a></code></pre></div>
+<p>Remove a mounted React component from the DOM and clean up its event handlers and state. If no component was mounted in the container, calling this function does nothing. Returns <code>true</code> if a component was unmounted and <code>false</code> if there was no component to unmount.</p>
+<hr />
+<h3 id="finddomnode"><code>findDOMNode()</code></h3>
+<blockquote>
+<p>Note:</p>
+<p><code>findDOMNode</code> is an escape hatch used to access the underlying DOM node. In most cases, use of this escape hatch is discouraged because it pierces the component abstraction. <a href="/docs/strict-mode.html#warning-about-deprecated-finddomnode-usage">It has been deprecated in <code>StrictMode</code>.</a></p>
+</blockquote>
+<div class="sourceCode" id="cb4"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb4-1" title="1"><span class="va">ReactDOM</span>.<span class="at">findDOMNode</span>(component)</a></code></pre></div>
+<p>If this component has been mounted into the DOM, this returns the corresponding native browser DOM element. This method is useful for reading values out of the DOM, such as form field values and performing DOM measurements. <strong>In most cases, you can attach a ref to the DOM node and avoid using <code>findDOMNode</code> at all.</strong></p>
+<p>When a component renders to <code>null</code> or <code>false</code>, <code>findDOMNode</code> returns <code>null</code>. When a component renders to a string, <code>findDOMNode</code> returns a text DOM node containing that value. As of React 16, a component may return a fragment with multiple children, in which case <code>findDOMNode</code> will return the DOM node corresponding to the first non-empty child.</p>
+<blockquote>
+<p>Note:</p>
+<p><code>findDOMNode</code> only works on mounted components (that is, components that have been placed in the DOM). If you try to call this on a component that has not been mounted yet (like calling <code>findDOMNode()</code> in <code>render()</code> on a component that has yet to be created) an exception will be thrown.</p>
+<p><code>findDOMNode</code> cannot be used on function components.</p>
+</blockquote>
+<hr />
+<h3 id="createportal"><code>createPortal()</code></h3>
+<div class="sourceCode" id="cb5"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb5-1" title="1"><span class="va">ReactDOM</span>.<span class="at">createPortal</span>(child<span class="op">,</span> container)</a></code></pre></div>
+<p>Creates a portal. Portals provide a way to <a href="/docs/portals.html">render children into a DOM node that exists outside the hierarchy of the DOM component</a>.</p>
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Release Channels</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Release Channels</h1>
+</header>
+<p>React relies on a thriving open source community to file bug reports, open pull requests, and <a href="https://github.com/reactjs/rfcs">submit RFCs</a>. To encourage feedback we sometimes share special builds of React that include unreleased features.</p>
+<blockquote>
+<p>This document will be most relevant to developers who work on frameworks, libraries, or developer tooling. Developers who use React primarily to build user-facing applications should not need to worry about our prerelease channels.</p>
+</blockquote>
+<p>Each of React’s release channels is designed for a distinct use case:</p>
+<ul>
+<li><a href="#latest-channel"><strong>Latest</strong></a> is for stable, semver React releases. It’s what you get when you install React from npm. This is the channel you’re already using today. <strong>Use this for all user-facing React applications.</strong></li>
+<li><a href="#next-channel"><strong>Next</strong></a> tracks the master branch of the React source code repository. Think of these as release candidates for the next minor semver release. Use this for integration testing between React and third party projects.</li>
+<li><a href="#experimental-channel"><strong>Experimental</strong></a> includes experimental APIs and features that aren’t available in the stable releases. These also track the master branch, but with additional feature flags turned on. Use this to try out upcoming features before they are released.</li>
+</ul>
+<p>All releases are published to npm, but only Latest uses <a href="/docs/faq-versioning.html">semantic versioning</a>. Prereleases (those in the Next and Experimental channels) have versions generated from a hash of their contents, e.g. <code>0.0.0-1022ee0ec</code> for Next and <code>0.0.0-experimental-1022ee0ec</code> for Experimental.</p>
+<p><strong>The only officially supported release channel for user-facing applications is Latest</strong>. Next and Experimental releases are provided for testing purposes only, and we provide no guarantees that behavior won’t change between releases. They do not follow the semver protocol that we use for releases from Latest.</p>
+<p>By publishing prereleases to the same registry that we use for stable releases, we are able to take advantage of the many tools that support the npm workflow, like <a href="https://unpkg.com">unpkg</a> and <a href="https://codesandbox.io">CodeSandbox</a>.</p>
+<h3 id="latest-channel">Latest Channel</h3>
+<p>Latest is the channel used for stable React releases. It corresponds to the <code>latest</code> tag on npm. It is the recommended channel for all React apps that are shipped to real users.</p>
+<p><strong>If you’re not sure which channel you should use, it’s Latest.</strong> If you’re a React developer, this is what you’re already using.</p>
+<p>You can expect updates to Latest to be extremely stable. Versions follow the semantic versioning scheme. Learn more about our commitment to stability and incremental migration in our <a href="/docs/faq-versioning.html">versioning policy</a>.</p>
+<h3 id="next-channel">Next Channel</h3>
+<p>The Next channel is a prerelease channel that tracks the master branch of the React repository. We use prereleases in the Next channel as release candidates for the Latest channel. You can think of Next as a superset of Latest that is updated more frequently.</p>
+<p>The degree of change between the most recent Next release and the most recent Latest release is approximately the same as you would find between two minor semver releases. However, <strong>the Next channel does not conform to semantic versioning.</strong> You should expect occasional breaking changes between successive releases in the Next channel.</p>
+<p><strong>Do not use prereleases in user-facing applications.</strong></p>
+<p>Releases in Next are published with the <code>next</code> tag on npm. Versions are generated from a hash of the build’s contents, e.g. <code>0.0.0-1022ee0ec</code>.</p>
+<h4 id="using-the-next-channel-for-integration-testing">Using the Next Channel for Integration Testing</h4>
+<p>The Next channel is designed to support integration testing between React and other projects.</p>
+<p>All changes to React go through extensive internal testing before they are released to the public. However, there are a myriad of environments and configurations used throughout the React ecosystem, and it’s not possible for us to test against every single one.</p>
+<p>If you’re the author of a third party React framework, library, developer tool, or similar infrastructure-type project, you can help us keep React stable for your users and the entire React community by periodically running your test suite against the most recent changes. If you’re interested, follow these steps:</p>
+<ul>
+<li>Set up a cron job using your preferred continuous integration platform. Cron jobs are supported by both <a href="https://circleci.com/docs/2.0/triggers/#scheduled-builds">CircleCI</a> and <a href="https://docs.travis-ci.com/user/cron-jobs/">Travis CI</a>.</li>
+<li><p>In the cron job, update your React packages to the most recent React release in the Next channel, using <code>next</code> tag on npm. Using the npm cli:</p>
+<pre><code>npm update react@next react-dom@next</code></pre>
+<p>Or yarn:</p>
+<pre><code>yarn upgrade react@next react-dom@next</code></pre></li>
+<li>Run your test suite against the updated packages.</li>
+<li>If everything passes, great! You can expect that your project will work with the next minor React release.</li>
+<li><p>If something breaks unexpectedly, please let us know by <a href="https://github.com/facebook/react/issues">filing an issue</a>.</p></li>
+</ul>
+<p>A project that uses this workflow is Next.js. (No pun intended! Seriously!) You can refer to their <a href="https://github.com/zeit/next.js/blob/c0a1c0f93966fe33edd93fb53e5fafb0dcd80a9e/.circleci/config.yml">CircleCI configuration</a> as an example.</p>
+<h3 id="experimental-channel">Experimental Channel</h3>
+<p>Like Next, the Experimental channel is a prerelease channel that tracks the master branch of the React repository. Unlike Next, Experimental releases include additional features and APIs that are not ready for wider release.</p>
+<p>Usually, an update to Next is accompanied by a corresponding update to Experimental. They are based on the same source revision, but are built using a different set of feature flags.</p>
+<p>Experimental releases may be significantly different than releases to Next and Latest. <strong>Do not use Experimental releases in user-facing applications.</strong> You should expect frequent breaking changes between releases in the Experimental channel.</p>
+<p>Releases in Experimental are published with the <code>experimental</code> tag on npm. Versions are generated from a hash of the build’s contents, e.g. <code>0.0.0-experimental-1022ee0ec</code>.</p>
+<h4 id="what-goes-into-an-experimental-release">What Goes Into an Experimental Release?</h4>
+<p>Experimental features are ones that are not ready to be released to the wider public, and may change drastically before they are finalized. Some experiments may never be finalized – the reason we have experiments is to test the viability of proposed changes.</p>
+<p>For example, if the Experimental channel had existed when we announced Hooks, we would have released Hooks to the Experimental channel weeks before they were available in Latest.</p>
+<p>You may find it valuable to run integration tests against Experimental. This is up to you. However, be advised that Experimental is even less stable than Next. <strong>We do not guarantee any stability between Experimental releases.</strong></p>
+<h4 id="how-can-i-learn-more-about-experimental-features">How Can I Learn More About Experimental Features?</h4>
+<p>Experimental features may or may not be documented. Usually, experiments aren’t documented until they are close to shipping in Next or Latest.</p>
+<p>If a feature is not documented, they may be accompanied by an <a href="https://github.com/reactjs/rfcs">RFC</a>.</p>
+<p>We will post to the <a href="/blog">React blog</a> when we’re ready to announce new experiments, but that doesn’t mean we will publicize every experiment.</p>
+<p>You can always refer to our public GitHub repository’s <a href="https://github.com/facebook/react/commits/master">history</a> for a comprehensive list of changes.</p>
+</body>
+</html>
