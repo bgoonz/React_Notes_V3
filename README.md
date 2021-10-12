@@ -3401,13 +3401,16 @@ React is not that complex once you start understanding the core principles behin
  * DOCUMENTATION: https://reactjs.org/docs/
  * FILE STRUCTURE: https://reactjs.org/docs/faq-structure.html
  * ******************************************************************************************* */
-```
+```bash
 
 npm install --save react // declarative and flexible JavaScript library for building UI
 npm install --save react-dom // serves as the entry point of the DOM-related rendering paths
 npm install --save prop-types // runtime type checking for React props and similar objects
 
 ```
+
+```js
+
 
 // notes: don't forget the command lines
 
