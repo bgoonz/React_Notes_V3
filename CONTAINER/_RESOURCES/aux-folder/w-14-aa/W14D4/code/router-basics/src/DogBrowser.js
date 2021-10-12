@@ -1,14 +1,14 @@
-import React from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import React from "react";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 
-import BreedList from './BreedList';
-import DogPicture from './DogPicture';
+import BreedList from "./BreedList";
+import DogPicture from "./DogPicture";
 
 class DogBrowser extends React.Component {
   constructor(props) {
     super(props);
     /* What is in a props object that has been passed down through a route tag? */
-    // debugger 
+    // debugger
     this.state = {
       breeds: [],
     };
@@ -17,7 +17,7 @@ class DogBrowser extends React.Component {
   async componentDidMount() {
     try {
       // Fetch the dog breeds
-      const url = 'https://dog.ceo/api/breeds/list/all';
+      const url = "https://dog.ceo/api/breeds/list/all";
       const response = await fetch(url);
       if (response.ok) {
         const { message } = await response.json();
@@ -27,9 +27,7 @@ class DogBrowser extends React.Component {
           breeds: Object.keys(message),
         });
       }
-    } catch (e) {
-
-    }
+    } catch (e) {}
   }
 
   render() {
@@ -51,5 +49,3 @@ class DogBrowser extends React.Component {
 }
 
 export default DogBrowser;
-
-

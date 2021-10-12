@@ -1,14 +1,14 @@
-import React from 'react';
-import PupContext from './PupContext';
-import banana from './pups/banana-pup.jpg';
-import sleepy from './pups/sleepy-pup.jpg';
-import speedy from './pups/speedy-pup.jpg';
+import React from "react";
+import PupContext from "./PupContext";
+import banana from "./pups/banana-pup.jpg";
+import sleepy from "./pups/sleepy-pup.jpg";
+import speedy from "./pups/speedy-pup.jpg";
 
 class PupForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      selectedPup: 'select',
+      selectedPup: "select",
     };
   }
 
@@ -16,12 +16,12 @@ class PupForm extends React.Component {
 
   updateSelection = (e) => {
     this.setState({ selectedPup: e.target.value });
-  }
+  };
 
   handleClick = (e) => {
     e.preventDefault();
     this.props.updateContext(this.state.selectedPup);
-  }
+  };
 
   render() {
     return (
@@ -36,9 +36,7 @@ class PupForm extends React.Component {
           <option value={banana}>Banana Pup</option>
           <option value={sleepy}>Sleepy Pup</option>
         </select>
-        <button onClick={this.handleClick}>
-          Submit
-        </button>
+        <button onClick={this.handleClick}>Submit</button>
       </form>
     );
   }

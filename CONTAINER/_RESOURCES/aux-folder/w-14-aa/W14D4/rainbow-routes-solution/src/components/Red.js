@@ -1,7 +1,7 @@
-import React from 'react';
-import { Route, NavLink } from 'react-router-dom';
-import Orange from './Orange';
-import Yellow from './Yellow';
+import React from "react";
+import { Route, NavLink } from "react-router-dom";
+import Orange from "./Orange";
+import Yellow from "./Yellow";
 
 class Red extends React.Component {
   render() {
@@ -17,6 +17,6 @@ class Red extends React.Component {
       </div>
     );
   }
-};
+}
 
 export default Red;

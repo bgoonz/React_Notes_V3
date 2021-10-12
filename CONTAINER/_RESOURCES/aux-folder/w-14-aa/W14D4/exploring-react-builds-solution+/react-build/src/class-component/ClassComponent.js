@@ -1,9 +1,8 @@
-import React from 'react';
-import { NavLink, Link, Route, Switch } from 'react-router-dom';
-import Something from './Something';
-import Nothing from './Nothing';
-import Other from './Other';
-
+import React from "react";
+import { NavLink, Link, Route, Switch } from "react-router-dom";
+import Something from "./Something";
+import Nothing from "./Nothing";
+import Other from "./Other";
 
 class ClassComponent extends React.Component {
   render() {

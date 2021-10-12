@@ -2,9 +2,9 @@
 
 If you’re new to React (or frontend in general) you may find the ecosystem confusing. There are a few reasons for this.
 
-* React has historically been targeted at early-adopters and experts
-* Facebook only open-sources what it actually uses, so it doesn’t focus on tooling for smaller-than-Facebook projects
-* There’s a lot of bad marketing masquerading as React guides
+- React has historically been targeted at early-adopters and experts
+- Facebook only open-sources what it actually uses, so it doesn’t focus on tooling for smaller-than-Facebook projects
+- There’s a lot of bad marketing masquerading as React guides
 
 Throughout this document, I’ll assume you’ve built a web page with HTML, CSS and JavaScript.
 
@@ -20,20 +20,21 @@ All software is built on a stack of technologies, and you need to understand eno
 
 You should learn, in this order, **without skipping ahead or learning concurrently**:
 
-* [React itself](#learning-react-itself)
-* [`npm`](#learning-npm)
-* [JavaScript “bundlers”](#learning-javascript-bundlers)
-* [ES6](#learning-es6)
-* [Routing](#learning-routing)
-* [Flux](#learning-flux)
+- [React itself](#learning-react-itself)
+- [`npm`](#learning-npm)
+- [JavaScript “bundlers”](#learning-javascript-bundlers)
+- [ES6](#learning-es6)
+- [Routing](#learning-routing)
+- [Flux](#learning-flux)
 
 **You don't need to learn all of these to be productive with React.** Only move to the next step if you have a problem that needs to be solved.
 
 Additionally, there are a few topics that are often mentioned in the React community that are "bleeding edge". The topics below are interesting, but they're difficult to understand, are far less popular than the above topics and **aren't required for most apps**.
-* [Inline styles](#learning-inline-styles)
-* [Server rendering](#learning-server-rendering)
-* [Immutable.js](#learning-immutablejs)
-* [Relay, Falcor, etc](#learning-relay-falcor-etc)
+
+- [Inline styles](#learning-inline-styles)
+- [Server rendering](#learning-server-rendering)
+- [Immutable.js](#learning-immutablejs)
+- [Relay, Falcor, etc](#learning-relay-falcor-etc)
 
 ## Learning React itself
 
@@ -75,7 +76,7 @@ The most popular router in the React ecosystem is [react-router](https://github.
 
 ## Learning Flux
 
-You’ve probably heard of Flux. There’s a *ton* of misinformation about Flux out there.
+You’ve probably heard of Flux. There’s a _ton_ of misinformation about Flux out there.
 
 A lot of people sit down to build an app and want to define their data model, and they think they need to use Flux to do it. **This is the wrong way to adopt Flux. Flux should only be added once many components have already been built.**
 
@@ -83,13 +84,13 @@ React components are arranged in a hierarchy. Most of the time, your data model 
 
 **You’ll know when you need Flux. If you aren’t sure if you need it, you don’t need it.**
 
-If you have decided to use Flux, the most popular and well-documented Flux library is [Redux](http://redux.js.org/). There are *a lot* of alternatives out there, and you’ll be tempted to evaluate lots of them, but my advice is to just stick with the most popular one.
+If you have decided to use Flux, the most popular and well-documented Flux library is [Redux](http://redux.js.org/). There are _a lot_ of alternatives out there, and you’ll be tempted to evaluate lots of them, but my advice is to just stick with the most popular one.
 
 ## Learning inline styles
 
 Pre-React, a lot of people reused CSS styles with complicated style sheets built by preprocessors like SASS. Since React makes writing reusable components easy, your stylesheets can be less complicated. Many in the community (including myself) are experimenting with getting rid of stylesheets altogether.
 
-This is a fairly crazy idea for a number of reasons. It makes media queries more difficult, and it's possible that there are  performance limitations using this technique. **When starting out with React, just style things the way you normally would.**
+This is a fairly crazy idea for a number of reasons. It makes media queries more difficult, and it's possible that there are performance limitations using this technique. **When starting out with React, just style things the way you normally would.**
 
 Once you've got a feel for how React works, you can look at alternate techniques. One popular one is [BEM](https://en.bem.info/). I recommend phasing out your CSS preprocessor, since React gives you a more powerful way to reuse styles (by reusing components) and your JavaScript bundler can generate more efficient stylesheets for you (I gave [a talk about this at OSCON](https://www.youtube.com/watch?v=VkTCL6Nqm6Y)). With that said, React, like any other JavaScript library, will work just fine with a CSS preprocessor.
 
@@ -105,7 +106,7 @@ Server rendering still requires a lot of tooling to get right. Since it transpar
 
 ## Learning Immutable.js
 
-[Immutable.js](https://facebook.github.io/immutable-js/) provides a set of data structures that can help to solve certain performance issues when building React apps. It's a great library, and you'll probably use it a lot in your apps moving forward, but it's completely unnecessary until you have an appreciation of the performance implications. 
+[Immutable.js](https://facebook.github.io/immutable-js/) provides a set of data structures that can help to solve certain performance issues when building React apps. It's a great library, and you'll probably use it a lot in your apps moving forward, but it's completely unnecessary until you have an appreciation of the performance implications.
 
 ## Learning Relay, Falcor etc
 

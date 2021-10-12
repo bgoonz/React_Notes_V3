@@ -1,10 +1,8 @@
-import GuessingGame from './GuessingGame';
-import React from 'react';
+import GuessingGame from "./GuessingGame";
+import React from "react";
 
 function App() {
-  return (
-    <GuessingGame />
-  );
+  return <GuessingGame />;
 }
 
 export default App;

@@ -1,7 +1,7 @@
-import React from 'react';
+import React from "react";
 
 const Dog = (props) => {
-  const { url, banana } =props;
+  const { url, banana } = props;
 
   return (
     <figure>
@@ -12,9 +12,7 @@ const Dog = (props) => {
 };
 
 function App(props) {
-  return (
-    props.urls.map(url => <Dog key={url} url={url} banana="apple" />)
-  );
+  return props.urls.map((url) => <Dog key={url} url={url} banana="apple" />);
 }
 
 App.defaultProps = {

@@ -51,14 +51,8 @@ class ContactUs extends React.Component {
     }
   };
   render() {
-    const {
-      name,
-      email,
-      phone,
-      comments,
-      phoneType,
-      validationErrors,
-    } = this.state;
+    const { name, email, phone, comments, phoneType, validationErrors } =
+      this.state;
     return (
       <div>
         <h2>Contact Us</h2>

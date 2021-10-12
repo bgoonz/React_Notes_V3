@@ -1,10 +1,10 @@
-import { useHistory } from 'react-router-dom';
+import { useHistory } from "react-router-dom";
 
 function Stocks() {
   const history = useHistory();
   const handleClick = () => {
-    console.log('I have been clicked');
-    return history.push('/');
+    console.log("I have been clicked");
+    return history.push("/");
   };
 
   return (

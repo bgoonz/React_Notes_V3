@@ -1,25 +1,25 @@
-import React from 'react';
+import React from "react";
 
-import OwnerLink from './OwnerLink';
+import OwnerLink from "./OwnerLink";
 
-const OwnersList = props =>
+const OwnersList = (props) => (
   <>
     <h2>Owners</h2>
     <ul>
-      {props.owners.map(owner =>
+      {props.owners.map((owner) => (
         <li key={owner.id}>
           <OwnerLink
             href={owner.href}
             firstName={owner.firstName}
-            lastName={owner.lastName} />
+            lastName={owner.lastName}
+          />
         </li>
-      )}
+      ))}
     </ul>
   </>
-;
-
+);
 OwnersList.defaultProps = {
-  owners: []
-}
+  owners: [],
+};
 
 export default OwnersList;

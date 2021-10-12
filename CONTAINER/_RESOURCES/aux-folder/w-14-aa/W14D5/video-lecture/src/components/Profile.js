@@ -10,12 +10,12 @@ class Profile extends React.Component {
   }
   // static contextType = ThemeContext;
 
-  updateSelection = e => {
+  updateSelection = (e) => {
     this.context.color; // value of the provider
     this.setState({ color: e.target.value });
   };
 
-  handleClick = e => {
+  handleClick = (e) => {
     debugger;
     e.preventDefault();
     // this.context.updateContext(this.state.color);

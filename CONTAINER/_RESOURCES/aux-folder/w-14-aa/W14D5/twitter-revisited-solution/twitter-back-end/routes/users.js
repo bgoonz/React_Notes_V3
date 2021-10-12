@@ -31,7 +31,7 @@ router.post(
     const user = await User.create({ username, email, hashedPassword });
 
     const token = getUserToken(user);
-    res.cookie('token', token);
+    res.cookie("token", token);
     res.status(201).json({
       user: { id: user.id },
       token,
@@ -59,7 +59,7 @@ router.post(
     }
     const token = getUserToken(user);
     res.cookie("token", token);
-    res.json({ token, user: { id: user.id }});
+    res.json({ token, user: { id: user.id } });
   })
 );
 
@@ -81,7 +81,7 @@ router.get(
   asyncHandler(async (req, res, next) => {
     const userId = parseInt(req.params.id, 10);
     const { id, username } = await User.findByPk(userId);
-    res.json({ user: { id, username }});
+    res.json({ user: { id, username } });
   })
 );
 

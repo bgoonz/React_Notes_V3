@@ -1,14 +1,13 @@
-import React from 'react';
+import React from "react";
 
-const PetInformationItem = props =>
+const PetInformationItem = (props) => (
   <>
     <dt>{props.name}</dt>
     <dd>{props.value}</dd>
   </>
-;
-
+);
 PetInformationItem.defaultProps = {
-  value: 'loading...',
-}
+  value: "loading...",
+};
 
 export default PetInformationItem;

@@ -1,22 +1,22 @@
-import React from 'react';
-import TodoContext from '../contexts/TodoContext';
+import React from "react";
+import TodoContext from "../contexts/TodoContext";
 
 class TodoForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      inputValue: '',
+      inputValue: "",
     };
   }
 
   handleInputChange = (e) => {
     this.setState({ inputValue: e.target.value });
-  }
-  
+  };
+
   handleSubmit = (e) => {
     e.preventDefault();
     this.props.createTask(this.state.inputValue);
-  }
+  };
 
   render() {
     return (
@@ -34,7 +34,7 @@ class TodoForm extends React.Component {
 
 const TodoFormWithContext = () => (
   <TodoContext.Consumer>
-    {value => <TodoForm createTask={value.createTask} />}
+    {(value) => <TodoForm createTask={value.createTask} />}
   </TodoContext.Consumer>
 );
 

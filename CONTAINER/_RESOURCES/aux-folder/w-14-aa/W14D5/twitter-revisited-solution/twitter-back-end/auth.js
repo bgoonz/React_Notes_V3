@@ -51,7 +51,7 @@ const restoreUser = (req, res, next) => {
     if (!req.user) {
       // Send a "401 Unauthorized" response status code
       // along with removing the token cookie
-      res.clearCookie('token');
+      res.clearCookie("token");
       return res.status(401).end();
     }
 

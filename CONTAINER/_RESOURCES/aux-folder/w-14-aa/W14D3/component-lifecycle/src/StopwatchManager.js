@@ -5,8 +5,8 @@ import Stopwatch from "./Stopwatch";
 class StopwatchManager extends React.Component {
   constructor() {
     super();
-    this.state = { 
-      show: false 
+    this.state = {
+      show: false,
     };
   }
 

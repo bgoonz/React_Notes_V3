@@ -1,10 +1,11 @@
-import React from 'react';
-import StaffBox from './StaffBox';
+import React from "react";
+import StaffBox from "./StaffBox";
 
-const StaffPage = props =>
+const StaffPage = (props) => (
   <>
-    { props.staff.map(person => <StaffBox key={person.id} {...person} />) }
+    {props.staff.map((person) => (
+      <StaffBox key={person.id} {...person} />
+    ))}
   </>
-;
-
+);
 export default StaffPage;

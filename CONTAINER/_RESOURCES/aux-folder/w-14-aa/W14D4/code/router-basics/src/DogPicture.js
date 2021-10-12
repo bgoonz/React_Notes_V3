@@ -1,11 +1,11 @@
-import React from 'react';
+import React from "react";
 
 class DogPicture extends React.Component {
   constructor(props) {
     super(props);
     // debugger; /* Check out what information props can give us */
     this.state = {
-      url: '/images/image-loading.svg',
+      url: "/images/image-loading.svg",
     };
   }
 
@@ -19,11 +19,15 @@ class DogPicture extends React.Component {
 
   async getDogPictureUrl(prevProps) {
     // Look at this awesome destructuring!!!
-    const { match: { params: { breed } } } = this.props;
+    const {
+      match: {
+        params: { breed },
+      },
+    } = this.props;
     if (prevProps && prevProps.match.params.breed === breed) {
       return;
     }
-    this.setState({ url: '/images/image-loading.svg' });
+    this.setState({ url: "/images/image-loading.svg" });
     try {
       const url = `https://dog.ceo/api/breed/${breed}/images/random`;
       const response = await fetch(url);
@@ -33,23 +37,21 @@ class DogPicture extends React.Component {
       }
     } catch (e) {
       this.setState({
-        error: e.message
+        error: e.message,
       });
     }
   }
 
   getImageForPane() {
-    return this.state.url ? { backgroundImage: `url('${this.state.url}')` } : {};
+    return this.state.url
+      ? { backgroundImage: `url('${this.state.url}')` }
+      : {};
   }
 
   getError() {
-    return (
-      this.state.error ?
-        <div className="is-error">
-          {this.state.error}
-        </div> :
-        null
-    );
+    return this.state.error ? (
+      <div className="is-error">{this.state.error}</div>
+    ) : null;
   }
 
   render() {
@@ -57,11 +59,9 @@ class DogPicture extends React.Component {
       <div
         className="detail-pane"
         style={this.getImageForPane()}
-        onClick={
-          () => (
-            // this.setState(); 
-            this.props.history.push(`/breeds/${this.props.match.params.breed}`)
-          )
+        onClick={() =>
+          // this.setState();
+          this.props.history.push(`/breeds/${this.props.match.params.breed}`)
         }
       >
         {this.getError()}

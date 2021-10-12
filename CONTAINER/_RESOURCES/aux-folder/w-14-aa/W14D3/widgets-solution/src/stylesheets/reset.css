@@ -1,6 +1,32 @@
 /* reset.css */
 
-a, article, body, button, div, fieldset, footer, form, h1, h2, header, html, i, img, input, label, li, main, nav, p, section, small, span, strong, textarea, time, ul {
+a,
+article,
+body,
+button,
+div,
+fieldset,
+footer,
+form,
+h1,
+h2,
+header,
+html,
+i,
+img,
+input,
+label,
+li,
+main,
+nav,
+p,
+section,
+small,
+span,
+strong,
+textarea,
+time,
+ul {
   background: transparent;
   border: 0;
   box-sizing: inherit;
@@ -24,7 +50,12 @@ img {
   width: 100%;
 }
 
-button, input[type="email"], input[type="password"], input[type="submit"], input[type="text"], textarea {
+button,
+input[type="email"],
+input[type="password"],
+input[type="submit"],
+input[type="text"],
+textarea {
   /*
   Get rid of native styling. Read more here:
   http://css-tricks.com/almanac/properties/a/appearance/
@@ -34,6 +65,7 @@ button, input[type="email"], input[type="password"], input[type="submit"], input
   appearance: none;
 }
 
-button, input[type="submit"] {
+button,
+input[type="submit"] {
   cursor: pointer;
 }

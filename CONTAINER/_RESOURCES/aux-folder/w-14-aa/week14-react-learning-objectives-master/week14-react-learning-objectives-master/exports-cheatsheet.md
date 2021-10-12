@@ -13,16 +13,16 @@
 ### Named Export Examples
 
 ```js
-export const str = 'Hello World';
+export const str = "Hello World";
 
 export const num1 = 100;
 export const num2 = 200;
 
-export const array = ['apple', 'pear', 'banana'];
+export const array = ["apple", "pear", "banana"];
 
 export const obj = {
-  firstName: 'Foo',
-  lastName: 'Bar'
+  firstName: "Foo",
+  lastName: "Bar",
 };
 
 export function add(number1, number2) {

@@ -2,16 +2,9 @@
 <footer>Copyright</footer>
 */
 
-
-
-
 /* Problem 2
 <a href="/posts">All Posts</a>
 */
-
-
-
-
 
 /* Problem 3
 <div class="post-header">
@@ -20,20 +13,12 @@
 </div>
 */
 
-
-
-
-
 /* Problem 4
 <div class="post-footer">
   <button class="edit-button">Edit</button>
   <button class="delete-button">Delete</button>
 </div>
 */
-
-
-
-
 
 /* Problem 5
 <nav>
@@ -47,11 +32,6 @@
   </ul>
 </nav>
 */
-
-
-
-
-
 
 /* Problem 5
 <section class="tweets">

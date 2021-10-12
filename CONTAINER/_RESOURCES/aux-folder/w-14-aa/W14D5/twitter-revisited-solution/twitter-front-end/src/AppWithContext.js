@@ -1,7 +1,7 @@
-import React from 'react';
-import Cookies from 'js-cookie';
-import UserContext from './contexts/UserContext';
-import App from './App';
+import React from "react";
+import Cookies from "js-cookie";
+import UserContext from "./contexts/UserContext";
+import App from "./App";
 
 class AppWithContext extends React.Component {
   constructor() {
@@ -16,7 +16,7 @@ class AppWithContext extends React.Component {
         const {
           data: { id },
         } = payloadObj;
-        currentUserId = id; 
+        currentUserId = id;
       } catch (e) {
         authToken = null;
         Cookies.remove("token");
@@ -34,14 +34,14 @@ class AppWithContext extends React.Component {
     this.setState({ authToken, currentUserId }, () => {
       console.log(this.state);
     });
-  }
+  };
 
   logout = () => {
     this.setState({ authToken: null, currentUserId: null }, () => {
       console.log(this.state);
-      Cookies.remove('token');
+      Cookies.remove("token");
     });
-  }
+  };
 
   render() {
     return (

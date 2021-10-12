@@ -1,7 +1,7 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import AppWithContext from './AppWithContext';
+import React from "react";
+import ReactDOM from "react-dom";
+import "./index.css";
+import AppWithContext from "./AppWithContext";
 
 const data = {
   company: {
@@ -19,20 +19,40 @@ const data = {
         Inc. created the new product Boop!, a goose-powered grist mill that
         could turn out tens of pounds of flour per month. From there, Company,
         Inc. has grown to many more products that make your life better.
-      `
+      `,
     },
     staff: [
-      { id: 1, name: "Tonya", title: "TANYA!", photo: 'https://via.placeholder.com/150' },
-      { id: 2, name: "Bill", title: "That guy, Bill", photo: 'https://via.placeholder.com/150' },
-      { id: 3, name: "Robot", title: "Beeper. Booper.", photo: 'https://via.placeholder.com/150' },
-      { id: 4, name: "Kitty", title: "Meower!", photo: 'https://via.placeholder.com/150' },
-    ]
-  }
+      {
+        id: 1,
+        name: "Tonya",
+        title: "TANYA!",
+        photo: "https://via.placeholder.com/150",
+      },
+      {
+        id: 2,
+        name: "Bill",
+        title: "That guy, Bill",
+        photo: "https://via.placeholder.com/150",
+      },
+      {
+        id: 3,
+        name: "Robot",
+        title: "Beeper. Booper.",
+        photo: "https://via.placeholder.com/150",
+      },
+      {
+        id: 4,
+        name: "Kitty",
+        title: "Meower!",
+        photo: "https://via.placeholder.com/150",
+      },
+    ],
+  },
 };
 
 ReactDOM.render(
   <React.StrictMode>
     <AppWithContext data={data} />
   </React.StrictMode>,
-  document.getElementById('root')
+  document.getElementById("root")
 );

@@ -60,15 +60,35 @@ const data = {
         Inc. created the new product Boop!, a goose-powered grist mill that
         could turn out tens of pounds of flour per month. From there, Company,
         Inc. has grown to many more products that make your life better.
-      `
+      `,
     },
     staff: [
-      { id: 1, name: "Tonya", title: "TANYA!", photo: 'https://via.placeholder.com/150' },
-      { id: 2, name: "Bill", title: "That guy, Bill", photo: 'https://via.placeholder.com/150' },
-      { id: 3, name: "Robot", title: "Beeper. Booper.", photo: 'https://via.placeholder.com/150' },
-      { id: 4, name: "Kitty", title: "Meower!", photo: 'https://via.placeholder.com/150' },
-    ]
-  }
+      {
+        id: 1,
+        name: "Tonya",
+        title: "TANYA!",
+        photo: "https://via.placeholder.com/150",
+      },
+      {
+        id: 2,
+        name: "Bill",
+        title: "That guy, Bill",
+        photo: "https://via.placeholder.com/150",
+      },
+      {
+        id: 3,
+        name: "Robot",
+        title: "Beeper. Booper.",
+        photo: "https://via.placeholder.com/150",
+      },
+      {
+        id: 4,
+        name: "Kitty",
+        title: "Meower!",
+        photo: "https://via.placeholder.com/150",
+      },
+    ],
+  },
 };
 ```
 
@@ -87,17 +107,17 @@ step.
 Create a Navigation component. The contents of the navigation should have this
 structure:
 
-* A `header` element as its root element
-* A `nav` element as the only child of the `header` element
-* A `ul` element as the only child of the `nav` element
-* Three `li` elements as the children of the `ul` element
-  * The first `li` should have a `NavLink` for the path "/" with the text "Home"
-  * The second `li` should have a `NavLink` for the path "/staff" with the text
+- A `header` element as its root element
+- A `nav` element as the only child of the `header` element
+- A `ul` element as the only child of the `nav` element
+- Three `li` elements as the children of the `ul` element
+  - The first `li` should have a `NavLink` for the path "/" with the text "Home"
+  - The second `li` should have a `NavLink` for the path "/staff" with the text
     "Staff"
-  * The third `li` should have a `NavLink` for the path "/about" with the text
+  - The third `li` should have a `NavLink` for the path "/about" with the text
     "About Us"
-* All `NavLink` components should set the active class name to "is-selected"
-* Make sure the "Home" `NavLink` only gets that class "is-selected" when the
+- All `NavLink` components should set the active class name to "is-selected"
+- Make sure the "Home" `NavLink` only gets that class "is-selected" when the
   route exactly matches "/"
 
 Add the `Navigation` component as the first child of the `BrowserRouter`
@@ -128,13 +148,13 @@ data into it that it needs to render the component.
 Create a component named `StaffBox`. In that component, follow these
 specifications.
 
-* The root element should be a `div` element with the class "staff-box"
-* The name of the person should be displayed as a child of the root element in
-  a `div` element with the class "staff-box__name"
-* The title of the person should be displayed as a child of the root element in
-  a `div` element with the class "staff-box__title"
-* The photo of the person should be displayed as a child of the root element in
-  an `img` element with the class "staff-box__photo"
+- The root element should be a `div` element with the class "staff-box"
+- The name of the person should be displayed as a child of the root element in
+  a `div` element with the class "staff-box\_\_name"
+- The title of the person should be displayed as a child of the root element in
+  a `div` element with the class "staff-box\_\_title"
+- The photo of the person should be displayed as a child of the root element in
+  an `img` element with the class "staff-box\_\_photo"
 
 Create a component named `StaffPage`. In that component, use the `StaffBox`
 component to show all of the staff from the data.
@@ -151,24 +171,27 @@ Create a new component named `AppWithContext` that will have state (yes,
 please, in another file). Import both the `App` component and the `NameContext`.
 Do the following:
 
-* In the constructor, set the initial value of the state that has a property
+- In the constructor, set the initial value of the state that has a property
   named "name" with a value of an empty string and a property that is the
   `changeName` method of the component (This code snippet will _not_ be given
   to you on the assessment.)
 
   ```js
-  this.state = { name: '', changeName: this.changeName }
+  this.state = { name: "", changeName: this.changeName };
   ```
 
-* Create a method named `changeName` using the experimental arrow function
+- Create a method named `changeName` using the experimental arrow function
   syntax that sets the name in the state to the value of the target of the event
   passed in. (This code snippet will _not_ be given to you on the assessment.)
 
   ```js
-  changeName = e => this.setState({ /* update the name, here */ });
+  changeName = (e) =>
+    this.setState({
+      /* update the name, here */
+    });
   ```
 
-* In the `render` function, use the provider for the `NameContext` as the root
+- In the `render` function, use the provider for the `NameContext` as the root
   element of the render function. Set its value to the value of the state of the
   component. Make the `App` component its single child and spread the properties
   of the `AppWithContext` component into it. (This code snippet will _not_ be
@@ -195,6 +218,5 @@ content "Hello «name»" where «name» comes from the value in the context.
 
 Now, when someone types into the `input` on the home page, it should show the
 message "Hello «name»" in the navigation.
-
 
 [screenshot]: https://appacademy-open-assets.s3-us-west-1.amazonaws.com/Modular-Curriculum/content/react-redux/assessments/version-a/practice/assets/react-practice-assessment-image.gif

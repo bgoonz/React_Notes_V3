@@ -1,4 +1,4 @@
-import { useParams, Redirect } from 'react-router-dom';
+import { useParams, Redirect } from "react-router-dom";
 // import { movies } from '../data/movieData';
 
 function MovieDetails(props) {
@@ -15,7 +15,7 @@ function MovieDetails(props) {
   return (
     <div className="comp purple">
       <h1>{choice.title}</h1>
-      <p style={{ fontStyle: 'italic' }}>{choice.description}</p>
+      <p style={{ fontStyle: "italic" }}>{choice.description}</p>
     </div>
   );
 }

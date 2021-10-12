@@ -1,5 +1,5 @@
-import React from 'react';
-import Calculator from './Calculator';
+import React from "react";
+import Calculator from "./Calculator";
 
 const App = () => (
   <div className="App">

@@ -4,7 +4,7 @@
 
 ```js
 export const num = 12;
-import { num } from '...';
+import { num } from "...";
 ```
 
 **Default Export | Default Import**
@@ -26,7 +26,7 @@ import {newPerson}
 ```js
 export const num = 22;
 export default myFunc;
-import * as anyName from '...';
+import * as anyName from "...";
 
 console.log(anyName.num, anyName.myFunc());
 ```
@@ -35,7 +35,7 @@ console.log(anyName.num, anyName.myFunc());
 
 ```js
 export { num1, num2 as newNum2 };
-import { num1 as newNum1, newNum2 } from '...';
+import { num1 as newNum1, newNum2 } from "...";
 ```
 
 ### LINKS

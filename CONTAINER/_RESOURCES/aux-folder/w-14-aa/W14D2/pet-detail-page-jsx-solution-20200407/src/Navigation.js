@@ -1,6 +1,6 @@
-import React from 'react';
+import React from "react";
 
-const Navigation = () =>
+const Navigation = () => (
   <header>
     <h1>Petrack</h1>
     <nav>
@@ -14,6 +14,5 @@ const Navigation = () =>
       </ul>
     </nav>
   </header>
-;
-
+);
 export default Navigation;

@@ -4,12 +4,12 @@ body {
 }
 
 a {
-  color: #00B7FF;
+  color: #00b7ff;
 }
 
 label {
   display: block;
-  margin-bottom: .5em;
+  margin-bottom: 0.5em;
 }
 
 input {

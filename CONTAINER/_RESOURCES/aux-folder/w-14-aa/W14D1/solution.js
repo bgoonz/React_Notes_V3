@@ -2,13 +2,13 @@
 <footer>Copyright</footer>
 */
 
-const footer = React.createElement('footer', null, 'Copyright');
+const footer = React.createElement("footer", null, "Copyright");
 
 /* Problem 2
 <a href="/posts">All Posts</a>
 */
 
-const allPosts = React.createElement('a', { href: "/posts" }, 'All Posts');
+const allPosts = React.createElement("a", { href: "/posts" }, "All Posts");
 
 /* Problem 3
 <div class="post-header">
@@ -18,10 +18,10 @@ const allPosts = React.createElement('a', { href: "/posts" }, 'All Posts');
 */
 
 const postFooter = React.createElement(
-  'div',
-  { className: 'post-header' },
-  React.createElement('span', null, 'User 1'),
-  React.createElement('span', null, '2020-05-18')
+  "div",
+  { className: "post-header" },
+  React.createElement("span", null, "User 1"),
+  React.createElement("span", null, "2020-05-18")
 );
 
 /* Problem 4
@@ -32,10 +32,10 @@ const postFooter = React.createElement(
 */
 
 const postFooter = React.createElement(
-  'div',
-  { className: 'post-footer' },
-  React.createElement('button', { className: 'edit-button' }, 'Edit'),
-  React.createElement('button', { className: 'delete-button' }, 'Delete')
+  "div",
+  { className: "post-footer" },
+  React.createElement("button", { className: "edit-button" }, "Edit"),
+  React.createElement("button", { className: "delete-button" }, "Delete")
 );
 
 /* Problem 5
@@ -52,52 +52,36 @@ const postFooter = React.createElement(
 */
 
 const nav = React.createElement(
-  'nav',
+  "nav",
   null,
   React.createElement(
-    'ul', 
-    { className: 'left-nav' },
+    "ul",
+    { className: "left-nav" },
     React.createElement(
-      'li',
+      "li",
       null,
-      React.createElement(
-        'a',
-        { href: "/home" },
-        "Home"
-      )
+      React.createElement("a", { href: "/home" }, "Home")
     ),
     React.createElement(
-      'li',
+      "li",
       null,
-      React.createElement(
-        'a',
-        { href: "/contacts" },
-        "Contacts"
-      )
+      React.createElement("a", { href: "/contacts" }, "Contacts")
     )
   ),
   React.createElement(
-    'ul', 
-    { className: 'left-nav' }, 
+    "ul",
+    { className: "left-nav" },
     React.createElement(
-      'li',
+      "li",
       null,
-      React.createElement(
-        'a',
-        { href: "/profile" },
-        "My Profile"
-      )
+      React.createElement("a", { href: "/profile" }, "My Profile")
     ),
     React.createElement(
-      'li',
+      "li",
       null,
-      React.createElement(
-        'button',
-        { className: "logout-button" },
-        "Log Out"
-      )
+      React.createElement("button", { className: "logout-button" }, "Log Out")
     )
-  ),
+  )
 );
 
 /* Problem 5
@@ -135,56 +119,40 @@ const nav = React.createElement(
 </section>
 */
 
-const form = () => React.createElement(
-  'form',
-  { className: 'tweet-form' },
+const form = () =>
   React.createElement(
-    'textarea',
-    { placeholder: 'What are you thinking?' }
-  ),
-  React.createElement(
-    'button',
-    { type: 'submit' },
-    'Tweet'
-  )
-);
+    "form",
+    { className: "tweet-form" },
+    React.createElement("textarea", { placeholder: "What are you thinking?" }),
+    React.createElement("button", { type: "submit" }, "Tweet")
+  );
 
-const tweet = ({ body, user }) => React.createElement(
-  'li',
-  { className: 'tweet' },
+const tweet = ({ body, user }) =>
   React.createElement(
-    'div',
-    { className: 'tweet-body' },
-    body
-  ),
-  React.createElement(
-    'div',
-    { className: 'tweet-footer' },
-    user
-  )
-);
+    "li",
+    { className: "tweet" },
+    React.createElement("div", { className: "tweet-body" }, body),
+    React.createElement("div", { className: "tweet-footer" }, user)
+  );
 
 const tweetsList = (props) => {
   return React.createElement(
-    'ul',
-    { className: 'tweets-list' },
-    props.tweets.map((tweetInfo) => React.createElement(
-      tweet, 
-      tweetInfo
-    ))
-  )
-}
+    "ul",
+    { className: "tweets-list" },
+    props.tweets.map((tweetInfo) => React.createElement(tweet, tweetInfo))
+  );
+};
 
 const tweets = React.createElement(
-  'section',
-  { className: 'tweets' },
+  "section",
+  { className: "tweets" },
   React.createElement(form, null),
   React.createElement(tweetsList, {
     tweets: [
-      { body: 'Tweet 1', user: 'User 1' },
-      { body: 'Tweet 2', user: 'User 2' },
-      { body: 'Tweet 3', user: 'User 1' },
-      { body: 'Tweet 4', user: 'User 3' },
-    ]
+      { body: "Tweet 1", user: "User 1" },
+      { body: "Tweet 2", user: "User 2" },
+      { body: "Tweet 3", user: "User 1" },
+      { body: "Tweet 4", user: "User 3" },
+    ],
   })
 );

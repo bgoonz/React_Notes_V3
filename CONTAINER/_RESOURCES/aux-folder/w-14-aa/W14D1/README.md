@@ -33,11 +33,7 @@ an actual DOM element and updates the actual DOM only if it needs to.
 `React.createElement` syntax:
 
 ```js
-React.createElement(
-  type,
-  [props],
-  [...children]
-);
+React.createElement(type, [props], [...children]);
 ```
 
 - `type` can be a string of the tag name, or a function that returns a React
@@ -59,11 +55,7 @@ Example 1:
 ```
 
 ```js
-const h1 = React.createElement(
-  'h1',
-  null,
-  'Hello Programmers!'
-);
+const h1 = React.createElement("h1", null, "Hello Programmers!");
 ```
 
 Example 2:
@@ -76,14 +68,9 @@ Example 2:
 ```
 
 ```js
-const home = React.createElement('li', null, 'Home');
-const contacts = React.createElement('li', null, 'Contacts');
-const ul = React.createElement(
-  'ul',
-  { className: 'left-nav' },
-  home,
-  contacts
-);
+const home = React.createElement("li", null, "Home");
+const contacts = React.createElement("li", null, "Contacts");
+const ul = React.createElement("ul", { className: "left-nav" }, home, contacts);
 ```
 
 Example 3:
@@ -115,26 +102,26 @@ Example 3:
 const post = (props) => {
   const { title, body } = props;
   return React.creatElement(
-    'li',
+    "li",
     { className: "post" },
     React.createElement(
-      'div',
+      "div",
       null,
-      React.createElement('div', null, title),
-      React.createElement('div', null, body)
+      React.createElement("div", null, title),
+      React.createElement("div", null, body)
     )
   );
-}
+};
 
 const posts = [
-  { title: 'Title 1', body: 'Body 1' },
-  { title: 'Title 2', body: 'Body 2' },
-  { title: 'Title 3', body: 'Body 3' },
+  { title: "Title 1", body: "Body 1" },
+  { title: "Title 2", body: "Body 2" },
+  { title: "Title 3", body: "Body 3" },
 ].map((props) => React.createElement(post, props));
 
 const postList = React.createElement(
-  'ul',
-  { className: 'post-list' },
+  "ul",
+  { className: "post-list" },
   ...posts
 );
 ```
@@ -143,8 +130,8 @@ const postList = React.createElement(
 
 [React.createElement Practice Solutions]
 
-[Facebook Image]: ./facebook.jpeg
-[React.createElement Demo]: ./createElement
-[React.createElement Examples]: ./example.js
-[React.createElement Practice Problems]: ./practice.js
-[React.createElement Practice Solutions]: ./solution.js
+[facebook image]: ./facebook.jpeg
+[react.createelement demo]: ./createElement
+[react.createelement examples]: ./example.js
+[react.createelement practice problems]: ./practice.js
+[react.createelement practice solutions]: ./solution.js

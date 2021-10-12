@@ -1,42 +1,100 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
-<head>
-  <meta charset="utf-8" />
-  <meta name="generator" content="pandoc" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>README</title>
-  <style type="text/css">
-      code{white-space: pre-wrap;}
-      span.smallcaps{font-variant: small-caps;}
-      span.underline{text-decoration: underline;}
-      div.column{display: inline-block; vertical-align: top; width: 50%;}
-  </style>
-</head>
-<body>
-<h1 id="react-context-los">React Context LOs</h1>
-<ul>
-<li>Use Context to share and manage global information within a React application</li>
-<li>Create a wrapper component with Context.Provider to set a component’s default context</li>
-<li>Create a wrapper component with Context.Consumer to share the global context through render props</li>
-<li>Create and pass a method through Context to update the global state from a nested component</li>
-</ul>
-<h1 id="react-context">React Context</h1>
-<p>React Context gives you a way to pass data through the component tree without having to manually thread props.</p>
-<p>React Context will re-render ALL of the children of a Component. React is specifically designed to cause small modular re-renders of components. So, we DO NOT want large swaths of our page re-rendering frequently, as this defeats the purpose of React. Therefore, React Context should be used for big, infreqeunt changes to your webpage.</p>
-<p>Ex: * Switching to Dark Mode * Sending a User’s information</p>
-<p>React Context should NOT be used for: * Live updates * Anything which is loaded when scrolling a page * Small or frequent updates to a page</p>
-<p><a href="./react-redux-context-solution">PupContext Homework Solutions</a></p>
-<p><a href="./creatingContext.md"><code>React.createContext</code></a></p>
-<p><a href="./contextProvider.md"><code>Context.Provider</code></a></p>
-<p><a href="./contextConsumer.md"><code>Context.Consumer</code></a></p>
-<p><a href="./updatingContext.md">Updating Context Value</a></p>
-<h2 id="command-to-set-up-a-simple-react-app">Command to set up a simple React App</h2>
-<ul>
-<li>npx create-react-app context-to-do-list –template <span class="citation" data-cites="appacademy/simple">@appacademy/simple</span></li>
-</ul>
-<h2 id="assessment-prep"><a href="./assessment-prep.md">Assessment Prep</a></h2>
-<h2 id="project-solutions">Project Solutions</h2>
-<p><a href="./context-to-do-list-solution">Context To Do List Solutions</a></p>
-<p><a href="./twitter-revisited-solution">Twitter Revisited Solutions</a></p>
-</body>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="generator" content="pandoc" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=yes"
+    />
+    <title>README</title>
+    <style type="text/css">
+      code {
+        white-space: pre-wrap;
+      }
+      span.smallcaps {
+        font-variant: small-caps;
+      }
+      span.underline {
+        text-decoration: underline;
+      }
+      div.column {
+        display: inline-block;
+        vertical-align: top;
+        width: 50%;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 id="react-context-los">React Context LOs</h1>
+    <ul>
+      <li>
+        Use Context to share and manage global information within a React
+        application
+      </li>
+      <li>
+        Create a wrapper component with Context.Provider to set a component’s
+        default context
+      </li>
+      <li>
+        Create a wrapper component with Context.Consumer to share the global
+        context through render props
+      </li>
+      <li>
+        Create and pass a method through Context to update the global state from
+        a nested component
+      </li>
+    </ul>
+    <h1 id="react-context">React Context</h1>
+    <p>
+      React Context gives you a way to pass data through the component tree
+      without having to manually thread props.
+    </p>
+    <p>
+      React Context will re-render ALL of the children of a Component. React is
+      specifically designed to cause small modular re-renders of components. So,
+      we DO NOT want large swaths of our page re-rendering frequently, as this
+      defeats the purpose of React. Therefore, React Context should be used for
+      big, infreqeunt changes to your webpage.
+    </p>
+    <p>Ex: * Switching to Dark Mode * Sending a User’s information</p>
+    <p>
+      React Context should NOT be used for: * Live updates * Anything which is
+      loaded when scrolling a page * Small or frequent updates to a page
+    </p>
+    <p>
+      <a href="./react-redux-context-solution">PupContext Homework Solutions</a>
+    </p>
+    <p>
+      <a href="./creatingContext.md"><code>React.createContext</code></a>
+    </p>
+    <p>
+      <a href="./contextProvider.md"><code>Context.Provider</code></a>
+    </p>
+    <p>
+      <a href="./contextConsumer.md"><code>Context.Consumer</code></a>
+    </p>
+    <p><a href="./updatingContext.md">Updating Context Value</a></p>
+    <h2 id="command-to-set-up-a-simple-react-app">
+      Command to set up a simple React App
+    </h2>
+    <ul>
+      <li>
+        npx create-react-app context-to-do-list –template
+        <span class="citation" data-cites="appacademy/simple"
+          >@appacademy/simple</span
+        >
+      </li>
+    </ul>
+    <h2 id="assessment-prep">
+      <a href="./assessment-prep.md">Assessment Prep</a>
+    </h2>
+    <h2 id="project-solutions">Project Solutions</h2>
+    <p>
+      <a href="./context-to-do-list-solution">Context To Do List Solutions</a>
+    </p>
+    <p>
+      <a href="./twitter-revisited-solution">Twitter Revisited Solutions</a>
+    </p>
+  </body>
 </html>

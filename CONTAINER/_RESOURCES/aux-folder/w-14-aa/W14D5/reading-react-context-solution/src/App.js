@@ -1,9 +1,9 @@
-import React from 'react';
-import PupContext from './PupContext';
-import PupFormWithContext from './PupForm';
-import banana from './pups/banana-pup.jpg';
-import sleepy from './pups/sleepy-pup.jpg';
-import speedy from './pups/speedy-pup.jpg';
+import React from "react";
+import PupContext from "./PupContext";
+import PupFormWithContext from "./PupForm";
+import banana from "./pups/banana-pup.jpg";
+import sleepy from "./pups/sleepy-pup.jpg";
+import speedy from "./pups/speedy-pup.jpg";
 
 const App = ({ puppyType }) => (
   <div id="app">
@@ -23,7 +23,7 @@ class AppWithContext extends React.Component {
 
   updateContext = (puppyType) => {
     this.setState({ puppyType });
-  }
+  };
 
   render() {
     return (

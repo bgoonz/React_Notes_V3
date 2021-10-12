@@ -7,5 +7,5 @@ export const toQueryString = (params) => {
       parts.push(`${key}=${val}`);
     }
   }
-  return parts.join('&');
-}
+  return parts.join("&");
+};

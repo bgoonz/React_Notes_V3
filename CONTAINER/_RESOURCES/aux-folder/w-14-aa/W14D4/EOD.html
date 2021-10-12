@@ -1,36 +1,75 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
-<head>
-  <meta charset="utf-8" />
-  <meta name="generator" content="pandoc" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>EOD</title>
-  <style type="text/css">
-      code{white-space: pre-wrap;}
-      span.smallcaps{font-variant: small-caps;}
-      span.underline{text-decoration: underline;}
-      div.column{display: inline-block; vertical-align: top; width: 50%;}
-  </style>
-</head>
-<body>
-<h1 id="eod">EOD</h1>
-<ul>
-<li>Relative vs. Absolute Paths with NavLink</li>
-<li><Link to="/absolute/path/only" /></li>
-<li><Switch>
-</Switch></li>
-<li>Express to serve our application? Wasn’t npm working fine?
-<ul>
-<li>Previously, we were serving up our application using the <code>npm start</code> script.</li>
-<li>When the script ran, the files were being streamlined for the browser on your computers RAM and not actually saved anywhere permanent.</li>
-<li><code>NPM build</code> did the same process, but also created the <code>build/</code> directory and saved static files of your application into it. We are having express serve these static, pre-built files because that is what we would actually push into production! The express folder of this second project, which contains
-<ul>
-<li>The express server</li>
-<li>The static files of your react application.</li>
-</ul></li>
-<li>When someone visits your webpage, we don’t expect Heroku to run npm start, streamline all of those files, then serve those up. We cut out the middleman and just hand those streamlined files to Heroku.</li>
-</ul></li>
-</ul>
-<p>Getting stuck on any part of React-Router? <a href="https://open.appacademy.io/learn/js-py---may-2020-online/week-14-may-2020-online/router-documentation">Check out the docs!</a> They are pretty easy to follow and reveal some extra functionality.</p>
-</body>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="generator" content="pandoc" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=yes"
+    />
+    <title>EOD</title>
+    <style type="text/css">
+      code {
+        white-space: pre-wrap;
+      }
+      span.smallcaps {
+        font-variant: small-caps;
+      }
+      span.underline {
+        text-decoration: underline;
+      }
+      div.column {
+        display: inline-block;
+        vertical-align: top;
+        width: 50%;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 id="eod">EOD</h1>
+    <ul>
+      <li>Relative vs. Absolute Paths with NavLink</li>
+      <li><link to="/absolute/path/only" /></li>
+      <li><Switch> </Switch></li>
+      <li>
+        Express to serve our application? Wasn’t npm working fine?
+        <ul>
+          <li>
+            Previously, we were serving up our application using the
+            <code>npm start</code> script.
+          </li>
+          <li>
+            When the script ran, the files were being streamlined for the
+            browser on your computers RAM and not actually saved anywhere
+            permanent.
+          </li>
+          <li>
+            <code>NPM build</code> did the same process, but also created the
+            <code>build/</code> directory and saved static files of your
+            application into it. We are having express serve these static,
+            pre-built files because that is what we would actually push into
+            production! The express folder of this second project, which
+            contains
+            <ul>
+              <li>The express server</li>
+              <li>The static files of your react application.</li>
+            </ul>
+          </li>
+          <li>
+            When someone visits your webpage, we don’t expect Heroku to run npm
+            start, streamline all of those files, then serve those up. We cut
+            out the middleman and just hand those streamlined files to Heroku.
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <p>
+      Getting stuck on any part of React-Router?
+      <a
+        href="https://open.appacademy.io/learn/js-py---may-2020-online/week-14-may-2020-online/router-documentation"
+        >Check out the docs!</a
+      >
+      They are pretty easy to follow and reveal some extra functionality.
+    </p>
+  </body>
 </html>

@@ -1,5 +1,5 @@
 import React from "react";
-import UserContext from '../contexts/UserContext';
+import UserContext from "../contexts/UserContext";
 
 class Profile extends React.Component {
   constructor(props) {
@@ -7,8 +7,8 @@ class Profile extends React.Component {
     this.state = {
       user: {},
       tweets: [],
-      newTweet: ""
-    }
+      newTweet: "",
+    };
   }
 
   fetchUser = async () => {
@@ -23,7 +23,7 @@ class Profile extends React.Component {
       console.error(err);
       return {};
     }
-  }
+  };
 
   createTweet = async (e) => {
     e.preventDefault();
@@ -44,13 +44,13 @@ class Profile extends React.Component {
     } catch (err) {
       console.error(err);
     }
-  }
+  };
 
   deleteTweet = (tweetId) => {
-    return async e => {
+    return async (e) => {
       try {
         const res = await fetch(`/tweets/${tweetId}`, {
-          method: "DELETE"
+          method: "DELETE",
         });
 
         if (!res.ok) throw res;
@@ -60,7 +60,7 @@ class Profile extends React.Component {
         console.error(err);
       }
     };
-  }
+  };
 
   fetchUserTweets = async () => {
     const { currentUserId } = this.props;
@@ -74,35 +74,34 @@ class Profile extends React.Component {
       console.error(err);
       return [];
     }
-  }
+  };
 
-  updateNewTweet = e => {
+  updateNewTweet = (e) => {
     this.setState({ newTweet: e.target.value });
-  }
+  };
 
   async componentDidMount() {
     const user = await this.fetchUser();
     const tweets = await this.fetchUserTweets();
-    this.setState(
-      { user, tweets },
-      () => console.log(this.state),
-    );
+    this.setState({ user, tweets }, () => console.log(this.state));
   }
 
   render() {
     const { user, tweets, newTweet } = this.state;
 
-    const userTweets = (tweets.length)
-      ? tweets.map((tweet) => {
-          const { id, message } = tweet;
-          return (
-            <li key={id}>
-              <p>{message}</p>
-              <button onClick={this.deleteTweet(id)}>Delete</button>
-            </li>
-          )
-        })
-      : <p>This user has no tweets! :(</p>
+    const userTweets = tweets.length ? (
+      tweets.map((tweet) => {
+        const { id, message } = tweet;
+        return (
+          <li key={id}>
+            <p>{message}</p>
+            <button onClick={this.deleteTweet(id)}>Delete</button>
+          </li>
+        );
+      })
+    ) : (
+      <p>This user has no tweets! :(</p>
+    );
 
     return (
       <div>
@@ -123,14 +122,20 @@ class Profile extends React.Component {
       </div>
     );
   }
-};
+}
 
 const ProfileWithContext = (props) => {
   return (
     <UserContext.Consumer>
-      {value => <Profile {...props} authToken={value.authToken} currentUserId={value.currentUserId} />}
+      {(value) => (
+        <Profile
+          {...props}
+          authToken={value.authToken}
+          currentUserId={value.currentUserId}
+        />
+      )}
     </UserContext.Consumer>
   );
-}
+};
 
 export default ProfileWithContext;

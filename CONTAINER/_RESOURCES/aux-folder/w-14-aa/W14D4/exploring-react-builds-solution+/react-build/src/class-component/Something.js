@@ -1,12 +1,12 @@
 import React from "react";
 
 class Something extends React.Component {
-  constructor (props) {
+  constructor(props) {
     super(props);
   }
 
-  render () {
-    return <h3>Something</h3>
+  render() {
+    return <h3>Something</h3>;
   }
 }
 

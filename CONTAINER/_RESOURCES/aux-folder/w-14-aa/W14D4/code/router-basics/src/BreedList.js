@@ -1,17 +1,15 @@
-import React from 'react';
-import { NavLink } from 'react-router-dom';
+import React from "react";
+import { NavLink } from "react-router-dom";
 
-const BreedList = props =>
+const BreedList = (props) => (
   <div className="list">
-    {props.breeds.map(breed => (
+    {props.breeds.map((breed) => (
       <div key={breed} className="list-item">
-        <NavLink activeClassName="is-selected"
-          to={`/breeds/${breed}`}>
+        <NavLink activeClassName="is-selected" to={`/breeds/${breed}`}>
           {breed}
         </NavLink>
       </div>
     ))}
   </div>
-  ;
-
+);
 export default BreedList;

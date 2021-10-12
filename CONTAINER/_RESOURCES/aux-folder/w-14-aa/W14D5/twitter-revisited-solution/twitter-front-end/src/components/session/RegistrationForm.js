@@ -1,5 +1,5 @@
-import React from 'react';
-import UserContext from '../../contexts/UserContext';
+import React from "react";
+import UserContext from "../../contexts/UserContext";
 
 class RegistrationForm extends React.Component {
   constructor(props) {
@@ -78,9 +78,9 @@ class RegistrationForm extends React.Component {
 const RegistrationFormWithContext = (props) => {
   return (
     <UserContext.Consumer>
-      {value => <RegistrationForm {...props} login={value.login} />}
+      {(value) => <RegistrationForm {...props} login={value.login} />}
     </UserContext.Consumer>
   );
-}
+};
 
 export default RegistrationFormWithContext;

@@ -35,15 +35,15 @@
 5.  **Use the `ReactDOM.render` method to have React render your virtual DOM nodes under an actual DOM node**<br/>
 
     ```js
-    import React from 'react';
-    import ReactDOM from 'react-dom';
-    import App from './App';
+    import React from "react";
+    import ReactDOM from "react-dom";
+    import App from "./App";
 
     ReactDOM.render(
       <React.StrictMode>
         <App />
       </React.StrictMode>,
-      document.getElementById('root')
+      document.getElementById("root")
     );
     ```
 
@@ -53,11 +53,11 @@
     ```js
     function AlertButton() {
       showAlert = () => {
-        window.alert('Button clicked!');
+        window.alert("Button clicked!");
       };
 
       return (
-        <button type='button' onClick={showAlert}>
+        <button type="button" onClick={showAlert}>
           Click Me
         </button>
       );
@@ -91,7 +91,7 @@
         <nav>
           <h1>Pet App</h1>
           // props being passed in component
-          <NavLinks hello='world' />
+          <NavLinks hello="world" />
         </nav>
       );
     }
@@ -101,7 +101,7 @@
 
     ```js
     function NavBar() {
-      const world = 'world';
+      const world = "world";
       return (
         <nav>
           <h1>Pet App</h1>
@@ -120,13 +120,13 @@
       return (
         <ul>
           <li>
-            <a href='/hello'>{props.hello}</a>
+            <a href="/hello">{props.hello}</a>
           </li>
-          <li className='selected'>
-            <a href='/pets'>Pets</a>
+          <li className="selected">
+            <a href="/pets">Pets</a>
           </li>
           <li>
-            <a href='/owners'>Owners</a>
+            <a href="/owners">Owners</a>
           </li>
         </ul>
       );
@@ -143,13 +143,13 @@
       return (
         <ul>
           <li>
-            <a href='/hello'>{hello}</a>
+            <a href="/hello">{hello}</a>
           </li>
-          <li className='selected'>
-            <a href='/pets'>Pets</a>
+          <li className="selected">
+            <a href="/pets">Pets</a>
           </li>
           <li>
-            <a href='/owners'>Owners</a>
+            <a href="/owners">Owners</a>
           </li>
         </ul>
       );
@@ -162,10 +162,10 @@
 
     ```js
     // ./src/index.js
-    import React from 'react';
-    import ReactDOM from 'react-dom';
-    import { BrowserRouter } from 'react-router-dom';
-    import App from './App';
+    import React from "react";
+    import ReactDOM from "react-dom";
+    import { BrowserRouter } from "react-router-dom";
+    import App from "./App";
 
     const Root = () => {
       return (
@@ -179,7 +179,7 @@
       <React.StrictMode>
         <Root />
       </React.StrictMode>,
-      document.getElementById('root')
+      document.getElementById("root")
     );
     ```
 
@@ -188,14 +188,14 @@
     Then in the component of your choosing, usually top tier such as App.js, you can create your routes using the Route and Switch Components
 
     ```js
-    import { Route, Switch } from 'react';
-    import Home from './components/Home';
+    import { Route, Switch } from "react";
+    import Home from "./components/Home";
 
     <Switch>
-      <Route exact path='/'>
+      <Route exact path="/">
         <Home />
       </Route>
-      <Route exact path='/users'>
+      <Route exact path="/users">
         <Users />
       </Route>
     </Switch>;
@@ -226,7 +226,7 @@
     **Example:**
 
     ```js
-    <Route path='/users/:userId'>
+    <Route path="/users/:userId">
       <Profile />
     </Route>
     ```
@@ -236,7 +236,7 @@
     We access these parameters in our component by using the useParams function from react-router-dom.
 
     ```js
-    import { useParams } from 'react-router-dom';
+    import { useParams } from "react-router-dom";
 
     function Example() {
       const params = useParams();
@@ -317,7 +317,7 @@
     We use useEffect to control our side-effects. Side effects include, manually touching the DOM, timers, data fetching, subscriptions, etc.
 
     ```js
-    import { useEffect } from 'react';
+    import { useEffect } from "react";
 
     export default function Example() {
       const [count, setCount] = useState(0);
@@ -371,40 +371,40 @@
 21. **Construct a form that can capture user data using common form inputs.**<br/>
 
 ```js
-import { useState } from 'react';
+import { useState } from "react";
 
 function ContactUs() {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [phone, setPhone] = useState('');
-  const [comments, setComments] = useState('');
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [comments, setComments] = useState("");
 
   return (
     <div>
       <h2>Contact Us</h2>
       <form>
         <div>
-          <label htmlFor='name'>Name:</label>
-          <input id='name' type='text' value={name} />
+          <label htmlFor="name">Name:</label>
+          <input id="name" type="text" value={name} />
         </div>
         <div>
-          <label htmlFor='email'>Email:</label>
-          <input id='email' type='text' value={email} />
+          <label htmlFor="email">Email:</label>
+          <input id="email" type="text" value={email} />
         </div>
         <div>
-          <label htmlFor='phone'>Phone:</label>
+          <label htmlFor="phone">Phone:</label>
           <input
-            id='phone'
-            type='text'
+            id="phone"
+            type="text"
             onChange={(e) => setPhone(e.target.value)}
             value={phone}
           />
         </div>
         <div>
-          <label htmlFor='comments'>Comments:</label>
+          <label htmlFor="comments">Comments:</label>
           <textarea
-            id='comments'
-            name='comments'
+            id="comments"
+            name="comments"
             onChange={(e) => setComments(e.target.value)}
             value={comments}
           />
@@ -451,9 +451,9 @@ export default ContactUs;
     const validate = () => {
       const validationErrors = [];
 
-      if (!name) validationErrors.push('Please provide a Name');
+      if (!name) validationErrors.push("Please provide a Name");
 
-      if (!email) validationErrors.push('Please provide an Email');
+      if (!email) validationErrors.push("Please provide an Email");
 
       return validationErrors;
     };
@@ -538,8 +538,8 @@ export default ContactUs;
     We retrieve values from a context using the useContext hook and the created Context.
 
     ```js
-    import { useContext } from 'react';
-    import { PupsContext } from './context/PupsContext';
+    import { useContext } from "react";
+    import { PupsContext } from "./context/PupsContext";
 
     export default function PupsReveal() {
       const myPups = useContext(PupsContext);

@@ -1,79 +1,330 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
-<head>
-  <meta charset="utf-8" />
-  <meta name="generator" content="pandoc" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>where-2-begin</title>
-  <style type="text/css">
-      code{white-space: pre-wrap;}
-      span.smallcaps{font-variant: small-caps;}
-      span.underline{text-decoration: underline;}
-      div.column{display: inline-block; vertical-align: top; width: 50%;}
-  </style>
-</head>
-<body>
-<h1 id="react-howto">react-howto</h1>
-<p>If you’re new to React (or frontend in general) you may find the ecosystem confusing. There are a few reasons for this.</p>
-<ul>
-<li>React has historically been targeted at early-adopters and experts</li>
-<li>Facebook only open-sources what it actually uses, so it doesn’t focus on tooling for smaller-than-Facebook projects</li>
-<li>There’s a lot of bad marketing masquerading as React guides</li>
-</ul>
-<p>Throughout this document, I’ll assume you’ve built a web page with HTML, CSS and JavaScript.</p>
-<h2 id="why-should-you-listen-to-me">Why should you listen to me?</h2>
-<p>There’s a ton of conflicting advice about React out there; why listen to me?</p>
-<p>I was one of the original members of the Facebook team that built and open-sourced React. I’m no longer at Facebook and I’m now at a small startup, so I have a non-Facebook perspective as well.</p>
-<h2 id="how-to-tackle-the-react-ecosystem">How to tackle the React ecosystem</h2>
-<p>All software is built on a stack of technologies, and you need to understand enough of that stack to build your app. The reason why the React ecosystem of tooling seems overwhelming is because it’s always explained in the wrong order.</p>
-<p>You should learn, in this order, <strong>without skipping ahead or learning concurrently</strong>:</p>
-<ul>
-<li><a href="#learning-react-itself">React itself</a></li>
-<li><a href="#learning-npm"><code>npm</code></a></li>
-<li><a href="#learning-javascript-bundlers">JavaScript “bundlers”</a></li>
-<li><a href="#learning-es6">ES6</a></li>
-<li><a href="#learning-routing">Routing</a></li>
-<li><a href="#learning-flux">Flux</a></li>
-</ul>
-<p><strong>You don’t need to learn all of these to be productive with React.</strong> Only move to the next step if you have a problem that needs to be solved.</p>
-<p>Additionally, there are a few topics that are often mentioned in the React community that are “bleeding edge”. The topics below are interesting, but they’re difficult to understand, are far less popular than the above topics and <strong>aren’t required for most apps</strong>. * <a href="#learning-inline-styles">Inline styles</a> * <a href="#learning-server-rendering">Server rendering</a> * <a href="#learning-immutablejs">Immutable.js</a> * <a href="#learning-relay-falcor-etc">Relay, Falcor, etc</a></p>
-<h2 id="learning-react-itself">Learning React itself</h2>
-<p>It’s a common misconception that you need to waste a lot of time setting up tooling to start to learn React. In the official documentation you’ll find a <a href="https://facebook.github.io/react/docs/getting-started.html#quick-start-without-npm">copy-paste HTML template</a> that you can save in an <code>.html</code> file and get started right away. <strong>No tooling is required for this step, and don’t start learning extra tooling until you’re comfortable with React basics.</strong></p>
-<p>I still think the easiest way to learn React is <a href="https://facebook.github.io/react/docs/tutorial.html">the official tutorial</a>.</p>
-<h2 id="learning-npm">Learning <code>npm</code></h2>
-<p><code>npm</code> is the Node.js package manager and is the most popular way front-end engineers and designers share JavaScript code. It includes a module system called <code>CommonJS</code> and lets you install command-line tools written in JavaScript. Read <a href="http://0fps.net/2013/01/22/commonjs-why-and-how/">this post</a> for background on why <code>CommonJS</code> is necessary for browsers, or the <a href="http://wiki.commonjs.org/wiki/Introduction">CommonJS Spec Wiki</a> for more on the <code>CommonJS</code> API.</p>
-<p>Most reusable components, libraries and tools in the React ecosystem are available as <code>CommonJS</code> modules and are installed with <code>npm</code>.</p>
-<h2 id="learning-javascript-bundlers">Learning JavaScript bundlers</h2>
-<p>For a number of good technical reasons <code>CommonJS</code> modules (i.e. everything in <code>npm</code>) cannot be used natively in the browser. You need a JavaScript “bundler” to “bundle” these modules into <code>.js</code> files that you can include in your web page with a <code>&lt;script&gt;</code> tag.</p>
-<p>Examples of JavaScript bundlers include <code>webpack</code> and <code>browserify</code>. Both are good choices, but I prefer <code>webpack</code> since it has a lot of features that make development of large apps easier. Since its documentation can be confusing, I have a <a href="https://github.com/petehunt/react-webpack-template">plug-and-play template for getting started</a> and I wrote a <a href="https://github.com/petehunt/webpack-howto">how-to guide for webpack</a> for more complex use cases.</p>
-<p>React also now offers <a href="https://github.com/facebookincubator/create-react-app">an officially supported CLI tool called Create React App</a>. It lets you create React projects powered by <code>webpack</code> without any configuration. It has its limitations, but it can serve as a great starting point, and its updates will add more features over time. It also offers an “ejection” feature that copies all configs and dependencies into your project so you have full control over them.</p>
-<p>One thing to keep in mind: <code>CommonJS</code> uses the <code>require()</code> function to import modules, so a lot of people get confused and think that it has something to do with a project called <code>require.js</code>. For a number of technical reasons, I would suggest that you avoid <code>require.js</code>. It’s also not very popular in the React ecosystem.</p>
-<h2 id="learning-es6">Learning ES6</h2>
-<p>Outside of JSX (which you learned in the React tutorial), you may see some funny syntax in React examples. This is called ES6, and it’s the latest version of JavaScript so you may not have learned it yet. Since it’s so new, it’s not supported in browsers yet, but your bundler can translate it for you with the proper configuration.</p>
-<p>If you just want to get things done with React, <strong>you can skip learning ES6</strong>, or try to pick it up along the way.</p>
-<p>You may see some talk about ES6 classes being the preferred way to create React components. This is untrue. Most people (including Facebook) are using <code>React.createClass()</code>.</p>
-<h2 id="learning-routing">Learning routing</h2>
-<p>“Single-page applications” are all the rage these days. These are web pages that load once, and when the user clicks on a link or a button, JavaScript running on the page updates the address bar, but the web page is not refreshed. Management of the address bar is done by something called a <strong>router</strong>.</p>
-<p>The most popular router in the React ecosystem is <a href="https://github.com/rackt/react-router">react-router</a>. If you’re building a single-page application, use it unless you have a good reason not to.</p>
-<p><strong>Don’t use a router if you aren’t building a single-page application</strong>. Most projects start out as smaller components inside of a larger application anyway.</p>
-<h2 id="learning-flux">Learning Flux</h2>
-<p>You’ve probably heard of Flux. There’s a <em>ton</em> of misinformation about Flux out there.</p>
-<p>A lot of people sit down to build an app and want to define their data model, and they think they need to use Flux to do it. <strong>This is the wrong way to adopt Flux. Flux should only be added once many components have already been built.</strong></p>
-<p>React components are arranged in a hierarchy. Most of the time, your data model also follows a hierarchy. In these situations Flux doesn’t buy you much. Sometimes, however, your data model is not hierarchical. When your React components start to receive <code>props</code> that feel extraneous, or you have a small number of components starting to get very complex, then you might want to look into Flux.</p>
-<p><strong>You’ll know when you need Flux. If you aren’t sure if you need it, you don’t need it.</strong></p>
-<p>If you have decided to use Flux, the most popular and well-documented Flux library is <a href="http://redux.js.org/">Redux</a>. There are <em>a lot</em> of alternatives out there, and you’ll be tempted to evaluate lots of them, but my advice is to just stick with the most popular one.</p>
-<h2 id="learning-inline-styles">Learning inline styles</h2>
-<p>Pre-React, a lot of people reused CSS styles with complicated style sheets built by preprocessors like SASS. Since React makes writing reusable components easy, your stylesheets can be less complicated. Many in the community (including myself) are experimenting with getting rid of stylesheets altogether.</p>
-<p>This is a fairly crazy idea for a number of reasons. It makes media queries more difficult, and it’s possible that there are performance limitations using this technique. <strong>When starting out with React, just style things the way you normally would.</strong></p>
-<p>Once you’ve got a feel for how React works, you can look at alternate techniques. One popular one is <a href="https://en.bem.info/">BEM</a>. I recommend phasing out your CSS preprocessor, since React gives you a more powerful way to reuse styles (by reusing components) and your JavaScript bundler can generate more efficient stylesheets for you (I gave <a href="https://www.youtube.com/watch?v=VkTCL6Nqm6Y">a talk about this at OSCON</a>). With that said, React, like any other JavaScript library, will work just fine with a CSS preprocessor.</p>
-<p>Alternatively, you can also use <a href="http://glenmaddern.com/articles/css-modules">CSS Modules</a>, more specifically <a href="https://github.com/gajus/react-css-modules">react-css-modules</a>. With CSS Modules you’ll still write CSS (or SASS/LESS/Stylus), but you can manage and compose your CSS files like you’d do with inline styles in React. And you don’t need to worry about managing your class names using methodologies like BEM, as this will be handled for you under the hood by the module system.</p>
-<h2 id="learning-server-rendering">Learning server rendering</h2>
-<p>Server rendering is often called “universal” or “isomorphic” JS. It means that you can take your React components and render them to static HTML on the server. This improves initial startup performance because the user does not need to wait for JS to download in order to see the initial UI, and React can re-use the server-rendered HTML so it doesn’t need to generate it client-side.</p>
-<p>You need server rendering if you notice that your initial render is too slow or if you want to improve your search engine ranking. While it’s true that Google now indexes client-rendered content, as of January 2016 every time it’s been measured it’s been shown to negatively affect ranking, potentially because of the performance penalty of client-side rendering.</p>
-<p>Server rendering still requires a lot of tooling to get right. Since it transparently supports React components written without server rendering in mind, you should build your app first and worry about server rendering later. You won’t need to rewrite all of your components to support it.</p>
-<h2 id="learning-immutable.js">Learning Immutable.js</h2>
-<p><a href="https://facebook.github.io/immutable-js/">Immutable.js</a> provides a set of data structures that can help to solve certain performance issues when building React apps. It’s a great library, and you’ll probably use it a lot in your apps moving forward, but it’s completely unnecessary until you have an appreciation of the performance implications.</p>
-<h2 id="learning-relay-falcor-etc">Learning Relay, Falcor etc</h2>
-<p>These are technologies that help you reduce the number of AJAX requests. They’re still very cutting-edge, so if you don’t have a problem with too many AJAX requests, you don’t need Relay or Falcor.</p>
-</body>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="generator" content="pandoc" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=yes"
+    />
+    <title>where-2-begin</title>
+    <style type="text/css">
+      code {
+        white-space: pre-wrap;
+      }
+      span.smallcaps {
+        font-variant: small-caps;
+      }
+      span.underline {
+        text-decoration: underline;
+      }
+      div.column {
+        display: inline-block;
+        vertical-align: top;
+        width: 50%;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 id="react-howto">react-howto</h1>
+    <p>
+      If you’re new to React (or frontend in general) you may find the ecosystem
+      confusing. There are a few reasons for this.
+    </p>
+    <ul>
+      <li>
+        React has historically been targeted at early-adopters and experts
+      </li>
+      <li>
+        Facebook only open-sources what it actually uses, so it doesn’t focus on
+        tooling for smaller-than-Facebook projects
+      </li>
+      <li>There’s a lot of bad marketing masquerading as React guides</li>
+    </ul>
+    <p>
+      Throughout this document, I’ll assume you’ve built a web page with HTML,
+      CSS and JavaScript.
+    </p>
+    <h2 id="why-should-you-listen-to-me">Why should you listen to me?</h2>
+    <p>
+      There’s a ton of conflicting advice about React out there; why listen to
+      me?
+    </p>
+    <p>
+      I was one of the original members of the Facebook team that built and
+      open-sourced React. I’m no longer at Facebook and I’m now at a small
+      startup, so I have a non-Facebook perspective as well.
+    </p>
+    <h2 id="how-to-tackle-the-react-ecosystem">
+      How to tackle the React ecosystem
+    </h2>
+    <p>
+      All software is built on a stack of technologies, and you need to
+      understand enough of that stack to build your app. The reason why the
+      React ecosystem of tooling seems overwhelming is because it’s always
+      explained in the wrong order.
+    </p>
+    <p>
+      You should learn, in this order,
+      <strong>without skipping ahead or learning concurrently</strong>:
+    </p>
+    <ul>
+      <li><a href="#learning-react-itself">React itself</a></li>
+      <li>
+        <a href="#learning-npm"><code>npm</code></a>
+      </li>
+      <li><a href="#learning-javascript-bundlers">JavaScript “bundlers”</a></li>
+      <li><a href="#learning-es6">ES6</a></li>
+      <li><a href="#learning-routing">Routing</a></li>
+      <li><a href="#learning-flux">Flux</a></li>
+    </ul>
+    <p>
+      <strong
+        >You don’t need to learn all of these to be productive with
+        React.</strong
+      >
+      Only move to the next step if you have a problem that needs to be solved.
+    </p>
+    <p>
+      Additionally, there are a few topics that are often mentioned in the React
+      community that are “bleeding edge”. The topics below are interesting, but
+      they’re difficult to understand, are far less popular than the above
+      topics and <strong>aren’t required for most apps</strong>. *
+      <a href="#learning-inline-styles">Inline styles</a> *
+      <a href="#learning-server-rendering">Server rendering</a> *
+      <a href="#learning-immutablejs">Immutable.js</a> *
+      <a href="#learning-relay-falcor-etc">Relay, Falcor, etc</a>
+    </p>
+    <h2 id="learning-react-itself">Learning React itself</h2>
+    <p>
+      It’s a common misconception that you need to waste a lot of time setting
+      up tooling to start to learn React. In the official documentation you’ll
+      find a
+      <a
+        href="https://facebook.github.io/react/docs/getting-started.html#quick-start-without-npm"
+        >copy-paste HTML template</a
+      >
+      that you can save in an <code>.html</code> file and get started right
+      away.
+      <strong
+        >No tooling is required for this step, and don’t start learning extra
+        tooling until you’re comfortable with React basics.</strong
+      >
+    </p>
+    <p>
+      I still think the easiest way to learn React is
+      <a href="https://facebook.github.io/react/docs/tutorial.html"
+        >the official tutorial</a
+      >.
+    </p>
+    <h2 id="learning-npm">Learning <code>npm</code></h2>
+    <p>
+      <code>npm</code> is the Node.js package manager and is the most popular
+      way front-end engineers and designers share JavaScript code. It includes a
+      module system called <code>CommonJS</code> and lets you install
+      command-line tools written in JavaScript. Read
+      <a href="http://0fps.net/2013/01/22/commonjs-why-and-how/">this post</a>
+      for background on why <code>CommonJS</code> is necessary for browsers, or
+      the
+      <a href="http://wiki.commonjs.org/wiki/Introduction"
+        >CommonJS Spec Wiki</a
+      >
+      for more on the <code>CommonJS</code> API.
+    </p>
+    <p>
+      Most reusable components, libraries and tools in the React ecosystem are
+      available as <code>CommonJS</code> modules and are installed with
+      <code>npm</code>.
+    </p>
+    <h2 id="learning-javascript-bundlers">Learning JavaScript bundlers</h2>
+    <p>
+      For a number of good technical reasons <code>CommonJS</code> modules
+      (i.e. everything in <code>npm</code>) cannot be used natively in the
+      browser. You need a JavaScript “bundler” to “bundle” these modules into
+      <code>.js</code> files that you can include in your web page with a
+      <code>&lt;script&gt;</code> tag.
+    </p>
+    <p>
+      Examples of JavaScript bundlers include <code>webpack</code> and
+      <code>browserify</code>. Both are good choices, but I prefer
+      <code>webpack</code> since it has a lot of features that make development
+      of large apps easier. Since its documentation can be confusing, I have a
+      <a href="https://github.com/petehunt/react-webpack-template"
+        >plug-and-play template for getting started</a
+      >
+      and I wrote a
+      <a href="https://github.com/petehunt/webpack-howto"
+        >how-to guide for webpack</a
+      >
+      for more complex use cases.
+    </p>
+    <p>
+      React also now offers
+      <a href="https://github.com/facebookincubator/create-react-app"
+        >an officially supported CLI tool called Create React App</a
+      >. It lets you create React projects powered by
+      <code>webpack</code> without any configuration. It has its limitations,
+      but it can serve as a great starting point, and its updates will add more
+      features over time. It also offers an “ejection” feature that copies all
+      configs and dependencies into your project so you have full control over
+      them.
+    </p>
+    <p>
+      One thing to keep in mind: <code>CommonJS</code> uses the
+      <code>require()</code> function to import modules, so a lot of people get
+      confused and think that it has something to do with a project called
+      <code>require.js</code>. For a number of technical reasons, I would
+      suggest that you avoid <code>require.js</code>. It’s also not very popular
+      in the React ecosystem.
+    </p>
+    <h2 id="learning-es6">Learning ES6</h2>
+    <p>
+      Outside of JSX (which you learned in the React tutorial), you may see some
+      funny syntax in React examples. This is called ES6, and it’s the latest
+      version of JavaScript so you may not have learned it yet. Since it’s so
+      new, it’s not supported in browsers yet, but your bundler can translate it
+      for you with the proper configuration.
+    </p>
+    <p>
+      If you just want to get things done with React,
+      <strong>you can skip learning ES6</strong>, or try to pick it up along the
+      way.
+    </p>
+    <p>
+      You may see some talk about ES6 classes being the preferred way to create
+      React components. This is untrue. Most people (including Facebook) are
+      using <code>React.createClass()</code>.
+    </p>
+    <h2 id="learning-routing">Learning routing</h2>
+    <p>
+      “Single-page applications” are all the rage these days. These are web
+      pages that load once, and when the user clicks on a link or a button,
+      JavaScript running on the page updates the address bar, but the web page
+      is not refreshed. Management of the address bar is done by something
+      called a <strong>router</strong>.
+    </p>
+    <p>
+      The most popular router in the React ecosystem is
+      <a href="https://github.com/rackt/react-router">react-router</a>. If
+      you’re building a single-page application, use it unless you have a good
+      reason not to.
+    </p>
+    <p>
+      <strong
+        >Don’t use a router if you aren’t building a single-page
+        application</strong
+      >. Most projects start out as smaller components inside of a larger
+      application anyway.
+    </p>
+    <h2 id="learning-flux">Learning Flux</h2>
+    <p>
+      You’ve probably heard of Flux. There’s a <em>ton</em> of misinformation
+      about Flux out there.
+    </p>
+    <p>
+      A lot of people sit down to build an app and want to define their data
+      model, and they think they need to use Flux to do it.
+      <strong
+        >This is the wrong way to adopt Flux. Flux should only be added once
+        many components have already been built.</strong
+      >
+    </p>
+    <p>
+      React components are arranged in a hierarchy. Most of the time, your data
+      model also follows a hierarchy. In these situations Flux doesn’t buy you
+      much. Sometimes, however, your data model is not hierarchical. When your
+      React components start to receive <code>props</code> that feel extraneous,
+      or you have a small number of components starting to get very complex,
+      then you might want to look into Flux.
+    </p>
+    <p>
+      <strong
+        >You’ll know when you need Flux. If you aren’t sure if you need it, you
+        don’t need it.</strong
+      >
+    </p>
+    <p>
+      If you have decided to use Flux, the most popular and well-documented Flux
+      library is <a href="http://redux.js.org/">Redux</a>. There are
+      <em>a lot</em> of alternatives out there, and you’ll be tempted to
+      evaluate lots of them, but my advice is to just stick with the most
+      popular one.
+    </p>
+    <h2 id="learning-inline-styles">Learning inline styles</h2>
+    <p>
+      Pre-React, a lot of people reused CSS styles with complicated style sheets
+      built by preprocessors like SASS. Since React makes writing reusable
+      components easy, your stylesheets can be less complicated. Many in the
+      community (including myself) are experimenting with getting rid of
+      stylesheets altogether.
+    </p>
+    <p>
+      This is a fairly crazy idea for a number of reasons. It makes media
+      queries more difficult, and it’s possible that there are performance
+      limitations using this technique.
+      <strong
+        >When starting out with React, just style things the way you normally
+        would.</strong
+      >
+    </p>
+    <p>
+      Once you’ve got a feel for how React works, you can look at alternate
+      techniques. One popular one is <a href="https://en.bem.info/">BEM</a>. I
+      recommend phasing out your CSS preprocessor, since React gives you a more
+      powerful way to reuse styles (by reusing components) and your JavaScript
+      bundler can generate more efficient stylesheets for you (I gave
+      <a href="https://www.youtube.com/watch?v=VkTCL6Nqm6Y"
+        >a talk about this at OSCON</a
+      >). With that said, React, like any other JavaScript library, will work
+      just fine with a CSS preprocessor.
+    </p>
+    <p>
+      Alternatively, you can also use
+      <a href="http://glenmaddern.com/articles/css-modules">CSS Modules</a>,
+      more specifically
+      <a href="https://github.com/gajus/react-css-modules">react-css-modules</a
+      >. With CSS Modules you’ll still write CSS (or SASS/LESS/Stylus), but you
+      can manage and compose your CSS files like you’d do with inline styles in
+      React. And you don’t need to worry about managing your class names using
+      methodologies like BEM, as this will be handled for you under the hood by
+      the module system.
+    </p>
+    <h2 id="learning-server-rendering">Learning server rendering</h2>
+    <p>
+      Server rendering is often called “universal” or “isomorphic” JS. It means
+      that you can take your React components and render them to static HTML on
+      the server. This improves initial startup performance because the user
+      does not need to wait for JS to download in order to see the initial UI,
+      and React can re-use the server-rendered HTML so it doesn’t need to
+      generate it client-side.
+    </p>
+    <p>
+      You need server rendering if you notice that your initial render is too
+      slow or if you want to improve your search engine ranking. While it’s true
+      that Google now indexes client-rendered content, as of January 2016 every
+      time it’s been measured it’s been shown to negatively affect ranking,
+      potentially because of the performance penalty of client-side rendering.
+    </p>
+    <p>
+      Server rendering still requires a lot of tooling to get right. Since it
+      transparently supports React components written without server rendering
+      in mind, you should build your app first and worry about server rendering
+      later. You won’t need to rewrite all of your components to support it.
+    </p>
+    <h2 id="learning-immutable.js">Learning Immutable.js</h2>
+    <p>
+      <a href="https://facebook.github.io/immutable-js/">Immutable.js</a>
+      provides a set of data structures that can help to solve certain
+      performance issues when building React apps. It’s a great library, and
+      you’ll probably use it a lot in your apps moving forward, but it’s
+      completely unnecessary until you have an appreciation of the performance
+      implications.
+    </p>
+    <h2 id="learning-relay-falcor-etc">Learning Relay, Falcor etc</h2>
+    <p>
+      These are technologies that help you reduce the number of AJAX requests.
+      They’re still very cutting-edge, so if you don’t have a problem with too
+      many AJAX requests, you don’t need Relay or Falcor.
+    </p>
+  </body>
 </html>

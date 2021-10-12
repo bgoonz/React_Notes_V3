@@ -1,106 +1,295 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
-<head>
-  <meta charset="utf-8" />
-  <meta name="generator" content="pandoc" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>A visual guide to React Mental models</title>
-  <style type="text/css">
-      code{white-space: pre-wrap;}
-      span.smallcaps{font-variant: small-caps;}
-      span.underline{text-decoration: underline;}
-      div.column{display: inline-block; vertical-align: top; width: 50%;}
-  </style>
-  <style type="text/css">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
-}
-pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
-pre.numberSource a.sourceLine::before
-  { content: attr(title);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-    color: #aaaaaa;
-  }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-div.sourceCode
-  {  }
-@media screen {
-a.sourceLine::before { text-decoration: underline; }
-}
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-  </style>
-</head>
-<body>
-<h1 id="a-visual-guide-to-react-mental-models">A visual guide to React Mental models</h1>
-<p>When I started building websites in 2014 I had a hard time understanding how it all worked. Building my blog with WordPress was easy, but I had no idea about hosting, servers, DNS, certificates, and much more.</p>
-<p>As I read articles and tried stuff out (and broke my server config more than once) I started to grasp the system, to get glimpses into how it all worked, until eventually it “clicked” and I felt comfortable working with it. My mind had built a mental model around this system that I could use to work with it.</p>
-<p>If someone had explained it by transferred their mental model to me, I would’ve understood it much faster. Here I’ll explain (and show) the mental models I use with React. It will help you understand React better and make you a better developer.</p>
-<h2 id="react-mental-models"><a href="#react-mental-models"></a>React Mental Models</h2>
-<p>React helps us build complex, interactive UIs more easily than ever before. It also encourages us to write code in a certain way, guiding us to create apps that are simpler to navigate and understand.</p>
-<figure>
-<img src="https://obedparla.com/static/c9f28303d7dad2744b40d64b0ab33358/9aabf/react-mental-model-illustration.jpg" alt="An abstract model inside a mind looking at the React logo" /><figcaption>An abstract model inside a mind looking at the React logo</figcaption>
-</figure>
-<p>React itself is a mental model with a simple idea at its core: encapsulate portions of your app that rely on similar logic and UI and React will make sure that portion is always up kept up to date.</p>
-<p>Whether you’ve been working with React for years or are just starting, having a clear mental model is the best way to feel confident working with it. So for me to transfer my mental models to you I’ll start from first-principles and build on top of them.</p>
-<h2 id="its-functions-all-the-way-down"><a href="#its-functions-all-the-way-down"></a>It’s functions all the way down</h2>
-<p>Let’s start by modeling the basic building blocks of JavaScript and React: functions.</p>
-<ul>
-<li>A React component is just a function</li>
-<li>Components containing other components are functions calling other functions</li>
-<li>Props are the function’s arguments</li>
-</ul>
-<p>This is hidden away by JSX, the markup language React uses. Strip away JSX and React is a bunch of functions calling one another. JSX is in itself an applied mental model that makes using React simpler and more intuitive.</p>
-<p>Let’s look at each part individually.</p>
-<h3 id="a-component-is-a-function-that-returns-jsx"><a href="#a-component-is-a-function-that-returns-jsx"></a>A component is a function that returns JSX</h3>
-<p>React is used with JSX—JavaScript XML—a way to write what seems as HTML with all of JavaScript’s power. JSX offers a great applied mental model for using nested functions in a way that feels intuitive.</p>
-<p>Let’s ignore class components and focus on the far more common functional components. A <em>functional</em> component is a function that behaves exactly like any other JavaScript function. React components always return JSX which is then executed and turned into HTML.</p>
-<p>This is what simple JSX looks like:</p>
-<pre class="jsx"><code>    const Li = props =&gt; &lt;li {...props}&gt;{props.children}&lt;/li&gt;;
+  <head>
+    <meta charset="utf-8" />
+    <meta name="generator" content="pandoc" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=yes"
+    />
+    <title>A visual guide to React Mental models</title>
+    <style type="text/css">
+      code {
+        white-space: pre-wrap;
+      }
+      span.smallcaps {
+        font-variant: small-caps;
+      }
+      span.underline {
+        text-decoration: underline;
+      }
+      div.column {
+        display: inline-block;
+        vertical-align: top;
+        width: 50%;
+      }
+    </style>
+    <style type="text/css">
+      a.sourceLine {
+        display: inline-block;
+        line-height: 1.25;
+      }
+      a.sourceLine {
+        pointer-events: none;
+        color: inherit;
+        text-decoration: inherit;
+      }
+      a.sourceLine:empty {
+        height: 1.2em;
+      }
+      .sourceCode {
+        overflow: visible;
+      }
+      code.sourceCode {
+        white-space: pre;
+        position: relative;
+      }
+      div.sourceCode {
+        margin: 1em 0;
+      }
+      pre.sourceCode {
+        margin: 0;
+      }
+      @media screen {
+        div.sourceCode {
+          overflow: auto;
+        }
+      }
+      @media print {
+        code.sourceCode {
+          white-space: pre-wrap;
+        }
+        a.sourceLine {
+          text-indent: -1em;
+          padding-left: 1em;
+        }
+      }
+      pre.numberSource a.sourceLine {
+        position: relative;
+        left: -4em;
+      }
+      pre.numberSource a.sourceLine::before {
+        content: attr(title);
+        position: relative;
+        left: -1em;
+        text-align: right;
+        vertical-align: baseline;
+        border: none;
+        pointer-events: all;
+        display: inline-block;
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        padding: 0 4px;
+        width: 4em;
+        color: #aaaaaa;
+      }
+      pre.numberSource {
+        margin-left: 3em;
+        border-left: 1px solid #aaaaaa;
+        padding-left: 4px;
+      }
+      div.sourceCode {
+      }
+      @media screen {
+        a.sourceLine::before {
+          text-decoration: underline;
+        }
+      }
+      code span.al {
+        color: #ff0000;
+        font-weight: bold;
+      } /* Alert */
+      code span.an {
+        color: #60a0b0;
+        font-weight: bold;
+        font-style: italic;
+      } /* Annotation */
+      code span.at {
+        color: #7d9029;
+      } /* Attribute */
+      code span.bn {
+        color: #40a070;
+      } /* BaseN */
+      code span.bu {
+      } /* BuiltIn */
+      code span.cf {
+        color: #007020;
+        font-weight: bold;
+      } /* ControlFlow */
+      code span.ch {
+        color: #4070a0;
+      } /* Char */
+      code span.cn {
+        color: #880000;
+      } /* Constant */
+      code span.co {
+        color: #60a0b0;
+        font-style: italic;
+      } /* Comment */
+      code span.cv {
+        color: #60a0b0;
+        font-weight: bold;
+        font-style: italic;
+      } /* CommentVar */
+      code span.do {
+        color: #ba2121;
+        font-style: italic;
+      } /* Documentation */
+      code span.dt {
+        color: #902000;
+      } /* DataType */
+      code span.dv {
+        color: #40a070;
+      } /* DecVal */
+      code span.er {
+        color: #ff0000;
+        font-weight: bold;
+      } /* Error */
+      code span.ex {
+      } /* Extension */
+      code span.fl {
+        color: #40a070;
+      } /* Float */
+      code span.fu {
+        color: #06287e;
+      } /* Function */
+      code span.im {
+      } /* Import */
+      code span.in {
+        color: #60a0b0;
+        font-weight: bold;
+        font-style: italic;
+      } /* Information */
+      code span.kw {
+        color: #007020;
+        font-weight: bold;
+      } /* Keyword */
+      code span.op {
+        color: #666666;
+      } /* Operator */
+      code span.ot {
+        color: #007020;
+      } /* Other */
+      code span.pp {
+        color: #bc7a00;
+      } /* Preprocessor */
+      code span.sc {
+        color: #4070a0;
+      } /* SpecialChar */
+      code span.ss {
+        color: #bb6688;
+      } /* SpecialString */
+      code span.st {
+        color: #4070a0;
+      } /* String */
+      code span.va {
+        color: #19177c;
+      } /* Variable */
+      code span.vs {
+        color: #4070a0;
+      } /* VerbatimString */
+      code span.wa {
+        color: #60a0b0;
+        font-weight: bold;
+        font-style: italic;
+      } /* Warning */
+    </style>
+  </head>
+  <body>
+    <h1 id="a-visual-guide-to-react-mental-models">
+      A visual guide to React Mental models
+    </h1>
+    <p>
+      When I started building websites in 2014 I had a hard time understanding
+      how it all worked. Building my blog with WordPress was easy, but I had no
+      idea about hosting, servers, DNS, certificates, and much more.
+    </p>
+    <p>
+      As I read articles and tried stuff out (and broke my server config more
+      than once) I started to grasp the system, to get glimpses into how it all
+      worked, until eventually it “clicked” and I felt comfortable working with
+      it. My mind had built a mental model around this system that I could use
+      to work with it.
+    </p>
+    <p>
+      If someone had explained it by transferred their mental model to me, I
+      would’ve understood it much faster. Here I’ll explain (and show) the
+      mental models I use with React. It will help you understand React better
+      and make you a better developer.
+    </p>
+    <h2 id="react-mental-models">
+      <a href="#react-mental-models"></a>React Mental Models
+    </h2>
+    <p>
+      React helps us build complex, interactive UIs more easily than ever
+      before. It also encourages us to write code in a certain way, guiding us
+      to create apps that are simpler to navigate and understand.
+    </p>
+    <figure>
+      <img
+        src="https://obedparla.com/static/c9f28303d7dad2744b40d64b0ab33358/9aabf/react-mental-model-illustration.jpg"
+        alt="An abstract model inside a mind looking at the React logo"
+      />
+      <figcaption>
+        An abstract model inside a mind looking at the React logo
+      </figcaption>
+    </figure>
+    <p>
+      React itself is a mental model with a simple idea at its core: encapsulate
+      portions of your app that rely on similar logic and UI and React will make
+      sure that portion is always up kept up to date.
+    </p>
+    <p>
+      Whether you’ve been working with React for years or are just starting,
+      having a clear mental model is the best way to feel confident working with
+      it. So for me to transfer my mental models to you I’ll start from
+      first-principles and build on top of them.
+    </p>
+    <h2 id="its-functions-all-the-way-down">
+      <a href="#its-functions-all-the-way-down"></a>It’s functions all the way
+      down
+    </h2>
+    <p>
+      Let’s start by modeling the basic building blocks of JavaScript and React:
+      functions.
+    </p>
+    <ul>
+      <li>A React component is just a function</li>
+      <li>
+        Components containing other components are functions calling other
+        functions
+      </li>
+      <li>Props are the function’s arguments</li>
+    </ul>
+    <p>
+      This is hidden away by JSX, the markup language React uses. Strip away JSX
+      and React is a bunch of functions calling one another. JSX is in itself an
+      applied mental model that makes using React simpler and more intuitive.
+    </p>
+    <p>Let’s look at each part individually.</p>
+    <h3 id="a-component-is-a-function-that-returns-jsx">
+      <a href="#a-component-is-a-function-that-returns-jsx"></a>A component is a
+      function that returns JSX
+    </h3>
+    <p>
+      React is used with JSX—JavaScript XML—a way to write what seems as HTML
+      with all of JavaScript’s power. JSX offers a great applied mental model
+      for using nested functions in a way that feels intuitive.
+    </p>
+    <p>
+      Let’s ignore class components and focus on the far more common functional
+      components. A <em>functional</em> component is a function that behaves
+      exactly like any other JavaScript function. React components always return
+      JSX which is then executed and turned into HTML.
+    </p>
+    <p>This is what simple JSX looks like:</p>
+    <pre
+      class="jsx"
+    ><code>    const Li = props =&gt; &lt;li {...props}&gt;{props.children}&lt;/li&gt;;
     
     export const RickRoll = () =&gt; (
       &lt;div&gt;
@@ -111,8 +300,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
         &lt;/div&gt;
       &lt;/div&gt;
     );</code></pre>
-<p>Which compiled into pure JavaScript by Babel:</p>
-<pre class="jsx"><code>    const Li = props =&gt; React.createElement(&#39;li&#39;, props, props.children);
+    <p>Which compiled into pure JavaScript by Babel:</p>
+    <pre
+      class="jsx"
+    ><code>    const Li = props =&gt; React.createElement(&#39;li&#39;, props, props.children);
     
     export const RickRoll = () =&gt;
       React.createElement(
@@ -136,15 +327,51 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           ),
         ),
       );</code></pre>
-<p>Now, notice how each component is a function calling another function, and each new component is the third argument for the <code>React.createElement</code> function. Whenever you write a component, it’s useful to keep in mind that it’s a normal JavaScript function.</p>
-<p>An important feature of React is that a component can have many children but only one parent. I found this a confusing until I realized it’s the same logic HTML has, where each element must be inside other elements, and can have many children. You can notice this in the code above, where there’s only one parent <code>div</code> containing all the children.</p>
-<h3 id="components-props-are-the-same-as-a-functions-arguments"><a href="#components-props-are-the-same-as-a-functions-arguments"></a>component’s props are the same as a function’s arguments</h3>
-<p>When using a function we can use arguments to share information with that function. For React components we call these arguments <code>props</code> (funny story, I didn’t realize props is short for <em>properties</em> for a long time).</p>
-<p>Under the hood, props behave <em>exactly</em> like function arguments, the differences are that we interact with them through the nicer interface of JSX, and that React gives extra functionality to props such as <code>children</code>.</p>
-<h2 id="creating-a-mental-model-around-functions"><a href="#creating-a-mental-model-around-functions"></a>Creating a mental model around functions</h2>
-<p>Using this knowledge let’s craft a mental model to intuitively understand functions!</p>
-<p>When I think about a function I imagine it as a box, and that box will do something whenever it’s called. It could return a value or not:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb3-1" title="1">    <span class="kw">function</span> <span class="at">sum</span>(a<span class="op">,</span> b) <span class="op">{</span></a>
+    <p>
+      Now, notice how each component is a function calling another function, and
+      each new component is the third argument for the
+      <code>React.createElement</code> function. Whenever you write a component,
+      it’s useful to keep in mind that it’s a normal JavaScript function.
+    </p>
+    <p>
+      An important feature of React is that a component can have many children
+      but only one parent. I found this a confusing until I realized it’s the
+      same logic HTML has, where each element must be inside other elements, and
+      can have many children. You can notice this in the code above, where
+      there’s only one parent <code>div</code> containing all the children.
+    </p>
+    <h3 id="components-props-are-the-same-as-a-functions-arguments">
+      <a href="#components-props-are-the-same-as-a-functions-arguments"></a
+      >component’s props are the same as a function’s arguments
+    </h3>
+    <p>
+      When using a function we can use arguments to share information with that
+      function. For React components we call these arguments
+      <code>props</code> (funny story, I didn’t realize props is short for
+      <em>properties</em> for a long time).
+    </p>
+    <p>
+      Under the hood, props behave <em>exactly</em> like function arguments, the
+      differences are that we interact with them through the nicer interface of
+      JSX, and that React gives extra functionality to props such as
+      <code>children</code>.
+    </p>
+    <h2 id="creating-a-mental-model-around-functions">
+      <a href="#creating-a-mental-model-around-functions"></a>Creating a mental
+      model around functions
+    </h2>
+    <p>
+      Using this knowledge let’s craft a mental model to intuitively understand
+      functions!
+    </p>
+    <p>
+      When I think about a function I imagine it as a box, and that box will do
+      something whenever it’s called. It could return a value or not:
+    </p>
+    <div class="sourceCode" id="cb3">
+      <pre
+        class="sourceCode js"
+      ><code class="sourceCode javascript"><a class="sourceLine" id="cb3-1" title="1">    <span class="kw">function</span> <span class="at">sum</span>(a<span class="op">,</span> b) <span class="op">{</span></a>
 <a class="sourceLine" id="cb3-2" title="2">      <span class="cf">return</span> a <span class="op">+</span> b<span class="op">;</span></a>
 <a class="sourceLine" id="cb3-3" title="3">    <span class="op">}</span></a>
 <a class="sourceLine" id="cb3-4" title="4">    </a>
@@ -152,41 +379,149 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb3-6" title="6">    </a>
 <a class="sourceLine" id="cb3-7" title="7">    <span class="kw">function</span> <span class="at">logSum</span>(a<span class="op">,</span> b) <span class="op">{</span></a>
 <a class="sourceLine" id="cb3-8" title="8">      <span class="va">console</span>.<span class="at">log</span>(a <span class="op">+</span> b)<span class="op">;</span> </a>
-<a class="sourceLine" id="cb3-9" title="9">    <span class="op">}</span></a></code></pre></div>
-<p>Since a component is a fancy function, that makes a component a box as well, with <code>props</code> as the ingredients the box needs to create the output.</p>
-<p><img src="https://obedparla.com/static/1078eb1563b832008167b49c2b8edb11/ce2e0/a-plus-b-box.jpg" alt="A plus B in a box with props explaining a mental model for JavaScript functions" /> <img src="https://obedparla.com/static/1078eb1563b832008167b49c2b8edb11/ce2e0/a-plus-b-box.jpg" alt="(&quot; &quot;)" /></p>
-<p>When a component is executed it will run whatever logic it has, if any, and evaluate its JSX. Any tags will become HTML and any component will be executed, and the process is repeated until reaching the last component in the chain of children.</p>
-<p>Since a component can have many children but only one parent I imagine multiple components as a set of boxes, one inside another. Each box must be contained within a bigger box and can have many smaller boxes inside.</p>
-<figure>
-<img src="https://obedparla.com/static/cf7892f6a3db2815d6c502fe74538e4a/1df45/box-inside-box.jpg" alt="One big box with many smaller boxes inside and text saying “it’s a box in another box”" /><figcaption>One big box with many smaller boxes inside and text saying “it’s a box in another box”</figcaption>
-</figure>
-<p>But the mental model of a box representing a component is not complete without understanding how it can interact with other boxes.</p>
-<p><a href="#how-to-think-about-closures"></a> How To Think About Closures ———————————————————–</p>
-<p>Closures are a core concept in JavaScript. They enable complex functionality in the language, they’re super important to understand to have a good mental model around React.</p>
-<p>They’re also one of the features newcomers struggle with the most, so instead of explaining the technicalities I’ll demonstrate the mental model I have around closures.</p>
-<p>The basic description of a closure is that it’s a function. I imagine it as a box that keeps what’s inside of it from spilling out, while allowing the things outside of it from entering, like a semi-permeable box. But spilling out where?</p>
-<p>While the closure itself is a box, any closure will be inside bigger boxes, with the outermost box being the Window object.</p>
-<figure>
-<img src="https://obedparla.com/static/952aebfcba6f1850f93b3bf6d15392f3/ce2e0/closures_window.jpg" alt="A box describing a mental model of a javascript closure, showing Window, scripts and React apps" /><figcaption>A box describing a mental model of a javascript closure, showing Window, scripts and React apps</figcaption>
-</figure>
-<blockquote>
-<p>The window object encapsulates everything else</p>
-</blockquote>
-<h3 id="but-what-is-a-closure"><a href="#but-what-is-a-closure"></a>But what <em>is</em> a closure?</h3>
-<p>A closure is a feature of JavaScript functions. If you’re using a function, you’re using a closure.</p>
-<p>As I’ve mentioned, a function is a box and that makes a closure a box too. Considering that each function can contain many others inside of it, then the closure is the ability of a function to use the information outside of it, while keeping the information it has inside from “spilling out”, or being used by the outer function.</p>
-<p>Speaking in terms of my mental model: I imagine the functions as boxes within boxes, and each smaller box can see the information of the outer box, or parent, but the big box cannot see the smaller one’s information. That’s as simple and accurate an explanation of closures as I can make.</p>
-<figure>
-<img src="https://obedparla.com/static/96f403cd585425c1057214447165bbbe/7efee/data-flow.jpg" alt="Visual representation of closures and the sharing of information between functions in a mental model, from a box view and a tree view" /><figcaption>Visual representation of closures and the sharing of information between functions in a mental model, from a box view and a tree view</figcaption>
-</figure>
-<p>"Each function can only access its own <img src="https://obedparla.com/static/96f403cd585425c1057214447165bbbe/01d85/data-flow.jpg" alt="(information and the parent’s&quot;)" /></p>
-<p>Each function can only access its own information and the parent’s</p>
-<p>Closures are important because they can be exploited to create some powerful mechanics and React takes full advantage of this.</p>
-<h3 id="closures-in-react"><a href="#closures-in-react"></a>Closures in React</h3>
-<p>Each React component is also a closure. Within components, you can only pass props down from parent to child and the parent cannot see what’s inside the child, this is an intended feature to make our app’s data flow simpler to trace. To find where data comes from, we usually need to go up the tree to find which parent is sending it down.</p>
-<p>A great example of closures in React is updating a parent’s state through a child component. You’ve probably done this without realizing you were messing around with closures.</p>
-<p>To start, we know the parent can’t access the child’s information directly, but the child can access the parent’s. So we send down that info from parent to child through <code>props</code>. In this case, the information takes the shape of a function that updates the parent’s state.</p>
-<pre class="jsx"><code>    const Parent = () =&gt; {
+<a class="sourceLine" id="cb3-9" title="9">    <span class="op">}</span></a></code></pre>
+    </div>
+    <p>
+      Since a component is a fancy function, that makes a component a box as
+      well, with <code>props</code> as the ingredients the box needs to create
+      the output.
+    </p>
+    <p>
+      <img
+        src="https://obedparla.com/static/1078eb1563b832008167b49c2b8edb11/ce2e0/a-plus-b-box.jpg"
+        alt="A plus B in a box with props explaining a mental model for JavaScript functions"
+      />
+      <img
+        src="https://obedparla.com/static/1078eb1563b832008167b49c2b8edb11/ce2e0/a-plus-b-box.jpg"
+        alt='(" ")'
+      />
+    </p>
+    <p>
+      When a component is executed it will run whatever logic it has, if any,
+      and evaluate its JSX. Any tags will become HTML and any component will be
+      executed, and the process is repeated until reaching the last component in
+      the chain of children.
+    </p>
+    <p>
+      Since a component can have many children but only one parent I imagine
+      multiple components as a set of boxes, one inside another. Each box must
+      be contained within a bigger box and can have many smaller boxes inside.
+    </p>
+    <figure>
+      <img
+        src="https://obedparla.com/static/cf7892f6a3db2815d6c502fe74538e4a/1df45/box-inside-box.jpg"
+        alt="One big box with many smaller boxes inside and text saying “it’s a box in another box”"
+      />
+      <figcaption>
+        One big box with many smaller boxes inside and text saying “it’s a box
+        in another box”
+      </figcaption>
+    </figure>
+    <p>
+      But the mental model of a box representing a component is not complete
+      without understanding how it can interact with other boxes.
+    </p>
+    <p>
+      <a href="#how-to-think-about-closures"></a> How To Think About Closures
+      ———————————————————–
+    </p>
+    <p>
+      Closures are a core concept in JavaScript. They enable complex
+      functionality in the language, they’re super important to understand to
+      have a good mental model around React.
+    </p>
+    <p>
+      They’re also one of the features newcomers struggle with the most, so
+      instead of explaining the technicalities I’ll demonstrate the mental model
+      I have around closures.
+    </p>
+    <p>
+      The basic description of a closure is that it’s a function. I imagine it
+      as a box that keeps what’s inside of it from spilling out, while allowing
+      the things outside of it from entering, like a semi-permeable box. But
+      spilling out where?
+    </p>
+    <p>
+      While the closure itself is a box, any closure will be inside bigger
+      boxes, with the outermost box being the Window object.
+    </p>
+    <figure>
+      <img
+        src="https://obedparla.com/static/952aebfcba6f1850f93b3bf6d15392f3/ce2e0/closures_window.jpg"
+        alt="A box describing a mental model of a javascript closure, showing Window, scripts and React apps"
+      />
+      <figcaption>
+        A box describing a mental model of a javascript closure, showing Window,
+        scripts and React apps
+      </figcaption>
+    </figure>
+    <blockquote>
+      <p>The window object encapsulates everything else</p>
+    </blockquote>
+    <h3 id="but-what-is-a-closure">
+      <a href="#but-what-is-a-closure"></a>But what <em>is</em> a closure?
+    </h3>
+    <p>
+      A closure is a feature of JavaScript functions. If you’re using a
+      function, you’re using a closure.
+    </p>
+    <p>
+      As I’ve mentioned, a function is a box and that makes a closure a box too.
+      Considering that each function can contain many others inside of it, then
+      the closure is the ability of a function to use the information outside of
+      it, while keeping the information it has inside from “spilling out”, or
+      being used by the outer function.
+    </p>
+    <p>
+      Speaking in terms of my mental model: I imagine the functions as boxes
+      within boxes, and each smaller box can see the information of the outer
+      box, or parent, but the big box cannot see the smaller one’s information.
+      That’s as simple and accurate an explanation of closures as I can make.
+    </p>
+    <figure>
+      <img
+        src="https://obedparla.com/static/96f403cd585425c1057214447165bbbe/7efee/data-flow.jpg"
+        alt="Visual representation of closures and the sharing of information between functions in a mental model, from a box view and a tree view"
+      />
+      <figcaption>
+        Visual representation of closures and the sharing of information between
+        functions in a mental model, from a box view and a tree view
+      </figcaption>
+    </figure>
+    <p>
+      "Each function can only access its own
+      <img
+        src="https://obedparla.com/static/96f403cd585425c1057214447165bbbe/01d85/data-flow.jpg"
+        alt='(information and the parent’s")'
+      />
+    </p>
+    <p>Each function can only access its own information and the parent’s</p>
+    <p>
+      Closures are important because they can be exploited to create some
+      powerful mechanics and React takes full advantage of this.
+    </p>
+    <h3 id="closures-in-react">
+      <a href="#closures-in-react"></a>Closures in React
+    </h3>
+    <p>
+      Each React component is also a closure. Within components, you can only
+      pass props down from parent to child and the parent cannot see what’s
+      inside the child, this is an intended feature to make our app’s data flow
+      simpler to trace. To find where data comes from, we usually need to go up
+      the tree to find which parent is sending it down.
+    </p>
+    <p>
+      A great example of closures in React is updating a parent’s state through
+      a child component. You’ve probably done this without realizing you were
+      messing around with closures.
+    </p>
+    <p>
+      To start, we know the parent can’t access the child’s information
+      directly, but the child can access the parent’s. So we send down that info
+      from parent to child through <code>props</code>. In this case, the
+      information takes the shape of a function that updates the parent’s state.
+    </p>
+    <pre class="jsx"><code>    const Parent = () =&gt; {
       const [count, setCount] = useState(0);
     
       return (
@@ -209,67 +544,259 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
         &lt;/button&gt;
       &lt;/div&gt;
     );</code></pre>
-<p>When an <code>onClick</code> happens in a <code>button</code>, that will execute the function received from props <code>props.onClick</code>, and update the value using <code>props.count</code>.</p>
-<p>The insight here lies in the way we’re updating a parent’s state through a child, in this case, the <code>props.onClick</code> function. The reason this works is that the function was <em>declared</em> within the <code>Parent</code> component’s scope, within its closure, so it will have access to the parent’s information. Once that function is called in a child, it still lives in the same closure.</p>
-<p>This can be hard to grasp, so the way I imagine it is as a “tunnel” between closures. Each has its own scope, but we can create a one-way communication tunnel that connects both.</p>
-<p>Once we understand how closures affect our components, we can take the next big step: React state.</p>
-<h2 id="fitting-reacts-state-into-our-mental-model"><a href="#fitting-reacts-state-into-our-mental-model"></a>Fitting React’s State Into Our Mental Model</h2>
-<p>React’s philosophy is simple: it handles <em>when</em> and <em>how</em> to render elements, and developers control <em>what</em> to render. State is our tool to decide that what.</p>
-<p>When state changes, its component renders and therefore re-executes all the code within. We do this to show new, updated information to the user.</p>
-<p>In my mental model state is like a special property inside the box. It’s independent of everything else that happens within it. It will get a default value on the first render and always be up to date with the latest value.</p>
-<p>Each variable and function is created on every render, which means their values are also brand new. Even if a variable’s value never changes, it is recalculated and reassigned every time. That’s not the case with state, it only changes when there’s a request for it to change via a <code>set state</code> event.</p>
-<figure>
-<img src="https://obedparla.com/static/acd86ef0ea8a3fe610df603769e68ad9/44313/state-in-box.jpg" alt="React component state visualized as a part of a bigger box with props coming in from outside" /><figcaption>React component state visualized as a part of a bigger box with props coming in from outside</figcaption>
-</figure>
-<p>State is a special, independent part of the box; with props coming from outside</p>
-<p>State follows a simple rule: Whenever it changes it will re-rendered the component and its children. Props follow the same logic, if a prop changes, the component will re-render, however, we can control state by modifying it, props are more static and usually change as a reaction to a state change.</p>
-<h1 id="the-rendering-mental-model-understanding-reacts-magic">the-rendering-mental-model-understanding-reacts-magic</h1>
-<h2 id="the-rendering-mental-model-understanding-reacts-magic-1">&gt;The Rendering Mental Model: understanding React’s magic</h2>
-<p>I consider rendering to be React’s most confusing part because a lot of things happen during rendering that sometimes isn’t obvious by looking at the code. That’s why having a clear mental model helps.</p>
-<p>The way I imagine rendering with my imaginary boxes is two-fold: the first render brings the box into existence, that’s when the state is initialized. The second part is when it re-renders, that’s the box being recycled, most of it is brand new but some important elements of it remain namely state.</p>
-<p>On every render, everything inside a component is created, including variables and functions, that’s why we can have variables storing a calculation’s results, since they will be recalculated on every render. It’s also why functions are not reliable as values, due to their reference (the function’s value, per se) being different every render.</p>
-<pre class="jsx"><code>    const Thumbnail = props =&gt; (
+    <p>
+      When an <code>onClick</code> happens in a <code>button</code>, that will
+      execute the function received from props <code>props.onClick</code>, and
+      update the value using <code>props.count</code>.
+    </p>
+    <p>
+      The insight here lies in the way we’re updating a parent’s state through a
+      child, in this case, the <code>props.onClick</code> function. The reason
+      this works is that the function was <em>declared</em> within the
+      <code>Parent</code> component’s scope, within its closure, so it will have
+      access to the parent’s information. Once that function is called in a
+      child, it still lives in the same closure.
+    </p>
+    <p>
+      This can be hard to grasp, so the way I imagine it is as a “tunnel”
+      between closures. Each has its own scope, but we can create a one-way
+      communication tunnel that connects both.
+    </p>
+    <p>
+      Once we understand how closures affect our components, we can take the
+      next big step: React state.
+    </p>
+    <h2 id="fitting-reacts-state-into-our-mental-model">
+      <a href="#fitting-reacts-state-into-our-mental-model"></a>Fitting React’s
+      State Into Our Mental Model
+    </h2>
+    <p>
+      React’s philosophy is simple: it handles <em>when</em> and <em>how</em> to
+      render elements, and developers control <em>what</em> to render. State is
+      our tool to decide that what.
+    </p>
+    <p>
+      When state changes, its component renders and therefore re-executes all
+      the code within. We do this to show new, updated information to the user.
+    </p>
+    <p>
+      In my mental model state is like a special property inside the box. It’s
+      independent of everything else that happens within it. It will get a
+      default value on the first render and always be up to date with the latest
+      value.
+    </p>
+    <p>
+      Each variable and function is created on every render, which means their
+      values are also brand new. Even if a variable’s value never changes, it is
+      recalculated and reassigned every time. That’s not the case with state, it
+      only changes when there’s a request for it to change via a
+      <code>set state</code> event.
+    </p>
+    <figure>
+      <img
+        src="https://obedparla.com/static/acd86ef0ea8a3fe610df603769e68ad9/44313/state-in-box.jpg"
+        alt="React component state visualized as a part of a bigger box with props coming in from outside"
+      />
+      <figcaption>
+        React component state visualized as a part of a bigger box with props
+        coming in from outside
+      </figcaption>
+    </figure>
+    <p>
+      State is a special, independent part of the box; with props coming from
+      outside
+    </p>
+    <p>
+      State follows a simple rule: Whenever it changes it will re-rendered the
+      component and its children. Props follow the same logic, if a prop
+      changes, the component will re-render, however, we can control state by
+      modifying it, props are more static and usually change as a reaction to a
+      state change.
+    </p>
+    <h1 id="the-rendering-mental-model-understanding-reacts-magic">
+      the-rendering-mental-model-understanding-reacts-magic
+    </h1>
+    <h2 id="the-rendering-mental-model-understanding-reacts-magic-1">
+      &gt;The Rendering Mental Model: understanding React’s magic
+    </h2>
+    <p>
+      I consider rendering to be React’s most confusing part because a lot of
+      things happen during rendering that sometimes isn’t obvious by looking at
+      the code. That’s why having a clear mental model helps.
+    </p>
+    <p>
+      The way I imagine rendering with my imaginary boxes is two-fold: the first
+      render brings the box into existence, that’s when the state is
+      initialized. The second part is when it re-renders, that’s the box being
+      recycled, most of it is brand new but some important elements of it remain
+      namely state.
+    </p>
+    <p>
+      On every render, everything inside a component is created, including
+      variables and functions, that’s why we can have variables storing a
+      calculation’s results, since they will be recalculated on every render.
+      It’s also why functions are not reliable as values, due to their reference
+      (the function’s value, per se) being different every render.
+    </p>
+    <pre class="jsx"><code>    const Thumbnail = props =&gt; (
       &lt;div&gt;
         {props.withIcon &amp;&amp; &lt;AmazingIcon /&gt;}
         &lt;img src={props.imgUrl} alt={props.alt} /&gt;
       &lt;/div&gt;
     );</code></pre>
-<p>The above will give a different result depending on the props the component receives. The reason React <em>must</em> re-render on every prop change is that it wants to keep the user up to date with the latest information.</p>
-<p>However, the state doesn’t change on re-renders, its value is maintained. That’s why the box is “recycled” instead of created brand new every time. Internally, React is keeping track of each box and making sure its state is always consistent. That’s how React knows when to update a component.</p>
-<p><img src="https://obedparla.com/static/78de62863da9bd4c40c588c294167031/7efee/react-rendering-mental-model.jpg" alt="Mental model of a React component re-rendering when props change" /> &gt; “When props (or state) changes, a new render happens and the component’s output can change”)] <img src="https://obedparla.com/static/78de62863da9bd4c40c588c294167031/ea2ac/react-rendering-mental-model.jpg" /></p>
-<p>When props (or state) changes, a new render happens and the component’s output can change</p>
-<p>By imagining a box being recycled I can understand what’s going on inside of it. For simple components, it’s easy to grasp, but the more complex a component becomes, the more props it receives, the more state it maintains, the more useful a clear mental model becomes.</p>
-<h2 id="a-complete-react-mental-model-putting-it-all-together."><a href="#a-complete-react-mental-model-putting-it-all-together"></a>A complete React mental model: Putting it all together.</h2>
-<p>Now that I’ve explained all the different parts of the puzzle separately, let’s put it all together. Here’s the complete mental model I use for React components, directly translated from how I imagine them into words.</p>
-<p>I imagine a React component as a box that contains all of its information within its walls, including its children, which are more boxes.</p>
-<p>And like a box in the real world, it can have other boxes inside of it and these boxes can, in turn, contain more boxes. That way each box/component must have a single parent, and a parent can have many children.</p>
-<figure>
-<img src="https://obedparla.com/static/d6c8afaef3597fd26d9174e070be1ce3/ce2e0/react-mental-model-basic.jpg" alt="Basic representation of a React component as a mental model using boxes" /><figcaption>Basic representation of a React component as a mental model using boxes</figcaption>
-</figure>
-<figure>
-<img src="https://obedparla.com/static/d6c8afaef3597fd26d9174e070be1ce3/ce2e0/react-mental-model-basic.jpg" alt="(“The basic representation of a React component”)" /><figcaption>(“The basic representation of a React component”)</figcaption>
-</figure>
-<blockquote>
-<p>The basic representation of a React component</p>
-</blockquote>
-<p>The boxes are semi-permeable, meaning they never leak anything to the outside but can use information from the outside as if it belonged to them. I imagine like this to represent how closures work in JavaScript.</p>
-<p>In React the way to share information between components is called <code>props</code>, the same idea applies to function and then it’s called <code>arguments</code>, they both work in the same way but with a different syntax.</p>
-<p>Within components, information can only travel <em>down</em> from parents to children. In other words, children can access their parent’s data and state, but not the other way around, and the way we share that information is through <code>props</code>.</p>
-<p>I imagine this directional sharing of information as boxes within boxes. With the inner-most box being able to absorb the parent’s data.</p>
-<figure>
-<img src="https://obedparla.com/static/a3471b4d03d16406ea159b3bc3f3e218/ce2e0/data-sharing-model.jpg" alt="React Mental model of data sharing between components visualized as information flowing downward" /><figcaption>React Mental model of data sharing between components visualized as information flowing downward</figcaption>
-</figure>
-<p>Data is shared from parent to child</p>
-<p>The box must first be created though, and this happens on <code>render</code>, where the default value is given to <code>state</code> and just like with functions, all the code within the component is executed. In my mental model, this is equivalent to the box being <em>created</em>.</p>
-<p>Subsequent renders, or <code>re-renders</code>, execute all the code in the component again, recalculating variables, recreating functions, and so on. Everything except for <code>state</code> is brand new on each render. State’s value is maintained across renders is updated only through a <code>set</code> method.</p>
-<p>In my mental model, I see re-rendering as recycling the box since most of it is recreated, but it’s still the same box due to React keeping track of the component’s state.</p>
-<p>When a box is recycled all the boxes within it, its children, are also recycled. This can happen because the component’s state was modified or a prop changed.</p>
-<figure>
-<img src="https://obedparla.com/static/267768646d810a0032728d222c3f13a5/7efee/react-rendering-mental-model-full.jpg" alt="Mental model of a React component re-rendering when props or state change" /><figcaption>Mental model of a React component re-rendering when props or state change</figcaption>
-</figure>
-<p>Mental model of a React component re-rendering when props or state change</p>
-<p>Remember that a state or prop changing means the information the user sees is outdated, and React always wants to keep the UI updated so it re-renders the component that must show the new data.</p>
-<p>By using these mental models I feel confident when working with React. They help me visualize what can be a maze of code into a comprehensive mental map. It also demystifies React and brings it to a level I’m much more comfortable with.</p>
-<p>React is not that complex once you start understanding the core principles behind it and create some ways to imagine how your code works.</p>
-</body>
+    <p>
+      The above will give a different result depending on the props the
+      component receives. The reason React <em>must</em> re-render on every prop
+      change is that it wants to keep the user up to date with the latest
+      information.
+    </p>
+    <p>
+      However, the state doesn’t change on re-renders, its value is maintained.
+      That’s why the box is “recycled” instead of created brand new every time.
+      Internally, React is keeping track of each box and making sure its state
+      is always consistent. That’s how React knows when to update a component.
+    </p>
+    <p>
+      <img
+        src="https://obedparla.com/static/78de62863da9bd4c40c588c294167031/7efee/react-rendering-mental-model.jpg"
+        alt="Mental model of a React component re-rendering when props change"
+      />
+      &gt; “When props (or state) changes, a new render happens and the
+      component’s output can change”)]
+      <img
+        src="https://obedparla.com/static/78de62863da9bd4c40c588c294167031/ea2ac/react-rendering-mental-model.jpg"
+      />
+    </p>
+    <p>
+      When props (or state) changes, a new render happens and the component’s
+      output can change
+    </p>
+    <p>
+      By imagining a box being recycled I can understand what’s going on inside
+      of it. For simple components, it’s easy to grasp, but the more complex a
+      component becomes, the more props it receives, the more state it
+      maintains, the more useful a clear mental model becomes.
+    </p>
+    <h2 id="a-complete-react-mental-model-putting-it-all-together.">
+      <a href="#a-complete-react-mental-model-putting-it-all-together"></a>A
+      complete React mental model: Putting it all together.
+    </h2>
+    <p>
+      Now that I’ve explained all the different parts of the puzzle separately,
+      let’s put it all together. Here’s the complete mental model I use for
+      React components, directly translated from how I imagine them into words.
+    </p>
+    <p>
+      I imagine a React component as a box that contains all of its information
+      within its walls, including its children, which are more boxes.
+    </p>
+    <p>
+      And like a box in the real world, it can have other boxes inside of it and
+      these boxes can, in turn, contain more boxes. That way each box/component
+      must have a single parent, and a parent can have many children.
+    </p>
+    <figure>
+      <img
+        src="https://obedparla.com/static/d6c8afaef3597fd26d9174e070be1ce3/ce2e0/react-mental-model-basic.jpg"
+        alt="Basic representation of a React component as a mental model using boxes"
+      />
+      <figcaption>
+        Basic representation of a React component as a mental model using boxes
+      </figcaption>
+    </figure>
+    <figure>
+      <img
+        src="https://obedparla.com/static/d6c8afaef3597fd26d9174e070be1ce3/ce2e0/react-mental-model-basic.jpg"
+        alt="(“The basic representation of a React component”)"
+      />
+      <figcaption>(“The basic representation of a React component”)</figcaption>
+    </figure>
+    <blockquote>
+      <p>The basic representation of a React component</p>
+    </blockquote>
+    <p>
+      The boxes are semi-permeable, meaning they never leak anything to the
+      outside but can use information from the outside as if it belonged to
+      them. I imagine like this to represent how closures work in JavaScript.
+    </p>
+    <p>
+      In React the way to share information between components is called
+      <code>props</code>, the same idea applies to function and then it’s called
+      <code>arguments</code>, they both work in the same way but with a
+      different syntax.
+    </p>
+    <p>
+      Within components, information can only travel <em>down</em> from parents
+      to children. In other words, children can access their parent’s data and
+      state, but not the other way around, and the way we share that information
+      is through <code>props</code>.
+    </p>
+    <p>
+      I imagine this directional sharing of information as boxes within boxes.
+      With the inner-most box being able to absorb the parent’s data.
+    </p>
+    <figure>
+      <img
+        src="https://obedparla.com/static/a3471b4d03d16406ea159b3bc3f3e218/ce2e0/data-sharing-model.jpg"
+        alt="React Mental model of data sharing between components visualized as information flowing downward"
+      />
+      <figcaption>
+        React Mental model of data sharing between components visualized as
+        information flowing downward
+      </figcaption>
+    </figure>
+    <p>Data is shared from parent to child</p>
+    <p>
+      The box must first be created though, and this happens on
+      <code>render</code>, where the default value is given to
+      <code>state</code> and just like with functions, all the code within the
+      component is executed. In my mental model, this is equivalent to the box
+      being <em>created</em>.
+    </p>
+    <p>
+      Subsequent renders, or <code>re-renders</code>, execute all the code in
+      the component again, recalculating variables, recreating functions, and so
+      on. Everything except for <code>state</code> is brand new on each render.
+      State’s value is maintained across renders is updated only through a
+      <code>set</code> method.
+    </p>
+    <p>
+      In my mental model, I see re-rendering as recycling the box since most of
+      it is recreated, but it’s still the same box due to React keeping track of
+      the component’s state.
+    </p>
+    <p>
+      When a box is recycled all the boxes within it, its children, are also
+      recycled. This can happen because the component’s state was modified or a
+      prop changed.
+    </p>
+    <figure>
+      <img
+        src="https://obedparla.com/static/267768646d810a0032728d222c3f13a5/7efee/react-rendering-mental-model-full.jpg"
+        alt="Mental model of a React component re-rendering when props or state change"
+      />
+      <figcaption>
+        Mental model of a React component re-rendering when props or state
+        change
+      </figcaption>
+    </figure>
+    <p>
+      Mental model of a React component re-rendering when props or state change
+    </p>
+    <p>
+      Remember that a state or prop changing means the information the user sees
+      is outdated, and React always wants to keep the UI updated so it
+      re-renders the component that must show the new data.
+    </p>
+    <p>
+      By using these mental models I feel confident when working with React.
+      They help me visualize what can be a maze of code into a comprehensive
+      mental map. It also demystifies React and brings it to a level I’m much
+      more comfortable with.
+    </p>
+    <p>
+      React is not that complex once you start understanding the core principles
+      behind it and create some ways to imagine how your code works.
+    </p>
+  </body>
 </html>

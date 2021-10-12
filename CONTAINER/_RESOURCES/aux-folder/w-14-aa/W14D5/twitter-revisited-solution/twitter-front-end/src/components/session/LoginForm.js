@@ -1,5 +1,5 @@
 import React from "react";
-import UserContext from '../../contexts/UserContext';
+import UserContext from "../../contexts/UserContext";
 
 class LoginForm extends React.Component {
   constructor(props) {
@@ -64,17 +64,16 @@ class LoginForm extends React.Component {
 
         <button type="submit">Log In</button>
       </form>
-    )  
+    );
   }
 }
 
 const LoginFormWithContext = (props) => {
   return (
     <UserContext.Consumer>
-      {value => <LoginForm {...props} login={value.login} />}
+      {(value) => <LoginForm {...props} login={value.login} />}
     </UserContext.Consumer>
   );
-}
+};
 
 export default LoginFormWithContext;
-

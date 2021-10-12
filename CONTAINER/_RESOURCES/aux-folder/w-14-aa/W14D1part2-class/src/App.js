@@ -1,5 +1,5 @@
-import { Movies, Stocks, Home } from './components';
-import { Route, Switch, NavLink } from 'react-router-dom';
+import { Movies, Stocks, Home } from "./components";
+import { Route, Switch, NavLink } from "react-router-dom";
 function App() {
   return (
     <div className="comp main">

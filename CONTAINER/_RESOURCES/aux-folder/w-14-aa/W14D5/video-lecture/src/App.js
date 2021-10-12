@@ -4,10 +4,10 @@ import Home from "./components/Home";
 
 const App = ({ color }) => {
   return (
-  <div id="app" style={{ backgroundColor: `${color}` }}>
-    <Home />
-  </div>
-  )
+    <div id="app" style={{ backgroundColor: `${color}` }}>
+      <Home />
+    </div>
+  );
 };
 
 class AppWithContext extends React.Component {

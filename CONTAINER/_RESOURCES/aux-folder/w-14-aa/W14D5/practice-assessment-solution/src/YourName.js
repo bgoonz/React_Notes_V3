@@ -1,10 +1,9 @@
-import React from 'react';
-import NameContext from './NameContext';
+import React from "react";
+import NameContext from "./NameContext";
 
-const YourName = () =>
+const YourName = () => (
   <NameContext.Consumer>
-    {value => <input onChange={value.changeName} value={value.name} />}
+    {(value) => <input onChange={value.changeName} value={value.name} />}
   </NameContext.Consumer>
-;
-
+);
 export default YourName;

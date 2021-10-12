@@ -1,59 +1,87 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
-<head>
-  <meta charset="utf-8" />
-  <meta name="generator" content="pandoc" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>data-structures</title>
-  <style type="text/css">
-      code{white-space: pre-wrap;}
-      span.smallcaps{font-variant: small-caps;}
-      span.underline{text-decoration: underline;}
-      div.column{display: inline-block; vertical-align: top; width: 50%;}
-  </style>
-</head>
-<body>
-<h1 id="bubble-sort">Bubble Sort</h1>
-<h4 id="problem-statement">Problem Statement</h4>
-<p>Given an unsorted array of n elements, write a function to sort the array #### Approach - select the first element of the array - compare it with its next element - if it is larger than the next element then swap them - else do nothing - keep doing this for every index of the array - repeat the above process n times. #### Time Complexity <code>O(n^2)</code> Worst case performance</p>
-<p><code>O(n)</code> Best-case performance</p>
-<p><code>O(n^2)</code> Average performance #### Space Complexity <code>O(1)</code> Worst case #### Founder’s Name - The term “Bubble Sort” was first used by Iverson, K in 1962. #### Example ~~~ arr[] = {10, 80, 40, 30} Indexes: 0 1 2 3<br />
-~~~</p>
-<ol type="1">
-<li>Index = 0, Number = 10</li>
-<li>10 &lt; 80, do nothing and continue</li>
-<li>Index = 1, Number = 80</li>
-<li>80 &gt; 40, swap 80 and 40</li>
-<li>The array now is {10, 40, 80, 30}</li>
-<li>Index = 2, Number = 80</li>
-<li>80 &gt; 30, swap 80 and 30</li>
-<li>The array now is {10, 40, 30, 80}</li>
-</ol>
-<p>Repeat the Above Steps again</p>
-<p>arr[] = {10, 40, 30, 80} Indexes: 0 1 2 3</p>
-<ol type="1">
-<li>Index = 0, Number = 10</li>
-<li>10 &lt; 40, do nothing and continue</li>
-<li>Index = 1, Number = 40</li>
-<li>40 &gt; 30, swap 40 and 30</li>
-<li>The array now is {10, 30, 40, 80}</li>
-<li>Index = 2, Number = 40</li>
-<li>40 &lt; 80, do nothing</li>
-<li>The array now is {10, 30, 40, 80}</li>
-</ol>
-<p>Repeat the Above Steps again</p>
-<p>arr[] = {10, 30, 40, 80} Indexes: 0 1 2 3</p>
-<ol type="1">
-<li>Index = 0, Number = 10</li>
-<li>10 &lt; 30, do nothing and continue</li>
-<li>Index = 1, Number = 30</li>
-<li>30 &lt; 40, do nothing and continue</li>
-<li>Index = 2, Number = 40</li>
-<li>40 &lt; 80, do nothing</li>
-</ol>
-<p>Since there are no swaps in above steps, it means the array is sorted and we can stop here. ~~~</p>
-<h4 id="code-implementation-links">Code Implementation Links</h4>
-<pre><code>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="generator" content="pandoc" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=yes"
+    />
+    <title>data-structures</title>
+    <style type="text/css">
+      code {
+        white-space: pre-wrap;
+      }
+      span.smallcaps {
+        font-variant: small-caps;
+      }
+      span.underline {
+        text-decoration: underline;
+      }
+      div.column {
+        display: inline-block;
+        vertical-align: top;
+        width: 50%;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 id="bubble-sort">Bubble Sort</h1>
+    <h4 id="problem-statement">Problem Statement</h4>
+    <p>
+      Given an unsorted array of n elements, write a function to sort the array
+      #### Approach - select the first element of the array - compare it with
+      its next element - if it is larger than the next element then swap them -
+      else do nothing - keep doing this for every index of the array - repeat
+      the above process n times. #### Time Complexity <code>O(n^2)</code> Worst
+      case performance
+    </p>
+    <p><code>O(n)</code> Best-case performance</p>
+    <p>
+      <code>O(n^2)</code> Average performance #### Space Complexity
+      <code>O(1)</code> Worst case #### Founder’s Name - The term “Bubble Sort”
+      was first used by Iverson, K in 1962. #### Example ~~~ arr[] = {10, 80,
+      40, 30} Indexes: 0 1 2 3<br />
+      ~~~
+    </p>
+    <ol type="1">
+      <li>Index = 0, Number = 10</li>
+      <li>10 &lt; 80, do nothing and continue</li>
+      <li>Index = 1, Number = 80</li>
+      <li>80 &gt; 40, swap 80 and 40</li>
+      <li>The array now is {10, 40, 80, 30}</li>
+      <li>Index = 2, Number = 80</li>
+      <li>80 &gt; 30, swap 80 and 30</li>
+      <li>The array now is {10, 40, 30, 80}</li>
+    </ol>
+    <p>Repeat the Above Steps again</p>
+    <p>arr[] = {10, 40, 30, 80} Indexes: 0 1 2 3</p>
+    <ol type="1">
+      <li>Index = 0, Number = 10</li>
+      <li>10 &lt; 40, do nothing and continue</li>
+      <li>Index = 1, Number = 40</li>
+      <li>40 &gt; 30, swap 40 and 30</li>
+      <li>The array now is {10, 30, 40, 80}</li>
+      <li>Index = 2, Number = 40</li>
+      <li>40 &lt; 80, do nothing</li>
+      <li>The array now is {10, 30, 40, 80}</li>
+    </ol>
+    <p>Repeat the Above Steps again</p>
+    <p>arr[] = {10, 30, 40, 80} Indexes: 0 1 2 3</p>
+    <ol type="1">
+      <li>Index = 0, Number = 10</li>
+      <li>10 &lt; 30, do nothing and continue</li>
+      <li>Index = 1, Number = 30</li>
+      <li>30 &lt; 40, do nothing and continue</li>
+      <li>Index = 2, Number = 40</li>
+      <li>40 &lt; 80, do nothing</li>
+    </ol>
+    <p>
+      Since there are no swaps in above steps, it means the array is sorted and
+      we can stop here. ~~~
+    </p>
+    <h4 id="code-implementation-links">Code Implementation Links</h4>
+    <pre><code>
 - [Java](https://github.com/TheAlgorithms/Java/blob/master/Sorts/BubbleSort.java)
 - [C++](https://github.com/TheAlgorithms/C-Plus-Plus/blob/master/sorting/bubble_sort.cpp)
 - [Python](https://github.com/TheAlgorithms/Python/blob/master/sorts/bubble_sort.py)
@@ -128,10 +156,10 @@ We fill `dp[0]` as 1 because there is only one way to get 0 coins (We pick no co
 Now let&#39;s try calculate `dp[i]` for any `i`. `dp[0..i]` will store each sub problems from `0` to `N`. That&#39;s why the answer will be `dp[N]`. First, we need to iterate each coin types to pick them one-by-one. Then we iterate the sub problems from current coin that we pick before  to `N` cents. That&#39;s why we must make dp table with `N` columns.
 
 This is the codes for the Coin Change algorithm:</code></pre>
-<pre><code>for coin_val in S:
+    <pre><code>for coin_val in S:
     for i in range(coin_val, n + 1):
         dp[i] += dp[i - coin_val]</code></pre>
-<pre><code>
+    <pre><code>
 In the second iteration, for every cent that can be exchanged, we take it by subtracting the i-th column by the value of the coin we take and adding it into the current column. So `dp[i]` will store the current sub problem.
 #### Time Complexity
 `O(N * S)` in any case
@@ -139,126 +167,251 @@ In the second iteration, for every cent that can be exchanged, we take it by sub
 `O(N)` - simple implementation. We only need 1D array to store the answer.
 #### Example
 Let&#39;s say we have 3 coin types `[1,2,3]` and we want to change for `7` cents. So we will define our table like this.</code></pre>
-<p>[1, 0, 0, 0, 0, 0, 0, 0] ~~~</p>
-<p>0th column will store 1 since there is only one way to get 0 cents.</p>
-<ul>
-<li>For the first iteration we take a coin that has a value of 1. Then for all sub problems, there is only one way to make change. For 7 cents, the only way is <code>{1,1,1,1,1,1,1}</code>. On the final iteration, our table be like:</li>
-</ul>
-<pre><code>[1, 1, 1, 1, 1, 1, 1, 1]</code></pre>
-<ul>
-<li>For the second iteration, we take a coin that has a value of 2. From here, all sub problems that can be divided by 2 will store another new way to make change. So, when the iteration stopped at 2nd column it will be like <code>dp[2] += dp[0]</code>. We know that <code>dp[0]</code> stored a value of 1. Thus, dp[2] will store the value of <code>1 + 1 = 2</code>. From here we know that for 2 cents, there are 2 ways <code>{1,1}</code> and <code>{2}</code>. And this operation will continue. Now our table be like:</li>
-</ul>
-<pre><code>[1, 1, 2, 2, 3, 3, 4, 4]</code></pre>
-<p>4 ways to make 7 cents using value of 1 and 2. <code>{{1,1,1,1,1,1,1}, {1,1,1,1,1,2}, {1,1,1,2,2}, {1,2,2,2}}</code></p>
-<ul>
-<li>For the final iteration (3rd iteration), we take a coin that has a value of 3. Like before, now all the columns that can be devided by 3 will store another new way. And the final result will be like:</li>
-</ul>
-<pre><code>[1, 1, 2, 3, 4, 5, 7, 8]</code></pre>
-<p>So the final answer is <strong>8</strong>. 8 ways to make change of 7 cents using all coin types. <code>{{1,1,1,1,1,1,1}, {1,1,1,1,1,2}, {1,1,1,2,2}, {1,2,2,2}, {1,1,1,1,3}, {1,3,3}, {2,2,3}, {1,1,2,3}}</code> #### Code Implementation Link <a href="https://github.com/TheAlgorithms/Python/blob/master/dynamic_programming/coin_change.py">Python</a> #### Video Explanation <a href="https://www.youtube.com/watch?v=DJ4a7cmjZY0">Total Unique Ways To Make Change by Back To Back SWE</a></p>
-<p># Doubly Linked List</p>
-<p>Singly Linked List is a linear and connected data structure made of Nodes. Each node is composed of a variable <code>data</code> where its content is stored and a pointer to the next Node on the list. The Linked List has a pointer to the first element of this Node sequence and may also have another pointer to the last Node to make operations at the far end less time-consuming. You can also store a <code>length</code> variable to store the total length.</p>
-<p>A **Doubly Linked List (DLL)** contains an extra pointer, typically called previous pointer, together with next pointer and data which are there in singly linked list.</p>
-<p>### Advantages over singly linked list</p>
-<ul>
-<li>A DLL can be traversed in both forward and backward direction.</li>
-<li>The delete operation in DLL is more efficient if pointer to the node to be deleted is given.</li>
-<li>We can quickly insert a new node before a given node.</li>
-</ul>
-<p>In singly linked list, to delete a node, pointer to the previous node is needed. To get this previous node, sometimes the list is traversed. In DLL, we can get the previous node using previous pointer.</p>
-<p>### Disadvantages over singly linked list</p>
-<ul>
-<li>Every node of DLL Require extra space for an previous pointer. It is possible to implement DLL with single pointer though (See this and this).</li>
-<li>All operations require an extra pointer previous to be maintained. For example, in insertion, we need to modify previous pointers together with next pointers. For example in following functions for insertions at different positions, we need 1 or 2 extra steps to set previous pointer.</li>
-</ul>
-<p>### Time Complexity</p>
-<div class="line-block">Operation | Average | Worst |</div>
-<p>|———–|———|——-|</p>
-<div class="line-block">Access | Θ(n) | O(n) |</div>
-<div class="line-block">Search | Θ(n) | O(n) |</div>
-<div class="line-block">Insertion | Θ(1) | O(1) |</div>
-<div class="line-block">Deletion | Θ(1) | O(1) |</div>
-<p>## Example</p>
-<p>```java</p>
-<p>class LinkedList {</p>
-<p>Node head; // Pointer to the first element</p>
-<p><code></code>Node tail; // Optional. Points to the last element</p>
-<p><code></code>int length; // Optional</p>
-<p>class Node {</p>
-<p>int data; // Node data. Can be int, string, float, templates, etc</p>
-<p>Node next; // Pointer to the next node on the list</p>
-<p>Node prev;</p>
-<p>Node(int data) {</p>
-<p>this.data = data;</p>
-<p>}</p>
-<p>}</p>
-<p>// Adding a node at the front of the list</p>
-<p>public void push(int new_data) {</p>
-<p>/* 1. allocate node</p>
-<ol type="1">
-<li><ol start="2" type="1">
-<li>put in the data */</li>
-</ol></li>
-</ol>
-<p>Node new_Node = new Node(new_data);</p>
-<p>/* 3. Make next of new node as head and previous as NULL */</p>
-<p>new_Node.next = head;</p>
-<p>new_Node.prev = null;</p>
-<p>/* 4. change prev of head node to new node */</p>
-<p>if (head != null)</p>
-<p>head.prev = new_Node;</p>
-<p>/* 5. move the head to point to the new node */</p>
-<p>head = new_Node;</p>
-<p>}</p>
-<p>/* Given a node as prev_node, insert a new node after the given node */</p>
-<p>public void InsertAfter(Node prev_Node, int new_data) {</p>
-<p>/*1. check if the given prev_node is NULL */</p>
-<p>if (prev_Node == null) {</p>
-<p>System.out.println(“The given previous node cannot be NULL”);</p>
-<p>return;</p>
-<p>}</p>
-<p>/* 2. allocate node</p>
-<ol type="1">
-<li><ol start="3" type="1">
-<li>put in the data */</li>
-</ol></li>
-</ol>
-<p>Node new_node = new Node(new_data);</p>
-<p>/* 4. Make next of new node as next of prev_node */</p>
-<p>new_node.next = prev_Node.next;</p>
-<p>/* 5. Make the next of prev_node as new_node */</p>
-<p>prev_Node.next = new_node;</p>
-<p>/* 6. Make prev_node as previous of new_node */</p>
-<p>new_node.prev = prev_Node;</p>
-<p>/* 7. Change previous of new_node’s next node */</p>
-<p>if (new_node.next != null)</p>
-<p>new_node.next.prev = new_node;</p>
-<p>}</p>
-<p>}</p>
-<p>```</p>
-<p>### Adding node at front</p>
-<figure>
-<img src="https://www.geeksforgeeks.org/wp-content/uploads/gq/2014/03/DLL_add_front1.png" alt="Tracing of algorithm" /><figcaption>Tracing of algorithm</figcaption>
-</figure>
-<p>### Add a node after a given node</p>
-<figure>
-<img src="https://www.geeksforgeeks.org/wp-content/uploads/gq/2014/03/DLL_add_middle1.png" alt="Tracing of algorithm" /><figcaption>Tracing of algorithm</figcaption>
-</figure>
-<p>## Code Implementation Links</p>
-<ol type="1">
-<li><a href="https://github.com/TheAlgorithms/Java/blob/master/DataStructures/Lists/DoublyLinkedList.java">Java</a></li>
-<li><a href="https://github.com/TheAlgorithms/C-Plus-Plus/blob/master/Data%20Structure/Doubly%20Linked%20List.cpp">C++</a></li>
-<li><a href="https://github.com/TheAlgorithms/Python/blob/master/data_structures/linked_list/doubly_linked_list.py">Python</a></li>
-<li><a href="https://github.com/TheAlgorithms/Go/blob/master/data-structures/linked-list/double-linkedlist.go">Go</a></li>
-<li><a href="https://github.com/TheAlgorithms/Ruby/blob/master/data_structures/linked_lists/double_list.rb">Ruby</a></li>
-</ol>
-<p>## Video Explanation</p>
-<p><a href="https://www.youtube.com/watch?v=FHMPswJDCvU">A CS50 video explaining the Doubly Linked List Data Structure</a> # Exponential Search #### Prerequisites - <a href="https://github.com/faridevnz/Algorithms-Explanation/blob/master/en/Search%20Algorithms/Binary%20Search.md">Binary Search algorithm</a> #### Problem Statement Given a sorted array of <em>n</em> elements, write a function to search for the index of a given element (target) #### Approach - Search for the <strong>range</strong> within which the target is included increasing <em>index</em> by powers of 2 - If this range exists in array apply the Binary Search algorithm over it - Else return -1 #### Example ~~~ markdown arr = [1, 2, 3, 4, 5, 6, 7, … 998, 999, 1_000]</p>
-<p>target = 998 index = 0 ~~~</p>
-<ol type="1">
-<li>SEARCHING FOR THE RANGE index = 1, 2, 4, 8, 16, 32, 64, …, 512, …, 1_024 after 10 iteration we have the index at 1_024 and outside of the array</li>
-<li>BINARY SEARCH Now we can apply the binary search on the subarray from 512 and 1_000.</li>
-</ol>
-<pre><code>
+    <p>[1, 0, 0, 0, 0, 0, 0, 0] ~~~</p>
+    <p>0th column will store 1 since there is only one way to get 0 cents.</p>
+    <ul>
+      <li>
+        For the first iteration we take a coin that has a value of 1. Then for
+        all sub problems, there is only one way to make change. For 7 cents, the
+        only way is <code>{1,1,1,1,1,1,1}</code>. On the final iteration, our
+        table be like:
+      </li>
+    </ul>
+    <pre><code>[1, 1, 1, 1, 1, 1, 1, 1]</code></pre>
+    <ul>
+      <li>
+        For the second iteration, we take a coin that has a value of 2. From
+        here, all sub problems that can be divided by 2 will store another new
+        way to make change. So, when the iteration stopped at 2nd column it will
+        be like <code>dp[2] += dp[0]</code>. We know that
+        <code>dp[0]</code> stored a value of 1. Thus, dp[2] will store the value
+        of <code>1 + 1 = 2</code>. From here we know that for 2 cents, there are
+        2 ways <code>{1,1}</code> and <code>{2}</code>. And this operation will
+        continue. Now our table be like:
+      </li>
+    </ul>
+    <pre><code>[1, 1, 2, 2, 3, 3, 4, 4]</code></pre>
+    <p>
+      4 ways to make 7 cents using value of 1 and 2.
+      <code>{{1,1,1,1,1,1,1}, {1,1,1,1,1,2}, {1,1,1,2,2}, {1,2,2,2}}</code>
+    </p>
+    <ul>
+      <li>
+        For the final iteration (3rd iteration), we take a coin that has a value
+        of 3. Like before, now all the columns that can be devided by 3 will
+        store another new way. And the final result will be like:
+      </li>
+    </ul>
+    <pre><code>[1, 1, 2, 3, 4, 5, 7, 8]</code></pre>
+    <p>
+      So the final answer is <strong>8</strong>. 8 ways to make change of 7
+      cents using all coin types.
+      <code
+        >{{1,1,1,1,1,1,1}, {1,1,1,1,1,2}, {1,1,1,2,2}, {1,2,2,2}, {1,1,1,1,3},
+        {1,3,3}, {2,2,3}, {1,1,2,3}}</code
+      >
+      #### Code Implementation Link
+      <a
+        href="https://github.com/TheAlgorithms/Python/blob/master/dynamic_programming/coin_change.py"
+        >Python</a
+      >
+      #### Video Explanation
+      <a href="https://www.youtube.com/watch?v=DJ4a7cmjZY0"
+        >Total Unique Ways To Make Change by Back To Back SWE</a
+      >
+    </p>
+    <p># Doubly Linked List</p>
+    <p>
+      Singly Linked List is a linear and connected data structure made of Nodes.
+      Each node is composed of a variable <code>data</code> where its content is
+      stored and a pointer to the next Node on the list. The Linked List has a
+      pointer to the first element of this Node sequence and may also have
+      another pointer to the last Node to make operations at the far end less
+      time-consuming. You can also store a <code>length</code> variable to store
+      the total length.
+    </p>
+    <p>
+      A **Doubly Linked List (DLL)** contains an extra pointer, typically called
+      previous pointer, together with next pointer and data which are there in
+      singly linked list.
+    </p>
+    <p>### Advantages over singly linked list</p>
+    <ul>
+      <li>A DLL can be traversed in both forward and backward direction.</li>
+      <li>
+        The delete operation in DLL is more efficient if pointer to the node to
+        be deleted is given.
+      </li>
+      <li>We can quickly insert a new node before a given node.</li>
+    </ul>
+    <p>
+      In singly linked list, to delete a node, pointer to the previous node is
+      needed. To get this previous node, sometimes the list is traversed. In
+      DLL, we can get the previous node using previous pointer.
+    </p>
+    <p>### Disadvantages over singly linked list</p>
+    <ul>
+      <li>
+        Every node of DLL Require extra space for an previous pointer. It is
+        possible to implement DLL with single pointer though (See this and
+        this).
+      </li>
+      <li>
+        All operations require an extra pointer previous to be maintained. For
+        example, in insertion, we need to modify previous pointers together with
+        next pointers. For example in following functions for insertions at
+        different positions, we need 1 or 2 extra steps to set previous pointer.
+      </li>
+    </ul>
+    <p>### Time Complexity</p>
+    <div class="line-block">Operation | Average | Worst |</div>
+    <p>|———–|———|——-|</p>
+    <div class="line-block">Access | Θ(n) | O(n) |</div>
+    <div class="line-block">Search | Θ(n) | O(n) |</div>
+    <div class="line-block">Insertion | Θ(1) | O(1) |</div>
+    <div class="line-block">Deletion | Θ(1) | O(1) |</div>
+    <p>## Example</p>
+    <p>```java</p>
+    <p>class LinkedList {</p>
+    <p>Node head; // Pointer to the first element</p>
+    <p><code></code>Node tail; // Optional. Points to the last element</p>
+    <p><code></code>int length; // Optional</p>
+    <p>class Node {</p>
+    <p>int data; // Node data. Can be int, string, float, templates, etc</p>
+    <p>Node next; // Pointer to the next node on the list</p>
+    <p>Node prev;</p>
+    <p>Node(int data) {</p>
+    <p>this.data = data;</p>
+    <p>}</p>
+    <p>}</p>
+    <p>// Adding a node at the front of the list</p>
+    <p>public void push(int new_data) {</p>
+    <p>/* 1. allocate node</p>
+    <ol type="1">
+      <li>
+        <ol start="2" type="1">
+          <li>put in the data */</li>
+        </ol>
+      </li>
+    </ol>
+    <p>Node new_Node = new Node(new_data);</p>
+    <p>/* 3. Make next of new node as head and previous as NULL */</p>
+    <p>new_Node.next = head;</p>
+    <p>new_Node.prev = null;</p>
+    <p>/* 4. change prev of head node to new node */</p>
+    <p>if (head != null)</p>
+    <p>head.prev = new_Node;</p>
+    <p>/* 5. move the head to point to the new node */</p>
+    <p>head = new_Node;</p>
+    <p>}</p>
+    <p>
+      /* Given a node as prev_node, insert a new node after the given node */
+    </p>
+    <p>public void InsertAfter(Node prev_Node, int new_data) {</p>
+    <p>/*1. check if the given prev_node is NULL */</p>
+    <p>if (prev_Node == null) {</p>
+    <p>System.out.println(“The given previous node cannot be NULL”);</p>
+    <p>return;</p>
+    <p>}</p>
+    <p>/* 2. allocate node</p>
+    <ol type="1">
+      <li>
+        <ol start="3" type="1">
+          <li>put in the data */</li>
+        </ol>
+      </li>
+    </ol>
+    <p>Node new_node = new Node(new_data);</p>
+    <p>/* 4. Make next of new node as next of prev_node */</p>
+    <p>new_node.next = prev_Node.next;</p>
+    <p>/* 5. Make the next of prev_node as new_node */</p>
+    <p>prev_Node.next = new_node;</p>
+    <p>/* 6. Make prev_node as previous of new_node */</p>
+    <p>new_node.prev = prev_Node;</p>
+    <p>/* 7. Change previous of new_node’s next node */</p>
+    <p>if (new_node.next != null)</p>
+    <p>new_node.next.prev = new_node;</p>
+    <p>}</p>
+    <p>}</p>
+    <p>```</p>
+    <p>### Adding node at front</p>
+    <figure>
+      <img
+        src="https://www.geeksforgeeks.org/wp-content/uploads/gq/2014/03/DLL_add_front1.png"
+        alt="Tracing of algorithm"
+      />
+      <figcaption>Tracing of algorithm</figcaption>
+    </figure>
+    <p>### Add a node after a given node</p>
+    <figure>
+      <img
+        src="https://www.geeksforgeeks.org/wp-content/uploads/gq/2014/03/DLL_add_middle1.png"
+        alt="Tracing of algorithm"
+      />
+      <figcaption>Tracing of algorithm</figcaption>
+    </figure>
+    <p>## Code Implementation Links</p>
+    <ol type="1">
+      <li>
+        <a
+          href="https://github.com/TheAlgorithms/Java/blob/master/DataStructures/Lists/DoublyLinkedList.java"
+          >Java</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://github.com/TheAlgorithms/C-Plus-Plus/blob/master/Data%20Structure/Doubly%20Linked%20List.cpp"
+          >C++</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://github.com/TheAlgorithms/Python/blob/master/data_structures/linked_list/doubly_linked_list.py"
+          >Python</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://github.com/TheAlgorithms/Go/blob/master/data-structures/linked-list/double-linkedlist.go"
+          >Go</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://github.com/TheAlgorithms/Ruby/blob/master/data_structures/linked_lists/double_list.rb"
+          >Ruby</a
+        >
+      </li>
+    </ol>
+    <p>## Video Explanation</p>
+    <p>
+      <a href="https://www.youtube.com/watch?v=FHMPswJDCvU"
+        >A CS50 video explaining the Doubly Linked List Data Structure</a
+      >
+      # Exponential Search #### Prerequisites -
+      <a
+        href="https://github.com/faridevnz/Algorithms-Explanation/blob/master/en/Search%20Algorithms/Binary%20Search.md"
+        >Binary Search algorithm</a
+      >
+      #### Problem Statement Given a sorted array of <em>n</em> elements, write
+      a function to search for the index of a given element (target) ####
+      Approach - Search for the <strong>range</strong> within which the target
+      is included increasing <em>index</em> by powers of 2 - If this range
+      exists in array apply the Binary Search algorithm over it - Else return -1
+      #### Example ~~~ markdown arr = [1, 2, 3, 4, 5, 6, 7, … 998, 999, 1_000]
+    </p>
+    <p>target = 998 index = 0 ~~~</p>
+    <ol type="1">
+      <li>
+        SEARCHING FOR THE RANGE index = 1, 2, 4, 8, 16, 32, 64, …, 512, …, 1_024
+        after 10 iteration we have the index at 1_024 and outside of the array
+      </li>
+      <li>
+        BINARY SEARCH Now we can apply the binary search on the subarray from
+        512 and 1_000.
+      </li>
+    </ol>
+    <pre><code>
 ***Note***: we apply the Binary Search from 512 to 1_000 because at `i = 2^10 = 1_024` the array is finisced and the target number is less than the latest index of the array ( 1_000 ).
 
 #### Time Complexity
@@ -268,65 +421,206 @@ Let&#39;s say we have 3 coin types `[1,2,3]` and we want to change for `7` cents
 **best case:** `O(*1*)`
 
 #### Complexity Explanation</code></pre>
-<ul>
-<li>The complexity of the first part of the algorithm is <strong>O( log <em>i</em> )</strong> because if <em>i</em> is the position of the target in the array, after doubling the search <em>index</em> <code>⌈log(i)⌉</code> times, the algorithm will be at a search index that is greater than or equal to <em>i</em>. We can write <code>2^⌈log(i)⌉ &gt;= i</code></li>
-<li>The complexity of the second part of the algorithm also is <strong>O ( log <em>i</em> )</strong> because that is a simple Binary Search. The Binary Search complexity ( as explained <a href="https://github.com/faridevnz/Algorithms-Explanation/blob/master/en/Search%20Algorithms/Binary%20Search.md">here</a> ) is O( <em>n</em> ) where <em>n</em> is the length of the array. In the Exponential Search, the length of the array on which the algorithm is applied is <code>2^i - 2^(i-1)</code>, put into words it means ‘( the length of the array from start to <em>i</em> ) - ( the part of array skipped until the previous iteration )’. Is simple verify that <code>2^i - 2^(i-1) = 2^(i-1)</code></li>
-</ul>
-<p>After this detailed explanation we can say that the the complexity of the Exponential Search is: ~~~ mathematica O(log i) + O(log i) = 2O(log i) = O(log i) ~~~ #### Binary Search vs Exponential Search Let’s take a look at this comparison with a less theoretical example. Imagine we have an array with<code>1_000_000</code> elements and we want to search an element that is in the <code>4th</code> position. It’s easy to see that:</p>
-<ul>
-<li>The Binary Search start from the middle of the array and arrive to the 4th position after many iterations</li>
-<li>The Exponential Search arrive at the 4th index after only 2 iterations #### Code Implementation Links</li>
-<li><a href="https://github.com/TheAlgorithms/C-Plus-Plus/blob/master/search/exponential_search.cpp">C++</a></li>
-<li><a href="https://github.com/TheAlgorithms/Javascript/blob/master/Search/ExponentialSearch.js">JavaScript</a> # Calculating Fibonacci numbers In mathematics, the Fibonacci numbers commonly denoted F(n), form a sequence, called the Fibonacci sequence, such that each number is the sum of the two preceding ones, starting from 0 and 1. The Sequence looks like this:</li>
-</ul>
-<p><code>[0, 1, 1, 2, 3, 5, 8, 13, 21, 34,  ...]</code> ## Applications Finding <code>N-th</code> member of this sequence would be useful in many Applications:</p>
-<ul>
-<li>Recently Fibonacci sequence and the golden ratio are of great interest to researchers in many fields of science including high energy physics, quantum mechanics, Cryptography and Coding. ## Steps</li>
-</ul>
-<ol type="1">
-<li>Prepare Base Matrice</li>
-<li>Calculate the power of this Matrice</li>
-<li>Take Corresponding value from Matrix ## Example Find <code>8-th</code> member of Fibonacci ### Step 0</li>
-</ol>
-<pre><code>| F(n+1)  F(n)  |
+    <ul>
+      <li>
+        The complexity of the first part of the algorithm is
+        <strong>O( log <em>i</em> )</strong> because if <em>i</em> is the
+        position of the target in the array, after doubling the search
+        <em>index</em> <code>⌈log(i)⌉</code> times, the algorithm will be at a
+        search index that is greater than or equal to <em>i</em>. We can write
+        <code>2^⌈log(i)⌉ &gt;= i</code>
+      </li>
+      <li>
+        The complexity of the second part of the algorithm also is
+        <strong>O ( log <em>i</em> )</strong> because that is a simple Binary
+        Search. The Binary Search complexity ( as explained
+        <a
+          href="https://github.com/faridevnz/Algorithms-Explanation/blob/master/en/Search%20Algorithms/Binary%20Search.md"
+          >here</a
+        >
+        ) is O( <em>n</em> ) where <em>n</em> is the length of the array. In the
+        Exponential Search, the length of the array on which the algorithm is
+        applied is <code>2^i - 2^(i-1)</code>, put into words it means ‘( the
+        length of the array from start to <em>i</em> ) - ( the part of array
+        skipped until the previous iteration )’. Is simple verify that
+        <code>2^i - 2^(i-1) = 2^(i-1)</code>
+      </li>
+    </ul>
+    <p>
+      After this detailed explanation we can say that the the complexity of the
+      Exponential Search is: ~~~ mathematica O(log i) + O(log i) = 2O(log i) =
+      O(log i) ~~~ #### Binary Search vs Exponential Search Let’s take a look at
+      this comparison with a less theoretical example. Imagine we have an array
+      with<code>1_000_000</code> elements and we want to search an element that
+      is in the <code>4th</code> position. It’s easy to see that:
+    </p>
+    <ul>
+      <li>
+        The Binary Search start from the middle of the array and arrive to the
+        4th position after many iterations
+      </li>
+      <li>
+        The Exponential Search arrive at the 4th index after only 2 iterations
+        #### Code Implementation Links
+      </li>
+      <li>
+        <a
+          href="https://github.com/TheAlgorithms/C-Plus-Plus/blob/master/search/exponential_search.cpp"
+          >C++</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://github.com/TheAlgorithms/Javascript/blob/master/Search/ExponentialSearch.js"
+          >JavaScript</a
+        >
+        # Calculating Fibonacci numbers In mathematics, the Fibonacci numbers
+        commonly denoted F(n), form a sequence, called the Fibonacci sequence,
+        such that each number is the sum of the two preceding ones, starting
+        from 0 and 1. The Sequence looks like this:
+      </li>
+    </ul>
+    <p>
+      <code>[0, 1, 1, 2, 3, 5, 8, 13, 21, 34, ...]</code> ## Applications
+      Finding <code>N-th</code> member of this sequence would be useful in many
+      Applications:
+    </p>
+    <ul>
+      <li>
+        Recently Fibonacci sequence and the golden ratio are of great interest
+        to researchers in many fields of science including high energy physics,
+        quantum mechanics, Cryptography and Coding. ## Steps
+      </li>
+    </ul>
+    <ol type="1">
+      <li>Prepare Base Matrice</li>
+      <li>Calculate the power of this Matrice</li>
+      <li>
+        Take Corresponding value from Matrix ## Example Find
+        <code>8-th</code> member of Fibonacci ### Step 0
+      </li>
+    </ol>
+    <pre><code>| F(n+1)  F(n)  |
 | F(n)    F(n-1)|</code></pre>
-<h3 id="step-1">Step 1</h3>
-<pre><code>Calculate matrix^1
+    <h3 id="step-1">Step 1</h3>
+    <pre><code>Calculate matrix^1
 | 1 1 |
 | 1 0 |</code></pre>
-<h3 id="step-2">Step 2</h3>
-<pre><code>Calculate matrix^2
+    <h3 id="step-2">Step 2</h3>
+    <pre><code>Calculate matrix^2
 | 2 1 |
 | 1 1 |</code></pre>
-<h3 id="step-3">Step 3</h3>
-<pre><code>Calculate matrix^4
+    <h3 id="step-3">Step 3</h3>
+    <pre><code>Calculate matrix^4
 | 5 3 |
 | 3 2 |</code></pre>
-<h3 id="step-4">Step 4</h3>
-<pre><code>Calculate matrix^8
+    <h3 id="step-4">Step 4</h3>
+    <pre><code>Calculate matrix^8
 | 34 21 |
 | 21 13 |</code></pre>
-<h3 id="step-5">Step 5</h3>
-<p>F(8)=21 ## Implementation - <a href="https://github.com/TheAlgorithms/C-Plus-Plus/blob/master/math/fibonacci.cpp">C++</a> - <a href="https://github.com/TheAlgorithms/Java/blob/master/Maths/FibonacciNumber.java">Java</a> - <a href="https://github.com/TheAlgorithms/Javascript/blob/80c2dc85d714f73783f133964d6acd9b5625ddd9/Maths/Fibonacci.js">Javascript</a> - <a href="https://github.com/TheAlgorithms/Python/blob/master/maths/fibonacci.py">Python</a> ## Video URL - <a href="https://www.youtube.com/watch?v=EEb6JP3NXBI">Youtube</a> ## Others - <a href="https://brilliant.org/wiki/fast-fibonacci-transform/">Proof</a> # Average (Mean) Calculate the average of a list of numbers using mean. ## Applications Calculating the mean of a list of numbers is one of the most common ways to determine the average of those numbers.</p>
-<p>Calculating a mean would be useful in these situations:</p>
-<ul>
-<li>Determining the average score for all players of a video game level.</li>
-<li>Finding the average grade for tests that a student took this semester.</li>
-<li>Determining the average size of all files in a directory/folder. ## Steps</li>
-</ul>
-<ol type="1">
-<li>Input a list of numbers.</li>
-<li>Calculate the sum of all numbers in the list.</li>
-<li>Count the numbers in the list.</li>
-<li>Divide the sum by the total count of numbers in the list.</li>
-<li>Return mean. ## Example Given the list <code>[2, 4, 6, 8, 20, 50, 70]</code>, let’s calculate the average. ### Step 1 Send <code>[2, 4, 6, 8, 20, 50, 70]</code> as input for a method/function. ### Step 2 Add all the numbers together.</li>
-</ol>
-<p><code>2 + 4 + 6 + 8 + 20 + 50 + 70 = 160</code>, so <code>sum = 160</code>. ### Step 3 Count the numbers in the list.</p>
-<p>The list has seven numbers, so <code>count = 7</code>. ### Step 4 Divide the sum of all the numbers by the count of the numbers. ~~~ sum = 160 count = 7 ~~~</p>
-<p>If we ignore significant digits: <code>sum / count =</code>22.<u>857142</u></p>
-<p>If we properly consider significant digits: <code>sum / count = 23</code> ### Step 5 Return the value of 22.<u>857142</u> or <code>23</code>. ## Implementation - <a href="https://github.com/TheAlgorithms/Python/blob/master/maths/average_mean.py">Python</a> ## Video URL - <a href="https://www.khanacademy.org/math/ap-statistics/summarizing-quantitative-data-ap/measuring-center-quantitative/v/mean-median-and-mode">Mean on Khan Academy</a> ## Others - <a href="https://en.wikipedia.org/wiki/Mean">Mean on Wikipedia</a> # Bellman-Ford #### Problem Statement Given a weighted directed graph G(V,E) and a source vertex s ∈ V, determine for each vertex v ∈ V the shortest path between s and v. #### Approach - Initialize the distance from the source to all vertices as infinite. - Initialize the distance to itself as 0. - Create an array dist[] of size |V| with all values as infinite except dist[s]. - Repeat the following |V| - 1 times. Where |V| is number of vertices. - Create another loop to go through each edge (u, v) in E and do the following:</p>
-<p>dist[v] = minimum(dist[v], dist[u] + weight of edge). - Lastly iterate through all edges on last time to make sure there are no negatively weighted cycles. #### Time Complexity O(VE) #### Space Complexity O(V^2) #### Founder’s Name - Richard Bellman &amp; Lester Ford, Jr. #### Example ~~~ # of vertices in graph = 5 [A, B, C, D, E] # of edges in graph = 8</p>
-<pre><code>edges  [A-&gt;B, A-&gt;C, B-&gt;C, B-&gt;D, B-&gt;E, D-&gt;C, D-&gt;B, E-&gt;D]
+    <h3 id="step-5">Step 5</h3>
+    <p>
+      F(8)=21 ## Implementation -
+      <a
+        href="https://github.com/TheAlgorithms/C-Plus-Plus/blob/master/math/fibonacci.cpp"
+        >C++</a
+      >
+      -
+      <a
+        href="https://github.com/TheAlgorithms/Java/blob/master/Maths/FibonacciNumber.java"
+        >Java</a
+      >
+      -
+      <a
+        href="https://github.com/TheAlgorithms/Javascript/blob/80c2dc85d714f73783f133964d6acd9b5625ddd9/Maths/Fibonacci.js"
+        >Javascript</a
+      >
+      -
+      <a
+        href="https://github.com/TheAlgorithms/Python/blob/master/maths/fibonacci.py"
+        >Python</a
+      >
+      ## Video URL -
+      <a href="https://www.youtube.com/watch?v=EEb6JP3NXBI">Youtube</a> ##
+      Others -
+      <a href="https://brilliant.org/wiki/fast-fibonacci-transform/">Proof</a> #
+      Average (Mean) Calculate the average of a list of numbers using mean. ##
+      Applications Calculating the mean of a list of numbers is one of the most
+      common ways to determine the average of those numbers.
+    </p>
+    <p>Calculating a mean would be useful in these situations:</p>
+    <ul>
+      <li>
+        Determining the average score for all players of a video game level.
+      </li>
+      <li>
+        Finding the average grade for tests that a student took this semester.
+      </li>
+      <li>
+        Determining the average size of all files in a directory/folder. ##
+        Steps
+      </li>
+    </ul>
+    <ol type="1">
+      <li>Input a list of numbers.</li>
+      <li>Calculate the sum of all numbers in the list.</li>
+      <li>Count the numbers in the list.</li>
+      <li>Divide the sum by the total count of numbers in the list.</li>
+      <li>
+        Return mean. ## Example Given the list
+        <code>[2, 4, 6, 8, 20, 50, 70]</code>, let’s calculate the average. ###
+        Step 1 Send <code>[2, 4, 6, 8, 20, 50, 70]</code> as input for a
+        method/function. ### Step 2 Add all the numbers together.
+      </li>
+    </ol>
+    <p>
+      <code>2 + 4 + 6 + 8 + 20 + 50 + 70 = 160</code>, so
+      <code>sum = 160</code>. ### Step 3 Count the numbers in the list.
+    </p>
+    <p>
+      The list has seven numbers, so <code>count = 7</code>. ### Step 4 Divide
+      the sum of all the numbers by the count of the numbers. ~~~ sum = 160
+      count = 7 ~~~
+    </p>
+    <p>
+      If we ignore significant digits: <code>sum / count =</code>22.<u
+        >857142</u
+      >
+    </p>
+    <p>
+      If we properly consider significant digits:
+      <code>sum / count = 23</code> ### Step 5 Return the value of 22.<u
+        >857142</u
+      >
+      or <code>23</code>. ## Implementation -
+      <a
+        href="https://github.com/TheAlgorithms/Python/blob/master/maths/average_mean.py"
+        >Python</a
+      >
+      ## Video URL -
+      <a
+        href="https://www.khanacademy.org/math/ap-statistics/summarizing-quantitative-data-ap/measuring-center-quantitative/v/mean-median-and-mode"
+        >Mean on Khan Academy</a
+      >
+      ## Others -
+      <a href="https://en.wikipedia.org/wiki/Mean">Mean on Wikipedia</a> #
+      Bellman-Ford #### Problem Statement Given a weighted directed graph G(V,E)
+      and a source vertex s ∈ V, determine for each vertex v ∈ V the shortest
+      path between s and v. #### Approach - Initialize the distance from the
+      source to all vertices as infinite. - Initialize the distance to itself as
+      0. - Create an array dist[] of size |V| with all values as infinite except
+      dist[s]. - Repeat the following |V| - 1 times. Where |V| is number of
+      vertices. - Create another loop to go through each edge (u, v) in E and do
+      the following:
+    </p>
+    <p>
+      dist[v] = minimum(dist[v], dist[u] + weight of edge). - Lastly iterate
+      through all edges on last time to make sure there are no negatively
+      weighted cycles. #### Time Complexity O(VE) #### Space Complexity O(V^2)
+      #### Founder’s Name - Richard Bellman &amp; Lester Ford, Jr. #### Example
+      ~~~ # of vertices in graph = 5 [A, B, C, D, E] # of edges in graph = 8
+    </p>
+    <pre><code>edges  [A-&gt;B, A-&gt;C, B-&gt;C, B-&gt;D, B-&gt;E, D-&gt;C, D-&gt;B, E-&gt;D]
 weight [ -1,    4,    3,    2,    2,    5,    1,   -4 ]
 source [  A,    A,    B,    B,    B,    D,    D,    E ]
 
@@ -375,126 +669,331 @@ graph-&gt;edge[7].weight = -3
 for source = A
 
 Vertex   Distance from Source</code></pre>
-<p>A 0 A-&gt;A B -1 A-&gt;B C 2 A-&gt;B-&gt;C = -1 + 3 D -2 A-&gt;B-&gt;E-&gt;D = -1 + 2 + -3 E 1 A-&gt;B-&gt;E = -1 + 2 ~~~ #### Code Implementation Links - <a href="https://github.com/TheAlgorithms/Java/blob/master/DataStructures/Graphs/BellmanFord.java">Java</a> - <a href="https://github.com/TheAlgorithms/C-Plus-Plus/blob/master/Dynamic%20Programming/Bellman-Ford.cpp">C++</a> - <a href="https://github.com/TheAlgorithms/Python/blob/master/data_structures/graph/bellman_ford.py">Python</a> - <a href="https://github.com/TheAlgorithms/C/blob/master/data_structures/graphs/Bellman-Ford.c">C</a> #### Video Explanation <a href="https://www.youtube.com/watch?v=hxMWBBCpR6A">A video explaining the Bellman-Ford Algorithm</a> #### Others Sources Used:</p>
-<ul>
-<li>https://www.geeksforgeeks.org/bellman-ford-algorithm-dp-23/</li>
-<li>https://en.wikipedia.org/wiki/Bellman%E2%80%93Ford_algorithm</li>
-</ul>
-<p># Binary Search (A divide and conquer algorithm)</p>
-<p>#### Problem Statement</p>
-<p>Given a sorted array of n elements, write a function to search for the index of a given element (target)</p>
-<p>#### Approach</p>
-<ul>
-<li>Search for the array by dividing the array in half repeatedly.</li>
-<li>Initially consider the actual array and pick the element at the middle index</li>
-<li>Keep a lower index i.e. 0 and higher index i.e. length of array</li>
-<li>If it is equal to the target element then return the index</li>
-<li>Else if it is greater than the target element then consider only the left half of array. (lower index = 0, higher = middle - 1)</li>
-<li>Else if it is less than the target element then consider only the right half of array. (lower index = middle + 1, higher = length of array)</li>
-<li>Return -1 if target element is not found in the array (Base Case: If lower index is greater than or equal to higher index)</li>
-</ul>
-<p>#### Time Complexity</p>
-<p>O(log n) Worse Case</p>
-<p>O(1) Best Case (If middle element of initial array is the target element)</p>
-<p>#### Space Complexity</p>
-<p>O(1) For iterative approach</p>
-<p>O(log n) For recursive approach due to recursion call stack</p>
-<p>#### Example</p>
-<p>```</p>
-<p>arr = [1,2,3,4,5,6,7]</p>
-<p>target = 2</p>
-<p>Initially the element at middle index is 4 which is greater than 2. Therefore we search the left half of the</p>
-<p>array i.e. [1,2,3].</p>
-<p>Here we find the middle element equal to target element so we return its index i.e. 1</p>
-<p>target = 9</p>
-<p>Binary Search should return -1 as 9 is not present in the array</p>
-<p>```</p>
-<p>#### Code Implementation Links</p>
-<ul>
-<li><a href="https://github.com/TheAlgorithms/Java/blob/master/Searches/BinarySearch.java">Java</a></li>
-<li><a href="https://github.com/TheAlgorithms/C-Plus-Plus/blob/master/Search/Binary%20Search.cpp">C++</a></li>
-<li><a href="https://github.com/TheAlgorithms/Python/blob/master/searches/binary_search.py">Python</a></li>
-<li><a href="https://github.com/TheAlgorithms/C-Sharp/blob/master/searches/binary_search.cs">C-Sharp</a></li>
-<li><a href="https://github.com/TheAlgorithms/C/blob/master/searching/Binary_Search.c">C</a></li>
-</ul>
-<p>#### Video Explanation</p>
-<p><a href="https://www.youtube.com/watch?v=5xlIPT1FRcA">A CS50 video explaining the Binary Search Algorithm</a></p>
-<p>#### Animation Explanation</p>
-<ul>
-<li><a href="https://boardhub.github.io/tute/?wd=binarySearchAlgo2">Tute Board</a></li>
-</ul>
-<p># Radix Sort</p>
-<p>The lower bound for Comparison based sorting algorithm (Merge Sort, Heap Sort, Quick-Sort .. etc) is <code>Ω(nlogn)</code>, i.e., they cannot do better than <code>nlogn</code>.</p>
-<p>Counting sort is a linear time sorting algorithm that sort in <code>O(n+k)</code> time when elements are in the range from 1 to k.</p>
-<p>What if the elements are in the range from 1 to n2? We can’t use counting sort because counting sort will take <code>O(n2)</code> which is worse than comparison-based sorting algorithms. Can we sort such an array in linear time?</p>
-<p>Radix Sort is the answer. The idea of Radix Sort is to do digit by digit sort starting from least significant digit to most significant digit. Radix sort uses counting sort as a subroutine to sort.</p>
-<p>## The Radix Sort Algorithm</p>
-<p>Do following for each digit i where i varies from least significant digit to the most significant digit.</p>
-<p>Sort input array using counting sort (or any stable sort) according to the i’th digit.</p>
-<p>Example:</p>
-<p>Original, unsorted list:</p>
-<p><code>170, 45, 75, 90, 802, 24, 2, 66</code></p>
-<p>Sorting by least significant digit (1s place) gives:</p>
-<p>[*Notice that we keep 802 before 2, because 802 occurred</p>
-<p>before 2 in the original list, and similarly for pairs</p>
-<p>170 &amp; 90 and 45 &amp; 75.]</p>
-<p>Sorting by next digit (10s place) gives:</p>
-<p>[*Notice that 802 again comes before 2 as 802 comes before 2 in the previous list.]</p>
-<p><code>802, 2, 24, 45, 66, 170, 75, 90</code></p>
-<p>Sorting by the most significant digit (100s place) gives:</p>
-<p><code>2, 24, 45, 66, 75, 90, 170, 802</code></p>
-<p>## What is the running time of Radix Sort?</p>
-<p>Let there be d digits in input integers. Radix Sort takes <code>O(d\*(n+b))</code> time where b is the base for representing numbers, for example, for the decimal system, b is 10.</p>
-<p>What is the value of d? If <code>k</code> is the maximum possible value, then d would be <code>O(logb(k))</code>. So overall time complexity is <code>O((n+b) \* logb(k))</code>. Which looks more than the</p>
-<p>time complexity of comparison-based sorting algorithms for a large k. Let us first limit k. Let k &lt;= nc where c is a constant. In that case, the complexity becomes</p>
-<p><code>O(n logb(n))</code>. But it still doesn’t beat comparison-based sorting algorithms.</p>
-<p>## Is Radix Sort preferable to Comparison based sorting algorithms like Quick-Sort?</p>
-<p>If we have <code>log2n</code> bits for every digit, the running time of Radix appears to be better than Quick Sort for a wide range of input numbers. The constant factors hidden in</p>
-<p>asymptotic notation are higher for Radix Sort and Quick-Sort uses hardware caches more effectively. Also, Radix sort uses counting sort as a subroutine and counting sort</p>
-<p>takes extra space to sort numbers.</p>
-<p>Video reference: https://youtu.be/nu4gDuFabIM # Recursive Bubble Sort Bubble Sort is one of the simplest sorting algorithms that compares two elements at a time and swaps them if they are in the wrong order. This process is repeated until the entire sequence is in order.</p>
-<ul>
-<li>Time Complexity: <code>O(n ^ 2)</code> for average case; <code>O(n)</code> for best case.</li>
-<li><p>Space Complexity: <code>O(n)</code>; note that iterative bubble sort has space complexity as <code>O(1)</code>. ## Steps Base case: If the size of the array is 1, return.</p></li>
-<li>We need to fix the last element of the current sub-array. For this, iterate over the entire array using normal Bubble Sort, and perform swapping.</li>
-<li>Next, call the function on the entire array excluding the last element(which was fixed by the iteration in the above step)</li>
-<li><p>Repeat until Base Case is reached. ## Example Let the given array be: <code>{5, 3, 2, 1, 4}</code></p></li>
-</ul>
-<p><strong>First Iteration:</strong></p>
-<ul>
-<li>{<code>5</code>, <code>3</code>, 2, 1, 4} -&gt; {<code>3</code>, <code>5</code>, 2, 1, 4} Swap since <code>5 &gt; 3</code></li>
-<li>{3, <code>5</code>, <code>2</code>, 1, 4} -&gt; {3, <code>2</code>, <code>5</code>, 1, 4} Swap since <code>5 &gt; 2</code></li>
-<li>{3, 2, <code>5</code>, <code>1</code>, 4} -&gt; {3, 2, <code>1</code>, <code>5</code>, 4} Swap since <code>5 &gt; 1</code></li>
-<li>{3, 2, 1, <code>5</code>, <code>4</code>} -&gt; {3, 2, 1, <code>4</code>, <code>5</code>} Swap since <code>5 &gt; 4</code></li>
-</ul>
-<p>This iteration has fixed the position of 5. Now, we will consider the array up to index 3.</p>
-<p><strong>Second Iteration:</strong></p>
-<ul>
-<li>{<code>3</code>, <code>2</code>, 1, 4, 5} -&gt; {<code>2</code>, <code>3</code>, 1, 4, 5} Swap since <code>3 &gt; 2</code></li>
-<li>{2, <code>3</code>, <code>1</code>, 4, 5} -&gt; {2, <code>1</code>, <code>3</code>, 4, 5} Swap since <code>3 &gt; 1</code></li>
-<li>{2, 1, <code>3</code>, <code>4</code>, 5}; As <code>3 &lt; 4</code>, do not swap</li>
-</ul>
-<p>Note: As we check one less element with every iteration, we do not need elements at index 3 and 4 i.e., <code>4</code> and <code>5</code>, as 5 is already in order. Formally, for an array with <code>n</code> integers, we consider elements only up to index <code>n - i</code>, where <code>i</code> is the iteration number.</p>
-<p><strong>Third Iteration:</strong></p>
-<ul>
-<li>{<code>2</code>, <code>1</code>, 3, 4, 5} -&gt; {<code>1</code>, <code>2</code>, 3, 4, 5} Swap since <code>1 &gt; 2</code></li>
-<li>{1, <code>2</code>, <code>3</code>, 4, 5}; As <code>2 &lt; 3</code>, do not swap</li>
-</ul>
-<p><strong>Fourth Iteration:</strong></p>
-<ul>
-<li>{<code>1</code>, <code>2</code>, 3, 4, 5}; As <code>1 &lt; 2</code>, do not swap</li>
-</ul>
-<p><strong>Fifth Iteration:</strong></p>
-<ul>
-<li>{<code>1</code>, 2, 3, 4, 5}; As the size of the array is 1, return.</li>
-</ul>
-<p>Note: This is the base case. ## Pseudo Code ~~~ void bubbleSort(arr[], n) if(n==1) return;</p>
-<pre><code>for(i = 0; i&lt;n-1; i++)
+    <p>
+      A 0 A-&gt;A B -1 A-&gt;B C 2 A-&gt;B-&gt;C = -1 + 3 D -2
+      A-&gt;B-&gt;E-&gt;D = -1 + 2 + -3 E 1 A-&gt;B-&gt;E = -1 + 2 ~~~ #### Code
+      Implementation Links -
+      <a
+        href="https://github.com/TheAlgorithms/Java/blob/master/DataStructures/Graphs/BellmanFord.java"
+        >Java</a
+      >
+      -
+      <a
+        href="https://github.com/TheAlgorithms/C-Plus-Plus/blob/master/Dynamic%20Programming/Bellman-Ford.cpp"
+        >C++</a
+      >
+      -
+      <a
+        href="https://github.com/TheAlgorithms/Python/blob/master/data_structures/graph/bellman_ford.py"
+        >Python</a
+      >
+      -
+      <a
+        href="https://github.com/TheAlgorithms/C/blob/master/data_structures/graphs/Bellman-Ford.c"
+        >C</a
+      >
+      #### Video Explanation
+      <a href="https://www.youtube.com/watch?v=hxMWBBCpR6A"
+        >A video explaining the Bellman-Ford Algorithm</a
+      >
+      #### Others Sources Used:
+    </p>
+    <ul>
+      <li>https://www.geeksforgeeks.org/bellman-ford-algorithm-dp-23/</li>
+      <li>https://en.wikipedia.org/wiki/Bellman%E2%80%93Ford_algorithm</li>
+    </ul>
+    <p># Binary Search (A divide and conquer algorithm)</p>
+    <p>#### Problem Statement</p>
+    <p>
+      Given a sorted array of n elements, write a function to search for the
+      index of a given element (target)
+    </p>
+    <p>#### Approach</p>
+    <ul>
+      <li>Search for the array by dividing the array in half repeatedly.</li>
+      <li>
+        Initially consider the actual array and pick the element at the middle
+        index
+      </li>
+      <li>Keep a lower index i.e. 0 and higher index i.e. length of array</li>
+      <li>If it is equal to the target element then return the index</li>
+      <li>
+        Else if it is greater than the target element then consider only the
+        left half of array. (lower index = 0, higher = middle - 1)
+      </li>
+      <li>
+        Else if it is less than the target element then consider only the right
+        half of array. (lower index = middle + 1, higher = length of array)
+      </li>
+      <li>
+        Return -1 if target element is not found in the array (Base Case: If
+        lower index is greater than or equal to higher index)
+      </li>
+    </ul>
+    <p>#### Time Complexity</p>
+    <p>O(log n) Worse Case</p>
+    <p>
+      O(1) Best Case (If middle element of initial array is the target element)
+    </p>
+    <p>#### Space Complexity</p>
+    <p>O(1) For iterative approach</p>
+    <p>O(log n) For recursive approach due to recursion call stack</p>
+    <p>#### Example</p>
+    <p>```</p>
+    <p>arr = [1,2,3,4,5,6,7]</p>
+    <p>target = 2</p>
+    <p>
+      Initially the element at middle index is 4 which is greater than 2.
+      Therefore we search the left half of the
+    </p>
+    <p>array i.e. [1,2,3].</p>
+    <p>
+      Here we find the middle element equal to target element so we return its
+      index i.e. 1
+    </p>
+    <p>target = 9</p>
+    <p>Binary Search should return -1 as 9 is not present in the array</p>
+    <p>```</p>
+    <p>#### Code Implementation Links</p>
+    <ul>
+      <li>
+        <a
+          href="https://github.com/TheAlgorithms/Java/blob/master/Searches/BinarySearch.java"
+          >Java</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://github.com/TheAlgorithms/C-Plus-Plus/blob/master/Search/Binary%20Search.cpp"
+          >C++</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://github.com/TheAlgorithms/Python/blob/master/searches/binary_search.py"
+          >Python</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://github.com/TheAlgorithms/C-Sharp/blob/master/searches/binary_search.cs"
+          >C-Sharp</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://github.com/TheAlgorithms/C/blob/master/searching/Binary_Search.c"
+          >C</a
+        >
+      </li>
+    </ul>
+    <p>#### Video Explanation</p>
+    <p>
+      <a href="https://www.youtube.com/watch?v=5xlIPT1FRcA"
+        >A CS50 video explaining the Binary Search Algorithm</a
+      >
+    </p>
+    <p>#### Animation Explanation</p>
+    <ul>
+      <li>
+        <a href="https://boardhub.github.io/tute/?wd=binarySearchAlgo2"
+          >Tute Board</a
+        >
+      </li>
+    </ul>
+    <p># Radix Sort</p>
+    <p>
+      The lower bound for Comparison based sorting algorithm (Merge Sort, Heap
+      Sort, Quick-Sort .. etc) is <code>Ω(nlogn)</code>, i.e., they cannot do
+      better than <code>nlogn</code>.
+    </p>
+    <p>
+      Counting sort is a linear time sorting algorithm that sort in
+      <code>O(n+k)</code> time when elements are in the range from 1 to k.
+    </p>
+    <p>
+      What if the elements are in the range from 1 to n2? We can’t use counting
+      sort because counting sort will take <code>O(n2)</code> which is worse
+      than comparison-based sorting algorithms. Can we sort such an array in
+      linear time?
+    </p>
+    <p>
+      Radix Sort is the answer. The idea of Radix Sort is to do digit by digit
+      sort starting from least significant digit to most significant digit.
+      Radix sort uses counting sort as a subroutine to sort.
+    </p>
+    <p>## The Radix Sort Algorithm</p>
+    <p>
+      Do following for each digit i where i varies from least significant digit
+      to the most significant digit.
+    </p>
+    <p>
+      Sort input array using counting sort (or any stable sort) according to the
+      i’th digit.
+    </p>
+    <p>Example:</p>
+    <p>Original, unsorted list:</p>
+    <p><code>170, 45, 75, 90, 802, 24, 2, 66</code></p>
+    <p>Sorting by least significant digit (1s place) gives:</p>
+    <p>[*Notice that we keep 802 before 2, because 802 occurred</p>
+    <p>before 2 in the original list, and similarly for pairs</p>
+    <p>170 &amp; 90 and 45 &amp; 75.]</p>
+    <p>Sorting by next digit (10s place) gives:</p>
+    <p>
+      [*Notice that 802 again comes before 2 as 802 comes before 2 in the
+      previous list.]
+    </p>
+    <p><code>802, 2, 24, 45, 66, 170, 75, 90</code></p>
+    <p>Sorting by the most significant digit (100s place) gives:</p>
+    <p><code>2, 24, 45, 66, 75, 90, 170, 802</code></p>
+    <p>## What is the running time of Radix Sort?</p>
+    <p>
+      Let there be d digits in input integers. Radix Sort takes
+      <code>O(d\*(n+b))</code> time where b is the base for representing
+      numbers, for example, for the decimal system, b is 10.
+    </p>
+    <p>
+      What is the value of d? If <code>k</code> is the maximum possible value,
+      then d would be <code>O(logb(k))</code>. So overall time complexity is
+      <code>O((n+b) \* logb(k))</code>. Which looks more than the
+    </p>
+    <p>
+      time complexity of comparison-based sorting algorithms for a large k. Let
+      us first limit k. Let k &lt;= nc where c is a constant. In that case, the
+      complexity becomes
+    </p>
+    <p>
+      <code>O(n logb(n))</code>. But it still doesn’t beat comparison-based
+      sorting algorithms.
+    </p>
+    <p>
+      ## Is Radix Sort preferable to Comparison based sorting algorithms like
+      Quick-Sort?
+    </p>
+    <p>
+      If we have <code>log2n</code> bits for every digit, the running time of
+      Radix appears to be better than Quick Sort for a wide range of input
+      numbers. The constant factors hidden in
+    </p>
+    <p>
+      asymptotic notation are higher for Radix Sort and Quick-Sort uses hardware
+      caches more effectively. Also, Radix sort uses counting sort as a
+      subroutine and counting sort
+    </p>
+    <p>takes extra space to sort numbers.</p>
+    <p>
+      Video reference: https://youtu.be/nu4gDuFabIM # Recursive Bubble Sort
+      Bubble Sort is one of the simplest sorting algorithms that compares two
+      elements at a time and swaps them if they are in the wrong order. This
+      process is repeated until the entire sequence is in order.
+    </p>
+    <ul>
+      <li>
+        Time Complexity: <code>O(n ^ 2)</code> for average case;
+        <code>O(n)</code> for best case.
+      </li>
+      <li>
+        <p>
+          Space Complexity: <code>O(n)</code>; note that iterative bubble sort
+          has space complexity as <code>O(1)</code>. ## Steps Base case: If the
+          size of the array is 1, return.
+        </p>
+      </li>
+      <li>
+        We need to fix the last element of the current sub-array. For this,
+        iterate over the entire array using normal Bubble Sort, and perform
+        swapping.
+      </li>
+      <li>
+        Next, call the function on the entire array excluding the last
+        element(which was fixed by the iteration in the above step)
+      </li>
+      <li>
+        <p>
+          Repeat until Base Case is reached. ## Example Let the given array be:
+          <code>{5, 3, 2, 1, 4}</code>
+        </p>
+      </li>
+    </ul>
+    <p><strong>First Iteration:</strong></p>
+    <ul>
+      <li>
+        {<code>5</code>, <code>3</code>, 2, 1, 4} -&gt; {<code>3</code>,
+        <code>5</code>, 2, 1, 4} Swap since <code>5 &gt; 3</code>
+      </li>
+      <li>
+        {3, <code>5</code>, <code>2</code>, 1, 4} -&gt; {3, <code>2</code>,
+        <code>5</code>, 1, 4} Swap since <code>5 &gt; 2</code>
+      </li>
+      <li>
+        {3, 2, <code>5</code>, <code>1</code>, 4} -&gt; {3, 2, <code>1</code>,
+        <code>5</code>, 4} Swap since <code>5 &gt; 1</code>
+      </li>
+      <li>
+        {3, 2, 1, <code>5</code>, <code>4</code>} -&gt; {3, 2, 1,
+        <code>4</code>, <code>5</code>} Swap since <code>5 &gt; 4</code>
+      </li>
+    </ul>
+    <p>
+      This iteration has fixed the position of 5. Now, we will consider the
+      array up to index 3.
+    </p>
+    <p><strong>Second Iteration:</strong></p>
+    <ul>
+      <li>
+        {<code>3</code>, <code>2</code>, 1, 4, 5} -&gt; {<code>2</code>,
+        <code>3</code>, 1, 4, 5} Swap since <code>3 &gt; 2</code>
+      </li>
+      <li>
+        {2, <code>3</code>, <code>1</code>, 4, 5} -&gt; {2, <code>1</code>,
+        <code>3</code>, 4, 5} Swap since <code>3 &gt; 1</code>
+      </li>
+      <li>
+        {2, 1, <code>3</code>, <code>4</code>, 5}; As <code>3 &lt; 4</code>, do
+        not swap
+      </li>
+    </ul>
+    <p>
+      Note: As we check one less element with every iteration, we do not need
+      elements at index 3 and 4 i.e., <code>4</code> and <code>5</code>, as 5 is
+      already in order. Formally, for an array with <code>n</code> integers, we
+      consider elements only up to index <code>n - i</code>, where
+      <code>i</code> is the iteration number.
+    </p>
+    <p><strong>Third Iteration:</strong></p>
+    <ul>
+      <li>
+        {<code>2</code>, <code>1</code>, 3, 4, 5} -&gt; {<code>1</code>,
+        <code>2</code>, 3, 4, 5} Swap since <code>1 &gt; 2</code>
+      </li>
+      <li>
+        {1, <code>2</code>, <code>3</code>, 4, 5}; As <code>2 &lt; 3</code>, do
+        not swap
+      </li>
+    </ul>
+    <p><strong>Fourth Iteration:</strong></p>
+    <ul>
+      <li>
+        {<code>1</code>, <code>2</code>, 3, 4, 5}; As <code>1 &lt; 2</code>, do
+        not swap
+      </li>
+    </ul>
+    <p><strong>Fifth Iteration:</strong></p>
+    <ul>
+      <li>
+        {<code>1</code>, 2, 3, 4, 5}; As the size of the array is 1, return.
+      </li>
+    </ul>
+    <p>
+      Note: This is the base case. ## Pseudo Code ~~~ void bubbleSort(arr[], n)
+      if(n==1) return;
+    </p>
+    <pre><code>for(i = 0; i&lt;n-1; i++)
     if(arr[i] &gt; arr[i+1])
         swap(arr[i], arr[i+1])
 
 bubbleSort(arr, n-1)</code></pre>
-<pre><code>## Implementations
+    <pre><code>## Implementations
 - [Java](https://github.com/TheAlgorithms/Java/blob/master/Sorts/BubbleSortRecursion.java)
 - [C](https://github.com/TheAlgorithms/C/blob/master/sorting/bubble_sort_recursion.c)
 ## Video Explanation
@@ -518,22 +1017,33 @@ Given an unsorted array of n elements, write a function to sort the array
 #### Space Complexity
 `O(1)` Worst case
 #### Example</code></pre>
-<p>arr[] = {80, 10, 40, 30} Indexes: 0 1 2 3<br />
-~~~</p>
-<ol type="1">
-<li>Index = 0 Select the minimum number from the array (between index 0-3), ie, 10</li>
-<li>Swap 10 and 80 (arr[0])</li>
-<li>The array now is {10, 80, 40, 30}</li>
-<li>Index = 1 Select the minimum number from the array (between index 1-3), ie, 30</li>
-<li>Swap 30 and 80 (arr[1])</li>
-<li>The array now is {10, 30, 40, 80}</li>
-<li>Index = 2 Select the minimum number from the array (between index 2-3), ie, 40</li>
-<li>Swap 40 and 40 (arr[2])</li>
-<li>The array now is {10, 30, 40, 80}</li>
-</ol>
-<p>The array is now sorted. ~~~</p>
-<h4 id="code-implementation-links-1">Code Implementation Links</h4>
-<pre><code>
+    <p>
+      arr[] = {80, 10, 40, 30} Indexes: 0 1 2 3<br />
+      ~~~
+    </p>
+    <ol type="1">
+      <li>
+        Index = 0 Select the minimum number from the array (between index 0-3),
+        ie, 10
+      </li>
+      <li>Swap 10 and 80 (arr[0])</li>
+      <li>The array now is {10, 80, 40, 30}</li>
+      <li>
+        Index = 1 Select the minimum number from the array (between index 1-3),
+        ie, 30
+      </li>
+      <li>Swap 30 and 80 (arr[1])</li>
+      <li>The array now is {10, 30, 40, 80}</li>
+      <li>
+        Index = 2 Select the minimum number from the array (between index 2-3),
+        ie, 40
+      </li>
+      <li>Swap 40 and 40 (arr[2])</li>
+      <li>The array now is {10, 30, 40, 80}</li>
+    </ol>
+    <p>The array is now sorted. ~~~</p>
+    <h4 id="code-implementation-links-1">Code Implementation Links</h4>
+    <pre><code>
 - [Java](https://github.com/TheAlgorithms/Java/blob/master/Sorts/SelectionSort.java)
 - [C++](https://github.com/TheAlgorithms/C-Plus-Plus/blob/master/Sorting/Selection%20Sort.cpp)
 - [Python](https://github.com/TheAlgorithms/Python/blob/master/sorts/selection_sort.py)
@@ -577,56 +1087,407 @@ or O(n) (equal keys) Best-case performance
 #### Space Complexity
 `O(1)` Worst case auxiliary
 #### Example</code></pre>
-<p>Input data: 4, 10, 3, 5, 1 4(0) /<br />
-10(1) 3(2) /<br />
-5(3) 1(4)</p>
-<p>The numbers in bracket represent the indices in the array representation of data.</p>
-<p>Applying heapify procedure to index 1: 4(0) /<br />
-10(1) 3(2) /<br />
-5(3) 1(4)</p>
-<p>Applying heapify procedure to index 0: 10(0) /<br />
-5(1) 3(2) /<br />
-4(3) 1(4) The heapify procedure calls itself recursively to build heap in top down manner. ~~~</p>
-<p><img src="https://upload.wikimedia.org/wikipedia/commons/1/1b/Sorting_heapsort_anim.gif" title="Heap Sort" alt="heap-image" /> #### Code Implementation Links - <a href="https://github.com/TheAlgorithms/Java/blob/master/Sorts/HeapSort.java">Java</a> - <a href="https://github.com/TheAlgorithms/C-Plus-Plus/blob/master/sorting/heap_sort.cpp">C++</a> - <a href="https://github.com/TheAlgorithms/Python/blob/master/sorts/heap_sort.py">Python</a> - <a href="https://github.com/TheAlgorithms/Go/blob/master/sorts/heapsort.go">Go</a> - <a href="https://github.com/TheAlgorithms/Ruby/blob/master/sorting/heap_sort.rb">Ruby</a> - <a href="https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Sorters/Comparison/HeapSorter.cs">C-sharp</a> - <a href="https://github.com/TheAlgorithms/C/blob/master/sorting/heap_sort.c">C</a> - <a href="https://github.com/TheAlgorithms/Javascript/blob/master/Sorts/HeapSort.js">Javascript</a> #### Video Explanation <a href="https://www.youtube.com/watch?v=MtQL_ll5KhQ">A video explaining the Selection Sort Algorithm</a> # Insertion Sort #### Problem Statement Given an array of n elements, write a function to sort the array in increasing order. #### Approach - Define a “key” index, the subarray to the left of which is sorted. - Initiate “key” as 1, ie. the second element of array(as there is only one element to left of the second element, which can be considered as sorted array with one element). - If value of element at (key - 1) position is less than value of element at (key) position; increment “key”. - Else move elements of sorted subarray that are greater than value of element at “key” to one position ahead of their current position. Put the value of element at “key” in the newly created void. #### Time Complexity - <code>О(n^2)</code> comparisons, <code>О(n^2)</code> swaps – Worst Case - <code>O(n)</code> comparisons, <code>O(1)</code> swaps – Best Case #### Space Complexity <code>O(1)</code> – (No extra space needed, sorting done in place) #### Example ~~~</p>
-<p>12, 11, 13, 5, 6</p>
-<p>Let us loop for i = 1 (second element of the array) to 4 (Size of input array)</p>
-<p>i = 1. Since 11 is smaller than 12, move 12 and insert 11 before 12 11, 12, 13, 5, 6</p>
-<p>i = 2. 13 will remain at its position as all elements in sorted subarray are smaller than 13 11, 12, 13, 5, 6</p>
-<p>i = 3. 5 will move to the beginning, and all other elements from 11 to 13 will move one position ahead of their current position. 5, 11, 12, 13, 6</p>
-<p>i = 4. 6 will move to position after 5, and elements from 11 to 13 will move one position ahead of their current position. 5, 6, 11, 12, 13 – sorted array ~~~ #### Code Implementation Links - <a href="https://github.com/TheAlgorithms/Java/blob/master/Sorts/InsertionSort.java">Java</a> - <a href="https://github.com/TheAlgorithms/C/blob/master/sorting/insertion_sort.c">C</a> - <a href="https://github.com/TheAlgorithms/C-Plus-Plus/blob/master/sorting/insertion_sort.cpp">C++</a> - <a href="https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Sorters/Comparison/InsertionSorter.cs">C#</a> - <a href="https://github.com/TheAlgorithms/Scala/blob/master/src/main/scala/Sort/InsertionSort.scala">Scala</a> - <a href="https://github.com/TheAlgorithms/Python/blob/master/sorts/insertion_sort.py">Python</a> - <a href="https://github.com/TheAlgorithms/Ruby/blob/master/sorting/insertion_sort.rb">Ruby</a> #### Video Explanation <a href="https://www.youtube.com/watch?v=DFG-XuyPYUQ">A CS50 video explaining the Insertion Search Algorithm</a> # Linear Search #### Problem Statement Given an array of n elements, write a function to search for the index of a given element (target) #### Approach - Start iterating with the first element in the array. - Compare it with the target element - If it is equal to the target element then return the index - Else continue iterating - Return -1 if target element is not found in the array #### Time Complexity O(n) Worse Case O(1) Best Case (If first element of array is the target element) #### Space Complexity O(1) #### Example ~~~ arr = [1, 3, 9, 5, 0, 2]</p>
-<p>target = 5 Linear Search should return index 3 as 5 is on index 3</p>
-<p>target = 6<br />
-Linear Search should return -1 as 6 is not present in the array ~~~ #### Code Implementation Links - <a href="https://github.com/TheAlgorithms/Java/blob/master/Searches/LinearSearch.java">Java</a> - <a href="https://github.com/TheAlgorithms/C-Plus-Plus/blob/master/Search/Linear%20Search.cpp">C++</a> - <a href="https://github.com/TheAlgorithms/Python/blob/master/searches/linear_search.py">Python</a> #### Video Explanation <a href="https://www.youtube.com/watch?v=CX2CYIJLwfg">A CS50 video explaining the Linear Search Algorithm</a> #### Animation Explanation - <a href="https://boardhub.github.io/tute/?wd=linearSearchAlgo">Tute Board</a> # Longest Common Subsequence #### Problem Statement Given two strings <code>S</code> and <code>T</code>, find the length of the longest common subsequence (<b>LCS</b>). #### Approach Let the <code>dp[i][j]</code> be the length of the longest common subsequence of prefixes <code>S[1..i]</code> and <code>T[1..j]</code>. Our answer (the length of LCS) is <code>dp[|S|][|T|]</code> since the prefix of the length of string is the string itself.</p>
-<p>Both <code>dp[0][i]</code> and <code>dp[i][0]</code> are <code>0</code> for any <code>i</code> since the LCS of empty prefix and anything else is an empty string.</p>
-<p>Now let’s try to calculate <code>dp[i][j]</code> for any <code>i</code>, <code>j</code>. Let’s say <code>S[1..i] = *A</code> and <code>T[1..j] = *B</code> where <code>*</code> stands for any sequence of letters (could be different for <code>S</code> and <code>T</code>), <code>A</code> stands for any letter and <code>B</code> stands for any letter different from <code>A</code>. Since <code>A != B</code>, our LCS doesn’t include <code>A</code> or <code>B</code> as a last character. So we could try to throw away <code>A</code> or <code>B</code> character. If we throw <code>A</code>, our LCS length will be <code>dp[i - 1][j]</code> (since we have prefixes <code>S[1..i - 1]</code> and <code>T[1..j]</code>). If we try to throw <code>B</code> character, we will have prefixes <code>S[1..i]</code> and <code>T[1..j - 1]</code> so the length of LCS will be <code>dp[i][j - 1]</code>. As we are looking for the <b>Longest</b> common subsequence, we will pick <b>the maximum value</b> from <code>dp[i][j - 1]</code> and <code>dp[i - 1][j]</code>.</p>
-<p>But what if <code>S[1..i] = *A</code> and <code>T[1..j] = *A</code>? We could say that the LCS of our prefixes is LCS of prefixes <code>S[1..i - 1]</code> and <code>T[1..j - 1]</code> <b>plus</b> the letter <code>A</code>. So <code>dp[i][j] = dp[i - 1][j - 1] + 1</code> if <code>S[i] = T[j]</code>.</p>
-<p>We could see that we can fill our <code>dp</code> table row by row, column by column. So our algorithm will be like:</p>
-<ul>
-<li>Let’s say that we have strings <code>S</code> of the length N and <code>T</code> of the length M (numbered from 1). Let’s create the table <code>dp</code> of size <code>(N + 1) x (M + 1)</code> numbered from 0.</li>
-<li>Let’s fill the 0th row and the 0th column of <code>dp</code> with 0.</li>
-<li>Then, we follow the algorithm:</li>
-</ul>
-<pre><code>for i in range(1..N):
+    <p>
+      Input data: 4, 10, 3, 5, 1 4(0) /<br />
+      10(1) 3(2) /<br />
+      5(3) 1(4)
+    </p>
+    <p>
+      The numbers in bracket represent the indices in the array representation
+      of data.
+    </p>
+    <p>
+      Applying heapify procedure to index 1: 4(0) /<br />
+      10(1) 3(2) /<br />
+      5(3) 1(4)
+    </p>
+    <p>
+      Applying heapify procedure to index 0: 10(0) /<br />
+      5(1) 3(2) /<br />
+      4(3) 1(4) The heapify procedure calls itself recursively to build heap in
+      top down manner. ~~~
+    </p>
+    <p>
+      <img
+        src="https://upload.wikimedia.org/wikipedia/commons/1/1b/Sorting_heapsort_anim.gif"
+        title="Heap Sort"
+        alt="heap-image"
+      />
+      #### Code Implementation Links -
+      <a
+        href="https://github.com/TheAlgorithms/Java/blob/master/Sorts/HeapSort.java"
+        >Java</a
+      >
+      -
+      <a
+        href="https://github.com/TheAlgorithms/C-Plus-Plus/blob/master/sorting/heap_sort.cpp"
+        >C++</a
+      >
+      -
+      <a
+        href="https://github.com/TheAlgorithms/Python/blob/master/sorts/heap_sort.py"
+        >Python</a
+      >
+      -
+      <a
+        href="https://github.com/TheAlgorithms/Go/blob/master/sorts/heapsort.go"
+        >Go</a
+      >
+      -
+      <a
+        href="https://github.com/TheAlgorithms/Ruby/blob/master/sorting/heap_sort.rb"
+        >Ruby</a
+      >
+      -
+      <a
+        href="https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Sorters/Comparison/HeapSorter.cs"
+        >C-sharp</a
+      >
+      -
+      <a
+        href="https://github.com/TheAlgorithms/C/blob/master/sorting/heap_sort.c"
+        >C</a
+      >
+      -
+      <a
+        href="https://github.com/TheAlgorithms/Javascript/blob/master/Sorts/HeapSort.js"
+        >Javascript</a
+      >
+      #### Video Explanation
+      <a href="https://www.youtube.com/watch?v=MtQL_ll5KhQ"
+        >A video explaining the Selection Sort Algorithm</a
+      >
+      # Insertion Sort #### Problem Statement Given an array of n elements,
+      write a function to sort the array in increasing order. #### Approach -
+      Define a “key” index, the subarray to the left of which is sorted. -
+      Initiate “key” as 1, ie. the second element of array(as there is only one
+      element to left of the second element, which can be considered as sorted
+      array with one element). - If value of element at (key - 1) position is
+      less than value of element at (key) position; increment “key”. - Else move
+      elements of sorted subarray that are greater than value of element at
+      “key” to one position ahead of their current position. Put the value of
+      element at “key” in the newly created void. #### Time Complexity -
+      <code>О(n^2)</code> comparisons, <code>О(n^2)</code> swaps – Worst Case -
+      <code>O(n)</code> comparisons, <code>O(1)</code> swaps – Best Case ####
+      Space Complexity <code>O(1)</code> – (No extra space needed, sorting done
+      in place) #### Example ~~~
+    </p>
+    <p>12, 11, 13, 5, 6</p>
+    <p>
+      Let us loop for i = 1 (second element of the array) to 4 (Size of input
+      array)
+    </p>
+    <p>
+      i = 1. Since 11 is smaller than 12, move 12 and insert 11 before 12 11,
+      12, 13, 5, 6
+    </p>
+    <p>
+      i = 2. 13 will remain at its position as all elements in sorted subarray
+      are smaller than 13 11, 12, 13, 5, 6
+    </p>
+    <p>
+      i = 3. 5 will move to the beginning, and all other elements from 11 to 13
+      will move one position ahead of their current position. 5, 11, 12, 13, 6
+    </p>
+    <p>
+      i = 4. 6 will move to position after 5, and elements from 11 to 13 will
+      move one position ahead of their current position. 5, 6, 11, 12, 13 –
+      sorted array ~~~ #### Code Implementation Links -
+      <a
+        href="https://github.com/TheAlgorithms/Java/blob/master/Sorts/InsertionSort.java"
+        >Java</a
+      >
+      -
+      <a
+        href="https://github.com/TheAlgorithms/C/blob/master/sorting/insertion_sort.c"
+        >C</a
+      >
+      -
+      <a
+        href="https://github.com/TheAlgorithms/C-Plus-Plus/blob/master/sorting/insertion_sort.cpp"
+        >C++</a
+      >
+      -
+      <a
+        href="https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Sorters/Comparison/InsertionSorter.cs"
+        >C#</a
+      >
+      -
+      <a
+        href="https://github.com/TheAlgorithms/Scala/blob/master/src/main/scala/Sort/InsertionSort.scala"
+        >Scala</a
+      >
+      -
+      <a
+        href="https://github.com/TheAlgorithms/Python/blob/master/sorts/insertion_sort.py"
+        >Python</a
+      >
+      -
+      <a
+        href="https://github.com/TheAlgorithms/Ruby/blob/master/sorting/insertion_sort.rb"
+        >Ruby</a
+      >
+      #### Video Explanation
+      <a href="https://www.youtube.com/watch?v=DFG-XuyPYUQ"
+        >A CS50 video explaining the Insertion Search Algorithm</a
+      >
+      # Linear Search #### Problem Statement Given an array of n elements, write
+      a function to search for the index of a given element (target) ####
+      Approach - Start iterating with the first element in the array. - Compare
+      it with the target element - If it is equal to the target element then
+      return the index - Else continue iterating - Return -1 if target element
+      is not found in the array #### Time Complexity O(n) Worse Case O(1) Best
+      Case (If first element of array is the target element) #### Space
+      Complexity O(1) #### Example ~~~ arr = [1, 3, 9, 5, 0, 2]
+    </p>
+    <p>target = 5 Linear Search should return index 3 as 5 is on index 3</p>
+    <p>
+      target = 6<br />
+      Linear Search should return -1 as 6 is not present in the array ~~~ ####
+      Code Implementation Links -
+      <a
+        href="https://github.com/TheAlgorithms/Java/blob/master/Searches/LinearSearch.java"
+        >Java</a
+      >
+      -
+      <a
+        href="https://github.com/TheAlgorithms/C-Plus-Plus/blob/master/Search/Linear%20Search.cpp"
+        >C++</a
+      >
+      -
+      <a
+        href="https://github.com/TheAlgorithms/Python/blob/master/searches/linear_search.py"
+        >Python</a
+      >
+      #### Video Explanation
+      <a href="https://www.youtube.com/watch?v=CX2CYIJLwfg"
+        >A CS50 video explaining the Linear Search Algorithm</a
+      >
+      #### Animation Explanation -
+      <a href="https://boardhub.github.io/tute/?wd=linearSearchAlgo"
+        >Tute Board</a
+      >
+      # Longest Common Subsequence #### Problem Statement Given two strings
+      <code>S</code> and <code>T</code>, find the length of the longest common
+      subsequence (<b>LCS</b>). #### Approach Let the <code>dp[i][j]</code> be
+      the length of the longest common subsequence of prefixes
+      <code>S[1..i]</code> and <code>T[1..j]</code>. Our answer (the length of
+      LCS) is <code>dp[|S|][|T|]</code> since the prefix of the length of string
+      is the string itself.
+    </p>
+    <p>
+      Both <code>dp[0][i]</code> and <code>dp[i][0]</code> are
+      <code>0</code> for any <code>i</code> since the LCS of empty prefix and
+      anything else is an empty string.
+    </p>
+    <p>
+      Now let’s try to calculate <code>dp[i][j]</code> for any <code>i</code>,
+      <code>j</code>. Let’s say <code>S[1..i] = *A</code> and
+      <code>T[1..j] = *B</code> where <code>*</code> stands for any sequence of
+      letters (could be different for <code>S</code> and <code>T</code>),
+      <code>A</code> stands for any letter and <code>B</code> stands for any
+      letter different from <code>A</code>. Since <code>A != B</code>, our LCS
+      doesn’t include <code>A</code> or <code>B</code> as a last character. So
+      we could try to throw away <code>A</code> or <code>B</code> character. If
+      we throw <code>A</code>, our LCS length will be
+      <code>dp[i - 1][j]</code> (since we have prefixes
+      <code>S[1..i - 1]</code> and <code>T[1..j]</code>). If we try to throw
+      <code>B</code> character, we will have prefixes <code>S[1..i]</code> and
+      <code>T[1..j - 1]</code> so the length of LCS will be
+      <code>dp[i][j - 1]</code>. As we are looking for the <b>Longest</b> common
+      subsequence, we will pick <b>the maximum value</b> from
+      <code>dp[i][j - 1]</code> and <code>dp[i - 1][j]</code>.
+    </p>
+    <p>
+      But what if <code>S[1..i] = *A</code> and <code>T[1..j] = *A</code>? We
+      could say that the LCS of our prefixes is LCS of prefixes
+      <code>S[1..i - 1]</code> and <code>T[1..j - 1]</code> <b>plus</b> the
+      letter <code>A</code>. So <code>dp[i][j] = dp[i - 1][j - 1] + 1</code> if
+      <code>S[i] = T[j]</code>.
+    </p>
+    <p>
+      We could see that we can fill our <code>dp</code> table row by row, column
+      by column. So our algorithm will be like:
+    </p>
+    <ul>
+      <li>
+        Let’s say that we have strings <code>S</code> of the length N and
+        <code>T</code> of the length M (numbered from 1). Let’s create the table
+        <code>dp</code> of size <code>(N + 1) x (M + 1)</code> numbered from 0.
+      </li>
+      <li>
+        Let’s fill the 0th row and the 0th column of <code>dp</code> with 0.
+      </li>
+      <li>Then, we follow the algorithm:</li>
+    </ul>
+    <pre><code>for i in range(1..N):
     for j in range(1..M):
         if(S[i] == T[j])
             dp[i][j] = dp[i - 1][j - 1] + 1
         else
             dp[i][j] = max(dp[i - 1][j], dp[i][j - 1])</code></pre>
-<h4 id="time-complexity">Time Complexity</h4>
-<p><code>O(N * M)</code> In any case #### Space Complexity <code>O(N * M)</code> - simple implementation <code>O(min {N, M})</code> - two-layers implementation (as <code>dp[i][j]</code> depends on only i-th and i-th layers, we coudld store only two layers). #### Example Let’s say we have strings <code>ABCB</code> and <code>BBCB</code>. We will build such a table: ~~~ # # A B C B # 0 0 0 0 0 B 0 ? ? ? ? B 0 ? ? ? ? C 0 ? ? ? ? B 0 ? ? ? ? ~~~</p>
-<p>Now we will start to fill our table from 1st row. Since <code>S[1] = A</code> and <code>T[1] = B</code>, the <code>dp[1][1]</code> will be tha maximal value of <code>dp[0][1] = 0</code> and <code>dp[1][0] = 0</code>. So <code>dp[1][1] = 0</code>. But now <code>S[2] = B = T[1]</code>, so <code>dp[1][2] = dp[0][1] + 1 = 1</code>. <code>dp[1][3]</code> is <code>1</code> since <code>A != C</code> and we pick <code>max{dp[1][2], dp[0][3]}</code>. And <code>dp[1][4] = dp[0][3] + 1 = 1</code>. ~~~ # # A B C B # 0 0 0 0 0 B 0 0 1 1 1 B 0 ? ? ? ? C 0 ? ? ? ? B 0 ? ? ? ? ~~~</p>
-<p>Now let’s fill the other part of the table: ~~~ # # A B C B # 0 0 0 0 0 B 0 0 1 1 1 B 0 0 1 1 2 C 0 0 1 2 2 B 0 0 1 2 3 ~~~</p>
-<p>So the length of LCS is <code>dp[4][4] = 3</code>. #### Code Implementation Links - <a href="https://github.com/TheAlgorithms/Java/blob/master/Dynamic%20Programming/LongestCommonSubsequence.java">Java</a> - <a href="https://github.com/TheAlgorithms/Python/blob/master/dynamic_programming/longest_common_subsequence.py">Python</a> - <a href="https://github.com/TheAlgorithms/C-Plus-Plus/blob/master/Dynamic%20Programming/Longest%20Common%20Subsequence.cpp">C++</a> #### Video Explanation <a href="https://youtu.be/NnD96abizww">Video explanation by Tushar Roy</a> # Merge Sort (Divide and Conquer Algorithm) #### Problem Statement Given an array of n elements, write a function to sort the array #### Approach - Find a mid point and divide the array into to halves based on the mid point - Recursively call the merge sort function for both the halves - Merge the two sorted halves to get the sorted array #### Time Complexity <code>O(n log n)</code> #### Space Complexity <code>O(n)</code> #### Example ~~~ arr = [1, 3, 9, 5, 0, 2]</p>
-<p>Divide the array in two halves [1, 3, 9] and [5, 0, 2]</p>
-<p>Recursively call merge sort function for both these halves which will provide sorted halves =&gt; [1, 3, 9] &amp; [0, 2, 5]</p>
-<p>Now merge both these halves to get the sorted array [0, 1, 2, 3, 5, 9] ~~~ #### Code Implementation Links - <a href="https://github.com/TheAlgorithms/Java/blob/master/Sorts/MergeSort.java">Java</a> - <a href="https://github.com/TheAlgorithms/C-Plus-Plus/blob/master/sorting/merge_sort.cpp">C++</a> - <a href="https://github.com/TheAlgorithms/Python/blob/master/sorts/merge_sort.py">Python</a> - <a href="https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Sorters/Comparison/MergeSorter.cs">C-Sharp</a> - <a href="https://github.com/TheAlgorithms/C/blob/master/sorting/merge_sort.c">C</a> - <a href="https://github.com/TheAlgorithms/Ruby/blob/master/sorting/merge_sort.rb">Ruby</a> #### Video Explanation <a href="https://www.youtube.com/watch?v=EeQ8pwjQxTM">A CS50 video explaining the Merge Sort Algorithm</a> # Quick Sort #### Problem Statement Given an unsorted array of n elements, write a function to sort the array #### Approach - Make the right-most index value pivot - partition the array using pivot value - quicksort left partition recursively - quicksort right partition recursively #### Time Complexity - <code>O(n^2)</code> Worst case performance - <code>O(n log n)</code> Best-case performance - <code>O(n log n)</code> Average performance #### Space Complexity <code>O(log n)</code> Worst case #### Founder’s Name Tony Hoare in 1959 #### Example ~~~ arr[] = {10, 80, 30, 90, 40, 50, 70} Indexes: 0 1 2 3 4 5 6</p>
-<p>low = 0, high = 6, pivot = arr[h] = 70 Initialize index of smaller element, i = -1</p>
-<p>Traverse elements from j = low to high-1 j = 0 : Since arr[j] &lt;= pivot, do i++ and swap(arr[i], arr[j]) i = 0 arr[] = {10, 80, 30, 90, 40, 50, 70} // No change as i and j // are same</p>
-<p>j = 1 : Since arr[j] &gt; pivot, do nothing // No change in i and arr[]</p>
-<p>j = 2 : Since arr[j] &lt;= pivot, do i++ and swap(arr[i], arr[j]) i = 1 arr[] = {10, 30, 80, 90, 40, 50, 70} // We swap 80 and 30</p>
-<p>j = 3 : Since arr[j] &gt; pivot, do nothing // No change in i and arr[]</p>
-<p>j = 4 : Since arr[j] &lt;= pivot, do i++ and swap(arr[i], arr[j]) i = 2 arr[] = {10, 30, 40, 90, 80, 50, 70} // 80 and 40 Swapped j = 5 : Since arr[j] &lt;= pivot, do i++ and swap arr[i] with arr[j] i = 3 arr[] = {10, 30, 40, 50, 80, 90, 70} // 90 and 50 Swapped</p>
-<p>We come out of loop because j is now equal to high-1. Finally we place pivot at correct position by swapping arr[i+1] and arr[high] (or pivot) arr[] = {10, 30, 40, 50, 70, 90, 80} // 80 and 70 Swapped</p>
-<p>Now 70 is at its correct place. All elements smaller than 70 are before it and all elements greater than 70 are after it. ~~~ #### Code Implementation Links - <a href="https://github.com/TheAlgorithms/Java/blob/master/Sorts/QuickSort.java">Java</a> - <a href="https://github.com/TheAlgorithms/C-Plus-Plus/blob/master/Sorting/Quick%20Sort.cpp">C++</a> - <a href="https://github.com/TheAlgorithms/Python/blob/master/sorts/quick_sort.py">Python</a> - <a href="https://github.com/TheAlgorithms/Ruby/blob/master/sorting/quicksort.rb">Ruby</a> #### Video Explanation <a href="https://www.youtube.com/watch?v=COk73cpQbFQ">A video explaining the Quick Sort Algorithm</a></p>
-</body>
+    <h4 id="time-complexity">Time Complexity</h4>
+    <p>
+      <code>O(N * M)</code> In any case #### Space Complexity
+      <code>O(N * M)</code> - simple implementation <code>O(min {N, M})</code> -
+      two-layers implementation (as <code>dp[i][j]</code> depends on only i-th
+      and i-th layers, we coudld store only two layers). #### Example Let’s say
+      we have strings <code>ABCB</code> and <code>BBCB</code>. We will build
+      such a table: ~~~ # # A B C B # 0 0 0 0 0 B 0 ? ? ? ? B 0 ? ? ? ? C 0 ? ?
+      ? ? B 0 ? ? ? ? ~~~
+    </p>
+    <p>
+      Now we will start to fill our table from 1st row. Since
+      <code>S[1] = A</code> and <code>T[1] = B</code>, the
+      <code>dp[1][1]</code> will be tha maximal value of
+      <code>dp[0][1] = 0</code> and <code>dp[1][0] = 0</code>. So
+      <code>dp[1][1] = 0</code>. But now <code>S[2] = B = T[1]</code>, so
+      <code>dp[1][2] = dp[0][1] + 1 = 1</code>. <code>dp[1][3]</code> is
+      <code>1</code> since <code>A != C</code> and we pick
+      <code>max{dp[1][2], dp[0][3]}</code>. And
+      <code>dp[1][4] = dp[0][3] + 1 = 1</code>. ~~~ # # A B C B # 0 0 0 0 0 B 0
+      0 1 1 1 B 0 ? ? ? ? C 0 ? ? ? ? B 0 ? ? ? ? ~~~
+    </p>
+    <p>
+      Now let’s fill the other part of the table: ~~~ # # A B C B # 0 0 0 0 0 B
+      0 0 1 1 1 B 0 0 1 1 2 C 0 0 1 2 2 B 0 0 1 2 3 ~~~
+    </p>
+    <p>
+      So the length of LCS is <code>dp[4][4] = 3</code>. #### Code
+      Implementation Links -
+      <a
+        href="https://github.com/TheAlgorithms/Java/blob/master/Dynamic%20Programming/LongestCommonSubsequence.java"
+        >Java</a
+      >
+      -
+      <a
+        href="https://github.com/TheAlgorithms/Python/blob/master/dynamic_programming/longest_common_subsequence.py"
+        >Python</a
+      >
+      -
+      <a
+        href="https://github.com/TheAlgorithms/C-Plus-Plus/blob/master/Dynamic%20Programming/Longest%20Common%20Subsequence.cpp"
+        >C++</a
+      >
+      #### Video Explanation
+      <a href="https://youtu.be/NnD96abizww">Video explanation by Tushar Roy</a>
+      # Merge Sort (Divide and Conquer Algorithm) #### Problem Statement Given
+      an array of n elements, write a function to sort the array #### Approach -
+      Find a mid point and divide the array into to halves based on the mid
+      point - Recursively call the merge sort function for both the halves -
+      Merge the two sorted halves to get the sorted array #### Time Complexity
+      <code>O(n log n)</code> #### Space Complexity <code>O(n)</code> ####
+      Example ~~~ arr = [1, 3, 9, 5, 0, 2]
+    </p>
+    <p>Divide the array in two halves [1, 3, 9] and [5, 0, 2]</p>
+    <p>
+      Recursively call merge sort function for both these halves which will
+      provide sorted halves =&gt; [1, 3, 9] &amp; [0, 2, 5]
+    </p>
+    <p>
+      Now merge both these halves to get the sorted array [0, 1, 2, 3, 5, 9] ~~~
+      #### Code Implementation Links -
+      <a
+        href="https://github.com/TheAlgorithms/Java/blob/master/Sorts/MergeSort.java"
+        >Java</a
+      >
+      -
+      <a
+        href="https://github.com/TheAlgorithms/C-Plus-Plus/blob/master/sorting/merge_sort.cpp"
+        >C++</a
+      >
+      -
+      <a
+        href="https://github.com/TheAlgorithms/Python/blob/master/sorts/merge_sort.py"
+        >Python</a
+      >
+      -
+      <a
+        href="https://github.com/TheAlgorithms/C-Sharp/blob/master/Algorithms/Sorters/Comparison/MergeSorter.cs"
+        >C-Sharp</a
+      >
+      -
+      <a
+        href="https://github.com/TheAlgorithms/C/blob/master/sorting/merge_sort.c"
+        >C</a
+      >
+      -
+      <a
+        href="https://github.com/TheAlgorithms/Ruby/blob/master/sorting/merge_sort.rb"
+        >Ruby</a
+      >
+      #### Video Explanation
+      <a href="https://www.youtube.com/watch?v=EeQ8pwjQxTM"
+        >A CS50 video explaining the Merge Sort Algorithm</a
+      >
+      # Quick Sort #### Problem Statement Given an unsorted array of n elements,
+      write a function to sort the array #### Approach - Make the right-most
+      index value pivot - partition the array using pivot value - quicksort left
+      partition recursively - quicksort right partition recursively #### Time
+      Complexity - <code>O(n^2)</code> Worst case performance -
+      <code>O(n log n)</code> Best-case performance -
+      <code>O(n log n)</code> Average performance #### Space Complexity
+      <code>O(log n)</code> Worst case #### Founder’s Name Tony Hoare in 1959
+      #### Example ~~~ arr[] = {10, 80, 30, 90, 40, 50, 70} Indexes: 0 1 2 3 4 5
+      6
+    </p>
+    <p>
+      low = 0, high = 6, pivot = arr[h] = 70 Initialize index of smaller
+      element, i = -1
+    </p>
+    <p>
+      Traverse elements from j = low to high-1 j = 0 : Since arr[j] &lt;= pivot,
+      do i++ and swap(arr[i], arr[j]) i = 0 arr[] = {10, 80, 30, 90, 40, 50, 70}
+      // No change as i and j // are same
+    </p>
+    <p>
+      j = 1 : Since arr[j] &gt; pivot, do nothing // No change in i and arr[]
+    </p>
+    <p>
+      j = 2 : Since arr[j] &lt;= pivot, do i++ and swap(arr[i], arr[j]) i = 1
+      arr[] = {10, 30, 80, 90, 40, 50, 70} // We swap 80 and 30
+    </p>
+    <p>
+      j = 3 : Since arr[j] &gt; pivot, do nothing // No change in i and arr[]
+    </p>
+    <p>
+      j = 4 : Since arr[j] &lt;= pivot, do i++ and swap(arr[i], arr[j]) i = 2
+      arr[] = {10, 30, 40, 90, 80, 50, 70} // 80 and 40 Swapped j = 5 : Since
+      arr[j] &lt;= pivot, do i++ and swap arr[i] with arr[j] i = 3 arr[] = {10,
+      30, 40, 50, 80, 90, 70} // 90 and 50 Swapped
+    </p>
+    <p>
+      We come out of loop because j is now equal to high-1. Finally we place
+      pivot at correct position by swapping arr[i+1] and arr[high] (or pivot)
+      arr[] = {10, 30, 40, 50, 70, 90, 80} // 80 and 70 Swapped
+    </p>
+    <p>
+      Now 70 is at its correct place. All elements smaller than 70 are before it
+      and all elements greater than 70 are after it. ~~~ #### Code
+      Implementation Links -
+      <a
+        href="https://github.com/TheAlgorithms/Java/blob/master/Sorts/QuickSort.java"
+        >Java</a
+      >
+      -
+      <a
+        href="https://github.com/TheAlgorithms/C-Plus-Plus/blob/master/Sorting/Quick%20Sort.cpp"
+        >C++</a
+      >
+      -
+      <a
+        href="https://github.com/TheAlgorithms/Python/blob/master/sorts/quick_sort.py"
+        >Python</a
+      >
+      -
+      <a
+        href="https://github.com/TheAlgorithms/Ruby/blob/master/sorting/quicksort.rb"
+        >Ruby</a
+      >
+      #### Video Explanation
+      <a href="https://www.youtube.com/watch?v=COk73cpQbFQ"
+        >A video explaining the Quick Sort Algorithm</a
+      >
+    </p>
+  </body>
 </html>

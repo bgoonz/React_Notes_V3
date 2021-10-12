@@ -1,11 +1,11 @@
-import React from 'react';
-import TodoContext from './contexts/TodoContext';
-import App from './App';
+import React from "react";
+import TodoContext from "./contexts/TodoContext";
+import App from "./App";
 
 class AppWithContext extends React.Component {
   constructor() {
     super();
-    const storedTasks = JSON.parse(localStorage.getItem('tasks'));
+    const storedTasks = JSON.parse(localStorage.getItem("tasks"));
 
     this.state = {
       tasks: storedTasks || {},
@@ -23,27 +23,33 @@ class AppWithContext extends React.Component {
       },
     };
 
-    this.setState((state, props) => ({
-      tasks: { ...state.tasks, ...newTask },
-    }), () => this.updateLocalStorageTasks());
-  }
+    this.setState(
+      (state, props) => ({
+        tasks: { ...state.tasks, ...newTask },
+      }),
+      () => this.updateLocalStorageTasks()
+    );
+  };
 
   updateLocalStorageTasks = () => {
     console.log(this.state.tasks);
     const jsonTasks = JSON.stringify(this.state.tasks);
-    localStorage.setItem('tasks', jsonTasks);
-  }
-  
+    localStorage.setItem("tasks", jsonTasks);
+  };
+
   deleteTask = (id) => {
-    this.setState((state, props) => {
-      const tasksWithDeletion = { ...state.tasks };
-      delete tasksWithDeletion[id];
-      return {
-        tasks: tasksWithDeletion,
-      };
-    }, () => this.updateLocalStorageTasks());
-  }
-  
+    this.setState(
+      (state, props) => {
+        const tasksWithDeletion = { ...state.tasks };
+        delete tasksWithDeletion[id];
+        return {
+          tasks: tasksWithDeletion,
+        };
+      },
+      () => this.updateLocalStorageTasks()
+    );
+  };
+
   render() {
     return (
       <TodoContext.Provider value={this.state}>

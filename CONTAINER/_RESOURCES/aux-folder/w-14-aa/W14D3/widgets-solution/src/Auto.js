@@ -1,23 +1,23 @@
-import React from 'react';
-import { CSSTransition, TransitionGroup } from 'react-transition-group';
+import React from "react";
+import { CSSTransition, TransitionGroup } from "react-transition-group";
 
 class AutoComplete extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      inputVal: '',
+      inputVal: "",
     };
     this.nodeRefs = {};
   }
 
   handleInput = (e) => {
     this.setState({ inputVal: e.target.value });
-  }
+  };
 
   selectName = (e) => {
     const name = e.target.innerText;
     this.setState({ inputVal: name });
-  }
+  };
 
   matches = () => {
     const { inputVal } = this.state;
@@ -27,17 +27,17 @@ class AutoComplete extends React.Component {
 
     if (inputLength === 0) return names;
 
-    names.forEach(name => {
+    names.forEach((name) => {
       const nameSegment = name.slice(0, inputLength);
       if (nameSegment.toLowerCase() === inputVal.toLowerCase()) {
         matches.push(name);
       }
     });
 
-    if (matches.length === 0) matches.push('No matches');
+    if (matches.length === 0) matches.push("No matches");
 
     return matches;
-  }
+  };
 
   wrappers(name) {
     if (!this.nodeRefs[name]) this.nodeRefs[name] = React.createRef();
@@ -67,13 +67,11 @@ class AutoComplete extends React.Component {
           />
         </div>
         <ul onClick={this.selectName}>
-          <TransitionGroup>
-            {results}
-          </TransitionGroup>
+          <TransitionGroup>{results}</TransitionGroup>
         </ul>
       </div>
     );
   }
-};
+}
 
 export default AutoComplete;

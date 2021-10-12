@@ -9,9 +9,13 @@ import Violet from "./Violet";
 const Rainbow = () => (
   <div>
     <h1>Rainbow Router!</h1>
-    <NavLink exact to="/red">Red</NavLink>
+    <NavLink exact to="/red">
+      Red
+    </NavLink>
     <NavLink to="/green">Green</NavLink>
-    <NavLink exact to="/blue">Blue</NavLink>
+    <NavLink exact to="/blue">
+      Blue
+    </NavLink>
     <NavLink to="/violet">Violet</NavLink>
 
     <div id="rainbow">
