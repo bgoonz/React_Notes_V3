@@ -1,37 +1,34 @@
 # React
 
-
-
-
-##  React
+## React
 
 > JavaScript Library for building User Interfaces
 
-## # React General Resources
+## React General Resources
 
 - [React Official Website](https://reactjs.org/)
 - [React Documentation](https://reactjs.org/docs)
 - [React GitHub](https://github.com/facebook/react)
 
-## # React Community
+## React Community
 
 - [Reactiflux Discord Channel](http://www.reactiflux.com/)
 - [React StackOverflow](http://stackoverflow.com/questions/tagged/reactjs)
 - [React Twitter](https://twitter.com/reactjs)
 
-## # React Online Playgrounds
+## React Online Playgrounds
 
 - [CodePen](https://reactjs.org/redirect-to-codepen/hello-world)
 - [CodeSandbox](https://codesandbox.io/s/new)
 - [JSFiddle](https://jsfiddle.net/boilerplate/react-jsx)
 
-## # Another Awesome Lists
+## Another Awesome Lists
 
 - [React/Redux Links](https://github.com/markerikson/react-redux-links)
 
-## # React Tutorials
+## React Tutorials
 
-## ## React General Tutorials
+## React General Tutorials
 
 - [React Official Tutorial](https://reactjs.org/tutorial/tutorial.html)
 - [Using React in Visual Studio Code](https://code.visualstudio.com/docs/nodejs/reactjs-tutorial)
@@ -41,7 +38,7 @@
 - [React Patterns](https://reactpatterns.com/)
 - [Setup Flow with React](https://flow.org/en/docs/react/)
 
-## ## React Hooks
+## React Hooks
 
 - [React Hooks](https://reactjs.org/docs/hooks-intro.html)
 - [Awesome React Hooks](https://github.com/rehooks/awesome-react-hooks)
@@ -52,14 +49,14 @@
 - [Easy to understand React Hook recipes](https://usehooks.com/)
 - [React Hooks Video Tutorial](https://www.youtube.com/playlist?list=PLN3n1USn4xlmyw3ebYuZmGp60mcENitdM)
 
-## ## React and TypeScript
+## React and TypeScript
 
 - [TypeScript, React and Webpack](https://www.typescriptlang.org/docs/handbook/react-&-webpack.html)
 - [JSX in TypeScript](https://www.typescriptlang.org/docs/handbook/jsx.html)
 - [Cheatsheets for experienced React developers getting started with TypeScript](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet)
 - [React by Example](https://reactbyexample.github.io/)
 
-## ## React Performance
+## React Performance
 
 - [React Optimizing Performance](https://reactjs.org/docs/optimizing-performance.html)
 - [Introducing the React Profiler](https://reactjs.org/blog/2018/09/10/introducing-the-react-profiler.html)
@@ -71,7 +68,7 @@
 - [React is Slow, React is Fast: Optimizing react Apps in Practice](https://medium.com/dailyjs/react-is-slow-react-is-fast-optimizing-react-apps-in-practice-394176a11fba)
 - [Rendering large lists with react-window](https://addyosmani.com/blog/react-window/)
 
-## ## React Internals
+## React Internals
 
 - [Reconciliation](https://reactjs.org/docs/reconciliation.html)
 - [React Fiber Architecture](https://github.com/acdlite/react-fiber-architecture)
@@ -79,15 +76,15 @@
 - [Inside Fiber: In-depth overview of the new reconciliation algorithm in React](https://medium.com/react-in-depth/inside-fiber-in-depth-overview-of-the-new-reconciliation-algorithm-in-react-e1c04700ef6e)
 - [Entire React code base explanation by visual block schemes](https://github.com/Bogdan-Lyashenko/Under-the-hood-ReactJS)
 
-## ## React Interview Questions
+## React Interview Questions
 
 - [13 Essential React Interview Questions](https://www.toptal.com/react/interview-questions)
 - [List of React interview Questions and Answers](https://github.com/sudheerj/reactjs-interview-questions)
 - [React Coding Challenges](https://github.com/alexgurr/react-coding-challenges/)
 
-## # React Tools
+## React Tools
 
-## ## React Development Tools
+## React Development Tools
 
 - [react-devtools](https://github.com/facebook/react-devtools) - Inspection of React component hierarchy in the Chrome and Firefox Developer Tools
 - [react-hot-loader](https://github.com/gaearon/react-hot-loader) - Tweak React components in real time
@@ -106,7 +103,7 @@
 - [Divjoy](https://divjoy.com) - React codebase and UI generator to speed up development (paid)
 - [Plasmic](https://www.plasmic.app/) - Powerful design tool for building your React components visually.
 
-## ## React Starter Kits and Toolchains
+## React Starter Kits and Toolchains
 
 - [create-react-app](https://github.com/facebook/create-react-app) - Set up a modern Web app by running one command
 - [Razzle](https://razzlejs.org/) - Build production ready React applications. Razzle is toolchain for modern static and dynamic websites and web applications
@@ -115,7 +112,7 @@
 - [create-react-library](https://github.com/transitive-bullshit/create-react-library) - CLI for creating reusable, modern React libraries using Rollup and create-react-app.
 - [tsdx](https://tsdx.io/) - Zero-config CLI for TypeScript package development
 
-## ## React Frameworks
+## React Frameworks
 
 - [next.js](https://github.com/vercel/next.js) - The React Framework
 - [gatsby.js](https://github.com/gatsbyjs/gatsby) - Free and open source framework based on React
@@ -124,7 +121,7 @@
 - [Blitz](https://blitzjs.com) - The Fullstack React Framework
 - [aleph.js](https://github.com/alephjs/aleph.js) - The React Framework in Deno
 
-## ## React Styling
+## React Styling
 
 - [styled-components](https://github.com/styled-components/styled-components) - Visual primitives for the component age
 - [emotion](https://github.com/emotion-js/emotion) - Library designed for writing CSS styles with JavaScript
@@ -132,7 +129,7 @@
 - [jss](https://github.com/cssinjs/jss) - Authoring tool for CSS
 - [aphrodite](https://github.com/Khan/aphrodite) - Framework-agnostic CSS-in-JS with support for server-side rendering, browser prefixing, and minimum CSS generation
 
-## ## React Routing
+## React Routing
 
 - [react-router](https://github.com/ReactTraining/react-router) - Declarative routing for React
 - [navi](https://github.com/frontarm/navi) - Declarative, asynchronous routing for React
@@ -141,7 +138,7 @@
 - [universal-router](https://github.com/kriasoft/universal-router) - A simple middleware-style router for isomorphic JavaScript web apps
 - [wouter](https://github.com/molefrog/wouter) - A minimalist-friendly ~1.3KB routing library
 
-## ## React Component Libraries
+## React Component Libraries
 
 - [material-ui](https://github.com/mui-org/material-ui) - React components for faster and easier web development
 - [blueprint](https://github.com/palantir/blueprint) - A React-based UI toolkit for the webs
@@ -167,7 +164,7 @@
 - [trunx](https://github.com/fibo/trunx) - Super Saiyan React components, son of awesome Bulma, implemented in TypeScript
 - [bumbag-ui](https://github.com/bumbag/bumbag-ui) - Build accessible & themeable React applications with your Bumbag
 
-## ## React Awesome Components
+## React Awesome Components
 
 - [Awesome React Components list](https://github.com/brillout/awesome-react-components)
 - [react-select](https://github.com/JedWatson/react-select) - The Select Component for React
@@ -218,7 +215,7 @@
 - [cleave.js](https://github.com/nosir/cleave.js) - Format input text content when you are typing
 - [react-fontawesome](https://github.com/FortAwesome/react-fontawesome) - Font Awesome 5 React component
 
-## ## React Testing
+## React Testing
 
 - [jest](https://github.com/facebook/jest) - Delightful JavaScript Testing Framework
 - [enzyme](https://github.com/airbnb/enzyme) - JavaScript Testing utilities for React
@@ -226,7 +223,7 @@
 - [react-hooks-testing-library](https://github.com/mpeyper/react-hooks-testing-library) - React hooks testing utilities that encourage good testing practices
 - [majestic](https://github.com/Raathigesh/majestic) - Zero config GUI for Jest
 
-## ## React Libraries
+## React Libraries
 
 - [react-border-wrapper](https://github.com/Metroxe/react-border-wrapper) - A wrapper for placing elements along div borders in React.
 - [react-magic](https://github.com/reactjs/react-magic) - Automatically AJAXify plain HTML with the power of React
@@ -260,7 +257,7 @@
 - [react-aria](https://react-spectrum.adobe.com/react-aria/index.html) - Adobe's library of React Hooks that provides accessible UI primitives for your design system
 - [react-uploady](https://github.com/rpldy/react-uploady) - Modern file-upload components & hooks for React.
 
-## ## React Integration
+## React Integration
 
 - [ReasonReact](https://reasonml.github.io/reason-react/)
 - [React Rails](https://github.com/reactjs/react-rails)
@@ -313,7 +310,7 @@
 - [reaptcha](https://github.com/sarneeh/reaptcha) - Clean, modern and simple React wrapper for Google reCAPTCHA
 - [react-recaptcha-that-works](https://github.com/douglasjunior/react-recaptcha-that-works) - A reCAPTCHA bridge for React that works
 
-## ## React State Management
+## React State Management
 
 - [redux](#redux) - Predictable State Container for JavaScript Apps
 - [mobx](https://github.com/mobxjs/mobx) - Simple, scalable state management
@@ -327,11 +324,11 @@
 - [effector](https://github.com/zerobias/effector) - Fast and powerful reactive state manager
 - [reactn](https://github.com/CharlesStover/reactn) - React, but with built-in global state management
 
-## ## React AR and VR
+## React AR and VR
 
 - [Viro React](https://viromedia.com/viroreact/) - Platform for rapidly building AR/VR applications using React Native
 
-## ## React Renderers
+## React Renderers
 
 - [react-three-fiber](https://github.com/pmndrs/react-three-fiber) - A React renderer for Three.js
 - [react-pdf](https://github.com/diegomura/react-pdf) - Create PDF files using React
@@ -342,7 +339,7 @@
 - [react-nil](https://github.com/pmndrs/react-nil) - A react null renderer
 - [remotion](https://github.com/JonnyBurger/remotion) - Create videos programmatically in React
 
-## ## Forms
+## Forms
 
 - [formik](https://github.com/jaredpalmer/formik) - Build forms in React, without the tears
 - [react-hook-form](https://github.com/react-hook-form/react-hook-form) - React Hooks for forms validation
@@ -354,7 +351,7 @@
 - [formsy-react](https://github.com/formsy/formsy-react/) - A form input builder and validator for React
 - [react-formal](https://github.com/jquense/react-formal) - Sophisticated HTML form management for React
 
-## ## Autocomplete
+## Autocomplete
 
 - [react-autocomplete by @rackt](https://github.com/rackt/react-autocomplete) - WAI-ARIA compliant React autocomplete (Archived, read-only)
 - [react-autosuggest by @moroshko](https://github.com/moroshko/react-autosuggest) - WAI-ARIA compliant React autosuggest component
@@ -364,7 +361,7 @@
 - [downshift](https://github.com/paypal/downshift) - 🏎 Primitives to build simple, flexible, WAI-ARIA compliant enhanced input React components
 - [React Bootstrap Typeahead](https://github.com/ericgio/react-bootstrap-typeahead) - A React-based typeahead that relies on Bootstrap for styling and was originally inspired by Twitter's typeahead.js.
 
-## ## Graphics
+## Graphics
 
 - [react-art](https://github.com/facebook/react-art) - React Bridge to the ART Drawing Library
 - [react-canvas](https://github.com/Flipboard/react-canvas) - High performance `<canvas>` rendering for React components
@@ -374,7 +371,7 @@
 - [react-hooks-svgdrawing](https://github.com/kmkzt/react-hooks-svgdrawing) - SVG Drawing with React hooks
 - [react-svg-pan-zoom](https://github.com/chrvadala/react-svg-pan-zoom) - A React component that adds pan and zoom features to SVG.
 
-## ## Data Managing
+## Data Managing
 
 - [immer](https://github.com/immerjs/immer) - Create the next immutable state by mutating the current one
 - [ReSub](https://github.com/Microsoft/ReSub) - A library for writing better React components and data stores
@@ -383,8 +380,7 @@
 - [WatermelonDB](https://github.com/Nozbe/WatermelonDB) - 🍉 Reactive & asynchronous database for powerful React and React Native apps ⚡️
 - [RxDB](https://github.com/pubkey/rxdb) - A realtime Database for JavaScript Applications
 
-
-## ## Maps
+## Maps
 
 - [react-googlemaps](https://github.com/pieterv/react-googlemaps) - React interface to Google maps
 - [react-maps](https://github.com/matnel/react-maps) - A map component for React
@@ -398,7 +394,7 @@
 - [react-geo](https://github.com/terrestris/react-geo) - A set of geo-related components using react, antd, and ol
 - [pigeon-maps](https://github.com/mariusandra/pigeon-maps) - ReactJS maps without external dependencies
 
-## ## Charts
+## Charts
 
 - [vx](https://github.com/airbnb/visx) - Visualization components
 - [victory](https://github.com/FormidableLabs/victory) - A collection of composable React components for building interactive data visualizations
@@ -411,11 +407,11 @@
 
 ---
 
-##  React Native
+## React Native
 
 > Framework for building native apps using React
 
-## # React Native General Resources
+## React Native General Resources
 
 - [React Native Official Site](https://facebook.github.io/react-native/)
 - [React Native GitHub](https://github.com/facebook/react-native)
@@ -425,7 +421,7 @@
 - [React Native StackOverflow](http://stackoverflow.com/questions/tagged/react-native)
 - [React Native Radio](https://devchat.tv/react-native-radio/)
 
-## # React Native Tutorials
+## React Native Tutorials
 
 - [React Native Tutorial](https://facebook.github.io/react-native/docs/tutorial.html)
 - [Introducing React Native: Building Apps with JavaScript](http://www.raywenderlich.com/99473/introducing-react-native-building-apps-javascript)
@@ -439,11 +435,11 @@
 - [Test driving react native applications](http://www.multunus.com/blog/2016/07/test-driving-react-native-applications/)
 - [Using React Native With TypeScript](https://medium.com/@jan.hesters/using-typescript-with-react-native-946aa4b4ae6f)
 
-## # React Native Development Tools
+## React Native Development Tools
 
 - [react-native-code-push](https://github.com/microsoft/react-native-code-push) - React Native module for CodePush
 
-## # React Native Sample Apps
+## React Native Sample Apps
 
 - [HackerNews](https://github.com/iSimar/HackerNews-React-Native)
 - [Ziliun](https://github.com/sonnylazuardi/ziliun-react-native)
@@ -452,12 +448,12 @@
 - [NBAreact](https://github.com/jbkuczma/NBAreact)
 - [Bus Timetable](https://github.com/EarlGeorge/timetable)
 
-## # React Native Boilerplates
+## React Native Boilerplates
 
 - [Create React Native App](https://github.com/react-community/create-react-native-app) - Create React Native apps that run on iOS, Android, and web
 - [Ignite](https://github.com/infinitered/ignite) - The hottest CLI for React Native, boilerplates, plugins, generators, and more!
 
-## # React Native Awesome Components
+## React Native Awesome Components
 
 - [Expo](https://expo.io/) - The Expo platform for making cross-platform mobile apps
 - [react-navigation](https://reactnavigation.org/) - Routing and navigation for your React Native apps
@@ -476,7 +472,7 @@
 - [react-native-gesture-handler](https://github.com/software-mansion/react-native-gesture-handler) - Declarative API exposing platform native touch and gesture system to React Native
 - [rn-placeholder](https://github.com/mfrachet/rn-placeholder) - Display some placeholder stuff before rendering your text or media content in React Native
 
-## # React Native Libraries
+## React Native Libraries
 
 - [sentry-react-native](https://github.com/getsentry/sentry-react-native) - Real-time crash reporting for your web apps, mobile apps, and games.
 - [realm-js](https://github.com/realm/realm-js) - Realm is a mobile database: an alternative to SQLite & key-value stores
@@ -484,17 +480,17 @@
 - [react-native-react-bridge](https://github.com/inokawa/react-native-react-bridge) - A toolset to run React web app in React Native and handle communication between them.
 - [uncompress-react-native](https://github.com/didisouzacosta/uncompress-react-native) - Simple library to decompress files .zip, .rar, .cbz, .cbr in React Native.
 
-##  Redux
+## Redux
 
 > Predictable State Container for JavaScript Apps
 
-## # Redux General Resources
+## Redux General Resources
 
 - [Redux GitHub](https://github.com/reduxjs/redux)
 - [Redux Official Site](http://redux.js.org/)
 - [Awesome Redux List](https://github.com/xgrommx/awesome-redux)
 
-## # Redux Tools
+## Redux Tools
 
 - [react-redux](https://github.com/reduxjs/react-redux) - Official React bindings for Redux
 - [redux-toolkit](https://github.com/reduxjs/redux-toolkit) - The official, opinionated, batteries-included toolset for efficient Redux development
@@ -509,7 +505,7 @@
 - [redux-undo](https://github.com/omnidan/redux-undo) - Higher order reducer to add undo/redo functionality to redux state containers
 - [redux-persist](https://github.com/rt2zz/redux-persist) - Persist and rehydrate a redux store
 
-## # Redux Tutorials
+## Redux Tutorials
 
 - [Redux Essentials](https://redux.js.org/tutorials/essentials/part-1-overview-concepts)
 - [Redux Fundamentals](https://redux.js.org/tutorials/fundamentals/part-1-overview)
@@ -518,29 +514,29 @@
 
 ---
 
-##  GraphQL
+## GraphQL
 
 > A query language for your API
 
-## # GraphQL General Resources
+## GraphQL General Resources
 
 - [GraphQL Official Site](http://graphql.org/)
 - [GraphQL Specification](https://github.com/graphql/graphql-spec)
 - [GraphQL Specification Repository](https://github.com/facebook/graphql)
 
-## # GraphQL Tools
+## GraphQL Tools
 
 - [graphql-js](https://github.com/graphql/graphql-js) - A reference implementation of GraphQL for **JavaScript**
 - [express-graphql](https://github.com/graphql/express-graphql) - Create a GraphQL HTTP server with **Express**
 - [Apollo](https://www.apollographql.com/) - Industry-standard GraphQL implementation
 - [GraphQL Playground - GraphQL IDE for better development workflows](https://github.com/graphql/graphql-playground)
 
-## # GraphQL Tutorials
+## GraphQL Tutorials
 
 - [GraphQL Introduction](http://facebook.github.io/react/blog/2015/05/01/graphql-introduction.html)
 - [How to Graphql - The Fullstack Tutorial for GraphQL](https://howtographql.com/)
 
-## # GraphQL Implementations
+## GraphQL Implementations
 
 - [graphql-ruby](https://github.com/rmosolgo/graphql-ruby) - **Ruby** implementation of GraphQL
 - [graphql-java](https://github.com/graphql-java/graphql-java) - GraphQL **Java** implementation
@@ -551,32 +547,32 @@
 - [graphql-go](https://github.com/graphql-go/graphql) - GraphQL for **Go**
 - [juniper](https://github.com/graphql-rust/juniper) - GraphQL server library for **Rust**
 
-## # Database Integration
+## Database Integration
 
 - [Hasura](https://hasura.io/) - Instant GraphQL for all your data
 - [Prisma](https://www.prisma.io/) - Next-generation ORM
-for Node.js and TypeScript
+  for Node.js and TypeScript
 - [graphql-sequelize](https://github.com/mickhansen/graphql-sequelize) - GraphQL & Relay for MySQL & Postgres via Sequelize
 
 ---
 
-##  Relay
+## Relay
 
 > Data-Driven React Applications
 
-## # Relay General Resources
+## Relay General Resources
 
 - [Relay Offical Site](https://relay.dev/)
 - [Relay GitHub](https://github.com/facebook/relay)
 
-## # Relay Tutorials
+## Relay Tutorials
 
 - [Official Relay Getting Started](https://facebook.github.io/relay/docs/en/introduction-to-relay.html)
 - [Relay for Visual Learners](http://sgwilym.github.io/relay-visual-learners/)
 - [Getting Started with Relay](https://auth0.com/blog/2015/10/06/getting-started-with-relay/)
 - [Relay and Routing](https://medium.com/@cpojer/relay-and-routing-36b5439bad9)
 
-## # Relay Tools
+## Relay Tools
 
 - [graphql-relay-js](https://github.com/graphql/graphql-relay-js) - A library to help construct a graphql-js server supporting react-relay
 - [react-router-relay](https://github.com/relay-tools/react-router-relay) - Relay integration for React Router
@@ -585,11 +581,11 @@ for Node.js and TypeScript
 
 ---
 
-##  Videos
+## Videos
 
-## # [reactjsvideos.com](https://www.reactjsvideos.com)
+## [reactjsvideos.com](https://www.reactjsvideos.com)
 
-## # Important Talks
+## Important Talks
 
 - [Pete Hunt: React: Rethinking best practices - JSConf EU 2013](https://www.youtube.com/watch?v=x7cQ3mrcKaY)
 - [Pete Hunt: React: Rethinking Best Practices (updated) - JSConf.Asia 2013](https://www.youtube.com/watch?v=DgVS-zXgMTk)
@@ -612,37 +608,37 @@ for Node.js and TypeScript
 - [React Videos](https://reactjs.org/community/videos.html)
 - [Awesome React Talks](https://github.com/tiaanduplessis/awesome-react-talks)
 
-## # [React.js Conf 2015 Playlist](https://www.youtube.com/playlist?list=PLb0IAmt7-GS1cbw4qonlQztYV1TAW0sCr)
+## [React.js Conf 2015 Playlist](https://www.youtube.com/playlist?list=PLb0IAmt7-GS1cbw4qonlQztYV1TAW0sCr)
 
-## # [ReactEurope Conf 2015 Day 1 Playlist](https://www.youtube.com/playlist?list=PLCC436JpVnK0Phxld2dD4tM4xPMxJCiRD)
+## [ReactEurope Conf 2015 Day 1 Playlist](https://www.youtube.com/playlist?list=PLCC436JpVnK0Phxld2dD4tM4xPMxJCiRD)
 
-## # [ReactEurope Conf 2015 Day 2 Playlist](https://www.youtube.com/playlist?list=PLCC436JpVnK3HvUSAHpt-LRJkIK8pQG6R)
+## [ReactEurope Conf 2015 Day 2 Playlist](https://www.youtube.com/playlist?list=PLCC436JpVnK3HvUSAHpt-LRJkIK8pQG6R)
 
-## # [ReactRally Conf 2015 Playlist](https://www.youtube.com/playlist?list=PLUD4kD-wL_zZhHy-G8hPNZTvx_M35loXQ)
+## [ReactRally Conf 2015 Playlist](https://www.youtube.com/playlist?list=PLUD4kD-wL_zZhHy-G8hPNZTvx_M35loXQ)
 
-## # [React.js Conf 2016 Playlist](https://www.youtube.com/playlist?list=PLb0IAmt7-GS0M8Q95RIc2lOM6nc77q1IY)
+## [React.js Conf 2016 Playlist](https://www.youtube.com/playlist?list=PLb0IAmt7-GS0M8Q95RIc2lOM6nc77q1IY)
 
-## # [React Amsterdam 2016 Playlist](https://www.youtube.com/playlist?list=PLNBNS7NRGKMG3uLrm5fgY02hJ87Wzb4IU)
+## [React Amsterdam 2016 Playlist](https://www.youtube.com/playlist?list=PLNBNS7NRGKMG3uLrm5fgY02hJ87Wzb4IU)
 
-## # [ReactEurope Conf 2016 Day 1 Playlist](https://www.youtube.com/playlist?list=PLCC436JpVnK09bZeayg-KeLuHfHgc-tDa)
+## [ReactEurope Conf 2016 Day 1 Playlist](https://www.youtube.com/playlist?list=PLCC436JpVnK09bZeayg-KeLuHfHgc-tDa)
 
-## # [ReactEurope Conf 2016 Day 2 Playlist](https://www.youtube.com/playlist?list=PLCC436JpVnK0LTDKW3O_BGTZnrZ8dBAof)
+## [ReactEurope Conf 2016 Day 2 Playlist](https://www.youtube.com/playlist?list=PLCC436JpVnK0LTDKW3O_BGTZnrZ8dBAof)
 
-## # [ReactRally Conf 2016 Playlist](https://www.youtube.com/playlist?list=PLUD4kD-wL_zYSfU3tIYsb4WqfFQzO_EjQ)
+## [ReactRally Conf 2016 Playlist](https://www.youtube.com/playlist?list=PLUD4kD-wL_zYSfU3tIYsb4WqfFQzO_EjQ)
 
-## # [React Conf 2017 Playlist](https://www.youtube.com/playlist?list=PLb0IAmt7-GS3fZ46IGFirdqKTIxlws7e0)
+## [React Conf 2017 Playlist](https://www.youtube.com/playlist?list=PLb0IAmt7-GS3fZ46IGFirdqKTIxlws7e0)
 
-## # [React.js Amsterdam 2018 Playlist](https://www.youtube.com/playlist?list=PLNBNS7NRGKMFi_glL49hsoyqu7dHTMnNm)
+## [React.js Amsterdam 2018 Playlist](https://www.youtube.com/playlist?list=PLNBNS7NRGKMFi_glL49hsoyqu7dHTMnNm)
 
-## # [React Amsterdam 2019 Playlist](https://www.youtube.com/playlist?list=PLNBNS7NRGKMHLTeH4qfD3F320GXfj97kc)
+## [React Amsterdam 2019 Playlist](https://www.youtube.com/playlist?list=PLNBNS7NRGKMHLTeH4qfD3F320GXfj97kc)
 
-## # Video Tutorials
+## Video Tutorials
 
 - [Trying React Hooks for the first time with Dan Abramov](https://www.youtube.com/watch?v=G-aO5hzo1aw)
 
 ---
 
-##  Demo React Apps
+## Demo React Apps
 
 - [hackernews-react-graphql](https://github.com/clintonwoo/hackernews-react-graphql) - Hacker News clone rewritten with universal JavaScript, using React and GraphQL
 - [react-reduction](https://github.com/reduction-admin/react-reduction) - Free Admin Template Built with React and Bootstrap4
@@ -651,7 +647,7 @@ for Node.js and TypeScript
 
 ---
 
-##  Real React Apps
+## Real React Apps
 
 - [kibana](https://github.com/elastic/kibana) - Your window into the Elastic Stack
 - [firefox debugger](https://github.com/firefox-devtools/debugger) - The Firefox debugger that works anywhere
@@ -661,19 +657,15 @@ for Node.js and TypeScript
 - [winamp2-js](https://github.com/captbaritone/winamp2-js) - Winamp 2 reimplemented for the browser
 - [dnote](https://github.com/dnote/dnote) - A command line notebook with multi-device sync and web interface
 
-
-
----
 ---
 
+---
 
 # React Overview:
 
-**Hello World**
-===============
+# **Hello World**
 
-The smallest React example looks like this:
-===========================================
+# The smallest React example looks like this:
 
 ```
 ReactDOM.render(
@@ -691,8 +683,7 @@ It displays a heading saying "Hello, world!" on the page.
 
 Click the link above to open an online editor. Feel free to make some changes, and see how they affect the output. Most pages in this guide will have editable examples like this one.
 
-How to Read This Guide
-======================
+# How to Read This Guide
 
 In this guide, we will examine the building blocks of React apps: elements and components. Once you master them, you can create complex apps from small reusable pieces.
 
@@ -702,18 +693,15 @@ This is the first chapter in a step-by-step guide about main React concepts. You
 
 Every chapter in this guide builds on the knowledge introduced in earlier chapters. **You can learn most of React by reading the "Main Concepts" guide chapters in the order they appear in the sidebar.** For example, ["Introducing JSX"](https://reactjs.org/docs/introducing-jsx.html) is the next chapter after this one.
 
-Knowledge Level Assumptions
-===========================
+# Knowledge Level Assumptions
 
 React is a JavaScript library, and so we'll assume you have a basic understanding of the JavaScript language. **If you don't feel very confident, we recommend [going through a JavaScript tutorial](https://developer.mozilla.org/en-US/docs/Web/JavaScript/A_re-introduction_to_JavaScript) to check your knowledge level** and enable you to follow along this guide without getting lost. It might take you between 30 minutes and an hour, but as a result you won't have to feel like you're learning both React and JavaScript at the same time.
 
 > NoteThis guide occasionally uses some newer JavaScript syntax in the examples. If you haven't worked with JavaScript in the last few years, these three points should get you most of the way.
 
-**Introducing JSX**
-===================
+# **Introducing JSX**
 
-Consider this variable declaration:
-===================================
+# Consider this variable declaration:
 
 ```
 const element = <h1>Hello, world!</h1>;
@@ -726,8 +714,7 @@ It is called JSX, and it is a syntax extension to JavaScript. We recommend using
 
 JSX produces React "elements". We will explore rendering them to the DOM in the [next section](https://reactjs.org/docs/rendering-elements.html). Below, you can find the basics of JSX necessary to get you started.
 
-Why JSX?
-========
+# Why JSX?
 
 React embraces the fact that rendering logic is inherently coupled with other UI logic: how events are handled, how the state changes over time, and how the data is prepared for display.
 
@@ -737,8 +724,7 @@ React [doesn't require](https://reactjs.org/docs/react-without-jsx.html) using
 
 With that out of the way, let's get started!
 
-Embedding Expressions in JSX
-============================
+# Embedding Expressions in JSX
 
 In the example below, we declare a variable called `name` and then use it inside JSX by wrapping it in curly braces:
 
@@ -781,8 +767,7 @@ ReactDOM.render(
 
 We split JSX over multiple lines for readability. While it isn't required, when doing this, we also recommend wrapping it in parentheses to avoid the pitfalls of [automatic semicolon insertion](https://stackoverflow.com/q/2846283).
 
-JSX is an Expression Too
-========================
+# JSX is an Expression Too
 
 After compilation, JSX expressions become regular JavaScript function calls and evaluate to JavaScript objects.
 
@@ -796,8 +781,7 @@ function getGreeting(user) {
 
 ```
 
-Specifying Attributes with JSX
-==============================
+# Specifying Attributes with JSX
 
 You may use quotes to specify string literals as attributes:
 
@@ -817,8 +801,7 @@ Don't put quotes around curly braces when embedding a JavaScript expression in a
 
 > Warning:Since JSX is closer to JavaScript than to HTML, React DOM uses camelCase property naming convention instead of HTML attribute names.For example, class becomes className in JSX, and tabindex becomes tabIndex.
 
-Specifying Children with JSX
-============================
+# Specifying Children with JSX
 
 If a tag is empty, you may close it immediately with `/>`, like XML:
 
@@ -838,8 +821,7 @@ const element = (
 
 ```
 
-JSX Prevents Injection Attacks
-==============================
+# JSX Prevents Injection Attacks
 
 It is safe to embed user input in JSX:
 
@@ -852,8 +834,7 @@ const element = <h1>{title}</h1>;
 
 By default, React DOM [escapes](https://stackoverflow.com/questions/7381974/which-characters-need-to-be-escaped-on-html) any values embedded in JSX before rendering them. Thus it ensures that you can never inject anything that's not explicitly written in your application. Everything is converted to a string before being rendered. This helps prevent [XSS (cross-site-scripting)](https://en.wikipedia.org/wiki/Cross-site_scripting) attacks.
 
-JSX Represents Objects
-======================
+# JSX Represents Objects
 
 Babel compiles JSX down to `React.createElement()` calls.
 
@@ -896,11 +877,9 @@ We will explore rendering React elements to the DOM in the [next section](https
 
 > Tip:We recommend using the "Babel" language definition for your editor of choice so that both ES6 and JSX code is properly highlighted.
 
-**Rendering Elements**
-======================
+# **Rendering Elements**
 
-Elements are the smallest building blocks of React apps.
-========================================================
+# Elements are the smallest building blocks of React apps.
 
 An element describes what you want to see on the screen:
 
@@ -910,8 +889,7 @@ Unlike browser DOM elements, React elements are plain objects, and are cheap to 
 
 > Note:One might confuse elements with a more widely known concept of "components". We will introduce components in the next section. Elements are what components are "made of", and we encourage you to read this section before jumping ahead.
 
-Rendering an Element into the DOM
-=================================
+# Rendering an Element into the DOM
 
 Let's say there is a `<div>` somewhere in your HTML file:
 
@@ -938,8 +916,7 @@ ReactDOM.render(element, document.getElementById('root'));
 
 It displays "Hello, world" on the page.
 
-Updating the Rendered Element
-=============================
+# Updating the Rendered Element
 
 React elements are [immutable](https://en.wikipedia.org/wiki/Immutable_object). Once you create an element, you can't change its children or attributes. An element is like a single frame in a movie: it represents the UI at a certain point in time.
 
@@ -965,8 +942,7 @@ It calls `[ReactDOM.render()](<https://reactjs.org/docs/react-dom.html#render>)
 
 > Note:In practice, most React apps only call ReactDOM.render() once. In the next sections we will learn how such code gets encapsulated into stateful components.We recommend that you don't skip topics because they build on each other.
 
-React Only Updates What's Necessary
-===================================
+# React Only Updates What's Necessary
 
 React DOM compares the element and its children to the previous one, and only applies the DOM updates necessary to bring the DOM to the desired state.
 
@@ -978,16 +954,13 @@ Even though we create an element describing the whole UI tree on every tick, onl
 
 In our experience, thinking about how the UI should look at any given moment, rather than how to change it over time, eliminates a whole class of bugs.
 
-**Components and Props**
-========================
+# **Components and Props**
 
-Components let you split the UI into independent, reusable pieces, and think about each piece in isolation. This page provides an introduction to the idea of components. You can find a [detailed component API reference here](https://reactjs.org/docs/react-component.html).
-================================================================================================================================================================================================================================================================================
+# Components let you split the UI into independent, reusable pieces, and think about each piece in isolation. This page provides an introduction to the idea of components. You can find a [detailed component API reference here](https://reactjs.org/docs/react-component.html).
 
 Conceptually, components are like JavaScript functions. They accept arbitrary inputs (called "props") and return React elements describing what should appear on the screen.
 
-Function and Class Components
-=============================
+# Function and Class Components
 
 The simplest way to define a component is to write a JavaScript function:
 
@@ -1015,8 +988,7 @@ The above two components are equivalent from React's point of view.
 
 Function and Class components both have some additional features that we will discuss in the [next sections](https://reactjs.org/docs/state-and-lifecycle.html).
 
-Rendering a Component
-=====================
+# Rendering a Component
 
 Previously, we only encountered React elements that represent DOM tags:
 
@@ -1060,8 +1032,7 @@ Let's recap what happens in this example:
 
 > Note: Always start component names with a capital letter.React treats components starting with lowercase letters as DOM tags. For example, <div /> represents an HTML div tag, but <Welcome /> represents a component and requires Welcome to be in [scope.To](http://scope.To) learn more about the reasoning behind this convention, please read JSX In Depth.
 
-Composing Components
-====================
+# Composing Components
 
 Components can refer to other components in their output. This lets us use the same component abstraction for any level of detail. A button, a form, a dialog, a screen: in React apps, all those are commonly expressed as components.
 
@@ -1090,8 +1061,7 @@ ReactDOM.render(
 
 Typically, new React apps have a single `App` component at the very top. However, if you integrate React into an existing app, you might start bottom-up with a small component like `Button` and gradually work your way to the top of the view hierarchy.
 
-Extracting Components
-=====================
+# Extracting Components
 
 Don't be afraid to split components into smaller components.
 
@@ -1175,8 +1145,7 @@ function Comment(props) {
 
 Extracting components might seem like grunt work at first, but having a palette of reusable components pays off in larger apps. A good rule of thumb is that if a part of your UI is used several times (`Button`, `Panel`, `Avatar`), or is complex enough on its own (`App`, `FeedStory`, `Comment`), it is a good candidate to be extracted to a separate component.
 
-Props are Read-Only
-===================
+# Props are Read-Only
 
 Whether you declare a component [as a function or a class](https://reactjs.org/docs/components-and-props.html#function-and-class-components), it must never modify its own props. Consider this `sum` function:
 
@@ -1204,11 +1173,9 @@ React is pretty flexible but it has a single strict rule:
 
 Of course, application UIs are dynamic and change over time. In the [next section](https://reactjs.org/docs/state-and-lifecycle.html), we will introduce a new concept of "state". State allows React components to change their output over time in response to user actions, network responses, and anything else, without violating this rule.
 
-**State and Lifecycle**
-=======================
+# **State and Lifecycle**
 
-This page introduces the concept of state and lifecycle in a React component. You can find a [detailed component API reference here](https://reactjs.org/docs/react-component.html).
-====================================================================================================================================================================================
+# This page introduces the concept of state and lifecycle in a React component. You can find a [detailed component API reference here](https://reactjs.org/docs/react-component.html).
 
 Consider the ticking clock example from [one of the previous sections](https://reactjs.org/docs/rendering-elements.html#updating-the-rendered-element). In [Rendering Elements](https://reactjs.org/docs/rendering-elements.html#rendering-an-element-into-the-dom), we have only learned one way to update the UI. We call `ReactDOM.render()` to change the rendered output:
 
@@ -1263,8 +1230,7 @@ To implement this, we need to add "state" to the `Clock` component.
 
 State is similar to props, but it is private and fully controlled by the component.
 
-Converting a Function to a Class
-================================
+# Converting a Function to a Class
 
 You can convert a function component like `Clock` to a class in five steps:
 
@@ -1295,8 +1261,7 @@ class Clock extends React.Component {
 
 The `render` method will be called each time an update happens, but as long as we render `<Clock />` into the same DOM node, only a single instance of the `Clock` class will be used. This lets us use additional features such as local state and lifecycle methods.
 
-Adding Local State to a Class
-=============================
+# Adding Local State to a Class
 
 We will move the `date` from props to state in three steps:
 
@@ -1372,8 +1337,7 @@ ReactDOM.render(
 
 Next, we'll make the `Clock` set up its own timer and update itself every second.
 
-Adding Lifecycle Methods to a Class
-===================================
+# Adding Lifecycle Methods to a Class
 
 In applications with many components, it's very important to free up resources taken by the components when they are destroyed.
 
@@ -1467,13 +1431,11 @@ Let's quickly recap what's going on and the order in which the methods are calle
 4.  Every second the browser calls the `tick()` method. Inside it, the `Clock` component schedules a UI update by calling `setState()` with an object containing the current time. Thanks to the `setState()` call, React knows the state has changed, and calls the `render()` method again to learn what should be on the screen. This time, `this.state.date` in the `render()` method will be different, and so the render output will include the updated time. React updates the DOM accordingly.
 5.  If the `Clock` component is ever removed from the DOM, React calls the `componentWillUnmount()` lifecycle method so the timer is stopped.
 
-Using State Correctly
-=====================
+# Using State Correctly
 
 There are three things you should know about `setState()`.
 
-Do Not Modify State Directly
-============================
+# Do Not Modify State Directly
 
 For example, this will not re-render a component:
 
@@ -1493,8 +1455,7 @@ this.setState({comment: 'Hello'});
 
 The only place where you can assign `this.state` is the constructor.
 
-State Updates May Be Asynchronous
-=================================
+# State Updates May Be Asynchronous
 
 React may batch multiple `setState()` calls into a single update for performance.
 
@@ -1532,8 +1493,7 @@ this.setState(function(state, props) {
 
 ```
 
-State Updates are Merged
-========================
+# State Updates are Merged
 
 When you call `setState()`, React merges the object you provide into the current state.
 
@@ -1567,8 +1527,7 @@ Then you can update them independently with separate `setState()` calls:
 
 The merging is shallow, so `this.setState({comments})` leaves `this.state.posts` intact, but completely replaces `this.state.comments`.
 
-The Data Flows Down
-===================
+# The Data Flows Down
 
 Neither parent nor child components can know if a certain component is stateful or stateless, and they shouldn't care whether it is defined as a function or a class.
 
@@ -1621,14 +1580,12 @@ Each `Clock` sets up its own timer and updates independently.
 
 In React apps, whether a component is stateful or stateless is considered an implementation detail of the component that may change over time. You can use stateless components inside stateful components, and vice versa.
 
-**Handling Events**
-===================
+# **Handling Events**
 
-Handling events with React elements is very similar to handling events on DOM elements. There are some syntax differences:
-==========================================================================================================================
+# Handling events with React elements is very similar to handling events on DOM elements. There are some syntax differences:
 
--   React events are named using camelCase, rather than lowercase.
--   With JSX you pass a function as the event handler, rather than a string.
+- React events are named using camelCase, rather than lowercase.
+- With JSX you pass a function as the event handler, rather than a string.
 
 For example, the HTML:
 
@@ -1735,8 +1692,7 @@ class LoggingButton extends React.Component {
 
 The problem with this syntax is that a different callback is created each time the `LoggingButton` renders. In most cases, this is fine. However, if this callback is passed as a prop to lower components, those components might do an extra re-rendering. We generally recommend binding in the constructor or using the class fields syntax, to avoid this sort of performance problem.
 
-Passing Arguments to Event Handlers
-===================================
+# Passing Arguments to Event Handlers
 
 Inside a loop, it is common to want to pass an extra parameter to an event handler. For example, if `id` is the row ID, either of the following would work:
 
@@ -1746,11 +1702,9 @@ The above two lines are equivalent, and use [arrow functions](https://developer
 
 In both cases, the `e` argument representing the React event will be passed as a second argument after the ID. With an arrow function, we have to pass it explicitly, but with `bind` any further arguments are automatically forwarded.
 
-**Conditional Rendering**
-=========================
+# **Conditional Rendering**
 
-In React, you can create distinct components that encapsulate behavior you need. Then, you can render only some of them, depending on the state of your application.
-====================================================================================================================================================================
+# In React, you can create distinct components that encapsulate behavior you need. Then, you can render only some of them, depending on the state of your application.
 
 Conditional rendering in React works the same way conditions work in JavaScript. Use JavaScript operators like `[if](<https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/if...else>)` or the [conditional operator](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Operators/Conditional_Operator) to create elements representing the current state, and let React update the UI to match them.
 
@@ -1785,8 +1739,7 @@ ReactDOM.render(
 
 This example renders a different greeting depending on the value of `isLoggedIn` prop.
 
-Element Variables
-=================
+# Element Variables
 
 You can use variables to store elements. This can help you conditionally render a part of the component while the rest of the output doesn't change.
 
@@ -1849,8 +1802,7 @@ ReactDOM.render(
 
 While declaring a variable and using an `if` statement is a fine way to conditionally render a component, sometimes you might want to use a shorter syntax. There are a few ways to inline conditions in JSX, explained below.
 
-Inline If with Logical && Operator
-==================================
+# Inline If with Logical && Operator
 
 You may [embed expressions in JSX](https://reactjs.org/docs/introducing-jsx.html#embedding-expressions-in-jsx) by wrapping them in curly braces. This includes the JavaScript logical `&&` operator. It can be handy for conditionally including an element:
 
@@ -1887,8 +1839,7 @@ render() {
 
 ```
 
-Inline If-Else with Conditional Operator
-========================================
+# Inline If-Else with Conditional Operator
 
 Another method for conditionally rendering elements inline is to use the JavaScript conditional operator `[condition ? true : false](<https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Operators/Conditional_Operator>)`.
 
@@ -1917,8 +1868,7 @@ render() {
 
 Just like in JavaScript, it is up to you to choose an appropriate style based on what you and your team consider more readable. Also remember that whenever conditions become too complex, it might be a good time to [extract a component](https://reactjs.org/docs/components-and-props.html#extracting-components).
 
-Preventing Component from Rendering
-===================================
+# Preventing Component from Rendering
 
 In rare cases you might want a component to hide itself even though it was rendered by another component. To do this return `null` instead of its render output.
 
@@ -1962,11 +1912,9 @@ ReactDOM.render(
 
 Returning `null` from a component's `render` method does not affect the firing of the component's lifecycle methods. For instance `componentDidUpdate` will still be called.
 
-**Lists and Keys**
-==================
+# **Lists and Keys**
 
-First, let's review how you transform lists in JavaScript.
-==========================================================
+# First, let's review how you transform lists in JavaScript.
 
 Given the code below, we use the `[map()](<https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map>)` function to take an array of `numbers` and double their values. We assign the new array returned by `map()` to the variable `doubled` and log it:
 
@@ -1980,8 +1928,7 @@ This code logs `[2, 4, 6, 8, 10]` to the console.
 
 In React, transforming arrays into lists of [elements](https://reactjs.org/docs/rendering-elements.html) is nearly identical.
 
-Rendering Multiple Components
-=============================
+# Rendering Multiple Components
 
 You can build collections of elements and [include them in JSX](https://reactjs.org/docs/introducing-jsx.html#embedding-expressions-in-jsx) using curly braces `{}`.
 
@@ -2008,8 +1955,7 @@ ReactDOM.render(
 
 This code displays a bullet list of numbers between 1 and 5.
 
-Basic List Component
-====================
+# Basic List Component
 
 Usually you would render lists inside a [component](https://reactjs.org/docs/components-and-props.html).
 
@@ -2055,8 +2001,7 @@ ReactDOM.render(
 
 [](https://codepen.io/bgoonz/pen/yLXyMMP?editors=0011)<https://codepen.io/bgoonz/pen/yLXyMMP?editors=0011>
 
-Keys
-====
+# Keys
 
 Keys help React identify which items have changed, are added, or are removed. Keys should be given to the elements inside the array to give the elements a stable identity:
 
@@ -2090,8 +2035,7 @@ We don't recommend using indexes for keys if the order of items may change. This
 
 Here is an [in-depth explanation about why keys are necessary](https://reactjs.org/docs/reconciliation.html#recursing-on-children) if you're interested in learning more.
 
-Extracting Components with Keys
-===============================
+# Extracting Components with Keys
 
 Keys only make sense in the context of the surrounding array.
 
@@ -2151,8 +2095,7 @@ ReactDOM.render(
 
 A good rule of thumb is that elements inside the `map()` call need keys.
 
-Keys Must Only Be Unique Among Siblings
-=======================================
+# Keys Must Only Be Unique Among Siblings
 
 Keys used within arrays should be unique among their siblings. However, they don't need to be globally unique. We can use the same keys when we produce two different arrays:
 
@@ -2192,8 +2135,7 @@ const content = posts.map((post) =>
 
 With the example above, the `Post` component can read `props.id`, but not `props.key`.
 
-Embedding map() in JSX
-======================
+# Embedding map() in JSX
 
 In the examples above we declared a separate `listItems` variable and included it in JSX:
 
@@ -2224,11 +2166,9 @@ function NumberList(props) {
 
 Sometimes this results in clearer code, but this style can also be abused. Like in JavaScript, it is up to you to decide whether it is worth extracting a variable for readability. Keep in mind that if the `map()` body is too nested, it might be a good time to [extract a component](https://reactjs.org/docs/components-and-props.html#extracting-components).
 
-**Forms**
-=========
+# **Forms**
 
-HTML form elements work a bit differently from other DOM elements in React, because form elements naturally keep some internal state. For example, this form in plain HTML accepts a single name:
-=================================================================================================================================================================================================
+# HTML form elements work a bit differently from other DOM elements in React, because form elements naturally keep some internal state. For example, this form in plain HTML accepts a single name:
 
 ```
 <form><label>
@@ -2239,8 +2179,7 @@ HTML form elements work a bit differently from other DOM elements in React, beca
 
 This form has the default HTML form behavior of browsing to a new page when the user submits the form. If you want this behavior in React, it just works. But in most cases, it's convenient to have a JavaScript function that handles the submission of the form and has access to the data that the user entered into the form. The standard way to achieve this is with a technique called "controlled components".
 
-Controlled Components
-=====================
+# Controlled Components
 
 In HTML, form elements such as `<input>`, `<textarea>`, and `<select>` typically maintain their own state and update it based on user input. In React, mutable state is typically kept in the state property of components, and only updated with `[setState()](<https://reactjs.org/docs/react-component.html#setstate>)`.
 
@@ -2278,8 +2217,7 @@ Since the `value` attribute is set on our form element, the displayed value wi
 
 With a controlled component, the input's value is always driven by the React state. While this means you have to type a bit more code, you can now pass the value to other UI elements too, or reset it from other event handlers.
 
-The textarea Tag
-================
+# The textarea Tag
 
 In HTML, a `<textarea>` element defines its text by its children:
 
@@ -2316,8 +2254,7 @@ class EssayForm extends React.Component {
 
 Notice that `this.state.value` is initialized in the constructor, so that the text area starts off with some text in it.
 
-The select Tag
-==============
+# The select Tag
 
 In HTML, `<select>` creates a drop-down list. For example, this HTML creates a drop-down list of flavors:
 
@@ -2353,8 +2290,7 @@ Overall, this makes it so that `<input type="text">`, `<textarea>`, and `<sel
 
 > NoteYou can pass an array into the value attribute, allowing you to select multiple options in a select tag:<select multiple={true} value={['B', 'C']}>
 
-The file input Tag
-==================
+# The file input Tag
 
 In HTML, an `<input type="file">` lets the user choose one or more files from their device storage to be uploaded to a server or manipulated by JavaScript via the [File API](https://developer.mozilla.org/en-US/docs/Web/API/File/Using_files_from_web_applications).
 
@@ -2362,8 +2298,7 @@ In HTML, an `<input type="file">` lets the user choose one or more files from 
 
 Because its value is read-only, it is an **uncontrolled** component in React. It is discussed together with other uncontrolled components [later in the documentation](https://reactjs.org/docs/uncontrolled-components.html#the-file-input-tag).
 
-Handling Multiple Inputs
-========================
+# Handling Multiple Inputs
 
 When you need to handle multiple controlled `input` elements, you can add a `name` attribute to each element and let the handler function choose what to do based on the value of `event.target.name`.
 
@@ -2420,8 +2355,7 @@ partialState[name] = value;this.setState(partialState);
 
 Also, since `setState()` automatically [merges a partial state into the current state](https://reactjs.org/docs/state-and-lifecycle.html#state-updates-are-merged), we only needed to call it with the changed parts.
 
-Controlled Input Null Value
-===========================
+# Controlled Input Null Value
 
 Specifying the value prop on a [controlled component](https://reactjs.org/docs/forms.html#controlled-components) prevents the user from changing the input unless you desire so. If you've specified a `value` but the input is still editable, you may have accidentally set `value` to `undefined` or `null`.
 
@@ -2436,21 +2370,17 @@ setTimeout(function() {
 
 ```
 
-Alternatives to Controlled Components
-=====================================
+# Alternatives to Controlled Components
 
 It can sometimes be tedious to use controlled components, because you need to write an event handler for every way your data can change and pipe all of the input state through a React component. This can become particularly annoying when you are converting a preexisting codebase to React, or integrating a React application with a non-React library. In these situations, you might want to check out [uncontrolled components](https://reactjs.org/docs/uncontrolled-components.html), an alternative technique for implementing input forms.
 
-Fully-Fledged Solutions
-=======================
+# Fully-Fledged Solutions
 
 If you're looking for a complete solution including validation, keeping track of the visited fields, and handling form submission, [Formik](https://jaredpalmer.com/formik) is one of the popular choices. However, it is built on the same principles of controlled components and managing state --- so don't neglect to learn them.
 
-**Lifting State Up**
-====================
+# **Lifting State Up**
 
-Often, several components need to reflect the same changing data. We recommend lifting the shared state up to their closest common ancestor. Let's see how this works in action.
-================================================================================================================================================================================
+# Often, several components need to reflect the same changing data. We recommend lifting the shared state up to their closest common ancestor. Let's see how this works in action.
 
 In this section, we will create a temperature calculator that calculates whether the water would boil at a given temperature.
 
@@ -2490,8 +2420,7 @@ class Calculator extends React.Component {
 
 [](https://codepen.io/bgoonz/pen/zYzxZoL?editors=0010)<https://codepen.io/bgoonz/pen/zYzxZoL?editors=0010>
 
-Adding a Second Input
-=====================
+# Adding a Second Input
 
 Our new requirement is that, in addition to a Celsius input, we provide a Fahrenheit input, and they are kept in sync.
 
@@ -2538,8 +2467,7 @@ We have two inputs now, but when you enter the temperature in one of them, the o
 
 We also can't display the `BoilingVerdict` from `Calculator`. The `Calculator` doesn't know the current temperature because it is hidden inside the `TemperatureInput`.
 
-Writing Conversion Functions
-============================
+# Writing Conversion Functions
 
 First, we will write two functions to convert from Celsius to Fahrenheit and back:
 
@@ -2573,8 +2501,7 @@ function tryConvert(temperature, convert) {
 
 For example, `tryConvert('abc', toCelsius)` returns an empty string, and `tryConvert('10.22', toFahrenheit)` returns `'50.396'`.
 
-Lifting State Up
-================
+# Lifting State Up
 
 Currently, both `TemperatureInput` components independently keep their values in the local state:
 
@@ -2704,19 +2631,18 @@ Now, no matter which input you edit, `this.state.temperature` and `this.state
 
 Let's recap what happens when you edit an input:
 
--   React calls the function specified as `onChange` on the DOM `<input>`. In our case, this is the `handleChange` method in the `TemperatureInput` component.
--   The `handleChange` method in the `TemperatureInput` component calls `this.props.onTemperatureChange()` with the new desired value. Its props, including `onTemperatureChange`, were provided by its parent component, the `Calculator`.
--   When it previously rendered, the `Calculator` had specified that `onTemperatureChange` of the Celsius `TemperatureInput` is the `Calculator`'s `handleCelsiusChange` method, and `onTemperatureChange` of the Fahrenheit `TemperatureInput` is the `Calculator`'s `handleFahrenheitChange` method. So either of these two `Calculator` methods gets called depending on which input we edited.
--   Inside these methods, the `Calculator` component asks React to re-render itself by calling `this.setState()` with the new input value and the current scale of the input we just edited.
--   React calls the `Calculator` component's `render` method to learn what the UI should look like. The values of both inputs are recomputed based on the current temperature and the active scale. The temperature conversion is performed here.
--   React calls the `render` methods of the individual `TemperatureInput` components with their new props specified by the `Calculator`. It learns what their UI should look like.
--   React calls the `render` method of the `BoilingVerdict` component, passing the temperature in Celsius as its props.
--   React DOM updates the DOM with the boiling verdict and to match the desired input values. The input we just edited receives its current value, and the other input is updated to the temperature after conversion.
+- React calls the function specified as `onChange` on the DOM `<input>`. In our case, this is the `handleChange` method in the `TemperatureInput` component.
+- The `handleChange` method in the `TemperatureInput` component calls `this.props.onTemperatureChange()` with the new desired value. Its props, including `onTemperatureChange`, were provided by its parent component, the `Calculator`.
+- When it previously rendered, the `Calculator` had specified that `onTemperatureChange` of the Celsius `TemperatureInput` is the `Calculator`'s `handleCelsiusChange` method, and `onTemperatureChange` of the Fahrenheit `TemperatureInput` is the `Calculator`'s `handleFahrenheitChange` method. So either of these two `Calculator` methods gets called depending on which input we edited.
+- Inside these methods, the `Calculator` component asks React to re-render itself by calling `this.setState()` with the new input value and the current scale of the input we just edited.
+- React calls the `Calculator` component's `render` method to learn what the UI should look like. The values of both inputs are recomputed based on the current temperature and the active scale. The temperature conversion is performed here.
+- React calls the `render` methods of the individual `TemperatureInput` components with their new props specified by the `Calculator`. It learns what their UI should look like.
+- React calls the `render` method of the `BoilingVerdict` component, passing the temperature in Celsius as its props.
+- React DOM updates the DOM with the boiling verdict and to match the desired input values. The input we just edited receives its current value, and the other input is updated to the temperature after conversion.
 
 Every update goes through the same steps so the inputs stay in sync.
 
-Lessons Learned
-===============
+# Lessons Learned
 
 There should be a single "source of truth" for any data that changes in a React application. Usually, the state is first added to the component that needs it for rendering. Then, if other components also need it, you can lift it up to their closest common ancestor. Instead of trying to sync the state between different components, you should rely on the [top-down data flow](https://reactjs.org/docs/state-and-lifecycle.html#the-data-flows-down).
 
@@ -2728,16 +2654,13 @@ When you see something wrong in the UI, you can use [React Developer Tools](htt
 
 ![https://reactjs.org/ef94afc3447d75cdc245c77efb0d63be/react-devtools-state.gif](https://reactjs.org/ef94afc3447d75cdc245c77efb0d63be/react-devtools-state.gif)
 
-**Composition vs Inheritance**
-==============================
+# **Composition vs Inheritance**
 
-React has a powerful composition model, and we recommend using composition instead of inheritance to reuse code between components.
-===================================================================================================================================
+# React has a powerful composition model, and we recommend using composition instead of inheritance to reuse code between components.
 
 In this section, we will consider a few problems where developers new to React often reach for inheritance, and show how we can solve them with composition.
 
-Containment
-===========
+# Containment
 
 Some components don't know their children ahead of time. This is especially common for components like `Sidebar` or `Dialog` that represent generic "boxes".
 
@@ -2786,8 +2709,7 @@ function App() {
 
 React elements like `<Contacts />` and `<Chat />` are just objects, so you can pass them as props like any other data. This approach may remind you of "slots" in other libraries but there are no limitations on what you can pass as props in React.
 
-Specialization
-==============
+# Specialization
 
 Sometimes we think about components as being "special cases" of other components. For example, we might say that a `WelcomeDialog` is a special case of `Dialog`.
 
@@ -2844,8 +2766,7 @@ class SignUpDialog extends React.Component {
 
 **[Try it on CodePen](https://codepen.io/gaearon/pen/gwZbYa?editors=0010)**
 
-So What About Inheritance?
-==========================
+# So What About Inheritance?
 
 At Facebook, we use React in thousands of components, and we haven't found any use cases where we would recommend creating component inheritance hierarchies.
 
@@ -2853,16 +2774,13 @@ Props and composition give you all the flexibility you need to customize a compo
 
 If you want to reuse non-UI functionality between components, we suggest extracting it into a separate JavaScript module. The components may import it and use that function, object, or a class, without extending it.
 
-**Thinking in React**
-=====================
+# **Thinking in React**
 
-React is, in our opinion, the premier way to build big, fast Web apps with JavaScript. It has scaled very well for us at Facebook and Instagram.
-================================================================================================================================================
+# React is, in our opinion, the premier way to build big, fast Web apps with JavaScript. It has scaled very well for us at Facebook and Instagram.
 
 One of the many great parts of React is how it makes you think about apps as you build them. In this document, we'll walk you through the thought process of building a searchable product data table using React.
 
-Start With A Mock
-=================
+# Start With A Mock
 
 Imagine that we already have a JSON API and a mock from our designer. The mock looks like this:
 
@@ -2882,8 +2800,7 @@ Our JSON API returns some data that looks like this:
 
 ```
 
-Step 1: Break The UI Into A Component Hierarchy
-===============================================
+# Step 1: Break The UI Into A Component Hierarchy
 
 The first thing you'll want to do is to draw boxes around every component (and subcomponent) in the mock and give them all names. If you're working with a designer, they may have already done this, so go talk to them! Their Photoshop layer names may end up being the names of your React components!
 
@@ -2905,14 +2822,13 @@ If you look at `ProductTable`, you'll see that the table header (containing the
 
 Now that we've identified the components in our mock, let's arrange them into a hierarchy. Components that appear within another component in the mock should appear as a child in the hierarchy:
 
--   `FilterableProductTable`
-    -   `SearchBar`
-    -   `ProductTable`
-        -   `ProductCategoryRow`
-        -   `ProductRow`
+- `FilterableProductTable`
+  - `SearchBar`
+  - `ProductTable`
+    - `ProductCategoryRow`
+    - `ProductRow`
 
-Step 2: Build A Static Version in React
-=======================================
+# Step 2: Build A Static Version in React
 
 See the Pen [Thinking In React: Step 2](https://codepen.io/gaearon/pen/BwWzwm) on [CodePen](https://codepen.io/).
 
@@ -2926,13 +2842,11 @@ At the end of this step, you'll have a library of reusable components that rende
 
 Refer to the [React docs](https://reactjs.org/docs/) if you need help executing this step.
 
-A Brief Interlude: Props vs State
-=================================
+# A Brief Interlude: Props vs State
 
 There are two types of "model" data in React: props and state. It's important to understand the distinction between the two; skim [the official React docs](https://reactjs.org/docs/state-and-lifecycle.html) if you aren't sure what the difference is. See also [FAQ: What is the difference between state and props?](https://reactjs.org/docs/faq-state.html#what-is-the-difference-between-state-and-props)
 
-Step 3: Identify The Minimal (but complete) Representation Of UI State
-======================================================================
+# Step 3: Identify The Minimal (but complete) Representation Of UI State
 
 To make your UI interactive, you need to be able to trigger changes to your underlying data model. React achieves this with **state**.
 
@@ -2940,10 +2854,10 @@ To build your app correctly, you first need to think of the minimal set of mutab
 
 Think of all the pieces of data in our example application. We have:
 
--   The original list of products
--   The search text the user has entered
--   The value of the checkbox
--   The filtered list of products
+- The original list of products
+- The search text the user has entered
+- The value of the checkbox
+- The filtered list of products
 
 Let's go through each one and figure out which one is state. Ask three questions about each piece of data:
 
@@ -2955,11 +2869,10 @@ The original list of products is passed in as props, so that's not state. The se
 
 So finally, our state is:
 
--   The search text the user has entered
--   The value of the checkbox
+- The search text the user has entered
+- The value of the checkbox
 
-Step 4: Identify Where Your State Should Live
-=============================================
+# Step 4: Identify Where Your State Should Live
 
 See the Pen [Thinking In React: Step 4](https://codepen.io/gaearon/pen/qPrNQZ) on [CodePen](https://codepen.io/).
 
@@ -2969,23 +2882,22 @@ Remember: React is all about one-way data flow down the component hierarchy. It 
 
 For each piece of state in your application:
 
--   Identify every component that renders something based on that state.
--   Find a common owner component (a single component above all the components that need the state in the hierarchy).
--   Either the common owner or another component higher up in the hierarchy should own the state.
--   If you can't find a component where it makes sense to own the state, create a new component solely for holding the state and add it somewhere in the hierarchy above the common owner component.
+- Identify every component that renders something based on that state.
+- Find a common owner component (a single component above all the components that need the state in the hierarchy).
+- Either the common owner or another component higher up in the hierarchy should own the state.
+- If you can't find a component where it makes sense to own the state, create a new component solely for holding the state and add it somewhere in the hierarchy above the common owner component.
 
 Let's run through this strategy for our application:
 
--   `ProductTable` needs to filter the product list based on state and `SearchBar` needs to display the search text and checked state.
--   The common owner component is `FilterableProductTable`.
--   It conceptually makes sense for the filter text and checked value to live in `FilterableProductTable`
+- `ProductTable` needs to filter the product list based on state and `SearchBar` needs to display the search text and checked state.
+- The common owner component is `FilterableProductTable`.
+- It conceptually makes sense for the filter text and checked value to live in `FilterableProductTable`
 
 Cool, so we've decided that our state lives in `FilterableProductTable`. First, add an instance property `this.state = {filterText: '', inStockOnly: false}` to `FilterableProductTable`'s `constructor` to reflect the initial state of your application. Then, pass `filterText` and `inStockOnly` to `ProductTable` and `SearchBar` as a prop. Finally, use these props to filter the rows in `ProductTable` and set the values of the form fields in `SearchBar`.
 
 You can start seeing how your application will behave: set `filterText` to `"ball"` and refresh your app. You'll see that the data table is updated correctly.
 
-Step 5: Add Inverse Data Flow
-=============================
+# Step 5: Add Inverse Data Flow
 
 See the Pen [Thinking In React: Step 5](https://codepen.io/gaearon/pen/LzWZvb) on [CodePen](https://codepen.io/).
 
@@ -2997,8 +2909,7 @@ If you try to type or check the box in the current version of the example, you'l
 
 Let's think about what we want to happen. We want to make sure that whenever the user changes the form, we update the state to reflect the user input. Since components should only update their own state, `FilterableProductTable` will pass callbacks to `SearchBar` that will fire whenever the state should be updated. We can use the `onChange` event on the inputs to be notified of it. The callbacks passed by `FilterableProductTable` will call `setState()`, and the app will be updated.
 
-And That's It
-=============
+# And That's It
 
 Hopefully, this gives you an idea of how to think about building components and applications with React. While it may be a little more typing than you're used to, remember that code is read far more than it's written, and it's less difficult to read this modular, explicit code. As you start to build large libraries of components, you'll appreciate this explicitness and modularity, and with code reuse, your lines of code will start to shrink. :)
 
@@ -3006,21 +2917,11 @@ Hopefully, this gives you an idea of how to think about building components and 
 
 [React Component](https://www.notion.so/React-Component-3dc17bc49a8e4d7e89efcc1281e747d9)
 
-
-
-
-
-
-
-
-
-
 ---
+
 ---
 
 # A visual guide to React Mental models
-
-
 
 When I started building websites in 2014 I had a hard time understanding how it all worked. Building my blog with WordPress was easy, but I had no idea about hosting, servers, DNS, certificates, and much more.
 
@@ -3028,124 +2929,124 @@ As I read articles and tried stuff out (and broke my server config more than onc
 
 If someone had explained it by transferred their mental model to me, I would've understood it much faster. Here I'll explain (and show) the mental models I use with React. It will help you understand React better and make you a better developer.
 
-[](#react-mental-models)React Mental Models
--------------------------------------------
+## [](#react-mental-models)React Mental Models
 
 React helps us build complex, interactive UIs more easily than ever before. It also encourages us to write code in a certain way, guiding us to create apps that are simpler to navigate and understand.
 
- ![An abstract model inside a mind looking at the React logo](https://obedparla.com/static/c9f28303d7dad2744b40d64b0ab33358/9aabf/react-mental-model-illustration.jpg ) 
-
+![An abstract model inside a mind looking at the React logo](https://obedparla.com/static/c9f28303d7dad2744b40d64b0ab33358/9aabf/react-mental-model-illustration.jpg)
 
 React itself is a mental model with a simple idea at its core: encapsulate portions of your app that rely on similar logic and UI and React will make sure that portion is always up kept up to date.
 
 Whether you've been working with React for years or are just starting, having a clear mental model is the best way to feel confident working with it. So for me to transfer my mental models to you I'll start from first-principles and build on top of them.
 
-[](#its-functions-all-the-way-down)It's functions all the way down
-------------------------------------------------------------------
+## [](#its-functions-all-the-way-down)It's functions all the way down
 
 Let's start by modeling the basic building blocks of JavaScript and React: functions.
 
-*   A React component is just a function
-*   Components containing other components are functions calling other functions
-*   Props are the function's arguments
+- A React component is just a function
+- Components containing other components are functions calling other functions
+- Props are the function's arguments
 
 This is hidden away by JSX, the markup language React uses. Strip away JSX and React is a bunch of functions calling one another. JSX is in itself an applied mental model that makes using React simpler and more intuitive.
 
 Let's look at each part individually.
 
-##  [](#a-component-is-a-function-that-returns-jsx)A component is a function that returns JSX
+## [](#a-component-is-a-function-that-returns-jsx)A component is a function that returns JSX
 
 React is used with JSX—JavaScript XML—a way to write what seems as HTML with all of JavaScript's power. JSX offers a great applied mental model for using nested functions in a way that feels intuitive.
 
 Let's ignore class components and focus on the far more common functional components. A _functional_ component is a function that behaves exactly like any other JavaScript function. React components always return JSX which is then executed and turned into HTML.
 
 This is what simple JSX looks like:
+
 ```jsx
-    const Li = props => <li {...props}>{props.children}</li>;
-    
-    export const RickRoll = () => (
-      <div>
-        <div className='wrapper'>
-          <ul>
-            <Li color={'red'}>Never give you up</Li>
-          </ul>
-        </div>
-      </div>
-    );
-```
-Which compiled into pure JavaScript by Babel:
-```jsx
-    const Li = props => React.createElement('li', props, props.children);
-    
-    export const RickRoll = () =>
-      React.createElement(
-        'div',
-        null,
-        React.createElement(
-          'div',
-          {
-            className: 'wrapper',
-          },
-          React.createElement(
-            'ul',
-            null,
-            React.createElement(
-              Li,
-              {
-                color: 'red',
-              },
-              'Never give you up',
-            ),
-          ),
-        ),
-      );
+const Li = (props) => <li {...props}>{props.children}</li>;
+
+export const RickRoll = () => (
+  <div>
+    <div className="wrapper">
+      <ul>
+        <Li color={"red"}>Never give you up</Li>
+      </ul>
+    </div>
+  </div>
+);
 ```
 
+Which compiled into pure JavaScript by Babel:
+
+```jsx
+const Li = (props) => React.createElement("li", props, props.children);
+
+export const RickRoll = () =>
+  React.createElement(
+    "div",
+    null,
+    React.createElement(
+      "div",
+      {
+        className: "wrapper",
+      },
+      React.createElement(
+        "ul",
+        null,
+        React.createElement(
+          Li,
+          {
+            color: "red",
+          },
+          "Never give you up"
+        )
+      )
+    )
+  );
+```
 
 Now, notice how each component is a function calling another function, and each new component is the third argument for the `React.createElement` function. Whenever you write a component, it's useful to keep in mind that it's a normal JavaScript function.
 
 An important feature of React is that a component can have many children but only one parent. I found this a confusing until I realized it's the same logic HTML has, where each element must be inside other elements, and can have many children. You can notice this in the code above, where there's only one parent `div` containing all the children.
 
-##  [](#components-props-are-the-same-as-a-functions-arguments)component's props are the same as a function's arguments
+## [](#components-props-are-the-same-as-a-functions-arguments)component's props are the same as a function's arguments
 
 When using a function we can use arguments to share information with that function. For React components we call these arguments `props` (funny story, I didn't realize props is short for _properties_ for a long time).
 
 Under the hood, props behave _exactly_ like function arguments, the differences are that we interact with them through the nicer interface of JSX, and that React gives extra functionality to props such as `children`.
 
-[](#creating-a-mental-model-around-functions)Creating a mental model around functions
--------------------------------------------------------------------------------------
+## [](#creating-a-mental-model-around-functions)Creating a mental model around functions
 
 Using this knowledge let's craft a mental model to intuitively understand functions!
 
 When I think about a function I imagine it as a box, and that box will do something whenever it's called. It could return a value or not:
+
 ```js
-    function sum(a, b) {
-      return a + b;
-    }
-    
-    console.log(sum(10, 20)); 
-    
-    function logSum(a, b) {
-      console.log(a + b); 
-    }
+function sum(a, b) {
+  return a + b;
+}
+
+console.log(sum(10, 20));
+
+function logSum(a, b) {
+  console.log(a + b);
+}
 ```
+
 Since a component is a fancy function, that makes a component a box as well, with `props` as the ingredients the box needs to create the output.
 
- ![A plus B in a box with props explaining a mental model for JavaScript functions](https://obedparla.com/static/1078eb1563b832008167b49c2b8edb11/ce2e0/a-plus-b-box.jpg ) 
-![(" ")](https://obedparla.com/static/1078eb1563b832008167b49c2b8edb11/ce2e0/a-plus-b-box.jpg) 
+![A plus B in a box with props explaining a mental model for JavaScript functions](https://obedparla.com/static/1078eb1563b832008167b49c2b8edb11/ce2e0/a-plus-b-box.jpg)
+![(" ")](https://obedparla.com/static/1078eb1563b832008167b49c2b8edb11/ce2e0/a-plus-b-box.jpg)
 
 When a component is executed it will run whatever logic it has, if any, and evaluate its JSX. Any tags will become HTML and any component will be executed, and the process is repeated until reaching the last component in the chain of children.
 
 Since a component can have many children but only one parent I imagine multiple components as a set of boxes, one inside another. Each box must be contained within a bigger box and can have many smaller boxes inside.
 
- ![One big box with many smaller boxes inside and text saying "it's a box in another box"](https://obedparla.com/static/cf7892f6a3db2815d6c502fe74538e4a/1df45/box-inside-box.jpg ) 
-
+![One big box with many smaller boxes inside and text saying "it's a box in another box"](https://obedparla.com/static/cf7892f6a3db2815d6c502fe74538e4a/1df45/box-inside-box.jpg)
 
 But the mental model of a box representing a component is not complete without understanding how it can interact with other boxes.
 
 [](#how-to-think-about-closures)
 How To Think About Closures
------------------------------------------------------------
+
+---
 
 Closures are a core concept in JavaScript. They enable complex functionality in the language, they're super important to understand to have a good mental model around React.
 
@@ -3155,12 +3056,11 @@ The basic description of a closure is that it's a function. I imagine it as a bo
 
 While the closure itself is a box, any closure will be inside bigger boxes, with the outermost box being the Window object.
 
- ![A box describing a mental model of a javascript closure, showing Window, scripts and React apps](https://obedparla.com/static/952aebfcba6f1850f93b3bf6d15392f3/ce2e0/closures_window.jpg)
-  
+![A box describing a mental model of a javascript closure, showing Window, scripts and React apps](https://obedparla.com/static/952aebfcba6f1850f93b3bf6d15392f3/ce2e0/closures_window.jpg)
 
->The window object encapsulates everything else
+> The window object encapsulates everything else
 
-##  [](#but-what-is-a-closure)But what _is_ a closure?
+## [](#but-what-is-a-closure)But what _is_ a closure?
 
 A closure is a feature of JavaScript functions. If you're using a function, you're using a closure.
 
@@ -3168,46 +3068,48 @@ As I've mentioned, a function is a box and that makes a closure a box too. Consi
 
 Speaking in terms of my mental model: I imagine the functions as boxes within boxes, and each smaller box can see the information of the outer box, or parent, but the big box cannot see the smaller one's information. That's as simple and accurate an explanation of closures as I can make.
 
- ![Visual representation of closures and the sharing of information between functions in a mental model, from a box view and a tree view](https://obedparla.com/static/96f403cd585425c1057214447165bbbe/7efee/data-flow.jpg)
- 
-  "Each function can only access its own ![(information and the parent's")](https://obedparla.com/static/96f403cd585425c1057214447165bbbe/01d85/data-flow.jpg) 
+![Visual representation of closures and the sharing of information between functions in a mental model, from a box view and a tree view](https://obedparla.com/static/96f403cd585425c1057214447165bbbe/7efee/data-flow.jpg)
+
+"Each function can only access its own ![(information and the parent's")](https://obedparla.com/static/96f403cd585425c1057214447165bbbe/01d85/data-flow.jpg)
 
 Each function can only access its own information and the parent's
 
 Closures are important because they can be exploited to create some powerful mechanics and React takes full advantage of this.
 
-##  [](#closures-in-react)Closures in React
+## [](#closures-in-react)Closures in React
 
 Each React component is also a closure. Within components, you can only pass props down from parent to child and the parent cannot see what's inside the child, this is an intended feature to make our app's data flow simpler to trace. To find where data comes from, we usually need to go up the tree to find which parent is sending it down.
 
 A great example of closures in React is updating a parent's state through a child component. You've probably done this without realizing you were messing around with closures.
 
 To start, we know the parent can't access the child's information directly, but the child can access the parent's. So we send down that info from parent to child through `props`. In this case, the information takes the shape of a function that updates the parent's state.
+
 ```jsx
-    const Parent = () => {
-      const [count, setCount] = useState(0);
-    
-      return (
-        <div>
-          The count is {count}
-          <div>
-            <ChildButtons onClick={setCount} count={count} />
-          </div>
-        </div>
-      );
-    };
-    
-    const ChildButtons = props => (
+const Parent = () => {
+  const [count, setCount] = useState(0);
+
+  return (
+    <div>
+      The count is {count}
       <div>
-        <button onClick={() => props.onClick(props.count + 1)}>
-          Increase count
-        </button>
-        <button onClick={() => props.onClick(props.count - 1)}>
-          Decrease count
-        </button>
+        <ChildButtons onClick={setCount} count={count} />
       </div>
-    );
+    </div>
+  );
+};
+
+const ChildButtons = (props) => (
+  <div>
+    <button onClick={() => props.onClick(props.count + 1)}>
+      Increase count
+    </button>
+    <button onClick={() => props.onClick(props.count - 1)}>
+      Decrease count
+    </button>
+  </div>
+);
 ```
+
 When an `onClick` happens in a `button`, that will execute the function received from props `props.onClick`, and update the value using `props.count`.
 
 The insight here lies in the way we're updating a parent's state through a child, in this case, the `props.onClick` function. The reason this works is that the function was _declared_ within the `Parent` component's scope, within its closure, so it will have access to the parent's information. Once that function is called in a child, it still lives in the same closure.
@@ -3216,8 +3118,7 @@ This can be hard to grasp, so the way I imagine it is as a "tunnel" between clos
 
 Once we understand how closures affect our components, we can take the next big step: React state.
 
-[](#fitting-reacts-state-into-our-mental-model)Fitting React's State Into Our Mental Model
-------------------------------------------------------------------------------------------
+## [](#fitting-reacts-state-into-our-mental-model)Fitting React's State Into Our Mental Model
 
 React's philosophy is simple: it handles _when_ and _how_ to render elements, and developers control _what_ to render. State is our tool to decide that what.
 
@@ -3227,44 +3128,47 @@ In my mental model state is like a special property inside the box. It's indepen
 
 Each variable and function is created on every render, which means their values are also brand new. Even if a variable's value never changes, it is recalculated and reassigned every time. That's not the case with state, it only changes when there's a request for it to change via a `set state` event.
 
- ![React component state visualized as a part of a bigger box with props coming in from outside](https://obedparla.com/static/acd86ef0ea8a3fe610df603769e68ad9/44313/state-in-box.jpg ) 
-
+![React component state visualized as a part of a bigger box with props coming in from outside](https://obedparla.com/static/acd86ef0ea8a3fe610df603769e68ad9/44313/state-in-box.jpg)
 
 State is a special, independent part of the box; with props coming from outside
 
 State follows a simple rule: Whenever it changes it will re-rendered the component and its children. Props follow the same logic, if a prop changes, the component will re-render, however, we can control state by modifying it, props are more static and usually change as a reaction to a state change.
 
 # the-rendering-mental-model-understanding-reacts-magic
->The Rendering Mental Model: understanding React's magic
------------------------------------------------------------------------------------------------------------------
+
+> The Rendering Mental Model: understanding React's magic
+
+---
 
 I consider rendering to be React's most confusing part because a lot of things happen during rendering that sometimes isn't obvious by looking at the code. That's why having a clear mental model helps.
 
 The way I imagine rendering with my imaginary boxes is two-fold: the first render brings the box into existence, that's when the state is initialized. The second part is when it re-renders, that's the box being recycled, most of it is brand new but some important elements of it remain namely state.
 
 On every render, everything inside a component is created, including variables and functions, that's why we can have variables storing a calculation's results, since they will be recalculated on every render. It's also why functions are not reliable as values, due to their reference (the function's value, per se) being different every render.
+
 ```jsx
-    const Thumbnail = props => (
-      <div>
-        {props.withIcon && <AmazingIcon />}
-        <img src={props.imgUrl} alt={props.alt} />
-      </div>
-    );
+const Thumbnail = (props) => (
+  <div>
+    {props.withIcon && <AmazingIcon />}
+    <img src={props.imgUrl} alt={props.alt} />
+  </div>
+);
 ```
+
 The above will give a different result depending on the props the component receives. The reason React _must_ re-render on every prop change is that it wants to keep the user up to date with the latest information.
 
 However, the state doesn't change on re-renders, its value is maintained. That's why the box is "recycled" instead of created brand new every time. Internally, React is keeping track of each box and making sure its state is always consistent. That's how React knows when to update a component.
 
- ![Mental model of a React component re-rendering when props change](https://obedparla.com/static/78de62863da9bd4c40c588c294167031/7efee/react-rendering-mental-model.jpg)
- > "When props (or state) changes, a new render happens and the component's output can change")]
- ![](https://obedparla.com/static/78de62863da9bd4c40c588c294167031/ea2ac/react-rendering-mental-model.jpg) 
+![Mental model of a React component re-rendering when props change](https://obedparla.com/static/78de62863da9bd4c40c588c294167031/7efee/react-rendering-mental-model.jpg)
+
+> "When props (or state) changes, a new render happens and the component's output can change")]
+> ![](https://obedparla.com/static/78de62863da9bd4c40c588c294167031/ea2ac/react-rendering-mental-model.jpg)
 
 When props (or state) changes, a new render happens and the component's output can change
 
 By imagining a box being recycled I can understand what's going on inside of it. For simple components, it's easy to grasp, but the more complex a component becomes, the more props it receives, the more state it maintains, the more useful a clear mental model becomes.
 
-[](#a-complete-react-mental-model-putting-it-all-together)A complete React mental model: Putting it all together.
------------------------------------------------------------------------------------------------------------------
+## [](#a-complete-react-mental-model-putting-it-all-together)A complete React mental model: Putting it all together.
 
 Now that I've explained all the different parts of the puzzle separately, let's put it all together. Here's the complete mental model I use for React components, directly translated from how I imagine them into words.
 
@@ -3272,11 +3176,11 @@ I imagine a React component as a box that contains all of its information within
 
 And like a box in the real world, it can have other boxes inside of it and these boxes can, in turn, contain more boxes. That way each box/component must have a single parent, and a parent can have many children.
 
- ![Basic representation of a React component as a mental model using boxes](https://obedparla.com/static/d6c8afaef3597fd26d9174e070be1ce3/ce2e0/react-mental-model-basic.jpg )
- 
- ![("The basic representation of a React component")](https://obedparla.com/static/d6c8afaef3597fd26d9174e070be1ce3/ce2e0/react-mental-model-basic.jpg) 
+![Basic representation of a React component as a mental model using boxes](https://obedparla.com/static/d6c8afaef3597fd26d9174e070be1ce3/ce2e0/react-mental-model-basic.jpg)
 
->The basic representation of a React component
+![("The basic representation of a React component")](https://obedparla.com/static/d6c8afaef3597fd26d9174e070be1ce3/ce2e0/react-mental-model-basic.jpg)
+
+> The basic representation of a React component
 
 The boxes are semi-permeable, meaning they never leak anything to the outside but can use information from the outside as if it belonged to them. I imagine like this to represent how closures work in JavaScript.
 
@@ -3286,8 +3190,7 @@ Within components, information can only travel _down_ from parents to children. 
 
 I imagine this directional sharing of information as boxes within boxes. With the inner-most box being able to absorb the parent's data.
 
- ![ React Mental model of data sharing between components visualized as information flowing downward ](https://obedparla.com/static/a3471b4d03d16406ea159b3bc3f3e218/ce2e0/data-sharing-model.jpg ) 
-
+![ React Mental model of data sharing between components visualized as information flowing downward ](https://obedparla.com/static/a3471b4d03d16406ea159b3bc3f3e218/ce2e0/data-sharing-model.jpg)
 
 Data is shared from parent to child
 
@@ -3299,8 +3202,7 @@ In my mental model, I see re-rendering as recycling the box since most of it is 
 
 When a box is recycled all the boxes within it, its children, are also recycled. This can happen because the component's state was modified or a prop changed.
 
- ![Mental model of a React component re-rendering when props or state change](https://obedparla.com/static/267768646d810a0032728d222c3f13a5/7efee/react-rendering-mental-model-full.jpg ) 
-
+![Mental model of a React component re-rendering when props or state change](https://obedparla.com/static/267768646d810a0032728d222c3f13a5/7efee/react-rendering-mental-model-full.jpg)
 
 Mental model of a React component re-rendering when props or state change
 
@@ -3309,8 +3211,6 @@ Remember that a state or prop changing means the information the user sees is ou
 By using these mental models I feel confident when working with React. They help me visualize what can be a maze of code into a comprehensive mental map. It also demystifies React and brings it to a level I'm much more comfortable with.
 
 React is not that complex once you start understanding the core principles behind it and create some ways to imagine how your code works.
-
-
 
 ## Cheatsheet
 
