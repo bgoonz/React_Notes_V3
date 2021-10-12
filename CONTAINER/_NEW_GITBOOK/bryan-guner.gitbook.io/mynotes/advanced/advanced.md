@@ -112,7 +112,7 @@ Advanced
 
 Advanced
 
-MY\_DOCS
+MY_DOCS
 
 <a href="../my_docs/docs.html" class="css-4rbku5 css-1dbjc4n r-1awozwy r-42olwf r-rs99b7 r-1loqt21 r-18u37iz r-15ysp7h r-ymttw5 r-1otgn73 r-1i6wzkk r-lrvibr"></a>
 
@@ -396,7 +396,7 @@ Copied!
 
 <span data-key="e1375c16f195405a9c14f2852f0697da"><span data-offset-key="e1375c16f195405a9c14f2852f0697da:0">We can check some accessibility features directly in our JSX code. Often intellisense checks are already provided in JSX aware IDE’s for the ARIA roles, states and properties. We also have access to the following tool:</span></span>
 
-### 
+###
 
 <span data-key="5c0561b05ac6428a97a1eacafe6a3b67"><span data-offset-key="5c0561b05ac6428a97a1eacafe6a3b67:0">eslint-plugin-jsx-a11y</span></span>
 
@@ -426,7 +426,7 @@ Copied!
 
 <span data-key="9d982f80539b4872bb9712183ff6b088"><span data-offset-key="9d982f80539b4872bb9712183ff6b088:0">A number of tools exist that can run accessibility audits on web pages in your browser. Please use them in combination with other accessibility checks mentioned here as they can only test the technical accessibility of your HTML.</span></span>
 
-### 
+###
 
 <span data-key="f08893086b9c47f79d31dffd6fb1edd7"><span data-offset-key="f08893086b9c47f79d31dffd6fb1edd7:0">aXe, aXe-core and react-axe</span></span>
 
@@ -436,13 +436,13 @@ Copied!
 
 <span data-key="98c540369d754f45854a1c2a20fa50e0"><span data-offset-key="98c540369d754f45854a1c2a20fa50e0:0">You can also use the </span></span><a href="https://github.com/dylanb/react-axe" class="css-4rbku5 css-1dbjc4n r-1loqt21 r-1471scf r-1otgn73 r-1i6wzkk r-lrvibr"><span class="css-901oao css-16my406" data-rnw-int-class="257-20744_259-20745-237__"><span data-key="19e55eb3c1c94b0e86ae820a84da2028"><span data-offset-key="19e55eb3c1c94b0e86ae820a84da2028:0">react-axe</span></span></span></a><span data-key="ea4363497e324c3d85bb4e0cb403ef46"><span data-offset-key="ea4363497e324c3d85bb4e0cb403ef46:0"> module to report these accessibility findings directly to the console while developing and debugging.</span></span>
 
-### 
+###
 
 <span data-key="b987f45e668a4d8484153bcc315f7a29"><span data-offset-key="b987f45e668a4d8484153bcc315f7a29:0">WebAIM WAVE</span></span>
 
 <span data-key="e47714e92ffc40528e3b9e6dbe41ccb0"><span data-offset-key="e47714e92ffc40528e3b9e6dbe41ccb0:0">The </span></span><a href="https://wave.webaim.org/extension/" class="css-4rbku5 css-1dbjc4n r-1loqt21 r-1471scf r-1otgn73 r-1i6wzkk r-lrvibr"><span class="css-901oao css-16my406" data-rnw-int-class="257-20744_259-20745-237__"><span data-key="89ac6411c2bb4e26ad3286a4c3b37512"><span data-offset-key="89ac6411c2bb4e26ad3286a4c3b37512:0">Web Accessibility Evaluation Tool</span></span></span></a><span data-key="2125d29b849c4ce6b83ee2b0d5d677b0"><span data-offset-key="2125d29b849c4ce6b83ee2b0d5d677b0:0"> is another accessibility browser extension.</span></span>
 
-### 
+###
 
 <span data-key="a5950a57c6b4413b974b04259694914b"><span data-offset-key="a5950a57c6b4413b974b04259694914b:0">Accessibility inspectors and the Accessibility Tree</span></span>
 
@@ -458,7 +458,7 @@ Copied!
 
 <span data-key="6fe3fc3af9eb44d1a51390e907719a37"><span data-offset-key="6fe3fc3af9eb44d1a51390e907719a37:0">Commonly Used Screen Readers</span></span>
 
-### 
+###
 
 <span data-key="2f1d8314729f4c2ca722fe33445a48d3"><span data-offset-key="2f1d8314729f4c2ca722fe33445a48d3:0">NVDA in Firefox</span></span>
 
@@ -466,7 +466,7 @@ Copied!
 
 <span data-key="916ba4d745734842bff8c20db2362910"><span data-offset-key="916ba4d745734842bff8c20db2362910:0">Refer to the following guides on how to best use NVDA:</span></span>
 
-### 
+###
 
 <span data-key="50489f478576451db1426f7ffb623360"><span data-offset-key="50489f478576451db1426f7ffb623360:0">VoiceOver in Safari</span></span>
 
@@ -474,7 +474,7 @@ Copied!
 
 <span data-key="0f01539ce0b1429ca5106d6cbfb5292e"><span data-offset-key="0f01539ce0b1429ca5106d6cbfb5292e:0">Refer to the following guides on how to activate and use VoiceOver:</span></span>
 
-### 
+###
 
 <span data-key="230095b6275741df9f64503933172d5c"><span data-offset-key="230095b6275741df9f64503933172d5c:0">JAWS in Internet Explorer</span></span>
 
@@ -484,7 +484,7 @@ Copied!
 
 <span data-key="7f3c992977cf41c9ab5a82b1f9090b53"><span data-offset-key="7f3c992977cf41c9ab5a82b1f9090b53:0">Other Screen Readers</span></span>
 
-### 
+###
 
 <span data-key="febf81db6685483d80a94a145f69728e"><span data-offset-key="febf81db6685483d80a94a145f69728e:0">ChromeVox in Google Chrome</span></span>
 
@@ -498,7 +498,7 @@ Copied!
 
 <span data-key="aaf7970a94274cbdb9cad6b188c93832"><span data-offset-key="aaf7970a94274cbdb9cad6b188c93832:0">Most React apps will have their files “bundled” using tools like </span></span><a href="https://webpack.js.org" class="css-4rbku5 css-1dbjc4n r-1loqt21 r-1471scf r-1otgn73 r-1i6wzkk r-lrvibr"><span class="css-901oao css-16my406" data-rnw-int-class="257-20744_259-20745-237__"><span data-key="5745cc2651e344a3a5c220e317e42617"><span data-offset-key="5745cc2651e344a3a5c220e317e42617:0">Webpack</span></span></span></a><span data-key="97766b164d904d93b2b5aad6eea65820"><span data-offset-key="97766b164d904d93b2b5aad6eea65820:0">, </span></span><a href="https://rollupjs.org" class="css-4rbku5 css-1dbjc4n r-1loqt21 r-1471scf r-1otgn73 r-1i6wzkk r-lrvibr"><span class="css-901oao css-16my406" data-rnw-int-class="257-20744_259-20745-237__"><span data-key="6739cf9da7e740468cf052a971d2f916"><span data-offset-key="6739cf9da7e740468cf052a971d2f916:0">Rollup</span></span></span></a><span data-key="6b7d5c424c084476a99a37523cafa30c"><span data-offset-key="6b7d5c424c084476a99a37523cafa30c:0"> or </span></span><a href="http://browserify.org" class="css-4rbku5 css-1dbjc4n r-1loqt21 r-1471scf r-1otgn73 r-1i6wzkk r-lrvibr"><span class="css-901oao css-16my406" data-rnw-int-class="257-20744_259-20745-237__"><span data-key="c6aff726e65a46eebf915d13c4b56257"><span data-offset-key="c6aff726e65a46eebf915d13c4b56257:0">Browserify</span></span></span></a><span data-key="baae491b223d4ba58ae40c4d0a03f0f0"><span data-offset-key="baae491b223d4ba58ae40c4d0a03f0f0:0">. Bundling is the process of following imported files and merging them into a single file: a “bundle”. This bundle can then be included on a webpage to load an entire app at once.</span></span>
 
-### 
+###
 
 <span data-key="4994b6237c7b4823b9317b2e98fc0e05"><span data-offset-key="4994b6237c7b4823b9317b2e98fc0e05:0">Example</span></span>
 
@@ -4232,7 +4232,7 @@ Copied!
 
 2
 
-<span data-key="18e42a7305404d0dbe98bc1bc71ce42d"><span data-offset-key="18e42a7305404d0dbe98bc1bc71ce42d:0"> -g \[ envify --NODE\_ENV production \] \\\\</span></span>
+<span data-key="18e42a7305404d0dbe98bc1bc71ce42d"><span data-offset-key="18e42a7305404d0dbe98bc1bc71ce42d:0"> -g \[ envify --NODE_ENV production \] \\\\</span></span>
 
 3
 
@@ -4288,7 +4288,7 @@ Copied!
 
 4
 
-<span data-key="d3b8125a964946f0985cc6f2d9534919"><span data-offset-key="d3b8125a964946f0985cc6f2d9534919:0"> 'process.env.NODE\_ENV': JSON.stringify('production')</span></span>
+<span data-key="d3b8125a964946f0985cc6f2d9534919"><span data-offset-key="d3b8125a964946f0985cc6f2d9534919:0"> 'process.env.NODE_ENV': JSON.stringify('production')</span></span>
 
 5
 
@@ -5498,7 +5498,7 @@ Copied!
 
 <span data-key="4f9ec620f173492fb8d879b0d889d604"><span data-offset-key="4f9ec620f173492fb8d879b0d889d604:0">Using Props Other Than </span><span data-offset-key="4f9ec620f173492fb8d879b0d889d604:1"><span class="css-901oao css-16my406 r-1vckr1u r-z2wwpe r-uibjmv r-m2pi6t r-1hvjb8t">render</span></span></span>
 
-<span data-key="12cd01ecbf0349c8985deee0bd9c3098"><span data-offset-key="12cd01ecbf0349c8985deee0bd9c3098:0">It’s important to remember that just because the pattern is called “render props” you don’t </span><span data-offset-key="12cd01ecbf0349c8985deee0bd9c3098:1"><span class="css-901oao css-16my406 r-36ujnk">have to use a prop named </span></span><span data-offset-key="12cd01ecbf0349c8985deee0bd9c3098:2"><span class="css-901oao css-16my406 r-1vckr1u r-z2wwpe r-uibjmv r-m2pi6t r-1hvjb8t"><span class="css-901oao css-16my406 r-36ujnk">render</span></span></span><span data-offset-key="12cd01ecbf0349c8985deee0bd9c3098:3"><span class="css-901oao css-16my406 r-36ujnk"> to use this pattern</span></span><span data-offset-key="12cd01ecbf0349c8985deee0bd9c3098:4">. In fact, \*</span></span><a href="https://cdb.reacttraining.com/use-a-render-prop-50de598f11ce" class="css-4rbku5 css-1dbjc4n r-1loqt21 r-1471scf r-1otgn73 r-1i6wzkk r-lrvibr"><span class="css-901oao css-16my406" data-rnw-int-class="257-20744_259-20745-237__"><span data-key="0581911311394e1eae57c74ca24d0275"><span data-offset-key="0581911311394e1eae57c74ca24d0275:0">any* prop that is a function that a component uses to know what to render is technically a “render prop”</span></span></span></a><span data-key="0b0ef082467940f0b95c283f3b2fb2e6"><span data-offset-key="0b0ef082467940f0b95c283f3b2fb2e6:0">.</span></span>
+<span data-key="12cd01ecbf0349c8985deee0bd9c3098"><span data-offset-key="12cd01ecbf0349c8985deee0bd9c3098:0">It’s important to remember that just because the pattern is called “render props” you don’t </span><span data-offset-key="12cd01ecbf0349c8985deee0bd9c3098:1"><span class="css-901oao css-16my406 r-36ujnk">have to use a prop named </span></span><span data-offset-key="12cd01ecbf0349c8985deee0bd9c3098:2"><span class="css-901oao css-16my406 r-1vckr1u r-z2wwpe r-uibjmv r-m2pi6t r-1hvjb8t"><span class="css-901oao css-16my406 r-36ujnk">render</span></span></span><span data-offset-key="12cd01ecbf0349c8985deee0bd9c3098:3"><span class="css-901oao css-16my406 r-36ujnk"> to use this pattern</span></span><span data-offset-key="12cd01ecbf0349c8985deee0bd9c3098:4">. In fact, \*</span></span><a href="https://cdb.reacttraining.com/use-a-render-prop-50de598f11ce" class="css-4rbku5 css-1dbjc4n r-1loqt21 r-1471scf r-1otgn73 r-1i6wzkk r-lrvibr"><span class="css-901oao css-16my406" data-rnw-int-class="257-20744_259-20745-237__"><span data-key="0581911311394e1eae57c74ca24d0275"><span data-offset-key="0581911311394e1eae57c74ca24d0275:0">any\* prop that is a function that a component uses to know what to render is technically a “render prop”</span></span></span></a><span data-key="0b0ef082467940f0b95c283f3b2fb2e6"><span data-offset-key="0b0ef082467940f0b95c283f3b2fb2e6:0">.</span></span>
 
 <span data-key="2796d572ea5840149f95e19b22fd1ecc"><span data-offset-key="2796d572ea5840149f95e19b22fd1ecc:0">Although the examples above use </span><span data-offset-key="2796d572ea5840149f95e19b22fd1ecc:1"><span class="css-901oao css-16my406 r-1vckr1u r-z2wwpe r-uibjmv r-m2pi6t r-1hvjb8t">render</span></span><span data-offset-key="2796d572ea5840149f95e19b22fd1ecc:2">, we could just as easily use the </span><span data-offset-key="2796d572ea5840149f95e19b22fd1ecc:3"><span class="css-901oao css-16my406 r-1vckr1u r-z2wwpe r-uibjmv r-m2pi6t r-1hvjb8t">children</span></span><span data-offset-key="2796d572ea5840149f95e19b22fd1ecc:4"> prop!</span></span>
 
@@ -5712,7 +5712,7 @@ Glossary
 
 <a href="../my_docs/docs.html" class="css-4rbku5 css-1dbjc4n r-1awozwy r-14lw9ot r-190qawg r-z2wwpe r-rs99b7 r-4dj0k7 r-1loqt21 r-1quu1zo r-1ro0kt6 r-18u37iz r-16y2uox r-1wbh5a2 r-nsbfu8 r-1otgn73 r-1i6wzkk r-lrvibr"></a>
 
-Next - MY\_DOCS
+Next - MY_DOCS
 
 Docs
 
