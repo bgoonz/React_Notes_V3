@@ -3407,7 +3407,7 @@ npm install --save react // declarative and flexible JavaScript library for buil
 npm install --save react-dom // serves as the entry point of the DOM-related rendering paths
 npm install --save prop-types // runtime type checking for React props and similar objects
 
-````
+```
 
 // notes: don't forget the command lines
 
