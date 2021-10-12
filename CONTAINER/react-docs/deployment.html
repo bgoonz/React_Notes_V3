@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Deployment</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Deployment</h1>
+</header>
+<p><code>npm run build</code> creates a <code>build</code> directory with a production build of your app. Set up your favorite HTTP server so that a visitor to your site is served <code>index.html</code>, and requests to static paths like <code>/static/js/main.&lt;hash&gt;.js</code> are served with the contents of the <code>/static/js/main.&lt;hash&gt;.js</code> file. For more information see the <a href="production-build.md">production build</a> section.</p>
+<h2 id="static-server">Static Server</h2>
+<p>For environments using <a href="https://nodejs.org/">Node</a>, the easiest way to handle this would be to install <a href="https://github.com/zeit/serve">serve</a> and let it handle the rest:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb1-1" title="1"><span class="ex">npm</span> install -g serve</a>
+<a class="sourceLine" id="cb1-2" title="2"><span class="ex">serve</span> -s build</a></code></pre></div>
+<p>The last command shown above will serve your static site on the port <strong>5000</strong>. Like many of <a href="https://github.com/zeit/serve">serve</a>’s internal settings, the port can be adjusted using the <code>-l</code> or <code>--listen</code> flags:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb2-1" title="1"><span class="ex">serve</span> -s build -l 4000</a></code></pre></div>
+<p>Run this command to get a full list of the options available:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb3-1" title="1"><span class="ex">serve</span> -h</a></code></pre></div>
+<h2 id="other-solutions">Other Solutions</h2>
+<p>You don’t necessarily need a static server in order to run a Create React App project in production. It also works well when integrated into an existing server side app.</p>
+<p>Here’s a programmatic example using <a href="https://nodejs.org/">Node</a> and <a href="https://expressjs.com/">Express</a>:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb4-1" title="1"><span class="kw">const</span> express <span class="op">=</span> <span class="at">require</span>(<span class="st">&#39;express&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb4-2" title="2"><span class="kw">const</span> path <span class="op">=</span> <span class="at">require</span>(<span class="st">&#39;path&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb4-3" title="3"><span class="kw">const</span> app <span class="op">=</span> <span class="at">express</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb4-4" title="4"></a>
+<a class="sourceLine" id="cb4-5" title="5"><span class="va">app</span>.<span class="at">use</span>(<span class="va">express</span>.<span class="at">static</span>(<span class="va">path</span>.<span class="at">join</span>(__dirname<span class="op">,</span> <span class="st">&#39;build&#39;</span>)))<span class="op">;</span></a>
+<a class="sourceLine" id="cb4-6" title="6"></a>
+<a class="sourceLine" id="cb4-7" title="7"><span class="va">app</span>.<span class="at">get</span>(<span class="st">&#39;/&#39;</span><span class="op">,</span> <span class="kw">function</span> (req<span class="op">,</span> res) <span class="op">{</span></a>
+<a class="sourceLine" id="cb4-8" title="8">  <span class="va">res</span>.<span class="at">sendFile</span>(<span class="va">path</span>.<span class="at">join</span>(__dirname<span class="op">,</span> <span class="st">&#39;build&#39;</span><span class="op">,</span> <span class="st">&#39;index.html&#39;</span>))<span class="op">;</span></a>
+<a class="sourceLine" id="cb4-9" title="9"><span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb4-10" title="10"></a>
+<a class="sourceLine" id="cb4-11" title="11"><span class="va">app</span>.<span class="at">listen</span>(<span class="dv">9000</span>)<span class="op">;</span></a></code></pre></div>
+<p>The choice of your server software isn’t important either. Since Create React App is completely platform-agnostic, there’s no need to explicitly use Node.</p>
+<p>The <code>build</code> folder with static assets is the only output produced by Create React App.</p>
+<p>However this is not quite enough if you use client-side routing. Read the next section if you want to support URLs like <code>/todos/42</code> in your single-page app.</p>
+<h2 id="serving-apps-with-client-side-routing">Serving Apps with Client-Side Routing</h2>
+<p>If you use routers that use the HTML5 <a href="https://developer.mozilla.org/en-US/docs/Web/API/History_API#Adding_and_modifying_history_entries"><code>pushState</code> history API</a> under the hood (for example, <a href="https://github.com/ReactTraining/react-router">React Router</a> with <code>browserHistory</code>), many static file servers will fail. For example, if you used React Router with a route for <code>/todos/42</code>, the development server will respond to <code>localhost:3000/todos/42</code> properly, but an Express serving a production build as above will not.</p>
+<p>This is because when there is a fresh page load for a <code>/todos/42</code>, the server looks for the file <code>build/todos/42</code> and does not find it. The server needs to be configured to respond to a request to <code>/todos/42</code> by serving <code>index.html</code>. For example, we can amend our Express example above to serve <code>index.html</code> for any unknown paths:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode diff"><code class="sourceCode diff"><a class="sourceLine" id="cb5-1" title="1"> app.use(express.static(path.join(__dirname, &#39;build&#39;)));</a>
+<a class="sourceLine" id="cb5-2" title="2"></a>
+<a class="sourceLine" id="cb5-3" title="3"><span class="st">-app.get(&#39;/&#39;, function (req, res) {</span></a>
+<a class="sourceLine" id="cb5-4" title="4"><span class="va">+app.get(&#39;/*&#39;, function (req, res) {</span></a>
+<a class="sourceLine" id="cb5-5" title="5">   res.sendFile(path.join(__dirname, &#39;build&#39;, &#39;index.html&#39;));</a>
+<a class="sourceLine" id="cb5-6" title="6"> });</a></code></pre></div>
+<p>If you’re using <a href="https://httpd.apache.org/">Apache HTTP Server</a>, you need to create a <code>.htaccess</code> file in the <code>public</code> folder that looks like this:</p>
+<pre><code>    Options -MultiViews
+    RewriteEngine On
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^ index.html [QSA,L]</code></pre>
+<p>It will get copied to the <code>build</code> folder when you run <code>npm run build</code>.</p>
+<p>If you’re using <a href="https://tomcat.apache.org/">Apache Tomcat</a>, you need to follow <a href="https://stackoverflow.com/a/41249464/4878474">this Stack Overflow answer</a>.</p>
+<p>Now requests to <code>/todos/42</code> will be handled correctly both in development and in production.</p>
+<p>On a production build, and when you’ve <a href="making-a-progressive-web-app.md#why-opt-in">opted-in</a>, a <a href="https://developers.google.com/web/fundamentals/primers/service-workers/">service worker</a> will automatically handle all navigation requests, like for <code>/todos/42</code>, by serving the cached copy of your <code>index.html</code>. This service worker navigation routing can be configured or disabled by <a href="available-scripts.md#npm-run-eject"><code>eject</code>ing</a> and then modifying the <a href="https://github.com/GoogleChrome/sw-precache#navigatefallback-string"><code>navigateFallback</code></a> and <a href="https://github.com/GoogleChrome/sw-precache#navigatefallbackwhitelist-arrayregexp"><code>navigateFallbackWhitelist</code></a> options of the <code>SWPrecachePlugin</code> configuration.</p>
+<p>When users install your app to the homescreen of their device the default configuration will make a shortcut to <code>/index.html</code>. This may not work for client-side routers which expect the app to be served from <code>/</code>. Edit the web app manifest at <code>public/manifest.json</code> and change <code>start_url</code> to match the required URL scheme, for example:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb7-1" title="1">  <span class="st">&quot;start_url&quot;</span><span class="op">:</span> <span class="st">&quot;.&quot;</span><span class="op">,</span></a></code></pre></div>
+<h2 id="building-for-relative-paths">Building for Relative Paths</h2>
+<p>By default, Create React App produces a build assuming your app is hosted at the server root.</p>
+<p>To override this, specify the <code>homepage</code> in your <code>package.json</code>, for example:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb8-1" title="1">  <span class="st">&quot;homepage&quot;</span><span class="op">:</span> <span class="st">&quot;http://mywebsite.com/relativepath&quot;</span><span class="op">,</span></a></code></pre></div>
+<p>This will let Create React App correctly infer the root path to use in the generated HTML file.</p>
+<p><strong>Note</strong>: If you are using <code>react-router@^4</code>, you can root <code>&lt;Link&gt;</code>s using the <code>basename</code> prop on any <code>&lt;Router&gt;</code>.</p>
+<p>More information <a href="https://reacttraining.com/react-router/web/api/BrowserRouter/basename-string">here</a>.</p>
+<p>For example:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb9-1" title="1"><span class="op">&lt;</span>BrowserRouter basename<span class="op">=</span><span class="st">&quot;/calendar&quot;</span>/&gt;</a>
+<a class="sourceLine" id="cb9-2" title="2"><span class="op">&lt;</span>Link to<span class="op">=</span><span class="st">&quot;/today&quot;</span>/&gt; <span class="co">// renders &lt;a href=&quot;/calendar/today&quot;&gt;</span></a></code></pre></div>
+<h3 id="serving-the-same-build-from-different-paths">Serving the Same Build from Different Paths</h3>
+<blockquote>
+<p>Note: this feature is available with <code>react-scripts@0.9.0</code> and higher.</p>
+</blockquote>
+<p>If you are not using the HTML5 <code>pushState</code> history API or not using client-side routing at all, it is unnecessary to specify the URL from which your app will be served. Instead, you can put this in your <code>package.json</code>:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb10-1" title="1">  <span class="st">&quot;homepage&quot;</span><span class="op">:</span> <span class="st">&quot;.&quot;</span><span class="op">,</span></a></code></pre></div>
+<p>This will make sure that all the asset paths are relative to <code>index.html</code>. You will then be able to move your app from <code>http://mywebsite.com</code> to <code>http://mywebsite.com/relativepath</code> or even <code>http://mywebsite.com/relative/path</code> without having to rebuild it.</p>
+<h2 id="customizing-environment-variables-for-arbitrary-build-environments">Customizing Environment Variables for Arbitrary Build Environments</h2>
+<p>You can create an arbitrary build environment by creating a custom <code>.env</code> file and loading it using <a href="https://www.npmjs.com/package/env-cmd">env-cmd</a>.</p>
+<p>For example, to create a build environment for a staging environment:</p>
+<ol type="1">
+<li>Create a file called <code>.env.staging</code></li>
+<li>Set environment variables as you would any other <code>.env</code> file (e.g. <code>REACT_APP_API_URL=http://api-staging.example.com</code>)</li>
+<li><p>Install <a href="https://www.npmjs.com/package/env-cmd">env-cmd</a></p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb11-1" title="1">$ <span class="ex">npm</span> install env-cmd --save</a>
+<a class="sourceLine" id="cb11-2" title="2">$ <span class="co"># or</span></a>
+<a class="sourceLine" id="cb11-3" title="3">$ <span class="ex">yarn</span> add env-cmd</a></code></pre></div></li>
+<li><p>Add a new script to your <code>package.json</code>, building with your new environment:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb12-1" title="1"><span class="fu">{</span></a>
+<a class="sourceLine" id="cb12-2" title="2">  <span class="dt">&quot;scripts&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb12-3" title="3">    <span class="dt">&quot;build:staging&quot;</span><span class="fu">:</span> <span class="st">&quot;env-cmd -f .env.staging npm run build&quot;</span></a>
+<a class="sourceLine" id="cb12-4" title="4">  <span class="fu">}</span></a>
+<a class="sourceLine" id="cb12-5" title="5"><span class="fu">}</span></a></code></pre></div></li>
+</ol>
+<p>Now you can run <code>npm run build:staging</code> to build with the staging environment config. You can specify other environments in the same way.</p>
+<p>Variables in <code>.env.production</code> will be used as fallback because <code>NODE_ENV</code> will always be set to <code>production</code> for a build.</p>
+<h2 id="aws-amplify"><a href="https://console.amplify.aws">AWS Amplify</a></h2>
+<p>The AWS Amplify Console provides continuous deployment and hosting for modern web apps (single page apps and static site generators) with serverless backends. The Amplify Console offers globally available CDNs, custom domain setup, feature branch deployments, and password protection.</p>
+<ol type="1">
+<li>Login to the Amplify Console <a href="https://console.aws.amazon.com/amplify/home">here</a>.</li>
+<li>Connect your Create React App repo and pick a branch. If you’re looking for a Create React App+Amplify starter, try the <a href="https://github.com/swaminator/create-react-app-auth-amplify">create-react-app-auth-amplify starter</a> that demonstrates setting up auth in 10 minutes with Create React App.</li>
+<li>The Amplify Console automatically detects the build settings. Choose Next.</li>
+<li>Choose <em>Save and deploy</em>.</li>
+</ol>
+<p>If the build succeeds, the app is deployed and hosted on a global CDN with an amplifyapp.com domain. You can now continuously deploy changes to your frontend or backend. Continuous deployment allows developers to deploy updates to their frontend and backend on every code commit to their Git repository.</p>
+<h2 id="azure"><a href="https://azure.microsoft.com/">Azure</a></h2>
+<p>Azure Static Web Apps creates an automated build and deploy pipeline for your React app powered by GitHub Actions. Applications are geo-distributed by default with multiple points of presence. PR’s are built automatically for staging environment previews.</p>
+<ol type="1">
+<li>Create a new Static Web App <a href="https://ms.portal.azure.com/#create/Microsoft.StaticApp">here</a>.</li>
+<li>Add in the details and connect to your GitHub repo.</li>
+<li>Make sure the build folder is set correctly on the “build” tab and create the resource.</li>
+</ol>
+<p>Azure Static Web Apps will automatically configure a GitHub Action in your repo and begin the deployment.</p>
+<p>See the <a href="https://aka.ms/swadocs">Azure Static Web Apps documentation</a> for more information on routing, APIs, authentication and authorization, custom domains and more.</p>
+<h2 id="firebase"><a href="https://firebase.google.com/">Firebase</a></h2>
+<p>Install the Firebase CLI if you haven’t already by running <code>npm install -g firebase-tools</code>. Sign up for a <a href="https://console.firebase.google.com/">Firebase account</a> and create a new project. Run <code>firebase login</code> and login with your previous created Firebase account.</p>
+<p>Then run the <code>firebase init</code> command from your project’s root. You need to choose the <strong>Hosting: Configure and deploy Firebase Hosting sites</strong> and choose the Firebase project you created in the previous step. You will need to agree with <code>database.rules.json</code> being created, choose <code>build</code> as the public directory, and also agree to <strong>Configure as a single-page app</strong> by replying with <code>y</code>.</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb13-1" title="1">    === <span class="ex">Project</span> Setup</a>
+<a class="sourceLine" id="cb13-2" title="2"></a>
+<a class="sourceLine" id="cb13-3" title="3">    <span class="ex">First</span>, let<span class="st">&#39;s associate this project directory with a Firebase project.</span></a>
+<a class="sourceLine" id="cb13-4" title="4"><span class="st">    You can create multiple project aliases by running firebase use --add,</span></a>
+<a class="sourceLine" id="cb13-5" title="5"><span class="st">    but for now we&#39;</span>ll set up a default project.</a>
+<a class="sourceLine" id="cb13-6" title="6"></a>
+<a class="sourceLine" id="cb13-7" title="7">    <span class="ex">?</span> What Firebase project do you want to associate as default? Example app (example-app-fd690)</a>
+<a class="sourceLine" id="cb13-8" title="8"></a>
+<a class="sourceLine" id="cb13-9" title="9">    === <span class="ex">Database</span> Setup</a>
+<a class="sourceLine" id="cb13-10" title="10"></a>
+<a class="sourceLine" id="cb13-11" title="11">    <span class="ex">Firebase</span> Realtime Database Rules allow you to define how your data should be</a>
+<a class="sourceLine" id="cb13-12" title="12">    <span class="ex">structured</span> and when your data can be read from and written to.</a>
+<a class="sourceLine" id="cb13-13" title="13"></a>
+<a class="sourceLine" id="cb13-14" title="14">    <span class="ex">?</span> What file should be used for Database Rules? database.rules.json</a>
+<a class="sourceLine" id="cb13-15" title="15">    ✔  <span class="ex">Database</span> Rules for example-app-fd690 have been downloaded to database.rules.json.</a>
+<a class="sourceLine" id="cb13-16" title="16">    <span class="ex">Future</span> modifications to database.rules.json will update Database Rules when you run</a>
+<a class="sourceLine" id="cb13-17" title="17">    <span class="ex">firebase</span> deploy.</a>
+<a class="sourceLine" id="cb13-18" title="18"></a>
+<a class="sourceLine" id="cb13-19" title="19">    === <span class="ex">Hosting</span> Setup</a>
+<a class="sourceLine" id="cb13-20" title="20"></a>
+<a class="sourceLine" id="cb13-21" title="21">    <span class="ex">Your</span> public directory is the folder (relative to your project directory) <span class="ex">that</span></a>
+<a class="sourceLine" id="cb13-22" title="22">    <span class="ex">will</span> contain Hosting assets to uploaded with firebase deploy. If you</a>
+<a class="sourceLine" id="cb13-23" title="23">    <span class="ex">have</span> a build process for your assets, use your build<span class="st">&#39;s output directory.</span></a>
+<a class="sourceLine" id="cb13-24" title="24"></a>
+<a class="sourceLine" id="cb13-25" title="25"><span class="st">    ? What do you want to use as your public directory? build</span></a>
+<a class="sourceLine" id="cb13-26" title="26"><span class="st">    ? Configure as a single-page app (rewrite all urls to /index.html)? Yes</span></a>
+<a class="sourceLine" id="cb13-27" title="27"><span class="st">    ✔  Wrote build/index.html</span></a>
+<a class="sourceLine" id="cb13-28" title="28"></a>
+<a class="sourceLine" id="cb13-29" title="29"><span class="st">    i  Writing configuration info to firebase.json...</span></a>
+<a class="sourceLine" id="cb13-30" title="30"><span class="st">    i  Writing project information to .firebaserc...</span></a>
+<a class="sourceLine" id="cb13-31" title="31"></a>
+<a class="sourceLine" id="cb13-32" title="32"><span class="st">    ✔  Firebase initialization complete!</span></a></code></pre></div>
+<p>IMPORTANT: you need to set proper HTTP caching headers for <code>service-worker.js</code> file in <code>firebase.json</code> file or you will not be able to see changes after first deployment (<a href="https://github.com/facebook/create-react-app/issues/2440">issue #2440</a>). It should be added inside <code>"hosting"</code> key like next:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb14-1" title="1"><span class="fu">{</span></a>
+<a class="sourceLine" id="cb14-2" title="2">  <span class="dt">&quot;hosting&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb14-3" title="3">    <span class="er">...</span></a>
+<a class="sourceLine" id="cb14-4" title="4">    <span class="dt">&quot;headers&quot;</span><span class="fu">:</span> <span class="ot">[</span></a>
+<a class="sourceLine" id="cb14-5" title="5">      <span class="fu">{</span><span class="dt">&quot;source&quot;</span><span class="fu">:</span> <span class="st">&quot;/service-worker.js&quot;</span><span class="fu">,</span> <span class="dt">&quot;headers&quot;</span><span class="fu">:</span> <span class="ot">[</span><span class="fu">{</span><span class="dt">&quot;key&quot;</span><span class="fu">:</span> <span class="st">&quot;Cache-Control&quot;</span><span class="fu">,</span> <span class="dt">&quot;value&quot;</span><span class="fu">:</span> <span class="st">&quot;no-cache&quot;</span><span class="fu">}</span><span class="ot">]</span><span class="fu">}</span></a>
+<a class="sourceLine" id="cb14-6" title="6">    <span class="ot">]</span></a>
+<a class="sourceLine" id="cb14-7" title="7">    <span class="er">...</span></a></code></pre></div>
+<p>Now, after you create a production build with <code>npm run build</code>, you can deploy it by running <code>firebase deploy</code>.</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb15-1" title="1">    === <span class="ex">Deploying</span> to <span class="st">&#39;example-app-fd690&#39;</span>...</a>
+<a class="sourceLine" id="cb15-2" title="2"></a>
+<a class="sourceLine" id="cb15-3" title="3">    <span class="ex">i</span>  deploying database, hosting</a>
+<a class="sourceLine" id="cb15-4" title="4">    ✔  <span class="ex">database</span>: rules ready to deploy.</a>
+<a class="sourceLine" id="cb15-5" title="5">    <span class="ex">i</span>  hosting: preparing build directory for upload...</a>
+<a class="sourceLine" id="cb15-6" title="6">    <span class="ex">Uploading</span>: [==============================          ] 75%✔  hosting: build folder uploaded successfully</a>
+<a class="sourceLine" id="cb15-7" title="7">    ✔  <span class="ex">hosting</span>: 8 files uploaded successfully</a>
+<a class="sourceLine" id="cb15-8" title="8">    <span class="ex">i</span>  starting release process (may take several minutes)<span class="ex">...</span></a>
+<a class="sourceLine" id="cb15-9" title="9"></a>
+<a class="sourceLine" id="cb15-10" title="10">    ✔  <span class="ex">Deploy</span> complete!</a>
+<a class="sourceLine" id="cb15-11" title="11"></a>
+<a class="sourceLine" id="cb15-12" title="12">    <span class="ex">Project</span> Console: https://console.firebase.google.com/project/example-app-fd690/overview</a>
+<a class="sourceLine" id="cb15-13" title="13">    <span class="ex">Hosting</span> URL: https://example-app-fd690.firebaseapp.com</a></code></pre></div>
+<p>For more information see <a href="https://firebase.google.com/docs/hosting">Firebase Hosting</a>.</p>
+<h2 id="github-pages"><a href="https://pages.github.com/">GitHub Pages</a></h2>
+<blockquote>
+<p>Note: this feature is available with <code>react-scripts@0.2.0</code> and higher.</p>
+</blockquote>
+<h3 id="step-1-add-homepage-to-package.json">Step 1: Add <code>homepage</code> to <code>package.json</code></h3>
+<p><strong>The step below is important!</strong><br/></p>
+<p><strong>If you skip it, your app will not deploy correctly.</strong></p>
+<p>Open your <code>package.json</code> and add a <code>homepage</code> field for your project:</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb16-1" title="1">  <span class="er">&quot;homepage&quot;:</span> <span class="er">&quot;https://myusername.github.io/my-app&quot;,</span></a></code></pre></div>
+<p>or for a GitHub user page:</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb17-1" title="1">  <span class="er">&quot;homepage&quot;:</span> <span class="er">&quot;https://myusername.github.io&quot;,</span></a></code></pre></div>
+<p>or for a custom domain page:</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb18-1" title="1">  <span class="er">&quot;homepage&quot;:</span> <span class="er">&quot;https://mywebsite.com&quot;,</span></a></code></pre></div>
+<p>Create React App uses the <code>homepage</code> field to determine the root URL in the built HTML file.</p>
+<h3 id="step-2-install-gh-pages-and-add-deploy-to-scripts-in-package.json">Step 2: Install <code>gh-pages</code> and add <code>deploy</code> to <code>scripts</code> in <code>package.json</code></h3>
+<p>Now, whenever you run <code>npm run build</code>, you will see a cheat sheet with instructions on how to deploy to GitHub Pages.</p>
+<p>To publish it at <a href="https://myusername.github.io/my-app">https://myusername.github.io/my-app</a>, run:</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb19-1" title="1"><span class="ex">npm</span> install --save gh-pages</a></code></pre></div>
+<p>Alternatively you may use <code>yarn</code>:</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb20-1" title="1"><span class="ex">yarn</span> add gh-pages</a></code></pre></div>
+<p>Add the following scripts in your <code>package.json</code>:</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode diff"><code class="sourceCode diff"><a class="sourceLine" id="cb21-1" title="1">  &quot;scripts&quot;: {</a>
+<a class="sourceLine" id="cb21-2" title="2"><span class="va">+   &quot;predeploy&quot;: &quot;npm run build&quot;,</span></a>
+<a class="sourceLine" id="cb21-3" title="3"><span class="va">+   &quot;deploy&quot;: &quot;gh-pages -d build&quot;,</span></a>
+<a class="sourceLine" id="cb21-4" title="4">    &quot;start&quot;: &quot;react-scripts start&quot;,</a>
+<a class="sourceLine" id="cb21-5" title="5">    &quot;build&quot;: &quot;react-scripts build&quot;,</a></code></pre></div>
+<p>The <code>predeploy</code> script will run automatically before <code>deploy</code> is run.</p>
+<p>If you are deploying to a GitHub user page instead of a project page you’ll need to make one additional modification:</p>
+<ol type="1">
+<li>Tweak your <code>package.json</code> scripts to push deployments to <strong>master</strong>:</li>
+</ol>
+<div class="sourceCode" id="cb22"><pre class="sourceCode diff"><code class="sourceCode diff"><a class="sourceLine" id="cb22-1" title="1">  &quot;scripts&quot;: {</a>
+<a class="sourceLine" id="cb22-2" title="2">    &quot;predeploy&quot;: &quot;npm run build&quot;,</a>
+<a class="sourceLine" id="cb22-3" title="3"><span class="st">-   &quot;deploy&quot;: &quot;gh-pages -d build&quot;,</span></a>
+<a class="sourceLine" id="cb22-4" title="4"><span class="va">+   &quot;deploy&quot;: &quot;gh-pages -b master -d build&quot;,</span></a></code></pre></div>
+<h3 id="step-3-deploy-the-site-by-running-npm-run-deploy">Step 3: Deploy the site by running <code>npm run deploy</code></h3>
+<p>Then run:</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb23-1" title="1"><span class="ex">npm</span> run deploy</a></code></pre></div>
+<h3 id="step-4-for-a-project-page-ensure-your-projects-settings-use-gh-pages">Step 4: For a project page, ensure your project’s settings use <code>gh-pages</code></h3>
+<p>Finally, make sure <strong>GitHub Pages</strong> option in your GitHub project settings is set to use the <code>gh-pages</code> branch:</p>
+<p><img src="https://i.imgur.com/HUjEr9l.png" width="500" alt="gh-pages branch setting" /></p>
+<h3 id="step-5-optionally-configure-the-domain">Step 5: Optionally, configure the domain</h3>
+<p>You can configure a custom domain with GitHub Pages by adding a <code>CNAME</code> file to the <code>public/</code> folder.</p>
+<p>Your CNAME file should look like this:</p>
+<pre><code>mywebsite.com</code></pre>
+<h3 id="notes-on-client-side-routing">Notes on client-side routing</h3>
+<p>GitHub Pages doesn’t support routers that use the HTML5 <code>pushState</code> history API under the hood (for example, React Router using <code>browserHistory</code>). This is because when there is a fresh page load for a url like <code>http://user.github.io/todomvc/todos/42</code>, where <code>/todos/42</code> is a frontend route, the GitHub Pages server returns 404 because it knows nothing of <code>/todos/42</code>. If you want to add a router to a project hosted on GitHub Pages, here are a couple of solutions:</p>
+<ul>
+<li>You could switch from using HTML5 history API to routing with hashes. If you use React Router, you can switch to <code>hashHistory</code> for this effect, but the URL will be longer and more verbose (for example, <code>http://user.github.io/todomvc/#/todos/42?_k=yknaj</code>). <a href="https://reacttraining.com/react-router/web/api/Router">Read more</a> about different history implementations in React Router.</li>
+<li>Alternatively, you can use a trick to teach GitHub Pages to handle 404s by redirecting to your <code>index.html</code> page with a custom redirect parameter. You would need to add a <code>404.html</code> file with the redirection code to the <code>build</code> folder before deploying your project, and you’ll need to add code handling the redirect parameter to <code>index.html</code>. You can find a detailed explanation of this technique <a href="https://github.com/rafrex/spa-github-pages">in this guide</a>.</li>
+</ul>
+<h3 id="troubleshooting">Troubleshooting</h3>
+<h4 id="devtty-no-such-a-device-or-address">“/dev/tty: No such a device or address”</h4>
+<p>If, when deploying, you get <code>/dev/tty: No such a device or address</code> or a similar error, try the following:</p>
+<ol type="1">
+<li>Create a new <a href="https://github.com/settings/tokens">Personal Access Token</a></li>
+<li><code>git remote set-url origin https://&lt;user&gt;:&lt;token&gt;@github.com/&lt;user&gt;/&lt;repo&gt;</code> .</li>
+<li>Try <code>npm run deploy</code> again</li>
+</ol>
+<h4 id="cannot-read-property-email-of-null">“Cannot read property ‘email’ of null”</h4>
+<p>If, when deploying, you get <code>Cannot read property 'email' of null</code>, try the following:</p>
+<ol type="1">
+<li><code>git config --global user.name '&lt;your_name&gt;'</code></li>
+<li><code>git config --global user.email '&lt;your_email&gt;'</code></li>
+<li>Try <code>npm run deploy</code> again</li>
+</ol>
+<h2 id="heroku"><a href="https://www.heroku.com/">Heroku</a></h2>
+<p>Use the <a href="https://github.com/mars/create-react-app-buildpack">Heroku Buildpack for Create React App</a>.</p>
+<p>You can find instructions in <a href="https://blog.heroku.com/deploying-react-with-zero-configuration">Deploying React with Zero Configuration</a>.</p>
+<h3 id="resolving-heroku-deployment-errors">Resolving Heroku Deployment Errors</h3>
+<p>Sometimes <code>npm run build</code> works locally but fails during deploy via Heroku. Following are the most common cases.</p>
+<h4 id="module-not-found-error-cannot-resolve-file-or-directory">“Module not found: Error: Cannot resolve ‘file’ or ‘directory’”</h4>
+<p>If you get something like this:</p>
+<pre><code>remote: Failed to create a production build. Reason:
+remote: Module not found: Error: Cannot resolve &#39;file&#39; or &#39;directory&#39;
+MyDirectory in /tmp/build_1234/src</code></pre>
+<p>It means you need to ensure that the lettercase of the file or directory you <code>import</code> matches the one you see on your filesystem or on GitHub.</p>
+<p>This is important because Linux (the operating system used by Heroku) is case sensitive. So <code>MyDirectory</code> and <code>mydirectory</code> are two distinct directories and thus, even though the project builds locally, the difference in case breaks the <code>import</code> statements on Heroku remotes.</p>
+<h4 id="could-not-find-a-required-file.">“Could not find a required file.”</h4>
+<p>If you exclude or ignore necessary files from the package you will see a error similar this one:</p>
+<pre><code>remote: Could not find a required file.
+remote:   Name: `index.html`
+remote:   Searched in: /tmp/build_a2875fc163b209225122d68916f1d4df/public
+remote:
+remote: npm ERR! Linux 3.13.0-105-generic
+remote: npm ERR! argv &quot;/tmp/build_a2875fc163b209225122d68916f1d4df/.heroku/node/bin/node&quot; &quot;/tmp/build_a2875fc163b209225122d68916f1d4df/.heroku/node/bin/npm&quot; &quot;run&quot; &quot;build&quot;</code></pre>
+<p>In this case, ensure that the file is there with the proper lettercase and that’s not ignored on your local <code>.gitignore</code> or <code>~/.gitignore_global</code>.</p>
+<h2 id="netlify"><a href="https://www.netlify.com/">Netlify</a></h2>
+<p><strong>To do a manual deploy to Netlify’s CDN:</strong></p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb27-1" title="1"><span class="ex">npm</span> install netlify-cli -g</a>
+<a class="sourceLine" id="cb27-2" title="2"><span class="ex">netlify</span> deploy</a></code></pre></div>
+<p>Choose <code>build</code> as the path to deploy.</p>
+<p><strong>To setup continuous delivery:</strong></p>
+<p>With this setup Netlify will build and deploy when you push to git or open a pull request:</p>
+<ol type="1">
+<li><a href="https://app.netlify.com/signup">Start a new netlify project</a></li>
+<li>Pick your Git hosting service and select your repository</li>
+<li>Click <code>Build your site</code></li>
+</ol>
+<p><strong>Support for client-side routing:</strong></p>
+<p>To support <code>pushState</code>, make sure to create a <code>public/_redirects</code> file with the following rewrite rules:</p>
+<pre><code>/*  /index.html  200</code></pre>
+<p>When you build the project, Create React App will place the <code>public</code> folder contents into the build output.</p>
+<h2 id="vercel"><a href="https://vercel.com">Vercel</a></h2>
+<p><a href="https://vercel.com/home">Vercel</a> is a cloud platform that enables developers to host Jamstack websites and web services that deploy instantly, scale automatically, and requires no supervision, all with zero configuration. They provide a global edge network, SSL encryption, asset compression, cache invalidation, and more.</p>
+<h3 id="step-1-deploying-your-react-project-to-vercel">Step 1: Deploying your React project to Vercel</h3>
+<p>To deploy your React project with a <a href="https://vercel.com/docs/git-integrations">Vercel for Git Integration</a>, make sure it has been pushed to a Git repository.</p>
+<p>Import the project into Vercel using the <a href="https://vercel.com/import/git">Import Flow</a>. During the import, you will find all relevant <a href="https://vercel.com/docs/build-step#build-&amp;-development-settings">options</a> preconfigured for you with the ability to change as needed.</p>
+<p>After your project has been imported, all subsequent pushes to branches will generate <a href="https://vercel.com/docs/platform/deployments#preview">Preview Deployments</a>, and all changes made to the <a href="https://vercel.com/docs/git-integrations#production-branch">Production Branch</a> (commonly “master” or “main”) will result in a <a href="https://vercel.com/docs/platform/deployments#production">Production Deployment</a>.</p>
+<p>Once deployed, you will get a URL to see your app live, such as the following: https://create-react-app-example.vercel.app/.</p>
+<h3 id="step-2-optional-using-a-custom-domain">Step 2 (optional): Using a Custom Domain</h3>
+<p>If you want to use a Custom Domain with your Vercel deployment, you can <strong>Add</strong> or <strong>Transfer in</strong> your domain via your Vercel <a href="https://vercel.com/dashboard/domains">account Domain settings.</a></p>
+<p>To add your domain to your project, navigate to your <a href="https://vercel.com/docs/platform/projects">Project</a> from the Vercel Dashboard. Once you have selected your project, click on the “Settings” tab, then select the <strong>Domains</strong> menu item. From your projects <strong>Domain</strong> page, enter the domain you wish to add to your project.</p>
+<p>Once the domain as been added, you will be presented with different methods for configuring it.</p>
+<h3 id="deploying-a-fresh-react-project">Deploying a fresh React project</h3>
+<p>You can deploy a fresh React project, with a Git repository set up for you, with the following Deploy Button:</p>
+<p><a href="https://vercel.com/import/git?s=https%3A%2F%2Fgithub.com%2Fvercel%2Fvercel%2Ftree%2Fmaster%2Fexamples%2Fcreate-react-app"><img src="https://vercel.com/button" alt="Deploy with Vercel" /></a></p>
+<h3 id="vercel-references">Vercel References:</h3>
+<ul>
+<li><a href="https://github.com/vercel/vercel/tree/master/examples/create-react-app">Example Source</a></li>
+<li><a href="https://vercel.com/guides/deploying-react-with-vercel-cra">Official Vercel Guide</a></li>
+<li><a href="https://vercel.com/docs">Vercel Deployment Docs</a></li>
+<li><a href="https://vercel.com/docs/custom-domains">Vercel Custom Domain Docs</a></li>
+</ul>
+<h2 id="render"><a href="https://render.com">Render</a></h2>
+<p>Render offers free <a href="https://render.com/docs/static-sites">static site</a> hosting with fully managed SSL, a global CDN and continuous auto deploys from GitHub.</p>
+<p>Deploy your app in only a few minutes by following the <a href="https://render.com/docs/deploy-create-react-app">Create React App deployment guide</a>.</p>
+<p>Use invite code <code>cra</code> to sign up or use <a href="https://render.com/i/cra">this link</a>.</p>
+<h2 id="s3-and-cloudfront"><a href="https://aws.amazon.com/s3">S3</a> and <a href="https://aws.amazon.com/cloudfront/">CloudFront</a></h2>
+<p>See this <a href="https://medium.com/@omgwtfmarc/deploying-create-react-app-to-s3-or-cloudfront-48dae4ce0af">blog post</a> on how to deploy your React app to Amazon Web Services S3 and CloudFront. If you are looking to add a custom domain, HTTPS and continuous deployment see this <a href="https://medium.com/dailyjs/a-guide-to-deploying-your-react-app-with-aws-s3-including-https-a-custom-domain-a-cdn-and-58245251f081">blog post</a>.</p>
+<h2 id="surge"><a href="https://surge.sh/">Surge</a></h2>
+<p>Install the Surge CLI if you haven’t already by running <code>npm install -g surge</code>. Run the <code>surge</code> command and log in you or create a new account.</p>
+<p>When asked about the project path, make sure to specify the <code>build</code> folder, for example:</p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb29-1" title="1">       <span class="ex">project</span> path: /path/to/project/build</a></code></pre></div>
+<p>Note that in order to support routers that use HTML5 <code>pushState</code> API, you may want to rename the <code>index.html</code> in your build folder to <code>200.html</code> before deploying to Surge. This <a href="https://surge.sh/help/adding-a-200-page-for-client-side-routing">ensures that every URL falls back to that file</a>.</p>
+<h2 id="publishing-components-to-npm">Publishing Components To npm</h2>
+<p>Create React App doesn’t provide any built-in functionality to publish a component to npm. If you’re ready to extract a component from your project so other people can use it, we recommend moving it to a separate directory outside of your project and then using a tool like <a href="https://github.com/insin/nwb#react-components-and-libraries">nwb</a> to prepare it for publishing.</p>
+</body>
+</html>

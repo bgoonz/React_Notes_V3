@@ -1,0 +1,958 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>react-cheat-sheet</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<h1 id="react-cheat-sheet">React Cheat Sheet</h1>
+<h2 id="react.js-cheatsheet">React.js cheatsheet</h2>
+<blockquote>
+<p>React.Component · render() · componentDidMount() · props/state · dangerouslySetInnerHTML · React is a JavaScript library for building user interfaces. This guide targets React v15 to v16.</p>
+</blockquote>
+<p><a href="https://reactjs.org/">React</a> is a JavaScript library for building user interfaces. This guide targets React v15 to v16.</p>
+<h2 id="react-cheat-sheet-1">React Cheat Sheet</h2>
+<h3 id="render">render</h3>
+<pre class="text"><code>render() {
+  return &lt;div /&gt;;
+}</code></pre>
+<h3 id="constructor">constructor</h3>
+<pre class="text"><code>    constructor(props) {
+      super(props);
+      this.state = {
+        list: props.initialList
+      };
+    }
+    
+    // where props aren&#39;t used in constructor
+    
+    constructor() {
+      super();
+      this.state = {
+        list: []
+      };
+    }</code></pre>
+<h3 id="componentwillmount">componentWillMount</h3>
+<pre class="text"><code>    componentWillMount() {
+      // invoked once.
+      // fires before initial &#39;render&#39;
+    }</code></pre>
+<h3 id="componentdidmount">componentDidMount</h3>
+<pre class="text"><code>    componentDidMount() {
+      // good for AJAX: fetch, ajax, or subscriptions.
+    
+      // invoked once (client-side only).
+      // fires before initial &#39;render&#39;
+    }</code></pre>
+<h3 id="componentwillreceiveprops">componentWillReceiveProps</h3>
+<pre class="text"><code>    componentWillReceiveProps(nextProps) {
+      // invoked every time component recieves new props.
+      // does not before initial &#39;render&#39;
+    }</code></pre>
+<h3 id="shouldcomponentupdate">shouldComponentUpdate</h3>
+<pre class="text"><code>    shouldComponentUpdate(nextProps, nextState) {
+      // invoked before every update (new props or state).
+      // does not fire before initial &#39;render&#39;.
+    }</code></pre>
+<h3 id="componentwillupdate">componentWillUpdate</h3>
+<pre class="text"><code>    componentWillUpdate(nextProps, nextState) {
+      // invoked immediately before update (new props or state).
+      // does not fire before initial &#39;render&#39;.
+    
+      // (see componentWillReceiveProps if you need to call setState)
+    }</code></pre>
+<p><strong>✖ this.setState</strong></p>
+<h3 id="componentdidupdate">componentDidUpdate</h3>
+<pre class="text"><code>    componentDidUpdate(prevProps, prevState) {
+      // invoked immediately after DOM updates
+      // does not fire after initial &#39;render&#39;
+    }</code></pre>
+<h3 id="componentwillunmount">componentWillUnmount</h3>
+<pre class="text"><code>    componentWillUnmount() {
+      // invoked immediately before a component is unmounted.
+    }</code></pre>
+<h3 id="setstate-function">setState (function)</h3>
+<pre class="text"><code>    // good for state transitions
+    
+    this.setState((prevState, props) =&gt; {
+      return {count: prevState.count + props.step};
+    });</code></pre>
+<h3 id="setstate-object">setState (object)</h3>
+<p>```text // good for static values</p>
+<pre><code>this.setState({mykey: &#39;my new value&#39;});
+
+```</code></pre>
+<h2 id="setstate-optional-callback">setState (optional callback)</h2>
+<div class="sourceCode" id="cb12"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb12-1" title="1">    <span class="co">// fires after setState</span></a>
+<a class="sourceLine" id="cb12-2" title="2">    <span class="co">// prefer componentDidUpdate</span></a>
+<a class="sourceLine" id="cb12-3" title="3">    </a>
+<a class="sourceLine" id="cb12-4" title="4">    <span class="kw">this</span>.<span class="at">setState</span>(</a>
+<a class="sourceLine" id="cb12-5" title="5">      (prevState<span class="op">,</span> props) <span class="kw">=&gt;</span> (<span class="op">{</span> <span class="dt">count</span><span class="op">:</span> <span class="va">prevState</span>.<span class="at">count</span> <span class="op">+</span> <span class="va">props</span>.<span class="at">step</span> <span class="op">}</span>)<span class="op">,</span></a>
+<a class="sourceLine" id="cb12-6" title="6">      () <span class="kw">=&gt;</span> <span class="va">console</span>.<span class="at">log</span>(<span class="kw">this</span>.<span class="va">state</span>.<span class="at">count</span>)</a>
+<a class="sourceLine" id="cb12-7" title="7">    )<span class="op">;</span></a></code></pre></div>
+<h3 id="forceupdate">forceUpdate</h3>
+<pre class="text"><code>    // forces a re-render; AVOID if possible
+    
+    this.forceUpdate();</code></pre>
+<h3 id="displayname">displayName</h3>
+<p>```text displayName: “MyComponent”</p>
+<pre><code>```</code></pre>
+<h2 id="defaultprops">defaultProps</h2>
+<div class="sourceCode" id="cb15"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb15-1" title="1">    <span class="kw">class</span> Greeting <span class="kw">extends</span> <span class="va">React</span>.<span class="at">Component</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb15-2" title="2">          <span class="at">render</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb15-3" title="3">            <span class="cf">return</span> <span class="op">&lt;</span>h1<span class="op">&gt;</span>Hi <span class="op">{</span><span class="kw">this</span>.<span class="va">props</span>.<span class="at">name</span><span class="op">}</span>&lt;/h1<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb15-4" title="4">          <span class="op">}</span></a>
+<a class="sourceLine" id="cb15-5" title="5">        <span class="op">}</span></a>
+<a class="sourceLine" id="cb15-6" title="6">        </a>
+<a class="sourceLine" id="cb15-7" title="7">        <span class="va">CustomButton</span>.<span class="at">defaultProps</span> <span class="op">=</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb15-8" title="8">          <span class="dt">name</span><span class="op">:</span> <span class="st">&#39;guest&#39;</span></a>
+<a class="sourceLine" id="cb15-9" title="9">        <span class="op">};</span></a></code></pre></div>
+<h3 id="children.map">Children.map</h3>
+<pre class="text"><code>    React.Children.map(this.props.children, (child, i) =&gt; {
+        return child;
+    })</code></pre>
+<h3 id="children.foreach">Children.forEach</h3>
+<pre class="text"><code>    React.Children.forEach(this.props.children, (child, i) =&gt; {
+      console.log(child + &#39; at index: &#39; + i);
+    })</code></pre>
+<h3 id="children.count">Children.count</h3>
+<pre class="text"><code>    React.Children.count(this.props.children);</code></pre>
+<h3 id="children.only">Children.only</h3>
+<pre class="text"><code>    React.Children.only(this.props.children);</code></pre>
+<h3 id="children.toarray">Children.toArray</h3>
+<pre class="text"><code>    React.Children.toArray(this.props.children)</code></pre>
+<h3 id="context-example">Context (example)</h3>
+<pre class="text"><code>    // requires &#39;prop-types&#39; library
+    
+    import { string } from &quot;prop-types&quot;;
+    
+    class Cowboy extends React.Component {
+      childContextTypes: {
+        salutation: string
+      }
+    
+      getChildContext() {
+        return { salutation: &quot;Howdy&quot; };
+      }
+    
+      render() {
+        return React.Children.only(this.props.children);
+      }
+    }
+    
+    const Greeting = (props, context) =&gt;
+      &lt;div&gt;{context.salutation} {props.name}.&lt;/div&gt;
+    
+    Greeting.contextTypes = {
+      salutation: PropTypes.string
+    }
+    
+    // &lt;Greeting name=&quot;Michael&quot; /&gt;
+    // =&gt; Michael.
+    
+    // &lt;Cowboy&gt;&lt;Greeting name=&quot;Michael&quot; /&gt;&lt;/Cowboy&gt;
+    // =&gt; Howdy Michael.</code></pre>
+<h3 id="contexttypes">contextTypes</h3>
+<pre class="text"><code>    // add to the context-aware component
+    // requires &#39;prop-types&#39; library
+    
+    contextTypes: {
+      color: PropTypes.string
+    },</code></pre>
+<h3 id="childcontexttypes">childContextTypes</h3>
+<pre class="text"><code>    // add to the context provider
+    // requires &#39;prop-types&#39; library
+    
+    childContextTypes: {
+      color: PropTypes.string
+    },</code></pre>
+<h3 id="getchildcontext">getChildContext</h3>
+<pre class="text"><code>    // add to the context provider
+    
+    getChildContext() {
+      return {color: &quot;purple&quot;};
+    }</code></pre>
+<h3 id="components"><a href="https://bryanguner.medium.com/media/a554d6ce459e6a031eb45921c3c5e6fd#components">#</a>Components</h3>
+<h4 id="components-1">Components</h4>
+<pre class="text"><code>    import React from &#39;react&#39;
+    import ReactDOM from &#39;react-dom&#39;
+    
+
+    class Hello extends React.Component {
+      render () {
+        return &lt;div className=&#39;message-box&#39;&gt;
+          Hello {this.props.name}
+        &lt;/div&gt;
+      }
+    }
+    
+
+    const el = document.body
+    ReactDOM.render(&lt;Hello name=&#39;John&#39; /&gt;, el)</code></pre>
+<p>Use the <a href="https://jsfiddle.net/reactjs/69z2wepo/">React.js jsfiddle</a> to start hacking. (or the unofficial <a href="http://jsbin.com/yafixat/edit?js,output">jsbin</a>)</p>
+<h4 id="import-multiple-exports">Import multiple exports</h4>
+<pre class="text"><code>    import React, {Component} from &#39;react&#39;
+    import ReactDOM from &#39;react-dom&#39;
+    
+
+    class Hello extends Component {
+      ...
+    }</code></pre>
+<h4 id="properties">Properties</h4>
+<pre class="text"><code>    &lt;Video fullscreen={true} autoplay={false} /&gt;
+    
+
+    render () {
+      this.props.fullscreen
+      const { fullscreen, autoplay } = this.props
+      ···
+    }</code></pre>
+<p>Use <code>this.props</code> to access properties passed to the component.</p>
+<p>See: <a href="https://reactjs.org/docs/tutorial.html#using-props">Properties</a></p>
+<h4 id="states">States</h4>
+<pre class="text"><code>    constructor(props) {
+      super(props)
+      this.state = { username: undefined }
+    }
+    
+
+    this.setState({ username: &#39;rstacruz&#39; })
+    
+
+    render () {
+      this.state.username
+      const { username } = this.state
+      ···
+    }</code></pre>
+<p>Use states (<code>this.state</code>) to manage dynamic data.</p>
+<p>With <a href="https://babeljs.io/">Babel</a> you can use <a href="https://github.com/tc39/proposal-class-fields">proposal-class-fields</a> and get rid of constructor</p>
+<pre class="text"><code>    class Hello extends Component {
+      state = { username: undefined };
+      ...
+    }</code></pre>
+<p>See: <a href="https://reactjs.org/docs/tutorial.html#reactive-state">States</a></p>
+<h4 id="nesting">Nesting</h4>
+<pre class="text"><code>    class Info extends Component {
+      render () {
+        const { avatar, username } = this.props
+    
+        return &lt;div&gt;
+          &lt;UserAvatar src={avatar} /&gt;
+          &lt;UserProfile username={username} /&gt;
+        &lt;/div&gt;
+      }
+    }</code></pre>
+<p>As of React v16.2.0, fragments can be used to return multiple children without adding extra wrapping nodes to the DOM.</p>
+<pre class="text"><code>    import React, {
+      Component,
+      Fragment
+    } from &#39;react&#39;
+    
+    class Info extends Component {
+      render () {
+        const { avatar, username } = this.props
+    
+        return (
+          &lt;Fragment&gt;
+            &lt;UserAvatar src={avatar} /&gt;
+            &lt;UserProfile username={username} /&gt;
+          &lt;/Fragment&gt;
+        )
+      }
+    }</code></pre>
+<p>Nest components to separate concerns.</p>
+<p>See: <a href="https://reactjs.org/docs/components-and-props.html#composing-components">Composing Components</a></p>
+<h4 id="children">Children</h4>
+<pre class="text"><code>    &lt;AlertBox&gt;
+      &lt;h1&gt;You have pending notifications&lt;/h1&gt;
+    &lt;/AlertBox&gt;
+    
+
+    class AlertBox extends Component {
+      render () {
+        return &lt;div className=&#39;alert-box&#39;&gt;
+          {this.props.children}
+        &lt;/div&gt;
+      }
+    }</code></pre>
+<p>Children are passed as the <code>children</code> property.</p>
+<h3 id="defaults"><a href="https://bryanguner.medium.com/media/a554d6ce459e6a031eb45921c3c5e6fd#defaults">#</a>Defaults</h3>
+<h4 id="setting-default-props">Setting default props</h4>
+<pre class="text"><code>    Hello.defaultProps = {
+      color: &#39;blue&#39;
+    }</code></pre>
+<p>See: <a href="https://reactjs.org/docs/react-component.html#defaultprops">defaultProps</a></p>
+<h4 id="setting-default-state">Setting default state</h4>
+<pre class="text"><code>    class Hello extends Component {
+      constructor (props) {
+        super(props)
+        this.state = { visible: true }
+      }
+    }</code></pre>
+<p>Set the default state in the <code>constructor()</code>.</p>
+<p>And without constructor using <a href="https://babeljs.io/">Babel</a> with <a href="https://github.com/tc39/proposal-class-fields">proposal-class-fields</a>.</p>
+<pre class="text"><code>    class Hello extends Component {
+      state = { visible: true }
+    }</code></pre>
+<p>See: <a href="https://reactjs.org/docs/react-without-es6.html#setting-the-initial-state">Setting the default state</a></p>
+<h3 id="other-components"><a href="https://bryanguner.medium.com/media/a554d6ce459e6a031eb45921c3c5e6fd#other-components">#</a>Other components</h3>
+<h4 id="functional-components">Functional components</h4>
+<pre class="text"><code>    function MyComponent ({ name }) {
+      return &lt;div className=&#39;message-box&#39;&gt;
+        Hello {name}
+      &lt;/div&gt;
+    }</code></pre>
+<p>Functional components have no state. Also, their <code>props</code> are passed as the first parameter to a function.</p>
+<p>See: <a href="https://reactjs.org/docs/components-and-props.html#functional-and-class-components">Function and Class Components</a></p>
+<h4 id="pure-components">Pure components</h4>
+<pre class="text"><code>    import React, {PureComponent} from &#39;react&#39;
+    
+    class MessageBox extends PureComponent {
+      ···
+    }</code></pre>
+<p>Performance-optimized version of <code>React.Component</code>. Doesn’t rerender if props/state hasn’t changed.</p>
+<p>See: <a href="https://reactjs.org/docs/react-api.html#react.purecomponent">Pure components</a></p>
+<h4 id="component-api">Component API</h4>
+<pre class="text"><code>    this.forceUpdate()
+    
+
+    this.setState({ ... })
+    this.setState(state =&gt; { ... })
+    
+
+    this.state
+    this.props</code></pre>
+<p>These methods and properties are available for <code>Component</code> instances.</p>
+<p>See: <a href="https://facebook.github.io/react/docs/component-api.html">Component API</a></p>
+<h3 id="lifecycle"><a href="https://bryanguner.medium.com/media/a554d6ce459e6a031eb45921c3c5e6fd#lifecycle">#</a>Lifecycle</h3>
+<h4 id="mounting">Mounting</h4>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Method</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>constructor</code> <em>(props)</em></td>
+<td style="text-align: left;">Before rendering <a href="https://reactjs.org/docs/react-component.html#constructor">#</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>componentWillMount()</code></td>
+<td style="text-align: left;"><em>Don’t use this</em> <a href="https://reactjs.org/docs/react-component.html#componentwillmount">#</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>render()</code></td>
+<td style="text-align: left;">Render <a href="https://reactjs.org/docs/react-component.html#render">#</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>componentDidMount()</code></td>
+<td style="text-align: left;">After rendering (DOM available) <a href="https://reactjs.org/docs/react-component.html#componentdidmount">#</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>componentWillUnmount()</code></td>
+<td style="text-align: left;">Before DOM removal <a href="https://reactjs.org/docs/react-component.html#componentwillunmount">#</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>componentDidCatch()</code></td>
+<td style="text-align: left;">Catch errors (16+) <a href="https://reactjs.org/blog/2017/07/26/error-handling-in-react-16.html">#</a></td>
+</tr>
+</tbody>
+</table>
+<p>Set initial the state on <code>constructor()</code>. Add DOM event handlers, timers (etc) on <code>componentDidMount()</code>, then remove them on <code>componentWillUnmount()</code>.</p>
+<h4 id="updating">Updating</h4>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Method</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>componentDidUpdate</code> <em>(prevProps, prevState, snapshot)</em></td>
+<td style="text-align: left;">Use <code>setState()</code> here, but remember to compare props</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>shouldComponentUpdate</code> <em>(newProps, newState)</em></td>
+<td style="text-align: left;">Skips <code>render()</code> if returns false</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>render()</code></td>
+<td style="text-align: left;">Render</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>componentDidUpdate</code> <em>(prevProps, prevState)</em></td>
+<td style="text-align: left;">Operate on the DOM here</td>
+</tr>
+</tbody>
+</table>
+<p>Called when parents change properties and <code>.setState()</code>. These are not called for initial renders.</p>
+<p>See: <a href="https://facebook.github.io/react/docs/component-specs.html#updating-componentwillreceiveprops">Component specs</a></p>
+<h3 id="hooks-new"><a href="https://bryanguner.medium.com/media/a554d6ce459e6a031eb45921c3c5e6fd#hooks-new">#</a>Hooks (New)</h3>
+<h4 id="state-hook">State Hook</h4>
+<pre class="text"><code>    import React, { useState } from &#39;react&#39;;
+    
+    function Example() {
+      
+      const [count, setCount] = useState(0);
+    
+      return (
+        &lt;div&gt;
+          &lt;p&gt;You clicked {count} times&lt;/p&gt;
+          &lt;button onClick={() =&gt; setCount(count + 1)}&gt;
+            Click me
+          &lt;/button&gt;
+        &lt;/div&gt;
+      );
+    }</code></pre>
+<p>Hooks are a new addition in React 16.8.</p>
+<p>See: <a href="https://reactjs.org/docs/hooks-overview.html">Hooks at a Glance</a></p>
+<h4 id="declaring-multiple-state-variables">Declaring multiple state variables</h4>
+<pre class="text"><code>    function ExampleWithManyStates() {
+      
+      const [age, setAge] = useState(42);
+      const [fruit, setFruit] = useState(&#39;banana&#39;);
+      const [todos, setTodos] = useState([{ text: &#39;Learn Hooks&#39; }]);
+      
+    }</code></pre>
+<h4 id="effect-hook">Effect hook</h4>
+<pre class="text"><code>    import React, { useState, useEffect } from &#39;react&#39;;
+    
+    function Example() {
+      const [count, setCount] = useState(0);
+    
+      
+      useEffect(() =&gt; {
+        
+        document.title = `You clicked ${count} times`;
+      }, [count]);
+    
+      return (
+        &lt;div&gt;
+          &lt;p&gt;You clicked {count} times&lt;/p&gt;
+          &lt;button onClick={() =&gt; setCount(count + 1)}&gt;
+            Click me
+          &lt;/button&gt;
+        &lt;/div&gt;
+      );
+    }</code></pre>
+<p>If you’re familiar with React class lifecycle methods, you can think of <code>useEffect</code> Hook as <code>componentDidMount</code>, <code>componentDidUpdate</code>, and <code>componentWillUnmount</code> combined.</p>
+<p>By default, React runs the effects after every render — including the first render.</p>
+<h4 id="building-your-own-hooks">Building your own hooks</h4>
+<p><strong>Define FriendStatus</strong></p>
+<pre class="text"><code>    import React, { useState, useEffect } from &#39;react&#39;;
+    
+    function FriendStatus(props) {
+      const [isOnline, setIsOnline] = useState(null);
+    
+      useEffect(() =&gt; {
+        function handleStatusChange(status) {
+          setIsOnline(status.isOnline);
+        }
+    
+        ChatAPI.subscribeToFriendStatus(props.friend.id, handleStatusChange);
+        return () =&gt; {
+          ChatAPI.unsubscribeFromFriendStatus(props.friend.id, handleStatusChange);
+        };
+      }, [props.friend.id]);
+    
+      if (isOnline === null) {
+        return &#39;Loading...&#39;;
+      }
+      return isOnline ? &#39;Online&#39; : &#39;Offline&#39;;
+    }</code></pre>
+<p>Effects may also optionally specify how to “clean up” after them by returning a function.</p>
+<p><strong>Use FriendStatus</strong></p>
+<pre class="text"><code>    function FriendStatus(props) {
+      const isOnline = useFriendStatus(props.friend.id);
+    
+      if (isOnline === null) {
+        return &#39;Loading...&#39;;
+      }
+      return isOnline ? &#39;Online&#39; : &#39;Offline&#39;;
+    }</code></pre>
+<p>See: <a href="https://reactjs.org/docs/hooks-custom.html">Building Your Own Hooks</a></p>
+<h4 id="hooks-api-reference">Hooks API Reference</h4>
+<p>Also see: <a href="https://reactjs.org/docs/hooks-faq.html">Hooks FAQ</a></p>
+<p><strong>Basic Hooks</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Hook</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>useState</code><em>(initialState)</em></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>useEffect</code><em>(() =&gt; { … })</em></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>useContext</code><em>(MyContext)</em></td>
+<td style="text-align: left;">value returned from <code>React.createContext</code></td>
+</tr>
+</tbody>
+</table>
+<p>Full details: <a href="https://reactjs.org/docs/hooks-reference.html#basic-hooks">Basic Hooks</a></p>
+<p><strong>Additional Hooks</strong></p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Hook</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>useReducer</code><em>(reducer, initialArg, init)</em></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>useCallback</code><em>(() =&gt; { … })</em></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>useMemo</code><em>(() =&gt; { … })</em></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>useRef</code><em>(initialValue)</em></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>useImperativeHandle</code><em>(ref, () =&gt; { … })</em></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>useLayoutEffect</code></td>
+<td style="text-align: left;">identical to <code>useEffect</code>, but it fires synchronously after all DOM mutations</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>useDebugValue</code><em>(value)</em></td>
+<td style="text-align: left;">display a label for custom hooks in React DevTools</td>
+</tr>
+</tbody>
+</table>
+<p>Full details: <a href="https://reactjs.org/docs/hooks-reference.html#additional-hooks">Additional Hooks</a></p>
+<h3 id="dom-nodes"><a href="https://bryanguner.medium.com/media/a554d6ce459e6a031eb45921c3c5e6fd#dom-nodes">#</a>DOM nodes</h3>
+<h4 id="references">References</h4>
+<pre class="text"><code>    class MyComponent extends Component {
+      render () {
+        return &lt;div&gt;
+          &lt;input ref={el =&gt; this.input = el} /&gt;
+        &lt;/div&gt;
+      }
+    
+      componentDidMount () {
+        this.input.focus()
+      }
+    }</code></pre>
+<p>Allows access to DOM nodes.</p>
+<p>See: <a href="https://reactjs.org/docs/refs-and-the-dom.html">Refs and the DOM</a></p>
+<h4 id="dom-events">DOM Events</h4>
+<pre class="text"><code>    class MyComponent extends Component {
+      render () {
+        &lt;input type=&quot;text&quot;
+            value={this.state.value}
+            onChange={event =&gt; this.onChange(event)} /&gt;
+      }
+    
+      onChange (event) {
+        this.setState({ value: event.target.value })
+      }
+    }</code></pre>
+<p>Pass functions to attributes like <code>onChange</code>.</p>
+<p>See: <a href="https://reactjs.org/docs/events.html">Events</a></p>
+<h3 id="other-features"><a href="https://bryanguner.medium.com/media/a554d6ce459e6a031eb45921c3c5e6fd#other-features">#</a>Other features</h3>
+<h4 id="transferring-props">Transferring props</h4>
+<pre class="text"><code>    &lt;VideoPlayer src=&quot;video.mp4&quot; /&gt;
+    
+
+    class VideoPlayer extends Component {
+      render () {
+        return &lt;VideoEmbed {...this.props} /&gt;
+      }
+    }</code></pre>
+<p>Propagates <code>src="..."</code> down to the sub-component.</p>
+<p>See <a href="https://facebook.github.io/react/docs/transferring-props.html">Transferring props</a></p>
+<h4 id="top-level-api">Top-level API</h4>
+<pre class="text"><code>    React.createClass({ ... })
+    React.isValidElement(c)
+    
+
+    ReactDOM.render(&lt;Component /&gt;, domnode, [callback])
+    ReactDOM.unmountComponentAtNode(domnode)
+    
+
+    ReactDOMServer.renderToString(&lt;Component /&gt;)
+    ReactDOMServer.renderToStaticMarkup(&lt;Component /&gt;)</code></pre>
+<p>There are more, but these are most common.</p>
+<p>See: <a href="https://reactjs.org/docs/react-api.html">React top-level API</a></p>
+<h3 id="jsx-patterns"><a href="https://bryanguner.medium.com/media/a554d6ce459e6a031eb45921c3c5e6fd#jsx-patterns">#</a>JSX patterns</h3>
+<h4 id="style-shorthand">Style shorthand</h4>
+<pre class="text"><code>    const style = { height: 10 }
+    return &lt;div style={style}&gt;&lt;/div&gt;
+    
+
+    return &lt;div style={{ margin: 0, padding: 0 }}&gt;&lt;/div&gt;</code></pre>
+<p>See: <a href="https://reactjs.org/tips/inline-styles.html">Inline styles</a></p>
+<h4 id="inner-html">Inner HTML</h4>
+<pre class="text"><code>    function markdownify() { return &quot;&lt;p&gt;...&lt;/p&gt;&quot;; }
+    &lt;div dangerouslySetInnerHTML={{__html: markdownify()}} /&gt;</code></pre>
+<p>See: <a href="https://reactjs.org/tips/dangerously-set-inner-html.html">Dangerously set innerHTML</a></p>
+<h4 id="lists">Lists</h4>
+<pre class="text"><code>    class TodoList extends Component {
+      render () {
+        const { items } = this.props
+    
+        return &lt;ul&gt;
+          {items.map(item =&gt;
+            &lt;TodoItem item={item} key={item.key} /&gt;)}
+        &lt;/ul&gt;
+      }
+    }</code></pre>
+<p>Always supply a <code>key</code> property.</p>
+<h4 id="conditionals">Conditionals</h4>
+<pre class="text"><code>    &lt;Fragment&gt;
+      {showMyComponent
+        ? &lt;MyComponent /&gt;
+        : &lt;OtherComponent /&gt;}
+    &lt;/Fragment&gt;</code></pre>
+<h4 id="short-circuit-evaluation">Short-circuit evaluation</h4>
+<pre class="text"><code>    &lt;Fragment&gt;
+      {showPopup &amp;&amp; &lt;Popup /&gt;}
+      ...
+    &lt;/Fragment&gt;</code></pre>
+<h3 id="new-features"><a href="https://bryanguner.medium.com/media/a554d6ce459e6a031eb45921c3c5e6fd#new-features">#</a>New features</h3>
+<h4 id="returning-multiple-elements">Returning multiple elements</h4>
+<p>You can return multiple elements as arrays or fragments.</p>
+<p><strong>Arrays</strong></p>
+<pre class="text"><code>    render () {
+      
+      return [
+        &lt;li key=&quot;A&quot;&gt;First item&lt;/li&gt;,
+        &lt;li key=&quot;B&quot;&gt;Second item&lt;/li&gt;
+      ]
+    }</code></pre>
+<p><strong>Fragments</strong></p>
+<pre class="text"><code>    render () {
+      
+      return (
+        &lt;Fragment&gt;
+          &lt;li&gt;First item&lt;/li&gt;
+          &lt;li&gt;Second item&lt;/li&gt;
+        &lt;/Fragment&gt;
+      )
+    }</code></pre>
+<p>See: <a href="https://reactjs.org/blog/2017/09/26/react-v16.0.html#new-render-return-types-fragments-and-strings">Fragments and strings</a></p>
+<h4 id="returning-strings">Returning strings</h4>
+<pre class="text"><code>    render() {
+      return &#39;Look ma, no spans!&#39;;
+    }</code></pre>
+<p>You can return just a string.</p>
+<p>See: <a href="https://reactjs.org/blog/2017/09/26/react-v16.0.html#new-render-return-types-fragments-and-strings">Fragments and strings</a></p>
+<h4 id="errors">Errors</h4>
+<pre class="text"><code>    class MyComponent extends Component {
+      ···
+      componentDidCatch (error, info) {
+        this.setState({ error })
+      }
+    }</code></pre>
+<p>Catch errors via <code>componentDidCatch</code>. (React 16+)</p>
+<p>See: <a href="https://reactjs.org/blog/2017/07/26/error-handling-in-react-16.html">Error handling in React 16</a></p>
+<h4 id="portals">Portals</h4>
+<pre class="text"><code>    render () {
+      return React.createPortal(
+        this.props.children,
+        document.getElementById(&#39;menu&#39;)
+      )
+    }</code></pre>
+<p>This renders <code>this.props.children</code> into any location in the DOM.</p>
+<p>See: <a href="https://reactjs.org/docs/portals.html">Portals</a></p>
+<h4 id="hydration">Hydration</h4>
+<pre class="text"><code>    const el = document.getElementById(&#39;app&#39;)
+    ReactDOM.hydrate(&lt;App /&gt;, el)</code></pre>
+<p>Use <code>ReactDOM.hydrate</code> instead of using <code>ReactDOM.render</code> if you’re rendering over the output of <a href="https://reactjs.org/docs/react-dom-server.html">ReactDOMServer</a>.</p>
+<p>See: <a href="https://reactjs.org/docs/react-dom.html#hydrate">Hydrate</a></p>
+<h3 id="property-validation"><a href="https://bryanguner.medium.com/media/a554d6ce459e6a031eb45921c3c5e6fd#property-validation">#</a>Property validation</h3>
+<h4 id="proptypes">PropTypes</h4>
+<pre class="text"><code>    import PropTypes from &#39;prop-types&#39;</code></pre>
+<p>See: <a href="https://reactjs.org/docs/typechecking-with-proptypes.html">Typechecking with PropTypes</a></p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Key</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>any</code></td>
+<td style="text-align: left;">Anything</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Basic</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Key</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>string</code></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>number</code></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>func</code></td>
+<td style="text-align: left;">Function</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>bool</code></td>
+<td style="text-align: left;">True or false</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Enum</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Key</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>oneOf</code><em>(any)</em></td>
+<td style="text-align: left;">Enum types</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>oneOfType</code><em>(type array)</em></td>
+<td style="text-align: left;">Union</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Array</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Key</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>array</code></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>arrayOf</code><em>(…)</em></td>
+<td style="text-align: left;"></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Object</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Key</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>object</code></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>objectOf</code><em>(…)</em></td>
+<td style="text-align: left;">Object with values of a certain type</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>instanceOf</code><em>(…)</em></td>
+<td style="text-align: left;">Instance of a class</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>shape</code><em>(…)</em></td>
+<td style="text-align: left;"></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Elements</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Key</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>element</code></td>
+<td style="text-align: left;">React element</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>node</code></td>
+<td style="text-align: left;">DOM node</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Required</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Key</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>(···).isRequired</code></td>
+<td style="text-align: left;">Required</td>
+</tr>
+</tbody>
+</table>
+<h4 id="basic-types">Basic types</h4>
+<pre class="text"><code>    MyComponent.propTypes = {
+      email:      PropTypes.string,
+      seats:      PropTypes.number,
+      callback:   PropTypes.func,
+      isClosed:   PropTypes.bool,
+      any:        PropTypes.any
+    }</code></pre>
+<h4 id="required-types">Required types</h4>
+<pre class="text"><code>    MyCo.propTypes = {
+      name:  PropTypes.string.isRequired
+    }</code></pre>
+<h4 id="elements">Elements</h4>
+<pre class="text"><code>    MyCo.propTypes = {
+      
+      element: PropTypes.element,
+    
+      
+      node: PropTypes.node
+    }</code></pre>
+<h4 id="enumerables-oneof">Enumerables (oneOf)</h4>
+<pre class="text"><code>    MyCo.propTypes = {
+      direction: PropTypes.oneOf([
+        &#39;left&#39;, &#39;right&#39;
+      ])
+    }</code></pre>
+<h4 id="arrays-and-objects">Arrays and objects</h4>
+<pre class="text"><code>    MyCo.propTypes = {
+      list: PropTypes.array,
+      ages: PropTypes.arrayOf(PropTypes.number),
+      user: PropTypes.object,
+      user: PropTypes.objectOf(PropTypes.number),
+      message: PropTypes.instanceOf(Message)
+    }
+    
+
+    MyCo.propTypes = {
+      user: PropTypes.shape({
+        name: PropTypes.string,
+        age:  PropTypes.number
+      })
+    }</code></pre>
+<p>Use <code>.array[Of]</code>, <code>.object[Of]</code>, <code>.instanceOf</code>, <code>.shape</code>.</p>
+<h4 id="custom-validation">Custom validation</h4>
+<pre class="text"><code>    MyCo.propTypes = {
+      customProp: (props, key, componentName) =&gt; {
+        if (!/matchme/.test(props[key])) {
+          return new Error(&#39;Validation failed!&#39;)
+        }
+      }
+    }</code></pre>
+</body>
+</html>

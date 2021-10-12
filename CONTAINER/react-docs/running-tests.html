@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Running Tests</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Running Tests</h1>
+</header>
+<blockquote>
+<p>Note: this feature is available with <code>react-scripts@0.3.0</code> and higher.</p>
+</blockquote>
+<blockquote>
+<p><a href="https://github.com/facebook/create-react-app/blob/master/CHANGELOG-0.x.md#migrating-from-023-to-030">Read the migration guide to learn how to enable it in older projects!</a></p>
+</blockquote>
+<p>Create React App uses <a href="https://jestjs.io/">Jest</a> as its test runner. To prepare for this integration, we did a <a href="https://jestjs.io/blog/2016/09/01/jest-15.html">major revamp</a> of Jest so if you heard bad things about it years ago, give it another try.</p>
+<p>Jest is a Node-based runner. This means that the tests always run in a Node environment and not in a real browser. This lets us enable fast iteration speed and prevent flakiness.</p>
+<p>While Jest provides browser globals such as <code>window</code> thanks to <a href="https://github.com/tmpvar/jsdom">jsdom</a>, they are only approximations of the real browser behavior. Jest is intended to be used for unit tests of your logic and your components rather than the DOM quirks.</p>
+<p>We recommend that you use a separate tool for browser end-to-end tests if you need them. They are beyond the scope of Create React App.</p>
+<h2 id="filename-conventions">Filename Conventions</h2>
+<p>Jest will look for test files with any of the following popular naming conventions:</p>
+<ul>
+<li>Files with <code>.js</code> suffix in <code>__tests__</code> folders.</li>
+<li>Files with <code>.test.js</code> suffix.</li>
+<li>Files with <code>.spec.js</code> suffix.</li>
+</ul>
+<p>The <code>.test.js</code> / <code>.spec.js</code> files (or the <code>__tests__</code> folders) can be located at any depth under the <code>src</code> top level folder.</p>
+<p>We recommend to put the test files (or <code>__tests__</code> folders) next to the code they are testing so that relative imports appear shorter. For example, if <code>App.test.js</code> and <code>App.js</code> are in the same folder, the test only needs to <code>import App from './App'</code> instead of a long relative path. Collocation also helps find tests more quickly in larger projects.</p>
+<h2 id="command-line-interface">Command Line Interface</h2>
+<p>When you run <code>npm test</code>, Jest will launch in watch mode<sup>*</sup>. Every time you save a file, it will re-run the tests, like how <code>npm start</code> recompiles the code.</p>
+<p>The watcher includes an interactive command-line interface with the ability to run all tests, or focus on a search pattern. It is designed this way so that you can keep it open and enjoy fast re-runs. You can learn the commands from the “Watch Usage” note that the watcher prints after every run:</p>
+<figure>
+<img src="https://jestjs.io/img/blog/15-watch.gif" alt="Jest watch mode" /><figcaption>Jest watch mode</figcaption>
+</figure>
+<blockquote>
+<p>*Although we recommend running your tests in watch mode during development, you can disable this behavior by passing in the <code>--watchAll=false</code> flag. In most CI environments, this is handled for you (see <a href="#on-ci-servers">On CI servers</a>).</p>
+</blockquote>
+<h2 id="version-control-integration">Version Control Integration</h2>
+<p>By default, when you run <code>npm test</code>, Jest will only run the tests related to files changed since the last commit. This is an optimization designed to make your tests run fast regardless of how many tests you have. However it assumes that you don’t often commit the code that doesn’t pass the tests.</p>
+<p>Jest will always explicitly mention that it only ran tests related to the files changed since the last commit. You can also press <code>a</code> in the watch mode to force Jest to run all tests.</p>
+<p>Jest will always run all tests on a <a href="#continuous-integration">continuous integration</a> server or if the project is not inside a Git or Mercurial repository.</p>
+<h2 id="writing-tests">Writing Tests</h2>
+<p>To create tests, add <code>it()</code> (or <code>test()</code>) blocks with the name of the test and its code. You may optionally wrap them in <code>describe()</code> blocks for logical grouping but this is neither required nor recommended.</p>
+<p>Jest provides a built-in <code>expect()</code> global function for making assertions. A basic test could look like this:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb1-1" title="1"><span class="im">import</span> sum <span class="im">from</span> <span class="st">&#39;./sum&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb1-2" title="2"></a>
+<a class="sourceLine" id="cb1-3" title="3"><span class="at">it</span>(<span class="st">&#39;sums numbers&#39;</span><span class="op">,</span> () <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb1-4" title="4">  <span class="at">expect</span>(<span class="at">sum</span>(<span class="dv">1</span><span class="op">,</span> <span class="dv">2</span>)).<span class="at">toEqual</span>(<span class="dv">3</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb1-5" title="5">  <span class="at">expect</span>(<span class="at">sum</span>(<span class="dv">2</span><span class="op">,</span> <span class="dv">2</span>)).<span class="at">toEqual</span>(<span class="dv">4</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb1-6" title="6"><span class="op">}</span>)<span class="op">;</span></a></code></pre></div>
+<p>All <code>expect()</code> matchers supported by Jest are <a href="https://jestjs.io/docs/en/expect.html#content">extensively documented here</a>.</p>
+<p>You can also use <a href="https://jestjs.io/docs/en/expect.html#tohavebeencalled"><code>jest.fn()</code> and <code>expect(fn).toBeCalled()</code></a> to create “spies” or mock functions.</p>
+<h2 id="testing-components">Testing Components</h2>
+<p>There is a broad spectrum of component testing techniques. They range from a “smoke test” verifying that a component renders without throwing, to shallow rendering and testing some of the output, to full rendering and testing component lifecycle and state changes.</p>
+<p>Different projects choose different testing tradeoffs based on how often components change, and how much logic they contain. If you haven’t decided on a testing strategy yet, we recommend that you start with creating basic smoke tests for your components:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb2-1" title="1"><span class="im">import</span> React <span class="im">from</span> <span class="st">&#39;react&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb2-2" title="2"><span class="im">import</span> ReactDOM <span class="im">from</span> <span class="st">&#39;react-dom&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb2-3" title="3"><span class="im">import</span> App <span class="im">from</span> <span class="st">&#39;./App&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb2-4" title="4"></a>
+<a class="sourceLine" id="cb2-5" title="5"><span class="at">it</span>(<span class="st">&#39;renders without crashing&#39;</span><span class="op">,</span> () <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb2-6" title="6">  <span class="kw">const</span> div <span class="op">=</span> <span class="va">document</span>.<span class="at">createElement</span>(<span class="st">&#39;div&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb2-7" title="7">  <span class="va">ReactDOM</span>.<span class="at">render</span>(<span class="op">&lt;</span>App /<span class="op">&gt;,</span> div)<span class="op">;</span></a>
+<a class="sourceLine" id="cb2-8" title="8"><span class="op">}</span>)<span class="op">;</span></a></code></pre></div>
+<p>This test mounts a component and makes sure that it didn’t throw during rendering. Tests like this provide a lot of value with very little effort so they are great as a starting point, and this is the test you will find in <code>src/App.test.js</code>.</p>
+<p>When you encounter bugs caused by changing components, you will gain a deeper insight into which parts of them are worth testing in your application. This might be a good time to introduce more specific tests asserting specific expected output or behavior.</p>
+<h3 id="react-testing-library">React Testing Library</h3>
+<p>If you’d like to test components in isolation from the child components they render, we recommend using <code>react-testing-library</code>. <a href="https://github.com/testing-library/react-testing-library"><code>react-testing-library</code></a> is a library for testing React components in a way that resembles the way the components are used by end users. It is well suited for unit, integration, and end-to-end testing of React components and applications. It works more directly with DOM nodes, and therefore it’s recommended to use with <a href="https://github.com/testing-library/jest-dom"><code>jest-dom</code></a> for improved assertions.</p>
+<p>To install <code>react-testing-library</code> and <code>jest-dom</code>, you can run:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb3-1" title="1"><span class="ex">npm</span> install --save @testing-library/react @testing-library/jest-dom</a></code></pre></div>
+<p>Alternatively you may use <code>yarn</code>:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb4-1" title="1"><span class="ex">yarn</span> add @testing-library/react @testing-library/jest-dom</a></code></pre></div>
+<p>If you want to avoid boilerplate in your test files, you can create a <a href="#initializing-test-environment"><code>src/setupTests.js</code></a> file:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb5-1" title="1"><span class="co">// react-testing-library renders your components to document.body,</span></a>
+<a class="sourceLine" id="cb5-2" title="2"><span class="co">// this adds jest-dom&#39;s custom assertions</span></a>
+<a class="sourceLine" id="cb5-3" title="3"><span class="im">import</span> <span class="st">&#39;@testing-library/jest-dom&#39;</span><span class="op">;</span></a></code></pre></div>
+<p>Here’s an example of using <code>react-testing-library</code> and <code>jest-dom</code> for testing that the <code>&lt;App /&gt;</code> component renders “Learn React”.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb6-1" title="1"><span class="im">import</span> React <span class="im">from</span> <span class="st">&#39;react&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb6-2" title="2"><span class="im">import</span> <span class="op">{</span> render<span class="op">,</span> screen <span class="op">}</span> <span class="im">from</span> <span class="st">&#39;@testing-library/react&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb6-3" title="3"><span class="im">import</span> App <span class="im">from</span> <span class="st">&#39;./App&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb6-4" title="4"></a>
+<a class="sourceLine" id="cb6-5" title="5"><span class="at">it</span>(<span class="st">&#39;renders welcome message&#39;</span><span class="op">,</span> () <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb6-6" title="6">  <span class="at">render</span>(<span class="op">&lt;</span>App /<span class="op">&gt;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb6-7" title="7">  <span class="at">expect</span>(<span class="va">screen</span>.<span class="at">getByText</span>(<span class="st">&#39;Learn React&#39;</span>)).<span class="at">toBeInTheDocument</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb6-8" title="8"><span class="op">}</span>)<span class="op">;</span></a></code></pre></div>
+<p>Learn more about the utilities provided by <code>react-testing-library</code> to facilitate testing asynchronous interactions as well as selecting form elements from the <a href="https://testing-library.com/react"><code>react-testing-library</code> documentation</a> and <a href="https://codesandbox.io/s/github/kentcdodds/react-testing-library-examples">examples</a>.</p>
+<h2 id="using-third-party-assertion-libraries">Using Third Party Assertion Libraries</h2>
+<p>We recommend that you use <code>expect()</code> for assertions and <code>jest.fn()</code> for spies. If you are having issues with them please <a href="https://github.com/facebook/jest/issues/new">file those against Jest</a>, and we’ll fix them. We intend to keep making them better for React, supporting, for example, <a href="https://github.com/facebook/jest/pull/1566">pretty-printing React elements as JSX</a>.</p>
+<p>However, if you are used to other libraries, such as <a href="https://www.chaijs.com/">Chai</a> and <a href="https://sinonjs.org/">Sinon</a>, or if you have existing code using them that you’d like to port over, you can import them normally like this:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb7-1" title="1"><span class="im">import</span> sinon <span class="im">from</span> <span class="st">&#39;sinon&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb7-2" title="2"><span class="im">import</span> <span class="op">{</span> expect <span class="op">}</span> <span class="im">from</span> <span class="st">&#39;chai&#39;</span><span class="op">;</span></a></code></pre></div>
+<p>and then use them in your tests like you normally do.</p>
+<h2 id="initializing-test-environment">Initializing Test Environment</h2>
+<blockquote>
+<p>Note: this feature is available with <code>react-scripts@0.4.0</code> and higher.</p>
+</blockquote>
+<p>If your app uses a browser API that you need to mock in your tests or if you need a global setup before running your tests, add a <code>src/setupTests.js</code> to your project. It will be automatically executed before running your tests.</p>
+<p>For example:</p>
+<h3 id="srcsetuptests.js"><code>src/setupTests.js</code></h3>
+<div class="sourceCode" id="cb8"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb8-1" title="1"><span class="kw">const</span> localStorageMock <span class="op">=</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb8-2" title="2">  <span class="dt">getItem</span><span class="op">:</span> <span class="va">jest</span>.<span class="at">fn</span>()<span class="op">,</span></a>
+<a class="sourceLine" id="cb8-3" title="3">  <span class="dt">setItem</span><span class="op">:</span> <span class="va">jest</span>.<span class="at">fn</span>()<span class="op">,</span></a>
+<a class="sourceLine" id="cb8-4" title="4">  <span class="dt">removeItem</span><span class="op">:</span> <span class="va">jest</span>.<span class="at">fn</span>()<span class="op">,</span></a>
+<a class="sourceLine" id="cb8-5" title="5">  <span class="dt">clear</span><span class="op">:</span> <span class="va">jest</span>.<span class="at">fn</span>()<span class="op">,</span></a>
+<a class="sourceLine" id="cb8-6" title="6"><span class="op">};</span></a>
+<a class="sourceLine" id="cb8-7" title="7"><span class="va">global</span>.<span class="at">localStorage</span> <span class="op">=</span> localStorageMock<span class="op">;</span></a></code></pre></div>
+<blockquote>
+<p>Note: Keep in mind that if you decide to “eject” before creating <code>src/setupTests.js</code>, the resulting <code>package.json</code> file won’t contain any reference to it, so you should manually create the property <code>setupFilesAfterEnv</code> in the configuration for Jest, something like the following:</p>
+</blockquote>
+<blockquote>
+<div class="sourceCode" id="cb9"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb9-1" title="1"><span class="st">&quot;jest&quot;</span><span class="op">:</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb9-2" title="2">  <span class="co">// ...</span></a>
+<a class="sourceLine" id="cb9-3" title="3">  <span class="st">&quot;setupFilesAfterEnv&quot;</span><span class="op">:</span> [<span class="st">&quot;&lt;rootDir&gt;/src/setupTests.js&quot;</span>]</a>
+<a class="sourceLine" id="cb9-4" title="4"> <span class="op">}</span></a></code></pre></div>
+</blockquote>
+<h2 id="focusing-and-excluding-tests">Focusing and Excluding Tests</h2>
+<p>You can replace <code>it()</code> with <code>xit()</code> to temporarily exclude a test from being executed.</p>
+<p>Similarly, <code>fit()</code> lets you focus on a specific test without running any other tests.</p>
+<h2 id="coverage-reporting">Coverage Reporting</h2>
+<p>Jest has an integrated coverage reporter that works well with ES6 and requires no configuration.</p>
+<p>Run <code>npm test -- --coverage</code> (note extra <code>--</code> in the middle) to include a coverage report like this:</p>
+<figure>
+<img src="https://i.imgur.com/5bFhnTS.png" alt="coverage report" /><figcaption>coverage report</figcaption>
+</figure>
+<p>Note that tests run much slower with coverage so it is recommended to run it separately from your normal workflow.</p>
+<h3 id="configuration">Configuration</h3>
+<p>The <a href="https://github.com/facebook/create-react-app/blob/master/packages/react-scripts/scripts/utils/createJestConfig.js">default configuration</a> that Create React App uses for Jest can be overridden by adding any of the following supported keys to a Jest config in your package.json.</p>
+<p>Supported overrides:</p>
+<ul>
+<li><a href="https://jestjs.io/docs/en/configuration.html#clearmocks-boolean"><code>clearMocks</code></a></li>
+<li><a href="https://jestjs.io/docs/en/configuration.html#collectcoveragefrom-array"><code>collectCoverageFrom</code></a></li>
+<li><a href="https://jestjs.io/docs/en/configuration#coveragepathignorepatterns-arraystring"><code>coveragePathIgnorePatterns</code></a></li>
+<li><a href="https://jestjs.io/docs/en/configuration.html#coveragereporters-array-string"><code>coverageReporters</code></a></li>
+<li><a href="https://jestjs.io/docs/en/configuration.html#coveragethreshold-object"><code>coverageThreshold</code></a></li>
+<li><a href="https://jestjs.io/docs/en/configuration.html#displayname-string-object"><code>displayName</code></a></li>
+<li><a href="https://jestjs.io/docs/en/configuration.html#extraglobals-array-string"><code>extraGlobals</code></a></li>
+<li><a href="https://jestjs.io/docs/en/configuration.html#globalsetup-string"><code>globalSetup</code></a></li>
+<li><a href="https://jestjs.io/docs/en/configuration.html#globalteardown-string"><code>globalTeardown</code></a></li>
+<li><a href="https://jestjs.io/docs/en/configuration.html#modulenamemapper-object-string-string"><code>moduleNameMapper</code></a></li>
+<li><a href="https://jestjs.io/docs/en/configuration.html#resetmocks-boolean"><code>resetMocks</code></a></li>
+<li><a href="https://jestjs.io/docs/en/configuration.html#resetmodules-boolean"><code>resetModules</code></a></li>
+<li><a href="https://jestjs.io/docs/en/configuration#restoremocks-boolean"><code>restoreMocks</code></a></li>
+<li><a href="https://jestjs.io/docs/en/configuration.html#snapshotserializers-array-string"><code>snapshotSerializers</code></a></li>
+<li><a href="https://jestjs.io/docs/en/configuration#testmatch-arraystring"><code>testMatch</code></a></li>
+<li><a href="https://jestjs.io/docs/en/configuration.html#transform-object-string-pathtotransformer-pathtotransformer-object"><code>transform</code></a></li>
+<li><a href="https://jestjs.io/docs/en/configuration.html#transformignorepatterns-array-string"><code>transformIgnorePatterns</code></a></li>
+<li><a href="https://jestjs.io/docs/en/configuration.html#watchpathignorepatterns-array-string"><code>watchPathIgnorePatterns</code></a></li>
+</ul>
+<p>Example package.json:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb10-1" title="1"><span class="fu">{</span></a>
+<a class="sourceLine" id="cb10-2" title="2">  <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;your-package&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb10-3" title="3">  <span class="dt">&quot;jest&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb10-4" title="4">    <span class="dt">&quot;collectCoverageFrom&quot;</span><span class="fu">:</span> <span class="ot">[</span></a>
+<a class="sourceLine" id="cb10-5" title="5">      <span class="st">&quot;src/**/*.{js,jsx,ts,tsx}&quot;</span><span class="ot">,</span></a>
+<a class="sourceLine" id="cb10-6" title="6">      <span class="st">&quot;!&lt;rootDir&gt;/node_modules/&quot;</span><span class="ot">,</span></a>
+<a class="sourceLine" id="cb10-7" title="7">      <span class="st">&quot;!&lt;rootDir&gt;/path/to/dir/&quot;</span></a>
+<a class="sourceLine" id="cb10-8" title="8">    <span class="ot">]</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb10-9" title="9">    <span class="dt">&quot;coverageThreshold&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb10-10" title="10">      <span class="dt">&quot;global&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb10-11" title="11">        <span class="dt">&quot;branches&quot;</span><span class="fu">:</span> <span class="dv">90</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb10-12" title="12">        <span class="dt">&quot;functions&quot;</span><span class="fu">:</span> <span class="dv">90</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb10-13" title="13">        <span class="dt">&quot;lines&quot;</span><span class="fu">:</span> <span class="dv">90</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb10-14" title="14">        <span class="dt">&quot;statements&quot;</span><span class="fu">:</span> <span class="dv">90</span></a>
+<a class="sourceLine" id="cb10-15" title="15">      <span class="fu">}</span></a>
+<a class="sourceLine" id="cb10-16" title="16">    <span class="fu">},</span></a>
+<a class="sourceLine" id="cb10-17" title="17">    <span class="dt">&quot;coverageReporters&quot;</span><span class="fu">:</span> <span class="ot">[</span><span class="st">&quot;text&quot;</span><span class="ot">]</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb10-18" title="18">    <span class="dt">&quot;snapshotSerializers&quot;</span><span class="fu">:</span> <span class="ot">[</span><span class="st">&quot;my-serializer-module&quot;</span><span class="ot">]</span></a>
+<a class="sourceLine" id="cb10-19" title="19">  <span class="fu">}</span></a>
+<a class="sourceLine" id="cb10-20" title="20"><span class="fu">}</span></a></code></pre></div>
+<h2 id="continuous-integration">Continuous Integration</h2>
+<p>By default <code>npm test</code> runs the watcher with interactive CLI. However, you can force it to run tests once and finish the process by setting an environment variable called <code>CI</code>.</p>
+<p>When creating a build of your application with <code>npm run build</code> linter warnings are not checked by default. Like <code>npm test</code>, you can force the build to perform a linter warning check by setting the environment variable <code>CI</code>. If any warnings are encountered then the build fails.</p>
+<p>Popular CI servers already set the environment variable <code>CI</code> by default but you can do this yourself too:</p>
+<h2 id="on-ci-servers">On CI servers</h2>
+<h3 id="travis-ci">Travis CI</h3>
+<ol type="1">
+<li>Following the <a href="https://docs.travis-ci.com/user/getting-started/">Travis Getting started</a> guide for syncing your GitHub repository with Travis. You may need to initialize some settings manually in your <a href="https://travis-ci.org/profile">profile</a> page.</li>
+<li>Add a <code>.travis.yml</code> file to your git repository.</li>
+</ol>
+<div class="sourceCode" id="cb11"><pre class="sourceCode yaml"><code class="sourceCode yaml"><a class="sourceLine" id="cb11-1" title="1"><span class="fu">language:</span><span class="at"> node_js</span></a>
+<a class="sourceLine" id="cb11-2" title="2"><span class="fu">node_js:</span></a>
+<a class="sourceLine" id="cb11-3" title="3">  <span class="kw">-</span> <span class="dv">8</span></a>
+<a class="sourceLine" id="cb11-4" title="4"><span class="fu">cache:</span></a>
+<a class="sourceLine" id="cb11-5" title="5">  <span class="fu">directories:</span></a>
+<a class="sourceLine" id="cb11-6" title="6">    <span class="kw">-</span> node_modules</a>
+<a class="sourceLine" id="cb11-7" title="7"><span class="fu">script:</span></a>
+<a class="sourceLine" id="cb11-8" title="8">  <span class="kw">-</span> npm run build</a>
+<a class="sourceLine" id="cb11-9" title="9">  <span class="kw">-</span> npm test</a></code></pre></div>
+<ol type="1">
+<li>Trigger your first build with a git push.</li>
+<li><a href="https://docs.travis-ci.com/user/customizing-the-build/">Customize your Travis CI Build</a> if needed.</li>
+</ol>
+<h3 id="circleci">CircleCI</h3>
+<p>Follow <a href="https://medium.com/@knowbody/circleci-and-zeits-now-sh-c9b7eebcd3c1">this article</a> to set up CircleCI with a Create React App project.</p>
+<h2 id="on-your-own-environment">On your own environment</h2>
+<h4 id="windows-cmd.exe">Windows (cmd.exe)</h4>
+<pre class="cmd"><code>set CI=true&amp;&amp;npm test</code></pre>
+<pre class="cmd"><code>set CI=true&amp;&amp;npm run build</code></pre>
+<p>(Note: the lack of whitespace is intentional.)</p>
+<h4 id="windows-powershell">Windows (Powershell)</h4>
+<div class="sourceCode" id="cb14"><pre class="sourceCode powershell"><code class="sourceCode powershell"><a class="sourceLine" id="cb14-1" title="1">(<span class="va">$env</span>:CI = <span class="st">&quot;true&quot;</span>) -and (npm test)</a></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode powershell"><code class="sourceCode powershell"><a class="sourceLine" id="cb15-1" title="1">(<span class="va">$env</span>:CI = <span class="st">&quot;true&quot;</span>) -and (npm run build)</a></code></pre></div>
+<h4 id="linux-macos-bash">Linux, macOS (Bash)</h4>
+<div class="sourceCode" id="cb16"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb16-1" title="1"><span class="va">CI=</span>true <span class="ex">npm</span> test</a></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb17-1" title="1"><span class="va">CI=</span>true <span class="ex">npm</span> run build</a></code></pre></div>
+<p>The test command will force Jest to run in CI-mode, and tests will only run once instead of launching the watcher.</p>
+<p>For non-CI environments, you can pass the <code>--watchAll=false</code> flag to disable test-watching.</p>
+<p>The build command will check for linter warnings and fail if any are found.</p>
+<h2 id="disabling-jsdom">Disabling jsdom</h2>
+<p>If you know that none of your tests depend on <a href="https://github.com/tmpvar/jsdom">jsdom</a>, you can safely set <code>--env=node</code>, and your tests will run faster:</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode diff"><code class="sourceCode diff"><a class="sourceLine" id="cb18-1" title="1">  &quot;scripts&quot;: {</a>
+<a class="sourceLine" id="cb18-2" title="2">    &quot;start&quot;: &quot;react-scripts start&quot;,</a>
+<a class="sourceLine" id="cb18-3" title="3">    &quot;build&quot;: &quot;react-scripts build&quot;,</a>
+<a class="sourceLine" id="cb18-4" title="4"><span class="st">-   &quot;test&quot;: &quot;react-scripts test&quot;</span></a>
+<a class="sourceLine" id="cb18-5" title="5"><span class="va">+   &quot;test&quot;: &quot;react-scripts test --env=node&quot;</span></a></code></pre></div>
+<p>To help you make up your mind, here is a list of APIs that <strong>need jsdom</strong>:</p>
+<ul>
+<li>Any browser globals like <code>window</code> and <code>document</code></li>
+<li><a href="https://facebook.github.io/react/docs/top-level-api.html#reactdom.render"><code>ReactDOM.render()</code></a></li>
+<li><a href="https://facebook.github.io/react/docs/test-utils.html#renderintodocument"><code>TestUtils.renderIntoDocument()</code></a> (<a href="https://github.com/facebook/react/blob/34761cf9a252964abfaab6faf74d473ad95d1f21/src/test/ReactTestUtils.js#L83-L91">a shortcut</a> for the above)</li>
+<li><a href="https://airbnb.io/enzyme/docs/api/mount.html"><code>mount()</code></a> in <a href="https://airbnb.io/enzyme/index.html">Enzyme</a></li>
+<li><a href="https://testing-library.com/docs/react-testing-library/api/#render"><code>render()</code></a> in <a href="https://testing-library.com/docs/react-testing-library/intro/">React Testing Library</a></li>
+</ul>
+<p>In contrast, <strong>jsdom is not needed</strong> for the following APIs:</p>
+<ul>
+<li><a href="https://facebook.github.io/react/docs/test-utils.html#shallow-rendering"><code>TestUtils.createRenderer()</code></a> (shallow rendering)</li>
+<li><a href="https://airbnb.io/enzyme/docs/api/shallow.html"><code>shallow()</code></a> in <a href="https://airbnb.io/enzyme/index.html">Enzyme</a></li>
+</ul>
+<p>Finally, jsdom is also not needed for <a href="https://jestjs.io/blog/2016/07/27/jest-14.html">snapshot testing</a>.</p>
+<h2 id="snapshot-testing">Snapshot Testing</h2>
+<p>Snapshot testing is a feature of Jest that automatically generates text snapshots of your components and saves them on the disk so if the UI output changes, you get notified without manually writing any assertions on the component output. <a href="https://jestjs.io/blog/2016/07/27/jest-14.html">Read more about snapshot testing.</a></p>
+<h2 id="editor-integration">Editor Integration</h2>
+<p>If you use <a href="https://code.visualstudio.com">Visual Studio Code</a>, there is a <a href="https://github.com/orta/vscode-jest">Jest extension</a> which works with Create React App out of the box. This provides a lot of IDE-like features while using a text editor: showing the status of a test run with potential fail messages inline, starting and stopping the watcher automatically, and offering one-click snapshot updates.</p>
+<figure>
+<img src="https://cloud.githubusercontent.com/assets/49038/20795349/a032308a-b7c8-11e6-9b34-7eeac781003f.png" alt="VS Code Jest Preview" /><figcaption>VS Code Jest Preview</figcaption>
+</figure>
+</body>
+</html>

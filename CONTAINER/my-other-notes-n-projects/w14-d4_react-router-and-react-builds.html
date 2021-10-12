@@ -1,0 +1,1389 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>w14-d4_react-router-and-react-builds</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<p><br><em>React Router and React Builds</em> {ignore=true} ________________________________________________________________________________ <!-- @import "[TOC]" {cmd="toc" depthFrom=1 depthTo=2 orderedList=false} --> ________________________________________________________________________________ ________________________________________________________________________________</p>
+<h1 id="react-router-learning-objectives">React Router Learning Objectives</h1>
+<p>At this point, you know how to build and render frontend components with React. Now it’s time to learn about frontend routing so that you can connect specific components to render at specific URL paths. After reading and practicing, you should be able to:</p>
+<ul>
+<li>Use the <code>react-router-dom</code> package to set up React Router in your applications</li>
+<li>Create routes using the <code>&lt;Route&gt;</code> component from the <code>react-router-dom</code> package</li>
+<li>Generate navigation links with the <code>&lt;Link&gt;</code> and <code>&lt;NavLink&gt;</code> components from the <code>react-router-dom</code> package<br />
+</li>
+<li>Create <code>&lt;Switch&gt;</code> routes and manage the order of rendered components</li>
+<li>Use the React Router <code>match</code> prop to access router parameters</li>
+<li>Use the React Router <code>history</code> prop to programmatically change the browser’s URL</li>
+<li>Redirect users by using the <code>&lt;Redirect&gt;</code> component in a route</li>
+<li>Describe what nested routes are and how to create them</li>
+</ul>
+<hr />
+<h1 id="react-builds-learning-objectives">React Builds Learning Objectives</h1>
+<p>You’ve been using Create React App to create and build React applications. While you don’t need to understand every detail of the frontend build process that Create React App provides, having a general understanding will help you to take full advantage of the features offered by the tool. After reading and practicing, you should be able to:</p>
+<ul>
+<li>Describe what frontend builds are and why they’re needed</li>
+<li>Describe at a high level what happens in a Create React App when you run <code>npm start</code></li>
+<li>Prepare to deploy a React application into a production environment</li>
+</ul>
+<hr />
+<h1 id="react-router-introduction">React Router Introduction</h1>
+<p>Now that you know how to render components in a React app, how do you handle rendering different components for different website pages? React Router is the answer!</p>
+<p>Think of how you have created server-side routes in Express. Take the following URL and server-side route. Notice how the <code>/users/:userId</code> path corresponds with the <code>http://localhost:3000/users/2</code> URL to render a specific HTML page.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb1-1" title="1"><span class="co">// http://localhost:3000/users/2</span></a>
+<a class="sourceLine" id="cb1-2" title="2"><span class="va">app</span>.<span class="at">get</span>(<span class="st">&#39;/users/:userId&#39;</span><span class="op">,</span> (req<span class="op">,</span> res) <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb1-3" title="3">  <span class="va">res</span>.<span class="at">render</span>(<span class="st">&#39;userProfile.pug&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb1-4" title="4"><span class="op">}</span>)<span class="op">;</span></a></code></pre></div>
+<p>In the default React setup, you lose the ability to create routes in the same manner as in Express. This is what React Router aims to solve!</p>
+<p><a href="https://github.com/ReactTraining/react-router">React Router</a> is a frontend routing library that allows you to control which components to display using the browser location. A user can also copy and paste a URL and email it to a friend or link to it from their own website.</p>
+<p>When you finish this article, you should be able to use the following from the <code>react-router-dom</code> library:</p>
+<ul>
+<li><code>&lt;BrowserRouter&gt;</code> to provide your application access to the <code>react-router-dom</code> library; and</li>
+<li><code>&lt;Route&gt;</code> to connect specific URL paths to specific components you want rendered; and</li>
+<li><code>&lt;Switch&gt;</code> to wrap several <code>Route</code> elements, rendering only one even if several match the current URL; and</li>
+<li>React Router’s <code>match</code> prop to access route path parameters.</li>
+</ul>
+<h2 id="getting-started-with-routing">Getting started with routing</h2>
+<p>Since you are writing single page apps, you don’t want to refresh the page each time you change the browser location. Instead, you want to update the browser location and your app’s response using JavaScript. This is known as client-side routing. You are using React, so you will use React Router to do this.</p>
+<p>Create a simple react project template:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb2-1" title="1"><span class="ex">npx</span> create-react-app my-app --template @appacademy/simple</a></code></pre></div>
+<p>Then install React Router:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb3-1" title="1"><span class="ex">npm</span> install --save react-router-dom@^5.1.2</a></code></pre></div>
+<p>Now import <code>BrowserRouter</code> from <code>react-router-dom</code> in your entry file:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb4-1" title="1"><span class="im">import</span> <span class="op">{</span> BrowserRouter <span class="op">}</span> <span class="im">from</span> <span class="st">&#39;react-router-dom`;</span></a></code></pre></div>
+<h3 id="browserrouter">BrowserRouter</h3>
+<p><code>BrowserRouter</code> is the primary component of the router that wraps your route hierarchy. It creates a React context that passes routing information down to all its descendent components. For example, if you want to give <code>&lt;App&gt;</code> and all its children components access to React Router, you would wrap <code>&lt;App&gt;</code> like so:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb5-1" title="1"><span class="co">// ./src/index.js</span></a>
+<a class="sourceLine" id="cb5-2" title="2"><span class="im">import</span> React <span class="im">from</span> <span class="st">&#39;react&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb5-3" title="3"><span class="im">import</span> ReactDOM <span class="im">from</span> <span class="st">&#39;react-dom&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb5-4" title="4"><span class="im">import</span> <span class="op">{</span> BrowserRouter <span class="op">}</span> <span class="im">from</span> <span class="st">&#39;react-router-dom&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb5-5" title="5"><span class="im">import</span> App <span class="im">from</span> <span class="st">&#39;./App&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb5-6" title="6"></a>
+<a class="sourceLine" id="cb5-7" title="7"><span class="kw">const</span> Root <span class="op">=</span> () <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb5-8" title="8">  <span class="cf">return</span> (</a>
+<a class="sourceLine" id="cb5-9" title="9">    <span class="op">&lt;</span>BrowserRouter<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb5-10" title="10">      <span class="op">&lt;</span>App /<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb5-11" title="11">    &lt;/BrowserRouter<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb5-12" title="12">  )<span class="op">;</span></a>
+<a class="sourceLine" id="cb5-13" title="13"><span class="op">};</span></a>
+<a class="sourceLine" id="cb5-14" title="14"></a>
+<a class="sourceLine" id="cb5-15" title="15"><span class="va">ReactDOM</span>.<span class="at">render</span>(</a>
+<a class="sourceLine" id="cb5-16" title="16">  <span class="op">&lt;</span><span class="va">React</span>.<span class="at">StrictMode</span><span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb5-17" title="17">    <span class="op">&lt;</span>Root /<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb5-18" title="18">  &lt;/<span class="va">React</span>.<span class="at">StrictMode</span><span class="op">&gt;,</span></a>
+<a class="sourceLine" id="cb5-19" title="19">  <span class="va">document</span>.<span class="at">getElementById</span>(<span class="st">&#39;root&#39;</span>)<span class="op">,</span></a>
+<a class="sourceLine" id="cb5-20" title="20">)<span class="op">;</span></a></code></pre></div>
+<p>Now you can route the rendering of certain components to certain URLs (i.e <code>https://www.website.com/profile</code>).</p>
+<h3 id="hashrouter">HashRouter</h3>
+<p>Alternatively, you could import and use <code>HashRouter</code> from <code>react-router-dom</code>. Links for applications that use <code>&lt;HashRouter&gt;</code> would look like <code>https://www.website.com/#/profile</code> (with an <code>#</code> between the domain and path).</p>
+<p>You’ll focus on using the <code>&lt;BrowserRouter&gt;</code>.</p>
+<h2 id="creating-frontend-routes">Creating frontend routes</h2>
+<p>React Router helps your React application render specific components based on the URL. The React Router component you’ll use most often is <code>&lt;Route&gt;</code>.</p>
+<p>The <code>&lt;Route&gt;</code> component is used to wrap another component, causing that component to only be rendered if a certain URL is matched. The behavior of the <code>&lt;Route&gt;</code> component is controlled by the following props: <code>path</code>, <code>component</code>, <code>exact</code>, and <code>render</code> (optional).</p>
+<p>Create a simple <code>Users</code> component that returns <code>&lt;h1&gt;This is the users index!&lt;/h1&gt;</code>. Now let’s refactor your <code>index.js</code> file so that you can create your routes within the component:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb6-1" title="1"><span class="co">// ./src/index.js</span></a>
+<a class="sourceLine" id="cb6-2" title="2"><span class="im">import</span> React <span class="im">from</span> <span class="st">&#39;react&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb6-3" title="3"><span class="im">import</span> ReactDOM <span class="im">from</span> <span class="st">&#39;react-dom&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb6-4" title="4"><span class="im">import</span> <span class="op">{</span> BrowserRouter<span class="op">,</span> Route <span class="op">}</span> <span class="im">from</span> <span class="st">&#39;react-router-dom&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb6-5" title="5"><span class="im">import</span> App <span class="im">from</span> <span class="st">&#39;./App&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb6-6" title="6"><span class="im">import</span> Users <span class="im">from</span> <span class="st">&#39;./Users&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb6-7" title="7"></a>
+<a class="sourceLine" id="cb6-8" title="8"><span class="kw">const</span> Root <span class="op">=</span> () <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb6-9" title="9">  <span class="cf">return</span> (</a>
+<a class="sourceLine" id="cb6-10" title="10">    <span class="op">&lt;</span>BrowserRouter<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb6-11" title="11">      <span class="op">&lt;</span>div<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb6-12" title="12">        <span class="op">{</span><span class="co">/* </span><span class="al">TODO</span><span class="co">: Routes */</span><span class="op">}</span></a>
+<a class="sourceLine" id="cb6-13" title="13">      &lt;/div<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb6-14" title="14">    &lt;/BrowserRouter<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb6-15" title="15">  )<span class="op">;</span></a>
+<a class="sourceLine" id="cb6-16" title="16"><span class="op">};</span></a>
+<a class="sourceLine" id="cb6-17" title="17"></a>
+<a class="sourceLine" id="cb6-18" title="18"><span class="va">ReactDOM</span>.<span class="at">render</span>(</a>
+<a class="sourceLine" id="cb6-19" title="19">  <span class="op">&lt;</span><span class="va">React</span>.<span class="at">StrictMode</span><span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb6-20" title="20">    <span class="op">&lt;</span>Root /<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb6-21" title="21">  &lt;/<span class="va">React</span>.<span class="at">StrictMode</span><span class="op">&gt;,</span></a>
+<a class="sourceLine" id="cb6-22" title="22">  <span class="va">document</span>.<span class="at">getElementById</span>(<span class="st">&#39;root&#39;</span>)<span class="op">,</span></a>
+<a class="sourceLine" id="cb6-23" title="23">)<span class="op">;</span></a></code></pre></div>
+<p>Note that <code>BrowserRouter</code> can only have a single child component, so the snippet above wraps all routes within parent a <code>&lt;div&gt;</code> element. Now let’s create some routes!</p>
+<h3 id="component">component</h3>
+<p>Begin with the <code>component</code> prop. This prop takes a reference to the component to be rendered. Let’s render your <code>App</code> component:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb7-1" title="1"><span class="kw">const</span> Root <span class="op">=</span> () <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb7-2" title="2">  <span class="cf">return</span> (</a>
+<a class="sourceLine" id="cb7-3" title="3">    <span class="op">&lt;</span>BrowserRouter<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb7-4" title="4">      <span class="op">&lt;</span>div<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb7-5" title="5">        <span class="op">&lt;</span>Route component<span class="op">={</span>App<span class="op">}</span> /&gt;</a>
+<a class="sourceLine" id="cb7-6" title="6">      &lt;/div<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb7-7" title="7">    &lt;/BrowserRouter<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb7-8" title="8">  )<span class="op">;</span></a>
+<a class="sourceLine" id="cb7-9" title="9"><span class="op">};</span></a></code></pre></div>
+<p>Now you’ll need to connect a path to the component!</p>
+<h3 id="path">path</h3>
+<p>The wrapped component will only be rendered when the path is matched. The path matches the URL when it matches some initial portion of the URL. For example, a path of <code>/</code> would match both of the following URLs: <code>/</code> and <code>/users</code>. (Because <code>/users</code> begins with a <code>/</code> it matches the path <code>/</code>)</p>
+<pre class="jsx"><code>&lt;Route path=&#39;/&#39; component={App} /&gt;
+&lt;Route path=&#39;/users&#39; component={Users} /&gt;</code></pre>
+<p>Take a moment to navigate to <code>http://localhost:3000/users</code> to see how both the <code>App</code> component and <code>Users</code> component are rendering.</p>
+<h3 id="exact">exact</h3>
+<p>If this <code>exact</code> flag is set, the path will only match when it exactly matches the URL. Then browsing to the <code>/users</code> path would no longer match <code>/</code> and only the <code>Users</code> component will be rendered (instead of both the <code>App</code> component and <code>Users</code> component).</p>
+<pre class="jsx"><code>&lt;Route exact path=&#39;/&#39; component={App} /&gt;
+&lt;Route path=&#39;/users&#39; component={Users} /&gt;</code></pre>
+<h3 id="render">render</h3>
+<p>This is an optional prop that takes in a function to be called. The function will be called when the path matches. The function’s return value is rendered. You could also define a functional component inside the <code>component</code> prop, but this results in extra, unnecessary work for React. The <code>render</code> prop is preferred for inline rendering of simple functional components.</p>
+<p>The difference between using <code>component</code> and <code>render</code> is that <code>component</code> returns new JSX to be re-mounted every time the route renders, while <code>render</code> simply returns to JSX what will be mounted once and re-rendered. For any given route, you should only use either the <code>component</code> prop, or the <code>render</code> prop. If both are supplied, only the <code>component</code> prop will be used.</p>
+<pre class="jsx"><code>// This inline rendering will work, but is unnecessarily slow.
+&lt;Route path=&quot;/hello&quot; component={() =&gt; &lt;h1&gt;Hello!&lt;/h1&gt;} /&gt;
+
+// This is the preferred way for inline rendering.
+&lt;Route path=&quot;/hello&quot; render={() =&gt; &lt;h1&gt;Hello!&lt;/h1&gt;} /&gt;</code></pre>
+<p>It can be helpful to use <code>render</code> instead of <code>component</code> in your <code>&lt;Route&gt;</code> when you need to pass props into the rendered component. For example, imagine that you needed to pass the <code>users</code> object as a prop to your <code>Users</code> component. Then you could pass in props from <code>Root</code> to <code>Users</code> by returning the <code>Users</code> component like so:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb11-1" title="1"><span class="co">// `users` to be passed as a prop:</span></a>
+<a class="sourceLine" id="cb11-2" title="2"><span class="kw">const</span> users <span class="op">=</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb11-3" title="3">  <span class="dv">1</span><span class="op">:</span> <span class="op">{</span> <span class="dt">name</span><span class="op">:</span> <span class="st">&#39;Andrew&#39;</span> <span class="op">},</span></a>
+<a class="sourceLine" id="cb11-4" title="4">  <span class="dv">2</span><span class="op">:</span> <span class="op">{</span> <span class="dt">name</span><span class="op">:</span> <span class="st">&#39;Raymond&#39;</span> <span class="op">}</span></a>
+<a class="sourceLine" id="cb11-5" title="5"><span class="op">};</span></a></code></pre></div>
+<pre class="jsx"><code>&lt;Route path=&quot;/users&quot; render={() =&gt; &lt;Users users={users} /&gt;} /&gt;</code></pre>
+<p>As a reminder, <code>BrowserRouter</code> can only have a single child component. That’s why you have wrapped all your routes within parent a <code>&lt;div&gt;</code> element.</p>
+<pre class="jsx"><code>const Root = () =&gt; {
+  const users = {
+    1: { name: &#39;Andrew&#39; },
+    2: { name: &#39;Raymond&#39; }
+  };
+
+  return (
+    &lt;BrowserRouter&gt;
+      &lt;div&gt;
+        &lt;h1&gt;Hi, I&#39;m Root!&lt;/h1&gt;
+        &lt;Route exact path=&quot;/&quot; component={App} /&gt;
+        &lt;Route path=&quot;/hello&quot; render={() =&gt; &lt;h1&gt;Hello!&lt;/h1&gt;} /&gt;
+        &lt;Route path=&quot;/users&quot; render={() =&gt; &lt;Users users={users} /&gt;} /&gt;
+      &lt;/div&gt;
+    &lt;/BrowserRouter&gt;
+  );
+};</code></pre>
+<p>With this <code>Root</code> component, you will always render the <code>&lt;h1&gt;Hi, I'm Root!&lt;/h1&gt;</code>, regardless of the path. Because of the first <code>&lt;Route&gt;</code>, you will only render the <code>App</code> component if the path exactly matches <code>/</code>. Because of the second <code>&lt;Route&gt;</code>, you will only render the <code>Users</code> component if the path matches <code>/users</code>.</p>
+<h3 id="route-path-params">Route path params</h3>
+<p>A component’s props can also hold information about a URL’s parameters. The router will match route segments starting at <code>:</code> up to the next <code>/</code>, <code>?</code>, or <code>#</code>. Those matched values are then passed to components via their props. Such segments are <em>wildcard</em> values that make up your route parameters.</p>
+<p>For example, take the route below:</p>
+<pre class="jsx"><code>&lt;Route path=&quot;/users/:userId&quot;
+       render={(props) =&gt; &lt;Profile users={users} {...props} /&gt;} /&gt;</code></pre>
+<p>The router would break down the full <code>/users/:userId/photos</code> path to two parts: <code>/users</code>, <code>:userId</code>.</p>
+<p>The <code>Profile</code> component’s props would have access to the <code>:userId</code> part of the <code>http://localhost:3000/users/:userId/photos</code> URL through the <code>props</code> with router parameter information. You would access the the <code>match</code> prop’s parameters (<code>props.match.params</code>). If you are using the <code>render</code> prop of the <code>Route</code> component, make sure to spread the props back into the component if you want it to know about the “match” parameters.</p>
+<pre class="jsx"><code>// Route&#39;s `render` prop allows you to pass the `users`
+// prop and spread the router `props`.
+render={(props) =&gt; &lt;Profile users={users} {...props} /&gt;}
+</code></pre>
+<p>The <code>params</code> object would then have a property of <code>userId</code> which would hold the value of the <code>:userId</code> <em>wildcard</em> value. Let’s render the <code>userId</code> parameter in a user profile component. Take a moment to create a <code>Profile.js</code> file with the following code:</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb16-1" title="1"><span class="co">// ./src/Profile.js</span></a>
+<a class="sourceLine" id="cb16-2" title="2"><span class="im">import</span> React <span class="im">from</span> <span class="st">&quot;react&quot;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb16-3" title="3"></a>
+<a class="sourceLine" id="cb16-4" title="4"><span class="kw">const</span> Profile <span class="op">=</span> (props) <span class="kw">=&gt;</span> (</a>
+<a class="sourceLine" id="cb16-5" title="5">  <span class="op">&lt;</span>div<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb16-6" title="6">    The user<span class="st">&#39;s id is {props.match.params.userId}.</span></a>
+<a class="sourceLine" id="cb16-7" title="7">  &lt;/div<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb16-8" title="8">)<span class="op">;</span></a>
+<a class="sourceLine" id="cb16-9" title="9"></a>
+<a class="sourceLine" id="cb16-10" title="10"><span class="im">export</span> <span class="im">default</span> Profile<span class="op">;</span></a></code></pre></div>
+<p>Notice how it uses the <code>match</code> prop to access the <code>:userId</code> parameter from the URL. You can use this wildcard to make and AJAX call to fetch the user information from the database and render the return data in the <code>Profile</code> component. Recall that your <code>Profile</code> component was rendered at the path <code>/users/:userId</code>. Thus you can use your <code>userId</code> parameters from <code>match.params</code> to fetch a specific user:</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb17-1" title="1"><span class="co">// ./src/Profile.js</span></a>
+<a class="sourceLine" id="cb17-2" title="2"><span class="im">import</span> React <span class="im">from</span> <span class="st">&quot;react&quot;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb17-3" title="3"></a>
+<a class="sourceLine" id="cb17-4" title="4"><span class="kw">const</span> Profile <span class="op">=</span> (<span class="op">{</span> users<span class="op">,</span> <span class="dt">match</span><span class="op">:</span> <span class="op">{</span> params <span class="op">}</span> <span class="op">}</span>) <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb17-5" title="5"></a>
+<a class="sourceLine" id="cb17-6" title="6">  <span class="co">// In a real-world scenario, you&#39;d make a call to an API to fetch the user,</span></a>
+<a class="sourceLine" id="cb17-7" title="7">  <span class="co">// instead of passing down and keying into a `users` prop.</span></a>
+<a class="sourceLine" id="cb17-8" title="8">  <span class="kw">const</span> user <span class="op">=</span> users[<span class="va">params</span>.<span class="at">userId</span>]<span class="op">;</span></a>
+<a class="sourceLine" id="cb17-9" title="9"></a>
+<a class="sourceLine" id="cb17-10" title="10">  <span class="cf">return</span> (</a>
+<a class="sourceLine" id="cb17-11" title="11">    <span class="op">&lt;</span>div<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb17-12" title="12">      The user<span class="st">&#39;s id is {params.userId} and the user&#39;</span>s name is <span class="op">{</span><span class="va">user</span>.<span class="at">name</span><span class="op">}</span>.</a>
+<a class="sourceLine" id="cb17-13" title="13">    &lt;/div<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb17-14" title="14">  )<span class="op">;</span></a>
+<a class="sourceLine" id="cb17-15" title="15"><span class="op">};</span></a>
+<a class="sourceLine" id="cb17-16" title="16"></a>
+<a class="sourceLine" id="cb17-17" title="17"><span class="im">export</span> <span class="im">default</span> Profile<span class="op">;</span></a></code></pre></div>
+<h2 id="match">Match</h2>
+<p>Now that you’ve seen your React Router’s <code>match</code> prop in action, let’s go over more about <a href="https://reacttraining.com/react-router/web/api/Route/route-props">route props</a>! React Router passes information to the components as route props, accessible to all components with access to the React Router. The three props it makes available are <code>location</code>, <code>match</code> and <code>history</code>. You’ve learned about <code>props.match.params</code>, but now let’s review the other properties of the <code>match</code> prop!</p>
+<p>This is an object that contains important information about how the current URL matches the route path. Here are some of the more useful keys on the <code>match</code> object:</p>
+<ul>
+<li><code>isExact</code>: a boolean that tells you whether or not the URL exactly matches the path</li>
+<li><code>url</code>: the current URL</li>
+<li><code>path</code>: the route path it matched against (without wildcards filled in)</li>
+<li><code>params</code>: the matches for the individual wildcard segments, nested under their names</li>
+</ul>
+<p>When you use React Router, the browser <code>location</code> and <code>history</code> are a part of the state of your app. You can store information about which component should be displayed, which user profile you are currently viewing, or any other piece of state, in the browser location. You can then access that information from anywhere your Router props are passed to in your app.</p>
+<p>Now that you’ve learned about parameters and route props, let’s revisit your <code>Root</code> component to add an <code>exact</code> flag to your <code>/users</code> route so that it does not render with your <code>/users/:userId</code> route. Your component should look something like this:</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb18-1" title="1"><span class="kw">const</span> Root <span class="op">=</span> () <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb18-2" title="2">  <span class="kw">const</span> users <span class="op">=</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb18-3" title="3">    <span class="dv">1</span><span class="op">:</span> <span class="op">{</span> <span class="dt">name</span><span class="op">:</span> <span class="st">&#39;Andrew&#39;</span> <span class="op">},</span></a>
+<a class="sourceLine" id="cb18-4" title="4">    <span class="dv">2</span><span class="op">:</span> <span class="op">{</span> <span class="dt">name</span><span class="op">:</span> <span class="st">&#39;Raymond&#39;</span> <span class="op">}</span></a>
+<a class="sourceLine" id="cb18-5" title="5">  <span class="op">};</span></a>
+<a class="sourceLine" id="cb18-6" title="6"></a>
+<a class="sourceLine" id="cb18-7" title="7">  <span class="cf">return</span> (</a>
+<a class="sourceLine" id="cb18-8" title="8">    <span class="op">&lt;</span>BrowserRouter<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb18-9" title="9">      <span class="op">&lt;</span>h1<span class="op">&gt;</span>Hi<span class="op">,</span> I<span class="st">&#39;m Root!&lt;/h1&gt;</span></a>
+<a class="sourceLine" id="cb18-10" title="10">      <span class="op">&lt;</span>div<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb18-11" title="11">        <span class="op">&lt;</span>Route exact path<span class="op">=</span><span class="st">&quot;/&quot;</span> component<span class="op">={</span>App<span class="op">}</span> /&gt;</a>
+<a class="sourceLine" id="cb18-12" title="12">        <span class="op">&lt;</span>Route path<span class="op">=</span><span class="st">&quot;/hello&quot;</span> render<span class="op">={</span>() <span class="kw">=&gt;</span> <span class="op">&lt;</span>h1<span class="op">&gt;</span>Hello<span class="op">!</span>&lt;/h1<span class="op">&gt;}</span> /&gt;</a>
+<a class="sourceLine" id="cb18-13" title="13"></a>
+<a class="sourceLine" id="cb18-14" title="14">        <span class="op">{</span><span class="co">/* Render the `Users` page if no ID is included. */</span><span class="op">}</span></a>
+<a class="sourceLine" id="cb18-15" title="15">        <span class="op">&lt;</span>Route exact path<span class="op">=</span><span class="st">&quot;/users&quot;</span> render<span class="op">={</span>() <span class="kw">=&gt;</span> <span class="op">&lt;</span>Users users<span class="op">={</span>users<span class="op">}</span> /&gt;<span class="op">}</span> /&gt;</a>
+<a class="sourceLine" id="cb18-16" title="16"></a>
+<a class="sourceLine" id="cb18-17" title="17">        <span class="op">{</span><span class="co">/* Otherwise, render the profile page for that userId. */</span><span class="op">}</span></a>
+<a class="sourceLine" id="cb18-18" title="18">        <span class="op">&lt;</span>Route path<span class="op">=</span><span class="st">&quot;/users/:userId&quot;</span> component<span class="op">={</span>(props) <span class="kw">=&gt;</span> <span class="op">&lt;</span>Profile users<span class="op">={</span>users<span class="op">}</span> <span class="op">{</span>...<span class="at">props</span><span class="op">}</span> /&gt;<span class="op">}</span> /&gt;</a>
+<a class="sourceLine" id="cb18-19" title="19">      &lt;/div<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb18-20" title="20">    &lt;/BrowserRouter<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb18-21" title="21">  )<span class="op">;</span></a>
+<a class="sourceLine" id="cb18-22" title="22"><span class="op">};</span></a></code></pre></div>
+<h2 id="what-you-learned">What you learned</h2>
+<p>In this article, you learned how to:</p>
+<ul>
+<li>Use components from the React Router library; and</li>
+<li>Create routes to render specific components; and</li>
+<li>Manage the order of rendered routes; and</li>
+<li>Use the <code>exact</code> flag to ensure that a specific path renders a specific component; and</li>
+<li>Use the React Router <code>match</code> prop to access Router params.</li>
+</ul>
+<hr />
+<h1 id="react-router-navigation">React Router Navigation</h1>
+<p>Now that you know how to create front-end routes with React Router, you’ll need to implement a way for your users to navigate the routes! This is what using React Router’s <code>Link</code>, <code>NavLink</code>, <code>Redirect</code>, and <code>history</code> prop can help you do.</p>
+<p>In this article, you’ll be working off of the demo project you built in the React Router Intro reading. When you finish this article, you should be able to use the following components from the <code>react-router-dom</code> library:</p>
+<ul>
+<li><code>&lt;Link&gt;</code> or <code>&lt;NavLink&gt;</code> to create links with absolute paths to routes in your application (like “/users/1”); and,</li>
+<li><code>&lt;Redirect&gt;</code> to redirect a user to another path (i.e. a login page when the user is not logged in); and</li>
+<li>React Router’s <code>history</code> prop to update a browser’s URL programmatically.</li>
+</ul>
+<h2 id="adding-links-for-navigation">Adding links for navigation</h2>
+<p>React Router’s <code>&lt;Link&gt;</code> is one way to simplify navigation around your app. It issues an on-click navigation event to a route defined in your app’s router. Using <code>&lt;Link&gt;</code> renders an anchor tag with a correctly set <code>href</code> attribute.</p>
+<h3 id="link">Link</h3>
+<p>To use it, update your imports from the <code>react-router-dom</code> package to include <code>Link</code>:</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb19-1" title="1"><span class="im">import</span> <span class="op">{</span> BrowserRouter<span class="op">,</span> Route<span class="op">,</span> Link <span class="op">}</span> <span class="im">from</span> <span class="st">&#39;react-router-dom&#39;</span><span class="op">;</span></a></code></pre></div>
+<p>Note that <code>&lt;Link&gt;</code> can take two props: <code>to</code> and <code>onClick</code>.</p>
+<p>The <code>to</code> prop is a route location description that points to an absolute path, (i.e. <code>/users</code>). Add the following <code>Link</code> components in your <code>index.js</code> file above your routes:</p>
+<pre class="jsx"><code>&lt;Link to=&quot;/&quot;&gt;App&lt;/Link&gt;
+&lt;Link to=&quot;/users&quot;&gt;Users&lt;/Link&gt;
+&lt;Link to=&quot;/users/1&quot;&gt;Andrew&#39;s Profile&lt;/Link&gt;</code></pre>
+<p>The <code>onClick</code> prop is just like any other JSX click handler. You can write a function that takes in an <code>event</code> and handles it. Add the following <code>Link</code> before your routes and the following click handler function within your <code>Root</code> component:</p>
+<pre class="jsx"><code>// Link with onClick prop
+&lt;Link to=&quot;/&quot; onClick={handleClick}&gt;App with click handler&lt;/Link&gt;</code></pre>
+<div class="sourceCode" id="cb22"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb22-1" title="1"><span class="co">// Click handler function</span></a>
+<a class="sourceLine" id="cb22-2" title="2"><span class="kw">const</span> handleClick <span class="op">=</span> () <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb22-3" title="3">  <span class="va">console</span>.<span class="at">log</span>(<span class="st">&#39;Thanks for clicking!&#39;</span>)</a>
+<a class="sourceLine" id="cb22-4" title="4"><span class="op">};</span></a></code></pre></div>
+<p>Now, test your routes and links! If you inspect the page, you’ll see that your links are now rendered as <code>&lt;a&gt;</code> elements. Notice that clicking the <code>App with click handler</code> link logs a message in your console while directing your browser to render the <code>App</code> component.</p>
+<h3 id="navlink">NavLink</h3>
+<p>The <code>&lt;NavLink&gt;</code> works just like a <code>&lt;Link&gt;</code>, but with a little extra functionality. It has the ability to add extra styling when the path it links to matches the current path. This makes it an ideal choice for a navigation bar, hence the name. This styling can be controlled by three extra props: <code>activeClassName</code>, <code>activeStyle</code>, and <code>exact</code>. To begin using <code>NavLink</code>, update your imports from the <code>react-router-dom</code> package:</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb23-1" title="1"><span class="im">import</span> <span class="op">{</span> BrowserRouter<span class="op">,</span> Route<span class="op">,</span> NavLink <span class="op">}</span> <span class="im">from</span> <span class="st">&#39;react-router-dom&#39;</span><span class="op">;</span></a></code></pre></div>
+<p>The <code>activeClassName</code> prop of the <code>NavLink</code> component allows you to set a CSS class name for styling the <code>NavLink</code> when its route is active. By default, the <code>activeClassName</code> is already set to <code>active</code>. This means that you simply need to add an <code>.active</code> class to your CSS file to add active styling to your link. A <code>NavLink</code> will be active if its <code>to</code> prop path matches the current URL.</p>
+<p>Let’s change your “Users”, “Hello”, and “Andrew’s Profile” links to be different colors and have a larger font size when active.</p>
+<pre class="jsx"><code>&lt;NavLink to=&quot;/&quot;&gt;App&lt;/NavLink&gt;
+&lt;NavLink activeClassName=&quot;red&quot; to=&quot;/users&quot;&gt;Users&lt;/NavLink&gt;
+&lt;NavLink activeClassName=&quot;blue&quot; to=&quot;/hello&quot;&gt;Hello&lt;/NavLink&gt;
+&lt;NavLink activeClassName=&quot;green&quot; to=&quot;/users/1&quot;&gt;Andrew&#39;s Profile&lt;/NavLink&gt;
+&lt;NavLink to=&quot;/&quot; onClick={handleClick}&gt;App with click handler&lt;/NavLink&gt;</code></pre>
+<p>For example, this is what the rendered HTML <code>&lt;a&gt;</code> tag would look like when when the browser is navigated to the <code>/</code> path or the <code>/users</code> path:</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode html"><code class="sourceCode html"><a class="sourceLine" id="cb25-1" title="1"><span class="co">&lt;!-- Navigated to the / path (the activeClassName</span></a>
+<a class="sourceLine" id="cb25-2" title="2"><span class="co">     prop is set to active by default) --&gt;</span></a>
+<a class="sourceLine" id="cb25-3" title="3"><span class="kw">&lt;a</span><span class="ot"> href=</span><span class="st">&quot;/&quot;</span><span class="ot"> class=</span><span class="st">&quot;active&quot;</span><span class="kw">&gt;</span>App<span class="kw">&lt;/a&gt;</span></a>
+<a class="sourceLine" id="cb25-4" title="4"></a>
+<a class="sourceLine" id="cb25-5" title="5"><span class="co">&lt;!-- NOT navigated to the `/` path --&gt;</span></a>
+<a class="sourceLine" id="cb25-6" title="6"><span class="kw">&lt;a</span><span class="ot"> href=</span><span class="st">&quot;/&quot;</span><span class="kw">&gt;</span>App<span class="kw">&lt;/a&gt;</span></a></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode html"><code class="sourceCode html"><a class="sourceLine" id="cb26-1" title="1"><span class="co">&lt;!-- Navigated to the /users path (the activeClassName</span></a>
+<a class="sourceLine" id="cb26-2" title="2"><span class="co">     prop is manually set to red) --&gt;</span></a>
+<a class="sourceLine" id="cb26-3" title="3"><span class="kw">&lt;a</span><span class="ot"> href=</span><span class="st">&quot;/users&quot;</span><span class="ot"> class=</span><span class="st">&quot;red&quot;</span><span class="kw">&gt;</span>Users<span class="kw">&lt;/a&gt;</span></a>
+<a class="sourceLine" id="cb26-4" title="4"></a>
+<a class="sourceLine" id="cb26-5" title="5"><span class="co">&lt;!-- NOT navigated to the `/users` path --&gt;</span></a>
+<a class="sourceLine" id="cb26-6" title="6"><span class="kw">&lt;a</span><span class="ot"> href=</span><span class="st">&quot;/users&quot;</span><span class="kw">&gt;</span>Users<span class="kw">&lt;/a&gt;</span></a></code></pre></div>
+<p>Import <code>NavLink</code> into your <code>index.js</code> file and take a moment to update all your <code>Link</code> elements to <code>NavLink</code> elements. Set an <code>activeClassName</code> prop to an <code>active</code> class. Add the following <code>.active</code> class to your <code>index.css</code> file:</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode css"><code class="sourceCode css"><a class="sourceLine" id="cb27-1" title="1"><span class="fu">.active</span> {</a>
+<a class="sourceLine" id="cb27-2" title="2">  <span class="kw">font-weight</span>: <span class="dv">bold</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb27-3" title="3">}</a>
+<a class="sourceLine" id="cb27-4" title="4"></a>
+<a class="sourceLine" id="cb27-5" title="5"><span class="fu">.red</span> {</a>
+<a class="sourceLine" id="cb27-6" title="6">  <span class="kw">color</span>: <span class="cn">red</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb27-7" title="7">  <span class="kw">font-size</span>: <span class="dv">30</span><span class="dt">px</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb27-8" title="8">}</a>
+<a class="sourceLine" id="cb27-9" title="9"></a>
+<a class="sourceLine" id="cb27-10" title="10"><span class="fu">.blue</span> {</a>
+<a class="sourceLine" id="cb27-11" title="11">  <span class="kw">color</span>: <span class="cn">blue</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb27-12" title="12">  <span class="kw">font-size</span>: <span class="dv">30</span><span class="dt">px</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb27-13" title="13">}</a>
+<a class="sourceLine" id="cb27-14" title="14"></a>
+<a class="sourceLine" id="cb27-15" title="15"><span class="fu">.green</span> {</a>
+<a class="sourceLine" id="cb27-16" title="16">  <span class="kw">color</span>: <span class="cn">green</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb27-17" title="17">  <span class="kw">font-size</span>: <span class="dv">30</span><span class="dt">px</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb27-18" title="18">}</a></code></pre></div>
+<p>Test your styled links! Notice how the <code>App</code> and <code>App with click handler</code> links are always bolded. This is because all of your links include the <code>/</code> path, meaning that the link to <code>/</code> will be active when browsing to <code>/users</code> and <code>/users/1</code> because of how <code>users</code> and <code>users/1</code> are both prefaced by a <code>/</code>.</p>
+<p>The <code>activeStyle</code> prop is a style object that will be applied inline to the <code>NavLink</code> when its <code>to</code> prop matches the current URL. Add the following <code>activeStyle</code> to your <code>App</code> link and comment out the <code>.active</code> class in your CSS file.</p>
+<pre class="jsx"><code>&lt;NavLink to=&quot;/&quot; activeStyle={{ fontWeight: &quot;bold&quot; }}&gt;App&lt;/NavLink&gt;</code></pre>
+<p>The following html is rendered when at the <code>/</code> path:</p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode html"><code class="sourceCode html"><a class="sourceLine" id="cb29-1" title="1"><span class="kw">&lt;a</span><span class="ot"> href=</span><span class="st">&quot;/&quot;</span><span class="ot"> style=</span><span class="st">&quot;font-weight:bold;&quot;</span><span class="ot"> class=</span><span class="st">&quot;active&quot;</span><span class="kw">&gt;</span>App<span class="kw">&lt;/a&gt;</span></a></code></pre></div>
+<p>Notice how your <code>App with click handler</code> is not bolded anymore. This is because the default <code>active</code> class being applied does not have any CSS stylings set to the class. Uncomment your <code>.active</code> class in your CSS file to bring back bolding to this NavLink.</p>
+<p>The <code>exact</code> prop is a boolean that defaults to <code>false</code>. If set to <code>true</code>, then the <code>activeStyle</code> and <code>activeClassName</code> props will only be applied when the current URL exactly matches the <code>to</code> prop. Update your <code>App</code> and <code>App with click handler</code> links with an <code>exact</code> prop set. Just like in your routes, you can use the <code>exact</code> flag instead of <code>exact={true}</code>.</p>
+<pre class="jsx"><code>&lt;NavLink to=&quot;/&quot; exact={true} activeStyle={{ fontWeight: &quot;bold&quot; }}&gt;App&lt;/NavLink&gt;
+&lt;NavLink to=&quot;/&quot; exact onClick={handleClick}&gt;App with click handler&lt;/NavLink&gt;</code></pre>
+<p>Now your <code>App</code> and <code>App with click handler</code> links will only be bolded when you have navigated precisely to the <code>/</code> path.</p>
+<h2 id="switching-between-routes">Switching between routes</h2>
+<p>You came across styling issues when the <code>/users</code> and <code>/users/1</code> paths matched the <code>/</code> path. Routing can have this issue as well. This is why you need to control the switching between routes.</p>
+<p>React Router’s <code>&lt;Switch&gt;</code> component allows you to only render one <code>&lt;Route&gt;</code> even if several match the current URL. You can nest as many <code>Route</code>s as you wish between the opening and closing <code>Switch</code> tags, but only the first one that matches the current URL will be rendered.</p>
+<p>This is particularly useful if you want a default component that will only render if none of our other routes match. View the example below. Without the Switch, <code>DefaultComponent</code> would always render. Since there isn’t set a path in the <code>DefaultComponent</code> route, it will simply use the default path of <code>/</code>. Now the <code>DefaultComponent</code> will only render when neither of the preceding routes match.</p>
+<pre class="jsx"><code>&lt;Switch&gt;
+  &lt;Route path=&quot;some/url&quot; component={SomeComponent} /&gt;
+  &lt;Route path=&quot;some/other/url&quot; component={OtherComponent} /&gt;
+  &lt;Route component={DefaultComponent} /&gt;
+&lt;/Switch&gt;</code></pre>
+<p>Import <code>Switch</code> from <code>react-router-dom</code> and add <code>&lt;Switch&gt;</code> tags around your routes to take care of ordering and switching between your routes! Begin by adding the following route to the bottom of your routes to render that a <code>404: Page not found</code> message:</p>
+<pre class="jsx"><code>&lt;Route render={() =&gt; &lt;h1&gt;404: Page not found&lt;/h1&gt;} /&gt;</code></pre>
+<p>This is what your <code>Root</code> component should look like at this point:</p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb33-1" title="1"><span class="kw">const</span> Root <span class="op">=</span> () <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb33-2" title="2">  <span class="kw">const</span> users <span class="op">=</span> [</a>
+<a class="sourceLine" id="cb33-3" title="3">    <span class="op">{</span> <span class="dt">name</span><span class="op">:</span> <span class="st">&#39;andrew&#39;</span> <span class="op">},</span></a>
+<a class="sourceLine" id="cb33-4" title="4">    <span class="op">{</span> <span class="dt">name</span><span class="op">:</span> <span class="st">&#39;raymond&#39;</span> <span class="op">}</span></a>
+<a class="sourceLine" id="cb33-5" title="5">  ]<span class="op">;</span></a>
+<a class="sourceLine" id="cb33-6" title="6"></a>
+<a class="sourceLine" id="cb33-7" title="7">  <span class="kw">const</span> handleClick <span class="op">=</span> () <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb33-8" title="8">    <span class="va">console</span>.<span class="at">log</span>(<span class="st">&#39;Thanks for clicking!&#39;</span>)</a>
+<a class="sourceLine" id="cb33-9" title="9">  <span class="op">};</span></a>
+<a class="sourceLine" id="cb33-10" title="10"></a>
+<a class="sourceLine" id="cb33-11" title="11">  <span class="cf">return</span> (</a>
+<a class="sourceLine" id="cb33-12" title="12">    <span class="op">&lt;</span>BrowserRouter<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb33-13" title="13">      <span class="op">&lt;</span>h1<span class="op">&gt;</span>Hi<span class="op">,</span> I<span class="st">&#39;m Root!&lt;/h1&gt;</span></a>
+<a class="sourceLine" id="cb33-14" title="14"></a>
+<a class="sourceLine" id="cb33-15" title="15">      <span class="op">&lt;</span>div<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb33-16" title="16">        <span class="op">&lt;</span>NavLink to<span class="op">=</span><span class="st">&quot;/&quot;</span> exact<span class="op">={</span><span class="kw">true</span><span class="op">}</span> activeStyle<span class="op">={{</span> <span class="dt">fontWeight</span><span class="op">:</span> <span class="st">&quot;bold&quot;</span> <span class="op">}}&gt;</span>App&lt;/NavLink<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb33-17" title="17">        <span class="op">&lt;</span>NavLink activeClassName<span class="op">=</span><span class="st">&quot;red&quot;</span> to<span class="op">=</span><span class="st">&quot;/users&quot;</span><span class="op">&gt;</span>Users&lt;/NavLink<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb33-18" title="18">        <span class="op">&lt;</span>NavLink activeClassName<span class="op">=</span><span class="st">&quot;blue&quot;</span> to<span class="op">=</span><span class="st">&quot;/hello&quot;</span><span class="op">&gt;</span>Hello&lt;/NavLink<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb33-19" title="19">        <span class="op">&lt;</span>NavLink activeClassName<span class="op">=</span><span class="st">&quot;green&quot;</span> to<span class="op">=</span><span class="st">&quot;/users/1&quot;</span><span class="op">&gt;</span>Andrew<span class="st">&#39;s Profile&lt;/NavLink&gt;</span></a>
+<a class="sourceLine" id="cb33-20" title="20">        <span class="op">&lt;</span>NavLink to<span class="op">=</span><span class="st">&quot;/&quot;</span> exact onClick<span class="op">={</span>handleClick<span class="op">}&gt;</span>App <span class="cf">with</span> click handler&lt;/NavLink<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb33-21" title="21"></a>
+<a class="sourceLine" id="cb33-22" title="22">        <span class="op">&lt;</span>Switch<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb33-23" title="23">          <span class="op">&lt;</span>Route path<span class="op">=</span><span class="st">&quot;/users/:userId&quot;</span> component<span class="op">={</span>(props) <span class="kw">=&gt;</span> <span class="op">&lt;</span>Profile users<span class="op">={</span>users<span class="op">}</span> <span class="op">{</span>...<span class="at">props</span><span class="op">}</span> /&gt;<span class="op">}</span> /&gt;</a>
+<a class="sourceLine" id="cb33-24" title="24">          <span class="op">&lt;</span>Route exact path<span class="op">=</span><span class="st">&quot;/users&quot;</span> render<span class="op">={</span>() <span class="kw">=&gt;</span> <span class="op">&lt;</span>Users users<span class="op">={</span>users<span class="op">}</span> /&gt;<span class="op">}</span> /&gt;</a>
+<a class="sourceLine" id="cb33-25" title="25">          <span class="op">&lt;</span>Route path<span class="op">=</span><span class="st">&quot;/hello&quot;</span> render<span class="op">={</span>() <span class="kw">=&gt;</span> <span class="op">&lt;</span>h1<span class="op">&gt;</span>Hello<span class="op">!</span>&lt;/h1<span class="op">&gt;}</span> /&gt;</a>
+<a class="sourceLine" id="cb33-26" title="26">          <span class="op">&lt;</span>Route exact path<span class="op">=</span><span class="st">&quot;/&quot;</span> component<span class="op">={</span>App<span class="op">}</span> /&gt;</a>
+<a class="sourceLine" id="cb33-27" title="27">          <span class="op">&lt;</span>Route render<span class="op">={</span>() <span class="kw">=&gt;</span> <span class="op">&lt;</span>h1<span class="op">&gt;</span><span class="dv">404</span><span class="op">:</span> Page not found&lt;/h1<span class="op">&gt;}</span> /&gt;</a>
+<a class="sourceLine" id="cb33-28" title="28">        &lt;/Switch<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb33-29" title="29">      &lt;/div<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb33-30" title="30">    &lt;/BrowserRouter<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb33-31" title="31">  )<span class="op">;</span></a>
+<a class="sourceLine" id="cb33-32" title="32"><span class="op">};</span></a></code></pre></div>
+<p>Now you have control over the precedence of rendered components! Try navigating to <code>http://localhost:3000/asdf</code> or any other route you have not defined. The <code>&lt;h1&gt;404: Page not found&lt;/h1&gt;</code> JSX of the last <code>&lt;Route&gt;</code> will be rendered whenever the browser attempts to visit an undefined route.</p>
+<h2 id="redirecting-users">Redirecting users</h2>
+<p>But what if you want to redirect users to a login page when they aren’t logged in? The <code>&lt;Redirect&gt;</code> component from React Router helps you redirect users!</p>
+<p>The component takes only one prop: <code>to</code>. When it renders, it replaces the current URL with the value of its <code>to</code> prop. Typically you conditionally render <code>&lt;Redirect&gt;</code> to redirect the user away from some page you don’t want them to visit. The example below checks whether there is a defined <code>currentUser</code> prop. If so, the <code>&lt;Route&gt;</code> will render the <code>Home</code> component. Otherwise, it will redirect the user to the <code>/login</code> path.</p>
+<pre class="jsx"><code>&lt;Route
+  exact path=&quot;/&quot;
+  render={() =&gt; (this.props.currentUser ? &lt;Home /&gt; : &lt;Redirect to=&quot;/login&quot; /&gt;)}
+/&gt;</code></pre>
+<p>Note: you will learn how to use a more flexible auth pattern - don’t directly imitate this example.</p>
+<h2 id="history">History</h2>
+<p>You know how to redirect users with a <code>&lt;Redirect&gt;</code> component, but what if you need to redirect users programmatically? You’ve learned about the React Router’s <code>match</code> prop, but now let’s go over another one of the <a href="https://reacttraining.com/react-router/web/api/Route/route-props">route props</a>: <code>history</code>!</p>
+<div class="sourceCode" id="cb35"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb35-1" title="1"><span class="co">// Pushing a new URL (and adding to the end of history stack):</span></a>
+<a class="sourceLine" id="cb35-2" title="2"><span class="kw">const</span> handleClick <span class="op">=</span> () <span class="kw">=&gt;</span> <span class="kw">this</span>.<span class="va">props</span>.<span class="va">history</span>.<span class="at">push</span>(<span class="st">&#39;/some/url&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb35-3" title="3"></a>
+<a class="sourceLine" id="cb35-4" title="4"><span class="co">// Replacing the current URL (won&#39;t be tracked in history stack):</span></a>
+<a class="sourceLine" id="cb35-5" title="5"><span class="kw">const</span> redirect <span class="op">=</span> () <span class="kw">=&gt;</span> <span class="kw">this</span>.<span class="va">props</span>.<span class="va">history</span>.<span class="at">replace</span>(<span class="st">&#39;/some/other/url&#39;</span>)<span class="op">;</span></a></code></pre></div>
+<p>This prop lets you update the URL programmatically. For example, suppose you want to push a new URL when the user clicks a button. It has two useful methods:</p>
+<ul>
+<li><code>push</code> - This adds a new URL to the end of the history stack. That means that clicking the back button will take the browser to the previous URL. Note that pushing the same URL multiple times in a row will have no effect; the URL will still only show up on the stack once. In development mode, pushing the same URL twice in a row will generate a console warning. This warning is disabled in production mode.</li>
+<li><code>replace</code> - This replaces the current URL on the history stack, so the back button won’t take you to it. For example:</li>
+</ul>
+<h2 id="what-you-learned-1">What you learned</h2>
+<p>In this article, you learned how to:</p>
+<ul>
+<li>Create navigation links for your route paths; and</li>
+<li>Redirect users through using the <code>&lt;Redirect&gt;</code> component; and</li>
+<li>Update a browser’s URL programmatically by using React Router’s <code>history</code> prop.</li>
+</ul>
+<hr />
+<h1 id="react-router-nested-routes">React Router Nested Routes</h1>
+<p>Now you know how to create front-end routes and add navigation with React Router. When initializing Express projects, you declare static routes. Static routes are routes that are declared when an application is initialized. When using React Router in your application’s initialization, you can declare dynamic routes. React Router introduces dynamic routing, where your routes are created as your application is rendering. This allows you to create nested routes within components!</p>
+<p>In this article, let’s dive into <a href="https://reacttraining.com/react-router/core/guides/philosophy/nested-routes">nested routes</a>! When you finish the article, you should:</p>
+<ul>
+<li>Describe what nested routes are; and</li>
+<li>Be able to use React Router to create and navigate nested routes; and</li>
+<li>Know how to use the React Router <code>match</code> prop to generate links and routes.</li>
+</ul>
+<h2 id="why-nested-routes">Why nested routes?</h2>
+<p>Let’s begin with why you might need nested routes. As you remember, you are using React to create a single-page application. This means that you’ll be organizing your application into different components and sub-components.</p>
+<p>For example, imagine creating a simple front-end application with three main pages: a home welcome page (path of <code>/</code>), a users index page (path of <code>/users</code>), and user profile pages (path of <code>/users/:userId</code>). Now imagine if every user had links to separate <code>posts</code> and <code>photos</code> pages.</p>
+<p>You can create those routes and links within the user profile component, instead of creating the routes and links where the main routes are defined.</p>
+<h2 id="what-are-nested-routes">What are nested routes?</h2>
+<p>Now let’s dive into a user profile component to understand what are nested routes! Imagine you have a route in your application’s entry file to each user’s profile like so:</p>
+<pre class="jsx"><code>&lt;Route path=&quot;/users/:userId&quot; component={Profile} /&gt;</code></pre>
+<p>This means that upon navigating to <code>http://localhost:3000/users/1</code>, you would render the following <code>Profile</code> component and the <code>userId</code> parameter within <code>props.match.params</code> would have the value of <code>"1"</code>.</p>
+<div class="sourceCode" id="cb37"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb37-1" title="1"><span class="kw">const</span> Profile <span class="op">=</span> (props) <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb37-2" title="2">  <span class="co">// Custom call to database to fetch a user by a user ID.</span></a>
+<a class="sourceLine" id="cb37-3" title="3">  <span class="kw">const</span> user <span class="op">=</span> <span class="at">fetchUser</span>(<span class="va">props</span>.<span class="va">match</span>.<span class="va">params</span>.<span class="at">userId</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb37-4" title="4">  <span class="kw">const</span> <span class="op">{</span> name<span class="op">,</span> id <span class="op">}</span> <span class="op">=</span> user<span class="op">;</span></a>
+<a class="sourceLine" id="cb37-5" title="5"></a>
+<a class="sourceLine" id="cb37-6" title="6">  <span class="cf">return</span> (</a>
+<a class="sourceLine" id="cb37-7" title="7">    <span class="op">&lt;</span>div<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb37-8" title="8">      <span class="op">&lt;</span>h1<span class="op">&gt;</span>Welcome to the profile <span class="kw">of</span> <span class="op">{</span>name<span class="op">}!</span>&lt;/h1<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb37-9" title="9"></a>
+<a class="sourceLine" id="cb37-10" title="10">      <span class="op">{</span><span class="co">/* Links to a specific user&#39;s posts and photos */</span><span class="op">}</span></a>
+<a class="sourceLine" id="cb37-11" title="11">      <span class="op">&lt;</span>Link to<span class="op">={</span><span class="vs">`/users/</span><span class="sc">${</span>id<span class="sc">}</span><span class="vs">/posts`</span><span class="op">}&gt;{</span>name<span class="op">}</span><span class="st">&#39;s Posts&lt;/Link&gt;</span></a>
+<a class="sourceLine" id="cb37-12" title="12">      <span class="op">&lt;</span>Link to<span class="op">={</span><span class="vs">`/users/</span><span class="sc">${</span>id<span class="sc">}</span><span class="vs">/photos`</span><span class="op">}&gt;{</span>name<span class="op">}</span><span class="st">&#39;s Photos&lt;/Link&gt;</span></a>
+<a class="sourceLine" id="cb37-13" title="13"></a>
+<a class="sourceLine" id="cb37-14" title="14">      <span class="op">{</span><span class="co">/* Routes to a specific user&#39;s posts and photos */</span><span class="op">}</span></a>
+<a class="sourceLine" id="cb37-15" title="15">      <span class="op">&lt;</span>Route path<span class="op">=</span><span class="st">&#39;/users/:userId/posts&#39;</span> component<span class="op">={</span>UserPosts<span class="op">}</span> /&gt;</a>
+<a class="sourceLine" id="cb37-16" title="16">      <span class="op">&lt;</span>Route path<span class="op">=</span><span class="st">&#39;/users/:userId/photos&#39;</span> component<span class="op">={</span>UserPhotos<span class="op">}</span> /&gt;</a>
+<a class="sourceLine" id="cb37-17" title="17">    &lt;/div<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb37-18" title="18">  )<span class="op">;</span></a>
+<a class="sourceLine" id="cb37-19" title="19"><span class="op">};</span></a></code></pre></div>
+<p>Since this route is not created until the <code>Profile</code> component is rendered, you are dynamically creating your nested <code>/users/:userId/posts</code> and <code>/users/:userId/photos</code> routes. Remember that your <code>match</code> prop also has other helpful properties. You can use <code>match.url</code> instead of <code>/users/${id}</code> in your profile links. You can also use <code>match.path</code> instead of <code>/users/:userId</code> in your profile routes. Remember that you can destructure <code>url</code>, <code>path</code>, and <code>params</code> from your <code>match</code> prop!</p>
+<div class="sourceCode" id="cb38"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb38-1" title="1"></a>
+<a class="sourceLine" id="cb38-2" title="2"><span class="co">// Destructure `match` prop</span></a>
+<a class="sourceLine" id="cb38-3" title="3"><span class="kw">const</span> Profile <span class="op">=</span> (<span class="op">{</span> <span class="dt">match</span><span class="op">:</span> <span class="op">{</span> url<span class="op">,</span> path<span class="op">,</span> params <span class="op">}</span>) <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb38-4" title="4"></a>
+<a class="sourceLine" id="cb38-5" title="5">  <span class="co">// Custom call to database to fetch a user by a user ID.</span></a>
+<a class="sourceLine" id="cb38-6" title="6">  <span class="kw">const</span> user <span class="op">=</span> <span class="at">fetchUser</span>(<span class="va">params</span>.<span class="at">userId</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb38-7" title="7">  <span class="kw">const</span> <span class="op">{</span> name<span class="op">,</span> id <span class="op">}</span> <span class="op">=</span> user<span class="op">;</span></a>
+<a class="sourceLine" id="cb38-8" title="8"></a>
+<a class="sourceLine" id="cb38-9" title="9">  <span class="cf">return</span> (</a>
+<a class="sourceLine" id="cb38-10" title="10">    <span class="op">&lt;</span>div<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb38-11" title="11">      <span class="op">&lt;</span>h1<span class="op">&gt;</span>Welcome to the profile <span class="kw">of</span> <span class="op">{</span>name<span class="op">}!</span>&lt;/h1<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb38-12" title="12"></a>
+<a class="sourceLine" id="cb38-13" title="13">      <span class="op">{</span><span class="co">/* Replaced `/users/${id}` URL with `props.match.url` */</span><span class="op">}</span></a>
+<a class="sourceLine" id="cb38-14" title="14">      <span class="op">&lt;</span>Link to<span class="op">={</span><span class="vs">`</span><span class="sc">${</span>url<span class="sc">}</span><span class="vs">/posts`</span><span class="op">}&gt;{</span>name<span class="op">}</span><span class="st">&#39;s Posts&lt;/Link&gt;</span></a>
+<a class="sourceLine" id="cb38-15" title="15">      <span class="op">&lt;</span>Link to<span class="op">={</span><span class="vs">`</span><span class="sc">${</span>url<span class="sc">}</span><span class="vs">/photos`</span><span class="op">}&gt;{</span>name<span class="op">}</span><span class="st">&#39;s Photos&lt;/Link&gt;</span></a>
+<a class="sourceLine" id="cb38-16" title="16"></a>
+<a class="sourceLine" id="cb38-17" title="17">      <span class="op">{</span><span class="co">/* Replaced `/users/:userId` path with `props.match.path` */</span><span class="op">}</span></a>
+<a class="sourceLine" id="cb38-18" title="18">      <span class="op">&lt;</span>Route path<span class="op">={</span><span class="vs">`</span><span class="sc">${</span>path<span class="sc">}</span><span class="vs">/posts`</span><span class="op">}</span> component<span class="op">={</span>UserPosts<span class="op">}</span> /&gt;</a>
+<a class="sourceLine" id="cb38-19" title="19">      <span class="op">&lt;</span>Route path<span class="op">={</span><span class="vs">`</span><span class="sc">${</span>path<span class="sc">}</span><span class="vs">/photos`</span><span class="op">}</span> component<span class="op">={</span>UserPhotos<span class="op">}</span> /&gt;</a>
+<a class="sourceLine" id="cb38-20" title="20">    &lt;/div<span class="op">&gt;}</span></a>
+<a class="sourceLine" id="cb38-21" title="21">  )<span class="op">;</span></a>
+<a class="sourceLine" id="cb38-22" title="22"><span class="op">};</span></a></code></pre></div>
+<p>In tomorrow’s project, you’ll build a rainbow of routes as well as define nested routes. In the future, you may choose to implement nested routes to keep your application’s routes organized within related components.</p>
+<h2 id="what-you-learned-2">What you learned</h2>
+<p>In this article, you learned:</p>
+<ul>
+<li>What nested routes are; and</li>
+<li>About creating and navigating nested routes with React Router; and</li>
+<li>How to use the React Router props to generate nested links and routes.</li>
+</ul>
+<hr />
+<h1 id="react-builds">React Builds</h1>
+<p>A “build” is the process of converting code into something that can actually execute or run on the target platform. A “front-end build” is a process of preparing a front-end or client-side application for the browser.</p>
+<p>With React applications, that means (at a minimum) converting JSX to something that browsers can actually understand. When using Create React App, the build process is automatically configured to do that and a lot more.</p>
+<p>When you finish this article, you should be able to:</p>
+<ul>
+<li>Describe what front-end builds are and why they’re needed;</li>
+<li>Describe at a high level what happens in a Create React App when you run <code>npm start</code>; and</li>
+<li>Prepare to deploy a React application into a production environment.</li>
+</ul>
+<h2 id="understanding-front-end-builds">Understanding front-end builds</h2>
+<p>The need for front-end builds predates React. Over the years, developers have found it helpful to extend the lowest common denominator version of JavaScript and CSS that they could use.</p>
+<p>Sometimes developers extend JavaScript and CSS with something like <a href="https://www.typescriptlang.org/">TypeScript</a> or <a href="https://sass-lang.com/">Sass</a>. Using these non-standard languages and syntaxes require you to use a build process to convert your code into standard JavaScript and CSS that can actually run in the browser.</p>
+<p>Browser-based applications also require a fair amount of optimization to deliver the best, or at least acceptable, experience to end users. Front-end build processes could be configured to lint code, run unit tests, optimize images, minify and bundle code, and more–all automatically at the press of a button (i.e. running a command at the terminal).</p>
+<h3 id="javascript-versions-and-the-growth-of-front-end-builds">JavaScript versions and the growth of front-end builds</h3>
+<p>Developers are generally an impatient lot. When new features are added to JavaScript, we don’t like to wait for browsers to widely support those features before we start to use them in our code. And we <em>really</em> don’t like when we have to support older, legacy versions of browsers.</p>
+<p>In recent years, JavaScript has been updated on a yearly basis and browser vendors do a decent job of updating their browsers to support the new features as they’re added to the language. Years ago though, there was an infamous delay between versions 5 and 6 of JavaScript. It took <em>years</em> before ES6 (or ES2015 as it eventually was renamed to) to officially be completed and even longer before browsers supported all of its features.</p>
+<p>In the period of time before ES2015 was broadly supported by browsers, developers used front-end builds to convert or <em>transpile</em> ES2015 features and syntax to an older version of the language that was more broadly supported by browsers (typically ES5). The transpilation from ES2015/ES6 down to ES5 was one of the major drivers for developers to add front-end builds to their client-side projects.</p>
+<h3 id="reviewing-common-terminology">Reviewing common terminology</h3>
+<p>When learning about front-end or React builds, you’ll encounter a lot of terminology that you may or may not be familiar with. Here’s some of the terminology that you’ll likely encounter:</p>
+<p><strong>Linting</strong> is process of using a tool to analyze your code to catch common programming errors, bugs, stylistic inconsistencies, and suspicious coding patterns. <a href="https://eslint.org/">ESLint</a> is a popular JavaScript linting tool.</p>
+<p><strong>Transpilation</strong> is the process of converting source code, like JavaScript, from one version to another version. Usually this means converting newer versions of JavaScript, <a href="https://www.ecma-international.org/ecma-262/10.0/index.html">ES2019</a> or <a href="https://tc39.es/ecma262/">ES2021</a>, to a version that’s more widely supported by browsers, like <a href="http://www.ecma-international.org/ecma-262/6.0/">ES2015</a>, or even <a href="https://www.ecma-international.org/ecma-262/5.1/">ES5</a> or <a href="https://www.ecma-international.org/publications/files/ECMA-ST-ARCH/ECMA-262,%203rd%20edition,%20December%201999.pdf">ES3</a> (if you need to support the browser that your parents or grandparents use).</p>
+<p><strong>Minification</strong> is the process of removing all unnecessary characters in your code (e.g. white space characters, new line characters, comments) to produce an overall smaller file. Minification tools will often also rename identifers in your code (i.e. parameter and variable names) in the quest for smaller and smaller file sizes. Source maps can also be generated to allow debugging tools to cross reference between minified code and the original source code.</p>
+<p><strong>Bundling</strong> is the process of combining multiple code files into a single file. Creating a bundle (or a handful of bundles) reduces the number of requests that a client needs to make to the server.</p>
+<p><strong>Tree shaking</strong> is the process of removing unused (or dead) code from your application before it’s bundled. Tree shaking external dependencies can sometimes have a dramatic positive impact on overall bundled file sizes.</p>
+<h3 id="configuration-or-code">Configuration or code?</h3>
+<p>Front-end build tools have come and gone over the years; sometimes very quickly, which helped bring about the phenomenon known as <a href="https://sdtimes.com/softwaredev/is-the-javascript-fatigue-real/">JavaScript fatigue</a>.</p>
+<p>Configuration based tools allow you to create your build tasks by declaring (usually using JSON, XML, or YAML) what you want to be done, without explicitly writing every step in the process. In contrast, coding or scripting based tools allow you to, well, write code to create your build tasks. Configuration based tools <em>can</em> sometimes feel simpler to use while giving up some control (at least initially) while coding based tools <em>can</em> feel more familiar and predictable (since you’re describing tasks procedurally). Every generalization is false though (including this one), so there are plenty of exceptions.</p>
+<p><a href="https://gruntjs.com/">Grunt</a> is a JSON configuration based task runner that can be used to orchestrate the various tasks that make up your front-end build. Grunt was very quickly supplanted by <a href="https://gulpjs.com/">Gulp</a>, which allowed developers to write JavaScript to define front-end build tasks. After Gulp, the front-end tooling landscape became a bit more muddled. Some developers preferred the simplicity of using <a href="https://docs.npmjs.com/misc/scripts">npm scripts</a> to define build tasks while others preferred the power of configuration based bundlers like <a href="https://webpack.js.org/">webpack</a>.</p>
+<h3 id="babel-and-webpack-yes-thats-intentionally-a-lowercase-w">Babel and webpack (yes, that’s intentionally a lowercase ‘w’)</h3>
+<p>As front-end or client-side applications grew in complexity, developers found themselves wanting to leverage more advanced JavaScript features and newer syntax like classes, arrow functions, destructuring, async/await, etc. Using a code transpiler, like <a href="https://babeljs.io/">Babel</a>, allows you to use all of the latest and greatest features and syntax without worrying about what browsers support what.</p>
+<p>Module loaders and bundlers, like <a href="https://webpack.js.org/">webpack</a>, also allowed developers to use JavaScript modules without requiring users to use a browser that natively supports ES modules. Also, module bundling (along with minification and tree-shaking) helps to reduce the bandwidth that’s required to deliver the assets for your application to the client.</p>
+<p>[Create React App][cra] uses webpack (along with Babel) under the covers to build your React applications. Even if you’re not using Create React App, webpack and Babel are still very popular choices for building React applications.</p>
+<h2 id="pulling-back-the-covers-a-bit-on-the-create-react-app-build-process">Pulling back the covers (a bit) on the Create React App build process</h2>
+<p>Running an application created by Create React App using <code>npm start</code> can feel magical. Some stuff happens in the terminal and your application opens into your default browser. Even better, when you make changes to your application, your changes will (usually) automatically appear in the browser!</p>
+<h3 id="the-create-react-app-build-process">The Create React App build process</h3>
+<p>At a high level, here’s what happens when you run <code>npm start</code>:</p>
+<ul>
+<li>Environment variables are loaded (more about this in a bit);</li>
+<li>The list of browsers to support are checked (more about this too in a bit);</li>
+<li>The configured HTTP port is checked to ensure that it’s available;</li>
+<li>The application compiler is configured and created;</li>
+<li><a href="https://webpack.js.org/configuration/dev-server/"><code>webpack-dev-server</code></a> is started;</li>
+<li><a href="https://webpack.js.org/configuration/dev-server/"><code>webpack-dev-server</code></a> compiles your application;</li>
+<li>The <code>index.html</code> file is loaded into the browser; and</li>
+<li>A file watcher is started to watch your files, waiting for changes.</li>
+</ul>
+<h3 id="ejecting">Ejecting</h3>
+<p>Create React App provides a script that you can run to “eject” your application from the Create React App tooling. When you eject your application, all of the hidden stuff is exposed so that you can review and customize it.</p>
+<blockquote>
+<p>The need to customize Create React App rarely happens. Also, don’t eject an actual project as it’s a one-way trip! Once a Create React App project has been ejected, there’s no going back (though you could always undo the ejection process by reverting to an earlier commit if you’re using source control).</p>
+</blockquote>
+<p>To eject your application from Create React App, run the command <code>npm run eject</code>. You’ll be prompted if you want to continue; type “y” to continue with the ejection process. Once the ejection process has completed, you can review the files that were previously hidden from you.</p>
+<p>In the <code>package.json</code> file, you’ll see the following npm scripts:</p>
+<div class="sourceCode" id="cb39"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb39-1" title="1"><span class="fu">{</span></a>
+<a class="sourceLine" id="cb39-2" title="2">  <span class="dt">&quot;scripts&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb39-3" title="3">    <span class="dt">&quot;start&quot;</span><span class="fu">:</span> <span class="st">&quot;node scripts/start.js&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb39-4" title="4">    <span class="dt">&quot;build&quot;</span><span class="fu">:</span> <span class="st">&quot;node scripts/build.js&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb39-5" title="5">    <span class="dt">&quot;test&quot;</span><span class="fu">:</span> <span class="st">&quot;node scripts/test.js&quot;</span></a>
+<a class="sourceLine" id="cb39-6" title="6">  <span class="fu">}</span></a>
+<a class="sourceLine" id="cb39-7" title="7"><span class="fu">}</span></a></code></pre></div>
+<p>You can open the <code>./scripts/start.js</code> file to see the code that’s executed when you run <code>npm start</code>.</p>
+<p>If you’re curious about the webpack configuration, you can open and review the <code>./config/webpack.config.js</code>.</p>
+<h2 id="preparing-to-deploy-a-react-application-for-production">Preparing to deploy a React application for production</h2>
+<p>Before you deploy your application to production, you’ll want to make sure that you’ve replaced static values in your code with environment variables and considered what browsers you need to support.</p>
+<h3 id="defining-environment-variables">Defining environment variables</h3>
+<p>Create React App supports defining environment variables in an <code>.env</code> file. To define an environment variable, add an <code>.env</code> file to your project and define one or more variables that start with the prefix <code>REACT_APP_</code>:</p>
+<pre><code>REACT_APP_FOO: some value
+REACT_APP_BAR: another value</code></pre>
+<p>Environment variables can be used in code like this:</p>
+<div class="sourceCode" id="cb41"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb41-1" title="1"><span class="va">console</span>.<span class="at">log</span>(<span class="va">process</span>.<span class="va">env</span>.<span class="at">REACT_APP_FOO</span>)<span class="op">;</span></a></code></pre></div>
+<p>You can also reference environment variables in your <code>index.html</code> like this:</p>
+<div class="sourceCode" id="cb42"><pre class="sourceCode html"><code class="sourceCode html"><a class="sourceLine" id="cb42-1" title="1"><span class="kw">&lt;title&gt;</span>%REACT_APP_BAR%<span class="kw">&lt;/title&gt;</span></a></code></pre></div>
+<blockquote>
+<p><strong>Important:</strong> Environment variables are embedded into your HTML, CSS, and JavaScript bundles during the build process. Because of this, it’s <em>very important</em> to not store any secrets, like API keys, in your environment variables as anyone can view your bundled code in the browser by inspecting your files.</p>
+</blockquote>
+<h3 id="configuring-the-supported-browsers">Configuring the supported browsers</h3>
+<p>In your project’s <code>package.json</code> file, you can see the list of targeted browsers:</p>
+<div class="sourceCode" id="cb43"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb43-1" title="1"><span class="fu">{</span></a>
+<a class="sourceLine" id="cb43-2" title="2">  <span class="dt">&quot;browserslist&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb43-3" title="3">    <span class="dt">&quot;production&quot;</span><span class="fu">:</span> <span class="ot">[</span></a>
+<a class="sourceLine" id="cb43-4" title="4">      <span class="st">&quot;&gt;0.2%&quot;</span><span class="ot">,</span></a>
+<a class="sourceLine" id="cb43-5" title="5">      <span class="st">&quot;not dead&quot;</span><span class="ot">,</span></a>
+<a class="sourceLine" id="cb43-6" title="6">      <span class="st">&quot;not op_mini all&quot;</span></a>
+<a class="sourceLine" id="cb43-7" title="7">    <span class="ot">]</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb43-8" title="8">    <span class="dt">&quot;development&quot;</span><span class="fu">:</span> <span class="ot">[</span></a>
+<a class="sourceLine" id="cb43-9" title="9">      <span class="st">&quot;last 1 chrome version&quot;</span><span class="ot">,</span></a>
+<a class="sourceLine" id="cb43-10" title="10">      <span class="st">&quot;last 1 firefox version&quot;</span><span class="ot">,</span></a>
+<a class="sourceLine" id="cb43-11" title="11">      <span class="st">&quot;last 1 safari version&quot;</span></a>
+<a class="sourceLine" id="cb43-12" title="12">    <span class="ot">]</span></a>
+<a class="sourceLine" id="cb43-13" title="13">  <span class="fu">}</span></a>
+<a class="sourceLine" id="cb43-14" title="14"><span class="fu">}</span></a></code></pre></div>
+<p>Adjusting these targets affect how your code will be transpiled. Specifying older browser versions will result in your code being transpiled to older versions of JavaScript in order to be compatible with the specified browser versions. The <code>production</code> list specifies the browsers to target when creating a production build and the <code>development</code> list specifics the browsers to target when running the application using <code>npm start</code>.</p>
+<p>The <a href="https://browserl.ist">browserl.ist</a> website can be used to see the browsers supported by your configured <code>browserslist</code>.</p>
+<h3 id="creating-a-production-build">Creating a production build</h3>
+<p>To create a production build, run the command <code>npm run build</code>. The production build process bundles React in production mode and optimizes the build for the best performance. When the command completes, you’ll find your production ready files in the <code>build</code> folder.</p>
+<p>Now your application is ready to be deployed!</p>
+<blockquote>
+<p>For more information about how to deploy a Create React App project into production, see <a href="https://facebook.github.io/create-react-app/docs/deployment">this page</a> in the official documentation.</p>
+</blockquote>
+<h2 id="what-you-learned-3">What you learned</h2>
+<p>In this article, you learned how to:</p>
+<ul>
+<li>Describe what front-end builds are and why they’re needed;</li>
+<li>Describe at a high level what happens in a Create React App when you run <code>npm start</code>; and</li>
+<li>Prepare to deploy a React application into a production environment.</li>
+</ul>
+<hr />
+<h1 id="react-router-documentation">React Router Documentation</h1>
+<p>Now that you’ve had an introduction to React Router, feel free to explore the official documentation to learn more! As you become a full-fledged software engineer, remember that documentation is your friend. You can take a brief overview for now, as the documentation might include a lot of information at first. The more you learn about React, the more you should revisit the official documentation and learn!</p>
+<h2 id="setting-up-react-router">Setting up React Router</h2>
+<ul>
+<li><a href="https://reacttraining.com/react-router/web/guides/quick-start">React Router Quick Start</a></li>
+<li><a href="https://reacttraining.com/react-router/web/api/HashRouter">HashRouter</a></li>
+<li><a href="https://reacttraining.com/react-router/web/api/BrowserRouter">BrowserRouter</a></li>
+</ul>
+<h2 id="routes-and-links">Routes and Links</h2>
+<ul>
+<li><a href="https://reacttraining.com/react-router/web/api/Route">Route</a></li>
+<li><a href="https://reacttraining.com/react-router/web/api/Link">Link</a></li>
+<li><a href="https://reacttraining.com/react-router/web/api/NavLink">NavLink</a></li>
+</ul>
+<h2 id="switch-and-redirect">Switch and Redirect</h2>
+<ul>
+<li><a href="https://reacttraining.com/react-router/web/api/Switch">Switch</a></li>
+<li><a href="https://reacttraining.com/react-router/web/api/Redirect">Redirect</a></li>
+</ul>
+<h2 id="react-router-params-ownprops">React Router Params (ownProps)</h2>
+<ul>
+<li><a href="https://reacttraining.com/react-router/web/api/history">props.history</a></li>
+<li><a href="https://reacttraining.com/react-router/web/api/location">props.location</a></li>
+<li><a href="https://reacttraining.com/react-router/web/api/match">props.match</a></li>
+</ul>
+<hr />
+<h1 id="rainbow-routes-project">Rainbow Routes Project</h1>
+<p>Today you’re going to get our first experience using React Router. The goal is to create a basic app that displays the colors of the rainbow. This rainbow, however, has something special about it - some of the colors are nested within others.</p>
+<h2 id="phase-0-setup">Phase 0: Setup</h2>
+<p>Begin by creating a new React project:</p>
+<div class="sourceCode" id="cb44"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb44-1" title="1"><span class="ex">npx</span> create-react-app rainbow-routes --template @appacademy/simple</a></code></pre></div>
+<p>Now you’ll remove all the contents of your <code>src</code> and all the contents from your <code>public</code> directory to build the application architecture from scratch! After you have deleted all your files within the directories, create a new <code>index.html</code> file in your <code>public</code> folder. Use the <code>html:5</code> emmet shortcut to generate an HTML template. Title your page “Rainbow Routes” and create a <code>div</code> with an <code>id</code> of <code>root</code> in your DOM’s <code>&lt;body&gt;</code> element. Create an <code>index.css</code> file in your <code>src</code> directory with the following code. Now let’s create your entry file!</p>
+<div class="sourceCode" id="cb45"><pre class="sourceCode css"><code class="sourceCode css"><a class="sourceLine" id="cb45-1" title="1">h4 {</a>
+<a class="sourceLine" id="cb45-2" title="2">  <span class="kw">color</span>: <span class="cn">darkblue</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb45-3" title="3">  <span class="kw">cursor</span>: <span class="dv">pointer</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb45-4" title="4">}</a>
+<a class="sourceLine" id="cb45-5" title="5"></a>
+<a class="sourceLine" id="cb45-6" title="6">h4<span class="in">:hover</span> {</a>
+<a class="sourceLine" id="cb45-7" title="7">  <span class="kw">text-decoration</span>: <span class="dv">underline</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb45-8" title="8">}</a>
+<a class="sourceLine" id="cb45-9" title="9"></a>
+<a class="sourceLine" id="cb45-10" title="10"><span class="pp">#rainbow</span> {</a>
+<a class="sourceLine" id="cb45-11" title="11">  <span class="kw">position</span>: <span class="dv">absolute</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb45-12" title="12">  <span class="kw">top</span>: <span class="dv">0</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb45-13" title="13">  <span class="kw">left</span>: <span class="dv">300</span><span class="dt">px</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb45-14" title="14">}</a>
+<a class="sourceLine" id="cb45-15" title="15"></a>
+<a class="sourceLine" id="cb45-16" title="16">h3 {</a>
+<a class="sourceLine" id="cb45-17" title="17">  <span class="kw">position</span>: <span class="dv">absolute</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb45-18" title="18">  <span class="kw">top</span>: <span class="dv">1</span><span class="dt">px</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb45-19" title="19">}</a>
+<a class="sourceLine" id="cb45-20" title="20"></a>
+<a class="sourceLine" id="cb45-21" title="21"><span class="fu">.red</span> {</a>
+<a class="sourceLine" id="cb45-22" title="22">  <span class="kw">background-color</span>: <span class="cn">red</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb45-23" title="23">  <span class="kw">width</span>: <span class="dv">100</span><span class="dt">px</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb45-24" title="24">  <span class="kw">height</span>: <span class="dv">100</span><span class="dt">px</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb45-25" title="25">}</a>
+<a class="sourceLine" id="cb45-26" title="26"></a>
+<a class="sourceLine" id="cb45-27" title="27"><span class="fu">.orange</span> {</a>
+<a class="sourceLine" id="cb45-28" title="28">  <span class="kw">background-color</span>: <span class="cn">orange</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb45-29" title="29">  <span class="kw">width</span>: <span class="dv">100</span><span class="dt">px</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb45-30" title="30">  <span class="kw">height</span>: <span class="dv">50</span><span class="dt">px</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb45-31" title="31">}</a>
+<a class="sourceLine" id="cb45-32" title="32"></a>
+<a class="sourceLine" id="cb45-33" title="33"><span class="fu">.yellow</span> {</a>
+<a class="sourceLine" id="cb45-34" title="34">  <span class="kw">background-color</span>: <span class="cn">yellow</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb45-35" title="35">  <span class="kw">width</span>: <span class="dv">100</span><span class="dt">px</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb45-36" title="36">  <span class="kw">height</span>: <span class="dv">50</span><span class="dt">px</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb45-37" title="37">}</a>
+<a class="sourceLine" id="cb45-38" title="38"></a>
+<a class="sourceLine" id="cb45-39" title="39"><span class="fu">.green</span> {</a>
+<a class="sourceLine" id="cb45-40" title="40">  <span class="kw">background-color</span>: <span class="cn">green</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb45-41" title="41">  <span class="kw">width</span>: <span class="dv">100</span><span class="dt">px</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb45-42" title="42">  <span class="kw">height</span>: <span class="dv">100</span><span class="dt">px</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb45-43" title="43">}</a>
+<a class="sourceLine" id="cb45-44" title="44"></a>
+<a class="sourceLine" id="cb45-45" title="45"><span class="fu">.blue</span> {</a>
+<a class="sourceLine" id="cb45-46" title="46">  <span class="kw">background-color</span>: <span class="cn">blue</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb45-47" title="47">  <span class="kw">width</span>: <span class="dv">100</span><span class="dt">px</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb45-48" title="48">  <span class="kw">height</span>: <span class="dv">100</span><span class="dt">px</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb45-49" title="49">}</a>
+<a class="sourceLine" id="cb45-50" title="50"></a>
+<a class="sourceLine" id="cb45-51" title="51"><span class="fu">.indigo</span> {</a>
+<a class="sourceLine" id="cb45-52" title="52">  <span class="kw">background-color</span>: <span class="cn">mediumslateblue</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb45-53" title="53">  <span class="kw">width</span>: <span class="dv">100</span><span class="dt">px</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb45-54" title="54">  <span class="kw">height</span>: <span class="dv">50</span><span class="dt">px</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb45-55" title="55">}</a>
+<a class="sourceLine" id="cb45-56" title="56"></a>
+<a class="sourceLine" id="cb45-57" title="57"><span class="fu">.violet</span> {</a>
+<a class="sourceLine" id="cb45-58" title="58">  <span class="kw">background-color</span>: <span class="cn">darkviolet</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb45-59" title="59">  <span class="kw">width</span>: <span class="dv">100</span><span class="dt">px</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb45-60" title="60">  <span class="kw">height</span>: <span class="dv">100</span><span class="dt">px</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb45-61" title="61">}</a>
+<a class="sourceLine" id="cb45-62" title="62"></a>
+<a class="sourceLine" id="cb45-63" title="63">a {</a>
+<a class="sourceLine" id="cb45-64" title="64">  <span class="kw">display</span>: <span class="dv">block</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb45-65" title="65">  <span class="kw">margin-bottom</span>: <span class="dv">10</span><span class="dt">px</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb45-66" title="66">}</a></code></pre></div>
+<p>Create an <code>index.js</code> entry file in the <code>src</code> directory. At the top of the file, make sure to import <code>React</code> from the <code>react</code> package and <code>ReactDOM</code> from the <code>react-dom</code> package. Make sure to also import your the <code>index.css</code> file you just created! This will take care of styling your <em>rainbow routes</em>.</p>
+<p>Now you can use the <code>ReactDOM.render()</code> method to render a <code>&lt;Root /&gt;</code> component instead of the DOM element with an <code>id</code> of <code>root</code>. Lastly, wrap your render function with a <code>DOMContentLoaded</code> event listener, like so:</p>
+<div class="sourceCode" id="cb46"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb46-1" title="1"><span class="va">document</span>.<span class="at">addEventListener</span>(<span class="st">&#39;DOMContentLoaded&#39;</span><span class="op">,</span> () <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb46-2" title="2">  <span class="va">ReactDOM</span>.<span class="at">render</span>(</a>
+<a class="sourceLine" id="cb46-3" title="3">    <span class="op">&lt;</span>Root /<span class="op">&gt;,</span></a>
+<a class="sourceLine" id="cb46-4" title="4">    <span class="va">document</span>.<span class="at">getElementById</span>(<span class="st">&#39;root&#39;</span>)<span class="op">,</span></a>
+<a class="sourceLine" id="cb46-5" title="5">  )<span class="op">;</span></a>
+<a class="sourceLine" id="cb46-6" title="6"><span class="op">}</span>)<span class="op">;</span></a></code></pre></div>
+<p>Let’s create your <code>Root</code> component right in your entry file! Your <code>Root</code> component will take care of applying your <code>BrowserRouter</code> to the application. Applying the <code>BrowserRouter</code> to your <code>Root</code> component allows all the child components rendering within <code>&lt;BrowserRouter&gt;</code> tags to use and access the <code>Route</code>, <code>Link</code>, and <code>NavLink</code> components within the <code>react-router-dom</code> package.</p>
+<div class="sourceCode" id="cb47"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb47-1" title="1"><span class="kw">const</span> Root <span class="op">=</span> () <span class="kw">=&gt;</span> (</a>
+<a class="sourceLine" id="cb47-2" title="2">  <span class="co">// </span><span class="al">TODO</span><span class="co">: Apply BrowserRouter</span></a>
+<a class="sourceLine" id="cb47-3" title="3">  <span class="co">// </span><span class="al">TODO</span><span class="co">: Render rainbow</span></a>
+<a class="sourceLine" id="cb47-4" title="4">)<span class="op">;</span></a></code></pre></div>
+<p>Install the <code>react-router-dom</code> package:</p>
+<div class="sourceCode" id="cb48"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb48-1" title="1"><span class="ex">npm</span> install react-router-dom@^5.0.0</a></code></pre></div>
+<p>Now import <code>BrowserRouter</code> from the <code>react-router-dom</code> package, like so:</p>
+<div class="sourceCode" id="cb49"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb49-1" title="1"><span class="im">import</span> <span class="op">{</span> BrowserRouter <span class="op">}</span> <span class="im">from</span> <span class="st">&#39;react-router-dom&#39;</span><span class="op">;</span></a></code></pre></div>
+<p>You’re going to be rendering a lot of components, so let’s keep your <code>src</code> directory organized by creating a <code>components</code> directory within. Within your new <code>./src/components</code> directory, create a <code>Rainbow.js</code> file for your <code>Rainbow</code> component with the following code:</p>
+<div class="sourceCode" id="cb50"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb50-1" title="1"><span class="co">// ./src/components/Rainbow.js</span></a>
+<a class="sourceLine" id="cb50-2" title="2"><span class="im">import</span> React <span class="im">from</span> <span class="st">&#39;react&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb50-3" title="3"><span class="im">import</span> <span class="op">{</span> Route<span class="op">,</span> Link<span class="op">,</span> NavLink <span class="op">}</span> <span class="im">from</span> <span class="st">&#39;react-router-dom&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb50-4" title="4"></a>
+<a class="sourceLine" id="cb50-5" title="5"><span class="kw">const</span> Rainbow <span class="op">=</span> () <span class="kw">=&gt;</span> (</a>
+<a class="sourceLine" id="cb50-6" title="6">  <span class="op">&lt;</span>div<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb50-7" title="7">    <span class="op">&lt;</span>h1<span class="op">&gt;</span>Rainbow Router<span class="op">!</span>&lt;/h1<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb50-8" title="8">    <span class="op">{</span><span class="co">/* Your links should go here */</span><span class="op">}</span></a>
+<a class="sourceLine" id="cb50-9" title="9"></a>
+<a class="sourceLine" id="cb50-10" title="10">    <span class="op">&lt;</span>div id<span class="op">=</span><span class="st">&quot;rainbow&quot;</span><span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb50-11" title="11">      <span class="op">{</span><span class="co">/* Your routes should go here */</span><span class="op">}</span></a>
+<a class="sourceLine" id="cb50-12" title="12">    &lt;/div<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb50-13" title="13">  &lt;/div<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb50-14" title="14">)<span class="op">;</span></a>
+<a class="sourceLine" id="cb50-15" title="15"></a>
+<a class="sourceLine" id="cb50-16" title="16"><span class="im">export</span> <span class="im">default</span> Rainbow<span class="op">;</span></a></code></pre></div>
+<p>Your <code>Rainbow</code> component will act as the home page or default path (<code>/</code>) of your application. Import the <code>Rainbow</code> component into your entry file and have your <code>Root</code> component render <code>&lt;Rainbow /&gt;</code> wrapped within <code>&lt;BrowserRouter&gt;</code> tags, like so:</p>
+<div class="sourceCode" id="cb51"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb51-1" title="1"><span class="kw">const</span> Root <span class="op">=</span> () <span class="kw">=&gt;</span> (</a>
+<a class="sourceLine" id="cb51-2" title="2">  <span class="op">&lt;</span>BrowserRouter<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb51-3" title="3">    <span class="op">&lt;</span>Rainbow /<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb51-4" title="4">  &lt;/BrowserRouter<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb51-5" title="5">)<span class="op">;</span></a></code></pre></div>
+<p>Within your <code>Rainbow</code> component, you’ll be rendering <code>&lt;NavLink&gt;</code> and <code>&lt;Route&gt;</code> components to add different navigation paths to different components. Let’s create all the components you will render!</p>
+<p>Create files for the following components in your <code>./src/components</code> directory:</p>
+<ul>
+<li><code>Red</code></li>
+<li><code>Blue</code></li>
+<li><code>Green</code></li>
+<li><code>Indigo</code></li>
+<li><code>Orange</code></li>
+<li><code>Violet</code></li>
+<li><code>Yellow</code></li>
+</ul>
+<p>Your <code>Red</code> and <code>Blue</code> components will look something like this:</p>
+<div class="sourceCode" id="cb52"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb52-1" title="1"><span class="im">import</span> React <span class="im">from</span> <span class="st">&#39;react&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb52-2" title="2"><span class="im">import</span> <span class="op">{</span> Route<span class="op">,</span> Link<span class="op">,</span> NavLink <span class="op">}</span> <span class="im">from</span> <span class="st">&#39;react-router-dom&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb52-3" title="3"></a>
+<a class="sourceLine" id="cb52-4" title="4"><span class="kw">const</span> Color <span class="op">=</span> () <span class="kw">=&gt;</span> (</a>
+<a class="sourceLine" id="cb52-5" title="5">  <span class="op">&lt;</span>div<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb52-6" title="6">    <span class="op">&lt;</span>h2 className<span class="op">=</span><span class="st">&quot;color&quot;</span><span class="op">&gt;</span>Color&lt;/h2<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb52-7" title="7">    <span class="op">{</span><span class="co">/* Links here */</span><span class="op">}</span></a>
+<a class="sourceLine" id="cb52-8" title="8"></a>
+<a class="sourceLine" id="cb52-9" title="9">    <span class="op">{</span><span class="co">/* Routes here */</span><span class="op">}</span></a>
+<a class="sourceLine" id="cb52-10" title="10">  &lt;/div<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb52-11" title="11">)<span class="op">;</span></a>
+<a class="sourceLine" id="cb52-12" title="12"></a>
+<a class="sourceLine" id="cb52-13" title="13"><span class="im">export</span> <span class="im">default</span> Color<span class="op">;</span></a></code></pre></div>
+<p>Your <code>Green</code>, <code>Indigo</code>, <code>Orange</code>, <code>Violet</code>, and <code>Yellow</code> components will look something like this:</p>
+<div class="sourceCode" id="cb53"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb53-1" title="1"><span class="im">import</span> React <span class="im">from</span> <span class="st">&#39;react&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb53-2" title="2"></a>
+<a class="sourceLine" id="cb53-3" title="3"><span class="kw">const</span> Color <span class="op">=</span> () <span class="kw">=&gt;</span> (</a>
+<a class="sourceLine" id="cb53-4" title="4">  <span class="op">&lt;</span>div<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb53-5" title="5">    <span class="op">&lt;</span>h3 className<span class="op">=</span><span class="st">&quot;color&quot;</span><span class="op">&gt;</span>Color&lt;/h3<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb53-6" title="6">  &lt;/div<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb53-7" title="7">)<span class="op">;</span></a>
+<a class="sourceLine" id="cb53-8" title="8"></a>
+<a class="sourceLine" id="cb53-9" title="9"><span class="im">export</span> <span class="im">default</span> Color<span class="op">;</span></a></code></pre></div>
+<p>Now start your server and verify you can see the “Rainbow Router!” header from your <code>Rainbow</code> component. Currently there is no functionality. Let’s fix that!</p>
+<h2 id="phase-1-routes">Phase 1: Routes</h2>
+<p>As a reminder, wrapping the <code>Rainbow</code> component in <code>&lt;BrowserRouter&gt;</code> tags makes the router available to all descendent React Router components. Now open the <code>Rainbow.js</code> file. You’re going to render some of your color components from here. Ultimately you want your routes to look like this.</p>
+<table>
+<thead>
+<tr class="header">
+<th>URL</th>
+<th>Components</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>/</code></td>
+<td><code>Rainbow</code></td>
+</tr>
+<tr class="even">
+<td><code>/red</code></td>
+<td><code>Rainbow -&gt; Red</code></td>
+</tr>
+<tr class="odd">
+<td><code>/red/orange</code></td>
+<td><code>Rainbow -&gt; Red -&gt; Orange</code></td>
+</tr>
+<tr class="even">
+<td><code>/red/yellow</code></td>
+<td><code>Rainbow -&gt; Red -&gt; Yellow</code></td>
+</tr>
+<tr class="odd">
+<td><code>/green</code></td>
+<td><code>Rainbow -&gt; Green</code></td>
+</tr>
+<tr class="even">
+<td><code>/blue</code></td>
+<td><code>Rainbow -&gt; Blue</code></td>
+</tr>
+<tr class="odd">
+<td><code>/blue/indigo</code></td>
+<td><code>Rainbow -&gt; Blue -&gt; Indigo</code></td>
+</tr>
+<tr class="even">
+<td><code>/violet</code></td>
+<td><code>Rainbow -&gt; Violet</code></td>
+</tr>
+</tbody>
+</table>
+<p>This means that the <code>Red</code>, <code>Green</code>, <code>Blue</code>, and <code>Violet</code> components need to render in the <code>Rainbow</code> component, but only when you are at the corresponding URL. You’ll do this with <code>Route</code> components. Begin by importing the <code>Red</code>, <code>Green</code>, <code>Blue</code>, and <code>Violet</code> components into your <code>Rainbow.js</code> file. Then add the necessary <code>Route</code> components inside the <code>div</code> with <code>id="rainbow"</code> in the <code>Rainbow</code> component. For example to render the <code>Red</code> component with the <code>/red</code> path, you would use the following <code>Route</code> component:</p>
+<pre class="jsx"><code>&lt;Route path=&quot;/red&quot; component={Red} /&gt;</code></pre>
+<p>Test that your code works! Manually type in each URL you just created, and you should see the color component pop up. Remember, these are React Routes, so the paths you created will come after the <code>/</code>. For example, your default rainbow route will look like <code>http://localhost:3000/</code> while your red route will look like <code>http://localhost:3000/red</code>.</p>
+<p>You want to nest the <code>Orange</code> and <code>Yellow</code> components inside the <code>Red</code> component, and the <code>Indigo</code> component inside the <code>Blue</code> component. Remember to import your components to use them in a <code>Route</code> tag. You’ll have to go add the corresponding <code>Route</code> tags to the <code>Red.js</code> and <code>Blue.js</code> files. Make sure to use the correct nested paths, such as <code>"/red/orange"</code> for the orange <code>Route</code>.</p>
+<h2 id="phase-2-links">Phase 2: Links</h2>
+<p>Manually navigating to our newly created routes is tiresome, so let’s add functionality to take care of this process for us. React Router provides the <code>Link</code> and <code>NavLink</code> components for this purpose.</p>
+<p>Add <code>Link</code>s to the paths <code>/red</code>, <code>/green</code>, <code>/blue</code>, and <code>/violet</code> in the <code>Rainbow</code> component. For example, your red link should look like</p>
+<pre class="jsx"><code>&lt;Link to=&quot;/red&quot;&gt;Red&lt;/NavLink&gt;</code></pre>
+<p>When you are at <code>blue</code> you want to be able to get to <code>/blue/indigo</code>, and then back to <code>/blue</code>. Add the corresponding <code>Link</code>s to the <code>Blue</code> component like this:</p>
+<pre class="jsx"><code>&lt;Link to=&#39;/blue&#39; &gt;Blue only&lt;/Link&gt;
+&lt;Link to=&#39;/blue/indigo&#39; &gt;Add indigo&lt;/Link&gt;</code></pre>
+<p>Similarly, add <code>Link</code>s to <code>/red</code>, <code>/red/orange</code> and <code>/red/yellow</code> to the <code>Red</code> component. Test all your links. Navigation is so much easier now!</p>
+<h2 id="phase-3-navlinks">Phase 3: NavLinks</h2>
+<p>It would be nice if our links gave us some indication of which route you were at. Fortunately, React Router has a special component for that very purpose: <code>NavLink</code>. NavLinks get an extra CSS class when their <code>to</code> prop matches the current URL. By default this class is called <code>active</code>.</p>
+<p>Go ahead and switch all your <code>Link</code>s to <code>NavLink</code>s. If you open the app you won’t see any change yet. That’s because you haven’t added any special styling to the <code>active</code> class. Go ahead and open the <code>index.css</code> file. Create an <code>.active</code> class and add the line <code>font-weight: 700</code>. Now your active links will be bold. Isn’t that nice!</p>
+<p>The only problem is that now the <code>Blue only</code> link is active even when the path is <code>/blue/indigo</code>. That doesn’t make a lot of sense. Let’s add the <code>exact</code> flag to that link so it will only be active when its <code>to</code> exactly matches the current path. Now it should look like:</p>
+<pre class="jsx"><code>&lt;NavLink exact to=&quot;/blue&quot;&gt;
+  Blue only
+&lt;/NavLink&gt;</code></pre>
+<p>Do the same for the <code>Red only</code> link. Everything should be working now.</p>
+<h1 id="phase-4---changing-navlinks-active-class">Phase 4 - Changing NavLink’s Active Class</h1>
+<p>You’ve already set up <code>NavLink</code> to <strong>bold</strong> the link text using the <code>.active</code> class in <code>src/index.css</code>. But what if you wanted this class to be something else? For instance, what if you want your main color links (Red, Green, Blue, Violet) to be styled differently when active than your sub-route links (Red Only, Add Orange, Add Yellow, etc.).</p>
+<p>You can set the class that React Router sets to an active <code>NavLink</code> by adding the <code>activeClassName</code> prop.</p>
+<p>For instance, when we are at a route matching the below <code>NavLink</code>’s <code>to</code> prop, the component will have a class of <code>.parent-active</code> applied:</p>
+<div class="sourceCode" id="cb58"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb58-1" title="1"><span class="op">&lt;</span>NavLink to<span class="op">=</span><span class="st">&quot;/blue&quot;</span> activeClassName<span class="op">=</span><span class="st">&quot;parent-active&quot;</span> <span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb58-2" title="2">  Blue</a>
+<a class="sourceLine" id="cb58-3" title="3">&lt;/NavLink<span class="op">&gt;</span></a></code></pre></div>
+<p>This allows much more flexibility to style an active <code>NavLink</code>!</p>
+<p>Using the example above, add an <code>activeClassName</code> prop to each of your <code>NavLink</code>s in <code>src/components/Rainbow.js</code>. Now, add some CSS styling for that class in your <code>src/index.css</code> to distinguish your main and your sub-route links.</p>
+<p>Compare your work to the solution and make sure the behavior is the same. Time to celebrate! ✨ 🌈 ✨</p>
+<p>You can also learn more about using the React Router at <a href="https://reacttraining.com/react-router/web/guides/quick-start">reacttraining.com</a>!</p>
+<hr />
+<h1 id="exploring-react-builds-project">Exploring React Builds Project</h1>
+<p>In this project, you’ll use Create React App to create a simple React application. You’ll experiment with some of the features that Create React App provides and deploy a production build of your application to a standalone Express application.</p>
+<h2 id="phase-0-setup-1">Phase 0: Setup</h2>
+<p>Begin by using the <a href="https://github.com/facebook/create-react-app">create-react-app</a> package to create a React application:</p>
+<div class="sourceCode" id="cb59"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb59-1" title="1"><span class="ex">npx</span> create-react-app exploring-react-builds --template @appacademy/simple</a></code></pre></div>
+<blockquote>
+<p>Remember that using the <code>create-react-app</code> command initializes your project as a Git repository. If you use the <code>ls -a</code> to view the hidden files in your project, you’ll see the <code>.git</code> file.</p>
+</blockquote>
+<p>Update the <code>App</code> component:</p>
+<ul>
+<li>Wrap the <code>&lt;h1&gt;</code> element with a <code>&lt;div&gt;</code> element; and</li>
+<li>Change the <code>&lt;h1&gt;</code> element content to something like “Exploring React Builds”.</li>
+</ul>
+<div class="sourceCode" id="cb60"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb60-1" title="1"><span class="co">// ./src/App.js</span></a>
+<a class="sourceLine" id="cb60-2" title="2"></a>
+<a class="sourceLine" id="cb60-3" title="3"><span class="im">import</span> React <span class="im">from</span> <span class="st">&#39;react&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb60-4" title="4"></a>
+<a class="sourceLine" id="cb60-5" title="5"><span class="kw">function</span> <span class="at">App</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb60-6" title="6">  <span class="cf">return</span> (</a>
+<a class="sourceLine" id="cb60-7" title="7">    <span class="op">&lt;</span>div<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb60-8" title="8">      <span class="op">&lt;</span>h1<span class="op">&gt;</span>Exploring React Builds&lt;/h1<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb60-9" title="9">    &lt;/div<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb60-10" title="10">  )<span class="op">;</span></a>
+<a class="sourceLine" id="cb60-11" title="11"><span class="op">}</span></a>
+<a class="sourceLine" id="cb60-12" title="12"></a>
+<a class="sourceLine" id="cb60-13" title="13"><span class="im">export</span> <span class="im">default</span> App<span class="op">;</span></a></code></pre></div>
+<h2 id="phase-1-using-css-modules">Phase 1: Using CSS modules</h2>
+<p>You’ve already seen an example of using the <code>import</code> keyword to import a stylesheet into a module so that it’ll be included in your application build. That’s the technique being used to include the global <code>index.css</code> stylesheet:</p>
+<div class="sourceCode" id="cb61"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb61-1" title="1"><span class="co">// ./src/index.js</span></a>
+<a class="sourceLine" id="cb61-2" title="2"></a>
+<a class="sourceLine" id="cb61-3" title="3"><span class="im">import</span> React <span class="im">from</span> <span class="st">&#39;react&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb61-4" title="4"><span class="im">import</span> ReactDOM <span class="im">from</span> <span class="st">&#39;react-dom&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb61-5" title="5"><span class="im">import</span> <span class="st">&#39;./index.css&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb61-6" title="6"><span class="im">import</span> App <span class="im">from</span> <span class="st">&#39;./App&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb61-7" title="7"></a>
+<a class="sourceLine" id="cb61-8" title="8"><span class="va">ReactDOM</span>.<span class="at">render</span>(</a>
+<a class="sourceLine" id="cb61-9" title="9">  <span class="op">&lt;</span><span class="va">React</span>.<span class="at">StrictMode</span><span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb61-10" title="10">    <span class="op">&lt;</span>App /<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb61-11" title="11">  &lt;/<span class="va">React</span>.<span class="at">StrictMode</span><span class="op">&gt;,</span></a>
+<a class="sourceLine" id="cb61-12" title="12">  <span class="va">document</span>.<span class="at">getElementById</span>(<span class="st">&#39;root&#39;</span>)</a>
+<a class="sourceLine" id="cb61-13" title="13">)<span class="op">;</span></a></code></pre></div>
+<p>You can also leverage <a href="https://github.com/css-modules/css-modules">CSS modules</a> in your Create React App projects. CSS Modules scope stylesheet class names so that they are unique to a specific React component. This allows you to create class names without having to worry if they might collide with class names used in another component.</p>
+<p>Add a new <code>css-modules</code> folder to the <code>src</code> folder. Within that folder, add the following files:</p>
+<ul>
+<li><code>HeadingA.js</code></li>
+<li><code>HeadingA.module.css</code></li>
+<li><code>HeadingB.js</code></li>
+<li><code>HeadingB.module.css</code></li>
+</ul>
+<p>Then update the contents of each file to the following:</p>
+<div class="sourceCode" id="cb62"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb62-1" title="1"><span class="co">// ./src/css-modules/HeadingA.js</span></a>
+<a class="sourceLine" id="cb62-2" title="2"></a>
+<a class="sourceLine" id="cb62-3" title="3"><span class="im">import</span> React <span class="im">from</span> <span class="st">&#39;react&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb62-4" title="4"><span class="im">import</span> styles <span class="im">from</span> <span class="st">&#39;./HeadingA.module.css&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb62-5" title="5"></a>
+<a class="sourceLine" id="cb62-6" title="6"><span class="kw">function</span> <span class="at">HeadingA</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb62-7" title="7">  <span class="cf">return</span> (</a>
+<a class="sourceLine" id="cb62-8" title="8">    <span class="op">&lt;</span>h1 className<span class="op">={</span><span class="va">styles</span>.<span class="at">heading</span><span class="op">}&gt;</span>Heading A&lt;/h1<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb62-9" title="9">  )<span class="op">;</span></a>
+<a class="sourceLine" id="cb62-10" title="10"><span class="op">}</span></a>
+<a class="sourceLine" id="cb62-11" title="11"></a>
+<a class="sourceLine" id="cb62-12" title="12"><span class="im">export</span> <span class="im">default</span> HeadingA<span class="op">;</span></a></code></pre></div>
+<div class="sourceCode" id="cb63"><pre class="sourceCode css"><code class="sourceCode css"><a class="sourceLine" id="cb63-1" title="1"><span class="co">/* ./src/css-modules/HeadingA.module.css */</span></a>
+<a class="sourceLine" id="cb63-2" title="2"></a>
+<a class="sourceLine" id="cb63-3" title="3"><span class="fu">.heading</span> {</a>
+<a class="sourceLine" id="cb63-4" title="4">  <span class="kw">color</span>: <span class="cn">green</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb63-5" title="5">}</a></code></pre></div>
+<div class="sourceCode" id="cb64"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb64-1" title="1"><span class="co">// ./src/css-modules/HeadingB.js</span></a>
+<a class="sourceLine" id="cb64-2" title="2"></a>
+<a class="sourceLine" id="cb64-3" title="3"><span class="im">import</span> React <span class="im">from</span> <span class="st">&#39;react&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb64-4" title="4"><span class="im">import</span> styles <span class="im">from</span> <span class="st">&#39;./HeadingB.module.css&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb64-5" title="5"></a>
+<a class="sourceLine" id="cb64-6" title="6"><span class="kw">function</span> <span class="at">HeadingB</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb64-7" title="7">  <span class="cf">return</span> (</a>
+<a class="sourceLine" id="cb64-8" title="8">    <span class="op">&lt;</span>h1 className<span class="op">={</span><span class="va">styles</span>.<span class="at">heading</span><span class="op">}&gt;</span>Heading B&lt;/h1<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb64-9" title="9">  )<span class="op">;</span></a>
+<a class="sourceLine" id="cb64-10" title="10"><span class="op">}</span></a>
+<a class="sourceLine" id="cb64-11" title="11"></a>
+<a class="sourceLine" id="cb64-12" title="12"><span class="im">export</span> <span class="im">default</span> HeadingB<span class="op">;</span></a></code></pre></div>
+<div class="sourceCode" id="cb65"><pre class="sourceCode css"><code class="sourceCode css"><a class="sourceLine" id="cb65-1" title="1"><span class="co">/* ./src/css-modules/HeadingB.module.css */</span></a>
+<a class="sourceLine" id="cb65-2" title="2"></a>
+<a class="sourceLine" id="cb65-3" title="3"><span class="fu">.heading</span> {</a>
+<a class="sourceLine" id="cb65-4" title="4">  <span class="kw">color</span>: <span class="cn">red</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb65-5" title="5">}</a></code></pre></div>
+<p>Notice how the <code>.heading</code> CSS class name is being used within each component to set the color of the <code>&lt;h1&gt;</code> element. For the <code>HeadingA</code> component, the color is <code>green</code>, and for the <code>HeadingB</code> component, the color is <code>red</code>. Using the file naming convention <code>[name].module.css</code> let’s Create React App know that we want these stylesheets to be processed as CSS Modules. Using CSS Modules allows the <code>.heading</code> class name to be reused across components without any issue.</p>
+<p>To see this feature in action, update your <code>App</code> component to render both of your new components:</p>
+<div class="sourceCode" id="cb66"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb66-1" title="1"><span class="im">import</span> React <span class="im">from</span> <span class="st">&#39;react&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb66-2" title="2"><span class="im">import</span> HeadingA <span class="im">from</span> <span class="st">&#39;./css-modules/HeadingA&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb66-3" title="3"><span class="im">import</span> HeadingB <span class="im">from</span> <span class="st">&#39;./css-modules/HeadingB&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb66-4" title="4"></a>
+<a class="sourceLine" id="cb66-5" title="5"><span class="kw">function</span> <span class="at">App</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb66-6" title="6">  <span class="cf">return</span> (</a>
+<a class="sourceLine" id="cb66-7" title="7">    <span class="op">&lt;</span>div<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb66-8" title="8">      <span class="op">&lt;</span>h1<span class="op">&gt;</span>Exploring React Builds&lt;/h1<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb66-9" title="9">      <span class="op">&lt;</span>HeadingA /<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb66-10" title="10">      <span class="op">&lt;</span>HeadingB /<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb66-11" title="11">    &lt;/div<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb66-12" title="12">  )<span class="op">;</span></a>
+<a class="sourceLine" id="cb66-13" title="13"><span class="op">}</span></a>
+<a class="sourceLine" id="cb66-14" title="14"></a>
+<a class="sourceLine" id="cb66-15" title="15"><span class="im">export</span> <span class="im">default</span> App<span class="op">;</span></a></code></pre></div>
+<p>Then run your application (<code>npm start</code>) to see “Heading A” and “Heading B” displayed respectively in green and red. If you use the browser’s developer tools to inspect “Heading A”, you’ll see that the <code>.heading</code> class name has been modified so that it’s unique to the <code>HeadingA</code> component:</p>
+<figure>
+<img src="images/react-builds-css-modules.png" alt="react builds css modules" /><figcaption>react builds css modules</figcaption>
+</figure>
+<p>CSS Modules is an example of how a front-end build process can be used to modify code to enable a feature that’s not natively supported by browsers.</p>
+<h2 id="phase-2-using-an-image-in-a-component">Phase 2: Using an image in a component</h2>
+<p>Create React App configures webpack with support for loading images (as well as CSS, fonts, and other file types). What this means, for you as the developer, is that you can add an image file to your project, import it directly into a module, and render it in a React component.</p>
+<p>Download any image of off the Web or <a href="https://appacademy-open-assets.s3-us-west-1.amazonaws.com/Modular-Curriculum/content/react-redux/topics/react-builds/assets/react-builds-cat.png">click here</a> to download the below image.</p>
+<figure>
+<img src="https://appacademy-open-assets.s3-us-west-1.amazonaws.com/Modular-Curriculum/content/react-redux/topics/react-builds/assets/react-builds-cat.png" alt="react builds cat" /><figcaption>react builds cat</figcaption>
+</figure>
+<p>Then within the <code>src</code> folder add a new folder named <code>image</code>. Within that folder add a new component file named <code>Image.js</code>. Also add your downloaded image file to the <code>image</code> folder (so it’s a sibling to the <code>Image.js</code> file).</p>
+<p>Update the contents of the <code>Image.js</code> file to this:</p>
+<div class="sourceCode" id="cb67"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb67-1" title="1"><span class="co">// ./src/image/Image.js</span></a>
+<a class="sourceLine" id="cb67-2" title="2"></a>
+<a class="sourceLine" id="cb67-3" title="3"><span class="im">import</span> React <span class="im">from</span> <span class="st">&#39;react&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb67-4" title="4"><span class="im">import</span> cat <span class="im">from</span> <span class="st">&#39;./react-builds-cat.png&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb67-5" title="5"></a>
+<a class="sourceLine" id="cb67-6" title="6"><span class="va">console</span>.<span class="at">log</span>(cat)<span class="op">;</span> <span class="co">// /static/media/react-builds-cat.45f7f4d2.png</span></a>
+<a class="sourceLine" id="cb67-7" title="7"></a>
+<a class="sourceLine" id="cb67-8" title="8"><span class="kw">function</span> <span class="at">Image</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb67-9" title="9">  <span class="co">// Import result is the URL of your image.</span></a>
+<a class="sourceLine" id="cb67-10" title="10">  <span class="cf">return</span> <span class="op">&lt;</span>img src<span class="op">={</span>cat<span class="op">}</span> alt<span class="op">=</span><span class="st">&quot;images/images/Cat&quot;</span> /&gt;<span class="op">;</span></a>
+<a class="sourceLine" id="cb67-11" title="11"><span class="op">}</span></a>
+<a class="sourceLine" id="cb67-12" title="12"></a>
+<a class="sourceLine" id="cb67-13" title="13"><span class="im">export</span> <span class="im">default</span> Image<span class="op">;</span></a></code></pre></div>
+<p>You can import an image into a component using the <code>import</code> keyword. This tells webpack to include the image in the build. Notice that when you import an image into a module, you’ll get a path to the image’s location within the build. You can use this path to set the <code>src</code> attribute on an <code>&lt;img&gt;</code> element.</p>
+<blockquote>
+<p>Be sure to update the image <code>import</code> statement to the correct file name if you’re using your own image!</p>
+</blockquote>
+<p>Now update the <code>App</code> component to import and render the <code>Image</code> component:</p>
+<div class="sourceCode" id="cb68"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb68-1" title="1"><span class="co">// ./src/App.js</span></a>
+<a class="sourceLine" id="cb68-2" title="2"></a>
+<a class="sourceLine" id="cb68-3" title="3"><span class="im">import</span> React <span class="im">from</span> <span class="st">&#39;react&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb68-4" title="4"><span class="im">import</span> HeadingA <span class="im">from</span> <span class="st">&#39;./css-modules/HeadingA&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb68-5" title="5"><span class="im">import</span> HeadingB <span class="im">from</span> <span class="st">&#39;./css-modules/HeadingB&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb68-6" title="6"><span class="im">import</span> Image <span class="im">from</span> <span class="st">&#39;./image/Image&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb68-7" title="7"></a>
+<a class="sourceLine" id="cb68-8" title="8"><span class="kw">function</span> <span class="at">App</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb68-9" title="9">  <span class="cf">return</span> (</a>
+<a class="sourceLine" id="cb68-10" title="10">    <span class="op">&lt;</span>div<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb68-11" title="11">      <span class="op">&lt;</span>h1<span class="op">&gt;</span>Exploring React Builds&lt;/h1<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb68-12" title="12">      <span class="op">&lt;</span>HeadingA /<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb68-13" title="13">      <span class="op">&lt;</span>HeadingB /<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb68-14" title="14">      <span class="op">&lt;</span>Image /<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb68-15" title="15">    &lt;/div<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb68-16" title="16">  )<span class="op">;</span></a>
+<a class="sourceLine" id="cb68-17" title="17"><span class="op">}</span></a>
+<a class="sourceLine" id="cb68-18" title="18"></a>
+<a class="sourceLine" id="cb68-19" title="19"><span class="im">export</span> <span class="im">default</span> App<span class="op">;</span></a></code></pre></div>
+<p>If you run your application (<code>npm start</code>) you’ll see your image displayed on the page! You can also open your browser’s developer tools and view the “Sources” for the current page. If you can expand the <code>localhost:3000</code> &gt; <code>static</code> &gt; <code>media</code> node on the left, you can see the image file that webpack copied to your build.</p>
+<figure>
+<img src="images/react-builds-dev-tools-image.png" alt="react builds dev tools image" /><figcaption>react builds dev tools image</figcaption>
+</figure>
+<h3 id="images-in-stylesheets">Images in stylesheets</h3>
+<p>You can also reference images in your CSS files too. Add a CSS file named <code>Image.css</code> to the <code>./src/image</code> folder and update its contents to this:</p>
+<div class="sourceCode" id="cb69"><pre class="sourceCode css"><code class="sourceCode css"><a class="sourceLine" id="cb69-1" title="1"><span class="co">/* ./src/image/Image.css */</span></a>
+<a class="sourceLine" id="cb69-2" title="2"></a>
+<a class="sourceLine" id="cb69-3" title="3"><span class="fu">.cat</span> {</a>
+<a class="sourceLine" id="cb69-4" title="4">  <span class="kw">background-image</span>: <span class="fu">url(</span><span class="st">./react-builds-cat.png</span><span class="fu">)</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb69-5" title="5">  <span class="kw">width</span>: <span class="dv">400</span><span class="dt">px</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb69-6" title="6">  <span class="kw">height</span>: <span class="dv">400</span><span class="dt">px</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb69-7" title="7">}</a></code></pre></div>
+<p>Then update the <code>Image</code> component to this:</p>
+<div class="sourceCode" id="cb70"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb70-1" title="1"><span class="co">// ./src/image/Image.js</span></a>
+<a class="sourceLine" id="cb70-2" title="2"></a>
+<a class="sourceLine" id="cb70-3" title="3"><span class="im">import</span> React <span class="im">from</span> <span class="st">&#39;react&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb70-4" title="4"><span class="im">import</span> <span class="st">&#39;./Image.css&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb70-5" title="5"><span class="im">import</span> cat <span class="im">from</span> <span class="st">&#39;./react-builds-cat.png&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb70-6" title="6"></a>
+<a class="sourceLine" id="cb70-7" title="7"><span class="va">console</span>.<span class="at">log</span>(cat)<span class="op">;</span> <span class="co">// /static/media/react-builds-cat.45f7f4d2.png</span></a>
+<a class="sourceLine" id="cb70-8" title="8"></a>
+<a class="sourceLine" id="cb70-9" title="9"><span class="kw">function</span> <span class="at">Image</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb70-10" title="10">  <span class="cf">return</span> (</a>
+<a class="sourceLine" id="cb70-11" title="11">    <span class="op">&lt;</span>div<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb70-12" title="12">      <span class="op">{</span><span class="co">/* Import result is the URL of your image. */</span><span class="op">}</span></a>
+<a class="sourceLine" id="cb70-13" title="13">      <span class="op">&lt;</span>img src<span class="op">={</span>cat<span class="op">}</span> alt<span class="op">=</span><span class="st">&quot;Cat&quot;</span> /&gt;</a>
+<a class="sourceLine" id="cb70-14" title="14">      <span class="op">&lt;</span>div className<span class="op">=</span><span class="st">&#39;cat&#39;</span><span class="op">&gt;</span>&lt;/div<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb70-15" title="15">    &lt;/div<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb70-16" title="16">  )<span class="op">;</span></a>
+<a class="sourceLine" id="cb70-17" title="17"><span class="op">}</span></a>
+<a class="sourceLine" id="cb70-18" title="18"></a>
+<a class="sourceLine" id="cb70-19" title="19"><span class="im">export</span> <span class="im">default</span> Image<span class="op">;</span></a></code></pre></div>
+<p>Now you’ll see the image displayed twice on the page!</p>
+<h2 id="phase-3-updating-the-supported-browsers-and-its-affect-on-code-transpilation">Phase 3: Updating the supported browsers (and its affect on code transpilation)</h2>
+<p>Earlier you learned about the <code>browerslist</code> setting in the <code>package.json</code> file and now adjusting these targets affect how your code will be transpiled:</p>
+<div class="sourceCode" id="cb71"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb71-1" title="1"><span class="fu">{</span></a>
+<a class="sourceLine" id="cb71-2" title="2">  <span class="dt">&quot;browserslist&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb71-3" title="3">    <span class="dt">&quot;production&quot;</span><span class="fu">:</span> <span class="ot">[</span></a>
+<a class="sourceLine" id="cb71-4" title="4">      <span class="st">&quot;&gt;0.2%&quot;</span><span class="ot">,</span></a>
+<a class="sourceLine" id="cb71-5" title="5">      <span class="st">&quot;not dead&quot;</span><span class="ot">,</span></a>
+<a class="sourceLine" id="cb71-6" title="6">      <span class="st">&quot;not op_mini all&quot;</span></a>
+<a class="sourceLine" id="cb71-7" title="7">    <span class="ot">]</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb71-8" title="8">    <span class="dt">&quot;development&quot;</span><span class="fu">:</span> <span class="ot">[</span></a>
+<a class="sourceLine" id="cb71-9" title="9">      <span class="st">&quot;last 1 chrome version&quot;</span><span class="ot">,</span></a>
+<a class="sourceLine" id="cb71-10" title="10">      <span class="st">&quot;last 1 firefox version&quot;</span><span class="ot">,</span></a>
+<a class="sourceLine" id="cb71-11" title="11">      <span class="st">&quot;last 1 safari version&quot;</span></a>
+<a class="sourceLine" id="cb71-12" title="12">    <span class="ot">]</span></a>
+<a class="sourceLine" id="cb71-13" title="13">  <span class="fu">}</span></a>
+<a class="sourceLine" id="cb71-14" title="14"><span class="fu">}</span></a></code></pre></div>
+<p>The <code>production</code> list specifies the browsers to target when creating a production build and the <code>development</code> list specifics the browsers to target when running the application using <code>npm start</code>. Currently, you’re targeting relatively recent versions of the major browsers when creating a development build. Targeting older browser versions results in your code being transpiled to an older version of JavaScript.</p>
+<p>To experiment with this configuration option, let’s add a class component to the project. Add a new folder named <code>class-component</code> to the <code>src</code> folder. Within that folder, add a file named <code>ClassComponent.js</code> containing the following code:</p>
+<div class="sourceCode" id="cb72"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb72-1" title="1"><span class="co">// ./src/class-component/ClassComponent.js</span></a>
+<a class="sourceLine" id="cb72-2" title="2"></a>
+<a class="sourceLine" id="cb72-3" title="3"><span class="im">import</span> React <span class="im">from</span> <span class="st">&#39;react&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb72-4" title="4"></a>
+<a class="sourceLine" id="cb72-5" title="5"><span class="kw">class</span> ClassComponent <span class="kw">extends</span> <span class="va">React</span>.<span class="at">Component</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb72-6" title="6">  <span class="at">render</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb72-7" title="7">    <span class="cf">return</span> (</a>
+<a class="sourceLine" id="cb72-8" title="8">      <span class="op">&lt;</span>h1<span class="op">&gt;</span>Class Component&lt;/h1<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb72-9" title="9">    )<span class="op">;</span></a>
+<a class="sourceLine" id="cb72-10" title="10">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb72-11" title="11"><span class="op">}</span></a>
+<a class="sourceLine" id="cb72-12" title="12"></a>
+<a class="sourceLine" id="cb72-13" title="13"><span class="im">export</span> <span class="im">default</span> ClassComponent<span class="op">;</span></a></code></pre></div>
+<p>Don’t forget to update your <code>App</code> component to render the new component:</p>
+<div class="sourceCode" id="cb73"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb73-1" title="1"><span class="co">// ./src/App.js</span></a>
+<a class="sourceLine" id="cb73-2" title="2"></a>
+<a class="sourceLine" id="cb73-3" title="3"><span class="im">import</span> React <span class="im">from</span> <span class="st">&#39;react&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb73-4" title="4"><span class="im">import</span> HeadingA <span class="im">from</span> <span class="st">&#39;./css-modules/HeadingA&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb73-5" title="5"><span class="im">import</span> HeadingB <span class="im">from</span> <span class="st">&#39;./css-modules/HeadingB&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb73-6" title="6"><span class="im">import</span> Image <span class="im">from</span> <span class="st">&#39;./image/Image&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb73-7" title="7"><span class="im">import</span> ClassComponent <span class="im">from</span> <span class="st">&#39;./class-component/ClassComponent&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb73-8" title="8"></a>
+<a class="sourceLine" id="cb73-9" title="9"><span class="kw">function</span> <span class="at">App</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb73-10" title="10">  <span class="cf">return</span> (</a>
+<a class="sourceLine" id="cb73-11" title="11">    <span class="op">&lt;</span>div<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb73-12" title="12">      <span class="op">&lt;</span>h1<span class="op">&gt;</span>Exploring React Builds&lt;/h1<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb73-13" title="13">      <span class="op">&lt;</span>HeadingA /<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb73-14" title="14">      <span class="op">&lt;</span>HeadingB /<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb73-15" title="15">      <span class="op">&lt;</span>Image /<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb73-16" title="16">      <span class="op">&lt;</span>ClassComponent /<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb73-17" title="17">    &lt;/div<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb73-18" title="18">  )<span class="op">;</span></a>
+<a class="sourceLine" id="cb73-19" title="19"><span class="op">}</span></a>
+<a class="sourceLine" id="cb73-20" title="20"></a>
+<a class="sourceLine" id="cb73-21" title="21"><span class="im">export</span> <span class="im">default</span> App<span class="op">;</span></a></code></pre></div>
+<p>Now run your application using <code>npm start</code>. Open your browser’s developer tools and view the “Sources” for the current page. Expand the <code>localhost:3000</code> &gt; <code>static</code> &gt; <code>js</code> node on the left and select the <code>main.chunk.js</code> file. Press <code>CMD+F</code> on macOS or <code>CTRL+F</code> on Windows to search the file for “Class Component”. Here’s what the transpiled code looks like for the <code>ClassComponent</code> class:</p>
+<div class="sourceCode" id="cb74"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb74-1" title="1"><span class="kw">class</span> ClassComponent <span class="kw">extends</span> <span class="va">react__WEBPACK_IMPORTED_MODULE_0___default</span>.<span class="va">a</span>.<span class="at">Component</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb74-2" title="2">  <span class="at">render</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb74-3" title="3">    <span class="cf">return</span> <span class="co">/*#__PURE__*/</span><span class="va">react__WEBPACK_IMPORTED_MODULE_0___default</span>.<span class="va">a</span>.<span class="at">createElement</span>(<span class="st">&quot;h1&quot;</span><span class="op">,</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb74-4" title="4">      <span class="dt">__self</span><span class="op">:</span> <span class="kw">this</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb74-5" title="5">      <span class="dt">__source</span><span class="op">:</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb74-6" title="6">        <span class="dt">fileName</span><span class="op">:</span> _jsxFileName<span class="op">,</span></a>
+<a class="sourceLine" id="cb74-7" title="7">        <span class="dt">lineNumber</span><span class="op">:</span> <span class="dv">7</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb74-8" title="8">        <span class="dt">columnNumber</span><span class="op">:</span> <span class="dv">7</span></a>
+<a class="sourceLine" id="cb74-9" title="9">      <span class="op">}</span></a>
+<a class="sourceLine" id="cb74-10" title="10">    <span class="op">},</span> <span class="st">&quot;Class Component&quot;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb74-11" title="11">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb74-12" title="12"><span class="op">}</span></a></code></pre></div>
+<blockquote>
+<p>Have you wondered yet why you need to use the developer tools to view the bundles generated by Create React App? Remember that when you run <code>npm start</code>, Create React App builds your application using <a href="https://webpack.js.org/configuration/dev-server/"><code>webpack-dev-server</code></a>. To keep things as performant as possible, the bundles generated by <a href="https://webpack.js.org/configuration/dev-server/"><code>webpack-dev-server</code></a> are stored in memory instead of writing them to the file system.</p>
+</blockquote>
+<p>The JSX in the component’s <code>render</code> method has been converted to JavaScript but the <code>ClassComponent</code> ES2015 class is left alone. This makes sense though as JSX isn’t natively supported by any browser while ES2015 classes have been natively supported by browsers for awhile now.</p>
+<p>But what if you need to target a version of a browser that doesn’t support ES2015 classes? You can use the <a href="https://caniuse.com/#feat=es6-class">“Can I use…”</a> website to see when browsers started supporting ES2105 (or ES6) classes. Starting with version 49, Chrome natively supported classes. But imagine that you need to support Chrome going back to version 30, a version of Chrome that doesn’t support classes.</p>
+<p>Change the <code>browserslist.development</code> property in the <code>package.json</code> file to this:</p>
+<div class="sourceCode" id="cb75"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb75-1" title="1"><span class="fu">{</span></a>
+<a class="sourceLine" id="cb75-2" title="2">  <span class="dt">&quot;browserslist&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb75-3" title="3">    <span class="dt">&quot;production&quot;</span><span class="fu">:</span> <span class="ot">[</span></a>
+<a class="sourceLine" id="cb75-4" title="4">      <span class="st">&quot;&gt;0.2%&quot;</span><span class="ot">,</span></a>
+<a class="sourceLine" id="cb75-5" title="5">      <span class="st">&quot;not dead&quot;</span><span class="ot">,</span></a>
+<a class="sourceLine" id="cb75-6" title="6">      <span class="st">&quot;not op_mini all&quot;</span></a>
+<a class="sourceLine" id="cb75-7" title="7">    <span class="ot">]</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb75-8" title="8">    <span class="dt">&quot;development&quot;</span><span class="fu">:</span> <span class="ot">[</span></a>
+<a class="sourceLine" id="cb75-9" title="9">      <span class="st">&quot;chrome &gt;= 30&quot;</span><span class="ot">,</span></a>
+<a class="sourceLine" id="cb75-10" title="10">      <span class="st">&quot;last 1 firefox version&quot;</span><span class="ot">,</span></a>
+<a class="sourceLine" id="cb75-11" title="11">      <span class="st">&quot;last 1 safari version&quot;</span></a>
+<a class="sourceLine" id="cb75-12" title="12">    <span class="ot">]</span></a>
+<a class="sourceLine" id="cb75-13" title="13">  <span class="fu">}</span></a>
+<a class="sourceLine" id="cb75-14" title="14"><span class="fu">}</span></a></code></pre></div>
+<p>The query <code>chrome &gt;= 30</code> specifies that you want to target Chrome version 30 or newer.</p>
+<blockquote>
+<p>The <a href="https://browserl.ist">browserl.ist</a> website can be used to see the browsers supported by your configured <code>browserslist</code>.</p>
+</blockquote>
+<p>Stop your application if it’s currently running. Delete the <code>./node_modules/.cache</code> folder and run <code>npm start</code> again. Then view the <code>main.chunk.js</code> bundle again in the developer tools:</p>
+<figure>
+<img src="https://appacademy-open-assets.s3-us-west-1.amazonaws.com/Modular-Curriculum/content/react-redux/topics/react-builds/assets/react-builds-transpilation.png" alt="react builds transpilation" /><figcaption>react builds transpilation</figcaption>
+</figure>
+<p>Now your ES2015 class component is being converted to a constructor function! Here’s the transpiled code for reference:</p>
+<div class="sourceCode" id="cb76"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb76-1" title="1"><span class="kw">var</span> ClassComponent <span class="op">=</span> <span class="co">/*#__PURE__*/</span><span class="kw">function</span> (_React$Component) <span class="op">{</span></a>
+<a class="sourceLine" id="cb76-2" title="2">  <span class="at">Object</span>(_Users_jameschurchill_Documents_GitHub_Modular_Curriculum_content_react_redux_topics_react_builds_projects_exploring_react_builds_solution_node_modules_babel_preset_react_app_node_modules_babel_runtime_helpers_esm_inherits__WEBPACK_IMPORTED_MODULE_2__[<span class="st">&quot;default&quot;</span>])(ClassComponent<span class="op">,</span> _React$Component)<span class="op">;</span></a>
+<a class="sourceLine" id="cb76-3" title="3"></a>
+<a class="sourceLine" id="cb76-4" title="4">  <span class="kw">var</span> _super <span class="op">=</span> <span class="at">Object</span>(_Users_jameschurchill_Documents_GitHub_Modular_Curriculum_content_react_redux_topics_react_builds_projects_exploring_react_builds_solution_node_modules_babel_preset_react_app_node_modules_babel_runtime_helpers_esm_createSuper__WEBPACK_IMPORTED_MODULE_3__[<span class="st">&quot;default&quot;</span>])(ClassComponent)<span class="op">;</span></a>
+<a class="sourceLine" id="cb76-5" title="5"></a>
+<a class="sourceLine" id="cb76-6" title="6">  <span class="kw">function</span> <span class="at">ClassComponent</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb76-7" title="7">    <span class="at">Object</span>(_Users_jameschurchill_Documents_GitHub_Modular_Curriculum_content_react_redux_topics_react_builds_projects_exploring_react_builds_solution_node_modules_babel_preset_react_app_node_modules_babel_runtime_helpers_esm_classCallCheck__WEBPACK_IMPORTED_MODULE_0__[<span class="st">&quot;default&quot;</span>])(<span class="kw">this</span><span class="op">,</span> ClassComponent)<span class="op">;</span></a>
+<a class="sourceLine" id="cb76-8" title="8"></a>
+<a class="sourceLine" id="cb76-9" title="9">    <span class="cf">return</span> <span class="va">_super</span>.<span class="at">apply</span>(<span class="kw">this</span><span class="op">,</span> <span class="kw">arguments</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb76-10" title="10">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb76-11" title="11"></a>
+<a class="sourceLine" id="cb76-12" title="12">  <span class="at">Object</span>(_Users_jameschurchill_Documents_GitHub_Modular_Curriculum_content_react_redux_topics_react_builds_projects_exploring_react_builds_solution_node_modules_babel_preset_react_app_node_modules_babel_runtime_helpers_esm_createClass__WEBPACK_IMPORTED_MODULE_1__[<span class="st">&quot;default&quot;</span>])(ClassComponent<span class="op">,</span> [<span class="op">{</span></a>
+<a class="sourceLine" id="cb76-13" title="13">    <span class="dt">key</span><span class="op">:</span> <span class="st">&quot;render&quot;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb76-14" title="14">    <span class="dt">value</span><span class="op">:</span> <span class="kw">function</span> <span class="at">render</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb76-15" title="15">      <span class="cf">return</span> <span class="co">/*#__PURE__*/</span><span class="va">react__WEBPACK_IMPORTED_MODULE_4___default</span>.<span class="va">a</span>.<span class="at">createElement</span>(<span class="st">&quot;h1&quot;</span><span class="op">,</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb76-16" title="16">        <span class="dt">__self</span><span class="op">:</span> <span class="kw">this</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb76-17" title="17">        <span class="dt">__source</span><span class="op">:</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb76-18" title="18">          <span class="dt">fileName</span><span class="op">:</span> _jsxFileName<span class="op">,</span></a>
+<a class="sourceLine" id="cb76-19" title="19">          <span class="dt">lineNumber</span><span class="op">:</span> <span class="dv">7</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb76-20" title="20">          <span class="dt">columnNumber</span><span class="op">:</span> <span class="dv">7</span></a>
+<a class="sourceLine" id="cb76-21" title="21">        <span class="op">}</span></a>
+<a class="sourceLine" id="cb76-22" title="22">      <span class="op">},</span> <span class="st">&quot;Class Component&quot;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb76-23" title="23">    <span class="op">}</span></a>
+<a class="sourceLine" id="cb76-24" title="24">  <span class="op">}</span>])<span class="op">;</span></a>
+<a class="sourceLine" id="cb76-25" title="25"></a>
+<a class="sourceLine" id="cb76-26" title="26">  <span class="cf">return</span> ClassComponent<span class="op">;</span></a>
+<a class="sourceLine" id="cb76-27" title="27"><span class="op">}</span>(<span class="va">react__WEBPACK_IMPORTED_MODULE_4___default</span>.<span class="va">a</span>.<span class="at">Component</span>)<span class="op">;</span></a></code></pre></div>
+<p>Luckily it’s very rare that you’ll need to read the code in your generated bundles. webpack, by default, is configured to generate sourcemaps. Sourcemaps are a mapping of the code in a generated file, like a bundle file, to the original source code. This gives you access to your original source code in the browser’s developer tools:</p>
+<figure>
+<img src="images/react-builds-sourcemaps.png" alt="react builds sourcemaps" /><figcaption>react builds sourcemaps</figcaption>
+</figure>
+<p>You can even set a breakpoint in your source within the developer tools to stop execution on a specific line of code!</p>
+<h2 id="phase-4-adding-environment-variables">Phase 4: Adding environment variables</h2>
+<p>Earlier you learned that Create React App supports defining environment variables in an <code>.env</code> file. This gives you a convenient way to avoid hard coding values that vary across environments.</p>
+<p>Let’s experiment with this feature so that you can see how the Create React App build process embeds environment variables into your HTML, CSS, and JavaScript bundles.</p>
+<p>Add an <code>.env</code> file to the root of your Create React App project. Define an environment variable named <code>REACT_APP_TITLE</code>:</p>
+<pre><code>REACT_APP_TITLE=Exploring React Builds</code></pre>
+<p>Remember that environment variables need to be prefixed with <code>REACT_APP_</code> for Create React App to process them. After defining your environment variable, you can refer to it within JSX using an expression and <code>process.env</code>:</p>
+<div class="sourceCode" id="cb78"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb78-1" title="1"><span class="co">// ./src/App.js</span></a>
+<a class="sourceLine" id="cb78-2" title="2"></a>
+<a class="sourceLine" id="cb78-3" title="3"><span class="im">import</span> React <span class="im">from</span> <span class="st">&#39;react&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb78-4" title="4"><span class="im">import</span> HeadingA <span class="im">from</span> <span class="st">&#39;./css-modules/HeadingA&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb78-5" title="5"><span class="im">import</span> HeadingB <span class="im">from</span> <span class="st">&#39;./css-modules/HeadingB&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb78-6" title="6"><span class="im">import</span> Image <span class="im">from</span> <span class="st">&#39;./image/Image&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb78-7" title="7"><span class="im">import</span> ClassComponent <span class="im">from</span> <span class="st">&#39;./class-component/ClassComponent&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb78-8" title="8"></a>
+<a class="sourceLine" id="cb78-9" title="9"><span class="kw">function</span> <span class="at">App</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb78-10" title="10">  <span class="cf">return</span> (</a>
+<a class="sourceLine" id="cb78-11" title="11">    <span class="op">&lt;</span>div<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb78-12" title="12">      <span class="op">&lt;</span>h1<span class="op">&gt;{</span><span class="va">process</span>.<span class="va">env</span>.<span class="at">REACT_APP_TITLE</span><span class="op">}</span>&lt;/h1<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb78-13" title="13">      <span class="op">&lt;</span>HeadingA /<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb78-14" title="14">      <span class="op">&lt;</span>HeadingB /<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb78-15" title="15">      <span class="op">&lt;</span>Image /<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb78-16" title="16">      <span class="op">&lt;</span>ClassComponent /<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb78-17" title="17">    &lt;/div<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb78-18" title="18">  )<span class="op">;</span></a>
+<a class="sourceLine" id="cb78-19" title="19"><span class="op">}</span></a>
+<a class="sourceLine" id="cb78-20" title="20"></a>
+<a class="sourceLine" id="cb78-21" title="21"><span class="im">export</span> <span class="im">default</span> App<span class="op">;</span></a></code></pre></div>
+<p>Environment variables can also be referred to in regular JavaScript code:</p>
+<div class="sourceCode" id="cb79"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb79-1" title="1"><span class="va">console</span>.<span class="at">log</span>(<span class="va">process</span>.<span class="va">env</span>.<span class="at">REACT_APP_TITLE</span>)<span class="op">;</span></a></code></pre></div>
+<p>You can also reference environment variables in your <code>./public/index.html</code> file like this:</p>
+<div class="sourceCode" id="cb80"><pre class="sourceCode html"><code class="sourceCode html"><a class="sourceLine" id="cb80-1" title="1"><span class="dt">&lt;!DOCTYPE </span>html<span class="dt">&gt;</span></a>
+<a class="sourceLine" id="cb80-2" title="2"><span class="kw">&lt;html</span><span class="ot"> lang=</span><span class="st">&quot;en&quot;</span><span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb80-3" title="3">  <span class="kw">&lt;head&gt;</span></a>
+<a class="sourceLine" id="cb80-4" title="4">    <span class="kw">&lt;meta</span><span class="ot"> charset=</span><span class="st">&quot;utf-8&quot;</span> <span class="kw">/&gt;</span></a>
+<a class="sourceLine" id="cb80-5" title="5">    <span class="kw">&lt;title&gt;</span>%REACT_APP_TITLE%<span class="kw">&lt;/title&gt;</span></a>
+<a class="sourceLine" id="cb80-6" title="6">  <span class="kw">&lt;/head&gt;</span></a>
+<a class="sourceLine" id="cb80-7" title="7">  <span class="kw">&lt;body&gt;</span></a>
+<a class="sourceLine" id="cb80-8" title="8">    <span class="kw">&lt;div</span><span class="ot"> id=</span><span class="st">&quot;root&quot;</span><span class="kw">&gt;&lt;/div&gt;</span></a>
+<a class="sourceLine" id="cb80-9" title="9">  <span class="kw">&lt;/body&gt;</span></a>
+<a class="sourceLine" id="cb80-10" title="10"><span class="kw">&lt;/html&gt;</span></a></code></pre></div>
+<p>Run your application again using <code>npm start</code>. Open your browser’s developer tools and view the “Sources” for the current page. Expand the <code>localhost:3000</code> node on the left and select <code>(index)</code>. Notice that the text <code>%REACT_APP_TITLE%</code> within the <code>&lt;title&gt;</code> element has been converted to the text literal <code>Exploring React Builds</code>:</p>
+<figure>
+<img src="images/react-builds-index-html.png" alt="react builds index html" /><figcaption>react builds index html</figcaption>
+</figure>
+<p>If you expand the <code>localhost:3000</code> &gt; <code>static</code> &gt; <code>js</code> node on the left and select the <code>main.chunk.js</code> file, you can see how the <code>App</code> component’s JSX has been converted to JavaScript:</p>
+<figure>
+<img src="images/react-builds-component-env-var.png" alt="react builds component env var" /><figcaption>react builds component env var</figcaption>
+</figure>
+<p>Here’s a closer look at the relevant <code>React.createElement</code> method call:</p>
+<div class="sourceCode" id="cb81"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb81-1" title="1"><span class="co">/*#__PURE__*/</span><span class="va">react__WEBPACK_IMPORTED_MODULE_0___default</span>.<span class="va">a</span>.<span class="at">createElement</span>(<span class="st">&quot;h1&quot;</span><span class="op">,</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb81-2" title="2">    <span class="dt">__self</span><span class="op">:</span> <span class="kw">this</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb81-3" title="3">    <span class="dt">__source</span><span class="op">:</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb81-4" title="4">      <span class="dt">fileName</span><span class="op">:</span> _jsxFileName<span class="op">,</span></a>
+<a class="sourceLine" id="cb81-5" title="5">      <span class="dt">lineNumber</span><span class="op">:</span> <span class="dv">10</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb81-6" title="6">      <span class="dt">columnNumber</span><span class="op">:</span> <span class="dv">7</span></a>
+<a class="sourceLine" id="cb81-7" title="7">    <span class="op">}</span></a>
+<a class="sourceLine" id="cb81-8" title="8">  <span class="op">},</span> <span class="st">&quot;Exploring React Builds&quot;</span>)</a></code></pre></div>
+<p>Again, notice how the environment variable has been replaced with a text literal. This has important security implications for you to consider. Because environment variables are embedded into your HTML, CSS, and JavaScript bundles during the build process, it’s <em>very important</em> to not store any secrets, like API keys, in your environment variables. Remember, anyone can view your bundled code in the browser by inspecting your files!</p>
+<h2 id="phase-5-deploying-a-production-build">Phase 5: Deploying a production build</h2>
+<p>In the last phase of this project, let’s add routing to the React application, create a production build, and deploy the build to an Express application!</p>
+<h3 id="adding-routing">Adding routing</h3>
+<p>To add React Router to the application, start by installing the <code>react-router-dom</code> npm package:</p>
+<div class="sourceCode" id="cb82"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb82-1" title="1"><span class="ex">npm</span> install react-router-dom@^5.0.0</a></code></pre></div>
+<p>Then update the <code>App</code> component to this code:</p>
+<div class="sourceCode" id="cb83"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb83-1" title="1"><span class="co">// ./src/App.js</span></a>
+<a class="sourceLine" id="cb83-2" title="2"></a>
+<a class="sourceLine" id="cb83-3" title="3"><span class="im">import</span> React <span class="im">from</span> <span class="st">&#39;react&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb83-4" title="4"><span class="im">import</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb83-5" title="5">  BrowserRouter<span class="op">,</span></a>
+<a class="sourceLine" id="cb83-6" title="6">  Switch<span class="op">,</span></a>
+<a class="sourceLine" id="cb83-7" title="7">  Route<span class="op">,</span></a>
+<a class="sourceLine" id="cb83-8" title="8">  Link</a>
+<a class="sourceLine" id="cb83-9" title="9"><span class="op">}</span> <span class="im">from</span> <span class="st">&#39;react-router-dom&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb83-10" title="10"><span class="im">import</span> HeadingA <span class="im">from</span> <span class="st">&#39;./css-modules/HeadingA&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb83-11" title="11"><span class="im">import</span> HeadingB <span class="im">from</span> <span class="st">&#39;./css-modules/HeadingB&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb83-12" title="12"><span class="im">import</span> Image <span class="im">from</span> <span class="st">&#39;./image/Image&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb83-13" title="13"><span class="im">import</span> ClassComponent <span class="im">from</span> <span class="st">&#39;./class-component/ClassComponent&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb83-14" title="14"></a>
+<a class="sourceLine" id="cb83-15" title="15"><span class="kw">function</span> <span class="at">App</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb83-16" title="16">  <span class="cf">return</span> (</a>
+<a class="sourceLine" id="cb83-17" title="17">    <span class="op">&lt;</span>BrowserRouter<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb83-18" title="18">      <span class="op">&lt;</span>div<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb83-19" title="19">        <span class="op">&lt;</span>h1<span class="op">&gt;{</span><span class="va">process</span>.<span class="va">env</span>.<span class="at">REACT_APP_TITLE</span><span class="op">}</span>&lt;/h1<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb83-20" title="20">        <span class="op">&lt;</span>nav<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb83-21" title="21">          <span class="op">&lt;</span>ul<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb83-22" title="22">            <span class="op">&lt;</span>li<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb83-23" title="23">              <span class="op">&lt;</span>Link to<span class="op">=</span><span class="st">&quot;/&quot;</span><span class="op">&gt;</span>Home&lt;/Link<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb83-24" title="24">            &lt;/li<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb83-25" title="25">            <span class="op">&lt;</span>li<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb83-26" title="26">              <span class="op">&lt;</span>Link to<span class="op">=</span><span class="st">&quot;/image&quot;</span><span class="op">&gt;</span>Image&lt;/Link<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb83-27" title="27">            &lt;/li<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb83-28" title="28">            <span class="op">&lt;</span>li<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb83-29" title="29">              <span class="op">&lt;</span>Link to<span class="op">=</span><span class="st">&quot;/class-component&quot;</span><span class="op">&gt;</span>Class Component&lt;/Link<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb83-30" title="30">            &lt;/li<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb83-31" title="31">          &lt;/ul<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb83-32" title="32">        &lt;/nav<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb83-33" title="33">        <span class="op">&lt;</span>Switch<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb83-34" title="34">          <span class="op">&lt;</span>Route path<span class="op">=</span><span class="st">&quot;/image&quot;</span><span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb83-35" title="35">            <span class="op">&lt;</span>Image /<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb83-36" title="36">          &lt;/Route<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb83-37" title="37">          <span class="op">&lt;</span>Route path<span class="op">=</span><span class="st">&quot;/class-component&quot;</span><span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb83-38" title="38">            <span class="op">&lt;</span>ClassComponent /<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb83-39" title="39">          &lt;/Route<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb83-40" title="40">          <span class="op">&lt;</span>Route path<span class="op">=</span><span class="st">&quot;/&quot;</span><span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb83-41" title="41">            <span class="op">&lt;</span>HeadingA /<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb83-42" title="42">            <span class="op">&lt;</span>HeadingB /<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb83-43" title="43">          &lt;/Route<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb83-44" title="44">        &lt;/Switch<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb83-45" title="45">      &lt;/div<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb83-46" title="46">    &lt;/BrowserRouter<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb83-47" title="47">  )<span class="op">;</span></a>
+<a class="sourceLine" id="cb83-48" title="48"><span class="op">}</span></a>
+<a class="sourceLine" id="cb83-49" title="49"></a>
+<a class="sourceLine" id="cb83-50" title="50"><span class="im">export</span> <span class="im">default</span> App<span class="op">;</span></a></code></pre></div>
+<p>Be sure to run and test your application to ensure that the defined routes work as expected:</p>
+<ul>
+<li><code>/</code> - Should display the <code>HeadingA</code> and <code>HeadingB</code> components;</li>
+<li><code>/image</code> - Should display the <code>Image</code> component; and</li>
+<li><code>/class-component</code> - Should display the <code>ClassComponent</code> component.</li>
+</ul>
+<h3 id="creating-a-production-build-1">Creating a production build</h3>
+<p>To create a production build, run the command <code>npm run build</code> from the root of your project. The output in the terminal should look something like this:</p>
+<div class="sourceCode" id="cb84"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb84-1" title="1"><span class="op">&gt;</span> <span class="ex">solution@0.1.0</span> build [absolute path to your project]</a>
+<a class="sourceLine" id="cb84-2" title="2"><span class="op">&gt;</span> <span class="ex">react-scripts</span> build</a>
+<a class="sourceLine" id="cb84-3" title="3"></a>
+<a class="sourceLine" id="cb84-4" title="4"><span class="ex">Creating</span> an optimized production build...</a>
+<a class="sourceLine" id="cb84-5" title="5"><span class="ex">Compiled</span> successfully.</a>
+<a class="sourceLine" id="cb84-6" title="6"></a>
+<a class="sourceLine" id="cb84-7" title="7"><span class="ex">File</span> sizes after gzip:</a>
+<a class="sourceLine" id="cb84-8" title="8"></a>
+<a class="sourceLine" id="cb84-9" title="9">  <span class="ex">47.83</span> KB  build/static/js/2.722c16c4.chunk.js</a>
+<a class="sourceLine" id="cb84-10" title="10">  <span class="ex">773</span> B     build/static/js/runtime-main.b7d1e5ee.js</a>
+<a class="sourceLine" id="cb84-11" title="11">  <span class="ex">745</span> B     build/static/js/main.12299197.chunk.js</a>
+<a class="sourceLine" id="cb84-12" title="12">  <span class="ex">197</span> B     build/static/css/main.e9a0d1f8.chunk.css</a>
+<a class="sourceLine" id="cb84-13" title="13"></a>
+<a class="sourceLine" id="cb84-14" title="14"><span class="ex">The</span> project was built assuming it is hosted at /.</a>
+<a class="sourceLine" id="cb84-15" title="15"><span class="ex">You</span> can control this with the homepage field in your package.json.</a>
+<a class="sourceLine" id="cb84-16" title="16"></a>
+<a class="sourceLine" id="cb84-17" title="17"><span class="ex">The</span> build folder is ready to be deployed.</a>
+<a class="sourceLine" id="cb84-18" title="18"><span class="ex">You</span> may serve it with a static server:</a>
+<a class="sourceLine" id="cb84-19" title="19"></a>
+<a class="sourceLine" id="cb84-20" title="20">  <span class="ex">npm</span> install -g serve</a>
+<a class="sourceLine" id="cb84-21" title="21">  <span class="ex">serve</span> -s build</a>
+<a class="sourceLine" id="cb84-22" title="22"></a>
+<a class="sourceLine" id="cb84-23" title="23"><span class="ex">Find</span> out more about deployment here:</a>
+<a class="sourceLine" id="cb84-24" title="24"></a>
+<a class="sourceLine" id="cb84-25" title="25">  <span class="ex">bit.ly/CRA-deploy</span></a></code></pre></div>
+<p><strong>Ignore the comments about using <code>serve</code> to deploy your application (i.e. <code>npm install -g serve</code> and <code>serve -s build</code>).</strong> In the next step, you’ll create a simple Express application to server your React application.</p>
+<h3 id="serving-a-react-application-using-express">Serving a React application using Express</h3>
+<p>Create a new folder for your Express application outside of the Create React App project folder.</p>
+<blockquote>
+<p>For example, from the root of your project, use <code>cd ..</code> to go up a level and then create a new folder named <code>express-server</code> by running the command <code>mkdir express-server</code>. This makes the <code>express-server</code> folder a sibling to your Create React App project folder.</p>
+</blockquote>
+<p>Browse into the <code>express-server</code> folder and initialize it to use npm (i.e. <code>npm init -y</code>). Then install Express by running the command <code>npm install express@^4.0.0</code>.</p>
+<p>App a file named <code>app.js</code> with the following contents:</p>
+<div class="sourceCode" id="cb85"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb85-1" title="1"><span class="co">// ./app.js</span></a>
+<a class="sourceLine" id="cb85-2" title="2"></a>
+<a class="sourceLine" id="cb85-3" title="3"><span class="kw">const</span> express <span class="op">=</span> <span class="at">require</span>(<span class="st">&#39;express&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb85-4" title="4"><span class="kw">const</span> path <span class="op">=</span> <span class="at">require</span>(<span class="st">&#39;path&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb85-5" title="5"></a>
+<a class="sourceLine" id="cb85-6" title="6"><span class="kw">const</span> app <span class="op">=</span> <span class="at">express</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb85-7" title="7"></a>
+<a class="sourceLine" id="cb85-8" title="8"><span class="va">app</span>.<span class="at">use</span>(<span class="va">express</span>.<span class="at">static</span>(<span class="va">path</span>.<span class="at">join</span>(__dirname<span class="op">,</span> <span class="st">&#39;public&#39;</span>)))<span class="op">;</span></a>
+<a class="sourceLine" id="cb85-9" title="9"></a>
+<a class="sourceLine" id="cb85-10" title="10"><span class="va">app</span>.<span class="at">get</span>(<span class="st">&#39;*&#39;</span><span class="op">,</span> <span class="kw">function</span>(req<span class="op">,</span> res) <span class="op">{</span></a>
+<a class="sourceLine" id="cb85-11" title="11">  <span class="va">res</span>.<span class="at">sendFile</span>(<span class="va">path</span>.<span class="at">join</span>(__dirname<span class="op">,</span> <span class="st">&#39;public&#39;</span><span class="op">,</span> <span class="st">&#39;index.html&#39;</span>))<span class="op">;</span></a>
+<a class="sourceLine" id="cb85-12" title="12"><span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb85-13" title="13"></a>
+<a class="sourceLine" id="cb85-14" title="14"><span class="kw">const</span> port <span class="op">=</span> <span class="dv">9000</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb85-15" title="15"></a>
+<a class="sourceLine" id="cb85-16" title="16"><span class="va">app</span>.<span class="at">listen</span>(port<span class="op">,</span> () <span class="kw">=&gt;</span> <span class="va">console</span>.<span class="at">log</span>(<span class="vs">`Listening on port </span><span class="sc">${</span>port<span class="sc">}</span><span class="vs">...`</span>))<span class="op">;</span></a></code></pre></div>
+<p>This simple Express application will:</p>
+<ul>
+<li>Attempt to match incoming requests to static files located in the <code>public</code> folder; and</li>
+<li>If a matching static file isn’t found, then the <code>./public/index.html</code> file will be served for all other requests.</li>
+</ul>
+<p>Now add a folder named <code>public</code> to the root of your Express project. Copy the files from the <code>build</code> folder in your Create React App project to the <code>public</code> folder in the Express application project. Then run your application using the command <code>node app.js</code>.</p>
+<p>Open a browser and browse to the URL <code>http://localhost:9000/</code>. You should see your React application served from your Express application! Be sure to click the navigation links to verify that all of your configured routes work as expected.</p>
+<p>Also, because you configured Express to serve the <code>./public/index.html</code> file for any request that doesn’t match a static file, you can “deep link” to any of your React application’s routes:</p>
+<ul>
+<li><a href="http://localhost:9000/image">http://localhost:9000/image</a></li>
+<li><a href="http://localhost:9000/class-component">http://localhost:9000/class-component</a></li>
+</ul>
+</body>
+</html>

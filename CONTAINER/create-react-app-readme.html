@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>create-react-app-readme</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<h1 id="create-react-app-readme">Create React App Readme</h1>
+<h2 id="create-react-app-build-status-prs-welcome">Create React App <a href="https://dev.azure.com/facebook/create-react-app/_build/latest?definitionId=1&amp;branchName=master"><img src="https://camo.githubusercontent.com/ba48d404e53a630d688e2a593446b037cd2fec00e40548e3dc3d0e0b028f0a88/68747470733a2f2f6465762e617a7572652e636f6d2f66616365626f6f6b2f6372656174652d72656163742d6170702f5f617069732f6275696c642f7374617475732f66616365626f6f6b2e6372656174652d72656163742d6170703f6272616e63684e616d653d6d6173746572" alt="Build Status" /></a> <a href="https://github.com/facebook/create-react-app/blob/master/CONTRIBUTING.md"><img src="https://camo.githubusercontent.com/accfb94480ba6689dde8dbeaf481411bbd41f1fbb13cb17e55e0846f11ce1cd5/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f5052732d77656c636f6d652d677265656e2e737667" alt="PRs Welcome" /></a></h2>
+<p><a href="https://camo.githubusercontent.com/5ebc638bb3e5113c5a87a5462197c35f40f7185ea9940e7723846b6e403f8a6b/68747470733a2f2f6372656174652d72656163742d6170702e6465762f696d672f6c6f676f2e737667"><img src="https://camo.githubusercontent.com/5ebc638bb3e5113c5a87a5462197c35f40f7185ea9940e7723846b6e403f8a6b/68747470733a2f2f6372656174652d72656163742d6170702e6465762f696d672f6c6f676f2e737667" alt="Logo" /></a></p>
+<p>Create React apps with no build configuration.</p>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/blob/master/README.md#creating-an-app">Creating an App</a> – How to create a new app.</li>
+<li><a href="https://facebook.github.io/create-react-app/">User Guide</a> – How to develop apps bootstrapped with Create React App.</li>
+</ul>
+<p>Create React App works on macOS, Windows, and Linux.<br />
+If something doesn’t work, please <a href="https://github.com/facebook/create-react-app/issues/new">file an issue</a>.<br />
+If you have questions or need help, please ask in <a href="https://github.com/facebook/create-react-app/discussions">GitHub Discussions</a>.</p>
+<h3 id="quick-overview">Quick Overview</h3>
+<pre class="text"><code>npx create-react-app my-app
+cd my-app
+npm start</code></pre>
+<p>If you’ve previously installed <code>create-react-app</code> globally via <code>npm install -g create-react-app</code>, we recommend you uninstall the package using <code>npm uninstall -g create-react-app</code> or <code>yarn global remove create-react-app</code> to ensure that npx always uses the latest version.</p>
+<p><em>(</em><a href="https://medium.com/@maybekatz/introducing-npx-an-npm-package-runner-55f7d4bd282b"><em>npx</em></a> <em>comes with npm 5.2+ and higher, see</em> <a href="https://gist.github.com/gaearon/4064d3c23a77c74a3614c498a8bb1c5f"><em>instructions for older npm versions</em></a><em>)</em></p>
+<p>Then open <a href="http://localhost:3000/">http://localhost:3000/</a> to see your app.<br />
+When you’re ready to deploy to production, create a minified bundle with <code>npm run build</code>.</p>
+<p><a href="https://camo.githubusercontent.com/b275c108e1c9e2d1c732a66ca1e0b6ecb1ae260824fb5d6ca4c4e46ee85d1ca0/68747470733a2f2f63646e2e6a7364656c6976722e6e65742f67682f66616365626f6f6b2f6372656174652d72656163742d61707040323762343261633765666130313866323534313135336162333064363331383066356661333965302f73637265656e636173742e737667"><img src="https://camo.githubusercontent.com/b275c108e1c9e2d1c732a66ca1e0b6ecb1ae260824fb5d6ca4c4e46ee85d1ca0/68747470733a2f2f63646e2e6a7364656c6976722e6e65742f67682f66616365626f6f6b2f6372656174652d72656163742d61707040323762343261633765666130313866323534313135336162333064363331383066356661333965302f73637265656e636173742e737667" alt="npm start" /></a></p>
+<h4 id="get-started-immediately">Get Started Immediately</h4>
+<p>You <strong>don’t</strong> need to install or configure tools like webpack or Babel.<br />
+They are preconfigured and hidden so that you can focus on the code.</p>
+<p>Create a project, and you’re good to go.</p>
+<h3 id="creating-an-app">Creating an App</h3>
+<p><strong>You’ll need to have Node 10.16.0 or later version on your local development machine</strong> (but it’s not required on the server). We recommend using the latest LTS version. You can use <a href="https://github.com/creationix/nvm#installation">nvm</a> (macOS/Linux) or <a href="https://github.com/coreybutler/nvm-windows#node-version-manager-nvm-for-windows">nvm-windows</a> to switch Node versions between different projects.</p>
+<p>To create a new app, you may choose one of the following methods:</p>
+<h4 id="npx">npx</h4>
+<pre class="text"><code>npx create-react-app my-app</code></pre>
+<p><em>(</em><a href="https://medium.com/@maybekatz/introducing-npx-an-npm-package-runner-55f7d4bd282b"><em>npx</em></a> <em>is a package runner tool that comes with npm 5.2+ and higher, see</em> <a href="https://gist.github.com/gaearon/4064d3c23a77c74a3614c498a8bb1c5f"><em>instructions for older npm versions</em></a><em>)</em></p>
+<h4 id="npm">npm</h4>
+<pre class="text"><code>npm init react-app my-app</code></pre>
+<p><em><code>npm init &lt;initializer&gt;</code> is available in npm 6+</em></p>
+<h4 id="yarn">Yarn</h4>
+<pre class="text"><code>yarn create react-app my-app</code></pre>
+<p><a href="https://yarnpkg.com/lang/en/docs/cli/create/"><em><code>yarn create &lt;starter-kit-package&gt;</code></em></a> <em>is available in Yarn 0.25+</em></p>
+<p>It will create a directory called <code>my-app</code> inside the current folder.<br />
+Inside that directory, it will generate the initial project structure and install the transitive dependencies:</p>
+<pre class="text"><code>my-app
+├── README.md
+├── node_modules
+├── package.json
+├── .gitignore
+├── public
+│   ├── favicon.ico
+│   ├── index.html
+│   └── manifest.json
+└── src
+    ├── App.css
+    ├── App.js
+    ├── App.test.js
+    ├── index.css
+    ├── index.js
+    ├── logo.svg
+    └── serviceWorker.js
+    └── setupTests.js</code></pre>
+<p>No configuration or complicated folder structures, only the files you need to build your app.<br />
+Once the installation is done, you can open your project folder:</p>
+<pre class="text"><code>cd my-app</code></pre>
+<p>Inside the newly created project, you can run some built-in commands:</p>
+<h4 id="npm-start-or-yarn-start"><code>npm start</code> or <code>yarn start</code></h4>
+<p>Runs the app in development mode.<br />
+Open <a href="http://localhost:3000/">http://localhost:3000</a> to view it in the browser.</p>
+<p>The page will automatically reload if you make changes to the code.<br />
+You will see the build errors and lint warnings in the console.</p>
+<p><a href="https://camo.githubusercontent.com/70bc7b8fa4e291e60f41abf75f392fa9bd42a24ae6cd8e0a1420c0ef73540a7b/68747470733a2f2f63646e2e6a7364656c6976722e6e65742f67682f6d6172696f6e65626c2f6372656174652d72656163742d61707040396636323832363731633534663038373461666433376137326636363839373237623536323439382f73637265656e636173742d6572726f722e737667"><img src="https://camo.githubusercontent.com/70bc7b8fa4e291e60f41abf75f392fa9bd42a24ae6cd8e0a1420c0ef73540a7b/68747470733a2f2f63646e2e6a7364656c6976722e6e65742f67682f6d6172696f6e65626c2f6372656174652d72656163742d61707040396636323832363731633534663038373461666433376137326636363839373237623536323439382f73637265656e636173742d6572726f722e737667" alt="Build errors" /></a></p>
+<h4 id="npm-test-or-yarn-test"><code>npm test</code> or <code>yarn test</code></h4>
+<p>Runs the test watcher in an interactive mode.<br />
+By default, runs tests related to files changed since the last commit.</p>
+<p><a href="https://facebook.github.io/create-react-app/docs/running-tests">Read more about testing.</a></p>
+<h4 id="npm-run-build-or-yarn-build"><code>npm run build</code> or <code>yarn build</code></h4>
+<p>Builds the app for production to the <code>build</code> folder.<br />
+It correctly bundles React in production mode and optimizes the build for the best performance.</p>
+<p>The build is minified and the filenames include the hashes.</p>
+<p>Your app is ready to be deployed.</p>
+<h3 id="user-guide">User Guide</h3>
+<p>You can find detailed instructions on using Create React App and many tips in <a href="https://facebook.github.io/create-react-app/">its documentation</a>.</p>
+<h3 id="how-to-update-to-new-versions">How to Update to New Versions?</h3>
+<p>Please refer to the <a href="https://facebook.github.io/create-react-app/docs/updating-to-new-releases">User Guide</a> for this and other information.</p>
+<h3 id="philosophy">Philosophy</h3>
+<ul>
+<li><strong>One Dependency:</strong> There is only one build dependency. It uses webpack, Babel, ESLint, and other amazing projects, but provides a cohesive curated experience on top of them.</li>
+<li><strong>No Configuration Required:</strong> You don’t need to configure anything. A reasonably good configuration of both development and production builds is handled for you so you can focus on writing code.</li>
+<li><strong>No Lock-In:</strong> You can “eject” to a custom setup at any time. Run a single command, and all the configuration and build dependencies will be moved directly into your project, so you can pick up right where you left off.</li>
+</ul>
+<h3 id="whats-included">What’s Included?</h3>
+<p>Your environment will have everything you need to build a modern single-page React app:</p>
+<ul>
+<li>React, JSX, ES6, TypeScript and Flow syntax support.</li>
+<li>Language extras beyond ES6 like the object spread operator.</li>
+<li>Autoprefixed CSS, so you don’t need <code>-webkit-</code> or other prefixes.</li>
+<li>A fast interactive unit test runner with built-in support for coverage reporting.</li>
+<li>A live development server that warns about common mistakes.</li>
+<li>A build script to bundle JS, CSS, and images for production, with hashes and sourcemaps.</li>
+<li>An offline-first <a href="https://developers.google.com/web/fundamentals/getting-started/primers/service-workers">service worker</a> and a <a href="https://developers.google.com/web/fundamentals/engage-and-retain/web-app-manifest/">web app manifest</a>, meeting all the <a href="https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app">Progressive Web App</a> criteria. (<em>Note: Using the service worker is opt-in as of <code>react-scripts@2.0.0</code> and higher</em>)</li>
+<li>Hassle-free updates for the above tools with a single dependency.</li>
+</ul>
+<p>Check out <a href="https://github.com/nitishdayal/cra_closer_look">this guide</a> for an overview of how these tools fit together.</p>
+<p>The tradeoff is that <strong>these tools are preconfigured to work in a specific way</strong>. If your project needs more customization, you can <a href="https://facebook.github.io/create-react-app/docs/available-scripts#npm-run-eject">“eject”</a> and customize it, but then you will need to maintain this configuration.</p>
+<h3 id="popular-alternatives">Popular Alternatives</h3>
+<p>Create React App is a great fit for:</p>
+<ul>
+<li><strong>Learning React</strong> in a comfortable and feature-rich development environment.</li>
+<li><strong>Starting new single-page React applications.</strong></li>
+<li><strong>Creating examples</strong> with React for your libraries and components.</li>
+</ul>
+<p>Here are a few common cases where you might want to try something else:</p>
+<ul>
+<li>If you want to <strong>try React</strong> without hundreds of transitive build tool dependencies, consider <a href="https://reactjs.org/docs/try-react.html">using a single HTML file or an online sandbox instead</a>.</li>
+<li>If you need to <strong>integrate React code with a server-side template framework</strong> like Rails, Django or Symfony, or if you’re <strong>not building a single-page app</strong>, consider using <a href="https://github.com/insin/nwb">nwb</a>, or <a href="https://neutrino.js.org/">Neutrino</a> which are more flexible. For Rails specifically, you can use <a href="https://github.com/rails/webpacker">Rails Webpacker</a>. For Symfony, try <a href="https://symfony.com/doc/current/frontend/encore/reactjs.html">Symfony’s webpack Encore</a>.</li>
+<li>If you need to <strong>publish a React component</strong>, <a href="https://github.com/insin/nwb">nwb</a> can <a href="https://github.com/insin/nwb#react-components-and-libraries">also do this</a>, as well as <a href="https://neutrino.js.org/packages/react-components/">Neutrino’s react-components preset</a>.</li>
+<li>If you want to do <strong>server rendering</strong> with React and Node.js, check out <a href="https://nextjs.org/">Next.js</a> or <a href="https://github.com/jaredpalmer/razzle">Razzle</a>. Create React App is agnostic of the backend, and only produces static HTML/JS/CSS bundles.</li>
+<li>If your website is <strong>mostly static</strong> (for example, a portfolio or a blog), consider using <a href="https://www.gatsbyjs.org/">Gatsby</a> or <a href="https://nextjs.org/">Next.js</a>. Unlike Create React App, Gatsby pre-renders the website into HTML at build time. Next.js supports both server rendering and pre-rendering.</li>
+<li>Finally, if you need <strong>more customization</strong>, check out <a href="https://neutrino.js.org/">Neutrino</a> and its <a href="https://neutrino.js.org/packages/react/">React preset</a>.</li>
+</ul>
+<p>All of the above tools can work with little to no configuration.</p>
+<p>If you prefer configuring the build yourself, <a href="https://reactjs.org/docs/add-react-to-an-existing-app.html">follow this guide</a>.</p>
+<h3 id="react-native">React Native</h3>
+<p>Looking for something similar, but for React Native?<br />
+Check out <a href="https://github.com/expo/expo-cli">Expo CLI</a>.</p>
+<h3 id="contributing">Contributing</h3>
+<p>We’d love to have your helping hand on <code>create-react-app</code>! See <a href="https://github.com/facebook/create-react-app/blob/master/CONTRIBUTING.md">CONTRIBUTING.md</a> for more information on what we’re looking for and how to get started.</p>
+<h3 id="supporting-create-react-app">Supporting Create React App</h3>
+<p>Create React App is a community maintained project and all contributors are volunteers. If you’d like to support the future development of Create React App then please consider donating to our <a href="https://opencollective.com/create-react-app">Open Collective</a>.</p>
+<h3 id="credits">Credits</h3>
+<p>This project exists thanks to all the people who <a href="https://github.com/facebook/create-react-app/blob/master/CONTRIBUTING.md">contribute</a>.<br />
+<a href="https://github.com/facebook/create-react-app/graphs/contributors"><img src="https://camo.githubusercontent.com/92ccfed4ad11b4743ec414e1b19700847d69e613d8277f902cb67c64c2c07218/68747470733a2f2f6f70656e636f6c6c6563746976652e636f6d2f6372656174652d72656163742d6170702f636f6e7472696275746f72732e7376673f77696474683d38393026627574746f6e3d66616c7365" /></a></p>
+<p>Thanks to <a href="https://www.netlify.com/">Netlify</a> for hosting our documentation.</p>
+<h3 id="acknowledgements">Acknowledgements</h3>
+<p>We are grateful to the authors of existing related projects for their ideas and collaboration:</p>
+<ul>
+<li><span class="citation" data-cites="eanplatter">[@eanplatter]</span>(https://github.com/eanplatter)</li>
+<li><span class="citation" data-cites="insin">[@insin]</span>(https://github.com/insin)</li>
+<li><span class="citation" data-cites="mxstbr">[@mxstbr]</span>(https://github.com/mxstbr)</li>
+</ul>
+<p><img src=".gitbook/assets/image.png" /></p>
+<h2 id="getting-started">Getting Started:</h2>
+<h2 id="getting-started-1">Getting Started</h2>
+<p>Create React App is an officially supported way to create single-page React applications. It offers a modern build setup with no configuration.</p>
+<h3 id="quick-start">Quick Start<a href="https://create-react-app.dev/docs/getting-started/#quick-start">#</a></h3>
+<p>npx create-react-app my-appcd my-appnpm start</p>
+<blockquote>
+<p>If you’ve previously installed <code>create-react-app</code> globally via <code>npm install -g create-react-app</code>, we recommend you uninstall the package using <code>npm uninstall -g create-react-app</code> or <code>yarn global remove create-react-app</code> to ensure that <code>npx</code> always uses the latest version.</p>
+</blockquote>
+<p><em>(</em><a href="https://medium.com/@maybekatz/introducing-npx-an-npm-package-runner-55f7d4bd282b"><em>npx</em></a> <em>comes with npm 5.2+ and higher, see</em> <a href="https://gist.github.com/gaearon/4064d3c23a77c74a3614c498a8bb1c5f"><em>instructions for older npm versions</em></a><em>)</em></p>
+<p>Then open <a href="http://localhost:3000/">http://localhost:3000/</a> to see your app.</p>
+<p>When you’re ready to deploy to production, create a minified bundle with <code>npm run build</code>.</p>
+<figure>
+<img src="https://cdn.jsdelivr.net/gh/facebook/create-react-app@27b42ac7efa018f2541153ab30d63180f5fa39e0/screencast.svg" alt="npm start" /><figcaption>npm start</figcaption>
+</figure>
+<h4 id="get-started-immediately-1">Get Started Immediately<a href="https://create-react-app.dev/docs/getting-started/#get-started-immediately">#</a></h4>
+<p>You <strong>don’t</strong> need to install or configure tools like webpack or Babel. They are preconfigured and hidden so that you can focus on the code.</p>
+<p>Create a project, and you’re good to go.</p>
+<h3 id="creating-an-app-1">Creating an App<a href="https://create-react-app.dev/docs/getting-started/#creating-an-app">#</a></h3>
+<p><strong>You’ll need to have Node &gt;= 10 on your local development machine</strong> (but it’s not required on the server). You can use <a href="https://github.com/creationix/nvm#installation">nvm</a> (macOS/Linux) or <a href="https://github.com/coreybutler/nvm-windows#node-version-manager-nvm-for-windows">nvm-windows</a> to switch Node versions between different projects.</p>
+<p>To create a new app, you may choose one of the following methods:</p>
+<h4 id="npx-1">npx<a href="https://create-react-app.dev/docs/getting-started/#npx">#</a></h4>
+<p>npx create-react-app my-app</p>
+<p><em>(</em><a href="https://medium.com/@maybekatz/introducing-npx-an-npm-package-runner-55f7d4bd282b"><em>npx</em></a> <em>comes with npm 5.2+ and higher, see</em> <a href="https://gist.github.com/gaearon/4064d3c23a77c74a3614c498a8bb1c5f"><em>instructions for older npm versions</em></a><em>)</em></p>
+<h4 id="npm-1">npm<a href="https://create-react-app.dev/docs/getting-started/#npm">#</a></h4>
+<p>npm init react-app my-app</p>
+<p><em><code>npm init &lt;initializer&gt;</code> is available in npm 6+</em></p>
+<h4 id="yarn-1">Yarn<a href="https://create-react-app.dev/docs/getting-started/#yarn">#</a></h4>
+<p>yarn create react-app my-app</p>
+<p><em><code>yarn create</code> is available in Yarn 0.25+</em></p>
+<h4 id="selecting-a-template">Selecting a template<a href="https://create-react-app.dev/docs/getting-started/#selecting-a-template">#</a></h4>
+<p>You can now optionally start a new app from a template by appending <code>--template [template-name]</code> to the creation command.</p>
+<p>If you don’t select a template, we’ll create your project with our base template.</p>
+<p>Templates are always named in the format <code>cra-template-[template-name]</code>, however you only need to provide the <code>[template-name]</code> to the creation command.npx create-react-app my-app –template [template-name]</p>
+<blockquote>
+<p>You can find a list of available templates by searching for <a href="https://www.npmjs.com/search?q=cra-template-*">“cra-template-*”</a> on npm.</p>
+</blockquote>
+<p>Our <a href="https://create-react-app.dev/docs/custom-templates">Custom Templates</a> documentation describes how you can build your own template.</p>
+<p><strong>Creating a TypeScript app#</strong></p>
+<p>You can start a new TypeScript app using templates. To use our provided TypeScript template, append <code>--template typescript</code> to the creation command.npx create-react-app my-app –template typescript</p>
+<p>If you already have a project and would like to add TypeScript, see our <a href="https://create-react-app.dev/docs/adding-typescript">Adding TypeScript</a> documentation.</p>
+<h4 id="selecting-a-package-manager">Selecting a package manager<a href="https://create-react-app.dev/docs/getting-started/#selecting-a-package-manager">#</a></h4>
+<p>When you create a new app, the CLI will use <a href="https://yarnpkg.com/">Yarn</a> to install dependencies (when available). If you have Yarn installed, but would prefer to use npm, you can append <code>--use-npm</code> to the creation command. For example:npx create-react-app my-app –use-npm</p>
+<h3 id="output">Output<a href="https://create-react-app.dev/docs/getting-started/#output">#</a></h3>
+<p>Running any of these commands will create a directory called <code>my-app</code> inside the current folder. Inside that directory, it will generate the initial project structure and install the transitive dependencies:</p>
+<pre class="text"><code>my-app
+├── README.md
+├── node_modules
+├── package.json
+├── .gitignore
+├── public
+│   ├── favicon.ico
+│   ├── index.html
+│   ├── logo192.png
+│   ├── logo512.png
+│   ├── manifest.json
+│   └── robots.txt
+└── src
+    ├── App.css
+    ├── App.js
+    ├── App.test.js
+    ├── index.css
+    ├── index.js
+    ├── logo.svg
+    ├── serviceWorker.js
+    └── setupTests.js
+
+
+</code></pre>
+<p>No configuration or complicated folder structures, only the files you need to build your app. Once the installation is done, you can open your project folder:cd my-app</p>
+<h3 id="scripts">Scripts<a href="https://create-react-app.dev/docs/getting-started/#scripts">#</a></h3>
+<p>Inside the newly created project, you can run some built-in commands:</p>
+<h4 id="npm-start-or-yarn-start-1"><code>npm start</code> or <code>yarn start</code><a href="https://create-react-app.dev/docs/getting-started/#npm-start-or-yarn-start">#</a></h4>
+<p>Runs the app in development mode. Open <a href="http://localhost:3000/">http://localhost:3000</a> to view it in the browser.</p>
+<p>The page will automatically reload if you make changes to the code. You will see the build errors and lint warnings in the console.</p>
+<figure>
+<img src="https://cdn.jsdelivr.net/gh/marionebl/create-react-app@9f6282671c54f0874afd37a72f6689727b562498/screencast-error.svg" alt="Build errors" /><figcaption>Build errors</figcaption>
+</figure>
+<h4 id="npm-test-or-yarn-test-1"><code>npm test</code> or <code>yarn test</code><a href="https://create-react-app.dev/docs/getting-started/#npm-test-or-yarn-test">#</a></h4>
+<p>Runs the test watcher in an interactive mode. By default, runs tests related to files changed since the last commit.</p>
+<p><a href="https://create-react-app.dev/docs/running-tests">Read more about testing</a>.</p>
+<h4 id="npm-run-build-or-yarn-build-1"><code>npm run build</code> or <code>yarn build</code><a href="https://create-react-app.dev/docs/getting-started/#npm-run-build-or-yarn-build">#</a></h4>
+<p>Builds the app for production to the <code>build</code> folder. It correctly bundles React in production mode and optimizes the build for the best performance.</p>
+<p>The build is minified and the filenames include the hashes.</p>
+<p>Your app is ready to be deployed.<a href="https://github.com/facebook/create-react-app/edit/master/docusaurus/docs/getting-started.md">Edit this page</a></p>
+</body>
+</html>

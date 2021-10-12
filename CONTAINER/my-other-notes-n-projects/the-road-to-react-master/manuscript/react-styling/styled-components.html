@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>styled-components</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<h2 id="styled-components-in-react">Styled Components in React</h2>
+<p>With the previous approaches from CSS-in-CSS, Styled Components is one of several approaches for <strong>CSS-in-JS</strong>. I picked Styled Components because it’s the most popular. It comes as a JavaScript dependency, so we must install it on the command line:</p>
+<p>{title=“Command Line”,lang=“text”} ~~~~~~~ npm install styled-components ~~~~~~~</p>
+<p>Then import it in your <em>src/App.js</em> file:</p>
+<p>{title=“src/App.js”,lang=“javascript”} ~~~~~~~ import * as React from ‘react’; import axios from ‘axios’; # leanpub-start-insert import styled from ‘styled-components’; # leanpub-end-insert ~~~~~~~</p>
+<p>As the name suggests, CSS-in-JS happens in your JavaScript file. In your <em>src/App.js</em> file, define your first styled components:</p>
+<p>{title=“src/App.js”,lang=“javascript”} ~~~~~~~ const StyledContainer = styled.div` height: 100vw; padding: 20px;</p>
+<p>background: #83a4d4; background: linear-gradient(to left, #b6fbff, #83a4d4);</p>
+<p>color: #171212; `;</p>
+<p>const StyledHeadlinePrimary = styled.h1<code>font-size: 48px;   font-weight: 300;   letter-spacing: 2px;</code>; ~~~~~~~</p>
+<p>When using Styled Components, you are using the JavaScript template literals the same way as JavaScript functions. Everything between the backticks can be seen as an argument and the <code>styled</code> object gives you access to all the necessary HTML elements (e.g. div, h1) as functions. Once a function is called with the style, it returns a React component that can be used in your App component:</p>
+<p>{title=“src/App.js”,lang=“javascript”} ~~~~~~~ const App = () =&gt; { …</p>
+<p>return ( # leanpub-start-insert <StyledContainer> <StyledHeadlinePrimary>My Hacker Stories</StyledHeadlinePrimary> # leanpub-end-insert</p>
+<pre><code>  &lt;SearchForm
+    searchTerm={searchTerm}
+    onSearchInput={handleSearchInput}
+    onSearchSubmit={handleSearchSubmit}
+  /&gt;
+
+  {stories.isError &amp;&amp; &lt;p&gt;Something went wrong ...&lt;/p&gt;}
+
+  {stories.isLoading ? (
+    &lt;p&gt;Loading ...&lt;/p&gt;
+  ) : (
+    &lt;List list={stories.data} onRemoveItem={handleRemoveStory} /&gt;
+  )}</code></pre>
+<h1 id="leanpub-start-insert">leanpub-start-insert</h1>
+<pre><code>&lt;/StyledContainer&gt;</code></pre>
+<h1 id="leanpub-end-insert">leanpub-end-insert</h1>
+<p>); }; ~~~~~~~</p>
+<p>This kind of React component follows the same rules as a common React component. Everything passed between its element tags is passed automatically as React <code>children</code> prop. For the Item component, we are not using inline styles this time, but defining a dedicated styled component for it. <code>StyledColumn</code> receives its styles dynamically using a React prop:</p>
+<p>{title=“src/App.js”,lang=“javascript”} ~~~~~~~ const Item = ({ item, onRemoveItem }) =&gt; ( # leanpub-start-insert <StyledItem> <StyledColumn width="40%"> # leanpub-end-insert <a href={item.url}>{item.title}</a> # leanpub-start-insert </StyledColumn> <StyledColumn width="30%">{item.author}</StyledColumn> <StyledColumn width="10%">{item.num_comments}</StyledColumn> <StyledColumn width="10%">{item.points}</StyledColumn> <StyledColumn width="10%"> &lt;StyledButtonSmall # leanpub-end-insert type=“button” onClick={() =&gt; onRemoveItem(item)} &gt; Dismiss # leanpub-start-insert </StyledButtonSmall> </StyledColumn> </StyledItem> # leanpub-end-insert ); ~~~~~~~</p>
+<p>The flexible <code>width</code> prop is accessible in the styled component’s template literal as an argument of an inline function. The return value from the function is applied there as a string. Since we can use immediate returns when omitting the arrow function’s body, it becomes a concise inline function:</p>
+<p>{title=“src/App.js”,lang=“javascript”} ~~~~~~~ const StyledItem = styled.li<code>display: flex;   align-items: center;   padding-bottom: 5px;</code>;</p>
+<p>const StyledColumn = styled.span` padding: 0 5px; white-space: nowrap; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;</p>
+<p>a { color: inherit; }</p>
+<p>width: ${(props) =&gt; props.width}; `; ~~~~~~~</p>
+<p>Advanced features like CSS nesting are available in Styled Components by default. Nested elements are accessible and the current element can be selected with the <code>&amp;</code> CSS operator:</p>
+<p>{title=“src/App.js”,lang=“javascript”} ~~~~~~~ const StyledButton = styled.button` background: transparent; border: 1px solid #171212; padding: 5px; cursor: pointer;</p>
+<p>transition: all 0.1s ease-in;</p>
+<p>&amp;:hover { background: #171212; color: #ffffff; } `; ~~~~~~~</p>
+<p>You can also create specialized versions of styled components by passing another component to the library’s function. The specialized button receives all the base styles from the previously defined StyledButton component:</p>
+<p>{title=“src/App.js”,lang=“javascript”} ~~~~~~~ const StyledButtonSmall = styled(StyledButton)<code>padding: 5px;</code>;</p>
+<p>const StyledButtonLarge = styled(StyledButton)<code>padding: 10px;</code>;</p>
+<p>const StyledSearchForm = styled.form<code>padding: 10px 0 20px 0;   display: flex;   align-items: baseline;</code>; ~~~~~~~</p>
+<p>When we use a styled component like StyledSearchForm, its underlying form element is used in the real HTML output. We can continue using the native HTML attributes (<code>onSubmit</code>, <code>type</code>, <code>disabled</code>) there:</p>
+<p>{title=“src/App.js”,lang=“javascript”} ~~~~~~~ const SearchForm = ({ … }) =&gt; ( # leanpub-start-insert <StyledSearchForm onSubmit={onSearchSubmit}> # leanpub-end-insert <InputWithLabel
+      id="search"
+      value={searchTerm}
+      isFocused
+      onInputChange={onSearchInput}
+    > <strong>Search:</strong> </InputWithLabel></p>
+<h1 id="leanpub-start-insert-1">leanpub-start-insert</h1>
+<pre><code>&lt;StyledButtonLarge type=&quot;submit&quot; disabled={!searchTerm}&gt;</code></pre>
+<h1 id="leanpub-end-insert-1">leanpub-end-insert</h1>
+<pre><code>  Submit</code></pre>
+<h1 id="leanpub-start-insert-2">leanpub-start-insert</h1>
+<pre><code>&lt;/StyledButtonLarge&gt;</code></pre>
+<p></StyledSearchForm> # leanpub-end-insert ); ~~~~~~~</p>
+<p>Finally, the InputWithLabel decorated with its yet undefined styled components:</p>
+<p>{title=“src/App.js”,lang=“javascript”} ~~~~~~~ const InputWithLabel = ({ … }) =&gt; { …</p>
+<p>return ( &lt;&gt; # leanpub-start-insert <StyledLabel htmlFor={id}>{children}</StyledLabel> # leanpub-end-insert   # leanpub-start-insert &lt;StyledInput # leanpub-end-insert ref={inputRef} id={id} type={type} value={value} onChange={onInputChange} /&gt; &lt;/&gt; ); }; ~~~~~~~</p>
+<p>And its matching styled components are defined in the same file:</p>
+<p>{title=“src/App.js”,lang=“javascript”} ~~~~~~~ const StyledLabel = styled.label<code>border-top: 1px solid #171212;   border-left: 1px solid #171212;   padding-left: 5px;   font-size: 24px;</code>;</p>
+<p>const StyledInput = styled.input` border: none; border-bottom: 1px solid #171212; background-color: transparent;</p>
+<p>font-size: 24px; `; ~~~~~~~</p>
+<p>CSS-in-JS with styled components shifts the focus of defining styles to actual React components. Styled Components are styles defined as React components without the intermediate CSS file. If a styled component isn’t used in a JavaScript, your IDE/editor will tell you. Styled Components are bundled next to other JavaScript assets in JavaScript files for a production-ready application. There are no extra CSS files, but only JavaScript when using the CSS-in-JS strategy. Both strategies, CSS-in-JS and CSS-in-CSS, and their approaches (e.g. Styled Components and CSS Modules) are popular among React developers. Use what suits you and your team best.</p>
+<h3 id="exercises">Exercises:</h3>
+<ul>
+<li>Confirm your <a href="https://codesandbox.io/s/github/the-road-to-learn-react/hacker-stories/tree/2021/Styled-Components-in-React">source code</a>.
+<ul>
+<li>Confirm the <a href="https://github.com/the-road-to-learn-react/hacker-stories/compare/2021/react-modern-final...2021/Styled-Components-in-React">changes</a>.</li>
+</ul></li>
+<li>Read more about <a href="https://www.robinwieruch.de/styled-components">best practices for Styled Components in React</a>.</li>
+<li>Usually there is no <em>src/index.css</em> file for global styles when using Styled Components. Find out how to use global styles when using Styled Components.</li>
+</ul>
+</body>
+</html>

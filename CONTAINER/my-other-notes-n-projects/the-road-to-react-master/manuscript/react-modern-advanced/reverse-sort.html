@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>reverse-sort</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<h2 id="reverse-sort">Reverse Sort</h2>
+<p><strong>Task:</strong> The sort feature works, but the ordering only includes one direction. Implement a reverse sort when a sort button is clicked twice, so it becomes a toggle between normal (ascending) and reverse (descending) sort.</p>
+<p><strong>Optional Hints:</strong></p>
+<ul>
+<li>Consider that reverse or normal sort could be just another state (e.g. <code>isReverse</code>) next to the <code>sortKey</code>.</li>
+<li>Set the new state in the <code>handleSort</code> handler based on the previous sort.</li>
+<li>Use the new <code>isReverse</code> state for sorting the list with the sort function from the dictionary with the optionally applied <code>reverse()</code> function from JavaScript arrays.</li>
+</ul>
+<p>Let’s get to the task. The initial sort direction works for strings, as well as numeric sorts like the reverse sort for JavaScript numbers that arranges them from high to low. Now we need another state to track whether the sort is reversed or normal:</p>
+<p>{title=“src/App.js”,lang=“javascript”} ~~~~~~~ const List = ({ list, onRemoveItem }) =&gt; { # leanpub-start-insert const [sort, setSort] = React.useState({ sortKey: ‘NONE’, isReverse: false, }); # leanpub-end-insert</p>
+<p>… }; ~~~~~~~</p>
+<p>Next, give the sort handler logic to see if the incoming <code>sortKey</code> triggers are a normal or reverse sort. If the <code>sortKey</code> is the same as the one in the state, it should be a reverse sort, but only if the sort state wasn’t already reversed:</p>
+<p>{title=“src/App.js”,lang=“javascript”} ~~~~~~~ const List = ({ list, onRemoveItem }) =&gt; { const [sort, setSort] = React.useState({ sortKey: ‘NONE’, isReverse: false, });</p>
+<p>const handleSort = (sortKey) =&gt; { # leanpub-start-insert const isReverse = sort.sortKey === sortKey &amp;&amp; !sort.isReverse;</p>
+<pre><code>setSort({ sortKey: sortKey, isReverse: isReverse });</code></pre>
+<h1 id="leanpub-end-insert">leanpub-end-insert</h1>
+<p>};</p>
+<h1 id="leanpub-start-insert">leanpub-start-insert</h1>
+<p>const sortFunction = SORTS[sort.sortKey]; # leanpub-end-insert const sortedList = sortFunction(list);</p>
+<p>return ( … ); }; ~~~~~~~</p>
+<p>Lastly, depending on the new <code>isReverse</code> state, apply the sort function from the dictionary with or without the built-in JavaScript reverse method for arrays:</p>
+<p>{title=“src/App.js”,lang=“javascript”} ~~~~~~~ const List = ({ list, onRemoveItem }) =&gt; { const [sort, setSort] = React.useState({ sortKey: ‘NONE’, isReverse: false, });</p>
+<p>const handleSort = (sortKey) =&gt; { const isReverse = sort.sortKey === sortKey &amp;&amp; !sort.isReverse;</p>
+<h1 id="leanpub-start-insert-1">leanpub-start-insert</h1>
+<pre><code>setSort({ sortKey, isReverse });</code></pre>
+<h1 id="leanpub-end-insert-1">leanpub-end-insert</h1>
+<p>};</p>
+<p>const sortFunction = SORTS[sort.sortKey]; # leanpub-start-insert const sortedList = sort.isReverse ? sortFunction(list).reverse() : sortFunction(list); # leanpub-end-insert</p>
+<p>return ( … ); }; ~~~~~~~</p>
+<p>The reverse sort is now operational! Congratulations, you have a fully sortable list now. And by the way: For the object passed to the state updater function, we use what is called a <strong>shorthand object initializer notation</strong>:</p>
+<p>{title=“src/App.js”,lang=“javascript”} ~~~~~~~ const firstName = ‘Robin’;</p>
+<p>const user = { firstName: firstName, };</p>
+<p>console.log(user); // { firstName: “Robin” } ~~~~~~~</p>
+<p>When the property name in your object is the same as your variable name, you can omit the key/value pair and just write the name:</p>
+<p>{title=“src/App.js”,lang=“javascript”} ~~~~~~~ const firstName = ‘Robin’;</p>
+<p>const user = { firstName, };</p>
+<p>console.log(user); // { firstName: “Robin” } ~~~~~~~</p>
+<p>If necessary, read more about <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Object_initializer">JavaScript Object Initializers</a>.</p>
+<h3 id="exercises">Exercises:</h3>
+<ul>
+<li>Confirm your <a href="https://codesandbox.io/s/github/the-road-to-learn-react/hacker-stories/tree/2021/Reverse-Sort">source code</a>.
+<ul>
+<li>Confirm the <a href="https://github.com/the-road-to-learn-react/hacker-stories/compare/2021/Sort...2021/Reverse-Sort">changes</a>.</li>
+</ul></li>
+<li>Consider the drawback of keeping the sort state in the List instead of the App component. If you don’t know, sort the list by “Title” and search for other stories afterward. What would be different if the sort state would be in the App component.</li>
+<li>Use your styling skills to give the user feedback about the current active sort and its reverse state. It could be an <a href="https://www.flaticon.com/packs/arrow-set-2">arrow up or arrow down SVG</a> next to each active sort button.</li>
+</ul>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>third-party-libraries</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<h2 id="third-party-libraries-in-react">Third-Party Libraries in React</h2>
+<p>We previously introduced the native fetch API to complete requests to the Hacker News API, which the browser provides. However, not all browsers support this, especially the older ones. Also, once you start testing your application in a <a href="https://en.wikipedia.org/wiki/Headless_browser">headless browser environment</a>, issues can arise with the fetch API. There are a couple of ways to make fetch work in older browsers (<a href="https://en.wikipedia.org/wiki/Polyfill_(programming)">polyfills</a>) and in tests (isomorphic fetch), but these concepts are a bit off-task for the purpose of this learning experience.</p>
+<p>One alternative is to substitute the native fetch API with a stable library like <a href="https://github.com/axios/axios">axios</a>, which performs asynchronous requests to remote APIs. In this section, we will discover how to substitute a library – a native API of the browser in this case – with another library from the npm registry. First, install axios from the command line:</p>
+<p>{title=“Command Line”,lang=“text”} ~~~~~~~ npm install axios ~~~~~~~</p>
+<p>Second, import axios in your App component’s file:</p>
+<p>{title=“src/App.js”,lang=“javascript”} ~~~~~~~ import * as React from ‘react’; # leanpub-start-insert import axios from ‘axios’; # leanpub-end-insert</p>
+<p>… ~~~~~~~</p>
+<p>You can use <code>axios</code> instead of <code>fetch</code>, and its usage looks almost identical to the native fetch API. It takes the URL as an argument and returns a promise. You don’t have to transform the returned response to JSON anymore, since axios wraps the result into a data object in JavaScript. Just make sure to adapt your code to the returned data structure:</p>
+<p>{title=“src/App.js”,lang=“javascript”} ~~~~~~~ const App = () =&gt; { …</p>
+<p>const handleFetchStories = React.useCallback(() =&gt; { dispatchStories({ type: ‘STORIES_FETCH_INIT’ });</p>
+<h1 id="leanpub-start-insert">leanpub-start-insert</h1>
+<pre><code>axios
+  .get(url)</code></pre>
+<h1 id="leanpub-end-insert">leanpub-end-insert</h1>
+<pre><code>  .then((result) =&gt; {
+    dispatchStories({
+      type: &#39;STORIES_FETCH_SUCCESS&#39;,</code></pre>
+<h1 id="leanpub-start-insert-1">leanpub-start-insert</h1>
+<pre><code>      payload: result.data.hits,</code></pre>
+<h1 id="leanpub-end-insert-1">leanpub-end-insert</h1>
+<pre><code>    });
+  })
+  .catch(() =&gt;
+    dispatchStories({ type: &#39;STORIES_FETCH_FAILURE&#39; })
+  );</code></pre>
+<p>}, [url]);</p>
+<p>… }; ~~~~~~~</p>
+<p>In this code, we call axios <code>axios.get()</code> for an explicit <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/GET">HTTP GET request</a>, which is the same HTTP method we used by default with the browser’s native fetch API. You can use other HTTP methods such as HTTP POST with <code>axios.post()</code>as well. We can see with these examples that axios is a powerful library for performing requests to remote APIs. I recommend it over the native fetch API when requests become complex, working with older browsers, or for testing.</p>
+<h3 id="exercises">Exercises:</h3>
+<ul>
+<li>Confirm your <a href="https://codesandbox.io/s/github/the-road-to-learn-react/hacker-stories/tree/2021/Third-Party-Libraries-in-React">source code</a>.
+<ul>
+<li>Confirm the <a href="https://github.com/the-road-to-learn-react/hacker-stories/compare/2021/Explicit-Data-Fetching-with-React...2021/Third-Party-Libraries-in-React">changes</a>.</li>
+</ul></li>
+<li>Read more about <a href="https://www.robinwieruch.de/react-libraries">popular libraries in React</a>.</li>
+<li>Read more about <a href="https://www.robinwieruch.de/why-frameworks-matter">why frameworks matter</a>.</li>
+<li>Read more about <a href="https://github.com/axios/axios">axios</a>.</li>
+</ul>
+</body>
+</html>

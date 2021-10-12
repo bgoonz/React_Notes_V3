@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>readme-1</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<h1 id="demo-class-components">Demo Class Components</h1>
+<p>This demo consists of a series of code snippets that each demonstrate basic React concepts in relative isolation. Feel free to refer back to this repository when you need to revisit basic React concepts.</p>
+<ul>
+<li>ex1 - A Basic React Component</li>
+<li>ex2 - A Basic React Class Component</li>
+<li>ex3 - A Class Component with State</li>
+<li>ex4 - A Class Component that Updates State</li>
+<li>ex5 - A Class Component that Iterates through State</li>
+<li>ex6 - An Example of Parent and Child Components</li>
+</ul>
+<p>{% tabs %} {% tab title=“Basic React Component” %}</p>
+<ul>
+<li>ex1 - A Basic React Component</li>
+</ul>
+<div class="sourceCode" id="cb1"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb1-1" title="1"><span class="im">import</span> React <span class="im">from</span> <span class="st">&#39;react&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb1-2" title="2"></a>
+<a class="sourceLine" id="cb1-3" title="3"><span class="kw">const</span> BasicComponent <span class="op">=</span> () <span class="kw">=&gt;</span> <span class="op">&lt;</span>div<span class="op">&gt;</span>Hello World<span class="op">!</span>&lt;/div<span class="op">&gt;;</span></a>
+<a class="sourceLine" id="cb1-4" title="4"></a>
+<a class="sourceLine" id="cb1-5" title="5"><span class="im">export</span> <span class="im">default</span> BasicComponent<span class="op">;</span></a></code></pre></div>
+<p>{% endtab %}</p>
+<p>{% tab title=“A Basic React Class Component” %} * ex2 - A Basic React Class Component</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb2-1" title="1"><span class="im">import</span> React<span class="op">,</span> <span class="op">{</span>Component<span class="op">}</span> <span class="im">from</span> <span class="st">&#39;react&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb2-2" title="2"></a>
+<a class="sourceLine" id="cb2-3" title="3"><span class="kw">class</span> BasicClassComponent <span class="kw">extends</span> Component <span class="op">{</span></a>
+<a class="sourceLine" id="cb2-4" title="4">  <span class="at">render</span> () <span class="op">{</span></a>
+<a class="sourceLine" id="cb2-5" title="5">    <span class="cf">return</span> <span class="op">&lt;</span>div<span class="op">&gt;</span> Hello World<span class="op">!</span> &lt;/div<span class="op">&gt;;</span></a>
+<a class="sourceLine" id="cb2-6" title="6">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb2-7" title="7"><span class="op">}</span></a>
+<a class="sourceLine" id="cb2-8" title="8"></a>
+<a class="sourceLine" id="cb2-9" title="9"><span class="im">export</span> <span class="im">default</span> BasicClassComponent<span class="op">;</span></a></code></pre></div>
+<p>{% endtab %}</p>
+<p>{% tab title=“Class Component with State” %} * ex3 - A Class Component with State</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb3-1" title="1"><span class="im">import</span> React<span class="op">,</span> <span class="op">{</span>Component<span class="op">}</span> <span class="im">from</span> <span class="st">&#39;react&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb3-2" title="2"></a>
+<a class="sourceLine" id="cb3-3" title="3"><span class="kw">class</span> ClassComponentWithState <span class="kw">extends</span> Component <span class="op">{</span></a>
+<a class="sourceLine" id="cb3-4" title="4">  <span class="at">constructor</span> () <span class="op">{</span></a>
+<a class="sourceLine" id="cb3-5" title="5">    <span class="kw">super</span> ()<span class="op">;</span></a>
+<a class="sourceLine" id="cb3-6" title="6"></a>
+<a class="sourceLine" id="cb3-7" title="7">    <span class="kw">this</span>.<span class="at">state</span> <span class="op">=</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb3-8" title="8">      <span class="dt">aNumber</span><span class="op">:</span> <span class="dv">8</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb3-9" title="9">    <span class="op">};</span></a>
+<a class="sourceLine" id="cb3-10" title="10">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb3-11" title="11"></a>
+<a class="sourceLine" id="cb3-12" title="12">  <span class="at">render</span> () <span class="op">{</span></a>
+<a class="sourceLine" id="cb3-13" title="13">    <span class="cf">return</span> <span class="op">&lt;</span>div<span class="op">&gt;</span> <span class="op">{</span><span class="vs">`Here&#39;s a thing to render: </span><span class="sc">${</span><span class="kw">this</span>.<span class="va">state</span>.<span class="at">aNumber</span><span class="sc">}</span><span class="vs">`</span><span class="op">}</span> &lt;/div<span class="op">&gt;;</span></a>
+<a class="sourceLine" id="cb3-14" title="14">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb3-15" title="15"><span class="op">}</span></a>
+<a class="sourceLine" id="cb3-16" title="16"></a>
+<a class="sourceLine" id="cb3-17" title="17"><span class="im">export</span> <span class="im">default</span> ClassComponentWithState<span class="op">;</span></a></code></pre></div>
+<p>{% endtab %}</p>
+<p>{% tab title=" Class Component that Updates State" %} * ex4 - A Class Component that Updates State</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb4-1" title="1"><span class="im">import</span> React<span class="op">,</span> <span class="op">{</span>Component<span class="op">}</span> <span class="im">from</span> <span class="st">&#39;react&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb4-2" title="2"></a>
+<a class="sourceLine" id="cb4-3" title="3"><span class="kw">class</span> ClassComponentUpdatingState <span class="kw">extends</span> Component <span class="op">{</span></a>
+<a class="sourceLine" id="cb4-4" title="4">  <span class="at">constructor</span> () <span class="op">{</span></a>
+<a class="sourceLine" id="cb4-5" title="5">    <span class="kw">super</span> ()<span class="op">;</span></a>
+<a class="sourceLine" id="cb4-6" title="6"></a>
+<a class="sourceLine" id="cb4-7" title="7">    <span class="kw">this</span>.<span class="at">state</span> <span class="op">=</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb4-8" title="8">      <span class="dt">aNumber</span><span class="op">:</span> <span class="dv">8</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb4-9" title="9">    <span class="op">};</span></a>
+<a class="sourceLine" id="cb4-10" title="10">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb4-11" title="11"></a>
+<a class="sourceLine" id="cb4-12" title="12">  increment <span class="op">=</span> () <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb4-13" title="13">    <span class="kw">this</span>.<span class="at">setState</span> (<span class="op">{</span></a>
+<a class="sourceLine" id="cb4-14" title="14">      <span class="dt">aNumber</span><span class="op">:</span> <span class="op">++</span><span class="kw">this</span>.<span class="va">state</span>.<span class="at">aNumber</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb4-15" title="15">    <span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb4-16" title="16">  <span class="op">};</span></a>
+<a class="sourceLine" id="cb4-17" title="17"></a>
+<a class="sourceLine" id="cb4-18" title="18">  decrement <span class="op">=</span> () <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb4-19" title="19">    <span class="kw">this</span>.<span class="at">setState</span> (<span class="op">{</span></a>
+<a class="sourceLine" id="cb4-20" title="20">      <span class="dt">aNumber</span><span class="op">:</span> <span class="op">--</span><span class="kw">this</span>.<span class="va">state</span>.<span class="at">aNumber</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb4-21" title="21">    <span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb4-22" title="22">  <span class="op">};</span></a>
+<a class="sourceLine" id="cb4-23" title="23"></a>
+<a class="sourceLine" id="cb4-24" title="24">  <span class="at">render</span> () <span class="op">{</span></a>
+<a class="sourceLine" id="cb4-25" title="25">    <span class="cf">return</span> (</a>
+<a class="sourceLine" id="cb4-26" title="26">      <span class="op">&lt;</span>div<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb4-27" title="27">        <span class="op">&lt;</span>div<span class="op">&gt;</span> <span class="op">{</span><span class="vs">`Our number: </span><span class="sc">${</span><span class="kw">this</span>.<span class="va">state</span>.<span class="at">aNumber</span><span class="sc">}</span><span class="vs">`</span><span class="op">}</span> &lt;/div<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb4-28" title="28">        <span class="op">{</span><span class="st">&#39; &#39;</span><span class="op">}</span></a>
+<a class="sourceLine" id="cb4-29" title="29">        <span class="op">&lt;</span>button onClick<span class="op">={</span><span class="kw">this</span>.<span class="at">increment</span><span class="op">}&gt;</span> <span class="op">+</span> &lt;/button<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb4-30" title="30">        <span class="op">{</span><span class="st">&#39; &#39;</span><span class="op">}</span></a>
+<a class="sourceLine" id="cb4-31" title="31">        <span class="op">&lt;</span>button onClick<span class="op">={</span><span class="kw">this</span>.<span class="at">decrement</span><span class="op">}&gt;</span> <span class="op">-</span> &lt;/button<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb4-32" title="32">        <span class="op">{</span><span class="st">&#39; &#39;</span><span class="op">}</span></a>
+<a class="sourceLine" id="cb4-33" title="33">      &lt;/div<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb4-34" title="34">    )<span class="op">;</span></a>
+<a class="sourceLine" id="cb4-35" title="35">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb4-36" title="36"><span class="op">}</span></a>
+<a class="sourceLine" id="cb4-37" title="37"></a>
+<a class="sourceLine" id="cb4-38" title="38"><span class="im">export</span> <span class="im">default</span> ClassComponentUpdatingState<span class="op">;</span></a></code></pre></div>
+<p>{% endtab %}</p>
+<p>{% tab title=" Class Component that Iterates through State" %} * ex5 - A Class Component that Iterates through State</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb5-1" title="1"><span class="im">import</span> React<span class="op">,</span> <span class="op">{</span>Component<span class="op">}</span> <span class="im">from</span> <span class="st">&#39;react&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb5-2" title="2"></a>
+<a class="sourceLine" id="cb5-3" title="3"><span class="kw">class</span> ClassComponentIteratingState <span class="kw">extends</span> Component <span class="op">{</span></a>
+<a class="sourceLine" id="cb5-4" title="4">  <span class="at">constructor</span> () <span class="op">{</span></a>
+<a class="sourceLine" id="cb5-5" title="5">    <span class="kw">super</span> ()<span class="op">;</span></a>
+<a class="sourceLine" id="cb5-6" title="6"></a>
+<a class="sourceLine" id="cb5-7" title="7">    <span class="kw">this</span>.<span class="at">state</span> <span class="op">=</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb5-8" title="8">      <span class="dt">ingredients</span><span class="op">:</span> [<span class="st">&#39;flour&#39;</span><span class="op">,</span> <span class="st">&#39;eggs&#39;</span><span class="op">,</span> <span class="st">&#39;milk&#39;</span><span class="op">,</span> <span class="st">&#39;sugar&#39;</span><span class="op">,</span> <span class="st">&#39;vanilla&#39;</span>]<span class="op">,</span></a>
+<a class="sourceLine" id="cb5-9" title="9">      <span class="dt">newIngredient</span><span class="op">:</span> <span class="st">&#39;&#39;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb5-10" title="10">    <span class="op">};</span></a>
+<a class="sourceLine" id="cb5-11" title="11">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb5-12" title="12"></a>
+<a class="sourceLine" id="cb5-13" title="13">  addIngredient <span class="op">=</span> event <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb5-14" title="14">    <span class="va">event</span>.<span class="at">preventDefault</span> ()<span class="op">;</span></a>
+<a class="sourceLine" id="cb5-15" title="15">    <span class="kw">const</span> ingredientsList <span class="op">=</span> <span class="kw">this</span>.<span class="va">state</span>.<span class="at">ingredients</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb5-16" title="16">    <span class="va">ingredientsList</span>.<span class="at">push</span> (<span class="kw">this</span>.<span class="va">state</span>.<span class="at">newIngredient</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb5-17" title="17">    <span class="kw">this</span>.<span class="at">setState</span> (<span class="op">{</span></a>
+<a class="sourceLine" id="cb5-18" title="18">      <span class="dt">newIngredient</span><span class="op">:</span> <span class="st">&#39;&#39;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb5-19" title="19">      <span class="dt">ingredients</span><span class="op">:</span> ingredientsList<span class="op">,</span></a>
+<a class="sourceLine" id="cb5-20" title="20">    <span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb5-21" title="21">  <span class="op">};</span></a>
+<a class="sourceLine" id="cb5-22" title="22"></a>
+<a class="sourceLine" id="cb5-23" title="23">  handleIngredientInput <span class="op">=</span> event <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb5-24" title="24">    <span class="kw">this</span>.<span class="at">setState</span> (<span class="op">{</span><span class="dt">newIngredient</span><span class="op">:</span> <span class="va">event</span>.<span class="va">target</span>.<span class="at">value</span><span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb5-25" title="25">  <span class="op">};</span></a>
+<a class="sourceLine" id="cb5-26" title="26"></a>
+<a class="sourceLine" id="cb5-27" title="27">  <span class="at">render</span> () <span class="op">{</span></a>
+<a class="sourceLine" id="cb5-28" title="28">    <span class="cf">return</span> (</a>
+<a class="sourceLine" id="cb5-29" title="29">      <span class="op">&lt;</span>div<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb5-30" title="30">        <span class="op">{</span><span class="kw">this</span>.<span class="va">state</span>.<span class="va">ingredients</span>.<span class="at">map</span> (ingredient <span class="kw">=&gt;</span> <span class="op">&lt;</span>div<span class="op">&gt;{</span>ingredient<span class="op">}</span>&lt;/div<span class="op">&gt;</span>)<span class="op">}</span></a>
+<a class="sourceLine" id="cb5-31" title="31">        <span class="op">&lt;</span>form onSubmit<span class="op">={</span><span class="kw">this</span>.<span class="at">addIngredient</span><span class="op">}&gt;</span></a>
+<a class="sourceLine" id="cb5-32" title="32">          <span class="op">&lt;</span>input</a>
+<a class="sourceLine" id="cb5-33" title="33">            type<span class="op">=</span><span class="st">&quot;text&quot;</span></a>
+<a class="sourceLine" id="cb5-34" title="34">            onChange<span class="op">={</span><span class="kw">this</span>.<span class="at">handleIngredientInput</span><span class="op">}</span></a>
+<a class="sourceLine" id="cb5-35" title="35">            placeholder<span class="op">=</span><span class="st">&quot;Add a new ingredient&quot;</span></a>
+<a class="sourceLine" id="cb5-36" title="36">            value<span class="op">={</span><span class="kw">this</span>.<span class="va">state</span>.<span class="at">newIngredient</span><span class="op">}</span></a>
+<a class="sourceLine" id="cb5-37" title="37">          /&gt;</a>
+<a class="sourceLine" id="cb5-38" title="38">        &lt;/form<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb5-39" title="39">      &lt;/div<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb5-40" title="40">    )<span class="op">;</span></a>
+<a class="sourceLine" id="cb5-41" title="41">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb5-42" title="42"><span class="op">}</span></a>
+<a class="sourceLine" id="cb5-43" title="43"></a>
+<a class="sourceLine" id="cb5-44" title="44"><span class="im">export</span> <span class="im">default</span> ClassComponentIteratingState<span class="op">;</span></a></code></pre></div>
+<p>{% endtab %}</p>
+<p>{% tab title=“Parent &amp; Child” %} * <strong>ex6 - An Example of Parent and Child Components</strong> * child:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb6-1" title="1"><span class="im">import</span> React<span class="op">,</span> <span class="op">{</span>Component<span class="op">}</span> <span class="im">from</span> <span class="st">&#39;react&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb6-2" title="2"></a>
+<a class="sourceLine" id="cb6-3" title="3"><span class="kw">class</span> ChildComponent <span class="kw">extends</span> Component <span class="op">{</span></a>
+<a class="sourceLine" id="cb6-4" title="4">  <span class="at">constructor</span> () <span class="op">{</span></a>
+<a class="sourceLine" id="cb6-5" title="5">    <span class="kw">super</span> ()<span class="op">;</span></a>
+<a class="sourceLine" id="cb6-6" title="6">    <span class="kw">this</span>.<span class="at">state</span> <span class="op">=</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb6-7" title="7">      <span class="dt">clicked</span><span class="op">:</span> <span class="kw">false</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb6-8" title="8">    <span class="op">};</span></a>
+<a class="sourceLine" id="cb6-9" title="9">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb6-10" title="10"></a>
+<a class="sourceLine" id="cb6-11" title="11">  handleClick <span class="op">=</span> () <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb6-12" title="12">    <span class="kw">this</span>.<span class="at">setState</span> (<span class="op">{</span></a>
+<a class="sourceLine" id="cb6-13" title="13">      <span class="dt">clicked</span><span class="op">:</span> <span class="op">!</span><span class="kw">this</span>.<span class="va">state</span>.<span class="at">clicked</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb6-14" title="14">    <span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb6-15" title="15">  <span class="op">};</span></a>
+<a class="sourceLine" id="cb6-16" title="16"></a>
+<a class="sourceLine" id="cb6-17" title="17">  <span class="at">render</span> () <span class="op">{</span></a>
+<a class="sourceLine" id="cb6-18" title="18">    <span class="kw">const</span> styles <span class="op">=</span> <span class="kw">this</span>.<span class="va">state</span>.<span class="at">clicked</span></a>
+<a class="sourceLine" id="cb6-19" title="19">      <span class="op">?</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb6-20" title="20">          <span class="dt">textDecoration</span><span class="op">:</span> <span class="st">&#39;line-through&#39;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb6-21" title="21">        <span class="op">}</span></a>
+<a class="sourceLine" id="cb6-22" title="22">      : <span class="op">{</span></a>
+<a class="sourceLine" id="cb6-23" title="23">          <span class="dt">textDecoration</span><span class="op">:</span> <span class="st">&#39;none&#39;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb6-24" title="24">        <span class="op">};</span></a>
+<a class="sourceLine" id="cb6-25" title="25">    <span class="cf">return</span> (</a>
+<a class="sourceLine" id="cb6-26" title="26">      <span class="op">&lt;</span>div style<span class="op">={</span>styles<span class="op">}</span> onClick<span class="op">={</span><span class="kw">this</span>.<span class="at">handleClick</span><span class="op">}&gt;</span> <span class="op">{</span><span class="kw">this</span>.<span class="va">props</span>.<span class="at">thing</span><span class="op">}</span> &lt;/div<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb6-27" title="27">    )<span class="op">;</span></a>
+<a class="sourceLine" id="cb6-28" title="28">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb6-29" title="29"><span class="op">}</span></a>
+<a class="sourceLine" id="cb6-30" title="30"></a>
+<a class="sourceLine" id="cb6-31" title="31"><span class="im">export</span> <span class="im">default</span> ChildComponent<span class="op">;</span></a></code></pre></div>
+<ul>
+<li>parent:</li>
+</ul>
+<div class="sourceCode" id="cb7"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb7-1" title="1"><span class="im">import</span> React<span class="op">,</span> <span class="op">{</span>Component<span class="op">}</span> <span class="im">from</span> <span class="st">&#39;react&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb7-2" title="2"><span class="im">import</span> ChildComponent <span class="im">from</span> <span class="st">&#39;./ChildComponent&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb7-3" title="3"></a>
+<a class="sourceLine" id="cb7-4" title="4"><span class="kw">class</span> ParentComponent <span class="kw">extends</span> Component <span class="op">{</span></a>
+<a class="sourceLine" id="cb7-5" title="5">  <span class="at">constructor</span> () <span class="op">{</span></a>
+<a class="sourceLine" id="cb7-6" title="6">    <span class="kw">super</span> ()<span class="op">;</span></a>
+<a class="sourceLine" id="cb7-7" title="7"></a>
+<a class="sourceLine" id="cb7-8" title="8">    <span class="kw">this</span>.<span class="at">state</span> <span class="op">=</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb7-9" title="9">      <span class="dt">ingredients</span><span class="op">:</span> [<span class="st">&#39;flour&#39;</span><span class="op">,</span> <span class="st">&#39;eggs&#39;</span><span class="op">,</span> <span class="st">&#39;milk&#39;</span><span class="op">,</span> <span class="st">&#39;sugar&#39;</span><span class="op">,</span> <span class="st">&#39;vanilla&#39;</span>]<span class="op">,</span></a>
+<a class="sourceLine" id="cb7-10" title="10">      <span class="dt">newIngredient</span><span class="op">:</span> <span class="st">&#39;&#39;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb7-11" title="11">    <span class="op">};</span></a>
+<a class="sourceLine" id="cb7-12" title="12">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb7-13" title="13"></a>
+<a class="sourceLine" id="cb7-14" title="14">  handleIngredientInput <span class="op">=</span> event <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb7-15" title="15">    <span class="kw">this</span>.<span class="at">setState</span> (<span class="op">{</span></a>
+<a class="sourceLine" id="cb7-16" title="16">      <span class="dt">newIngredient</span><span class="op">:</span> <span class="va">event</span>.<span class="va">target</span>.<span class="at">value</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb7-17" title="17">    <span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb7-18" title="18">  <span class="op">};</span></a>
+<a class="sourceLine" id="cb7-19" title="19"></a>
+<a class="sourceLine" id="cb7-20" title="20">  addIngredient <span class="op">=</span> event <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb7-21" title="21">    <span class="va">event</span>.<span class="at">preventDefault</span> ()<span class="op">;</span></a>
+<a class="sourceLine" id="cb7-22" title="22">    <span class="kw">const</span> ingredientsList <span class="op">=</span> <span class="kw">this</span>.<span class="va">state</span>.<span class="at">ingredients</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb7-23" title="23">    <span class="va">ingredientsList</span>.<span class="at">push</span> (<span class="kw">this</span>.<span class="va">state</span>.<span class="at">newIngredient</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb7-24" title="24">    <span class="kw">this</span>.<span class="at">setState</span> (<span class="op">{</span></a>
+<a class="sourceLine" id="cb7-25" title="25">      <span class="dt">newIngredient</span><span class="op">:</span> <span class="st">&#39;&#39;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb7-26" title="26">      <span class="dt">ingredients</span><span class="op">:</span> ingredientsList<span class="op">,</span></a>
+<a class="sourceLine" id="cb7-27" title="27">    <span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb7-28" title="28">  <span class="op">};</span></a>
+<a class="sourceLine" id="cb7-29" title="29"></a>
+<a class="sourceLine" id="cb7-30" title="30">  <span class="at">render</span> () <span class="op">{</span></a>
+<a class="sourceLine" id="cb7-31" title="31">    <span class="cf">return</span> (</a>
+<a class="sourceLine" id="cb7-32" title="32">      <span class="op">&lt;</span>div<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb7-33" title="33">        <span class="op">{</span><span class="st">&#39; &#39;</span><span class="op">}</span></a>
+<a class="sourceLine" id="cb7-34" title="34">        <span class="op">{</span><span class="kw">this</span>.<span class="va">state</span>.<span class="va">ingredients</span>.<span class="at">map</span> (ingredient <span class="kw">=&gt;</span> (</a>
+<a class="sourceLine" id="cb7-35" title="35">          <span class="op">&lt;</span>ChildComponent thing<span class="op">={</span>ingredient<span class="op">}</span> /&gt;</a>
+<a class="sourceLine" id="cb7-36" title="36">        ))<span class="op">}</span></a>
+<a class="sourceLine" id="cb7-37" title="37">        <span class="op">{</span><span class="st">&#39; &#39;</span><span class="op">}</span></a>
+<a class="sourceLine" id="cb7-38" title="38">        <span class="op">&lt;</span>form onSubmit<span class="op">={</span><span class="kw">this</span>.<span class="at">addIngredient</span><span class="op">}&gt;</span></a>
+<a class="sourceLine" id="cb7-39" title="39">          <span class="op">&lt;</span>input</a>
+<a class="sourceLine" id="cb7-40" title="40">            type<span class="op">=</span><span class="st">&quot;text&quot;</span></a>
+<a class="sourceLine" id="cb7-41" title="41">            onChange<span class="op">={</span><span class="kw">this</span>.<span class="at">handleIngredientInput</span><span class="op">}</span></a>
+<a class="sourceLine" id="cb7-42" title="42">            placeholder<span class="op">=</span><span class="st">&quot;Add a new ingredient&quot;</span></a>
+<a class="sourceLine" id="cb7-43" title="43">            value<span class="op">={</span><span class="kw">this</span>.<span class="va">state</span>.<span class="at">newIngredient</span><span class="op">}</span></a>
+<a class="sourceLine" id="cb7-44" title="44">          /&gt;</a>
+<a class="sourceLine" id="cb7-45" title="45">          <span class="op">{</span><span class="st">&#39; &#39;</span><span class="op">}</span></a>
+<a class="sourceLine" id="cb7-46" title="46">        &lt;/form<span class="op">&gt;{</span><span class="st">&#39; &#39;</span><span class="op">}</span></a>
+<a class="sourceLine" id="cb7-47" title="47">      &lt;/div<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb7-48" title="48">    )<span class="op">;</span></a>
+<a class="sourceLine" id="cb7-49" title="49">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb7-50" title="50"><span class="op">}</span></a>
+<a class="sourceLine" id="cb7-51" title="51"></a>
+<a class="sourceLine" id="cb7-52" title="52"><span class="im">export</span> <span class="im">default</span> ParentComponent<span class="op">;</span></a></code></pre></div>
+<p>{% endtab %} {% endtabs %}</p>
+<p><strong>With regards to converting an existing HTML, CSS, and JS site into React, first you’ll want to think about how to break up your site into components.</strong></p>
+<ul>
+<li>What the general hierarchical component structure of your site will look like.</li>
+</ul>
+<p><em>From there, it’s a simple matter of copying the relevant HTML for that component and throwing it into the render method of your component file.</em></p>
+<p><em>Any methods that are needed for that component to function properly can added onto your new component.</em></p>
+<p><code>Once you've "component-ized" your HTML, you'll want to lay them out in the desired hierarchical structure, with children components being rendered by their parents, as well as ensuring that the parent components are passing down the necessary data as props to their children components.</code></p>
+<p><strong>The key abstraction that React provides is that of a component.</strong></p>
+<h3 id="to-reiterate-a-component-is-some-thing-that-is-being-rendered-in-the-browser.">To reiterate, a component is some thing that is being rendered in the browser.</h3>
+<p><em><strong>- It could be a button, a form with a bunch of fields in it, a navigation bar at the top of the page, a single input field, etc.</strong></em></p>
+<p>React doesn’t place any restrictions on how large or small a component can be.</p>
+<p>You <em>could</em> have an entire static site encapsulated in a single React component, but that at that point you may as well not be using React.</p>
+<p><strong>So the first thing to remember about a component is that a component must</strong> <em><strong>render</strong></em> <strong>something. If nothing is being rendered from a component, then React will throw an error.</strong></p>
+<p>Let’s write the most basic of components we can possibly write. Inside of <code>BasicComponent.js</code> , first import React at the top of the file. Our most basic of<br />
+components looks like this:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb8-1" title="1"><span class="im">import</span> React <span class="im">from</span> <span class="st">&#39;react&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb8-2" title="2"></a>
+<a class="sourceLine" id="cb8-3" title="3"><span class="kw">const</span> BasicComponent <span class="op">=</span> () <span class="kw">=&gt;</span> <span class="op">&lt;</span>div<span class="op">&gt;</span>Hello World<span class="op">!</span>&lt;/div<span class="op">&gt;;</span></a>
+<a class="sourceLine" id="cb8-4" title="4"></a>
+<a class="sourceLine" id="cb8-5" title="5"><span class="im">export</span> <span class="im">default</span> BasicComponent<span class="op">;</span></a></code></pre></div>
+<p>This is a component that simply returns a div tag with the words Hello World! inside. The last line simply exports our component so that it can be imported<br />
+by another file.</p>
+<p>Notice that this component looks exactly like an anonymous arrow function that we’ve named <code>BasicComponent</code> . In fact, that is literally what this is. Nothing<br />
+more, nothing less. The arrow function then is simply returning the div tag. When a component is written as a function like this one is, it is called a<br />
+<em>functional</em> component.</p>
+<p>While a component can of course get a lot more complicated than this, fundamentally, all a component does is render some HTML.</p>
+<p>The basic component you wrote in the previous exercise is an example of a functional component, which is appropriate since that component is literally<br />
+nothing more than a function that returns some HTML. Functional components are great when all you want a component to do is to render some stuff; they<br />
+are really good at doing just that.</p>
+<p>Components can also be written as classes. For this exercise, we’re going to write a class component that does exactly the same thing as the functional component we just wrote. We’ll again need to import React at the top of the file, but we’ll also need to add a little something. Our import statement will look like this:</p>
+<pre class="text"><code>import React, { Component } from &#39;react&#39;;</code></pre>
+<p>So, in addition to importing React, we’re also importing the base Component class that is included in the React library. The export statement at the bottom of the file also stays, completely unchanged. Our class component will thus look like this:</p>
+<pre class="text"><code>import React, { Component } from &#39;react&#39;;
+
+class BasicClassComponent extends Component {
+    render() {
+        return (
+            &lt;div&gt;Hello World!&lt;/div&gt;
+        );
+    }
+}
+
+export default BasicClassComponent;</code></pre>
+<p>Notice that our <code>BasicClassComponent</code> inherits from the base <code>Component</code> class that we imported from the React library, by virtue of the ‘extends’ keyword. That being said, there’s nothing in this minimal component that takes advantage of any of those inherited methods. All we have is a method on our component class called <code>render</code> that returns the same div tag.</p>
+<p>In this case, if we really were deciding between whether to use a functional component versus a class component to render a simple div tag, then the functional style is more appropriate to use. This is because class components are much better suited for handling component state and triggering events based on the component’s lifecycle. Don’t worry if you don’t know what all these terms meant, we will get to them shortly.</p>
+<p>The important takeaways at this point are that there are two types of components, functional and class components, and that functional components are well-suited if you’re just looking to render some HTML. Class components, on the other hand, are much better suited for handling components that require more complex functionality, need to exhibit more varied behavior, and/or need to keep track of some state that may change throughout said component’s lifecycle.</p>
+<p>When we talked about class components, it was mentioned that class components can handle state. So what does that mean? Component state is any dynamic data that we want the component to keep track of. For example, let’s say we have a form component. This form has some input fields that we’d like users to fill out. When a user types characters into an input field, how is that input persisted from the point of view of our form component?</p>
+<p>The answer is by using component state! There are a few important concepts regarding component state, such as how to update it, pass it to another component, render it, etc. We’ll talk about all of these in a bit, but for now, let’s just focus on how to add state to a class component.</p>
+<p>Only class components have the ability to persist state, so if at any time you realize that a component needs to keep track of some state, you know that you’ll automatically need a class component instead of a functional component.</p>
+<p>Our class component with state will look a lot like the basic class component we just wrote, but with some extra stuff:</p>
+<pre class="text"><code>import React, { Component } from &#39;react&#39;;
+
+class ClassComponentWithState extends Component {
+    constructor() {
+        super();
+        this.state = {};
+    }
+
+    render() {
+        return (
+            &lt;div&gt;Hello World!&lt;/div&gt;
+        );
+    }
+}
+
+export default ClassComponentWithState;</code></pre>
+<p>So far, the only new thing going on here is the constructor block. If you recall how classes in JavaScript work, classes need constructors. Additionally, if a class is extending off of another class and wants access to its parent class’s methods and properties, then the <code>super</code> function needs to be called inside the class’s constructor function. Point being, the constructor function and the call to the <code>super</code> function are <em>not</em> associated with React, they are associated with all JavaScript classes.</p>
+<p>Then there is the <code>this.state</code> property inside the constructor function that is set as an empty object. We’re adding a property called <code>state</code> to our class and setting it to an empty object. State objects in React are always just plain old objects.</p>
+<p>The observant student may be wondering why the basic class component we wrote in the previous exercise had no constructor function within its body. That is because we had no need for them since all our class component was doing was rendering some HTML. The constructor is needed here because that is where we need to initialize our state object. The call to <code>super</code> is needed because we can’t reference <code>this</code> inside of our constructor without a call to <code>super</code> first.</p>
+<p>Ok, now let’s actually use this state object. One very common application of state objects in React components is to render the data being stored inside them within our component’s render function. Let’s change our current class component to do that.</p>
+<pre class="text"><code>class ClassComponentWithState extends Component {
+    constructor() {
+        super();
+        this.state = {
+            someData: 8
+        };
+    }
+
+    render() {
+        return (
+            &lt;div&gt;{`Here&#39;s some data to render: ${this.state.someData}`}&lt;/div&gt;
+        );
+    }
+}
+
+export default ClassComponentWithState;</code></pre>
+<p>So what’s changed here? Well, we added a key-value pair to our state object inside our constructor. Then we changed the contents of the render function. Now, it’s actually rendering the data that we have inside the state object. Notice that inside the div tags we’re using a template string literal so that we can access the value of <code>this.state.someData</code> straight inside of our rendered content. This is a very handy piece of functionality that React provides for us when writing components.</p>
+<p>With React’s newest version, we can actually now add state to a component without explicitly defining a constructor on the class. We can refactor our class component to look like this:</p>
+<pre class="text"><code>class ClassComponentWithState extends Component {
+    state = {
+        someData: 8
+    };
+
+    render() {
+        return (
+            &lt;div&gt;{`Here&#39;s some data to render: ${this.state.someData}`}&lt;/div&gt;
+        );
+    }
+}
+
+export default ClassComponentWithState;</code></pre>
+<p>Our code is slightly cleaner, and doesn’t require as many keystrokes as the older version. Fewer keystrokes are always a plus in my book! This new syntax is what is often referred to as ‘syntactic sugar’: under the hood, the React library translates this back into the old constructor code that we first started with, so that the JavaScript remains valid to the JavaScript interpreter. The clue to this is the fact that when we want to access some data from the state object, we still need to call it with <code>this.state.someData</code> ; changing it to just <code>state.someData</code> does not work.</p>
+<p>While being able to write our code in this way is nice and convenient, going forward, I’m going to stick with the ‘older’ style of writing my React components by explicitly defining constructors so that you’ll all have a better idea of what’s going on under the hood. In other words, it’s more “pedagogically sound”. If you prefer the newer style (and I would in my own code), feel free to write your React components that way.</p>
+<p>Great, so we can render some state that our component persists for us. However, we said an important use case of component state is to handle <em>dynamic</em> data. A single static number isn’t very dynamic at all. So now let’s walk through how to update component state.</p>
+<pre class="text"><code>import React, { Component } from &#39;react&#39;;
+
+class ClassComponentUpdatingState extends Component {
+  constructor() {
+    super();
+    this.state = {
+      aNumber: 8
+    };
+  }
+
+  increment = () =&gt; {
+    this.setState({ aNumber: ++this.state.aNumber });
+  };
+
+  decrement = () =&gt; {
+    this.setState({ aNumber: --this.state.aNumber });
+  };
+
+  render() {
+    return (
+      &lt;div&gt;
+        &lt;div&gt;{`Our number: ${this.state.aNumber}`}&lt;/div&gt;
+        &lt;button onClick={this.increment}&gt;+&lt;/button&gt;
+        &lt;button onClick={this.decrement}&gt;-&lt;/button&gt;
+      &lt;/div&gt;
+    );
+  }
+}
+
+export default ClassComponentUpdatingState;</code></pre>
+<p>Notice that we’ve added two methods to our class: <code>increment</code> and <code>decrement</code> . <code>increment</code> and <code>decrement</code> are methods that <em>we</em> are adding to our class component. Unlike the <code>render</code> method, <code>increment</code> and <code>decrement</code> were not already a part of our class component. This is why <code>increment</code> and <code>decrement</code> are written as arrow functions, so that they are automatically bound to our class component. This needs to happen so that we can call them later on. Again, there’s no crazy React black magic going on here, we simply added two methods to our class.</p>
+<p>The more interesting thing is what is going on within the bodies of these methods. Each calls this funky <code>setState</code> function. <code>setState</code> in fact <em>is</em> provided to us by React. It is the canonical way to update a component’s state. Actually, it’s the <em>only</em> way you should ever update a component’s state. It may seem more verbose than necessary, but there are good reasons for why you should be doing it this way. I’m not going to get into those reasons now. I’ll leave a <a href="https://reactjs.org/docs/react-component.html#setstate">link</a> to the official documentation on the <code>setState</code> function, although I’m pretty sure at this point it will probably just blow your mind and/or overwhelm you with jargon. So for now, take this as a case of “because I’m telling you so”.</p>
+<p>So the way to use <code>setState</code> to update a component’s state is to pass it an object with each of the state keys you wish to update, along with the updated value. In our <code>increment</code> method we said “I would like to update the <code>aNumber</code> property on my component state by adding one to it and then setting the new value as my new <code>aNumber</code>”. The same thing happens in our <code>decrement</code> method, only we’re subtracting instead of adding.</p>
+<p>Then the other new concept we’re running into here is how to actually call these methods we’ve added to our class. We added two HTML button tags within our <code>render</code> function, then in their respective <code>onClick</code> handlers, we specify the method that should be called whenever this button gets clicked. So whenever we click either of the buttons, our state gets updated appropriately and our component will re-render to show the correct value we’re expecting.</p>
+<p>—# Class Component Iterating State</p>
+<p>Another common state pattern you’ll see being used in React components is iterating over an array in our state object and rendering each array element in its own tag. This is often used in order to render lists.</p>
+<p>Additionally, we want to be able to easily update lists and have React re-render our updated list. We’ll see how both of these are done and how they work together within a single component in order to create the behavior of a dynamic list.</p>
+<pre class="text"><code>import React, { Component } from &#39;react&#39;;
+
+class ClassComponentIteratingState extends Component {
+    constructor() {
+        super();
+
+        this.state = {
+            ingredients: [&#39;flour&#39;, &#39;eggs&#39;, &#39;milk&#39;, &#39;sugar&#39;, &#39;vanilla extract&#39;],
+            newIngredient: &#39;&#39;
+        };
+    }
+
+    handleIngredientInput = (event) =&gt; {
+        this.setState({ newIngredient: event.target.value });
+    };
+
+    addIngredient = (event) =&gt; {
+        event.preventDefault();
+        const ingredientsList = this.state.ingredients;
+        ingredientsList.push(this.state.newIngredient);
+        this.setState({
+            newIngredient: &#39;&#39;,
+            ingredients: ingredientsList
+        });
+    };
+
+    render() {
+        return (
+            &lt;div&gt;
+                {this.state.ingredients.map(ingredient =&gt; &lt;div&gt;{ingredient}&lt;/div&gt;)}
+                &lt;form onSubmit={this.addIngredient}&gt;
+                    &lt;input type=&quot;text&quot; onChange={this.handleIngredientInput} placeholder=&quot;Add a new ingredient&quot; value={this.state.newIngredient} /&gt;
+                &lt;/form&gt;
+            &lt;/div&gt;
+        );
+    }
+}
+
+export default ClassComponentIteratingState;</code></pre>
+<p>The first change to note is that our state object now has an ‘ingredients’ array, and a ‘newIngredient’ field that has been initialized to an empty string. The ingredients array contains the elements that we’ll want to render in our list. We’ll see shortly why the newIngredient field is needed.</p>
+<p>The <code>addIngredient</code> and <code>handleIngredientInput</code> methods we’ve added to our class receives a parameter called ‘event’. This event object is part of the browser’s API. When we interact with some DOM element, such as clicking on an HTML button, the function that is invoked upon that button being clicked actually receives the event object. So when we type some input into an input tag, we’re able grab each character that was typed into the input field through the event object paramter.</p>
+<p>The <code>handleIngredientInput</code> method is what gets invoked every time the user presses a key to enter text in the input box for adding a new ingredient. Every character the user types gets persisted in the <code>newIngredient</code> field on the state object. We’re able to grab the text in the input box using <code>event.target.value</code> , which holds the value of the string text that is currently in the input box. We use that to update our <code>newIngredient</code> string field.</p>
+<p>Breaking down the <code>addIngredient</code> method, we see this <code>event.preventDefault()</code> invocation. This is because this method will be used upon submitting a form, and it turns out that submitting a form triggers some default form behavior that we don’t want to trigger when we submit the form (namely refreshing the entire page). <code>event.preventDefault()</code> will prevent this default form behavior, meaning our form will only do what we want it to do when it is submitted.</p>
+<p>Next, we store a reference to <code>this.state.ingredients</code> in a variable called <code>ingredientsList</code> . So we now have a copy of the array that is stored in our state object. We want to update the copy of the ingredients array first instead of directly updating the actual array itself in state. This is a React best practice.</p>
+<p>Now we push whatever value is being stored at our <code>newIngredient</code> field onto the <code>ingredientsList</code> array so that our <code>ingredientsList</code> array is now more up-to-date than our <code>this.state.ingredients</code> array. So all we have to do now is call <code>setState</code> appropriately in order to update the value in our state object. Additionally, we also set the <code>newIngredient</code> field back to an empty string in order to clear out the input field once we submit a new ingredient. Now it’s ready to accept more user input!</p>
+<p>Looking at our render function, first note the <code>this.state.ingredients.map</code> call. This is looping through each ingredient in our <code>ingredients</code> array and returning each one within its own div tag. This is a very common syntax for rendering everything inside an array.</p>
+<p>Then we have an HTML form which contains an input field. The purpose of this form is to allow a user to add new ingredients to the list. Note that we’re passing our <code>addIngredient</code> method to the form’s <code>onSubmit</code> handler. This means that our <code>addIngredient</code> method gets invoked whenever our form is submitted.</p>
+<p>Lastly, the input field has an <code>onChange</code> handler that invokes our <code>handleIngredientInput</code> method whenever there is some sort of change in the input field, namely when a user types into it. Notice that the <code>value</code> field in our input tag reads off of <code>this.state.newIngredient</code> in order to know what value to display. So when a user enters text into the input field, the <code>onChange</code> handler is invoked every time, which updates our <code>this.state.newIngredient</code> field, which the input field<br />
+then renders.</p>
+<h2 id="parent-and-child-components">Parent and Child Components <a id="parent-and-child-components"></a></h2>
+<p>Now let’s get into talking about how to have components interact with each other. A single isolated component isn’t going to do us much good. That being said, it’s <em>possible</em> to simply throw all of the HTML for a page into a single React component, though at that point that one component would be so bloated and monolithic that you might as well not have used React at all.</p>
+<p>The beauty of React lies in the fact that it allows us to compose modular components together. Let’s start off with the component we just saw, but let’s change its name to <code>ParentComponent</code> .</p>
+<pre class="text"><code>import React, { Component } from &#39;react&#39;;
+import ChildComponent from &#39;./ChildComponent&#39;;
+
+class ParentComponent extends Component {
+    constructor() {
+        super();
+
+        this.state = {
+            ingredients: [&#39;flour&#39;, &#39;eggs&#39;, &#39;milk&#39;, &#39;sugar&#39;, &#39;vanilla&#39;],
+            newIngredient: &#39;&#39;
+        };
+    }
+
+    handleIngredientInput = (event) =&gt; {
+        this.setState({ newIngredient: event.target.value });
+    };
+
+    addIngredient = (event) =&gt; {
+        event.preventDefault();
+        const ingredientsList = this.state.ingredients;
+        ingredientsList.push(this.state.newIngredient);
+        this.setState({
+            newIngredient: &#39;&#39;,
+            ingredients: ingredientsList
+        });
+    };
+
+    render() {
+        return (
+            &lt;div&gt;
+                {this.state.ingredients.map(ingredient =&gt; &lt;ChildComponent thing={ingredient} /&gt;)}
+                &lt;form onSubmit={this.addIngredient}&gt;
+                    &lt;input type=&quot;text&quot; onChange={this.handleIngredientInput} placeholder=&quot;Add a new ingredient&quot; value={this.state.newIngredient} /&gt;
+                &lt;/form&gt;
+            &lt;/div&gt;
+        );
+    }
+}
+
+export default ParentComponent;</code></pre>
+<p>The only two other differences in this component are that we’re importing a <code>ChildComponent</code> and then using it inside our <code>this.state.ingredients.map</code> call. <code>ChildComponent</code> is another React component. Notice that we’re using it just as if it were any other HTML tag. This is how we lay out our component hierarchy: the ChildComponent is rendered within the ParentComponent. We can see this to be the case if we open up the developer console and inspect these elements.</p>
+<p>Note also that we’re passing each ingredient as a ‘thing’ to the ChildComponent component. This is how a parent component passes data to a child component. It doesn’t need to be called ‘thing’; you can call it whatever you want. Conceptually though, every piece of data that a parent component passes down to a child component is called a ‘prop’ in React lingo.</p>
+<p>Let’s take a look now at the Child Component. It serves two purposes: 1) to render the props data that it gets from a parent component, and 2) to add the ability for a user to click on it and have it toggle a strikethrough, indicating that the item is ‘complete’.</p>
+<pre class="text"><code>import React, { Component } from &#39;react&#39;;
+
+class ChildComponent extends Component {
+  constructor() {
+    super();
+    this.state = {
+      clicked: false
+    };
+  }
+
+  handleClick = () =&gt; {
+    this.setState({ clicked: !this.state.clicked });
+  };
+
+  render() {
+    const styles = this.state.clicked ? { textDecoration: &#39;line-through&#39;} : { textDecoration: &#39;none&#39; };
+    return (
+      &lt;div style={styles} onClick={this.handleClick}&gt;{this.props.thing}&lt;/div&gt;
+    );
+  }
+}
+
+export default ChildComponent;</code></pre>
+<p>The overall structure of the child component is nothing we haven’t seen. It’s just another class component with its own state object and a method called <code>handleClick</code> .</p>
+<p>A component accesses its props via the <code>this.props</code> object. Any prop a parent component passes down to a child component is accessible inside the child component’s <code>this.prop</code> object.</p>
+<p>So our child component keeps its own state that tracks whether the component has been clicked or not. Then at the top of the <code>render</code> function, it uses a ternary condition to determine whether the div tag that is being rendered should have a strikethrough or not. The <code>handleClick</code> method is then invoked via an <code>onClick</code> handler on the div tag; it does the work of toggling the <code>this.state.clicked</code> boolean.</p>
+<p>The overall structure of React applications can be represented as a hierarchical tree structure, just like how the DOM itself is structure. There is an overarching root component at the top of the hierarchy that every other component sits underneath. Specifying that a component should be a child of some parent component is as simple as throwing it in the parent component’s render function, just like how we did it in this example.</p>
+<h2 id="react-a-javascript-library-for-building-user-interfaces">React – A JavaScript library for building user interfaces</h2>
+<blockquote>
+<p>A JavaScript library for building user interfaces</p>
+</blockquote>
+<h4 id="declarative">Declarative</h4>
+<p>React makes it painless to create interactive UIs. Design simple views for each state in your application, and React will efficiently update and render just the right components when your data changes.</p>
+<p>Declarative views make your code more predictable and easier to debug.</p>
+<h4 id="component-based">Component-Based</h4>
+<p>Build encapsulated components that manage their own state, then compose them to make complex UIs.</p>
+<p>Since component logic is written in JavaScript instead of templates, you can easily pass rich data through your app and keep state out of the DOM.</p>
+<h4 id="learn-once-write-anywhere">Learn Once, Write Anywhere</h4>
+<p>We don’t make assumptions about the rest of your technology stack, so you can develop new features in React without rewriting existing code.</p>
+<p>React can also render on the server using Node and power mobile apps using <a href="https://reactnative.dev/">React Native</a>.</p>
+<h4 id="a-simple-component">A Simple Component</h4>
+<p>React components implement a <code>render()</code> method that takes input data and returns what to display. This example uses an XML-like syntax called JSX. Input data that is passed into the component can be accessed by <code>render()</code> via <code>this.props</code>.</p>
+<p><strong>JSX is optional and not required to use React.</strong> Try the <a href="https://babeljs.io/repl/#?presets=react&amp;code_lz=MYewdgzgLgBApgGzgWzmWBeGAeAFgRgD4AJRBEAGhgHcQAnBAEwEJsB6AwgbgChRJY_KAEMAlmDh0YWRiGABXVOgB0AczhQAokiVQAQgE8AkowAUAcjogQUcwEpeAJTjDgUACIB5ALLK6aRklTRBQ0KCohMQk6Bx4gA">Babel REPL</a> to see the raw JavaScript code produced by the JSX compilation step.</p>
+<pre class="jsx"><code>class HelloMessage extends React.Component {
+  render() {
+    return (
+      &lt;div\&gt;
+        Hello {this.props.name}
+      &lt;/div\&gt;
+    );
+  }
+}
+
+ReactDOM.render(
+  &lt;HelloMessage name\=&quot;Taylor&quot; /&gt;,
+  document.getElementById(&#39;hello-example&#39;)
+);</code></pre>
+<h4 id="a-stateful-component">A Stateful Component</h4>
+<p>In addition to taking input data (accessed via <code>this.props</code>), a component can maintain internal state data (accessed via <code>this.state</code>). When a component’s state data changes, the rendered markup will be updated by re-invoking <code>render()</code>.</p>
+<pre class="jsx"><code>class Timer extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state \= { seconds: 0 };
+  }
+
+  tick() {
+    this.setState(state \=\&gt; ({
+      seconds: state.seconds + 1
+    }));
+  }
+
+  componentDidMount() {
+    this.interval \= setInterval(() \=\&gt; this.tick(), 1000);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.interval);
+  }
+
+  render() {
+    return (
+      &lt;div\&gt;
+        Seconds: {this.state.seconds}
+      &lt;/div\&gt;
+    );
+  }
+}
+
+ReactDOM.render(
+  &lt;Timer /&gt;,
+  document.getElementById(&#39;timer-example&#39;)
+);</code></pre>
+<h4 id="an-application">An Application</h4>
+<p>Using <code>props</code> and <code>state</code>, we can put together a small Todo application. This example uses <code>state</code> to track the current list of items as well as the text that the user has entered. Although event handlers appear to be rendered inline, they will be collected and implemented using event delegation.</p>
+<pre class="jsx"><code>class TodoApp extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state \= { items: \[\], text: &#39;&#39; };
+    this.handleChange \= this.handleChange.bind(this);
+    this.handleSubmit \= this.handleSubmit.bind(this);
+  }
+
+  render() {
+    return (
+      &lt;div\&gt;
+        &lt;h3\&gt;TODO&lt;/h3\&gt;
+        &lt;TodoList items\={this.state.items} /&gt;
+        &lt;form onSubmit\={this.handleSubmit}\&gt;
+          &lt;label htmlFor\=&quot;new-todo&quot;\&gt;
+            What needs to be done?
+          &lt;/label\&gt;
+          &lt;input
+            id\=&quot;new-todo&quot;
+            onChange\={this.handleChange}
+            value\={this.state.text}
+          /&gt;
+          &lt;button\&gt;
+            Add #{this.state.items.length + 1}
+          &lt;/button\&gt;
+        &lt;/form\&gt;
+      &lt;/div\&gt;
+    );
+  }
+
+  handleChange(e) {
+    this.setState({ text: e.target.value });
+  }
+
+  handleSubmit(e) {
+    e.preventDefault();
+    if (this.state.text.length \=== 0) {
+      return;
+    }
+    const newItem \= {
+      text: this.state.text,
+      id: Date.now()
+    };
+    this.setState(state \=\&gt; ({
+      items: state.items.concat(newItem),
+      text: &#39;&#39;
+    }));
+  }
+}
+
+class TodoList extends React.Component {
+  render() {
+    return (
+      &lt;ul\&gt;
+        {this.props.items.map(item \=\&gt; (
+          &lt;li key\={item.id}\&gt;{item.text}&lt;/li\&gt;
+        ))}
+      &lt;/ul\&gt;
+    );
+  }
+}
+
+ReactDOM.render(
+  &lt;TodoApp /&gt;,
+  document.getElementById(&#39;todos-example&#39;)
+);</code></pre>
+<h4 id="a-component-using-external-plugins">A Component Using External Plugins</h4>
+<p>React allows you to interface with other libraries and frameworks. This example uses <strong>remarkable</strong>, an external Markdown library, to convert the <code>&lt;textarea&gt;</code>’s value in real time.</p>
+<pre class="jsx"><code>class MarkdownEditor extends React.Component {
+  constructor(props) {
+    super(props);
+    this.md \= new Remarkable();
+    this.handleChange \= this.handleChange.bind(this);
+    this.state \= { value: &#39;Hello, \*\*world\*\*!&#39; };
+  }
+
+  handleChange(e) {
+    this.setState({ value: e.target.value });
+  }
+
+  getRawMarkup() {
+    return { \_\_html: this.md.render(this.state.value) };
+  }
+
+  render() {
+    return (
+      &lt;div className\=&quot;MarkdownEditor&quot;\&gt;
+        &lt;h3\&gt;Input&lt;/h3\&gt;
+        &lt;label htmlFor\=&quot;markdown-content&quot;\&gt;
+          Enter some markdown
+        &lt;/label\&gt;
+        &lt;textarea
+          id\=&quot;markdown-content&quot;
+          onChange\={this.handleChange}
+          defaultValue\={this.state.value}
+        /&gt;
+        &lt;h3\&gt;Output&lt;/h3\&gt;
+        &lt;div
+          className\=&quot;content&quot;
+          dangerouslySetInnerHTML\={this.getRawMarkup()}
+        /&gt;
+      &lt;/div\&gt;
+    );
+  }
+}
+
+ReactDOM.render(
+  &lt;MarkdownEditor /&gt;,
+  document.getElementById(&#39;markdown-example&#39;)
+);</code></pre>
+</body>
+</html>

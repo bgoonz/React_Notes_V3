@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>intro</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<p><a href="../../readme.md">Table of contents</a> / <a href="../intro.md">Workers</a></p>
+<h1 id="hermes">Hermes</h1>
+<p><em>Hermes (/ˈhɜːrmiːz/) is the messenger god, moving between the worlds of the mortal and the divine.</em></p>
+<p>Hermes is our email worker. Hermes reads off of our <a href="../background-jobs.md">Redis queue</a> to process email content and deliver emails via <a href="https://sendgrid.com/">SendGrid</a>. Hermes is responsible for formatting content before it enters the email templates. All inbound jobs should contain all the required data for the final email.</p>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>intro</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<p><a href="../readme.md">Table of contents</a></p>
+<h1 id="workers">Workers</h1>
+<p>Our asynchronos background job processing is powered by a series of worker servers.</p>
+<ul>
+<li><a href="athena/intro.md">Athena</a>: processes notifications</li>
+<li><a href="chronos/intro.md">Chronos</a>: processes cron jobs</li>
+<li><a href="hermes/intro.md">Hermes</a>: sends emails</li>
+<li><a href="mercury/intro.md">Mercury</a>: processes reputation events</li>
+<li><a href="vulcan/intro.md">Vulcan</a>: indexes content for search</li>
+</ul>
+<p>Each one of these can be run and developed independently with matching <code>npm run dev:x</code> and <code>npm run build:x</code> commands. (where <code>x</code> is the name of the server)</p>
+<h3 id="naming-scheme">Naming scheme</h3>
+<p>As you can see we follow a loose naming scheme based on ancient Greek, Roman, and philosophical figures that are somewhat related to what our servers do:</p>
+<ul>
+<li>Athena (/əˈθiːnə/) is the goddess of wisdom, craft, and war.</li>
+<li>Chronos (/ˈkroʊnɒs/) is the personification of Time in pre-Socratic philosophy</li>
+<li>Hermes (/ˈhɜːrmiːz/) is the messenger god, moving between the worlds of the mortal and the divine.</li>
+<li>Mercury (/ˈmɜːrkjʊri/) is the patron god of financial gain, commerce, eloquence (and thus poetry), messages/communication (including divination), travelers, boundaries, luck, trickery and thieves</li>
+<li>Vulcan is the god of fire, including the fire of volcanoes, metalworking, and the forge.</li>
+</ul>
+<h3 id="background-jobs">Background jobs</h3>
+<p>Many of our workers run off of our <a href="background-jobs.md">Redis queue</a> to handle asynchronous events.</p>
+<p><a href="background-jobs.md">Learn more about background jobs</a></p>
+</body>
+</html>

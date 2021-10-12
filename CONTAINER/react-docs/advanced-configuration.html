@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Advanced Configuration</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Advanced Configuration</h1>
+</header>
+<p>You can adjust various development and production settings by setting environment variables in your shell or with <a href="adding-custom-environment-variables.md#adding-development-environment-variables-in-env">.env</a>.</p>
+<blockquote>
+<p>Note: You do not need to declare <code>REACT_APP_</code> before the below variables as you would with custom environment variables.</p>
+</blockquote>
+<table>
+<colgroup>
+<col style="width: 3%" />
+<col style="width: 1%" />
+<col style="width: 1%" />
+<col style="width: 93%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Variable</th>
+<th style="text-align: center;">Development</th>
+<th style="text-align: center;">Production</th>
+<th style="text-align: left;">Usage</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">BROWSER</td>
+<td style="text-align: center;">✅ Used</td>
+<td style="text-align: center;">🚫 Ignored</td>
+<td style="text-align: left;">By default, Create React App will open the default system browser, favoring Chrome on macOS. Specify a <a href="https://github.com/sindresorhus/open#app">browser</a> to override this behavior, or set it to <code>none</code> to disable it completely. If you need to customize the way the browser is launched, you can specify a node script instead. Any arguments passed to <code>npm start</code> will also be passed to this script, and the url where your app is served will be the last argument. Your script’s file name must have the <code>.js</code> extension.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">BROWSER_ARGS</td>
+<td style="text-align: center;">✅ Used</td>
+<td style="text-align: center;">🚫 Ignored</td>
+<td style="text-align: left;">When the <code>BROWSER</code> environment variable is specified, any arguments that you set to this environment variable will be passed to the browser instance. Multiple arguments are supported as a space separated list. By default, no arguments are passed through to browsers.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">HOST</td>
+<td style="text-align: center;">✅ Used</td>
+<td style="text-align: center;">🚫 Ignored</td>
+<td style="text-align: left;">By default, the development web server binds to all hostnames on the device (<code>localhost</code>, LAN network address, etc.). You may use this variable to specify a different host.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">PORT</td>
+<td style="text-align: center;">✅ Used</td>
+<td style="text-align: center;">🚫 Ignored</td>
+<td style="text-align: left;">By default, the development web server will attempt to listen on port 3000 or prompt you to attempt the next available port. You may use this variable to specify a different port.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">HTTPS</td>
+<td style="text-align: center;">✅ Used</td>
+<td style="text-align: center;">🚫 Ignored</td>
+<td style="text-align: left;">When set to <code>true</code>, Create React App will run the development server in <code>https</code> mode.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">WDS_SOCKET_HOST</td>
+<td style="text-align: center;">✅ Used</td>
+<td style="text-align: center;">🚫 Ignored</td>
+<td style="text-align: left;">When set, Create React App will run the development server with a custom websocket hostname for hot module reloading. Normally, <code>webpack-dev-server</code> defaults to <code>window.location.hostname</code> for the SockJS hostname. You may use this variable to start local development on more than one Create React App project at a time. See <a href="https://webpack.js.org/configuration/dev-server/#devserversockhost">webpack-dev-server documentation</a> for more details.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">WDS_SOCKET_PATH</td>
+<td style="text-align: center;">✅ Used</td>
+<td style="text-align: center;">🚫 Ignored</td>
+<td style="text-align: left;">When set, Create React App will run the development server with a custom websocket path for hot module reloading. Normally, <code>webpack-dev-server</code> defaults to <code>/sockjs-node</code> for the SockJS pathname. You may use this variable to start local development on more than one Create React App project at a time. See <a href="https://webpack.js.org/configuration/dev-server/#devserversockpath">webpack-dev-server documentation</a> for more details.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">WDS_SOCKET_PORT</td>
+<td style="text-align: center;">✅ Used</td>
+<td style="text-align: center;">🚫 Ignored</td>
+<td style="text-align: left;">When set, Create React App will run the development server with a custom websocket port for hot module reloading. Normally, <code>webpack-dev-server</code> defaults to <code>window.location.port</code> for the SockJS port. You may use this variable to start local development on more than one Create React App project at a time. See <a href="https://webpack.js.org/configuration/dev-server/#devserversockport">webpack-dev-server documentation</a> for more details.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">PUBLIC_URL</td>
+<td style="text-align: center;">✅ Used</td>
+<td style="text-align: center;">✅ Used</td>
+<td style="text-align: left;">Create React App assumes your application is hosted at the serving web server’s root or a subpath as specified in <a href="deployment#building-for-relative-paths"><code>package.json</code> (<code>homepage</code>)</a>. Normally, Create React App ignores the hostname. You may use this variable to force assets to be referenced verbatim to the url you provide (hostname included). This may be particularly useful when using a CDN to host your application.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">BUILD_PATH</td>
+<td style="text-align: center;">🚫 Ignored</td>
+<td style="text-align: center;">✅ Used</td>
+<td style="text-align: left;">By default, Create React App will output compiled assets to a <code>/build</code> directory adjacent to your <code>/src</code>. You may use this variable to specify a new path for Create React App to output assets. BUILD_PATH should be specified as a path relative to the root of your project.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">CI</td>
+<td style="text-align: center;">✅ Used</td>
+<td style="text-align: center;">✅ Used</td>
+<td style="text-align: left;">When set to <code>true</code>, Create React App treats warnings as failures in the build. It also makes the test runner non-watching. Most CIs set this flag by default.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">REACT_EDITOR</td>
+<td style="text-align: center;">✅ Used</td>
+<td style="text-align: center;">🚫 Ignored</td>
+<td style="text-align: left;">When an app crashes in development, you will see an error overlay with clickable stack trace. When you click on it, Create React App will try to determine the editor you are using based on currently running processes, and open the relevant source file. You can <a href="https://github.com/facebook/create-react-app/issues/2636">send a pull request to detect your editor of choice</a>. Setting this environment variable overrides the automatic detection. If you do it, make sure your systems <a href="https://en.wikipedia.org/wiki/PATH_(variable)">PATH</a> environment variable points to your editor’s bin folder. You can also set it to <code>none</code> to disable it completely.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">CHOKIDAR_USEPOLLING</td>
+<td style="text-align: center;">✅ Used</td>
+<td style="text-align: center;">🚫 Ignored</td>
+<td style="text-align: left;">When set to <code>true</code>, the watcher runs in polling mode, as necessary inside a VM. Use this option if <code>npm start</code> isn’t detecting changes.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">GENERATE_SOURCEMAP</td>
+<td style="text-align: center;">🚫 Ignored</td>
+<td style="text-align: center;">✅ Used</td>
+<td style="text-align: left;">When set to <code>false</code>, source maps are not generated for a production build. This solves out of memory (OOM) issues on some smaller machines.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">INLINE_RUNTIME_CHUNK</td>
+<td style="text-align: center;">🚫 Ignored</td>
+<td style="text-align: center;">✅ Used</td>
+<td style="text-align: left;">By default, Create React App will embed the runtime script into <code>index.html</code> during the production build. When set to <code>false</code>, the script will not be embedded and will be imported as usual. This is normally required when dealing with CSP.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">IMAGE_INLINE_SIZE_LIMIT</td>
+<td style="text-align: center;">✅ Used</td>
+<td style="text-align: center;">✅ Used</td>
+<td style="text-align: left;">By default, images smaller than 10,000 bytes are encoded as a data URI in base64 and inlined in the CSS or JS build artifact. Set this to control the size limit in bytes. Setting it to <code>0</code> will disable the inlining of images.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">FAST_REFRESH</td>
+<td style="text-align: center;">✅ Used</td>
+<td style="text-align: center;">🚫 Ignored</td>
+<td style="text-align: left;">When set to <code>false</code>, disables experimental support for Fast Refresh to allow you to tweak your components in real time without reloading the page.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">TSC_COMPILE_ON_ERROR</td>
+<td style="text-align: center;">✅ Used</td>
+<td style="text-align: center;">✅ Used</td>
+<td style="text-align: left;">When set to <code>true</code>, you can run and properly build TypeScript projects even if there are TypeScript type check errors. These errors are printed as warnings in the terminal and/or browser console.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">ESLINT_NO_DEV_ERRORS</td>
+<td style="text-align: center;">✅ Used</td>
+<td style="text-align: center;">🚫 Ignored</td>
+<td style="text-align: left;">When set to <code>true</code>, ESLint errors are converted to warnings during development. As a result, ESLint output will no longer appear in the error overlay.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">DISABLE_ESLINT_PLUGIN</td>
+<td style="text-align: center;">✅ Used</td>
+<td style="text-align: center;">✅ Used</td>
+<td style="text-align: left;">When set to <code>true</code>, <a href="https://github.com/webpack-contrib/eslint-webpack-plugin">eslint-webpack-plugin</a> will be completely disabled.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">DISABLE_NEW_JSX_TRANSFORM</td>
+<td style="text-align: center;">✅ Used</td>
+<td style="text-align: center;">✅ Used</td>
+<td style="text-align: left;">When set to <code>true</code>, disables the <a href="https://reactjs.org/blog/2020/09/22/introducing-the-new-jsx-transform.html">new JSX transform</a> introduced in React 17 and backported to React 16.14.0, 15.7.0, and 0.14.10. New projects will use a version of React that supports this by default but you may need to disable it in existing projects if you can’t upgrade React.</td>
+</tr>
+</tbody>
+</table>
+</body>
+</html>

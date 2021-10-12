@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Adding a CSS Reset</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Adding a CSS Reset</h1>
+</header>
+<p>This project setup uses <a href="https://github.com/csstools/postcss-normalize">PostCSS Normalize</a> for adding a <a href="https://cssreset.com/what-is-a-css-reset/">CSS Reset</a>.</p>
+<p>To start using it, add <code>@import-normalize;</code> anywhere in your CSS file(s). You only need to include it once and duplicate imports are automatically removed. Since you only need to include it once, a good place to add it is <code>index.css</code> or <code>App.css</code>.</p>
+<h2 id="index.css"><code>index.css</code></h2>
+<div class="sourceCode" id="cb1"><pre class="sourceCode css"><code class="sourceCode css"><a class="sourceLine" id="cb1-1" title="1"><span class="im">@import-normalize</span><span class="op">;</span> <span class="co">/* bring in normalize.css styles */</span></a>
+<a class="sourceLine" id="cb1-2" title="2"></a>
+<a class="sourceLine" id="cb1-3" title="3"><span class="co">/* rest of app styles */</span></a></code></pre></div>
+<blockquote>
+<p><strong>Tip</strong>: If you see an “<em>Unknown at rule <span class="citation" data-cites="import-normalize">@import-normalize</span> css(unknownAtRules)</em>” warning in VSCode, change the <code>css.lint.unknownAtRules</code> setting to <code>ignore</code>.</p>
+</blockquote>
+<p>You can control which parts of <a href="https://github.com/csstools/normalize.css">normalize.css</a> to use via your project’s <a href="https://browserl.ist/">browserslist</a>.</p>
+<p>Results when <a href="https://browserl.ist/">browserslist</a> is <code>last 3 versions</code>:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode css"><code class="sourceCode css"><a class="sourceLine" id="cb2-1" title="1"><span class="co">/**</span></a>
+<a class="sourceLine" id="cb2-2" title="2"><span class="co"> * Add the correct display in IE 9-.</span></a>
+<a class="sourceLine" id="cb2-3" title="3"><span class="co"> */</span></a>
+<a class="sourceLine" id="cb2-4" title="4"></a>
+<a class="sourceLine" id="cb2-5" title="5">audio<span class="op">,</span></a>
+<a class="sourceLine" id="cb2-6" title="6">video {</a>
+<a class="sourceLine" id="cb2-7" title="7">  <span class="kw">display</span>: <span class="dv">inline-block</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb2-8" title="8">}</a>
+<a class="sourceLine" id="cb2-9" title="9"></a>
+<a class="sourceLine" id="cb2-10" title="10"><span class="co">/**</span></a>
+<a class="sourceLine" id="cb2-11" title="11"><span class="co"> * Remove the border on images inside links in IE 10-.</span></a>
+<a class="sourceLine" id="cb2-12" title="12"><span class="co"> */</span></a>
+<a class="sourceLine" id="cb2-13" title="13"></a>
+<a class="sourceLine" id="cb2-14" title="14">img {</a>
+<a class="sourceLine" id="cb2-15" title="15">  <span class="kw">border-style</span>: <span class="dv">none</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb2-16" title="16">}</a></code></pre></div>
+<p>Results when <a href="https://browserl.ist/">browserslist</a> is <code>last 2 versions</code>:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode css"><code class="sourceCode css"><a class="sourceLine" id="cb3-1" title="1"><span class="co">/**</span></a>
+<a class="sourceLine" id="cb3-2" title="2"><span class="co"> * Remove the border on images inside links in IE 10-.</span></a>
+<a class="sourceLine" id="cb3-3" title="3"><span class="co"> */</span></a>
+<a class="sourceLine" id="cb3-4" title="4"></a>
+<a class="sourceLine" id="cb3-5" title="5">img {</a>
+<a class="sourceLine" id="cb3-6" title="6">  <span class="kw">border-style</span>: <span class="dv">none</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb3-7" title="7">}</a></code></pre></div>
+<h2 id="browser-support">Browser support</h2>
+<p>Browser support is dictated by what normalize.css <a href="https://github.com/csstools/normalize.css#browser-support">supports</a>. As of this writing, it includes:</p>
+<ul>
+<li>Chrome (last 3)</li>
+<li>Edge (last 3)</li>
+<li>Firefox (last 3)</li>
+<li>Firefox ESR</li>
+<li>Opera (last 3)</li>
+<li>Safari (last 3)</li>
+<li>iOS Safari (last 2)</li>
+<li>Internet Explorer 9+</li>
+</ul>
+</body>
+</html>

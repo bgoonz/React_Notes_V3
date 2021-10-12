@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Travis CI Tutorial - Travis CI ef1533b52bfa4561baf2dcbcb682cd1f</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<h1 id="travis-ci-tutorial---travis-ci">Travis CI Tutorial - Travis CI</h1>
+<h1 id="travis"><a href="https://travis-ci.com/">Travis</a></h1>
+<ul>
+<li><a href="https://blog.travis-ci.com/">Blog</a></li>
+<li><a href="https://docs.travis-ci.com/">Docs</a></li>
+<li>Menu</li>
+</ul>
+<h3 id="getting-started">Getting Started</h3>
+<ul>
+<li><a href="https://docs.travis-ci.com/user/for-beginners/">Core Concepts for Beginners</a></li>
+<li><a href="https://docs.travis-ci.com/user/tutorial/">Travis CI Tutorial</a></li>
+<li><a href="https://docs.travis-ci.com/user/customizing-the-build/">Customizing the Build</a></li>
+<li><a href="https://docs.travis-ci.com/user/speeding-up-the-build/">Speeding up the Build</a></li>
+<li><a href="https://docs.travis-ci.com/user/docker/">Using Docker in your Build</a></li>
+<li><a href="https://docs.travis-ci.com/user/gui-and-headless-browsers/">Headless Testing with Browsers</a></li>
+<li><a href="https://docs.travis-ci.com/user/pull-requests/">Building Pull Requests</a></li>
+<li><a href="https://docs.travis-ci.com/user/cron-jobs/">Cron Jobs</a></li>
+<li><a href="https://docs.travis-ci.com/user/common-build-problems/">Common Build Problems</a></li>
+<li><a href="https://github.com/travis-ci/travis#readme">Command Line Client</a></li>
+<li><a href="https://docs.travis-ci.com/user/build-config-imports/">Build Config Imports</a></li>
+<li><a href="https://docs.travis-ci.com/user/build-config-validation/">Build Config Validation</a></li>
+</ul>
+<h3 id="jobs-builds-matrices-and-stages">Jobs, Builds, Matrices and Stages</h3>
+<ul>
+<li><a href="https://docs.travis-ci.com/user/job-lifecycle/">Job Lifecycle</a></li>
+<li><a href="https://docs.travis-ci.com/user/build-matrix/">Build Matrix</a></li>
+<li><a href="https://docs.travis-ci.com/user/build-stages/">Build Stages</a></li>
+<li><a href="https://docs.travis-ci.com/user/conditional-builds-stages-jobs/">Conditional Builds, Stages, and Jobs</a></li>
+</ul>
+<h3 id="installing-dependencies">Installing Dependencies</h3>
+<ul>
+<li><a href="https://docs.travis-ci.com/user/installing-dependencies/">Installing Dependencies</a></li>
+<li><a href="https://docs.travis-ci.com/user/private-dependencies/">Private Dependencies GitHub</a></li>
+<li><a href="https://docs.travis-ci.com/user/private-dependencies-bb/">Private Dependencies Bitbucket</a></li>
+<li><a href="https://docs.travis-ci.com/user/database-setup/">Setting up Services and Databases</a></li>
+<li><a href="https://docs.travis-ci.com/user/caching/">Caching Dependencies</a></li>
+<li><a href="https://docs.travis-ci.com/user/ssh-known-hosts/">Adding to SSH Known Hosts</a></li>
+</ul>
+<h3 id="programming-languages">Programming Languages</h3>
+<ul>
+<li><a href="https://docs.travis-ci.com/user/languages/android/">Android</a></li>
+<li><a href="https://docs.travis-ci.com/user/languages/c/">C</a></li>
+<li><a href="https://docs.travis-ci.com/user/languages/csharp/">C#</a></li>
+<li><a href="https://docs.travis-ci.com/user/languages/cpp/">C++</a></li>
+<li><a href="https://docs.travis-ci.com/user/languages/clojure/">Clojure</a></li>
+<li><a href="https://docs.travis-ci.com/user/languages/crystal/">Crystal</a></li>
+<li><a href="https://docs.travis-ci.com/user/languages/d/">D</a></li>
+<li><a href="https://docs.travis-ci.com/user/languages/dart/">Dart</a></li>
+<li><a href="https://docs.travis-ci.com/user/languages/elixir/">Elixir</a></li>
+<li><a href="https://docs.travis-ci.com/user/languages/elm/">Elm</a></li>
+<li><a href="https://docs.travis-ci.com/user/languages/erlang/">Erlang</a></li>
+<li><a href="https://docs.travis-ci.com/user/languages/csharp/">F#</a></li>
+<li><a href="https://docs.travis-ci.com/user/languages/minimal-and-generic/">Generic</a></li>
+<li><a href="https://docs.travis-ci.com/user/languages/go/">Go</a></li>
+<li><a href="https://docs.travis-ci.com/user/languages/groovy/">Groovy</a></li>
+<li><a href="https://docs.travis-ci.com/user/languages/haskell/">Haskell</a></li>
+<li><a href="https://docs.travis-ci.com/user/languages/haxe/">Haxe</a></li>
+<li><a href="https://docs.travis-ci.com/user/languages/java/">Java</a></li>
+<li><a href="https://docs.travis-ci.com/user/languages/javascript-with-nodejs/">JavaScript (with Node.js)</a></li>
+<li><a href="https://docs.travis-ci.com/user/languages/julia/">Julia</a></li>
+<li><a href="https://docs.travis-ci.com/user/languages/matlab/">MATLAB</a></li>
+<li><a href="https://docs.travis-ci.com/user/languages/minimal-and-generic/">Minimal</a></li>
+<li><a href="https://docs.travis-ci.com/user/languages/nix/">Nix</a></li>
+<li><a href="https://docs.travis-ci.com/user/languages/objective-c/">Objective-C</a></li>
+<li><a href="https://docs.travis-ci.com/user/languages/perl/">Perl</a></li>
+<li><a href="https://docs.travis-ci.com/user/languages/perl6/">Perl6</a></li>
+<li><a href="https://docs.travis-ci.com/user/languages/php/">PHP</a></li>
+<li><a href="https://docs.travis-ci.com/user/languages/python/">Python</a></li>
+<li><a href="https://docs.travis-ci.com/user/languages/r/">R</a></li>
+<li><a href="https://docs.travis-ci.com/user/languages/ruby/">Ruby</a></li>
+<li><a href="https://docs.travis-ci.com/user/languages/rust/">Rust</a></li>
+<li><a href="https://docs.travis-ci.com/user/languages/scala/">Scala</a></li>
+<li><a href="https://docs.travis-ci.com/user/languages/smalltalk/">Smalltalk</a></li>
+<li><a href="https://docs.travis-ci.com/user/languages/objective-c/">Swift</a></li>
+<li><a href="https://docs.travis-ci.com/user/languages/csharp/">Visual Basic</a></li>
+<li><a href="https://docs.travis-ci.com/user/languages/community-supported-languages/">Adding a language</a></li>
+</ul>
+<h3 id="deployments-and-uploads">Deployments and Uploads</h3>
+<ul>
+<li><a href="https://docs.travis-ci.com/user/deployment/">Overview</a></li>
+<li><a href="https://docs.travis-ci.com/user/deployment/anynines/">anynines</a></li>
+<li><a href="https://docs.travis-ci.com/user/deployment/atlas/">Atlas</a></li>
+<li><a href="https://docs.travis-ci.com/user/deployment/codedeploy/">AWS CodeDeploy</a></li>
+<li><a href="https://docs.travis-ci.com/user/deployment/elasticbeanstalk/">AWS Elastic Beanstalk</a></li>
+<li><a href="https://docs.travis-ci.com/user/deployment/lambda/">AWS Lambda</a></li>
+<li><a href="https://docs.travis-ci.com/user/deployment/opsworks/">AWS OpsWorks</a></li>
+<li><a href="https://docs.travis-ci.com/user/deployment/s3/">AWS S3</a></li>
+<li><a href="https://docs.travis-ci.com/user/deployment/azure-web-apps/">Azure Web Apps</a></li>
+<li><a href="https://docs.travis-ci.com/user/deployment/bintray/">bintray</a></li>
+<li><a href="https://docs.travis-ci.com/user/deployment/bitballoon/">BitBalloon</a></li>
+<li><a href="https://docs.travis-ci.com/user/deployment/bluemixcloudfoundry/">Bluemix CloudFoundry</a></li>
+<li><a href="https://docs.travis-ci.com/user/deployment/boxfuse/">Boxfuse</a></li>
+<li><a href="https://docs.travis-ci.com/user/deployment/catalyze/">Catalyze</a></li>
+<li><a href="https://docs.travis-ci.com/user/deployment/chefsupermarket/">Chef Supermarket</a></li>
+<li><a href="https://docs.travis-ci.com/user/deployment/cloud66/">Cloud 66</a></li>
+<li><a href="https://docs.travis-ci.com/user/deployment/cloudfoundry/">CloudFoundry</a></li>
+<li><a href="https://docs.travis-ci.com/user/deployment/cargo/">Cargo</a></li>
+<li><a href="https://docs.travis-ci.com/user/deployment/engineyard/">Engine Yard</a></li>
+<li><a href="https://docs.travis-ci.com/user/deployment/pages/">GitHub Pages</a></li>
+<li><a href="https://docs.travis-ci.com/user/deployment/releases/">GitHub Releases</a></li>
+<li><a href="https://docs.travis-ci.com/user/deployment/google-app-engine/">Google App Engine</a></li>
+<li><a href="https://docs.travis-ci.com/user/deployment/gcs/">Google Cloud Storage</a></li>
+<li><a href="https://docs.travis-ci.com/user/deployment/firebase/">Google Firebase</a></li>
+<li><a href="https://docs.travis-ci.com/user/deployment/hackage/">Hackage</a></li>
+<li><a href="https://docs.travis-ci.com/user/deployment/hephy/">Hephy</a></li>
+<li><a href="https://docs.travis-ci.com/user/deployment/heroku/">Heroku</a></li>
+<li><a href="https://docs.travis-ci.com/user/deployment/launchpad/">Launchpad</a></li>
+<li><a href="https://docs.travis-ci.com/user/deployment/npm/">npm</a></li>
+<li><a href="https://docs.travis-ci.com/user/deployment/openshift/">OpenShift</a></li>
+<li><a href="https://docs.travis-ci.com/user/deployment/packagecloud/">packagecloud.io</a></li>
+<li><a href="https://docs.travis-ci.com/user/deployment/puppetforge/">Puppet Forge</a></li>
+<li><a href="https://docs.travis-ci.com/user/deployment/pypi/">PyPI</a></li>
+<li><a href="https://docs.travis-ci.com/user/deployment/cloudfiles/">Rackspace Cloud Files</a></li>
+<li><a href="https://docs.travis-ci.com/user/deployment/rubygems/">RubyGems</a></li>
+<li><a href="https://docs.travis-ci.com/user/deployment/scalingo/">Scalingo</a></li>
+<li><a href="https://docs.travis-ci.com/user/deployment/script/">Script</a></li>
+<li><a href="https://docs.travis-ci.com/user/deployment/snaps/">Snap Store</a></li>
+<li><a href="https://docs.travis-ci.com/user/deployment/surge/">Surge.sh</a></li>
+<li><a href="https://docs.travis-ci.com/user/deployment/testfairy/">TestFairy</a></li>
+<li><a href="https://docs.travis-ci.com/user/deployment/transifex/">Transifex</a></li>
+<li><a href="https://docs.travis-ci.com/user/uploading-artifacts/">Uploading Build Artifacts</a></li>
+</ul>
+<h3 id="ci-environment-reference">CI Environment Reference</h3>
+<ul>
+<li><a href="https://docs.travis-ci.com/user/reference/overview/">Overview</a></li>
+<li><a href="https://docs.travis-ci.com/user/reference/linux/">Ubuntu Linux CI Environment References</a></li>
+<li><a href="https://docs.travis-ci.com/user/reference/osx/">macOS CI Environment Reference</a></li>
+<li><a href="https://docs.travis-ci.com/user/reference/windows/">Windows CI Environment Reference</a></li>
+<li><a href="https://docs.travis-ci.com/user/reference/freebsd/">FreeBSD CI Environment Reference</a></li>
+<li><a href="https://docs.travis-ci.com/user/multi-os/">Building on Multiple Operating Systems</a></li>
+<li><a href="https://docs.travis-ci.com/user/multi-cpu-architectures/">Building on Multiple CPU Architectures</a></li>
+<li><a href="https://docs.travis-ci.com/user/environment-variables/">Environment Variables</a></li>
+<li><a href="https://docs.travis-ci.com/user/build-environment-updates/">Build Environment Updates</a></li>
+<li><a href="https://docs.travis-ci.com/user/ip-addresses/">Build Machines IP Addresses</a></li>
+</ul>
+<h3 id="encrypting-files-and-data">Encrypting Files and Data</h3>
+<ul>
+<li><a href="https://docs.travis-ci.com/user/encryption-keys/">Encrypting Sensitive Data</a></li>
+<li><a href="https://docs.travis-ci.com/user/encrypting-files/">Encrypting Files</a></li>
+<li><a href="https://docs.travis-ci.com/user/github-oauth-scopes/">GitHub Permissions used by Travis CI</a></li>
+<li><a href="https://docs.travis-ci.com/user/bb-oauth-scopes/">Bitbucket Permissions used by Travis CI</a></li>
+<li><a href="https://docs.travis-ci.com/user/assembla-oauth-scopes/">Assembla Permissions used by Travis CI</a></li>
+<li><a href="https://docs.travis-ci.com/user/gl-oauth-scopes/">GitLab Permissions used by Travis CI</a></li>
+<li><a href="https://docs.travis-ci.com/user/best-practices-security/">Best Practices in Securing Your Data</a></li>
+</ul>
+<h3 id="integrations-and-notifications">Integrations and Notifications</h3>
+<ul>
+<li><a href="https://docs.travis-ci.com/user/notifications/">Configuring Notifications</a></li>
+<li><a href="https://docs.travis-ci.com/user/status-images/">Showing Build Status Images</a></li>
+<li><a href="https://docs.travis-ci.com/user/code-climate/">Code Climate</a></li>
+<li><a href="https://docs.travis-ci.com/user/deepsource/">DeepSource</a></li>
+<li><a href="https://docs.travis-ci.com/user/coveralls/">Coveralls</a></li>
+<li><a href="https://docs.travis-ci.com/user/coverity-scan/">Coverity Scan</a></li>
+<li><a href="https://docs.travis-ci.com/user/browserstack/">BrowserStack</a></li>
+<li><a href="https://docs.travis-ci.com/user/sauce-connect/">Sauce Labs</a></li>
+<li><a href="https://docs.travis-ci.com/user/sonarcloud/">SonarCloud</a></li>
+<li><a href="https://docs.travis-ci.com/user/sourceclear/">SourceClear</a></li>
+<li><a href="https://docs.travis-ci.com/user/build-feeds/">Atom Feeds</a></li>
+<li><a href="https://docs.travis-ci.com/user/cc-menu/">CCMenu / CCTray Feeds</a></li>
+<li><a href="https://docs.travis-ci.com/user/integration/platformio/">Embedded Builds with PlatformIO</a></li>
+<li><a href="https://docs.travis-ci.com/user/apps/">3rd Party Apps, Clients and Tools</a></li>
+</ul>
+<h3 id="developer-program">Developer Program</h3>
+<ul>
+<li><a href="https://docs.travis-ci.com/user/developer/">Overview</a></li>
+<li><a href="https://developer.travis-ci.com/">API V3</a></li>
+<li><a href="https://docs.travis-ci.com/user/triggering-builds/">Triggering Builds with API V3</a></li>
+<li><a href="https://github.com/travis-ci/travis#ruby-library">The Ruby Library</a></li>
+</ul>
+<h3 id="hosted-billing">Hosted Billing</h3>
+<ul>
+<li><a href="https://docs.travis-ci.com/user/billing-overview/">Overview</a></li>
+<li><a href="https://docs.travis-ci.com/user/billing-faq/">FAQ</a></li>
+</ul>
+<h3 id="travis-ci-enterprise">Travis CI Enterprise</h3>
+<ul>
+<li><a href="https://docs.travis-ci.com/user/enterprise/">Enterprise Docs</a></li>
+</ul>
+<p>This documentation site is open source. The <a href="https://github.com/travis-ci/docs-travis-ci-com">README in our Git repository</a> explains how to contribute.</p>
+<p><a href="https://github.com/travis-ci/docs-travis-ci-com/edit/master/user/tutorial.md">Improve this page on GitHub</a></p>
+<ul>
+<li><a href="about:blank#prerequisites">Prerequisites</a></li>
+<li><a href="about:blank#to-get-started-with-travis-ci-using-github">To get started with Travis CI using GitHub</a></li>
+<li><a href="about:blank#to-get-started-with-travis-ci-using-bitbucket">To get started with Travis CI using Bitbucket</a></li>
+<li><a href="about:blank#to-get-started-with-travis-ci-using-gitlab">To get started with Travis CI using GitLab</a></li>
+<li><a href="about:blank#to-get-started-with-travis-ci-using-assembla">To get started with Travis CI using Assembla</a></li>
+<li><a href="about:blank#switching-accounts">Switching accounts</a></li>
+<li><a href="about:blank#selecting-a-different-programming-language">Selecting a different programming language</a></li>
+<li><a href="about:blank#more-than-running-tests">More than running tests</a></li>
+<li><a href="about:blank#further-reading">Further Reading</a></li>
+</ul>
+<p>This is a very short guide to using Travis CI with your cloud platform hosted code repository. If you’re new to continuous integration or would like some more information on what Travis CI does, start with <a href="https://docs.travis-ci.com/user/for-beginners">Core Concepts for Beginners</a> instead.</p>
+<h2 id="prerequisites">Prerequisites <a href="about:blank#prerequisites">#</a></h2>
+<p>To start using Travis CI, make sure you have:</p>
+<ul>
+<li>A <a href="https://github.com/">GitHub</a> or <a href="https://bitbucket.org/">Bitbucket</a> or <a href="https://about.gitlab.com/">GitLab</a> or <a href="https://www.assembla.com/">Assembla</a> account.</li>
+<li>Owner permissions for a project hosted on <a href="https://help.github.com/categories/importing-your-projects-to-github/">GitHub</a> or <a href="https://confluence.atlassian.com/bitbucket/transfer-repository-ownership-289964397.html">Bitbucket</a> or <a href="https://www.tutorialspoint.com/gitlab/gitlab_user_permissions.htm">GitLab</a> or <a href="https://articles.assembla.com/en/articles/1665737-advanced-user-permissions-controls">Assembla</a>.</li>
+</ul>
+<h2 id="to-get-started-with-travis-ci-using-github">To get started with Travis CI using GitHub <a href="about:blank#to-get-started-with-travis-ci-using-github">#</a></h2>
+<ol type="1">
+<li>Go to <a href="https://travis-ci.com/">Travis-ci.com</a> and <em><a href="https://travis-ci.com/signin">Sign up with GitHub</a></em>.</li>
+<li>Accept the Authorization of Travis CI. You’ll be redirected to GitHub. For any doubts on the Travis CI GitHub Authorized OAuth App access rights message, please read more details <a href="https://docs.travis-ci.com/user/tutorial#travis-ci-github-oauth-app-access-rights">below</a></li>
+<li>Click on your profile picture in the top right of your Travis Dashboard, click Settings and then the green <em>Activate</em> button, and select the repositories you want to use with Travis CI.</li>
+</ol>
+<blockquote>
+<p>Or you click the Activate all repositories using GitHub Apps button on the getting started page to just activate all your repos</p>
+</blockquote>
+<ol type="1">
+<li><p>Add a <code>.travis.yml</code> file to your repository to tell Travis CI what to do.</p>
+<p>The following example specifies a Ruby project that should be built with Ruby 2.2 and the latest versions of JRuby.</p>
+<pre><code>language: ruby
+rvm:
+ - 2.2
+ - jruby</code></pre>
+<p>YAML</p>
+<p>The defaults for Ruby projects are <code>bundle install</code> to <a href="https://docs.travis-ci.com/user/job-lifecycle/#customizing-the-installation-phase">install dependencies</a>, and <code>rake</code> to build the project.</p></li>
+<li><p>Add the <code>.travis.yml</code> file to git, commit and push to trigger a Travis CI build:</p>
+<blockquote>
+<p>Travis only runs builds on the commits you push after you’ve added a .travis.yml file.</p>
+</blockquote></li>
+<li><p>Check the build status page to see if your build <a href="https://docs.travis-ci.com/user/job-lifecycle/#breaking-the-build">passes or fails</a> according to the return status of the build command by visiting <a href="https://travis-ci.com/auth">Travis CI</a> and selecting your repository.</p></li>
+</ol>
+<h3 id="travis-ci-github-oauth-app-access-rights">Travis CI GitHub OAuth App access rights <a href="about:blank#travis-ci-github-oauth-app-access-rights">#</a></h3>
+<p>When you sign in to <a href="https://travis-ci.com/">travis-ci.com</a> using GitHub for the first time, you will receive a message from GitHub saying:</p>
+<blockquote>
+<p>Travis CI by travis-pro wants to access your [account name] account.</p>
+</blockquote>
+<p>and in the repositories section it will state:</p>
+<blockquote>
+<p>This application will be able to read and write all public and private repository data.</p>
+</blockquote>
+<p>This is not how Travis CI accesses your data, however we can explain it later in the process.</p>
+<p>The warning is triggerred due to GitHub OAuth App permissions which Travis CI uses, and due to the available granularity of permission scopes (see GitHub <a href="https://docs.github.com/en/developers/apps/scopes-for-oauth-apps">Scopes for OAuth Apps documentation</a> ).</p>
+<p><strong>Travis CI does not access all your repositories by default</strong>.</p>
+<p>Once you acknowledge the access rights, you will see Travis CI OAuth application present in your GitHub <a href="https://github.com/settings/applications">Authorized OAuth Apps list</a>, however <strong>you need to explicitly configure which repositories Travis CI has access to</strong> within your <a href="https://travis-ci.com/">travis-ci.com</a> account. The configuration is done during the activation of Travis CI for your repositories. You can use either the ‘All repositories’ option or the ‘Only select repositories’ option during the activation process.</p>
+<p>When the Travis CI activation has completed, you will see the actual Travis CI GitHub Application installed in <a href="https://github.com/settings/installations">Installed GitHub Apps</a> section.</p>
+<p>Travis CI uses OAuth permissions in the following way:</p>
+<ol type="1">
+<li><p>Travis CI’s system synchronizes certain metadata with GitHub. This metadata is required for proper service functioning. In particular, we sync users, orgs, memberships, repos, permissions and, (optionally) branches. This type of sync happens either once a day by schedule or per the user’s request. You can find more information and source code <a href="https://github.com/travis-ci/travis-github-sync#syncs">in this repository</a></p></li>
+<li><p>In order to run builds, Travis CI’s system clones a repository, from which the build is triggered, to the build environment. The build environment is an isolated virtual machine or an LXD container, which gets terminated as soon as the build finishes. Cloning happens only after a build request, and therefore only for the repositories explicitly enabled at GitHub settings.</p></li>
+<li><p>To set up a build environment and prepare the build, Travis CI’s system fetches and processes the <code>.travis.yml</code> config file from the repository and the branch explicitly specified in the build request, triggered by GitHub.</p></li>
+<li><p>Travis CI’s system reports build results back to GitHub via its <a href="https://developer.github.com/v3/checks/">Checks API</a>.</p></li>
+</ol>
+<h2 id="to-get-started-with-travis-ci-using-bitbucket">To get started with Travis CI using Bitbucket <a href="about:blank#to-get-started-with-travis-ci-using-bitbucket">#</a></h2>
+<blockquote>
+<p>This section documents the new Bitbucket option that is currently in beta.</p>
+</blockquote>
+<ol type="1">
+<li>Go to <a href="https://travis-ci.com/">Travis-ci.com</a> and <em><a href="https://travis-ci.com/signin">Sign up with Bitbucket</a></em>.</li>
+<li>Accept the Authorization of Travis CI. You’ll be redirected to Bitbucket.</li>
+<li>Click on your profile picture in the top right of your Travis Dashboard, click <em>Settings</em>, and toggle the repositories you want to use with Travis CI.</li>
+<li><p>Add a <code>.travis.yml</code> file to your repository to tell Travis CI what to do.</p>
+<p>The following example specifies a Ruby project that should be built with Ruby 2.2 and the latest versions of JRuby.</p>
+<pre><code>language: ruby
+rvm:
+ - 2.2
+ - jruby</code></pre>
+<p>YAML</p>
+<p>The defaults for Ruby projects are <code>bundle install</code> to <a href="https://docs.travis-ci.com/user/job-lifecycle/#customizing-the-installation-phase">install dependencies</a>, and <code>rake</code> to build the project.</p></li>
+<li><p>Add the <code>.travis.yml</code> file to git, commit and push to trigger a Travis CI build:</p>
+<blockquote>
+<p>Travis only runs builds on the commits you push after you’ve added a .travis.yml file.</p>
+</blockquote></li>
+<li><p>Check the build status page to see if your build <a href="https://docs.travis-ci.com/user/job-lifecycle/#breaking-the-build">passes or fails</a> according to the return status of the build command by visiting <a href="https://travis-ci.com/auth">Travis CI</a> and selecting your repository.</p></li>
+</ol>
+<h2 id="to-get-started-with-travis-ci-using-gitlab">To get started with Travis CI using GitLab <a href="about:blank#to-get-started-with-travis-ci-using-gitlab">#</a></h2>
+<blockquote>
+<p>This section documents the new GitLab option that is currently in beta.</p>
+</blockquote>
+<ol type="1">
+<li>Go to <a href="https://travis-ci.com/">Travis-ci.com</a> and <em><a href="https://travis-ci.com/signin">Sign up with GitLab</a></em>.</li>
+<li>Accept the Authorization of Travis CI. You’ll be redirected to GitLab.</li>
+<li>Click on your profile picture in the top right of your Travis Dashboard, click <em>Settings</em>, and toggle the repositories you want to use with Travis CI.</li>
+<li><p>Add a <code>.travis.yml</code> file to your repository to tell Travis CI what to do.</p>
+<p>The following example specifies a Ruby project that should be built with Ruby 2.2 and the latest versions of JRuby.</p>
+<pre><code>language: ruby
+rvm:
+ - 2.2
+ - jruby</code></pre>
+<p>YAML</p>
+<p>The defaults for Ruby projects are <code>bundle install</code> to <a href="https://docs.travis-ci.com/user/job-lifecycle/#customizing-the-installation-phase">install dependencies</a>, and <code>rake</code> to build the project.</p></li>
+<li><p>Add the <code>.travis.yml</code> file to git, commit and push to trigger a Travis CI build:</p>
+<blockquote>
+<p>Travis only runs builds on the commits you push after you’ve added a .travis.yml file.</p>
+</blockquote></li>
+<li><p>Check the build status page to see if your build <a href="https://docs.travis-ci.com/user/job-lifecycle/#breaking-the-build">passes or fails</a> according to the return status of the build command by visiting <a href="https://travis-ci.com/auth">Travis CI</a> and selecting your repository.</p></li>
+</ol>
+<h2 id="to-get-started-with-travis-ci-using-assembla">To get started with Travis CI using Assembla <a href="about:blank#to-get-started-with-travis-ci-using-assembla">#</a></h2>
+<blockquote>
+<p>This section documents the new Assembla option that is currently in beta.</p>
+</blockquote>
+<ol type="1">
+<li>Go to <a href="https://travis-ci.com/">Travis-ci.com</a> and <em><a href="https://travis-ci.com/signin">Sign up with Assembla</a></em>.</li>
+<li>Accept the Authorization of Travis CI. You’ll be redirected to Assembla.</li>
+<li>Click on your profile picture in the top right of your Travis Dashboard, click <em>Settings</em>, and toggle the repositories you want to use with Travis CI.</li>
+<li><p>Add a <code>.travis.yml</code> file to your repository to tell Travis CI what to do.</p>
+<p>The following example specifies a Ruby project that should be built with Ruby 2.2 and the latest versions of JRuby.</p>
+<pre><code>language: ruby
+rvm:
+ - 2.2
+ - jruby</code></pre>
+<p>YAML</p>
+<p>The defaults for Ruby projects are <code>bundle install</code> to <a href="https://docs.travis-ci.com/user/job-lifecycle/#customizing-the-installation-phase">install dependencies</a>, and <code>rake</code> to build the project.</p></li>
+<li><p>Add the <code>.travis.yml</code> file to git, commit and push to trigger a Travis CI build:</p>
+<blockquote>
+<p>Travis only runs builds on the commits you push after you’ve added a .travis.yml file.</p>
+</blockquote></li>
+<li><p>Check the build status page to see if your build <a href="https://docs.travis-ci.com/user/job-lifecycle/#breaking-the-build">passes or fails</a> according to the return status of the build command by visiting <a href="https://travis-ci.com/auth">Travis CI</a> and selecting your repository.</p></li>
+</ol>
+<h2 id="switching-accounts">Switching accounts <a href="about:blank#switching-accounts">#</a></h2>
+<p>You can easily switch between your cloud platform provider accounts:</p>
+<ol type="1">
+<li>Click on your account icon in the top right corner on <a href="https://travis-ci.com/">Travis-ci.com</a>.</li>
+<li>Select the desired account and have fun using Travis CI.</li>
+</ol>
+<h2 id="selecting-a-different-programming-language">Selecting a different programming language <a href="about:blank#selecting-a-different-programming-language">#</a></h2>
+<p>Use one of these common languages:</p>
+<pre><code>language: ruby</code></pre>
+<p>YAML</p>
+<pre><code>language: java</code></pre>
+<p>YAML</p>
+<pre><code>language: node_js</code></pre>
+<p>YAML</p>
+<pre><code>language: python</code></pre>
+<p>YAML</p>
+<pre><code>language: php</code></pre>
+<p>YAML</p>
+<pre><code>language: go</code></pre>
+<p>YAML</p>
+<p>If you have tests that need to run on macOS or your project uses Swift or Objective-C, use our macOS environment:</p>
+<pre><code>os: osx</code></pre>
+<p>YAML</p>
+<blockquote>
+<p>You do not necessarily need to use macOS if you develop on a Mac. macOS is required only if you need Swift, Objective-C, or other macOS-specific software.</p>
+</blockquote>
+<p>Travis CI supports many <a href="https://docs.travis-ci.com/user/languages/">programming languages</a>.</p>
+<h2 id="more-than-running-tests">More than running tests <a href="about:blank#more-than-running-tests">#</a></h2>
+<p>Travis CI isn’t just for running tests, there are many other things you can do with your code:</p>
+<ul>
+<li>deploy to <a href="https://docs.travis-ci.com/user/deployment/pages/">GitHub pages</a></li>
+<li>run apps on <a href="https://docs.travis-ci.com/user/deployment/heroku/">Heroku</a></li>
+<li>upload <a href="https://docs.travis-ci.com/user/deployment/rubygems/">RubyGems</a></li>
+<li>send <a href="https://docs.travis-ci.com/user/notifications/">notifications</a></li>
+</ul>
+<h2 id="further-reading">Further Reading <a href="about:blank#further-reading">#</a></h2>
+<p>Read more about</p>
+<ul>
+<li><a href="https://docs.travis-ci.com/user/customizing-the-build">customizing your build</a></li>
+<li><a href="https://docs.travis-ci.com/user/best-practices-security/">security best practices</a></li>
+<li><a href="https://docs.travis-ci.com/user/build-stages/">build stages</a></li>
+<li><a href="https://docs.travis-ci.com/user/customizing-the-build/#build-matrix">build matrixes</a></li>
+<li><a href="https://docs.travis-ci.com/user/installing-dependencies">installing dependencies</a></li>
+<li><a href="https://docs.travis-ci.com/user/database-setup/">setting up databases</a></li>
+</ul>
+<p>Travis CI Mascot</p>
+<h3 id="travis-ci-gmbh">©Travis CI, GmbH</h3>
+<p>Rigaer Straße 8</p>
+<p>10247 Berlin, Germany</p>
+<ul>
+<li><a href="https://travisci.workable.com/">Work with Travis CI</a></li>
+</ul>
+<h3 id="help">Help</h3>
+<ul>
+<li><a href="https://docs.travis-ci.com/">Documentation</a></li>
+<li><a href="https://changelog.travis-ci.com/">Changelog</a></li>
+<li><a href="https://blog.travis-ci.com/">Blog</a></li>
+<li><a href="mailto:support@travis-ci.com">Email</a></li>
+<li><a href="https://twitter.com/travisci">Twitter</a></li>
+</ul>
+<h3 id="company">Company</h3>
+<ul>
+<li><a href="https://docs.travis-ci.com/imprint.html">Imprint</a></li>
+<li><a href="https://ideracorp.com/legal/TravisCI">Legal</a></li>
+</ul>
+<h3 id="travis-ci-status">Travis CI Status</h3>
+<ul>
+<li>Status: <a href="http://www.traviscistatus.com/">Travis CI Status</a></li>
+</ul>
+<p><a href="about:blank#">×</a></p>
+<p>This site is still being indexed. Please try your search again in a few minutes.</p>
+<p><a href="http://swiftype.com/?ref=pbo">search by swiftype</a></p>
+</body>
+</html>

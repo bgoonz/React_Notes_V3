@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>remember-last-searches</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<h2 id="remember-last-searches">Remember Last Searches</h2>
+<p><strong>Task:</strong> Remember the last five search terms which hit the API, and provide a button to move quickly between searches. When the buttons are clicked, stories for the search term should be fetched again.</p>
+<p><strong>Optional Hints:</strong></p>
+<ul>
+<li>Don’t use a new state for this feature. Instead, reuse the <code>url</code> state and <code>setUrl</code> state updater function to fetch stories from the API. Adapt them to multiple <code>urls</code> as state, and to set multiple <code>urls</code> with <code>setUrls</code>. The last URL from <code>urls</code> can be used to fetch the data, and the last five URLs from <code>urls</code> can be used to display the buttons.</li>
+</ul>
+<p><img src="images/last-searches.png" /></p>
+<p>Let’s get to it. First, we will refactor all <code>url</code> to <code>urls</code> state and all <code>setUrl</code> to <code>setUrls</code> state updater functions. Instead of initializing the state with an <code>url</code> as a string, make it an array with the initial <code>url</code> as its only entry:</p>
+<p>{title=“src/App.js”,lang=“javascript”} ~~~~~~~ const App = () =&gt; { …</p>
+<h1 id="leanpub-start-insert">leanpub-start-insert</h1>
+<p>const [urls, setUrls] = React.useState([ # leanpub-end-insert <code>${API_ENDPOINT}${searchTerm}</code>, # leanpub-start-insert ]); # leanpub-end-insert</p>
+<p>… }; ~~~~~~~</p>
+<p>Second, instead of using the current <code>url</code> state for data fetching, use the last <code>url</code> entry from the <code>urls</code> array. If another <code>url</code> is added to the list of <code>urls</code>, it is used to fetch data instead:</p>
+<p>{title=“src/App.js”,lang=“javascript”} ~~~~~~~ const App = () =&gt; {</p>
+<p>…</p>
+<p>const handleFetchStories = React.useCallback(async () =&gt; { dispatchStories({ type: ‘STORIES_FETCH_INIT’ });</p>
+<pre><code>try {</code></pre>
+<h1 id="leanpub-start-insert-1">leanpub-start-insert</h1>
+<pre><code>  const lastUrl = urls[urls.length - 1];
+  const result = await axios.get(lastUrl);</code></pre>
+<h1 id="leanpub-end-insert">leanpub-end-insert</h1>
+<pre><code>  dispatchStories({
+    type: &#39;STORIES_FETCH_SUCCESS&#39;,
+    payload: result.data.hits,
+  });
+} catch {
+  dispatchStories({ type: &#39;STORIES_FETCH_FAILURE&#39; });
+}</code></pre>
+<h1 id="leanpub-start-insert-2">leanpub-start-insert</h1>
+<p>}, [urls]); # leanpub-end-insert</p>
+<p>… }; ~~~~~~~</p>
+<p>And third, instead of storing the <code>url</code> string as state with the state updater function, concatenate the new <code>url</code> using the concat method with the previous <code>urls</code> in an array for the new state:</p>
+<p>{title=“src/App.js”,lang=“javascript”} ~~~~~~~ const App = () =&gt; { …</p>
+<p>const handleSearchSubmit = (event) =&gt; { # leanpub-start-insert const url = <code>${API_ENDPOINT}${searchTerm}</code>; setUrls(urls.concat(url)); # leanpub-end-insert</p>
+<pre><code>event.preventDefault();</code></pre>
+<p>};</p>
+<p>… }; ~~~~~~~</p>
+<p>With each search, another URL is stored in our state of <code>urls</code>. Next, render a button for each of the last five URLs. We’ll include a new universal handler for these buttons, and each passes a specific <code>url</code> with a more specific inline handler:</p>
+<p>{title=“src/App.js”,lang=“javascript”} ~~~~~~~ # leanpub-start-insert const getLastSearches = (urls) =&gt; urls.slice(-5); # leanpub-end-insert</p>
+<p>…</p>
+<p>const App = () =&gt; { …</p>
+<h1 id="leanpub-start-insert-3">leanpub-start-insert</h1>
+<p>const handleLastSearch = (url) =&gt; { // do something }; # leanpub-end-insert</p>
+<h1 id="leanpub-start-insert-4">leanpub-start-insert</h1>
+<p>const lastSearches = getLastSearches(urls); # leanpub-end-insert</p>
+return (
+<div>
+<pre><code>  &lt;h1&gt;My Hacker Stories&lt;/h1&gt;
+
+  &lt;SearchForm ... /&gt;</code></pre>
+<h1 id="leanpub-start-insert-5">leanpub-start-insert</h1>
+<pre><code>  {lastSearches.map((url) =&gt; (
+    &lt;button
+      key={url}
+      type=&quot;button&quot;
+      onClick={() =&gt; handleLastSearch(url)}
+    &gt;
+      {url}
+    &lt;/button&gt;
+  ))}</code></pre>
+<h1 id="leanpub-end-insert-1">leanpub-end-insert</h1>
+<pre><code>  ...
+&lt;/div&gt;</code></pre>
+<p>); }; ~~~~~~~</p>
+<p>Next, instead of showing the whole URL of the last search in the button as button text, show only the search term by replacing the API’s endpoint with an empty string:</p>
+<p>{title=“src/App.js”,lang=“javascript”} ~~~~~~~ # leanpub-start-insert const extractSearchTerm = (url) =&gt; url.replace(API_ENDPOINT, ’’);</p>
+<p>const getLastSearches = (urls) =&gt; urls.slice(-5).map((url) =&gt; extractSearchTerm(url)); # leanpub-end-insert</p>
+<p>…</p>
+<p>const App = () =&gt; { …</p>
+<p>const lastSearches = getLastSearches(urls);</p>
+return (
+<div>
+<pre><code>  ...</code></pre>
+<h1 id="leanpub-start-insert-6">leanpub-start-insert</h1>
+<pre><code>  {lastSearches.map((searchTerm) =&gt; (</code></pre>
+<p># leanpub-end-insert &lt;button # leanpub-start-insert key={searchTerm} # leanpub-end-insert type=“button” # leanpub-start-insert onClick={() =&gt; handleLastSearch(searchTerm)} # leanpub-end-insert &gt; # leanpub-start-insert {searchTerm} # leanpub-end-insert </button> ))}</p>
+<pre><code>  ...
+&lt;/div&gt;</code></pre>
+<p>); }; ~~~~~~~</p>
+<p>The <code>getLastSearches</code> function now returns search terms instead of URLs. The actual <code>searchTerm</code> is passed to the inline handler instead of the <code>url</code>. By mapping over the list of <code>urls</code> in <code>getLastSearches</code>, we can extract the search term for each <code>url</code> within the array’s map method. Making it more concise, it can also look like this:</p>
+<p>{title=“src/App.js”,lang=“javascript”} ~~~~~~~ const getLastSearches = (urls) =&gt; # leanpub-start-insert urls.slice(-5).map(extractSearchTerm); # leanpub-end-insert ~~~~~~~</p>
+<p>Now we’ll provide functionality for the new handler used by every button, since clicking one of these buttons should trigger another search. Since we use the <code>urls</code> state for fetching data, and since we know the last URL is always used for data fetching, concatenate a new <code>url</code> to the list of <code>urls</code> to trigger another search request:</p>
+<p>{title=“src/App.js”,lang=“javascript”} ~~~~~~~ const App = () =&gt; { …</p>
+<h1 id="leanpub-start-insert-7">leanpub-start-insert</h1>
+<p>const handleLastSearch = (searchTerm) =&gt; { const url = <code>${API_ENDPOINT}${searchTerm}</code>; setUrls(urls.concat(url)); }; # leanpub-end-insert</p>
+<p>… }; ~~~~~~~</p>
+<p>If you compare this new handler’s implementation logic to the <code>handleSearchSubmit</code>, you may see some common functionality. Extract this common functionality to a new handler and a new extracted utility function:</p>
+<p>{title=“src/App.js”,lang=“javascript”} ~~~~~~~ # leanpub-start-insert const getUrl = (searchTerm) =&gt; <code>${API_ENDPOINT}${searchTerm}</code>; # leanpub-end-insert</p>
+<p>…</p>
+<p>const App = () =&gt; { …</p>
+<p>const handleSearchSubmit = (event) =&gt; { # leanpub-start-insert handleSearch(searchTerm); # leanpub-end-insert</p>
+<pre><code>event.preventDefault();</code></pre>
+<p>};</p>
+<p>const handleLastSearch = (searchTerm) =&gt; { # leanpub-start-insert handleSearch(searchTerm); # leanpub-end-insert };</p>
+<h1 id="leanpub-start-insert-8">leanpub-start-insert</h1>
+<p>const handleSearch = (searchTerm) =&gt; { const url = getUrl(searchTerm); setUrls(urls.concat(url)); }; # leanpub-end-insert</p>
+<p>… }; ~~~~~~~</p>
+<p>The new utility function can be used somewhere else in the App component. If you extract functionality that can be used by two parties, always check to see if it can be used by a third party:</p>
+<p>{title=“src/App.js”,lang=“javascript”} ~~~~~~~ const App = () =&gt; { …</p>
+<p>// important: still wraps the returned value in [] # leanpub-start-insert const [urls, setUrls] = React.useState([getUrl(searchTerm)]); # leanpub-end-insert</p>
+<p>… }; ~~~~~~~</p>
+<p>The functionality should work, but it complains or breaks if the same search term is used more than once, because <code>searchTerm</code> is used for each button element as <code>key</code> attribute. Make the key more specific by concatenating it with the <code>index</code> of the mapped array.</p>
+<p>{title=“src/App.js”,lang=“javascript”} ~~~~~~~ const App = () =&gt; { …</p>
+return (
+<div>
+<pre><code>  ...</code></pre>
+<h1 id="leanpub-start-insert-9">leanpub-start-insert</h1>
+<pre><code>  {lastSearches.map((searchTerm, index) =&gt; (</code></pre>
+<h1 id="leanpub-end-insert-2">leanpub-end-insert</h1>
+<pre><code>    &lt;button</code></pre>
+<h1 id="leanpub-start-insert-10">leanpub-start-insert</h1>
+<pre><code>      key={searchTerm + index}</code></pre>
+<h1 id="leanpub-end-insert-3">leanpub-end-insert</h1>
+<pre><code>      type=&quot;button&quot;
+      onClick={() =&gt; handleLastSearch(searchTerm)}
+    &gt;
+      {searchTerm}
+    &lt;/button&gt;
+  ))}
+
+  ...
+&lt;/div&gt;</code></pre>
+<p>); }; ~~~~~~~</p>
+<p>It’s not the perfect solution, because the <code>index</code> isn’t a stable key (especially when adding items to the list); however, it doesn’t break in this scenario. The feature works now, but you can add further UX improvements by following the tasks below.</p>
+<p><strong>More Tasks:</strong></p>
+<ul>
+<li><ol type="1">
+<li>Do not show the current search as a button, only the five preceding searches. Hint: Adapt the <code>getLastSearches</code> function.</li>
+</ol></li>
+<li><ol start="2" type="1">
+<li>Don’t show duplicated searches. Searching twice for “React” shouldn’t create two different buttons. Hint: Adapt the <code>getLastSearches</code> function.</li>
+</ol></li>
+<li><ol start="3" type="1">
+<li>Set the SearchForm component’s input field value with the last search term if one of the buttons is clicked.</li>
+</ol></li>
+</ul>
+<p>The source of the five rendered buttons is the <code>getLastSearches</code> function. There, we take the array of <code>urls</code> and return the last five entries from it. Now we’ll change this utility function to return the last six entries instead of five by removing the last one, in order to not show the current search as a button. Afterward, only the five <em>previous</em> searches are displayed as buttons:</p>
+<p>{title=“src/App.js”,lang=“javascript”} ~~~~~~~ const getLastSearches = (urls) =&gt; urls # leanpub-start-insert .slice(-6) .slice(0, -1) # leanpub-end-insert .map(extractSearchTerm); ~~~~~~~</p>
+<p>If the same search is executed two or more times in a row, duplicate buttons appear, which is likely not your desired behavior. It would be acceptable to group identical searches into one button if they followed each other. We will solve this problem in the utility function as well. Before separating the array into the five previous searches, group the identical searches:</p>
+<p>{title=“src/App.js”,lang=“javascript”} ~~~~~~~ const getLastSearches = (urls) =&gt; urls # leanpub-start-insert .reduce((result, url, index) =&gt; { const searchTerm = extractSearchTerm(url);</p>
+<pre><code>  if (index === 0) {
+    return result.concat(searchTerm);
+  }
+
+  const previousSearchTerm = result[result.length - 1];
+
+  if (searchTerm === previousSearchTerm) {
+    return result;
+  } else {
+    return result.concat(searchTerm);
+  }
+}, [])</code></pre>
+<h1 id="leanpub-end-insert-4">leanpub-end-insert</h1>
+<pre><code>.slice(-6)
+.slice(0, -1);</code></pre>
+<pre><code>
+The reduce function starts with an empty array as its `result`. The first iteration concatenates the `searchTerm` we extracted from the first `url` into the `result`. Every extracted `searchTerm` is compared to the one before it. If the previous search term is different from the current, concatenate the `searchTerm` to the result. If the search terms are identical, return the result without adding anything.
+
+The SearchForm component&#39;s input field should be set with the new `searchTerm` if one of the last search buttons is clicked. We can solve this using the state updater function for the specific value used in the SearchForm component.
+
+{title=&quot;src/App.js&quot;,lang=&quot;javascript&quot;}</code></pre>
+<p>const App = () =&gt; { …</p>
+<p>const handleLastSearch = (searchTerm) =&gt; { # leanpub-start-insert setSearchTerm(searchTerm); # leanpub-end-insert</p>
+<pre><code>handleSearch(searchTerm);</code></pre>
+<p>};</p>
+<p>… }; ~~~~~~~</p>
+<p>Lastly, extract the feature’s new rendered content from this section as a standalone component, to keep the App component lightweight:</p>
+<p>{title=“src/App.js”,lang=“javascript”} ~~~~~~~ const App = () =&gt; { …</p>
+<p>const lastSearches = getLastSearches(urls);</p>
+return (
+<div>
+<pre><code>  ...
+
+  &lt;SearchForm ... /&gt;</code></pre>
+<h1 id="leanpub-start-insert-11">leanpub-start-insert</h1>
+<pre><code>  &lt;LastSearches
+    lastSearches={lastSearches}
+    onLastSearch={handleLastSearch}
+  /&gt;</code></pre>
+<h1 id="leanpub-end-insert-5">leanpub-end-insert</h1>
+<pre><code>  &lt;hr /&gt;
+
+  ...
+&lt;/div&gt;</code></pre>
+<p>); };</p>
+<h1 id="leanpub-start-insert-12">leanpub-start-insert</h1>
+<p>const LastSearches = ({ lastSearches, onLastSearch }) =&gt; ( &lt;&gt; {lastSearches.map((searchTerm, index) =&gt; ( &lt;button key={searchTerm + index} type=“button” onClick={() =&gt; onLastSearch(searchTerm)} &gt; {searchTerm} </button> ))} &lt;/&gt; ); # leanpub-end-insert ~~~~~~~</p>
+<p>This feature wasn’t an easy one. Lots of fundamental React but also JavaScript knowledge was needed to accomplish it. If you had no problems implementing it yourself or in following the instructions, you are very well set. If you had one or the other issue, don’t worry too much about it. Maybe you even figured out another way to solve this task and it may have turned out simpler than the one I showed here.</p>
+<h3 id="exercises">Exercises:</h3>
+<ul>
+<li>Confirm your <a href="https://codesandbox.io/s/github/the-road-to-learn-react/hacker-stories/tree/2021/Remember-Last-Searches">source code</a>.
+<ul>
+<li>Confirm the <a href="https://github.com/the-road-to-learn-react/hacker-stories/compare/2021/Reverse-Sort...2021/Remember-Last-Searches">changes</a>.</li>
+</ul></li>
+<li>Read more about <a href="https://www.robinwieruch.de/javascript-groupby/">grouping in JavaScript</a>.</li>
+</ul>
+</body>
+</html>

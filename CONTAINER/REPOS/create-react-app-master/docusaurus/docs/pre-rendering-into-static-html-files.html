@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Pre-Rendering into Static HTML Files</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Pre-Rendering into Static HTML Files</h1>
+</header>
+<p>If you’re hosting your <code>build</code> with a static hosting provider you can use <a href="https://www.npmjs.com/package/react-snapshot">react-snapshot</a> or <a href="https://github.com/stereobooster/react-snap">react-snap</a> to generate HTML pages for each route, or relative link, in your application. These pages will then seamlessly become active, or “hydrated”, when the JavaScript bundle has loaded.</p>
+<p>There are also opportunities to use this outside of static hosting, to take the pressure off the server when generating and caching routes.</p>
+<p>The primary benefit of pre-rendering is that you get the core content of each page <em>with</em> the HTML payload—regardless of whether or not your JavaScript bundle successfully downloads. It also increases the likelihood that each route of your application will be picked up by search engines.</p>
+<p>You can read more about <a href="https://medium.com/superhighfives/an-almost-static-stack-6df0a2791319">zero-configuration pre-rendering (also called snapshotting) here</a>.</p>
+</body>
+</html>

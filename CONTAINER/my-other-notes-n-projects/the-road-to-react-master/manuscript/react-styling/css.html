@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>css</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<h1 id="styling-in-react">Styling in React</h1>
+<p>There are many ways to style a React application, and there are lengthy debates about the best <strong>styling strategy</strong> and <strong>styling approach</strong>. We’ll go over a few of these approaches without giving them too much weight. There will be some pro and con arguments, but it’s mostly a matter of what fits best for developers and teams.</p>
+<p>We will begin React styling with common CSS in React, but then explore two alternatives for more advanced <strong>CSS-in-CSS</strong> (<strong>CSS Modules</strong>) and <strong>CSS-in-JS</strong> (<strong>Styled Components</strong>) strategies. CSS Modules and Styled Components are only two approaches out of many in both groups of strategies. We’ll also cover how to include scalable vector graphics (SVGs), such as a logo or icons, in our React application.</p>
+<p><img src="images/css-style-strategies.png" /></p>
+<p>If you don’t want to build common UI components (e.g. button, dialog, dropdown) from scratch, you can always pick a <a href="https://www.robinwieruch.de/react-libraries">popular UI library suited for React</a>, which provides these components by default. However, it is better for learning React if you try building these components before using a pre-built solution. As a result, we won’t use any of the UI component libraries.</p>
+<p><img src="images/ui-library.png" /></p>
+<p>The following styling approaches and SVGs are pre-configured in <code>create-react-app</code>. If you’re in control of the build tools (e.g. Webpack) by having a custom setup, they might need to be configured to enable importing CSS or SVG files. Since we are using create-react-app, we can use these files as assets right away.</p>
+<h3 id="exercises">Exercises:</h3>
+<ul>
+<li>Read more about <a href="https://www.robinwieruch.de/react-css-styling">the different styling strategies and approaches in React</a>.</li>
+</ul>
+<h2 id="css-in-react">CSS in React</h2>
+<p>Common CSS in React is similar to the standard CSS you may have already learned. Each web application gives HTML elements a <code>class</code> (in React it’s <code>className</code>) attribute that is styled via a CSS file:</p>
+<p>{title=“src/App.js”,lang=“javascript”} ~~~~~~~ const App = () =&gt; { …</p>
+return ( # leanpub-start-insert
+<div className="container">
+<pre><code>  &lt;h1 className=&quot;headline-primary&quot;&gt;My Hacker Stories&lt;/h1&gt;</code></pre>
+<h1 id="leanpub-end-insert">leanpub-end-insert</h1>
+<pre><code>  &lt;SearchForm
+    searchTerm={searchTerm}
+    onSearchInput={handleSearchInput}
+    onSearchSubmit={handleSearchSubmit}
+  /&gt;
+
+  {stories.isError &amp;&amp; &lt;p&gt;Something went wrong ...&lt;/p&gt;}
+
+  {stories.isLoading ? (
+    &lt;p&gt;Loading ...&lt;/p&gt;
+  ) : (
+    &lt;List list={stories.data} onRemoveItem={handleRemoveStory} /&gt;
+  )}
+&lt;/div&gt;</code></pre>
+<p>); }; ~~~~~~~</p>
+<p>The <code>&lt;hr /&gt;</code> was removed because the CSS handles the border in the next steps. We’ll import the CSS file, which is done with the help of the create-react-app configuration:</p>
+<p>{title=“src/App.js”,lang=“javascript”} ~~~~~~~ import * as React from ‘react’; import axios from ‘axios’;</p>
+<h1 id="leanpub-start-insert">leanpub-start-insert</h1>
+<p>import ‘./App.css’; # leanpub-end-insert ~~~~~~~</p>
+<p>This CSS file will define the two (and more) CSS classes we used (and will use) in the App component. In your <em>src/App.css</em> file, define them like the following:</p>
+<p>{title=“src/App.css”,lang=“css”} ~~~~~~~ .container { height: 100vw; padding: 20px;</p>
+<p>background: #83a4d4; /* fallback for old browsers */ background: linear-gradient(to left, #b6fbff, #83a4d4);</p>
+<p>color: #171212; }</p>
+<p>.headline-primary { font-size: 48px; font-weight: 300; letter-spacing: 2px; } ~~~~~~~</p>
+<p>You should see the first stylings taking effect in your application when you start it again. Next, we will head over to the Item component. Some of its elements receive the <code>className</code> attribute too, however, we are also using a new styling technique here:</p>
+{title=“src/App.js”,lang=“javascript”} ~~~~~~~ const Item = ({ item, onRemoveItem }) =&gt; ( # leanpub-start-insert
+<li className="item">
+&lt;span style={{ width: ‘40%’ }}&gt; # leanpub-end-insert <a href={item.url}>{item.title}</a> </span> # leanpub-start-insert &lt;span style={{ width: ‘30%’ }}&gt;{item.author}</span> &lt;span style={{ width: ‘10%’ }}&gt;{item.num_comments}</span> &lt;span style={{ width: ‘10%’ }}&gt;{item.points}</span> &lt;span style={{ width: ‘10%’ }}&gt; # leanpub-end-insert &lt;button type=“button” onClick={() =&gt; onRemoveItem(item)} # leanpub-start-insert className=“button button_small” # leanpub-end-insert &gt; Dismiss </button> </span>
+</li>
+<p>); ~~~~~~~</p>
+<p>As you can see, we can also use the <code>style</code> attribute for HTML elements. In JSX, style can be passed as an inline JavaScript object to these attributes. This way we can define dynamic style properties in JavaScript files rather than mostly static CSS files. This approach is called <strong>inline style</strong>, which is useful for quick prototyping and dynamic style definitions. Inline style should be used sparingly, however, since a separate style definition with a CSS file keeps the JSX more concise.</p>
+<p>In your <em>src/App.css</em> file, define the new CSS classes. Basic CSS features are used here, because advanced CSS features (e.g. nesting) from CSS extensions (e.g. Sass) are not included in this example, as they are <a href="https://create-react-app.dev/docs/adding-a-sass-stylesheet/">optional configurations</a>:</p>
+<p>{title=“src/App.css”,lang=“css”} ~~~~~~~ .item { display: flex; align-items: center; padding-bottom: 5px; }</p>
+<p>.item &gt; span { padding: 0 5px; white-space: nowrap; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }</p>
+<p>.item &gt; span &gt; a { color: inherit; } ~~~~~~~</p>
+<p>The button style from the previous component is still missing, so we’ll define a base button style and two more specific button styles (small and large). One of the button specifications has been already used, the other will be used in the next steps:</p>
+<p>{title=“src/App.css”,lang=“css”} ~~~~~~~ .button { background: transparent; border: 1px solid #171212; padding: 5px; cursor: pointer;</p>
+<p>transition: all 0.1s ease-in; }</p>
+<p>.button:hover { background: #171212; color: #ffffff; }</p>
+<p>.button_small { padding: 5px; }</p>
+<p>.button_large { padding: 10px; } ~~~~~~~</p>
+<p>Apart from styling approaches in React, naming conventions (<a href="https://developer.mozilla.org/en-US/docs/MDN/Contribute/Guidelines/Code_guidelines/CSS">CSS guidelines</a>) are a whole other topic. The last CSS snippet followed BEM rules by defining modifications of a class with an underscore (<code>_</code>). Choose whatever naming convention suits you and your team. Without further ado, we will style the next React component:</p>
+{title=“src/App.js”,lang=“javascript”} ~~~~~~~ const SearchForm = ({ … }) =&gt; ( # leanpub-start-insert
+<form onSubmit="{onSearchSubmit}" className="search-form">
+<h1 id="leanpub-end-insert-1">leanpub-end-insert</h1>
+<pre><code>&lt;InputWithLabel ... &gt;
+  &lt;strong&gt;Search:&lt;/strong&gt;
+&lt;/InputWithLabel&gt;
+
+&lt;button
+  type=&quot;submit&quot;
+  disabled={!searchTerm}</code></pre>
+<h1 id="leanpub-start-insert-1">leanpub-start-insert</h1>
+<pre><code>  className=&quot;button button_large&quot;</code></pre>
+<h1 id="leanpub-end-insert-2">leanpub-end-insert</h1>
+<pre><code>&gt;
+  Submit
+&lt;/button&gt;</code></pre>
+</form>
+<p>); ~~~~~~~</p>
+<p>We can also pass the <code>className</code> attribute as a prop to React components. For example, we can use this option to pass the SearchForm component a flexible style with a <code>className</code> prop from a range of predefined classes (e.g. <code>button_large</code> or <code>button_small</code>) from a CSS file. Lastly, style the InputWithLabel component:</p>
+<p>{title=“src/App.js”,lang=“javascript”} ~~~~~~~ const InputWithLabel = ({ … }) =&gt; { …</p>
+<p>return ( &lt;&gt; # leanpub-start-insert <label htmlFor={id} className="label"> # leanpub-end-insert {children} </label>   &lt;input ref={inputRef} id={id} type={type} value={value} onChange={onInputChange} # leanpub-start-insert className=“input” # leanpub-end-insert /&gt; &lt;/&gt; ); }; ~~~~~~~</p>
+<p>In your <em>src/App.css</em> file, add the remaining classes:</p>
+<p>{title=“src/App.css”,lang=“css”} ~~~~~~~ .search-form { padding: 10px 0 20px 0; display: flex; align-items: baseline; }</p>
+<p>.label { border-top: 1px solid #171212; border-left: 1px solid #171212; padding-left: 5px; font-size: 24px; }</p>
+<p>.input { border: none; border-bottom: 1px solid #171212; background-color: transparent;</p>
+<p>font-size: 24px; } ~~~~~~~</p>
+<p>For simplicity, we styled elements like label and input individually in the <em>src/App.css</em> file. However, in a real application, it may be better to define these elements once in the <em>src/index.css</em> file globally. As React components are split into multiple files, sharing style becomes a necessity. After all, this is the basic usage of CSS in React. Without CSS extensions like Sass (Syntactically Awesome Style Sheets), styling can become more burdensome, though, because features like CSS nesting are not available in native CSS.</p>
+<h3 id="exercises-1">Exercises:</h3>
+<ul>
+<li>Confirm your <a href="https://codesandbox.io/s/github/the-road-to-learn-react/hacker-stories/tree/2021/CSS-in-React">source code</a>.
+<ul>
+<li>Confirm the <a href="https://github.com/the-road-to-learn-react/hacker-stories/compare/2021/react-modern-final...2021/CSS-in-React">changes</a>.</li>
+</ul></li>
+<li>Read more about <a href="https://create-react-app.dev/docs/adding-a-stylesheet">CSS stylesheets in create-react-app</a>.
+<ul>
+<li>Try to pass <code>className</code> prop from App to SearchForm component, either with the value <code>button_small</code> or <code>button_large</code>, and use this as <code>className</code> for the button element.</li>
+</ul></li>
+<li>Read more about <a href="https://create-react-app.dev/docs/adding-a-sass-stylesheet">Sass in create-react-app</a> for taking advantage of more advanced CSS features like nesting.</li>
+<li>Enable Sass in your create-react-app and start to use its features (e.g. nesting) in your CSS file.</li>
+</ul>
+</body>
+</html>

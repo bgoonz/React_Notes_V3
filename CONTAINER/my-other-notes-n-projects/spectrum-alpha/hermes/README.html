@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>README</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<h1 id="sending-emails-with-hermes">Sending emails with Hermes</h1>
+<p>In an effort to maintain consistency across our emails, please following the following guidelines:</p>
+<ol type="1">
+<li>Abort all emails that do not have an <code>unsubscribeToken</code> in the email’s dynamic_template_data</li>
+<li>Abort all emails that are being sent to a user without a username - they probably aren’t active.</li>
+<li>Pre-process and upload to SendGrid via the local syncing script. See <code>email-template-scripts/README.md</code>.</li>
+</ol>
+</body>
+</html>

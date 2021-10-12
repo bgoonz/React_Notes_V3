@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>background-jobs</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<p><a href="../readme.md">Table of contents</a> / <a href="intro.md">Workers</a></p>
+<h1 id="background-jobs">Background jobs</h1>
+<p>We use <a href="https://github.com/OptimalBits/bull"><code>bull</code></a> for all of our background job needs (at the moment that mostly means notification processing and emails). <code>bull</code> uses redis under the hood to store information about these jobs. (follow the instructions on <a href="https://redis.io/download">redis.io/download</a> to install Redis)</p>
+<p>All of our servers and workers connect to the same redis instance, adding and taking jobs as they see fit. In development, that’s your local instance. In production, that’s a remote instance hosted on <a href="https://compose.com">compose.com</a>. Thusly, redis acts kind of like shared global state that helps our disparate processes talk to each other.</p>
+<p>Because <code>bull</code> implements job locking we can run as many of these servers and workers in parallel without any job getting done more than one time, which is very neat and should help us a lot when we run into scaling problems.</p>
+</body>
+</html>

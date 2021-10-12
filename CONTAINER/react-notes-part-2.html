@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>react-notes-part-2</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<h1 id="react-notes-part-2">React Notes Part 2</h1>
+<h3 id="for-more-resources-visit">For more resources visit: <a id="36ee"></a></h3>
+<p><a href="https://github.com/bgoonz/React_Notes_V3">bgoonz/React_Notes_V3A JavaScript library for building user interfaces React makes it painless to create interactive UIs. Design simple…github.com</a></p>
+<p><a href="https://gist.github.com/bgoonz/e07d9e7917ae9e98807358d1e7cc4a67">Use this appendix to get any prerequisite concepts and terminology under your belt:</a><img src="https://miro.medium.com/freeze/max/60/0*bZjlAJDEmP6yfpKI.gif?q=20" /><img src="https://miro.medium.com/max/647/0*bZjlAJDEmP6yfpKI.gif" /></p>
+<p>Here I will walk through a demo…. skip down below for more fundamental examples and resources…</p>
+<h2 id="react-demo">React Demo <a id="b2b8"></a></h2>
+<ul>
+<li>ex1 — A Basic React Component</li>
+<li>ex2 — A Basic React Class Component</li>
+<li>ex3 — A Class Component with State</li>
+<li>ex4 — A Class Component that Updates State</li>
+<li>ex5 — A Class Component that Iterates through State</li>
+<li>ex6 — An Example of Parent and Child Components</li>
+</ul>
+<p>With regards to converting an existing HTML, CSS, and JS site into React, first you’ll want to think about how to break up your site into components,</p>
+<ul>
+<li>as well as think about what the general hierarchical component structure of your site will look like.</li>
+<li>From there, it’s a simple matter of copying the relevant HTML for that component and throwing it into the <strong>render method of your component file.</strong></li>
+<li><em>Any methods that are needed for that component to function properly can added onto your new component.</em></li>
+</ul>
+<p>Once you’ve refactored your HTML components into React components, you’ll want to lay them out in the desired hierarchical structure</p>
+<ul>
+<li>with children components being rendered by their parents, as well as ensuring that the parent components are passing down the necessary data as props to their children components.</li>
+</ul>
+<p>ex.)</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb1-1" title="1"><span class="op">&lt;!--</span> Hello world <span class="op">--&gt;</span></a>
+<a class="sourceLine" id="cb1-2" title="2"><span class="op">&lt;</span>div <span class="kw">class</span><span class="op">=</span><span class="st">&quot;awesome&quot;</span> style<span class="op">=</span><span class="st">&quot;border: 1px solid red&quot;</span><span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb1-3" title="3">  <span class="op">&lt;</span>label <span class="cf">for</span><span class="op">=</span><span class="st">&quot;name&quot;</span><span class="op">&gt;</span>Enter your name<span class="op">:</span> &lt;/label<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb1-4" title="4">  <span class="op">&lt;</span>input type<span class="op">=</span><span class="st">&quot;text&quot;</span> id<span class="op">=</span><span class="st">&quot;name&quot;</span> /&gt;</a>
+<a class="sourceLine" id="cb1-5" title="5">&lt;/div<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb1-6" title="6"><span class="op">&lt;</span>p<span class="op">&gt;</span>Enter your HTML here&lt;/p<span class="op">&gt;</span></a></code></pre></div>
+<p>Is equivalent to:</p>
+<pre class="jsx"><code>let NewComponent = React.createClass ({
+  render: function () {
+    return (
+      &lt;div&gt;
+        {/* Hello world */}
+        &lt;div className=&quot;awesome&quot; style={{border: &#39;1px solid red&#39;}}&gt;
+          &lt;label htmlFor=&quot;name&quot;&gt;Enter your name: &lt;/label&gt;
+          &lt;input type=&quot;text&quot; id=&quot;name&quot; /&gt;
+        &lt;/div&gt;
+        &lt;p&gt;Enter your HTML here&lt;/p&gt;
+      &lt;/div&gt;
+    );
+  },
+});</code></pre>
+<h2 id="a-basic-component">A Basic Component <a id="fa4c"></a></h2>
+<p>Acomponent is some thing that is being rendered in the browser. It could be a button, a form with a bunch of fields in it…etc.…</p>
+<p>React doesn’t place any restrictions on how large or small a component can be.</p>
+<p>You <em>could</em> have an entire static site encapsulated in a single React component, but that would defeat the purpose of using React.</p>
+<p>So the first thing to remember about a component is that a <strong>component must</strong> <em><strong>render</strong></em> <strong>something.</strong></p>
+<p><em>If nothing is being rendered from a component, then React will throw an error.</em></p>
+<p>Inside of <code>BasicComponent.js</code> , first import React at the top of the file. Our most basic of components looks like this:</p>
+<pre class="jsx"><code>
+import React from &#39;react&#39;;
+
+const BasicComponent = () =&gt; &lt;div&gt;Hello World!&lt;/div&gt;;
+
+export default BasicComponent;</code></pre>
+<blockquote>
+<p><em>This is a component that simply returns a div tag with the words Hello World! inside.</em></p>
+<p><em>The last line simply exports our component so that it can be imported<br />
+by another file.</em></p>
+</blockquote>
+<p>Notice that this component looks exactly like an anonymous arrow function that we’ve named <code>BasicComponent</code> .</p>
+<p>In fact, that is literally what this is.</p>
+<p>The arrow function then is simply returning the div tag. When a component is written as a function like this one is, it is called a <em>functional</em> component.</p>
+<h2 id="a-basic-class-component">A Basic Class Component <a id="8d7d"></a></h2>
+<p>The above component is an example of a functional component, which is appropriate since that component is literally nothing more than a function that returns some HTML.</p>
+<p><em>Functional components are great when all you want a component to do is to render some stuff.</em></p>
+<p><em>Components can also be written as classes (although this paradigm is becoming outdated and you should strive to write your components functionally!</em></p>
+<p>For this exercise, we’re going to write a class component that does exactly the same thing as the functional component we just wrote.</p>
+<p>We’ll again need to import React at the top of the file, but we’ll also need to add a little something. Our import statement will look like this:</p>
+<pre class="text"><code>import React, { Component } from &#39;react&#39;;</code></pre>
+<p><strong>So, in addition to importing React, we’re also importing the base Component class that is included in the React library.</strong></p>
+<h3 id="react-lets-you-define-components-as-classes-or-functions.">React lets you define components as classes or functions. <a id="ed09"></a></h3>
+<p>Components defined as classes currently provide more features . To define a React component class, you need to extend <code>React.Component</code>:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb5-1" title="1"><span class="kw">class</span> Welcome <span class="kw">extends</span> <span class="va">React</span>.<span class="at">Component</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb5-2" title="2">  <span class="at">render</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb5-3" title="3">    <span class="cf">return</span> <span class="op">&lt;</span>h1<span class="op">&gt;</span>Hello<span class="op">,</span> <span class="op">{</span><span class="kw">this</span>.<span class="va">props</span>.<span class="at">name</span><span class="op">}</span>&lt;/h1<span class="op">&gt;;</span></a>
+<a class="sourceLine" id="cb5-4" title="4">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb5-5" title="5"><span class="op">}</span></a></code></pre></div>
+<p><strong>The only method you</strong> <em><strong>must</strong></em> <strong>define in a <code>React.Component</code> subclass is called</strong> <a href="https://reactjs.org/docs/react-component.html#render"><strong><code>render()</code></strong></a><strong>.</strong></p>
+<h2 id="render"><code>render()</code> <a id="2c45"></a></h2>
+<p>The <code>render()</code> method is the only required method in a class component.</p>
+<p>When called, it should examine <code>this.props</code> and <code>this.state</code> and return one of the following types:</p>
+<ul>
+<li><strong>React elements.</strong> Typically created via <a href="https://reactjs.org/docs/introducing-jsx.html">JSX</a>. For example, <code>&lt;div /&gt;</code> and <code>&lt;MyComponent /&gt;</code> are React elements that instruct React to render a DOM node, or another user-defined component, respectively.</li>
+<li><strong>Arrays and fragments.</strong> Let you return multiple elements from render. See the documentation on <a href="https://reactjs.org/docs/fragments.html">fragments</a> for more details.</li>
+<li><strong>Portals</strong>. Let you render children into a different DOM subtree. See the documentation on <a href="https://reactjs.org/docs/portals.html">portals</a> for more details.</li>
+<li><strong>String and numbers.</strong> These are rendered as text nodes in the DOM.</li>
+<li><strong>Booleans or <code>null</code></strong>. Render nothing. (Mostly exists to support <code>return test &amp;&amp; &lt;Child /&gt;</code> pattern, where <code>test</code> is boolean.)</li>
+</ul>
+<p>The <code>render()</code> function should be pure, meaning that it does not modify component state, it returns the same result each time it’s invoked, and it does not directly interact with the browser.</p>
+<p>If you need to interact with the browser, perform your work in <code>componentDidMount()</code> or the other lifecycle methods instead. Keeping <code>render()</code> pure makes components easier to think about.</p>
+<blockquote>
+<p><em>Note</em></p>
+<p><em><code>render()</code> will not be invoked if</em> <a href="https://reactjs.org/docs/react-component.html#shouldcomponentupdate"><em><code>shouldComponentUpdate()</code></em></a> <em>returns false.</em></p>
+</blockquote>
+<p>The export statement at the bottom of the file also stays, completely unchanged. Our class component will thus look like this:</p>
+<pre class="jsx"><code>import React, { Component } from &#39;react&#39;;
+
+class BasicClassComponent extends Component {
+    render() {
+        return (
+            &lt;div&gt;Hello World!&lt;/div&gt;
+        );
+    }
+}
+
+export default BasicClassComponent;</code></pre>
+<p><strong>Notice that our <code>BasicClassComponent</code> inherits from the base <code>Component</code> class that we imported from the React library, by virtue of the ‘extends’ keyword.</strong></p>
+<p><em>That being said, there’s nothing in this minimal component that takes advantage of any of those inherited methods.</em></p>
+<p><strong>All we have is a method on our component class called <code>render</code> that returns the same div tag.</strong></p>
+<p>If we really were deciding between whether to use a functional component versus a class component to render a simple div tag, then the functional style is more appropriate to use.</p>
+<p>This is because class components are much better suited for handling component state and triggering events based on the component’s <a href="https://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/">lifecycle.</a></p>
+<h3 id="the-important-takeaways-at-this-point-are-that-there-are-two-types-of-components-functional-and-class-components-and-that-functional-components-are-well-suited-if-youre-just-looking-to-render-some-html.">The important takeaways at this point are that there are two types of components, functional and class components, and that functional components are well-suited if you’re just looking to render some HTML. <a id="66ab"></a></h3>
+<p><em>Class components, on the other hand, are much better suited for handling components that require more complex functionality, need to exhibit more varied behavior, and/or need to keep track of some state that may change throughout said component’s lifecycle.</em></p>
+<h2 id="a-class-component-with-some-state">A Class Component with Some State <a id="da0a"></a></h2>
+<p><strong>Component state is any dynamic data that we want the component to keep track of.</strong></p>
+<blockquote>
+<p>For example, let’s say we have a form component. This form has some input fields that we’d like users to fill out. When a user types characters into an input field, how is that input persisted from the point of view of our form component?</p>
+</blockquote>
+<p><strong>The answer is by using component state!</strong></p>
+<p>There are a few important concepts regarding component state, such as how to update it, pass it to another component, render it, etc.</p>
+<p><strong>Only class components have the ability to persist state, so if at any time you realize that a component needs to keep track of some state, you know that you’ll automatically need a class component instead of a functional component.</strong></p>
+<blockquote>
+<p>It is possible to handle state with functional components but that requires the use of something called the <a href="https://reactjs.org/docs/hooks-state.html">useState() hook</a>. Hooks were added in React 16.8; prior to this release, there was no mechanism to add state to functional components.</p>
+</blockquote>
+<p>Here’s what the above component looks like as a functional component:</p>
+<p>Our class component with state will look a lot like the basic class component we just wrote, but with some exceptions:</p>
+<pre class="jsx"><code>import React, { Component } from &#39;react&#39;;
+
+class ClassComponentWithState extends Component {
+    constructor() {
+        super();
+        this.state = {};
+    }
+
+    render() {
+        return (
+            &lt;div&gt;Hello World!&lt;/div&gt;
+        );
+    }
+}
+
+export default ClassComponentWithState;</code></pre>
+<p><strong>So far, the only new thing going on here is the constructor block. If you recall how classes in JavaScript work, classes need constructors.</strong></p>
+<p><strong>Additionally, if a class is extending off of another class and wants access to its parent class’s methods and properties, then the <code>super</code> function needs to be called inside the class’s constructor function.</strong></p>
+<h3 id="point-being-the-constructor-function-and-the-call-to-the-super-function-are-not-associated-with-react-they-are-associated-with-all-javascript-classes.">Point being, the constructor function and the call to the <code>super</code> function are <em>not</em> associated with React, they are associated with all JavaScript classes. <a id="7791"></a></h3>
+<ul>
+<li>Then there is the <strong><code>this.state</code> property inside the constructor function that is set as an empty object</strong>.</li>
+<li>We’re adding a property called <code>state</code> to our class and setting it to an empty object.</li>
+</ul>
+<h3 id="state-objects-in-react-are-always-just-plain-old-objects.">State objects in React are always just plain old objects. <a id="2e40"></a></h3>
+<h3 id="so-why-is-it-that-the-basic-class-component-we-wrote-in-the-previous-exercise-had-no-constructor-function-within-its-body"><strong>So why is it that the basic class component we wrote in the previous exercise had no constructor function within its body?</strong> <a id="a76e"></a></h3>
+<p>That is because we had no need for them since all our class component was doing was rendering some HTML.</p>
+<p><strong>The constructor is needed here because that is where we need to initialize our state object.</strong></p>
+<p><strong>The call to <code>super</code> is needed because we can’t reference <code>this</code> inside of our constructor without a call to <code>super</code> first.</strong></p>
+<p>Ok, now let’s actually use this state object.</p>
+<p><em>One very common application of state objects in React components is to render the data being stored inside them within our component’s render function.</em></p>
+<h3 id="refactoring-our-component-class-to-do-that">Refactoring our component class to do that: <a id="6929"></a></h3>
+<pre class="jsx"><code>
+class ClassComponentWithState extends Component {
+    constructor() {
+        super();
+        this.state = {
+            someData: 8
+        };
+    }
+
+    render() {
+        return (
+            &lt;div&gt;{`Here&#39;s some data to render: ${this.state.someData}`}&lt;/div&gt;
+        );
+    }
+}
+
+export default ClassComponentWithState;
+</code></pre>
+<p>We added a key-value pair to our state object inside our constructor.</p>
+<ul>
+<li>Then we changed the contents of the render function.</li>
+<li>Now, it’s actually rendering the data that we have inside the state object.</li>
+<li>Notice that inside the div tags we’re using a template string literal so that we can access the value of <code>this.state.someData</code> straight inside of our rendered content.</li>
+</ul>
+<p><strong>With Reacts newest version, we can actually now add state to a component without explicitly defining a constructor on the class. We can refactor our class component to look like this:</strong></p>
+<pre class="jsx"><code>class ClassComponentWithState extends Component {
+    state = {
+        someData: 8
+    };
+
+    render() {
+        return (
+            &lt;div&gt;{`Here&#39;s some data to render: ${this.state.someData}`}&lt;/div&gt;
+        );
+    }
+}
+
+export default ClassComponentWithState;</code></pre>
+<p><img src="https://miro.medium.com/max/3064/1*6sYhFUNpUkt6xN9kkn4pJQ.png" /></p>
+<p>This new syntax is what is often referred to as ‘syntactic sugar’: under the hood, the React library translates this back into the old constructor code that we first started with, so that the JavaScript remains valid to the JavaScript interpreter.</p>
+<p>The clue to this is the fact that when we want to access some data from the state object, we still need to call it with <code>this.state.someData</code> ; changing it to just <code>state.someData</code> does not work.</p>
+<h2 id="class-component-updating-state">Class Component Updating State <a id="3e29"></a></h2>
+<p>Great, so we can render some state that our component persists for us.</p>
+<p>However, we said an important use case of component state is to handle <em>dynamic</em> data.</p>
+<p>A single static number isn’t very dynamic at all.</p>
+<p>So now let’s walk through how to update component state.</p>
+<pre class="jsx"><code>
+import React, { Component } from &#39;react&#39;;
+
+class ClassComponentUpdatingState extends Component {
+  constructor() {
+    super();
+    this.state = {
+      aNumber: 8
+    };
+  }
+
+  increment = () =&gt; {
+    this.setState({ aNumber: ++this.state.aNumber });
+  };
+
+  decrement = () =&gt; {
+    this.setState({ aNumber: --this.state.aNumber });
+  };
+
+  render() {
+    return (
+      &lt;div&gt;
+        &lt;div&gt;{`Our number: ${this.state.aNumber}`}&lt;/div&gt;
+        &lt;button onClick={this.increment}&gt;+&lt;/button&gt;
+        &lt;button onClick={this.decrement}&gt;-&lt;/button&gt;
+      &lt;/div&gt;
+    );
+  }
+}
+
+export default ClassComponentUpdatingState;</code></pre>
+<p>Notice that we’ve added two methods to our class: <code>increment</code> and <code>decrement</code> .</p>
+<p><code>increment</code> and <code>decrement</code> are methods that <em>we</em> are adding to our class component.</p>
+<p>Unlike the <code>render</code> method, <code>increment</code> and <code>decrement</code> were not already a part of our class component.</p>
+<p>This is why <code>increment</code> and <code>decrement</code> are written as arrow functions, <em><strong>so that they are automatically bound to our class component.</strong></em></p>
+<p>The alternative is using a declaration syntax function with the bind method to bind the context of our methods to the class component.</p>
+<p>The more interesting thing is what is going on within the bodies of these methods.</p>
+<h3 id="each-calls-the-setstate-function.">Each calls the <code>setState</code> function. <a id="3d7e"></a></h3>
+<ul>
+<li><code>setState</code> in fact <em>is</em> provided to us by React.</li>
+</ul>
+<p>It is the standard way to update a component’s state.</p>
+<p>It’s the <em>only</em> way you should ever update a component’s state. It may seem more verbose than necessary, but there are good reasons for why you should be doing it this way.</p>
+<p>Unlike the lifecycle methods above (which React calls for you), the methods below are the methods <em>you</em> can call from your components.</p>
+<p>There are just two of them: <code>setState()</code> and <code>forceUpdate()</code>.</p>
+<h4 id="setstate"><code>setState()</code></h4>
+<pre class="text"><code>setState(updater, [callback])</code></pre>
+<p><code>setState()</code> enqueues changes to the component state and tells React that this component and its children need to be re-rendered with the updated state. This is the primary method you use to update the user interface in response to event handlers and server responses.</p>
+<p>Think of <code>setState()</code> as a <em>request</em> rather than an immediate command to update the component. For better perceived performance, React may delay it, and then update several components in a single pass. React does not guarantee that the state changes are applied immediately.</p>
+<p><code>setState()</code> does not always immediately update the component. It may batch or defer the update until later. This makes reading <code>this.state</code> right after calling <code>setState()</code> a potential pitfall. Instead, use <code>componentDidUpdate</code> or a <code>setState</code> callback (<code>setState(updater, callback)</code>), either of which are guaranteed to fire after the update has been applied. If you need to set the state based on the previous state, read about the <code>updater</code> argument below.</p>
+<p><code>setState()</code> will always lead to a re-render unless <code>shouldComponentUpdate()</code> returns <code>false</code>. If mutable objects are being used and conditional rendering logic cannot be implemented in <code>shouldComponentUpdate()</code>, calling <code>setState()</code> only when the new state differs from the previous state will avoid unnecessary re-renders.</p>
+<p>The first argument is an <code>updater</code> function with the signature:</p>
+<pre class="text"><code>(state, props) =&gt; stateChange</code></pre>
+<p><code>state</code> is a reference to the component state at the time the change is being applied. It should not be directly mutated. Instead, changes should be represented by building a new object based on the input from <code>state</code> and <code>props</code>. For instance, suppose we wanted to increment a value in state by <code>props.step</code>:</p>
+<pre class="text"><code>this.setState((state, props) =&gt; {
+  return {counter: state.counter + props.step};
+});</code></pre>
+<p>Both <code>state</code> and <code>props</code> received by the updater function are guaranteed to be up-to-date. The output of the updater is shallowly merged with <code>state</code>.</p>
+<p>The second parameter to <code>setState()</code> is an optional callback function that will be executed once <code>setState</code> is completed and the component is re-rendered. Generally we recommend using <code>componentDidUpdate()</code> for such logic instead.</p>
+<p>You may optionally pass an object as the first argument to <code>setState()</code> instead of a function:</p>
+<pre class="text"><code>setState(stateChange[, callback])</code></pre>
+<p>This performs a shallow merge of <code>stateChange</code> into the new state, e.g., to adjust a shopping cart item quantity:</p>
+<pre class="text"><code>this.setState({quantity: 2})</code></pre>
+<p>This form of <code>setState()</code> is also asynchronous, and multiple calls during the same cycle may be batched together. For example, if you attempt to increment an item quantity more than once in the same cycle, that will result in the equivalent of:</p>
+<pre class="text"><code>Object.assign(
+  previousState,
+  {quantity: state.quantity + 1},
+  {quantity: state.quantity + 1},
+  ...
+)</code></pre>
+<p>Subsequent calls will override values from previous calls in the same cycle, so the quantity will only be incremented once. If the next state depends on the current state, we recommend using the updater function form, instead:</p>
+<pre class="text"><code>this.setState((state) =&gt; {
+  return {quantity: state.quantity + 1};
+});</code></pre>
+<h3 id="so-the-way-to-use-setstate-to-update-a-components-state-is-to-pass-it-an-object-with-each-of-the-state-keys-you-wish-to-update-along-with-the-updated-value.">So the way to use <code>setState</code> to update a component’s state is to pass it an object with each of the state keys you wish to update, along with the updated value. <a id="bd27"></a></h3>
+<p>In our <code>increment</code> method we said “I would like to update the <code>aNumber</code> property on my component state by adding one to it and then setting the new value as my new <code>aNumber</code>”.</p>
+<p>The same thing happens in our <code>decrement</code> method, only we’re subtracting instead of adding.</p>
+<p>Then the other new concept we’re running into here is how to actually call these methods we’ve added to our class.<img src="https://miro.medium.com/max/60/1*k8t5QBcMvHDX521sd4pC4g.png?q=20" /><img src="https://miro.medium.com/max/856/1*k8t5QBcMvHDX521sd4pC4g.png" /></p>
+<p>We added two HTML button tags within our <code>render</code> function, then in their respective <code>onClick</code> handlers, we specify the method that should be called whenever this button gets clicked. So whenever we click either of the buttons, our state gets updated appropriately and our component will re-render to show the correct value we’re expecting.</p>
+<h2 id="class-component-iterating-state">Class Component Iterating State <a id="e859"></a></h2>
+<p>Another common state pattern you’ll see being used in React components is iterating over an array in our state object and rendering each array element in its own tag.</p>
+<blockquote>
+<p>This is often used in order to render lists.</p>
+</blockquote>
+<p>Additionally, we want to be able to easily update lists and have React re-render our updated list.</p>
+<p>We’ll see how both of these are done and how they work together within a single component in order to create the behavior of a dynamic list.</p>
+<pre class="jsx"><code>import React, { Component } from &#39;react&#39;;
+
+class ClassComponentIteratingState extends Component {
+    constructor() {
+        super();
+
+        this.state = {
+            ingredients: [&#39;flour&#39;, &#39;eggs&#39;, &#39;milk&#39;, &#39;sugar&#39;, &#39;vanilla extract&#39;],
+            newIngredient: &#39;&#39;
+        };
+    }
+
+    handleIngredientInput = (event) =&gt; {
+        this.setState({ newIngredient: event.target.value });
+    };
+
+    addIngredient = (event) =&gt; {
+        event.preventDefault();
+        const ingredientsList = this.state.ingredients;
+        ingredientsList.push(this.state.newIngredient);
+        this.setState({
+            newIngredient: &#39;&#39;,
+            ingredients: ingredientsList
+        });
+    };
+
+    render() {
+        return (
+            &lt;div&gt;
+                {this.state.ingredients.map(ingredient =&gt; &lt;div&gt;{ingredient}&lt;/div&gt;)}
+                &lt;form onSubmit={this.addIngredient}&gt;
+                    &lt;input type=&quot;text&quot; onChange={this.handleIngredientInput} placeholder=&quot;Add a new ingredient&quot; value={this.state.newIngredient} /&gt;
+                &lt;/form&gt;
+            &lt;/div&gt;
+        );
+    }
+}
+
+export default ClassComponentIteratingState;
+</code></pre>
+<p>The first change to note is that our state object now has an ‘ingredients’ array, and a ‘newIngredient’ field that has been initialized to an empty string.</p>
+<p>The ingredients array contains the elements that we’ll want to render in our list.</p>
+<p>The <code>addIngredient</code> and <code>handleIngredientInput</code> methods we’ve added to our class receives a parameter called ‘event’.</p>
+<p>This event object is part of the browser’s API.</p>
+<p>When we interact with some DOM element, <strong>such as clicking on an HTML button, the</strong> <em><strong>function that is invoked upon that button being clicked</strong></em> <strong>actually receives the event object.</strong></p>
+<ul>
+<li>So when we type some input into an input tag, we’re able grab each character that was typed into the input field through the event object parameter.</li>
+<li>The <code>handleIngredientInput</code> method is what gets invoked every time the user presses a key to enter text in the input box for adding a new ingredient.</li>
+<li>Every character the user types gets persisted in the <code>newIngredient</code> field on the state object.</li>
+</ul>
+<p>We’re able to grab the text in the input box using <code>event.target.value</code></p>
+<p><strong>Which holds the value of the string text that is currently in the input box</strong>.</p>
+<blockquote>
+<p>We use that to update our <code>newIngredient</code> string field.</p>
+</blockquote>
+<p>Breaking down the <code>addIngredient</code> method, we see this <code>event.preventDefault()</code> invocation.</p>
+<p>This is because this method will be used upon submitting a form, and it turns out that submitting a form triggers some default form behavior that we don’t want to trigger when we submit the form (<strong>namely refreshing the entire page</strong>).</p>
+<blockquote>
+<p><code>event.preventDefault()</code> will prevent this default form behavior, meaning our form will only do what we want it to do when it is submitted.</p>
+</blockquote>
+<p><img src="https://miro.medium.com/max/894/1*RN_y7Bk4tb-LLG8vNqGHHA.png" /></p>
+<p>Next, we store a reference to <code>this.state.ingredients</code> in a variable called <code>ingredientsList</code> .</p>
+<p>So we now have a copy of the array that is stored in our state object.</p>
+<p><strong>We want to update the copy of the ingredients array first instead of directly updating the actual array itself in state.</strong></p>
+<p>Now we push whatever value is being stored at our <code>newIngredient</code> field onto the <code>ingredientsList</code> array so that our <code>ingredientsList</code> array is now more up-to-date than our <code>this.state.ingredients</code> array.</p>
+<p>So all we have to do now is call <code>setState</code> appropriately in order to update the value in our state object.</p>
+<p>Additionally, we also set the <code>newIngredient</code> field back to an empty string in order to clear out the input field once we submit a new ingredient.</p>
+<p>Now it’s ready to accept more user input!</p>
+<p><img src="https://miro.medium.com/max/60/1*LXx7WeP_5wFRfYa45snSEA.png?q=20" /></p>
+<p><img src="https://miro.medium.com/max/478/1*LXx7WeP_5wFRfYa45snSEA.png" /></p>
+<p>Looking at our render function, first note the <code>this.state.ingredients.map</code> call.</p>
+<p>This is looping through each ingredient in our <code>ingredients</code> array and returning each one within its own div tag.</p>
+<p>This is a very common pattern for rendering everything inside an array.</p>
+<p>Then we have an HTML form which contains an input field.</p>
+<p>The purpose of this form is to allow a user to add new ingredients to the list. Note that we’re passing our <code>addIngredient</code> method to the form’s <code>onSubmit</code> handler.</p>
+<p>This means that our <code>addIngredient</code> method gets invoked whenever our form is submitted.</p>
+<p>Lastly, the input field has an <code>onChange</code> handler that invokes our <code>handleIngredientInput</code> method whenever there is some sort of change in the input field, namely when a user types into it.<img src="https://miro.medium.com/max/60/1*S7s9FfaPVlKGyaSwFeId_w.png?q=20" /></p>
+<p><img src="https://miro.medium.com/max/816/1*S7s9FfaPVlKGyaSwFeId_w.png" /></p>
+<p>Notice that the <code>value</code> field in our input tag reads off of <code>this.state.newIngredient</code> in order to know what value to display.</p>
+<p>So when a user enters text into the input field, the <code>onChange</code> handler is invoked every time, which updates our <code>this.state.newIngredient</code> field, which the input field and then renders.</p>
+<h2 id="parent-and-child-components">Parent and Child Components <a id="413c"></a></h2>
+<p>A single isolated component isn’t going to do us much good.</p>
+<blockquote>
+<p>The beauty of React lies in the fact that it allows us to compose modular components together.</p>
+<p>Let’s start off with the component we just saw, but let’s change its name to <em><code>ParentComponent</code></em> .</p>
+</blockquote>
+<pre class="jsx"><code>import React, { Component } from &#39;react&#39;;
+import ChildComponent from &#39;./ChildComponent&#39;;
+
+class ParentComponent extends Component {
+    constructor() {
+        super();
+
+        this.state = {
+            ingredients: [&#39;flour&#39;, &#39;eggs&#39;, &#39;milk&#39;, &#39;sugar&#39;, &#39;vanilla&#39;],
+            newIngredient: &#39;&#39;
+        };
+    }
+
+    handleIngredientInput = (event) =&gt; {
+        this.setState({ newIngredient: event.target.value });
+    };
+
+    addIngredient = (event) =&gt; {
+        event.preventDefault();
+        const ingredientsList = this.state.ingredients;
+        ingredientsList.push(this.state.newIngredient);
+        this.setState({
+            newIngredient: &#39;&#39;,
+            ingredients: ingredientsList
+        });
+    };
+
+    render() {
+        return (
+            &lt;div&gt;
+                {this.state.ingredients.map(ingredient =&gt; &lt;ChildComponent thing={ingredient} /&gt;)}
+                &lt;form onSubmit={this.addIngredient}&gt;
+                    &lt;input type=&quot;text&quot; onChange={this.handleIngredientInput} placeholder=&quot;Add a new ingredient&quot; value={this.state.newIngredient} /&gt;
+                &lt;/form&gt;
+            &lt;/div&gt;
+        );
+    }
+}
+
+export default ParentComponent;</code></pre>
+<p>The only two other differences in this component are that we’re importing a <code>ChildComponent</code> and then using it inside our <code>this.state.ingredients.map</code> call.</p>
+<p><code>ChildComponent</code> is another React component.</p>
+<p>Notice that we’re using it just as if it were any other HTML tag.</p>
+<p><strong>This is how we lay out our component hierarchy: the ChildComponent is rendered within the ParentComponent.</strong></p>
+<p>We can see this to be the case if we open up the developer console and inspect these elements.<strong>child-left: parent-right</strong></p>
+<p><img src="https://miro.medium.com/max/2602/1*q_XLnJ2h1L5yZjNnSKzj5w.png" /></p>
+<p>Note also that we’re passing each ingredient as a ‘thing’ to the ChildComponent component.</p>
+<p>This is how a parent component passes data to a child component. It doesn’t need to be called ‘thing’; you can call it whatever you want.</p>
+<p>Conceptually though, <strong>every piece of data that a parent component passes down to a child component is called a ‘prop’ in React lingo.</strong></p>
+<p>Let’s take a look now at the Child Component. It serves two purposes:</p>
+<ol type="1">
+<li>to render the props data that it gets from a parent component,</li>
+<li>to add the ability for a user to click on it and have it toggle a strikethrough, indicating that the item is ‘complete’.</li>
+</ol>
+<pre class="jsx"><code>
+import React, { Component } from &#39;react&#39;;
+
+class ChildComponent extends Component {
+  constructor() {
+    super();
+    this.state = {
+      clicked: false
+    };
+  }
+
+  handleClick = () =&gt; {
+    this.setState({ clicked: !this.state.clicked });
+  };
+
+  render() {
+    const styles = this.state.clicked ? { textDecoration: &#39;line-through&#39;} : { textDecoration: &#39;none&#39; };
+    return (
+      &lt;div style={styles} onClick={this.handleClick}&gt;{this.props.thing}&lt;/div&gt;
+    );
+  }
+}
+
+export default ChildComponent;
+
+</code></pre>
+<p>The overall structure of the child component is nothing we haven’t seen. It’s just another class component with its own s<strong>tate object and a method called <code>handleClick</code> .</strong></p>
+<p><strong>A component accesses its props via the <code>this.props</code> object.</strong></p>
+<p><em>Any prop a parent component passes down to a child component is accessible inside the child component’s <code>this.prop</code> object.</em></p>
+<p>So our child component keeps its own state that tracks whether the component has been clicked or not.</p>
+<p>Then at the top of the <code>render</code> function, it uses a ternary condition to determine whether the div tag that is being rendered should have a strikethrough or not.</p>
+<p>The <code>handleClick</code> method is then invoked via an <code>onClick</code> handler on the div tag; it does the work of toggling the <code>this.state.clicked</code> Boolean.</p>
+<p>The overall structure of React applications can be represented as a hierarchical tree structure, just like how the DOM itself is structure. There is an overarching root component at the top of the hierarchy that every other component sits underneath. Specifying that a component should be a child of some parent component is as simple as throwing it in the parent component’s render function, just like how we did it in this example<img src="https://miro.medium.com/max/60/0*aqqfHMjBXT8PWYJC?q=20" /><img src="https://miro.medium.com/max/490/0*aqqfHMjBXT8PWYJC" /><img src="https://miro.medium.com/max/1000/0*j9aPKza7Y4htBeQ-.gif" /></p>
+<h2 id="core-concepts"><strong>Core Concepts:</strong> <a id="c45d"></a></h2>
+<h3 id="what-is-react">1. What is react? <a id="068e"></a></h3>
+<h3 id="react-is-a-declarative-efficient-and-flexible-javascript-library-for-building-user-interfaces.-it-uses-components-to-update-and-render-as-your-data-changes.">React is a declarative, efficient, and flexible JavaScript library for building user interfaces. It uses components to update and render as your data changes. <a id="a7cb"></a></h3>
+<blockquote>
+<p>React manages the <strong>creation and continuous updating of DOM nodes in your Web page</strong>.</p>
+</blockquote>
+<ul>
+<li><em>It does not handle</em> <a href="https://skillcrush.com/blog/what-is-ajax/"><em>AJAX</em></a><em>requests, Local Storage or style your website. IT is just a tool to dynamically render content on a webpage as a result of changes in ‘state’. Because it’s function is so limited in scope you may hear it referred to as a library… (not a framework … like Angular for example) and you may also hear it described as unopinionated.</em></li>
+</ul>
+<h3 id="why-use-react">2. Why use react? <a id="643d"></a></h3>
+<ul>
+<li>Works for teams and helps UI workflow patterns</li>
+<li>The components can be reusable</li>
+<li>Componentized UI is the future of web dev</li>
+</ul>
+<p><img src="https://miro.medium.com/max/60/1*pFe_v7Ea--vfdmvR3UcunA.png?q=20" /><img src="https://miro.medium.com/max/846/1*pFe_v7Ea--vfdmvR3UcunA.png" /></p>
+<h2 id="declarative-programming">Declarative programming <a id="994b"></a></h2>
+<p>In the same way that you use HTML to <em>declare</em> what the user interface should<br />
+look like, React provides the same mechanism in its <strong><code>createElement</code></strong> method or the higher-level language known as JSX.<img src="https://miro.medium.com/max/60/0*MW-A5Dp_v1T0BB1s.png?q=20" /><img src="https://miro.medium.com/max/1338/0*MW-A5Dp_v1T0BB1s.png" />React… like HTML is Declarative</p>
+<p><a href="https://en.wikipedia.org/wiki/Declarative_programming">Declarative programming</a> is often defined as any style of programming that is not <a href="https://en.wikipedia.org/wiki/Imperative_programming">imperative</a>.</p>
+<p>A number of other common definitions attempt to define it by simply contrasting it with imperative programming. For example:</p>
+<ul>
+<li>A high-level program that describes what a computation should perform.</li>
+<li>Any programming language that lacks <a href="https://en.wikipedia.org/wiki/Side_effect_%28computer_science%29">side effects</a></li>
+<li>A language with a clear correspondence to <a href="https://en.wikipedia.org/wiki/Mathematical_logic">mathematical logic</a>.<a href="https://en.wikipedia.org/wiki/Declarative_programming#cite_note-5">[5]</a></li>
+</ul>
+<p>These definitions overlap substantially.</p>
+<p>D<strong>eclarative programming is a non-imperative style of programming in which programs describe their desired results without explicitly listing commands or steps that must be performed.</strong></p>
+<p><a href="https://en.wikipedia.org/wiki/Functional_programming">Functional</a> and <a href="https://en.wikipedia.org/wiki/Logical_programming">logical programming</a> languages are characterized by a declarative programming style.</p>
+<p><em>In a</em> <a href="https://en.wikipedia.org/wiki/Pure_functional_language"><em>pure functional language</em></a><em>, such as</em> <a href="https://en.wikipedia.org/wiki/Haskell_%28programming_language%29"><em>Haskell</em></a><em>, all functions are</em> <a href="https://en.wikipedia.org/wiki/Pure_function"><em>without side effects</em></a><em>, and state changes are only represented as functions that transform the state, which is explicitly represented as a</em> <a href="https://en.wikipedia.org/wiki/First-class_citizen"><em>first-class</em></a> <em>object in the program.</em></p>
+<p>— Wikipedia</p>
+<h2 id="what-is-a-react-pure-component">What is a React pure component? <a id="abbb"></a></h2>
+<p><a href="https://blog.logrocket.com/react-pure-components-functional/#whatisareactpurecomponent">Based on the concept of purity in functional programming paradigms, a function is said to be pure if:</a></p>
+<ul>
+<li>Its return value is only determined by its input values</li>
+<li>Its return value is always the same for the same input values</li>
+</ul>
+<p>A React component is considered pure if it renders the same output for the same state and props. For class components like this, React provides the <code>PureComponent</code> base class. Class components that extend the <code>React.PureComponent</code> class are treated as pure components.</p>
+<p>Pure components have some performance improvements and render optimizations since React implements the <code>shouldComponentUpdate()</code> method for them with a shallow comparison for props and state.</p>
+<h2 id="are-react-functional-components-pure">Are React functional components pure? <a id="e24e"></a></h2>
+<p>Functional components are very useful in React, especially when you want to isolate state management from the component. That’s why they are often called stateless components.</p>
+<p>However, functional components cannot leverage the performance improvements and render optimizations that come with <code>React.PureComponent</code> since they are not classes by definition.</p>
+<p>If you want React to treat a functional component as a pure component, you’ll have to convert the functional component to a class component that extends <code>React.PureComponent</code>.</p>
+<pre class="jsx"><code>
+function PercentageStat({ label, score = 0, total = Math.max(1, score) }) {
+  return (
+    &lt;div&gt;
+      &lt;h6&gt;{ label }&lt;/h6&gt;
+      &lt;span&gt;{ Math.round(score / total * 100) }%&lt;/span&gt;
+    &lt;/div&gt;
+  )
+}
+
+
+// CONVERTED TO PURE COMPONENT
+class PercentageStat extends React.PureComponent {
+
+  render() {
+    const { label, score = 0, total = Math.max(1, score) } = this.props;
+
+    return (
+      &lt;div&gt;
+        &lt;h6&gt;{ label }&lt;/h6&gt;
+        &lt;span&gt;{ Math.round(score / total * 100) }%&lt;/span&gt;
+      &lt;/div&gt;
+    )
+  }
+
+}</code></pre>
+<h2 id="reusability">Reusability <a id="9c36"></a></h2>
+<p>React encourages you to think in terms of reusability as you construct the user<br />
+interface from elements and components that you create. When you<br />
+make a list or a button, you can then reuse those components to show different data ‘state’ in the same UI structure as you have built for different data previously.<img src="https://miro.medium.com/max/60/0*cBLQ5aBP2qihrT59.jpeg?q=20" /><img src="https://miro.medium.com/max/1885/0*cBLQ5aBP2qihrT59.jpeg" /></p>
+<h3 id="component-based">Component-Based <a id="a38d"></a></h3>
+<p>Build encapsulated components that manage their own state, then compose them to make complex UIs.</p>
+<p>Since component logic is written in JavaScript instead of templates, you can easily pass rich data through your app and keep state out of the DOM.</p>
+<h3 id="learn-once-write-anywhere">Learn Once, Write Anywhere <a id="fc7f"></a></h3>
+<p>We don’t make assumptions about the rest of your technology stack, so you can develop new features in React without rewriting existing code.</p>
+<p>React can also render on the server using Node and power mobile apps using <a href="https://reactnative.dev/">React Native</a>.</p>
+<h2 id="speed">Speed <a id="345f"></a></h2>
+<p>Due to the use of a virtual DOM, React handles changes to a Web page more<br />
+intelligently than just string manipulation. It is constantly monitors the<br />
+virtual DOM for changes. It very efficiently reconciles changes in the virtual<br />
+DOM with what it has already produced in the real DOM. This is what<br />
+makes React one of the speediest front-end libraries available.<img src="https://miro.medium.com/max/60/0*OdOq6pmpXBJhjj7k.png?q=20" /><img src="https://miro.medium.com/max/810/0*OdOq6pmpXBJhjj7k.png" /></p>
+<h3 id="who-uses-react">3. Who uses react? <a id="c395"></a></h3>
+<ul>
+<li>Companies such as Facebook app for android and Instagram</li>
+<li><a href="https://facebook.github.io/react-native/showcase.html">Here</a> is a link to a list of other companies who use react.</li>
+</ul>
+<p><img src="https://miro.medium.com/max/60/1*Cn9JvaSmkxdLwgXIO9Y8iQ.png?q=20" /><img src="https://miro.medium.com/max/1027/1*Cn9JvaSmkxdLwgXIO9Y8iQ.png" />Who uses react</p>
+<h3 id="setting-up-react">4. Setting up react <a id="ba44"></a></h3>
+<ul>
+<li>React can be set up in CodePen for quick practice development by adding react.js, react-dom and babel.</li>
+<li>It can also be set up by downloading a react starter project from GitHub installing node and following these <a href="https://github.com/hjb23/ReduxSimpleStarter">instructions</a>.</li>
+<li>Alternatively it can be set up through NPM like <a href="https://www.codementor.io/tamizhvendan/beginner-guide-setup-reactjs-environment-npm-babel-6-webpack-du107r9zr">this</a>.</li>
+</ul>
+<h3 id="intro-to-eco-system">5. Intro to eco system <a id="6ef8"></a></h3>
+<ul>
+<li>Composition, being able to wrap up sections of code into there own containers so they can be re used.</li>
+<li>How to make a large application? by combining small components to create a larger complex application.</li>
+</ul>
+<h3 id="imperative-vs-declarative-react-is-declarative">6. Imperative vs Declarative <a href="https://medium.com/trabe/why-is-react-declarative-a-story-about-function-components-aaae83198f79">(React is Declarative)</a> <a id="ea7a"></a></h3>
+<ul>
+<li><strong>Imperative, ‘telling to computer HOW to do something’ e.g looping over an array of numbers using a for loop.</strong></li>
+<li><strong>Declarative, is concerned about WHAT we want to happen. e.g using a reduce method on an array.</strong></li>
+<li>Benefits of using declarative code:</li>
+<li>Reduce side effects</li>
+<li>Minimize mutability</li>
+<li>Less Bugs</li>
+</ul>
+<h3 id="unidirectional-data-flow">7. Unidirectional Data Flow <a id="e6f2"></a></h3>
+<ul>
+<li>As the state collects from user interaction, the UI gets updated.</li>
+</ul>
+<ol type="1">
+<li>Explicit Mutations</li>
+<li>Whenever the state needs to be updated in our application setState has to be called.</li>
+</ol>
+<pre class="text"><code>this.setState({
+  highlight: !this.state.highlight,
+})</code></pre>
+<h3 id="first-component">7.1. First component <a id="d1c5"></a></h3>
+<ul>
+<li>Components are the building blocks of React.</li>
+<li>They are similar to a collection of HTML,CSS, JS and data specific to that component.</li>
+<li>They can be defined in pure JavaScript or JSX.</li>
+<li>Data is either received from a component’s parent component, or it’s contained in the component itself.</li>
+<li>Applications can be separated into smaller components like this…</li>
+<li>React components can be created using ES6 class like this.</li>
+</ul>
+<pre class="text"><code>import React from &#39;react&#39;;class Hello extends React.Component {
+  render () {
+    return &lt;h1&gt;Hello, {this.props.name}!&lt;/h1&gt;;
+  }
+}export default Hello;</code></pre>
+<ul>
+<li>At the top with have the code to bring react and react dom libraries in.</li>
+<li>React library is used for the react syntax.</li>
+<li>React DOM is used to update the DOM.</li>
+<li>We then have the Class section which creates the component.</li>
+<li>Render() describes the specific UI for the component.</li>
+<li>Return is used to return the JSX</li>
+<li>And Finally ReactDOM.render is used to update the DOM.</li>
+</ul>
+<h3 id="data-flow-with-props">8. Data flow with props <a id="91ff"></a></h3>
+<p>Small examples of data flow, see if you can get the code to work.</p>
+<p><a href="https://codepen.io/bgoonz/embed/WNpoLbg?default-tab=&amp;theme-id=">https://codepen.io/bgoonz/embed/WNpoLbg?default-tab=&amp;theme-id=</a></p>
+<p>{% embed url=“https://codepen.io/bgoonz/embed/BaWQGQp?default-tab=&amp;theme-id=” %}</p>
+<h3 id="creating-lists-with-map">9. Creating lists with map <a id="6790"></a></h3>
+<p>{% embed url=“https://codepen.io/bgoonz/embed/XWMNoJr?default-tab=&amp;theme-id=” %}</p>
+<p>The parent component passes down to the child component as props.</p>
+<p>Using props to access names and map to loop through each list item. Then passing this by using props.</p>
+<p>{% embed url=“https://codepen.io/bgoonz/embed/gOmLZbX?default-tab=&amp;theme-id=” %}</p>
+<p>Checking data to see if Boolean is true then adding detail to the list.</p>
+<p>{% embed url=“https://codepen.io/bgoonz/embed/WNpoLbg?default-tab=&amp;theme-id=” %}</p>
+<h3 id="prop-types">10. Prop types <a id="18ed"></a></h3>
+<p>PropTypes allow you to declare the type (string, number, function, etc) of each prop being passed to a component. Then if a prop passed in isn’t of the declared type you’ll get a warning in the console.</p>
+<h2 id="excerpt-from-the-react-website">Excerpt from the React website: <a id="7094"></a></h2>
+<h2 id="react-a-javascript-library-for-building-user-interfaces">React — A JavaScript library for building user interfaces <a id="5047"></a></h2>
+<blockquote>
+<p><em>A JavaScript library for building user interfaces</em></p>
+</blockquote>
+<h3 id="declarative">Declarative <a id="cae4"></a></h3>
+<p>React makes it painless to create interactive UIs. Design simple views for each state in your application, and React will efficiently update and render just the right components when your data changes.</p>
+<p>Declarative views make your code more predictable and easier to debug.</p>
+<h3 id="a-simple-component">A Simple Component <a id="b36a"></a></h3>
+<p>React components implement a <code>render()</code> method that takes input data and returns what to display. This example uses an XML-like syntax called JSX. Input data that is passed into the component can be accessed by <code>render()</code> via <code>this.props</code>.</p>
+<p>JSX is optional and not required to use React. Try the <a href="https://babeljs.io/repl/#?presets=react&amp;code_lz=MYewdgzgLgBApgGzgWzmWBeGAeAFgRgD4AJRBEAGhgHcQAnBAEwEJsB6AwgbgChRJY_KAEMAlmDh0YWRiGABXVOgB0AczhQAokiVQAQgE8AkowAUAcjogQUcwEpeAJTjDgUACIB5ALLK6aRklTRBQ0KCohMQk6Bx4gA">Babel REPL</a> to see the raw JavaScript code produced by the JSX compilation step.</p>
+<p>In addition to taking input data (accessed via <code>this.props</code>), a component can maintain internal state data (accessed via <code>this.state</code>). When a component’s state data changes, the rendered markup will be updated by re-invoking <code>render()</code>.</p>
+<h3 id="an-application">An Application <a id="2936"></a></h3>
+<p>Using <code>props</code> and <code>state</code>, we can put together a small Todo application. This example uses <code>state</code> to track the current list of items as well as the text that the user has entered. Although event handlers appear to be rendered inline, they will be collected and implemented using event delegation.</p>
+<h3 id="a-component-using-external-plugins">A Component Using External Plugins <a id="2276"></a></h3>
+<p>React allows you to interface with other libraries and frameworks. This example uses remarkable, an external Markdown library, to convert the <code>&lt;textarea&gt;</code>’s value in real time.</p>
+<h2 id="all-code">ALL CODE:</h2>
+<pre class="jsx"><code>
+</code></pre>
+<h2 id="react-cheat-sheet">React Cheat Sheet: <a id="8738"></a></h2>
+<p>React-Tutorial-1:<a href="https://replit.com/@bgoonz/react-tutorial-1">react-tutorial-1A React repl by bgoonzreplit.com</a></p>
+<p>React Boilerplate:<span class="citation" data-cites="eankeen">[React.js + Babel + Webpack BoilerplateCreated by @eankeen \| The ultimate trifecta - React, Babel, and Webpack - complete with hot module reloading and a…replit.com ]</span>(https://replit.com/<span class="citation" data-cites="bgoonz/Reactjs-Babel-Webpack-Boilerplate#index.js">@bgoonz/Reactjs-Babel-Webpack-Boilerplate#index.js</span>)</p>
+</body>
+</html>

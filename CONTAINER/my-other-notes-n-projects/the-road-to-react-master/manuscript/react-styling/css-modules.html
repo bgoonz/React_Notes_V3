@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>css-modules</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<h2 id="css-modules-in-react">CSS Modules in React</h2>
+<p>CSS Modules are an advanced <strong>CSS-in-CSS</strong> approach. The CSS file stays the same, where you could apply CSS extensions like Sass, but its use in React components changes. To enable CSS modules in create-react-app, rename the <em>src/App.css</em> file to <em>src/App.module.css</em>. This action is performed in the command line from your project’s directory:</p>
+<p>{title=“Command Line”,lang=“text”} ~~~~~~~ mv src/App.css src/App.module.css ~~~~~~~</p>
+<p>In the renamed <em>src/App.module.css</em>, start with the first CSS class definitions, as before:</p>
+<p>{title=“src/App.module.css”,lang=“css”} ~~~~~~~ .container { height: 100vw; padding: 20px;</p>
+<p>background: #83a4d4; /* fallback for old browsers */ background: linear-gradient(to left, #b6fbff, #83a4d4);</p>
+<p>color: #171212; }</p>
+<p>.headlinePrimary { font-size: 48px; font-weight: 300; letter-spacing: 2px; } ~~~~~~~</p>
+<p>Import the <em>src/App.module.css</em> file with a relative path again. This time, import it as a JavaScript object where the name of the object (here <code>styles</code>) is up to you:</p>
+<p>{title=“src/App.js”,lang=“javascript”} ~~~~~~~ import * as React from ‘react’; import axios from ‘axios’;</p>
+<h1 id="leanpub-start-insert">leanpub-start-insert</h1>
+<p>import styles from ‘./App.module.css’; # leanpub-end-insert ~~~~~~~</p>
+<p>Instead of defining the <code>className</code> as a string mapped to a CSS file, access the CSS class directly from the <code>styles</code> object, and assign it with a JavaScript in JSX expression to your elements.</p>
+<p>{title=“src/App.js”,lang=“javascript”} ~~~~~~~ const App = () =&gt; { …</p>
+return ( # leanpub-start-insert
+<div className={styles.container}>
+<pre><code>  &lt;h1 className={styles.headlinePrimary}&gt;My Hacker Stories&lt;/h1&gt;</code></pre>
+<h1 id="leanpub-end-insert">leanpub-end-insert</h1>
+<pre><code>  &lt;SearchForm
+    searchTerm={searchTerm}
+    onSearchInput={handleSearchInput}
+    onSearchSubmit={handleSearchSubmit}
+  /&gt;
+
+  {stories.isError &amp;&amp; &lt;p&gt;Something went wrong ...&lt;/p&gt;}
+
+  {stories.isLoading ? (
+    &lt;p&gt;Loading ...&lt;/p&gt;
+  ) : (
+    &lt;List list={stories.data} onRemoveItem={handleRemoveStory} /&gt;
+  )}
+&lt;/div&gt;</code></pre>
+<p>); }; ~~~~~~~</p>
+<p>There are various ways to add multiple CSS classes via the <code>styles</code> object to the element’s single <code>className</code> attribute. Here, we use JavaScript template literals:</p>
+{title=“src/App.js”,lang=“javascript”} ~~~~~~~ const Item = ({ item, onRemoveItem }) =&gt; ( # leanpub-start-insert
+<li className="{styles.item}">
+&lt;span style={{ width: ‘40%’ }}&gt; # leanpub-end-insert <a href={item.url}>{item.title}</a> </span> # leanpub-start-insert &lt;span style={{ width: ‘30%’ }}&gt;{item.author}</span> &lt;span style={{ width: ‘10%’ }}&gt;{item.num_comments}</span> &lt;span style={{ width: ‘10%’ }}&gt;{item.points}</span> &lt;span style={{ width: ‘10%’ }}&gt; # leanpub-end-insert &lt;button type=“button” onClick={() =&gt; onRemoveItem(item)} # leanpub-start-insert className={<code>${styles.button} ${styles.buttonSmall}</code>} # leanpub-end-insert &gt; Dismiss </button> </span>
+</li>
+<p>); ~~~~~~~</p>
+<p>We can also add inline styles as more dynamic styles in JSX again. It’s also possible to add a CSS extension like Sass to enable advanced features like CSS nesting (see the previous section). We will stick to native CSS features though:</p>
+<p>{title=“src/App.module.css”,lang=“css”} ~~~~~~~ .item { display: flex; align-items: center; padding-bottom: 5px; }</p>
+<p>.item &gt; span { padding: 0 5px; white-space: nowrap; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }</p>
+<p>.item &gt; span &gt; a { color: inherit; } ~~~~~~~</p>
+<p>Then the button CSS classes in the <em>src/App.module.css</em> file:</p>
+<p>{title=“src/App.module.css”,lang=“css”} ~~~~~~~ .button { background: transparent; border: 1px solid #171212; padding: 5px; cursor: pointer;</p>
+<p>transition: all 0.1s ease-in; }</p>
+<p>.button:hover { background: #171212; color: #ffffff; }</p>
+<p>.buttonSmall { padding: 5px; }</p>
+<p>.buttonLarge { padding: 10px; } ~~~~~~~</p>
+<p>There is a shift toward pseudo BEM naming conventions here, in contrast to <code>button_small</code> and <code>button_large</code> from the previous section. If the previous naming convention holds true, we can only access the style with <code>styles['button_small']</code> which makes it more verbose because of JavaScript’s limitation with object underscores. The same shortcomings would apply for classes defined with a dash (<code>-</code>). In contrast, now we can use <code>styles.buttonSmall</code> instead (see: Item component):</p>
+{title=“src/App.js”,lang=“javascript”} ~~~~~~~ const SearchForm = ({ … }) =&gt; ( # leanpub-start-insert
+<form onSubmit="{onSearchSubmit}" className="{styles.searchForm}">
+<h1 id="leanpub-end-insert-1">leanpub-end-insert</h1>
+<pre><code>&lt;InputWithLabel ... &gt;
+  &lt;strong&gt;Search:&lt;/strong&gt;
+&lt;/InputWithLabel&gt;
+
+&lt;button
+  type=&quot;submit&quot;
+  disabled={!searchTerm}</code></pre>
+<h1 id="leanpub-start-insert-1">leanpub-start-insert</h1>
+<pre><code>  className={`${styles.button} ${styles.buttonLarge}`}</code></pre>
+<h1 id="leanpub-end-insert-2">leanpub-end-insert</h1>
+<pre><code>&gt;
+  Submit
+&lt;/button&gt;</code></pre>
+</form>
+<p>); ~~~~~~~</p>
+<p>The SearchForm component receives the styles as well. It has to use string interpolation for using two styles in one element via JavaScript’s template literals. One alternative way is the <a href="https://github.com/JedWatson/classnames">classnames</a> library, which is installed via the command line as a project dependency:</p>
+<p>{title=“src/App.js”,lang=“javascript”} ~~~~~~~ import cs from ‘classnames’;</p>
+<p>…</p>
+<p>// somewhere in a className attribute className={cs(styles.button, styles.buttonLarge)} ~~~~~~~</p>
+<p>The library offers conditional styling too; whereas the left-hand side of the object’s property must be used as a <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Object_initializer">computed property name</a> and is only applied if the right-hand side evaluates to true:</p>
+<p>{title=“src/App.js”,lang=“javascript”} ~~~~~~~ import cs from ‘classnames’;</p>
+<p>…</p>
+<p>// somewhere in a className attribute className={cs(styles.button, { [styles.buttonLarge]: isLarge })} ~~~~~~~</p>
+<p>Finally, continue with the InputWithLabel component:</p>
+<p>{title=“src/App.js”,lang=“javascript”} ~~~~~~~ const InputWithLabel = ({ … }) =&gt; { …</p>
+<p>return ( &lt;&gt; # leanpub-start-insert <label htmlFor={id} className={styles.label}> # leanpub-end-insert {children} </label>   &lt;input ref={inputRef} id={id} type={type} value={value} onChange={onInputChange} # leanpub-start-insert className={styles.input} # leanpub-end-insert /&gt; &lt;/&gt; ); }; ~~~~~~~</p>
+<p>And finish up the remaining style in the <em>src/App.module.css</em> file:</p>
+<p>{title=“src/App.module.css”,lang=“css”} ~~~~~~~ .searchForm { padding: 10px 0 20px 0; display: flex; align-items: baseline; }</p>
+<p>.label { border-top: 1px solid #171212; border-left: 1px solid #171212; padding-left: 5px; font-size: 24px; }</p>
+<p>.input { border: none; border-bottom: 1px solid #171212; background-color: transparent;</p>
+<p>font-size: 24px; } ~~~~~~~</p>
+<p>The same caution as the last section applies: some of these styles like <code>input</code> and <code>label</code> might be more efficient in a global <em>src/index.css</em> file without CSS modules.</p>
+<p>Again, CSS Modules – like any other CSS-in-CSS approach – can use Sass for more advanced CSS features like nesting. The advantage of CSS modules is that we receive an error in JavaScript each time a style isn’t defined. In the standard CSS approach, unmatched styles in JavaScript and CSS files might go unnoticed.</p>
+<h3 id="exercises">Exercises:</h3>
+<ul>
+<li>Confirm your <a href="https://codesandbox.io/s/github/the-road-to-learn-react/hacker-stories/tree/2021/CSS-Modules-in-React">source code</a>.
+<ul>
+<li>Confirm the <a href="https://github.com/the-road-to-learn-react/hacker-stories/compare/2021/react-modern-final...2021/CSS-Modules-in-React">changes</a>.</li>
+</ul></li>
+<li>Read more about <a href="https://create-react-app.dev/docs/adding-a-css-modules-stylesheet">CSS Modules in create-react-app</a>.</li>
+</ul>
+</body>
+</html>

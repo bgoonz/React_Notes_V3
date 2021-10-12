@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>react-docs-home</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<h1 id="react-a-javascript-library-for-building-user-interfaces">React – A JavaScript library for building user interfaces</h1>
+<h2 id="declarative">Declarative</h2>
+<p>React makes it painless to create interactive UIs. Design simple views for each state in your application, and React will efficiently update and render just the right components when your data changes.</p>
+<p>Declarative views make your code more predictable and easier to debug.</p>
+<h2 id="component-based">Component-Based</h2>
+<p>Build encapsulated components that manage their own state, then compose them to make complex UIs.</p>
+<p>Since component logic is written in JavaScript instead of templates, you can easily pass rich data through your app and keep state out of the DOM.</p>
+<h2 id="learn-once-write-anywhere">Learn Once, Write Anywhere</h2>
+<p>We don’t make assumptions about the rest of your technology stack, so you can develop new features in React without rewriting existing code.</p>
+<p>React can also render on the server using Node and power mobile apps using <a href="https://reactnative.dev/">React Native</a>.</p>
+<h2 id="a-simple-component">A Simple Component</h2>
+<p>React components implement a <code>render()</code> method that takes input data and returns what to display. This example uses an XML-like syntax called JSX. Input data that is passed into the component can be accessed by <code>render()</code> via <code>this.props</code>.</p>
+<p><strong>JSX is optional and not required to use React.</strong> Try the <a href="https://babeljs.io/repl/#?presets=react&amp;code_lz=MYewdgzgLgBApgGzgWzmWBeGAeAFgRgD4AJRBEAGhgHcQAnBAEwEJsB6AwgbgChRJY_KAEMAlmDh0YWRiGABXVOgB0AczhQAokiVQAQgE8AkowAUAcjogQUcwEpeAJTjDgUACIB5ALLK6aRklTRBQ0KCohMQk6Bx4gA">Babel REPL</a> to see the raw JavaScript code produced by the JSX compilation step.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">class</span> HelloMessage <span class="kw">extends</span> <span class="va">React</span>.<span class="at">Component</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb1-2" title="2">  <span class="at">render</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb1-3" title="3">    <span class="cf">return</span> (</a>
+<a class="sourceLine" id="cb1-4" title="4">      <span class="op">&lt;</span>div<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb1-5" title="5">        Hello <span class="op">{</span><span class="kw">this</span>.<span class="va">props</span>.<span class="at">name</span><span class="op">}</span></a>
+<a class="sourceLine" id="cb1-6" title="6">      &lt;/div<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb1-7" title="7">    )<span class="op">;</span></a>
+<a class="sourceLine" id="cb1-8" title="8">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb1-9" title="9"><span class="op">}</span></a>
+<a class="sourceLine" id="cb1-10" title="10"></a>
+<a class="sourceLine" id="cb1-11" title="11"><span class="va">ReactDOM</span>.<span class="at">render</span>(</a>
+<a class="sourceLine" id="cb1-12" title="12">  <span class="op">&lt;</span>HelloMessage name<span class="op">=</span><span class="st">&quot;Taylor&quot;</span> /&gt;<span class="op">,</span></a>
+<a class="sourceLine" id="cb1-13" title="13">  <span class="va">document</span>.<span class="at">getElementById</span>(<span class="st">&#39;hello-example&#39;</span>)</a>
+<a class="sourceLine" id="cb1-14" title="14">)<span class="op">;</span></a></code></pre></div>
+<h2 id="a-stateful-component">A Stateful Component</h2>
+<p>In addition to taking input data (accessed via <code>this.props</code>), a component can maintain internal state data (accessed via <code>this.state</code>). When a component’s state data changes, the rendered markup will be updated by re-invoking <code>render()</code>.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb2-1" title="1"><span class="kw">class</span> Timer <span class="kw">extends</span> <span class="va">React</span>.<span class="at">Component</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb2-2" title="2">  <span class="at">constructor</span>(props) <span class="op">{</span></a>
+<a class="sourceLine" id="cb2-3" title="3">    <span class="kw">super</span>(props)<span class="op">;</span></a>
+<a class="sourceLine" id="cb2-4" title="4">    <span class="kw">this</span>.<span class="at">state</span> <span class="op">=</span> <span class="op">{</span> <span class="dt">seconds</span><span class="op">:</span> <span class="dv">0</span> <span class="op">};</span></a>
+<a class="sourceLine" id="cb2-5" title="5">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb2-6" title="6"></a>
+<a class="sourceLine" id="cb2-7" title="7">  <span class="at">tick</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb2-8" title="8">    <span class="kw">this</span>.<span class="at">setState</span>(state <span class="kw">=&gt;</span> (<span class="op">{</span></a>
+<a class="sourceLine" id="cb2-9" title="9">      <span class="dt">seconds</span><span class="op">:</span> <span class="va">state</span>.<span class="at">seconds</span> <span class="op">+</span> <span class="dv">1</span></a>
+<a class="sourceLine" id="cb2-10" title="10">    <span class="op">}</span>))<span class="op">;</span></a>
+<a class="sourceLine" id="cb2-11" title="11">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb2-12" title="12"></a>
+<a class="sourceLine" id="cb2-13" title="13">  <span class="at">componentDidMount</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb2-14" title="14">    <span class="kw">this</span>.<span class="at">interval</span> <span class="op">=</span> <span class="at">setInterval</span>(() <span class="kw">=&gt;</span> <span class="kw">this</span>.<span class="at">tick</span>()<span class="op">,</span> <span class="dv">1000</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb2-15" title="15">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb2-16" title="16"></a>
+<a class="sourceLine" id="cb2-17" title="17">  <span class="at">componentWillUnmount</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb2-18" title="18">    <span class="at">clearInterval</span>(<span class="kw">this</span>.<span class="at">interval</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb2-19" title="19">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb2-20" title="20"></a>
+<a class="sourceLine" id="cb2-21" title="21">  <span class="at">render</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb2-22" title="22">    <span class="cf">return</span> (</a>
+<a class="sourceLine" id="cb2-23" title="23">      <span class="op">&lt;</span>div<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb2-24" title="24">        <span class="dt">Seconds</span><span class="op">:</span> <span class="op">{</span><span class="kw">this</span>.<span class="va">state</span>.<span class="at">seconds</span><span class="op">}</span></a>
+<a class="sourceLine" id="cb2-25" title="25">      &lt;/div<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb2-26" title="26">    )<span class="op">;</span></a>
+<a class="sourceLine" id="cb2-27" title="27">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb2-28" title="28"><span class="op">}</span></a>
+<a class="sourceLine" id="cb2-29" title="29"></a>
+<a class="sourceLine" id="cb2-30" title="30"><span class="va">ReactDOM</span>.<span class="at">render</span>(</a>
+<a class="sourceLine" id="cb2-31" title="31">  <span class="op">&lt;</span>Timer /<span class="op">&gt;,</span></a>
+<a class="sourceLine" id="cb2-32" title="32">  <span class="va">document</span>.<span class="at">getElementById</span>(<span class="st">&#39;timer-example&#39;</span>)</a>
+<a class="sourceLine" id="cb2-33" title="33">)<span class="op">;</span></a></code></pre></div>
+<h2 id="an-application">An Application</h2>
+<p>Using <code>props</code> and <code>state</code>, we can put together a small Todo application. This example uses <code>state</code> to track the current list of items as well as the text that the user has entered. Although event handlers appear to be rendered inline, they will be collected and implemented using event delegation.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb3-1" title="1"><span class="kw">class</span> TodoApp <span class="kw">extends</span> <span class="va">React</span>.<span class="at">Component</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb3-2" title="2">  <span class="at">constructor</span>(props) <span class="op">{</span></a>
+<a class="sourceLine" id="cb3-3" title="3">    <span class="kw">super</span>(props)<span class="op">;</span></a>
+<a class="sourceLine" id="cb3-4" title="4">    <span class="kw">this</span>.<span class="at">state</span> <span class="op">=</span> <span class="op">{</span> <span class="dt">items</span><span class="op">:</span> []<span class="op">,</span> <span class="dt">text</span><span class="op">:</span> <span class="st">&#39;&#39;</span> <span class="op">};</span></a>
+<a class="sourceLine" id="cb3-5" title="5">    <span class="kw">this</span>.<span class="at">handleChange</span> <span class="op">=</span> <span class="kw">this</span>.<span class="va">handleChange</span>.<span class="at">bind</span>(<span class="kw">this</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb3-6" title="6">    <span class="kw">this</span>.<span class="at">handleSubmit</span> <span class="op">=</span> <span class="kw">this</span>.<span class="va">handleSubmit</span>.<span class="at">bind</span>(<span class="kw">this</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb3-7" title="7">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb3-8" title="8"></a>
+<a class="sourceLine" id="cb3-9" title="9">  <span class="at">render</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb3-10" title="10">    <span class="cf">return</span> (</a>
+<a class="sourceLine" id="cb3-11" title="11">      <span class="op">&lt;</span>div<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb3-12" title="12">        <span class="op">&lt;</span>h3<span class="op">&gt;</span>TODO&lt;/h3<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb3-13" title="13">        <span class="op">&lt;</span>TodoList items<span class="op">={</span><span class="kw">this</span>.<span class="va">state</span>.<span class="at">items</span><span class="op">}</span> /&gt;</a>
+<a class="sourceLine" id="cb3-14" title="14">        <span class="op">&lt;</span>form onSubmit<span class="op">={</span><span class="kw">this</span>.<span class="at">handleSubmit</span><span class="op">}&gt;</span></a>
+<a class="sourceLine" id="cb3-15" title="15">          <span class="op">&lt;</span>label htmlFor<span class="op">=</span><span class="st">&quot;new-todo&quot;</span><span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb3-16" title="16">            What needs to be done<span class="op">?</span></a>
+<a class="sourceLine" id="cb3-17" title="17">          &lt;/label<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb3-18" title="18">          <span class="op">&lt;</span>input</a>
+<a class="sourceLine" id="cb3-19" title="19">            id<span class="op">=</span><span class="st">&quot;new-todo&quot;</span></a>
+<a class="sourceLine" id="cb3-20" title="20">            onChange<span class="op">={</span><span class="kw">this</span>.<span class="at">handleChange</span><span class="op">}</span></a>
+<a class="sourceLine" id="cb3-21" title="21">            value<span class="op">={</span><span class="kw">this</span>.<span class="va">state</span>.<span class="at">text</span><span class="op">}</span></a>
+<a class="sourceLine" id="cb3-22" title="22">          /&gt;</a>
+<a class="sourceLine" id="cb3-23" title="23">          <span class="op">&lt;</span>button<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb3-24" title="24">            Add #<span class="op">{</span><span class="kw">this</span>.<span class="va">state</span>.<span class="va">items</span>.<span class="at">length</span> <span class="op">+</span> <span class="dv">1</span><span class="op">}</span></a>
+<a class="sourceLine" id="cb3-25" title="25">          &lt;/button<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb3-26" title="26">        &lt;/form<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb3-27" title="27">      &lt;/div<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb3-28" title="28">    )<span class="op">;</span></a>
+<a class="sourceLine" id="cb3-29" title="29">  }</a>
+<a class="sourceLine" id="cb3-30" title="30"></a>
+<a class="sourceLine" id="cb3-31" title="31">  <span class="at">handleChange</span>(e) <span class="op">{</span></a>
+<a class="sourceLine" id="cb3-32" title="32">    <span class="kw">this</span>.<span class="at">setState</span>(<span class="op">{</span> <span class="dt">text</span><span class="op">:</span> <span class="va">e</span>.<span class="va">target</span>.<span class="at">value</span> <span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb3-33" title="33">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb3-34" title="34"></a>
+<a class="sourceLine" id="cb3-35" title="35">  <span class="at">handleSubmit</span>(e) <span class="op">{</span></a>
+<a class="sourceLine" id="cb3-36" title="36">    <span class="va">e</span>.<span class="at">preventDefault</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb3-37" title="37">    <span class="cf">if</span> (<span class="kw">this</span>.<span class="va">state</span>.<span class="va">text</span>.<span class="at">length</span> <span class="op">===</span> <span class="dv">0</span>) <span class="op">{</span></a>
+<a class="sourceLine" id="cb3-38" title="38">      <span class="cf">return</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb3-39" title="39">    <span class="op">}</span></a>
+<a class="sourceLine" id="cb3-40" title="40">    <span class="kw">const</span> newItem <span class="op">=</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb3-41" title="41">      <span class="dt">text</span><span class="op">:</span> <span class="kw">this</span>.<span class="va">state</span>.<span class="at">text</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb3-42" title="42">      <span class="dt">id</span><span class="op">:</span> <span class="va">Date</span>.<span class="at">now</span>()</a>
+<a class="sourceLine" id="cb3-43" title="43">    <span class="op">};</span></a>
+<a class="sourceLine" id="cb3-44" title="44">    <span class="kw">this</span>.<span class="at">setState</span>(state <span class="kw">=&gt;</span> (<span class="op">{</span></a>
+<a class="sourceLine" id="cb3-45" title="45">      <span class="dt">items</span><span class="op">:</span> <span class="va">state</span>.<span class="va">items</span>.<span class="at">concat</span>(newItem)<span class="op">,</span></a>
+<a class="sourceLine" id="cb3-46" title="46">      <span class="dt">text</span><span class="op">:</span> <span class="st">&#39;&#39;</span></a>
+<a class="sourceLine" id="cb3-47" title="47">    <span class="op">}</span>))<span class="op">;</span></a>
+<a class="sourceLine" id="cb3-48" title="48">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb3-49" title="49">}</a>
+<a class="sourceLine" id="cb3-50" title="50"></a>
+<a class="sourceLine" id="cb3-51" title="51"><span class="kw">class</span> TodoList <span class="kw">extends</span> <span class="va">React</span>.<span class="at">Component</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb3-52" title="52">  <span class="at">render</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb3-53" title="53">    <span class="cf">return</span> (</a>
+<a class="sourceLine" id="cb3-54" title="54">      <span class="op">&lt;</span>ul<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb3-55" title="55">        <span class="op">{</span><span class="kw">this</span>.<span class="va">props</span>.<span class="va">items</span>.<span class="at">map</span>(item <span class="kw">=&gt;</span> (</a>
+<a class="sourceLine" id="cb3-56" title="56">          <span class="op">&lt;</span>li key<span class="op">={</span><span class="va">item</span>.<span class="at">id</span><span class="op">}&gt;{</span><span class="va">item</span>.<span class="at">text</span><span class="op">}</span>&lt;/li<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb3-57" title="57">        ))<span class="op">}</span></a>
+<a class="sourceLine" id="cb3-58" title="58">      &lt;/ul<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb3-59" title="59">    )<span class="op">;</span></a>
+<a class="sourceLine" id="cb3-60" title="60">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb3-61" title="61"><span class="op">}</span></a>
+<a class="sourceLine" id="cb3-62" title="62"></a>
+<a class="sourceLine" id="cb3-63" title="63"><span class="va">ReactDOM</span>.<span class="at">render</span>(</a>
+<a class="sourceLine" id="cb3-64" title="64">  <span class="op">&lt;</span>TodoApp /<span class="op">&gt;,</span></a>
+<a class="sourceLine" id="cb3-65" title="65">  <span class="va">document</span>.<span class="at">getElementById</span>(<span class="st">&#39;todos-example&#39;</span>)</a>
+<a class="sourceLine" id="cb3-66" title="66">)<span class="op">;</span></a></code></pre></div>
+<h2 id="a-component-using-external-plugins">A Component Using External Plugins</h2>
+<p>React allows you to interface with other libraries and frameworks. This example uses <strong>remarkable</strong>, an external Markdown library, to convert the <code>&lt;textarea&gt;</code>’s value in real time.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb4-1" title="1"><span class="kw">class</span> MarkdownEditor <span class="kw">extends</span> <span class="va">React</span>.<span class="at">Component</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb4-2" title="2">  <span class="at">constructor</span>(props) <span class="op">{</span></a>
+<a class="sourceLine" id="cb4-3" title="3">    <span class="kw">super</span>(props)<span class="op">;</span></a>
+<a class="sourceLine" id="cb4-4" title="4">    <span class="kw">this</span>.<span class="at">md</span> <span class="op">=</span> <span class="kw">new</span> <span class="at">Remarkable</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb4-5" title="5">    <span class="kw">this</span>.<span class="at">handleChange</span> <span class="op">=</span> <span class="kw">this</span>.<span class="va">handleChange</span>.<span class="at">bind</span>(<span class="kw">this</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb4-6" title="6">    <span class="kw">this</span>.<span class="at">state</span> <span class="op">=</span> <span class="op">{</span> <span class="dt">value</span><span class="op">:</span> <span class="st">&#39;Hello, **world**!&#39;</span> <span class="op">};</span></a>
+<a class="sourceLine" id="cb4-7" title="7">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb4-8" title="8"></a>
+<a class="sourceLine" id="cb4-9" title="9">  <span class="at">handleChange</span>(e) <span class="op">{</span></a>
+<a class="sourceLine" id="cb4-10" title="10">    <span class="kw">this</span>.<span class="at">setState</span>(<span class="op">{</span> <span class="dt">value</span><span class="op">:</span> <span class="va">e</span>.<span class="va">target</span>.<span class="at">value</span> <span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb4-11" title="11">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb4-12" title="12"></a>
+<a class="sourceLine" id="cb4-13" title="13">  <span class="at">getRawMarkup</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb4-14" title="14">    <span class="cf">return</span> <span class="op">{</span> <span class="dt">__html</span><span class="op">:</span> <span class="kw">this</span>.<span class="va">md</span>.<span class="at">render</span>(<span class="kw">this</span>.<span class="va">state</span>.<span class="at">value</span>) <span class="op">};</span></a>
+<a class="sourceLine" id="cb4-15" title="15">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb4-16" title="16"></a>
+<a class="sourceLine" id="cb4-17" title="17">  <span class="at">render</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb4-18" title="18">    <span class="cf">return</span> (</a>
+<a class="sourceLine" id="cb4-19" title="19">      <span class="op">&lt;</span>div className<span class="op">=</span><span class="st">&quot;MarkdownEditor&quot;</span><span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb4-20" title="20">        <span class="op">&lt;</span>h3<span class="op">&gt;</span>Input&lt;/h3<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb4-21" title="21">        <span class="op">&lt;</span>label htmlFor<span class="op">=</span><span class="st">&quot;markdown-content&quot;</span><span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb4-22" title="22">          Enter some markdown</a>
+<a class="sourceLine" id="cb4-23" title="23">        &lt;/label<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb4-24" title="24">        <span class="op">&lt;</span>textarea</a>
+<a class="sourceLine" id="cb4-25" title="25">          id<span class="op">=</span><span class="st">&quot;markdown-content&quot;</span></a>
+<a class="sourceLine" id="cb4-26" title="26">          onChange<span class="op">={</span><span class="kw">this</span>.<span class="at">handleChange</span><span class="op">}</span></a>
+<a class="sourceLine" id="cb4-27" title="27">          defaultValue<span class="op">={</span><span class="kw">this</span>.<span class="va">state</span>.<span class="at">value</span><span class="op">}</span></a>
+<a class="sourceLine" id="cb4-28" title="28">        /&gt;</a>
+<a class="sourceLine" id="cb4-29" title="29">        <span class="op">&lt;</span>h3<span class="op">&gt;</span>Output&lt;/h3<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb4-30" title="30">        <span class="op">&lt;</span>div</a>
+<a class="sourceLine" id="cb4-31" title="31">          className<span class="op">=</span><span class="st">&quot;content&quot;</span></a>
+<a class="sourceLine" id="cb4-32" title="32">          dangerouslySetInnerHTML<span class="op">={</span><span class="kw">this</span>.<span class="at">getRawMarkup</span>()<span class="op">}</span></a>
+<a class="sourceLine" id="cb4-33" title="33">        /&gt;</a>
+<a class="sourceLine" id="cb4-34" title="34">      &lt;/div<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb4-35" title="35">    )<span class="op">;</span></a>
+<a class="sourceLine" id="cb4-36" title="36">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb4-37" title="37"><span class="op">}</span></a>
+<a class="sourceLine" id="cb4-38" title="38"></a>
+<a class="sourceLine" id="cb4-39" title="39"><span class="va">ReactDOM</span>.<span class="at">render</span>(</a>
+<a class="sourceLine" id="cb4-40" title="40">  <span class="op">&lt;</span>MarkdownEditor /<span class="op">&gt;,</span></a>
+<a class="sourceLine" id="cb4-41" title="41">  <span class="va">document</span>.<span class="at">getElementById</span>(<span class="st">&#39;markdown-example&#39;</span>)</a>
+<a class="sourceLine" id="cb4-42" title="42">)<span class="op">;</span></a></code></pre></div>
+<h2 id="input">Input</h2>
+<p>Enter some markdown</p>
+<h2 id="output">Output</h2>
+<p>Hello, <strong>world</strong>!</p>
+</body>
+</html>

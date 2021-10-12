@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>README</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<h1 id="react-app-polyfill">react-app-polyfill</h1>
+<p>This package includes polyfills for various browsers. It includes minimum requirements and commonly used language features used by <a href="https://github.com/facebook/create-react-app">Create React App</a> projects.</p>
+<h3 id="usage">Usage</h3>
+<p>First, install the package using Yarn or npm:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb1-1" title="1"><span class="ex">npm</span> install react-app-polyfill</a></code></pre></div>
+<p>or</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb2-1" title="1"><span class="ex">yarn</span> add react-app-polyfill</a></code></pre></div>
+<h2 id="supporting-internet-explorer">Supporting Internet Explorer</h2>
+<p>You can import the entry point for the minimal version you intend to support to ensure that the minimum language features are present that are required to use Create React App. For example, if you import the IE9 entry point, this will include IE10 and IE11 support.</p>
+<p>These modules ensure the following language features are present:</p>
+<ol type="1">
+<li><code>Promise</code> (for <code>async</code> / <code>await</code> support)</li>
+<li><code>window.fetch</code> (a Promise-based way to make web requests in the browser)</li>
+<li><code>Object.assign</code> (a helper required for Object Spread, i.e. <code>{ ...a, ...b }</code>)</li>
+<li><code>Symbol</code> (a built-in object used by <code>for...of</code> syntax and friends)</li>
+<li><code>Array.from</code> (a built-in static method used by array spread, i.e. <code>[...arr]</code>)</li>
+</ol>
+<p><em>If you need more features, see the <a href="#polyfilling-other-language-features">Polyfilling other language features</a> section below.</em></p>
+<h4 id="internet-explorer-9">Internet Explorer 9</h4>
+<div class="sourceCode" id="cb3"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb3-1" title="1"><span class="co">// This must be the first line in src/index.js</span></a>
+<a class="sourceLine" id="cb3-2" title="2"><span class="im">import</span> <span class="st">&#39;react-app-polyfill/ie9&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb3-3" title="3"></a>
+<a class="sourceLine" id="cb3-4" title="4"><span class="co">// ...</span></a></code></pre></div>
+<h4 id="internet-explorer-11">Internet Explorer 11</h4>
+<div class="sourceCode" id="cb4"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb4-1" title="1"><span class="co">// This must be the first line in src/index.js</span></a>
+<a class="sourceLine" id="cb4-2" title="2"><span class="im">import</span> <span class="st">&#39;react-app-polyfill/ie11&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb4-3" title="3"></a>
+<a class="sourceLine" id="cb4-4" title="4"><span class="co">// ...</span></a></code></pre></div>
+<h2 id="polyfilling-other-language-features">Polyfilling other language features</h2>
+<p>You can also polyfill stable language features not available in your target browsers. If you’re using this in Create React App, it will automatically use the <code>browserslist</code> you’ve defined to only include polyfills needed by your target browsers when importing the <code>stable</code> polyfill. <strong>Make sure to follow the Internet Explorer steps above if you need to support Internet Explorer in your application</strong>.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb5-1" title="1"><span class="co">// This must be the first line in src/index.js</span></a>
+<a class="sourceLine" id="cb5-2" title="2"><span class="im">import</span> <span class="st">&#39;react-app-polyfill/stable&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb5-3" title="3"></a>
+<a class="sourceLine" id="cb5-4" title="4"><span class="co">// ...</span></a></code></pre></div>
+<p>If you are supporting Internet Explorer 9 or Internet Explorer 11 you should include both the <code>ie9</code> or <code>ie11</code> and <code>stable</code> modules:</p>
+<p>For IE9:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb6-1" title="1"><span class="co">// These must be the first lines in src/index.js</span></a>
+<a class="sourceLine" id="cb6-2" title="2"><span class="im">import</span> <span class="st">&#39;react-app-polyfill/ie9&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb6-3" title="3"><span class="im">import</span> <span class="st">&#39;react-app-polyfill/stable&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb6-4" title="4"></a>
+<a class="sourceLine" id="cb6-5" title="5"><span class="co">// ...</span></a></code></pre></div>
+<p>For IE11:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb7-1" title="1"><span class="co">// These must be the first lines in src/index.js</span></a>
+<a class="sourceLine" id="cb7-2" title="2"><span class="im">import</span> <span class="st">&#39;react-app-polyfill/ie11&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb7-3" title="3"><span class="im">import</span> <span class="st">&#39;react-app-polyfill/stable&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb7-4" title="4"></a>
+<a class="sourceLine" id="cb7-5" title="5"><span class="co">// ...</span></a></code></pre></div>
+</body>
+</html>

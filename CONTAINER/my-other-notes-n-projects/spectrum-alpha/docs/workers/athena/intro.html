@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>intro</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<p><a href="../../readme.md">Table of contents</a> / <a href="../intro.md">Workers</a></p>
+<h1 id="athena">Athena</h1>
+<p><em>Athena (/əˈθiːnə/) is the goddess of wisdom, craft, and war.</em></p>
+<p>Athena is our notifications worker, processing things like new message notifications, new thread notifications, new member notifications, etc. Athena is built to read off of our <a href="../background-jobs.md">Redis queue</a>. Most queues in Athena handle the sending of both in-app notifications as well as email notifications (by dispatching a new job to the Redis queue for <a href="../hermes/intro.md">Hermes</a> to read).</p>
+<p>This server also does the heavy lifting of keeping track of the <code>lastSeen</code> field on <code>usersThreads</code>, which is what powers the small ‘New Messages’ badge that users see when viewing threads on Spectrum. While not directly a notification, the <code>lastSeen</code> field is a critical piece of Spectrum that helps people keep up with the most important and active conversations in their communities.</p>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>README</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<h1 id="syncing-email-templates-with-sendgrid">Syncing Email Templates with SendGrid</h1>
+<p>All email templates must have their CSS inlined before being added to SendGrid. SendGrid does <em>not</em> automatically inline the CSS. Additionally, to save time while testing email template changes it is tedious to copy/paste templates between a code editor and the SendGrid UI, with the CSS-inlining script being required to run with each modification.</p>
+<p>The scripts in this directory solve both of these problems. To get started:</p>
+<ul>
+<li>Make sure you have python3 installed: <code>brew install python3</code></li>
+<li>Install <code>premailer</code> with python3: <code>sudo python3 -m pip install premailer</code></li>
+</ul>
+<p>From the root directory of the Spectrum repo, run: <code>SENDGRID_API_KEY=&lt;key&gt; yarn run process:emails:test</code> You will need a <code>SENDGRID_API_KEY</code> from the SendGrid app for this to work.</p>
+<p>The <code>:test</code> script inlines all the CSS for each email template then syncs it with the <code>[Test]</code> template on SendGrid. When done testing your changes, you can sync both test and production templates by running: <code>SENDGRID_API_KEY=&lt;key&gt; yarn run process:emails:prod</code></p>
+<h1 id="sending-test-emails">Sending test emails</h1>
+<p>Rather than spinning up the local web app, clicking around and trying to replicate each email’s conditions, you can instead run the <code>send-test-emails</code> script:</p>
+<p><code>SENDGRID_API_KEY=&lt;key&gt; yarn run process:emails:send</code></p>
+<p><strong>Be sure to edit the email address in <code>package.json</code> first</strong></p>
+</body>
+</html>

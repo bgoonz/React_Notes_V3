@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>intro</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<p><a href="../../readme.md">Table of contents</a> / <a href="../intro.md">Workers</a></p>
+<h1 id="chronos">Chronos</h1>
+<p><em>Chronos (/ˈkroʊnɒs/) is the personification of Time in pre-Socratic philosophy</em></p>
+<p>Chronos powers all the cron jobs needed to run Spectrum. These jobs currently include:</p>
+<ul>
+<li>daily and weekly digest emails for Spectrum users</li>
+<li>daily core metrics reports for the Spectrum team</li>
+</ul>
+<p>Any recurring jobs should go here. Chronos also runs off of our <a href="../background-jobs.md">Redis queue</a> which handles the cron schedule, job locking, and retry logic.</p>
+</body>
+</html>

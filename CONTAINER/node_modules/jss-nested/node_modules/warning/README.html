@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>README</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<h1 id="warning-npm-version">Warning <a href="https://badge.fury.io/js/warning"><img src="https://badge.fury.io/js/warning.svg" alt="npm version" /></a></h1>
+<p>A mirror of Facebook’s Warning</p>
+<h2 id="usage">Usage</h2>
+<pre><code>npm install warning</code></pre>
+<pre><code>// some script
+var warning = require(&#39;warning&#39;);
+
+var ShouldBeTrue = false;
+
+warning(
+  ShouldBeTrue,
+  &#39;This thing should be true but you set to false. No soup for you!&#39;
+);
+//  &#39;This thing should be true but you set to false. No soup for you!&#39;</code></pre>
+<p>Similar to Facebook’s invariant but only logs a warning if the condition is not met. This can be used to log issues in development environments in critical paths. Removing the logging code for production environments will keep the same logic and follow the same code paths.</p>
+<h2 id="browserify">Browserify</h2>
+<p>When using <a href="http://browserify.org/">browserify</a>, the <code>browser.js</code> file will be imported instead of <code>invariant.js</code> and browserify will be told to transform the file with <a href="https://github.com/hughsk/envify">envify</a>. The only difference between <code>browser.js</code> and <code>invariant.js</code> is the <code>process.env.NODE_ENV</code> variable isn’t cached. This, in combination with envify and (optionally) <a href="https://github.com/mishoo/UglifyJS">uglifyjs</a>, will result in a noop in production environments. Otherwise behavior is as expected.</p>
+<h2 id="use-in-production">Use in Production</h2>
+<p>It is recommended to add <a href="https://github.com/4Catalyzer/babel-plugin-dev-expression">babel-plugin-dev-expression</a> with this module to remove warning messages in production. <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <small>Don’t Forget To Be Awesome</small></p>
+</body>
+</html>

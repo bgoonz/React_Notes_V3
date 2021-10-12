@@ -1,0 +1,1173 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>w14-d5_react-context</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<p>DAY-5<br><em>React Context</em> {ignore=true} ________________________________________________________________________________ <!-- @import "[TOC]" {cmd="toc" depthFrom=1 depthTo=2 orderedList=false} --> ________________________________________________________________________________ ________________________________________________________________________________</p>
+<h1 id="react-context-learning-objectives">React Context Learning Objectives</h1>
+<p>You’ve been using a component’s state and props to manage the information rendered in your React applications. However, applications generally use global state to share the same information across multiple components. After reading and practicing how to use React Context, you should be able to manage application-wide data by:</p>
+<ul>
+<li>Use Context to share and manage global information within a React application</li>
+<li>Create a wrapper component with <code>Context.Provider</code> to set a component’s default context</li>
+<li>Create a wrapper component with <code>Context.Consumer</code> to share the global context through render props</li>
+<li>Create and pass a method through Context to update the global state from a nested component</li>
+</ul>
+<hr />
+<h1 id="react-context">React Context</h1>
+<p>At this point, you know how to manage a component’s state and pass information down an application’s component tree by threading props from parent components to child components. Think of how tedious it could be to pass down information, like current user data or a UI theme, to every component in an application. Instead of threading the information as props from a parent component to its children and grandchildren, you can share information with any of your application’s components by using React Context!</p>
+<p><a href="https://reactjs.org/docs/context.html">React Context</a> gives you a way to pass data through the component tree without having to manually thread props. Context gives developers a convenient way to share and update “global” data across a React application. Now it’s time to dive into application-wide data management!</p>
+<p>When you finish this article, you should be able to:</p>
+<ul>
+<li>Use React Context to pass down global information</li>
+<li>Create a Provider wrapper component to set a default context</li>
+<li>Create a Consumer wrapper component to allow child components to subscribe to a global context</li>
+<li>Use the <code>static contextType</code> property to access the global context</li>
+<li>Update the global context from a nested component</li>
+</ul>
+<blockquote>
+<p>In a future lesson, you’ll learn about Redux, a common approach for managing global state in React applications. The React Context can be thought of as a lightweight alternative to using Redux.</p>
+</blockquote>
+<h2 id="using-context">Using Context</h2>
+<p>In this demo, you’ll create a simple React app that uses Context to allow users to choose what images/images/images/images/puppy picture to render.</p>
+<p>Begin by cloning this starter React app with a folder of <code>pups</code> photos!</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb1-1" title="1"><span class="fu">git</span> clone https://github.com/appacademy-starters/react-context-pups-starter.git</a></code></pre></div>
+<p>Now let’s import the pup photos into your <code>App.js</code> file and render the <code>speedy</code> pup:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb2-1" title="1"><span class="co">// App.js</span></a>
+<a class="sourceLine" id="cb2-2" title="2"><span class="im">import</span> React <span class="im">from</span> <span class="st">&#39;react&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb2-3" title="3"><span class="im">import</span> speedy <span class="im">from</span> <span class="st">&#39;./pups/speedy-pup.jpg&#39;</span></a>
+<a class="sourceLine" id="cb2-4" title="4"><span class="im">import</span> banana <span class="im">from</span> <span class="st">&#39;./pups/banana-pup.jpg&#39;</span></a>
+<a class="sourceLine" id="cb2-5" title="5"><span class="im">import</span> sleepy <span class="im">from</span> <span class="st">&#39;./pups/sleepy-pup.jpg&#39;</span></a>
+<a class="sourceLine" id="cb2-6" title="6"></a>
+<a class="sourceLine" id="cb2-7" title="7"><span class="kw">const</span> App <span class="op">=</span> () <span class="kw">=&gt;</span> (</a>
+<a class="sourceLine" id="cb2-8" title="8">  <span class="op">&lt;</span>div id<span class="op">=</span><span class="st">&quot;app&quot;</span><span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb2-9" title="9">    <span class="op">&lt;</span>img src<span class="op">={</span>speedy<span class="op">}</span> alt<span class="op">=</span><span class="st">&quot;pup&quot;</span> /&gt;</a>
+<a class="sourceLine" id="cb2-10" title="10">  &lt;/div<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb2-11" title="11">)<span class="op">;</span></a>
+<a class="sourceLine" id="cb2-12" title="12"></a>
+<a class="sourceLine" id="cb2-13" title="13"><span class="im">export</span> <span class="im">default</span> App<span class="op">;</span></a></code></pre></div>
+<p>Start your application is you’ll see a huge and super happy pup that’s running! Take a moment to update your <code>index.css</code> file so that your pup photo isn’t so large:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode css"><code class="sourceCode css"><a class="sourceLine" id="cb3-1" title="1"><span class="co">/* index.css */</span></a>
+<a class="sourceLine" id="cb3-2" title="2">body {</a>
+<a class="sourceLine" id="cb3-3" title="3">  <span class="kw">padding</span>: <span class="dv">50</span><span class="dt">px</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb3-4" title="4">}</a>
+<a class="sourceLine" id="cb3-5" title="5"></a>
+<a class="sourceLine" id="cb3-6" title="6"><span class="pp">#app</span> {</a>
+<a class="sourceLine" id="cb3-7" title="7">  <span class="kw">display</span>: flex<span class="op">;</span></a>
+<a class="sourceLine" id="cb3-8" title="8">  <span class="kw">flex-direction</span>: column<span class="op">;</span></a>
+<a class="sourceLine" id="cb3-9" title="9">  <span class="kw">width</span>: <span class="dv">500</span><span class="dt">px</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb3-10" title="10">}</a>
+<a class="sourceLine" id="cb3-11" title="11"></a>
+<a class="sourceLine" id="cb3-12" title="12">img {</a>
+<a class="sourceLine" id="cb3-13" title="13">  <span class="kw">width</span>: <span class="dv">500</span><span class="dt">px</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb3-14" title="14">}</a></code></pre></div>
+<p>Being able to render a pup photo is great, but what about giving your users the chance to select a pup photo to render? Let’s allow your users to select a pup photo through a form by passing information through Context!</p>
+<h3 id="creating-a-context">Creating a Context</h3>
+<p>You can use the <a href="https://reactjs.org/docs/context.html#reactcreatecontext">React.createContext</a> method to create a <code>PupContext</code>. In order to create a context, you can simply import the <code>createContext()</code> function from <code>react</code>, invoke the function to create a Context object, and export the Context!</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb4-1" title="1"><span class="co">// PupContext.js</span></a>
+<a class="sourceLine" id="cb4-2" title="2"><span class="im">import</span> <span class="op">{</span> createContext <span class="op">}</span> <span class="im">from</span> <span class="st">&#39;react&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb4-3" title="3"></a>
+<a class="sourceLine" id="cb4-4" title="4"><span class="kw">const</span> PupContext <span class="op">=</span> <span class="at">createContext</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb4-5" title="5"></a>
+<a class="sourceLine" id="cb4-6" title="6"><span class="im">export</span> <span class="im">default</span> PupContext<span class="op">;</span></a></code></pre></div>
+<p>Note that if you invoke the <code>createContext</code> method with arguments, those arguments will be set as the default context. In the next step, you’ll set up a component’s state to use as the default context.</p>
+<h3 id="adding-a-provider-to-the-app-component">Adding a Provider to the App component</h3>
+<p>The <em>Provider</em> component expects <code>value</code> prop to set the context information passed throughout your application. You need to wrap your child components with provider component tags to give them access to the context. The context <code>value</code> will include information to pass to child components by using context <em>Consumer</em> components. As a reminder, Consumer components must always be nested under Provider components because the Provider must render first (parent components always render before children components).</p>
+<pre class="jsx"><code>&lt;MyContext.Provider value={/* some value */}&gt;
+  &lt;ChildComponent /&gt;
+&lt;/MyContext.Provider&gt;</code></pre>
+<p>Now you’ll use <a href="https://reactjs.org/docs/context.html#contextprovider">Context.Provider</a> to create a wrapper component to set the <code>value</code> of your <code>PupContext</code>! Let’s go into your <code>App.js</code> file to create an <code>AppWithContext</code> wrapper component that will pass a <code>puppyType</code> prop to determine what image your <code>App</code> component renders.</p>
+<p>Your wrapper component should set up a default <code>puppyType</code> state in its constructor. Choose one of your imported pup photos (<code>banana</code>, <code>sleepy</code>, or <code>speedy</code>) to set as the default state.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb6-1" title="1"><span class="kw">this</span>.<span class="at">state</span> <span class="op">=</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb6-2" title="2">  <span class="dt">puppyType</span><span class="op">:</span> speedy<span class="op">,</span></a>
+<a class="sourceLine" id="cb6-3" title="3"><span class="op">};</span></a></code></pre></div>
+<p>Note that you should set the <code>puppyType</code> as <code>speedy</code> instead of <code>"speedy"</code> (without quotations), or else you’d be setting a string to be the default state, instead of a default pup photo to be rendered.</p>
+<p>Now let’s visit the <code>AppWithContext</code> component’s <code>render()</code> method! You’ll want to render the <code>App</code> component wrapped with <code>&lt;PupContext.Provider&gt;</code> tags to give <code>App</code> and all of its children components access to the <code>PupContext</code>:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb7-1" title="1"><span class="at">render</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb7-2" title="2">  <span class="cf">return</span> (</a>
+<a class="sourceLine" id="cb7-3" title="3">    <span class="op">&lt;</span><span class="va">PupContext</span>.<span class="at">Provider</span> value<span class="op">={}&gt;</span></a>
+<a class="sourceLine" id="cb7-4" title="4">      <span class="op">&lt;</span>App /<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb7-5" title="5">    &lt;/<span class="va">PupContext</span>.<span class="at">Provider</span><span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb7-6" title="6">  )<span class="op">;</span></a>
+<a class="sourceLine" id="cb7-7" title="7"><span class="op">}</span></a></code></pre></div>
+<p>Remember that provider components expect to receive a <code>value</code> prop. The <code>value</code> prop will hold the context information that will be passed throughout the application. Set the provider component’s <code>value</code> prop to be the <code>state</code> of your <code>AppWithContext</code> component. As you know, a component re-renders when its state is updated. This is how you’ll update an application’s context from nested components. Your <code>AppWithContext</code> component’s <code>render()</code> method should look something like this:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb8-1" title="1"><span class="at">render</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb8-2" title="2">  <span class="cf">return</span> (</a>
+<a class="sourceLine" id="cb8-3" title="3">    <span class="op">&lt;</span><span class="va">PupContext</span>.<span class="at">Provider</span> value<span class="op">={</span><span class="kw">this</span>.<span class="at">state</span><span class="op">}&gt;</span></a>
+<a class="sourceLine" id="cb8-4" title="4">      <span class="op">&lt;</span>App /<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb8-5" title="5">    &lt;/<span class="va">PupContext</span>.<span class="at">Provider</span><span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb8-6" title="6">  )<span class="op">;</span></a>
+<a class="sourceLine" id="cb8-7" title="7"><span class="op">}</span></a></code></pre></div>
+<p>Since you are rendering the pup image from <code>App</code>, you can pass in the wrapper component’s <code>puppyType</code> state as a prop:</p>
+<pre class="jsx"><code>&lt;App puppyType={this.state.puppyType} /&gt;</code></pre>
+<p>Now you can refactor your <code>App</code> component to use its <code>puppyType</code> prop to render a specific pup photo!</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb10-1" title="1"><span class="kw">const</span> App <span class="op">=</span> (<span class="op">{</span> puppyType <span class="op">}</span>) <span class="kw">=&gt;</span> (</a>
+<a class="sourceLine" id="cb10-2" title="2">  <span class="op">&lt;</span>div id<span class="op">=</span><span class="st">&quot;app&quot;</span><span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb10-3" title="3">    <span class="op">&lt;</span>PupForm /<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb10-4" title="4">    <span class="op">&lt;</span>img src<span class="op">={</span>puppyType<span class="op">}</span> alt<span class="op">=</span><span class="st">&quot;pup&quot;</span> /&gt;</a>
+<a class="sourceLine" id="cb10-5" title="5">  &lt;/div<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb10-6" title="6">)<span class="op">;</span></a></code></pre></div>
+<p>Don’t forget to update the <code>export</code> statement at the bottom of your <code>App.js</code> file. You’ll want to export the <code>AppWithContext</code> component instead of the <code>App</code> component. Don’t worry about changing the <code>App</code> import statement in your <code>index.js</code> file. Since you are using <code>export default</code>, only the component explicitly specified in your file’s export statement will be exported from the file. At this point, your full <code>App.js</code> file should look something like this:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb11-1" title="1"><span class="co">// App.js</span></a>
+<a class="sourceLine" id="cb11-2" title="2"><span class="im">import</span> React <span class="im">from</span> <span class="st">&#39;react&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb11-3" title="3"><span class="im">import</span> PupContext <span class="im">from</span> <span class="st">&#39;./PupContext&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb11-4" title="4"><span class="im">import</span> banana <span class="im">from</span> <span class="st">&#39;./pups/banana-pup.jpg&#39;</span></a>
+<a class="sourceLine" id="cb11-5" title="5"><span class="im">import</span> sleepy <span class="im">from</span> <span class="st">&#39;./pups/sleepy-pup.jpg&#39;</span></a>
+<a class="sourceLine" id="cb11-6" title="6"><span class="im">import</span> speedy <span class="im">from</span> <span class="st">&#39;./pups/speedy-pup.jpg&#39;</span></a>
+<a class="sourceLine" id="cb11-7" title="7"></a>
+<a class="sourceLine" id="cb11-8" title="8"><span class="kw">const</span> App <span class="op">=</span> (<span class="op">{</span> puppyType <span class="op">}</span>) <span class="kw">=&gt;</span> (</a>
+<a class="sourceLine" id="cb11-9" title="9">  <span class="op">&lt;</span>div id<span class="op">=</span><span class="st">&quot;app&quot;</span><span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb11-10" title="10">    <span class="op">&lt;</span>img src<span class="op">={</span>puppyType<span class="op">}</span> alt<span class="op">=</span><span class="st">&quot;pup&quot;</span> /&gt;</a>
+<a class="sourceLine" id="cb11-11" title="11">  &lt;/div<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb11-12" title="12">)<span class="op">;</span></a>
+<a class="sourceLine" id="cb11-13" title="13"></a>
+<a class="sourceLine" id="cb11-14" title="14"><span class="kw">class</span> AppWithContext <span class="kw">extends</span> <span class="va">React</span>.<span class="at">Component</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb11-15" title="15">  <span class="at">constructor</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb11-16" title="16">    <span class="kw">super</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb11-17" title="17">    <span class="kw">this</span>.<span class="at">state</span> <span class="op">=</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb11-18" title="18">      <span class="dt">puppyType</span><span class="op">:</span> speedy<span class="op">,</span></a>
+<a class="sourceLine" id="cb11-19" title="19">    <span class="op">};</span></a>
+<a class="sourceLine" id="cb11-20" title="20">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb11-21" title="21"></a>
+<a class="sourceLine" id="cb11-22" title="22">  <span class="at">render</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb11-23" title="23">    <span class="cf">return</span> (</a>
+<a class="sourceLine" id="cb11-24" title="24">      <span class="op">&lt;</span><span class="va">PupContext</span>.<span class="at">Provider</span> value<span class="op">={</span><span class="kw">this</span>.<span class="at">state</span><span class="op">}&gt;</span></a>
+<a class="sourceLine" id="cb11-25" title="25">        <span class="op">&lt;</span>App puppyType<span class="op">={</span><span class="kw">this</span>.<span class="va">state</span>.<span class="at">puppyType</span><span class="op">}</span> /&gt;</a>
+<a class="sourceLine" id="cb11-26" title="26">      &lt;/<span class="va">PupContext</span>.<span class="at">Provider</span><span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb11-27" title="27">    )<span class="op">;</span></a>
+<a class="sourceLine" id="cb11-28" title="28">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb11-29" title="29"><span class="op">}</span></a>
+<a class="sourceLine" id="cb11-30" title="30"></a>
+<a class="sourceLine" id="cb11-31" title="31"><span class="im">export</span> <span class="im">default</span> AppWithContext<span class="op">;</span></a></code></pre></div>
+<p>Now start your server and make sure that your cute pup photo is rendering!</p>
+<h3 id="adding-a-consumer-to-a-nested-component">Adding a Consumer to a nested component</h3>
+<p>Before setting up a consumer, let’s create a nested child component that will consume your <code>PupContext</code>! Create a <code>PupForm</code> component that will be be rendered as a child of your <code>App</code> component. Begin by rendering a dropdown menu for users to choose which pup photo to render in the app. Feel free to use the <code>PupForm</code> component defined below:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb12-1" title="1"><span class="co">// PupForm.js</span></a>
+<a class="sourceLine" id="cb12-2" title="2"><span class="im">import</span> React <span class="im">from</span> <span class="st">&#39;react&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb12-3" title="3"><span class="im">import</span> banana <span class="im">from</span> <span class="st">&#39;./pups/banana-pup.jpg&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb12-4" title="4"><span class="im">import</span> sleepy <span class="im">from</span> <span class="st">&#39;./pups/sleepy-pup.jpg&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb12-5" title="5"><span class="im">import</span> speedy <span class="im">from</span> <span class="st">&#39;./pups/speedy-pup.jpg&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb12-6" title="6"></a>
+<a class="sourceLine" id="cb12-7" title="7"><span class="kw">class</span> PupForm <span class="kw">extends</span> <span class="va">React</span>.<span class="at">Component</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb12-8" title="8">  <span class="at">constructor</span>(props) <span class="op">{</span></a>
+<a class="sourceLine" id="cb12-9" title="9">    <span class="kw">super</span>(props)<span class="op">;</span></a>
+<a class="sourceLine" id="cb12-10" title="10">    <span class="kw">this</span>.<span class="at">state</span> <span class="op">=</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb12-11" title="11">      <span class="dt">selectedPup</span><span class="op">:</span> <span class="st">&#39;select&#39;</span><span class="op">,</span> <span class="co">// Set the default select option</span></a>
+<a class="sourceLine" id="cb12-12" title="12">    <span class="op">};</span></a>
+<a class="sourceLine" id="cb12-13" title="13">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb12-14" title="14"></a>
+<a class="sourceLine" id="cb12-15" title="15">  <span class="co">// Update state with the user&#39;s dropdown selection</span></a>
+<a class="sourceLine" id="cb12-16" title="16">  updateSelection <span class="op">=</span> (e) <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb12-17" title="17">    <span class="kw">this</span>.<span class="at">setState</span>(<span class="op">{</span> <span class="dt">selectedPup</span><span class="op">:</span> <span class="va">e</span>.<span class="va">target</span>.<span class="at">value</span> <span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb12-18" title="18">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb12-19" title="19"></a>
+<a class="sourceLine" id="cb12-20" title="20">  <span class="at">render</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb12-21" title="21">    <span class="cf">return</span> (</a>
+<a class="sourceLine" id="cb12-22" title="22">      <span class="op">&lt;</span>form<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb12-23" title="23">        <span class="op">&lt;</span>select</a>
+<a class="sourceLine" id="cb12-24" title="24">          name<span class="op">=</span><span class="st">&quot;pup&quot;</span></a>
+<a class="sourceLine" id="cb12-25" title="25">          onChange<span class="op">={</span><span class="kw">this</span>.<span class="at">updateSelection</span><span class="op">}</span></a>
+<a class="sourceLine" id="cb12-26" title="26">          value<span class="op">={</span><span class="kw">this</span>.<span class="va">state</span>.<span class="at">selectedPup</span><span class="op">}&gt;</span></a>
+<a class="sourceLine" id="cb12-27" title="27"></a>
+<a class="sourceLine" id="cb12-28" title="28">          <span class="op">&lt;</span>option value<span class="op">=</span><span class="st">&quot;select&quot;</span><span class="op">&gt;</span>Select a pup<span class="op">!</span>&lt;/option<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb12-29" title="29">          <span class="op">&lt;</span>option value<span class="op">={</span>speedy<span class="op">}&gt;</span>Speedy Pup&lt;/option<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb12-30" title="30">          <span class="op">&lt;</span>option value<span class="op">={</span>banana<span class="op">}&gt;</span>Banana Pup&lt;/option<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb12-31" title="31">          <span class="op">&lt;</span>option value<span class="op">={</span>sleepy<span class="op">}&gt;</span>Sleepy Pup&lt;/option<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb12-32" title="32">        &lt;/select<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb12-33" title="33">        <span class="op">&lt;</span>button onClick<span class="op">={</span><span class="co">/* </span><span class="al">TODO</span><span class="co">: Set up the click handler */</span><span class="op">}&gt;</span></a>
+<a class="sourceLine" id="cb12-34" title="34">          Submit</a>
+<a class="sourceLine" id="cb12-35" title="35">        &lt;/button<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb12-36" title="36">      &lt;/form<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb12-37" title="37">    )<span class="op">;</span></a>
+<a class="sourceLine" id="cb12-38" title="38">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb12-39" title="39"><span class="op">}</span></a></code></pre></div>
+<p>As you can see, the <code>PupForm</code> has a default <code>selectedPup</code> state that will set the default select option to be “Select a pup!”. There is also an <code>updateSelection</code> method that listens for change events in the dropdown menu to update the <code>selectedPup</code> slice of state. Now that you have a basic dropdown menu set up, it’s time to create a consumer wrapper so that the <code>PupForm</code> component can have access to the <code>PupContext</code>!</p>
+<p>You’ll want to use a <a href="https://reactjs.org/docs/context.html#contextconsumer">Context.Consumer</a> component to wrap your <code>PupForm</code> component, this way the wrapped component can subscribe to context changes. Note that the <code>Context.Consumer</code> component expects a function as a child:</p>
+<pre class="jsx"><code>&lt;MyContext.Consumer&gt;
+  {(value) =&gt; &lt;Component value={value} /&gt;}
+&lt;/MyContext.Consumer&gt;</code></pre>
+<p>The function has access to the <code>value</code> prop passed into the <code>Context.Provider</code>. The <code>value</code> prop can then be passed as a render prop into the wrapped component.</p>
+<p>Import your <code>PupContext</code> into your <code>PupForm.js</code> file and use the <code>Context.Consumer</code> component to create a wrapper for your <code>PupForm</code> component like so:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb14-1" title="1"><span class="kw">const</span> PupFormWithContext <span class="op">=</span> () <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb14-2" title="2">  <span class="cf">return</span> (</a>
+<a class="sourceLine" id="cb14-3" title="3">    <span class="op">&lt;</span><span class="va">PupContext</span>.<span class="at">Consumer</span><span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb14-4" title="4">      <span class="op">{</span>(value) <span class="kw">=&gt;</span> <span class="op">&lt;</span>PupForm value<span class="op">={</span>value<span class="op">}</span> /&gt;<span class="op">}</span></a>
+<a class="sourceLine" id="cb14-5" title="5">    &lt;/<span class="va">PupContext</span>.<span class="at">Consumer</span><span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb14-6" title="6">  )<span class="op">;</span></a>
+<a class="sourceLine" id="cb14-7" title="7"><span class="op">};</span></a></code></pre></div>
+<p>Just as you did with your <code>AppWithContext</code> component, you’ll want to export the <code>PupFormWithContext</code> wrapper component in your <code>PupForm.js</code> file.</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb15-1" title="1"><span class="im">export</span> <span class="im">default</span> PupFormWithContext<span class="op">;</span></a></code></pre></div>
+<p>Now update your <code>App</code> component to render the <code>PupFormWithContext</code> component:</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb16-1" title="1"><span class="kw">const</span> App <span class="op">=</span> (<span class="op">{</span> puppyType <span class="op">}</span>) <span class="kw">=&gt;</span> (</a>
+<a class="sourceLine" id="cb16-2" title="2">  <span class="op">&lt;</span>div id<span class="op">=</span><span class="st">&quot;app&quot;</span><span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb16-3" title="3">    <span class="op">&lt;</span>PupFormWithContext /<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb16-4" title="4">    <span class="op">&lt;</span>img src<span class="op">={</span>puppyType<span class="op">}</span> alt<span class="op">=</span><span class="st">&quot;pup&quot;</span> /&gt;</a>
+<a class="sourceLine" id="cb16-5" title="5">  &lt;/div<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb16-6" title="6">)<span class="op">;</span></a></code></pre></div>
+<p>Take a moment to create a <code>handleClick</code> function for your submit button’s <code>onClick</code> listener. For now, simply prevent the default re-render of the submitted form and console log your component’s props so that you can examine the <code>value</code> prop passed into the <code>PupForm</code> component:</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb17-1" title="1">handleClick <span class="op">=</span> (e) <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb17-2" title="2">  <span class="va">e</span>.<span class="at">preventDefault</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb17-3" title="3">  <span class="va">console</span>.<span class="at">log</span>(<span class="kw">this</span>.<span class="at">props</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb17-4" title="4"><span class="op">}</span></a></code></pre></div>
+<p>Open up your developer tools and click the submit button! You should see the context <code>value</code> prop logged in your console:</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb18-1" title="1">{<span class="ex">value</span>: <span class="dt">{...}</span>}</a></code></pre></div>
+<p>If you expand the prop, you’ll then see the <code>puppyType</code>, which is the default context set by your <code>AppWithContext</code> component’s state!</p>
+<p>Note that you can also use the <code>static contextType</code> property to access context value in class components. Take a moment to set the <code>contextType</code> property to your <code>PupContext</code> in the <code>PupForm</code> class component:</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb19-1" title="1"><span class="co">// Rest of file not shown</span></a>
+<a class="sourceLine" id="cb19-2" title="2"><span class="kw">class</span> PupForm <span class="kw">extends</span> <span class="va">React</span>.<span class="at">Component</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb19-3" title="3">  <span class="at">constructor</span>(props) <span class="op">{</span></a>
+<a class="sourceLine" id="cb19-4" title="4">    <span class="kw">super</span>(props)<span class="op">;</span></a>
+<a class="sourceLine" id="cb19-5" title="5">    <span class="kw">this</span>.<span class="at">state</span> <span class="op">=</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb19-6" title="6">      <span class="dt">selectedPup</span><span class="op">:</span> <span class="st">&#39;select&#39;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb19-7" title="7">    <span class="op">};</span></a>
+<a class="sourceLine" id="cb19-8" title="8">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb19-9" title="9"></a>
+<a class="sourceLine" id="cb19-10" title="10">  <span class="kw">static</span> contextType <span class="op">=</span> PupContext<span class="op">;</span></a>
+<a class="sourceLine" id="cb19-11" title="11"><span class="co">// Rest of file not shown</span></a></code></pre></div>
+<p>Now update your <code>handleClick</code> method to console log <code>this.context</code> instead of <code>this.props</code>:</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb20-1" title="1">handleClick <span class="op">=</span> (e) <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb20-2" title="2">  <span class="va">e</span>.<span class="at">preventDefault</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb20-3" title="3">  <span class="va">console</span>.<span class="at">log</span>(<span class="kw">this</span>.<span class="at">context</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb20-4" title="4"><span class="op">}</span></a></code></pre></div>
+<p>Click the submit button to fire your <code>handleClick</code> method and you should see the context <code>value</code> object logged in your console:</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb21-1" title="1">{<span class="ex">puppyType</span>: <span class="st">&quot;/static/media/speedy-pup.d706601f.jpg&quot;</span>}</a></code></pre></div>
+<p>Note that the <code>static contextType</code> property only works for class components. Because of this, you’ll focus on using <code>Context.Consumer</code> components to manually pass render props.</p>
+<h2 id="updating-the-context-from-a-nested-component">Updating the Context from a nested component</h2>
+<p>Now you can access the context value, but what about updating the context value? It’s a common need to update the global context from a child consumer component. For example, if your Context is providing the UI theme or language, you might have a child component that consumes the context and allows a user to select their preferred theme or language.</p>
+<p>Once a user makes a selection, your application will need a way to update the context value. From the context update fired from the child component, your application will re-render all of the nested components that depend on that data.</p>
+<p>Let’s define an <code>updateContext</code> method in your <code>AppWithContext</code> component! This method will take care of updating the <code>puppyType</code> slice of state:</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb22-1" title="1">updateContext <span class="op">=</span> (puppyType) <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb22-2" title="2">  <span class="kw">this</span>.<span class="at">setState</span>(<span class="op">{</span> puppyType <span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb22-3" title="3"><span class="op">}</span></a></code></pre></div>
+<p>You’ll then set a reference to the method in the state so that a nested component (with access to context) can invoke the <code>updateContext</code> method to update the <code>AppWithContext</code> state (and therefore the global context)!</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb23-1" title="1"><span class="kw">this</span>.<span class="at">state</span> <span class="op">=</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb23-2" title="2">  <span class="dt">puppyType</span><span class="op">:</span> speedy<span class="op">,</span></a>
+<a class="sourceLine" id="cb23-3" title="3">  <span class="dt">updateContext</span><span class="op">:</span> <span class="kw">this</span>.<span class="at">updateContext</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb23-4" title="4"><span class="op">};</span></a></code></pre></div>
+<p>At this point, your complete <code>AppWithContext</code> component should look something like this:</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb24-1" title="1"><span class="kw">class</span> AppWithContext <span class="kw">extends</span> <span class="va">React</span>.<span class="at">Component</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb24-2" title="2">  <span class="at">constructor</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb24-3" title="3">    <span class="kw">super</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb24-4" title="4">    <span class="kw">this</span>.<span class="at">state</span> <span class="op">=</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb24-5" title="5">      <span class="dt">puppyType</span><span class="op">:</span> speedy<span class="op">,</span></a>
+<a class="sourceLine" id="cb24-6" title="6">      <span class="dt">updateContext</span><span class="op">:</span> <span class="kw">this</span>.<span class="at">updateContext</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb24-7" title="7">    <span class="op">};</span></a>
+<a class="sourceLine" id="cb24-8" title="8">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb24-9" title="9"></a>
+<a class="sourceLine" id="cb24-10" title="10">  updateContext <span class="op">=</span> (puppyType) <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb24-11" title="11">    <span class="kw">this</span>.<span class="at">setState</span>(<span class="op">{</span> puppyType <span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb24-12" title="12">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb24-13" title="13"></a>
+<a class="sourceLine" id="cb24-14" title="14">  <span class="at">render</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb24-15" title="15">    <span class="cf">return</span> (</a>
+<a class="sourceLine" id="cb24-16" title="16">      <span class="op">&lt;</span><span class="va">PupContext</span>.<span class="at">Provider</span> value<span class="op">={</span><span class="kw">this</span>.<span class="at">state</span><span class="op">}&gt;</span></a>
+<a class="sourceLine" id="cb24-17" title="17">        <span class="op">&lt;</span>App puppyType<span class="op">={</span><span class="kw">this</span>.<span class="va">state</span>.<span class="at">puppyType</span><span class="op">}</span> /&gt;</a>
+<a class="sourceLine" id="cb24-18" title="18">      &lt;/<span class="va">PupContext</span>.<span class="at">Provider</span><span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb24-19" title="19">    )<span class="op">;</span></a>
+<a class="sourceLine" id="cb24-20" title="20">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb24-21" title="21"><span class="op">}</span></a></code></pre></div>
+<p>Since your <code>value</code> prop is taking in the component’s <code>state</code>, this means that your <code>updateContext</code> method is also available to any components with access to context. Let’s revisit the <code>PupFormWithContext</code> component! Update the wrapper component to pass the <code>updateContext</code> method as a render prop to the <code>PupForm</code>:</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb25-1" title="1"><span class="kw">const</span> PupFormWithContext <span class="op">=</span> () <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb25-2" title="2">  <span class="cf">return</span> (</a>
+<a class="sourceLine" id="cb25-3" title="3">    <span class="op">&lt;</span><span class="va">PupContext</span>.<span class="at">Consumer</span><span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb25-4" title="4">      <span class="op">{</span>(value) <span class="kw">=&gt;</span> <span class="op">&lt;</span>PupForm updateContext<span class="op">={</span><span class="va">value</span>.<span class="at">updateContext</span><span class="op">}</span> /&gt;<span class="op">}</span></a>
+<a class="sourceLine" id="cb25-5" title="5">    &lt;/<span class="va">PupContext</span>.<span class="at">Consumer</span><span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb25-6" title="6">  )<span class="op">;</span></a>
+<a class="sourceLine" id="cb25-7" title="7"><span class="op">};</span></a></code></pre></div>
+<p>Now if you update your <code>handleClick</code> method to console log both <code>this.props</code> and <code>this.context</code>, you’ll see the <code>updateContext</code> method you just created and passed down!</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb26-1" title="1">handleClick <span class="op">=</span> (e) <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb26-2" title="2">  <span class="va">e</span>.<span class="at">preventDefault</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb26-3" title="3">  <span class="va">console</span>.<span class="at">log</span>(<span class="kw">this</span>.<span class="at">props</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb26-4" title="4">  <span class="va">console</span>.<span class="at">log</span>(<span class="kw">this</span>.<span class="at">context</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb26-5" title="5"><span class="op">}</span></a></code></pre></div>
+<p>This means that you can invoke either <code>this.props.value.updateContext</code> or <code>this.context.updateContext</code> to update the global context. Take a moment to refactor your <code>handleClick</code> method to invoke the <code>updateContext</code> method by passing in the <code>selectedPup</code> from the <code>PupForm</code> state:</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb27-1" title="1">handleClick <span class="op">=</span> (e) <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb27-2" title="2">  <span class="va">e</span>.<span class="at">preventDefault</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb27-3" title="3">  <span class="kw">this</span>.<span class="va">props</span>.<span class="va">value</span>.<span class="at">updateContext</span>(<span class="kw">this</span>.<span class="va">state</span>.<span class="at">selectedPup</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb27-4" title="4"><span class="op">}</span></a></code></pre></div>
+<p>Now you should be able to use the dropdown menu to select a pup photo to render! Congratulations, you now know how to use React Context to share and update global information across your application!</p>
+<h2 id="what-you-learned">What you learned</h2>
+<p>In this article, you learned how to:</p>
+<ul>
+<li>Create a Context to share global information with an application; and</li>
+<li>Use the <code>Context.Provider</code> to create a wrapper and set the default context; and</li>
+<li>Use the <code>Context.Consumer</code> to create a wrapper that shares the global context through render props; and</li>
+<li>Access the global context through the <code>contextType</code> property; and</li>
+<li>Pass a method to a nested component to update the global context.</li>
+</ul>
+<hr />
+<h1 id="react-context-to-do-list-project">React Context To-do List Project</h1>
+<p>Today you’ll be building a to-do list application with React and local storage. Instead of threading props from a parent to its children and grandchildren, you’ll use Context to share information with any of your application’s components!</p>
+<p>As a reminder, Context gives you a convenient way to pass data through the component tree without having to manually thread props. This project will also give you a better understanding of how to share and update “global” data across a React application.</p>
+<p>In this project, you will:</p>
+<ul>
+<li>Create and use a <code>TodoContext</code> to share global information</li>
+<li>Create an <code>AppWithContext</code> wrapper component that uses <code>Provider</code> to set the default value of <code>TodoContext</code> in your application</li>
+<li>Create a <code>TodoFormWithContext</code> wrapper component that uses <code>Consumer</code> to allow child components to subscribe to the application’s global <code>TodoContext</code></li>
+<li>Use the <code>static contextType</code> property to access the global <code>TodoContext</code> in a class component</li>
+<li>Update the global value of the <code>TodoContext</code> from a nested component</li>
+<li>Use a <code>debugger</code> to investigate the context value from nested component</li>
+</ul>
+<h2 id="phase-1-set-up-your-project">Phase 1: Set up your project</h2>
+<p>Begin by using the <code>create-react-app</code> package to create a React application:</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb28-1" title="1"><span class="ex">npx</span> create-react-app context-to-do-list --template @appacademy/simple</a></code></pre></div>
+<p>Next, set up your application file structure based on the file tree below. To begin, you’ll want two subdirectories within <code>src</code>: <code>components</code> and <code>contexts</code>.</p>
+<pre><code>├── package-lock.json
+├── package.json
+├── public
+│   └── index.html
+└── src
+    ├── App.js
+    ├── AppWithContext.js
+    ├── components
+    │   ├── Task.js
+    │   ├── TodoForm.js
+    │   └── TodoList.js
+    ├── contexts
+    │   └── TodoContext.js
+    └── index.js</code></pre>
+<p>Within your <code>components</code> directory, you’ll want a <code>Task</code> component:</p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb30-1" title="1"><span class="co">// ./src/components/Task.js</span></a>
+<a class="sourceLine" id="cb30-2" title="2"></a>
+<a class="sourceLine" id="cb30-3" title="3"><span class="im">import</span> React <span class="im">from</span> <span class="st">&#39;react&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb30-4" title="4"></a>
+<a class="sourceLine" id="cb30-5" title="5"><span class="kw">const</span> Task <span class="op">=</span> () <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb30-6" title="6">  <span class="kw">const</span> handleClick <span class="op">=</span> () <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb30-7" title="7">    <span class="co">// </span><span class="al">TODO</span><span class="co">: Delete task</span></a>
+<a class="sourceLine" id="cb30-8" title="8">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb30-9" title="9">  </a>
+<a class="sourceLine" id="cb30-10" title="10">  <span class="cf">return</span> (</a>
+<a class="sourceLine" id="cb30-11" title="11">    <span class="op">&lt;</span>li<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb30-12" title="12">      <span class="op">&lt;</span>h1<span class="op">&gt;</span>Hi<span class="op">,</span> I<span class="st">&#39;m a task in your to-do list!&lt;/h1&gt;</span></a>
+<a class="sourceLine" id="cb30-13" title="13">      <span class="op">&lt;</span>button onClick<span class="op">={</span>handleClick<span class="op">}&gt;</span>Delete Task&lt;/button<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb30-14" title="14">    &lt;/li<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb30-15" title="15">  )<span class="op">;</span></a>
+<a class="sourceLine" id="cb30-16" title="16"><span class="op">}</span></a>
+<a class="sourceLine" id="cb30-17" title="17"></a>
+<a class="sourceLine" id="cb30-18" title="18"><span class="im">export</span> <span class="im">default</span> Task<span class="op">;</span></a></code></pre></div>
+<p>You’ll also want a <code>TodoList</code> component:</p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb31-1" title="1"><span class="co">// ./src/components/TodoList.js</span></a>
+<a class="sourceLine" id="cb31-2" title="2"></a>
+<a class="sourceLine" id="cb31-3" title="3"><span class="im">import</span> React <span class="im">from</span> <span class="st">&#39;react&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb31-4" title="4"><span class="co">// import Task from &#39;./Task&#39;;</span></a>
+<a class="sourceLine" id="cb31-5" title="5"><span class="co">// </span><span class="al">TODO</span><span class="co">: Import context</span></a>
+<a class="sourceLine" id="cb31-6" title="6"></a>
+<a class="sourceLine" id="cb31-7" title="7"><span class="kw">class</span> TodoList <span class="kw">extends</span> <span class="va">React</span>.<span class="at">Component</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb31-8" title="8">  <span class="co">// </span><span class="al">TODO</span><span class="co">: Access context</span></a>
+<a class="sourceLine" id="cb31-9" title="9"></a>
+<a class="sourceLine" id="cb31-10" title="10">  <span class="at">render</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb31-11" title="11">    <span class="cf">return</span> (</a>
+<a class="sourceLine" id="cb31-12" title="12">      <span class="op">&lt;</span>ul<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb31-13" title="13">        <span class="op">{</span><span class="co">/* </span><span class="al">TODO</span><span class="co">: Render a `Task` component for each of the `tasks` stored in context */</span><span class="op">}</span></a>
+<a class="sourceLine" id="cb31-14" title="14">      &lt;/ul<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb31-15" title="15">    )<span class="op">;</span></a>
+<a class="sourceLine" id="cb31-16" title="16">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb31-17" title="17"><span class="op">}</span> </a>
+<a class="sourceLine" id="cb31-18" title="18"></a>
+<a class="sourceLine" id="cb31-19" title="19"><span class="im">export</span> <span class="im">default</span> TodoList<span class="op">;</span></a></code></pre></div>
+<p>You’ll also want a <code>TodoForm</code> component:</p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb32-1" title="1"><span class="co">// ./src/components/TodoForm.js</span></a>
+<a class="sourceLine" id="cb32-2" title="2"></a>
+<a class="sourceLine" id="cb32-3" title="3"><span class="im">import</span> React <span class="im">from</span> <span class="st">&#39;react&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb32-4" title="4"><span class="co">// </span><span class="al">TODO</span><span class="co">: Import TodoContext</span></a>
+<a class="sourceLine" id="cb32-5" title="5"></a>
+<a class="sourceLine" id="cb32-6" title="6"><span class="kw">class</span> TodoForm <span class="kw">extends</span> <span class="va">React</span>.<span class="at">Component</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb32-7" title="7">  <span class="at">constructor</span>(props) <span class="op">{</span></a>
+<a class="sourceLine" id="cb32-8" title="8">    <span class="kw">super</span>(props)<span class="op">;</span></a>
+<a class="sourceLine" id="cb32-9" title="9">    <span class="co">// </span><span class="al">TODO</span><span class="co">: Set default `inputValue` state</span></a>
+<a class="sourceLine" id="cb32-10" title="10">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb32-11" title="11"></a>
+<a class="sourceLine" id="cb32-12" title="12">  handleInputChange <span class="op">=</span> (e) <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb32-13" title="13">    <span class="co">// </span><span class="al">TODO</span><span class="co">: Update `inputValue` state</span></a>
+<a class="sourceLine" id="cb32-14" title="14">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb32-15" title="15">  </a>
+<a class="sourceLine" id="cb32-16" title="16">  handleSubmit <span class="op">=</span> (e) <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb32-17" title="17">    <span class="va">e</span>.<span class="at">preventDefault</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb32-18" title="18">    <span class="co">// </span><span class="al">TODO</span><span class="co">: Create a task based on the `inputValue`</span></a>
+<a class="sourceLine" id="cb32-19" title="19">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb32-20" title="20"></a>
+<a class="sourceLine" id="cb32-21" title="21">  <span class="at">render</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb32-22" title="22">    <span class="cf">return</span> (</a>
+<a class="sourceLine" id="cb32-23" title="23">      <span class="op">&lt;</span>form onSubmit<span class="op">={</span><span class="kw">this</span>.<span class="at">handleSubmit</span><span class="op">}&gt;</span></a>
+<a class="sourceLine" id="cb32-24" title="24">        <span class="op">&lt;</span>input</a>
+<a class="sourceLine" id="cb32-25" title="25">          type<span class="op">=</span><span class="st">&quot;text&quot;</span></a>
+<a class="sourceLine" id="cb32-26" title="26">          placeholder<span class="op">=</span><span class="st">&quot;Add a todo&quot;</span></a>
+<a class="sourceLine" id="cb32-27" title="27">          value<span class="op">={</span><span class="co">/* </span><span class="al">TODO</span><span class="co">: Set the `inputValue` state as the input&#39;s value */</span><span class="op">}</span></a>
+<a class="sourceLine" id="cb32-28" title="28">          onChange<span class="op">={</span><span class="kw">this</span>.<span class="at">handleInputChange</span><span class="op">}</span></a>
+<a class="sourceLine" id="cb32-29" title="29">        /&gt;</a>
+<a class="sourceLine" id="cb32-30" title="30">      &lt;/form<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb32-31" title="31">    )<span class="op">;</span></a>
+<a class="sourceLine" id="cb32-32" title="32">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb32-33" title="33"><span class="op">}</span></a>
+<a class="sourceLine" id="cb32-34" title="34"></a>
+<a class="sourceLine" id="cb32-35" title="35"><span class="kw">const</span> TodoFormWithContext <span class="op">=</span> () <span class="kw">=&gt;</span> (</a>
+<a class="sourceLine" id="cb32-36" title="36">  <span class="co">// </span><span class="al">TODO</span><span class="co">: Use a Consumer component to wrap the TodoForm</span></a>
+<a class="sourceLine" id="cb32-37" title="37">  <span class="co">// </span><span class="al">TODO</span><span class="co">: Pass the `createTask` method stored in the context value as a prop to TodoForm</span></a>
+<a class="sourceLine" id="cb32-38" title="38">)<span class="op">;</span></a>
+<a class="sourceLine" id="cb32-39" title="39"></a>
+<a class="sourceLine" id="cb32-40" title="40"><span class="im">export</span> <span class="im">default</span> TodoFormWithContext<span class="op">;</span></a></code></pre></div>
+<p>Now you’ll update your <code>App</code> component to render the <code>TodoForm</code> and <code>TodoList</code> components, along with a “To-do List” header.</p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb33-1" title="1"><span class="co">// ./src/App.js</span></a>
+<a class="sourceLine" id="cb33-2" title="2"></a>
+<a class="sourceLine" id="cb33-3" title="3"><span class="im">import</span> React <span class="im">from</span> <span class="st">&#39;react&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb33-4" title="4"><span class="im">import</span> TodoForm <span class="im">from</span> <span class="st">&#39;./components/TodoForm&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb33-5" title="5"><span class="im">import</span> TodoList <span class="im">from</span> <span class="st">&#39;./components/TodoList&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb33-6" title="6"></a>
+<a class="sourceLine" id="cb33-7" title="7"><span class="kw">const</span> App <span class="op">=</span> () <span class="kw">=&gt;</span> (</a>
+<a class="sourceLine" id="cb33-8" title="8">  <span class="op">&lt;</span>div<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb33-9" title="9">    <span class="op">&lt;</span>h1<span class="op">&gt;</span>To<span class="op">-</span><span class="cf">do</span> List&lt;/h1<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb33-10" title="10">    <span class="op">&lt;</span>TodoForm /<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb33-11" title="11">    <span class="op">&lt;</span>TodoList /<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb33-12" title="12">  &lt;/div<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb33-13" title="13">)<span class="op">;</span></a>
+<a class="sourceLine" id="cb33-14" title="14"></a>
+<a class="sourceLine" id="cb33-15" title="15"><span class="im">export</span> <span class="im">default</span> App<span class="op">;</span></a></code></pre></div>
+<h3 id="create-a-context">Create a context</h3>
+<p>Let’s get started on creating the <code>TodoContext</code> that will store your to-do list application’s global information! Within your <code>contexts</code> directory, you’ll set up the <code>TodoContext.js</code> file. Create and export a <code>TodoContext</code> by using the <code>createContext()</code> method, like so:</p>
+<div class="sourceCode" id="cb34"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb34-1" title="1"><span class="co">// ./src/contexts/TodoContext.js</span></a>
+<a class="sourceLine" id="cb34-2" title="2"></a>
+<a class="sourceLine" id="cb34-3" title="3"><span class="im">import</span> <span class="op">{</span> createContext <span class="op">}</span> <span class="im">from</span> <span class="st">&#39;react&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb34-4" title="4"></a>
+<a class="sourceLine" id="cb34-5" title="5"><span class="kw">const</span> TodoContext <span class="op">=</span> <span class="at">createContext</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb34-6" title="6"></a>
+<a class="sourceLine" id="cb34-7" title="7"><span class="im">export</span> <span class="im">default</span> TodoContext<span class="op">;</span></a></code></pre></div>
+<p>Now that you have a <code>TodoContext</code> set up, you can work on providing the context value from a parent <code>TodoContext.Provider</code> component. In the next phase, you’ll create an <code>AppWithContext</code> to wrap your <code>App</code> component with a parent <code>TodoContext.Provider</code> component. This will provide the context <code>value</code> to the <code>App</code> component and any of its child or grandchildren components.</p>
+<h2 id="phase-2-provider-wrapper-component">Phase 2: Provider wrapper component</h2>
+<p>Create a <code>AppWithContext</code> wrapper component. This wrapper component will take care of <em>providing</em> the context value. Start off with this code skeleton of the <code>AppWithContext</code> component:</p>
+<div class="sourceCode" id="cb35"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb35-1" title="1"><span class="co">// ./src/AppWithContext.js</span></a>
+<a class="sourceLine" id="cb35-2" title="2"></a>
+<a class="sourceLine" id="cb35-3" title="3"><span class="im">import</span> React <span class="im">from</span> <span class="st">&#39;react&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb35-4" title="4"><span class="co">// </span><span class="al">TODO</span><span class="co">: Import TodoContext</span></a>
+<a class="sourceLine" id="cb35-5" title="5"><span class="co">// </span><span class="al">TODO</span><span class="co">: Import App</span></a>
+<a class="sourceLine" id="cb35-6" title="6"></a>
+<a class="sourceLine" id="cb35-7" title="7"><span class="kw">class</span> AppWithContext <span class="kw">extends</span> <span class="va">React</span>.<span class="at">Component</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb35-8" title="8">  <span class="at">constructor</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb35-9" title="9">    <span class="kw">super</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb35-10" title="10">    <span class="kw">const</span> storedTasks <span class="op">=</span> <span class="va">JSON</span>.<span class="at">parse</span>(<span class="va">localStorage</span>.<span class="at">getItem</span>(<span class="st">&#39;tasks&#39;</span>))<span class="op">;</span></a>
+<a class="sourceLine" id="cb35-11" title="11">    <span class="co">// </span><span class="al">TODO</span><span class="co">: Set up default state (tasks, createTask, deleteTask)</span></a>
+<a class="sourceLine" id="cb35-12" title="12">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb35-13" title="13"></a>
+<a class="sourceLine" id="cb35-14" title="14">  createTask <span class="op">=</span> (task) <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb35-15" title="15">    <span class="co">// </span><span class="al">TODO</span><span class="co">: Use the built-in Date `getTime` method to generate the `nextTaskId` for the `newTask`</span></a>
+<a class="sourceLine" id="cb35-16" title="16">    <span class="co">// </span><span class="al">TODO</span><span class="co">: Generate a `newTask` object, structured with proper &quot;state shape&quot;</span></a>
+<a class="sourceLine" id="cb35-17" title="17">    <span class="co">// </span><span class="al">TODO</span><span class="co">: Update the `tasks` state</span></a>
+<a class="sourceLine" id="cb35-18" title="18">    <span class="co">// </span><span class="al">TODO</span><span class="co">: Invoke the `updateLocalStorageTasks` method</span></a>
+<a class="sourceLine" id="cb35-19" title="19">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb35-20" title="20">  </a>
+<a class="sourceLine" id="cb35-21" title="21">  deleteTask <span class="op">=</span> (id) <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb35-22" title="22">    <span class="co">// </span><span class="al">TODO</span><span class="co">: Delete the task based on the task `id`</span></a>
+<a class="sourceLine" id="cb35-23" title="23">    <span class="co">// </span><span class="al">TODO</span><span class="co">: Update the `tasks` state</span></a>
+<a class="sourceLine" id="cb35-24" title="24">    <span class="co">// </span><span class="al">TODO</span><span class="co">: Invoke the `updateLocalStorageTasks` method</span></a>
+<a class="sourceLine" id="cb35-25" title="25">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb35-26" title="26"></a>
+<a class="sourceLine" id="cb35-27" title="27">  updateLocalStorageTasks <span class="op">=</span> () <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb35-28" title="28">    <span class="va">console</span>.<span class="at">log</span>(<span class="kw">this</span>.<span class="va">state</span>.<span class="at">tasks</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb35-29" title="29">    <span class="kw">const</span> jsonTasks <span class="op">=</span> <span class="va">JSON</span>.<span class="at">stringify</span>(<span class="kw">this</span>.<span class="va">state</span>.<span class="at">tasks</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb35-30" title="30">    <span class="va">localStorage</span>.<span class="at">setItem</span>(<span class="st">&#39;tasks&#39;</span><span class="op">,</span> jsonTasks)<span class="op">;</span></a>
+<a class="sourceLine" id="cb35-31" title="31">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb35-32" title="32">  </a>
+<a class="sourceLine" id="cb35-33" title="33">  <span class="at">render</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb35-34" title="34">    <span class="cf">return</span> (</a>
+<a class="sourceLine" id="cb35-35" title="35">      <span class="co">// </span><span class="al">TODO</span><span class="co">: Use a Provider component to wrap the App component</span></a>
+<a class="sourceLine" id="cb35-36" title="36">      <span class="co">// </span><span class="al">TODO</span><span class="co">: Use the AppWithContext state as the Provider component&#39;s `value`</span></a>
+<a class="sourceLine" id="cb35-37" title="37">    )<span class="op">;</span></a>
+<a class="sourceLine" id="cb35-38" title="38">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb35-39" title="39"><span class="op">}</span></a>
+<a class="sourceLine" id="cb35-40" title="40"></a>
+<a class="sourceLine" id="cb35-41" title="41"><span class="im">export</span> <span class="im">default</span> AppWithContext<span class="op">;</span></a></code></pre></div>
+<p>Begin by importing the <code>TodoContext</code> and <code>App</code> component. Next, you’ll want to set up a default state with <code>tasks</code>, <code>createTask</code>, <code>deleteTask</code>.</p>
+<h3 id="set-default-state">Set default state</h3>
+<p>Set the value of the <code>tasks</code> state to the <code>storedTasks</code>, <em>or</em> an empty object (<code>{}</code>) if <code>storedTasks</code> is null. Notice how <code>storedTasks</code> is simply accessing the local storage item with a name of <code>tasks</code>, and parsing the JSON string back to JavaScript.</p>
+<div class="sourceCode" id="cb36"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb36-1" title="1"><span class="kw">const</span> storedTasks <span class="op">=</span> <span class="va">JSON</span>.<span class="at">parse</span>(<span class="va">localStorage</span>.<span class="at">getItem</span>(<span class="st">&#39;tasks&#39;</span>))<span class="op">;</span></a></code></pre></div>
+<p>For the <code>createTask</code> state and <code>deleteTask</code> state, you’ll want to set the state values to their prospective methods, like so:</p>
+<div class="sourceCode" id="cb37"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb37-1" title="1">createTask<span class="op">:</span> <span class="kw">this</span>.<span class="at">createTask</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb37-2" title="2">deleteTask<span class="op">:</span> <span class="kw">this</span>.<span class="at">deleteTask</span><span class="op">,</span></a></code></pre></div>
+<h3 id="create-a-task">Create a task</h3>
+<p>Now you’ll define the <code>createTask</code> method. Use the built-in Date <code>getTime</code> method to generate the <code>nextTaskId</code> for the <code>newTask</code>. You’ll also want to generate a <code>newTask</code> object. You can use square brackets around the <code>nextTaskId</code> to use the generated integer as a key:</p>
+<div class="sourceCode" id="cb38"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb38-1" title="1"><span class="kw">const</span> newTask <span class="op">=</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb38-2" title="2">  [nextTaskId]<span class="op">:</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb38-3" title="3">    <span class="dt">id</span><span class="op">:</span> nextTaskId<span class="op">,</span></a>
+<a class="sourceLine" id="cb38-4" title="4">    <span class="dt">message</span><span class="op">:</span> task<span class="op">,</span></a>
+<a class="sourceLine" id="cb38-5" title="5">  <span class="op">},</span></a>
+<a class="sourceLine" id="cb38-6" title="6"><span class="op">};</span></a></code></pre></div>
+<p>As you might remember, the <code>tasks</code> state is set to the <code>storedTasks</code>, <em>or</em> an empty object (<code>{}</code>) as default. You might be wondering why you are using an object instead of an array. You are being prepared to work with <a href="https://redux.js.org/recipes/structuring-reducers/normalizing-state-shape/#designing-a-normalized-state">normalized state shape</a>! The <code>byId</code> slice of state in the Redux documentation’s example illustrates the state format you will be building today. Similarly to how each post has its ID as a key, each task will have its ID as a key, as well as <code>id</code> and <code>message</code> properties.</p>
+<div class="sourceCode" id="cb39"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb39-1" title="1">byId <span class="op">:</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb39-2" title="2">  <span class="st">&quot;post1&quot;</span> <span class="op">:</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb39-3" title="3">    <span class="dt">id </span><span class="op">:</span> <span class="st">&quot;post1&quot;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb39-4" title="4">    <span class="dt">author </span><span class="op">:</span> <span class="st">&quot;user1&quot;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb39-5" title="5">    <span class="dt">body </span><span class="op">:</span> <span class="st">&quot;......&quot;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb39-6" title="6">    <span class="dt">comments </span><span class="op">:</span> [<span class="st">&quot;comment1&quot;</span><span class="op">,</span> <span class="st">&quot;comment2&quot;</span>]</a>
+<a class="sourceLine" id="cb39-7" title="7">  <span class="op">},</span></a>
+<a class="sourceLine" id="cb39-8" title="8">  <span class="st">&quot;post2&quot;</span> <span class="op">:</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb39-9" title="9">    <span class="dt">id </span><span class="op">:</span> <span class="st">&quot;post2&quot;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb39-10" title="10">    <span class="dt">author </span><span class="op">:</span> <span class="st">&quot;user2&quot;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb39-11" title="11">    <span class="dt">body </span><span class="op">:</span> <span class="st">&quot;......&quot;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb39-12" title="12">    <span class="dt">comments </span><span class="op">:</span> [<span class="st">&quot;comment3&quot;</span><span class="op">,</span> <span class="st">&quot;comment4&quot;</span><span class="op">,</span> <span class="st">&quot;comment5&quot;</span>]</a>
+<a class="sourceLine" id="cb39-13" title="13">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb39-14" title="14"><span class="op">},</span></a></code></pre></div>
+<p>In the future, you’ll be working with Redux and will manage much more data. Feel free to view the <a href="https://redux.js.org/recipes/structuring-reducers/normalizing-state-shape/#normalizing-state-shape">nested state shape with an array</a> and read more about how using normalized state shape is an improvement. The documentation explains how “compared to the original nested format, this is an improvement in several ways.”</p>
+<p>After generating a <code>newTask</code> object, you’ll want to update the <code>tasks</code> state with the new object and then update the tasks stored in local storage. First, let’s take a closer look at the <code>updateLocalStorageTasks</code> method. You’ll see that it takes care of logging the tasks to your DevTools console, converting the JavaScript <code>tasks</code> object into a JSON string, and then storing the tasks in local storage, under the name <code>tasks</code>.</p>
+<div class="sourceCode" id="cb40"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb40-1" title="1">updateLocalStorageTasks <span class="op">=</span> () <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb40-2" title="2">  <span class="va">console</span>.<span class="at">log</span>(<span class="kw">this</span>.<span class="va">state</span>.<span class="at">tasks</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb40-3" title="3">  <span class="kw">const</span> jsonTasks <span class="op">=</span> <span class="va">JSON</span>.<span class="at">stringify</span>(<span class="kw">this</span>.<span class="va">state</span>.<span class="at">tasks</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb40-4" title="4">  <span class="va">localStorage</span>.<span class="at">setItem</span>(<span class="st">&#39;tasks&#39;</span><span class="op">,</span> jsonTasks)<span class="op">;</span></a>
+<a class="sourceLine" id="cb40-5" title="5"><span class="op">}</span></a></code></pre></div>
+<p>You can spread the <code>tasks</code> slice of state and the attributes of the <code>newTask</code> to generate a collection of updated tasks. When a state update depends on a previous state value, you need to <a href="https://reactjs.org/docs/state-and-lifecycle.html#state-updates-may-be-asynchronous">pass a function</a> into the <code>setState</code> method to reliably get the previous state value. Since your <code>createTask</code> method relies on the previous state to produce the next state, the method’s <code>setState</code> invocation will look something like this:</p>
+<div class="sourceCode" id="cb41"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb41-1" title="1"><span class="kw">this</span>.<span class="at">setState</span>((state<span class="op">,</span> props) <span class="kw">=&gt;</span> (<span class="op">{</span></a>
+<a class="sourceLine" id="cb41-2" title="2">  <span class="dt">tasks</span><span class="op">:</span> <span class="op">{</span> ...<span class="va">state</span>.<span class="at">tasks</span><span class="op">,</span> ...<span class="at">newTask</span> <span class="op">},</span></a>
+<a class="sourceLine" id="cb41-3" title="3"><span class="op">}</span>))<span class="op">;</span></a></code></pre></div>
+<p>After the <code>tasks</code> slice of state has been updated, you’ll want to update the tasks stored in local storage by invoking the <code>updateLocalStorageTasks</code> method. The <code>setState()</code> method takes an optional callback as its second parameter so that you can have asynchronous behavior with <code>setState()</code>. Note that you can’t <code>await</code> on a <code>setState()</code> method since it doesn’t return a promise!</p>
+<p>Invoke <code>setState</code> with a callback that invokes the <code>updateLocalStorageTasks</code> method, so that the method is invoked after the state is set:</p>
+<div class="sourceCode" id="cb42"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb42-1" title="1"><span class="kw">this</span>.<span class="at">setState</span>((state<span class="op">,</span> props) <span class="kw">=&gt;</span> (<span class="op">{</span></a>
+<a class="sourceLine" id="cb42-2" title="2">  <span class="dt">tasks</span><span class="op">:</span> <span class="op">{</span> ...<span class="va">state</span>.<span class="at">tasks</span><span class="op">,</span> ...<span class="at">newTask</span> <span class="op">},</span></a>
+<a class="sourceLine" id="cb42-3" title="3"><span class="op">}</span>)<span class="op">,</span> () <span class="kw">=&gt;</span> <span class="kw">this</span>.<span class="at">updateLocalStorageTasks</span>())<span class="op">;</span></a></code></pre></div>
+<h3 id="delete-a-task">Delete a task</h3>
+<p>Delete a task based on the task’s <code>id</code>. Since your <code>tasks</code> state is structured as an object, you can use the <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/delete">delete operator</a> to delete a specific task. Although you can delete a specific tasks directly from the <code>tasks</code> slice of state, it’s best practice not to do so.</p>
+<p>It’s best practice to maintain immutable state, meaning that you should not directly delete a task from the <code>tasks</code> slice of state with the delete operator. You can maintain immutable state by making a copy of the <code>tasks</code> slice of state with spread syntax, and then using the delete operator to delete a specific task within the <code>setState</code> method.</p>
+<div class="sourceCode" id="cb43"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb43-1" title="1"><span class="kw">this</span>.<span class="at">setState</span>((state<span class="op">,</span> props) <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb43-2" title="2">  <span class="kw">const</span> tasksWithDeletion <span class="op">=</span> <span class="op">{</span> ...<span class="va">state</span>.<span class="at">tasks</span> <span class="op">};</span></a>
+<a class="sourceLine" id="cb43-3" title="3">  <span class="kw">delete</span> tasksWithDeletion[id]<span class="op">;</span></a>
+<a class="sourceLine" id="cb43-4" title="4">  <span class="cf">return</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb43-5" title="5">    <span class="dt">tasks</span><span class="op">:</span> tasksWithDeletion<span class="op">,</span></a>
+<a class="sourceLine" id="cb43-6" title="6">  <span class="op">};</span></a>
+<a class="sourceLine" id="cb43-7" title="7"><span class="op">}</span>))<span class="op">;</span></a></code></pre></div>
+<blockquote>
+<p><strong>Reminder:</strong> when a state update depends on a previous state value, you need to pass a function into the <code>setState</code> method to reliably access the previous state.</p>
+</blockquote>
+<p>Just like how you used an optional callback to invoke the <code>updateLocalStorageTasks</code> method asynchronously within the <code>createTask</code> method, you’ll do the same for task deletion.</p>
+<h3 id="use-a-provider-component">Use a provider component</h3>
+<p>Now it’s time to provide context to your application. Use a <code>Provider</code> component (<code>&lt;TodoContext.Provider&gt;</code>) to wrap the <code>App</code> component in the <code>render</code> method. You’ll use the <code>AppWithContext</code> state as the Provider component’s <code>value</code>.</p>
+<p>As a reminder, rendering the <code>Provider</code> component and nesting the <code>App</code> component as a child within the <code>Provider</code> component will provide the context <code>value</code> (global state of the application) to your application. The <code>App</code> component and any of its child or grandchildren components will then be able to access any information stored within the context <code>value</code>. Since your <code>App</code> component renders the rest of your application’s components, the context value will be provided to any of its child components as well - even if they were not directly rendered as a child component of <code>&lt;TodoContext.Provider&gt;</code>!</p>
+<p>Lastly, take a moment to update your <code>index.js</code> to render your new <code>AppWithContext</code> component instead of the <code>App</code> component. This will not result in any breaking changes, as you have simply replaced the <code>App</code> component with another component that wraps and renders it.</p>
+<h2 id="phase-3-consumer-wrapper-component">Phase 3: Consumer wrapper component</h2>
+<p>It’s time to set up a consumer wrapper component to allow the <code>TodoForm</code> component to <em>consume</em> the <code>TodoContext</code>. Begin by importing <code>TodoContext</code> into the file and updating the return of the <code>TodoFormWithContext</code>. Within the <code>TodoFormWithContext</code>, you use a <code>Consumer</code> component (<code>&lt;TodoContext.Consumer&gt;</code>) to wrap the <code>TodoForm</code> and pass render props.</p>
+<p>Pass the <code>createTask</code> method stored in the context <code>value</code> as a prop to the <code>TodoForm</code>. Since you set the <code>AppWithContext</code> state as the <code>value</code> in the <code>&lt;TodoContext.Provider&gt;</code>, you can access anything stored in the <code>AppWithContext</code> state through the <code>value</code> prop referenced within the <code>&lt;TodoContext.Consumer&gt;</code>:</p>
+<div class="sourceCode" id="cb44"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb44-1" title="1"><span class="op">&lt;</span><span class="va">TodoContext</span>.<span class="at">Consumer</span><span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb44-2" title="2">  <span class="op">{</span>value <span class="kw">=&gt;</span> <span class="co">/* </span><span class="al">TODO</span><span class="co">: Pass the `createTask` method as a prop to TodoForm */</span> <span class="op">}</span></a>
+<a class="sourceLine" id="cb44-3" title="3">&lt;/<span class="va">TodoContext</span>.<span class="at">Consumer</span><span class="op">&gt;</span></a></code></pre></div>
+<p>Now that you have the consumer wrapper component set up, it’s time to work on the <code>TodoForm</code> component. Set the default <code>inputValue</code> state to an empty string and update <code>inputValue</code> state within the <code>handleInputChange</code> method. You’ll also want to set the <code>inputValue</code> state as the form input’s value so that the input is a <a href="https://reactjs.org/docs/forms.html#controlled-components">controlled component</a>.</p>
+<p>On form submission, you’ll want to create a task based on the <code>inputValue</code> by invoking the <code>createTask</code> prop passed from the context consumer. As a reminder, the <code>createTask</code> method updates the <code>tasks</code> stored in the <code>AppWithContext</code> state. This means that whenever the <code>createTask</code> method is invoked, the global <code>tasks</code> state will update and any components that subscribe to the context (via a <code>Consumer</code> component or <code>static contextType</code>) will have access to the updated tasks.</p>
+<p>Before moving onto the next phase, use a <code>debugger</code> to investigate what actions happen when you submit the <code>TodoForm</code>. Set two <code>debugger</code> statements: one in the <code>handleSubmit</code> method defined in <code>TodoForm</code> and another in the <code>createTask</code> method defined in <code>AppWithContext</code>. With these two debugger statements, you can trace whether invoking <code>this.props.createTask</code> really invokes the <code>createTask</code> method in the <code>AppWithContext</code> component.</p>
+<figure>
+<img src="https://appacademy-open-assets.s3-us-west-1.amazonaws.com/Modular-Curriculum/content/react-redux/topics/react-context/assets/debugger-createTask.gif" alt="debugger-createTask" /><figcaption>debugger-createTask</figcaption>
+</figure>
+<h2 id="phase-4-access-context-through-contexttype">Phase 4: Access context through contextType</h2>
+<p>Now you’ll access context by using the <code>static contextType</code> property instead of setting up a consumer wrapper component. Uncomment the import statement for <code>Task</code> and import the <code>TodoContext</code> into your <code>TodoList.js</code> file. Set the <code>TodoList</code> component’s <code>static contextType</code> property to the <code>TodoContext</code>. By setting the <code>contextType</code> property, the <code>TodoList</code> component gains access to the context value via <code>this.context</code>. As a reminder, you can use a <code>debugger</code> statement to investigate <code>this.context</code> to view everything stored as the context value before moving forward.</p>
+<figure>
+<img src="https://appacademy-open-assets.s3-us-west-1.amazonaws.com/Modular-Curriculum/content/react-redux/topics/react-context/assets/debugger-context.gif" alt="debugger-context" /><figcaption>debugger-context</figcaption>
+</figure>
+<p>Access the <code>tasks</code> and <code>deleteTask</code> method stored within the context value. Map over each of the <code>tasks</code> and render a <code>Task</code> component for each task. Since your tasks are currently formatted as an object, you’ll need to convert the object to an iterable array before mapping over them. You can use the <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/values">Object.values</a> method to access an array containing the object’s property values.</p>
+<p>You’ll want to set a task ID <code>key</code> for each of the tasks, as well as pass the task as a prop for each <code>Task</code> component rendered. In order to keep the <code>Task</code> component as a function component, you’ll pass the <code>deleteTask</code> method from context as a prop into each rendered <code>Task</code> as well. As a reminder, the <code>static contextType</code> property can only be used in class components.</p>
+<p>Now have the <code>Task</code> component take in the props. Then update the click handler to invoke the <code>deleteTask</code> prop with the task’s ID. You’ll also want to replace the “Hi, I’m a task in your to-do list!” message with the task’s message.</p>
+<p>Congratulations! You have just built a to-do list application with React Context! You used a context provider to set a global context value, used a context consumer to pass render props into a consuming component, and used the <code>static contextType</code> property to give a class component access to the context value. In the next Context project, you’ll work on using Context to store a user’s login session information.</p>
+<hr />
+<h1 id="react-twitter-lite-project">React Twitter Lite Project</h1>
+<p>A few weeks ago, you set up an Express API for tweets and created a client-side application to render Pug views. Today you’ll build a client-side application with React to render a single-page application that interacts with your backend Tweets API!</p>
+<p>In this project, you’ll build a frontend client to render React components. You’ll use React Context to keep track of a user’s login state to protect tweet resources from unauthenticated users. You’ll also use React Router to create your application’s routes and navigation bar.</p>
+<p>When you have finished today’s project, your application should have the following features:</p>
+<ol type="1">
+<li>A frontend user registration</li>
+<li>A <code>UserContext</code> to keep track of the current user</li>
+<li>A protected and authenticated routes</li>
+<li>A frontend user log-in</li>
+<li>A home page with protected tweet resources</li>
+<li>A user profile page</li>
+</ol>
+<h2 id="phase-1-set-up-your-project-1">Phase 1: Set up your project</h2>
+<p>Begin by cloning the tweets API you built with Express a few weeks ago:</p>
+<div class="sourceCode" id="cb45"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb45-1" title="1"><span class="fu">git</span> clone https://github.com/appacademy-starters/react-twitter-revisited-starter.git</a></code></pre></div>
+<p>Now go into your backend directory and install all of the application’s packages:</p>
+<div class="sourceCode" id="cb46"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb46-1" title="1"><span class="ex">npm</span> install</a></code></pre></div>
+<p>Now take a moment to create a database and database user by opening <code>psql</code> and running the following SQL statements:</p>
+<div class="sourceCode" id="cb47"><pre class="sourceCode sql"><code class="sourceCode sql"><a class="sourceLine" id="cb47-1" title="1"><span class="kw">create</span> <span class="kw">database</span> twitter_lite;</a>
+<a class="sourceLine" id="cb47-2" title="2"><span class="kw">create</span> <span class="fu">user</span> twitter_lite_app <span class="kw">with</span> <span class="kw">password</span> <span class="st">&#39;«a strong password for the user»&#39;</span>;</a>
+<a class="sourceLine" id="cb47-3" title="3"><span class="kw">grant</span> <span class="kw">all</span> <span class="kw">privileges</span> <span class="kw">on</span> <span class="kw">database</span> twitter_lite <span class="kw">to</span> twitter_lite_app;</a></code></pre></div>
+<p>Now you’ll need to by set your environment variables. Remember you can refer to the <code>.env.example</code> file to remember what environment variables to set. After you have set up your database and environment variables, migrate and seed your database:</p>
+<div class="sourceCode" id="cb48"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb48-1" title="1"><span class="ex">npx</span> dotenv sequelize db:migrate</a>
+<a class="sourceLine" id="cb48-2" title="2"><span class="ex">npx</span> dotenv sequelize db:seed:all</a></code></pre></div>
+<p>Take a moment to start your backend server and verify that everything is working by navigating to <code>http://localhost:8080</code> and ensuring that you see your API’s <code>index root</code> response. Now you are ready to create a React frontend for your backend tweets API!</p>
+<p>Change out of your backend directory. Now use the command below to generate a simple React template. You should be generating a sibling <code>twitter-front-end</code> directory to your <code>twitter-back-end</code> directory.</p>
+<div class="sourceCode" id="cb49"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb49-1" title="1"><span class="ex">npx</span> create-react-app twitter-front-end --template @appacademy/simple</a></code></pre></div>
+<p>Since you’ll be make fetch requests from your frontend client to your backend API, you’ll want to set up a proxy to make your frontend client act like it is being served on a different server. The idea is to follow the same pattern that you used in Express.</p>
+<p>Here are the docs for setting up <a href="https://create-react-app.dev/docs/proxying-api-requests-in-development/"><code>create-react-app</code> proxying in development</a>.</p>
+<p>To set up the proxy, you need to add the following line to the <code>package.json</code> in your <code>twitter-front-end</code> project.</p>
+<div class="sourceCode" id="cb50"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb50-1" title="1"><span class="fu">{</span></a>
+<a class="sourceLine" id="cb50-2" title="2">  <span class="dt">&quot;proxy&quot;</span><span class="fu">:</span> <span class="st">&quot;http://localhost:8080&quot;</span></a>
+<a class="sourceLine" id="cb50-3" title="3"><span class="fu">}</span></a></code></pre></div>
+<p>This will set up the frontend client’s development environment to act like it is served on <code>http://localhost:8080</code> (your backend Express server’s port is <code>8080</code>) instead of <code>http://localhost:3000</code> (<code>create-react-app</code>’s default frontend server port is <code>3000</code>).</p>
+<p>You can append url paths to your proxy URL whenever you need to make a request to help clean up your code! For example:</p>
+<div class="sourceCode" id="cb51"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb51-1" title="1"><span class="co">// With proxy</span></a>
+<a class="sourceLine" id="cb51-2" title="2"><span class="kw">const</span> res <span class="op">=</span> <span class="cf">await</span> <span class="at">fetch</span>(<span class="vs">`/tweets`</span><span class="op">,</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb51-3" title="3">  <span class="dt">method</span><span class="op">:</span> <span class="st">&quot;POST&quot;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb51-4" title="4">  <span class="dt">headers</span><span class="op">:</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb51-5" title="5">    <span class="st">&quot;Content-Type&quot;</span><span class="op">:</span> <span class="st">&quot;application/json&quot;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb51-6" title="6">  <span class="op">},</span></a>
+<a class="sourceLine" id="cb51-7" title="7"><span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb51-8" title="8"></a>
+<a class="sourceLine" id="cb51-9" title="9"><span class="co">// Without proxy</span></a>
+<a class="sourceLine" id="cb51-10" title="10"><span class="kw">const</span> res <span class="op">=</span> <span class="cf">await</span> <span class="at">fetch</span>(<span class="vs">`http://localhost:8080/tweets`</span><span class="op">,</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb51-11" title="11">  <span class="dt">method</span><span class="op">:</span> <span class="st">&quot;POST&quot;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb51-12" title="12">  <span class="dt">headers</span><span class="op">:</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb51-13" title="13">    <span class="st">&quot;Content-Type&quot;</span><span class="op">:</span> <span class="st">&quot;application/json&quot;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb51-14" title="14">  <span class="op">},</span></a>
+<a class="sourceLine" id="cb51-15" title="15"><span class="op">}</span>)<span class="op">;</span></a></code></pre></div>
+<p>Your backend server is already set up to accept all requests from <code>http://localhost:3000</code> using <code>cors</code>:</p>
+<div class="sourceCode" id="cb52"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb52-1" title="1"><span class="co">// in twitter-back-end/app.js</span></a>
+<a class="sourceLine" id="cb52-2" title="2"><span class="va">app</span>.<span class="at">use</span>(<span class="at">cors</span>(<span class="op">{</span> <span class="dt">origin</span><span class="op">:</span> <span class="st">&quot;http://localhost:3000&quot;</span> <span class="op">}</span>))<span class="op">;</span></a></code></pre></div>
+<p>Before moving onto the second phase, start your frontend server and make sure that your backend server is still up and running!</p>
+<h2 id="phase-2-user-registration-form">Phase 2: User registration form</h2>
+<p>Now it’s time to create the user registration form! Begin by creating a <code>components</code> directory to hold all your components in your frontend application’s <code>src</code> directory. Then create a <code>session</code> directory within your <code>components</code> directory. This folder will hold your registration form component and login form component. These extra directories are just to help organize your components. They’re not necessary. But, as the number of components that you has grows, it helps to have them organized like this.</p>
+<p>Create a <code>RegistrationForm.js</code> file to render a user sign-up form. You’ll be setting up a default state for your component’s input fields, so make <code>RegistrationForm</code> a class component:</p>
+<div class="sourceCode" id="cb53"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb53-1" title="1"><span class="co">// ./twitter-front-end/src/components/session/RegistrationForm.js</span></a>
+<a class="sourceLine" id="cb53-2" title="2"></a>
+<a class="sourceLine" id="cb53-3" title="3"><span class="im">import</span> React <span class="im">from</span> <span class="st">&#39;react&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb53-4" title="4"></a>
+<a class="sourceLine" id="cb53-5" title="5"><span class="kw">class</span> RegistrationForm <span class="kw">extends</span> <span class="va">React</span>.<span class="at">Component</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb53-6" title="6">  <span class="at">constructor</span>(props) <span class="op">{</span></a>
+<a class="sourceLine" id="cb53-7" title="7">    <span class="kw">super</span>(props)<span class="op">;</span></a>
+<a class="sourceLine" id="cb53-8" title="8">    <span class="co">// </span><span class="al">TODO</span><span class="co">: Set up default state</span></a>
+<a class="sourceLine" id="cb53-9" title="9">    <span class="kw">this</span>.<span class="at">state</span> <span class="op">=</span> <span class="op">{};</span></a>
+<a class="sourceLine" id="cb53-10" title="10">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb53-11" title="11"></a>
+<a class="sourceLine" id="cb53-12" title="12">  <span class="at">render</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb53-13" title="13">    <span class="co">// </span><span class="al">TODO</span><span class="co">: Render registration form</span></a>
+<a class="sourceLine" id="cb53-14" title="14">    <span class="cf">return</span> (</a>
+<a class="sourceLine" id="cb53-15" title="15">      <span class="op">&lt;</span>form<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb53-16" title="16">      &lt;/form<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb53-17" title="17">    )<span class="op">;</span></a>
+<a class="sourceLine" id="cb53-18" title="18">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb53-19" title="19"><span class="op">}</span></a>
+<a class="sourceLine" id="cb53-20" title="20"></a>
+<a class="sourceLine" id="cb53-21" title="21"><span class="im">export</span> <span class="im">default</span> RegistrationForm<span class="op">;</span></a></code></pre></div>
+<p>Take a moment to update your <code>App.js</code> file so that it renders your <code>RegistrationForm</code> with a “Twitter Lite” title:</p>
+<div class="sourceCode" id="cb54"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb54-1" title="1"><span class="im">import</span> React <span class="im">from</span> <span class="st">&#39;react&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb54-2" title="2"><span class="im">import</span> RegistrationForm <span class="im">from</span> <span class="st">&#39;./components/session/RegistrationForm&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb54-3" title="3"></a>
+<a class="sourceLine" id="cb54-4" title="4"><span class="kw">const</span> App <span class="op">=</span> () <span class="kw">=&gt;</span> (</a>
+<a class="sourceLine" id="cb54-5" title="5">  <span class="op">&lt;</span>div<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb54-6" title="6">    <span class="op">&lt;</span>h1<span class="op">&gt;</span>Twitter Lite&lt;/h1<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb54-7" title="7">    <span class="op">&lt;</span>RegistrationForm /<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb54-8" title="8">  &lt;/div<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb54-9" title="9">)<span class="op">;</span></a>
+<a class="sourceLine" id="cb54-10" title="10"></a>
+<a class="sourceLine" id="cb54-11" title="11"><span class="im">export</span> <span class="im">default</span> App<span class="op">;</span></a></code></pre></div>
+<p>As you might remember from creating your initial frontend client for your tweets application, you used scripts with event listeners to handle sign up requests.</p>
+<p>Instead of using scripts to handle your sign up requests, you’ll define an <code>onChange</code> event handler method to set your component’s <code>state</code> to the value of user input fields. Then you’ll create a <code>registerUser</code> method that will house the logic to use your <code>state</code> and make a POST request to create a user with the Fetch API.</p>
+<p>Begin by setting your <code>RegistrationForm</code> component’s default <code>username</code>, <code>email</code>, and <code>password</code> state to empty strings. Now let’s move forward to rendering the form!</p>
+<h3 id="rendering-the-form">Rendering the form</h3>
+<p>Return a <code>&lt;form&gt;</code> element within your <code>render()</code> method. Within the form, render an <code>&lt;h2&gt;</code> with the content “Register”, three input fields, and a submit button. You’ll want to create a <code>text</code> type field for your user to input a username. Set the <code>name</code> of this field to be “username” and the <code>placeholder</code> to be “Enter Username”. You’ll also want to set the <code>value</code> of this field to be your component’s <code>username</code> state.</p>
+<p>If you try to type in your “username” field right now, you’ll notice that you are unable to. This is because you are setting the value of the field to be <code>this.state.username</code>, which will always be an empty string unless you update that slice of state. Note that you can have your render method destructure the state into all the variables you need before you return the JSX:</p>
+<div class="sourceCode" id="cb55"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb55-1" title="1"><span class="at">render</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb55-2" title="2">  <span class="kw">const</span> <span class="op">{</span> username<span class="op">,</span> email<span class="op">,</span> password <span class="op">}</span> <span class="op">=</span> <span class="kw">this</span>.<span class="at">state</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb55-3" title="3">  <span class="cf">return</span> (</a>
+<a class="sourceLine" id="cb55-4" title="4">    <span class="co">// </span><span class="al">TODO</span><span class="co">: Render form</span></a>
+<a class="sourceLine" id="cb55-5" title="5">  )</a>
+<a class="sourceLine" id="cb55-6" title="6"><span class="op">}</span></a></code></pre></div>
+<h3 id="updating-state">Updating state</h3>
+<p>This is where creating <code>onChange</code> event handler methods to update state come into play! You’ll want to add an <code>onChange</code> listener to update state with the user input. Begin by creating an <code>updateUsername</code> method:</p>
+<div class="sourceCode" id="cb56"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb56-1" title="1">updateUsername <span class="op">=</span> (e) <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb56-2" title="2">  <span class="kw">this</span>.<span class="at">setState</span>(<span class="op">{</span> <span class="dt">username</span><span class="op">:</span> <span class="va">e</span>.<span class="va">target</span>.<span class="at">value</span> <span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb56-3" title="3"><span class="op">}</span></a></code></pre></div>
+<p>Now update your username input field to have an <code>onChange</code> handler:</p>
+<pre class="jsx"><code>&lt;input
+  type=&quot;text&quot;
+  value={username}
+  onChange={this.updateUsername}
+  name=&quot;username&quot;
+  placeholder=&quot;Enter Username&quot;
+/&gt;</code></pre>
+<p>Follow the same pattern to create your email and password fields with their prospective <code>onChange</code> handler methods to update state. Remember that HTML inputs have different type attributes (i.e. <code>type="email"</code> and <code>type="password"</code>). JSX input fields also have access to those different type attributes.</p>
+<p>Now start your server and test your controlled input fields. You should be able to type and erase within your fields. However if you try submitting the form, nothing will happen. This is because you haven’t added an <code>onSubmit</code> event listener to your form! Add an <code>onSubmit</code> handler to your form to invoke a <code>registerUser</code> method that you will define. Your form’s opening tag should look something like this:</p>
+<pre class="jsx"><code>&lt;form onSubmit={this.registerUser}&gt;</code></pre>
+<p>Alternatively, you could define an <code>onClick</code> event listener to your form’s submit button like so:</p>
+<pre class="jsx"><code>&lt;button type=&quot;submit&quot; onClick={this.registerUser}&gt;
+  Sign Up
+&lt;/button&gt;</code></pre>
+<p>In this case, your component would simply be listening for a <em>click</em> event from the submit button, instead of a <em>submit</em> event from the form.</p>
+<h3 id="registering-a-user">Registering a user</h3>
+<p>Now let’s define a <code>registerUser</code> method for your <code>onSubmit</code> listener! As you have learned in the event handling readings, remember that <code>submit</code> events automatically prompt a GET request to re-render the page. Make sure to prevent the form from re-rendering by using <code>e.preventDefault()</code> at the beginning of your submit event listener. (If you handled the button’s click event, you’d want to do the same, prevent the default action from occurring.)</p>
+<div class="sourceCode" id="cb60"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb60-1" title="1">registerUser <span class="op">=</span> (e) <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb60-2" title="2">  <span class="va">e</span>.<span class="at">preventDefault</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb60-3" title="3">  <span class="co">// </span><span class="al">TODO</span><span class="co">: Send a POST request to create a user</span></a>
+<a class="sourceLine" id="cb60-4" title="4"><span class="op">}</span></a></code></pre></div>
+<p>In your <code>registerUser</code> method, use the Fetch API to create a user. You can do so by making a POST request to your backend API. As a reminder, a fetch call takes in the following parameters: an endpoint URL to make a request and an options object to specify a fetch call’s method, body, and headers. Feel free to reference the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch#Supplying_request_options">Fetch API docs</a> for more reminders.</p>
+<p>Use the Fetch API to make a POST request to <code>/users</code>. Remember that you can make use of proxy to make a request to <code>/users</code> instead of <code>http://localhost:8080/users</code>.</p>
+<p>You’ll want to use the user’s username, email, and password entries as the body of the request. You can do so by transforming your component’s <code>state</code> into JSON and setting it as the <code>body</code> property of the fetch call’s options object. Since you are making a POST request with a JSON string body, don’t forget to set your call’s <code>headers</code> option to include <code>"Content-Type": "application/json"</code>.</p>
+<p>Since you’ll want to await your fetch call, make your <code>registerUser</code> method an asynchronous function to do so. Wrap your fetch call in a <code>try/catch</code> statement. Now remember that the Fetch API does not throw errors, so you’ll need to manually check whether fetch response is valid and throw the response if it is not:</p>
+<div class="sourceCode" id="cb61"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb61-1" title="1"><span class="cf">if</span> (<span class="op">!</span><span class="va">res</span>.<span class="at">ok</span>) <span class="op">{</span></a>
+<a class="sourceLine" id="cb61-2" title="2">  <span class="cf">throw</span> res<span class="op">;</span></a>
+<a class="sourceLine" id="cb61-3" title="3"><span class="op">}</span></a></code></pre></div>
+<p>Don’t forget about catching your errors. In the future, you’ll use your application’s global state to keep track of and render errors. For now, just console error the caught error responses in the <code>catch</code> block. You’ll see these errors as the full fetch response thrown from the <code>!res.ok</code> statement.</p>
+<p>You’ll also want to sign in your users as soon as they register. Take a moment to remember that you have set up a JSON web token in the backend routes to manage your user sessions. Remember that you can access the <code>token</code> and <code>user.id</code> from your fetch response, once it is parsed in JSON. In a later phase, you’ll use <a href="https://reactjs.org/docs/context.html">React Context</a> with cookies to share these values across different components.</p>
+<p>For now, test your <code>registerUser</code> method by console logging the <code>token</code> and <code>user.id</code> from your fetch response. Make sure that you have parsed your response in JSON. Upon a successful user registration, you should see a JSON web token and a user ID in your frontend console!</p>
+<p>Now let’s set up your frontend routes!</p>
+<h2 id="phase-3-set-up-routes">Phase 3: Set up routes</h2>
+<p>Take a moment to install <code>react-router-dom</code>:</p>
+<div class="sourceCode" id="cb62"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb62-1" title="1"><span class="ex">npm</span> install react-router-dom@^5.0.0</a></code></pre></div>
+<p>Now set up <code>BrowserRouter</code> in your entry file by wrapping your rendered <code>App</code> component. Then set up the following skeleton files for your <code>LoginForm</code>, <code>Home</code>, and <code>Profile</code> components. Your <code>Home</code> and <code>Profile</code> components should live in your <code>components</code> directory, while your <code>LoginForm</code> should live with your <code>RegistrationForm</code> in the <code>session</code> directory.</p>
+<h3 id="loginform">LoginForm</h3>
+<div class="sourceCode" id="cb63"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb63-1" title="1"><span class="co">// ./twitter-front-end/src/components/session/LoginForm.js</span></a>
+<a class="sourceLine" id="cb63-2" title="2"><span class="im">import</span> React <span class="im">from</span> <span class="st">&#39;react&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb63-3" title="3"></a>
+<a class="sourceLine" id="cb63-4" title="4"><span class="kw">class</span> LoginForm <span class="kw">extends</span> <span class="va">React</span>.<span class="at">Component</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb63-5" title="5">  <span class="at">constructor</span>(props) <span class="op">{</span></a>
+<a class="sourceLine" id="cb63-6" title="6">    <span class="kw">super</span>(props)<span class="op">;</span></a>
+<a class="sourceLine" id="cb63-7" title="7">    <span class="co">// </span><span class="al">TODO</span><span class="co">: Set up default state</span></a>
+<a class="sourceLine" id="cb63-8" title="8">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb63-9" title="9"></a>
+<a class="sourceLine" id="cb63-10" title="10">  <span class="at">render</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb63-11" title="11">    <span class="cf">return</span> (</a>
+<a class="sourceLine" id="cb63-12" title="12">      <span class="op">&lt;</span>form<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb63-13" title="13">        <span class="op">&lt;</span>h2<span class="op">&gt;</span>Log In&lt;/h2<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb63-14" title="14">      &lt;/form<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb63-15" title="15">    )<span class="op">;</span></a>
+<a class="sourceLine" id="cb63-16" title="16">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb63-17" title="17"><span class="op">};</span></a>
+<a class="sourceLine" id="cb63-18" title="18"></a>
+<a class="sourceLine" id="cb63-19" title="19"><span class="im">export</span> <span class="im">default</span> LoginForm<span class="op">;</span></a></code></pre></div>
+<h3 id="home">Home</h3>
+<div class="sourceCode" id="cb64"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb64-1" title="1"><span class="co">// ./twitter-front-end/src/components/Home.js</span></a>
+<a class="sourceLine" id="cb64-2" title="2"><span class="im">import</span> React <span class="im">from</span> <span class="st">&#39;react&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb64-3" title="3"></a>
+<a class="sourceLine" id="cb64-4" title="4"><span class="kw">class</span> Home <span class="kw">extends</span> <span class="va">React</span>.<span class="at">Component</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb64-5" title="5">  <span class="at">constructor</span>(props) <span class="op">{</span></a>
+<a class="sourceLine" id="cb64-6" title="6">    <span class="kw">super</span>(props)<span class="op">;</span></a>
+<a class="sourceLine" id="cb64-7" title="7">    <span class="co">// </span><span class="al">TODO</span><span class="co">: Set up default state</span></a>
+<a class="sourceLine" id="cb64-8" title="8">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb64-9" title="9"></a>
+<a class="sourceLine" id="cb64-10" title="10">  <span class="kw">async</span> <span class="at">componentDidMount</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb64-11" title="11">    <span class="co">// </span><span class="al">TODO</span><span class="co">: Fetch tweets</span></a>
+<a class="sourceLine" id="cb64-12" title="12">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb64-13" title="13"></a>
+<a class="sourceLine" id="cb64-14" title="14">  <span class="at">render</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb64-15" title="15">    <span class="cf">return</span> (</a>
+<a class="sourceLine" id="cb64-16" title="16">      <span class="op">&lt;</span>div<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb64-17" title="17">        <span class="op">&lt;</span>h1<span class="op">&gt;</span>Home Page&lt;/h1<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb64-18" title="18">      &lt;/div<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb64-19" title="19">    )<span class="op">;</span></a>
+<a class="sourceLine" id="cb64-20" title="20">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb64-21" title="21"><span class="op">};</span></a>
+<a class="sourceLine" id="cb64-22" title="22"></a>
+<a class="sourceLine" id="cb64-23" title="23"><span class="im">export</span> <span class="im">default</span> Home<span class="op">;</span></a></code></pre></div>
+<h3 id="profile">Profile</h3>
+<div class="sourceCode" id="cb65"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb65-1" title="1"><span class="co">// ./twitter-front-end/src/components/Profile.js</span></a>
+<a class="sourceLine" id="cb65-2" title="2"><span class="im">import</span> React <span class="im">from</span> <span class="st">&#39;react&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb65-3" title="3"></a>
+<a class="sourceLine" id="cb65-4" title="4"><span class="kw">class</span> Profile <span class="kw">extends</span> <span class="va">React</span>.<span class="at">Component</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb65-5" title="5">  <span class="at">constructor</span>(props) <span class="op">{</span></a>
+<a class="sourceLine" id="cb65-6" title="6">    <span class="kw">super</span>(props)<span class="op">;</span></a>
+<a class="sourceLine" id="cb65-7" title="7">    <span class="co">// </span><span class="al">TODO</span><span class="co">: Set up default state</span></a>
+<a class="sourceLine" id="cb65-8" title="8">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb65-9" title="9"></a>
+<a class="sourceLine" id="cb65-10" title="10">  <span class="kw">async</span> <span class="at">componentDidMount</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb65-11" title="11">    <span class="co">// </span><span class="al">TODO</span><span class="co">: Fetch user and their tweets</span></a>
+<a class="sourceLine" id="cb65-12" title="12">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb65-13" title="13"></a>
+<a class="sourceLine" id="cb65-14" title="14">  <span class="at">render</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb65-15" title="15">    <span class="cf">return</span> (</a>
+<a class="sourceLine" id="cb65-16" title="16">      <span class="op">&lt;</span>h1<span class="op">&gt;</span>Profile Page&lt;/h1<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb65-17" title="17">    )<span class="op">;</span></a>
+<a class="sourceLine" id="cb65-18" title="18">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb65-19" title="19"><span class="op">};</span></a>
+<a class="sourceLine" id="cb65-20" title="20"></a>
+<a class="sourceLine" id="cb65-21" title="21"><span class="im">export</span> <span class="im">default</span> Profile<span class="op">;</span></a></code></pre></div>
+<p>Create the following routes within a <code>&lt;Switch&gt;</code> component in your <code>App.js</code> file:</p>
+<table>
+<thead>
+<tr class="header">
+<th>URL Path</th>
+<th>Components</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>/</code></td>
+<td><code>Home</code></td>
+</tr>
+<tr class="even">
+<td><code>/register</code></td>
+<td><code>RegistrationForm</code></td>
+</tr>
+<tr class="odd">
+<td><code>/login</code></td>
+<td><code>LoginForm</code></td>
+</tr>
+<tr class="even">
+<td><code>/users/:userId</code></td>
+<td><code>Profile</code></td>
+</tr>
+</tbody>
+</table>
+<p>Now that you have your routes set up, take a moment to create a <code>&lt;nav&gt;</code> bar to render your “Register”, “Login”, and “Home” navigation links. Note that you won’t be creating a link for the current user’s profile <em>yet</em>. Use <code>&lt;NavLink&gt;</code> components to create your links so that you can style active links. Create an <code>.active</code> class in your <code>index.css</code> file to style your active links to be bold.</p>
+<p>Now you’re going to create a <code>ProtectedRoute</code> as a higher order component (a component that takes in another component as an argument) to ensure that only logged users can view the <code>Profile</code> and <code>Home</code> pages. Your <code>&lt;ProtectedRoute&gt;</code> will use your current user context to determine whether your user is logged in. If the user is not logged in, the route will render a <code>&lt;Redirect&gt;</code> component to redirect the user to the login page.</p>
+<p>You’ll use a <code>currentUserId</code> prop to determine whether a route’s component or a <code>&lt;Redirect&gt;</code> is rendered. In the next phase, you’ll create a <code>UserContext</code> that will pass the <code>currentUserId</code> information as a prop into your <code>App</code> component. Then you can check whether the <code>currentUserId</code> is <em>truthy</em> or <em>falsey</em> to determine whether your <code>ProtectedRoute</code> renders a protected component (i.e. <code>Home</code>) or redirects users to the <code>/login</code> path.</p>
+<p>Make a new <code>Routes.js</code> file in your <code>src</code> directory. Think of what you’ll need to import to create routes with redirection. Just like how you can use <code>window.location.href</code> into redirect a user upon an unsuccessful login, you can use a <code>&lt;ProtectedRoute&gt;</code> component to wrap your <code>&lt;Route&gt;</code> components to redirect users.</p>
+<div class="sourceCode" id="cb66"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb66-1" title="1"><span class="co">// Excerpt from login script file for previous Twitter frontend client</span></a>
+<a class="sourceLine" id="cb66-2" title="2"><span class="cf">if</span> (<span class="va">res</span>.<span class="at">status</span> <span class="op">===</span> <span class="dv">401</span>) <span class="op">{</span></a>
+<a class="sourceLine" id="cb66-3" title="3">  <span class="va">window</span>.<span class="va">location</span>.<span class="at">href</span> <span class="op">=</span> <span class="st">&quot;/log-in&quot;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb66-4" title="4">  <span class="cf">return</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb66-5" title="5"><span class="op">}</span></a></code></pre></div>
+<p>The <code>ProtectedRoute</code> below destructures and distributes its props to the <code>Route</code> component it returns. Note that the <code>ProtectedRoute</code> will expect to receive route props (<code>component</code>, <code>path</code>, and <code>exact</code>) as well as an additional <code>currentUserId</code> prop.</p>
+<p>Just like how a <code>Route</code> component references its <code>component</code>, <code>path</code>, and <code>exact</code> flag props to create a front-end route, the <code>ProtectedRoute</code> will use the same props to create a protected front-end route as well as check whether its <code>currentUserId</code> prop is valid. The route’s <code>component</code> will be conditionally rendered based on whether there is a valid <code>currentUserId</code> prop.</p>
+<p>Since it is standard to capitalize components, the route below uses the syntax <code>component: Component</code> to rename the <code>component</code> prop as <code>Component</code>. If the <code>currentUserId</code> is <em>falsey</em>, then the route would redirect to the <code>/login</code> path instead of rendering the <code>Component</code>.</p>
+<div class="sourceCode" id="cb67"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb67-1" title="1"><span class="im">export</span> <span class="kw">const</span> ProtectedRoute <span class="op">=</span> (<span class="op">{</span> <span class="dt">component</span><span class="op">:</span> Component<span class="op">,</span> path<span class="op">,</span> currentUserId<span class="op">,</span> exact <span class="op">}</span>) <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb67-2" title="2">  <span class="cf">return</span> (</a>
+<a class="sourceLine" id="cb67-3" title="3">    <span class="op">&lt;</span>Route</a>
+<a class="sourceLine" id="cb67-4" title="4">      path<span class="op">={</span>path<span class="op">}</span></a>
+<a class="sourceLine" id="cb67-5" title="5">      exact<span class="op">={</span>exact<span class="op">}</span></a>
+<a class="sourceLine" id="cb67-6" title="6">      render<span class="op">={</span>(props) <span class="kw">=&gt;</span></a>
+<a class="sourceLine" id="cb67-7" title="7">        currentUserId <span class="op">?</span> <span class="op">&lt;</span>Component <span class="op">{</span>...<span class="at">props</span><span class="op">}</span> /&gt; : <span class="op">&lt;</span>Redirect to<span class="op">=</span><span class="st">&quot;/login&quot;</span> /&gt;</a>
+<a class="sourceLine" id="cb67-8" title="8">      <span class="op">}</span></a>
+<a class="sourceLine" id="cb67-9" title="9">    /&gt;</a>
+<a class="sourceLine" id="cb67-10" title="10">  )<span class="op">;</span></a>
+<a class="sourceLine" id="cb67-11" title="11"><span class="op">};</span></a></code></pre></div>
+<p>On another note, you also don’t want your logged in users to be able to view the login or registration forms. You can prevent them from viewing the session forms by creating <code>AuthRoute</code> components that do the opposite of your <code>ProtectedRoute</code> components. Your <code>AuthRoute</code> will redirect logged in users to the home page (<code>"/"</code>) if they try to navigate to the authentication routes (<code>"/login"</code> or <code>"/register"</code>). Your <code>AuthRoute</code> will also take care of redirecting users to the home page once they’re logged in.</p>
+<div class="sourceCode" id="cb68"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb68-1" title="1"><span class="im">export</span> <span class="kw">const</span> AuthRoute <span class="op">=</span> (<span class="op">{</span> <span class="dt">component</span><span class="op">:</span> Component<span class="op">,</span> path<span class="op">,</span> currentUserId<span class="op">,</span> exact <span class="op">}</span>) <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb68-2" title="2">  <span class="cf">return</span> (</a>
+<a class="sourceLine" id="cb68-3" title="3">    <span class="op">&lt;</span>Route</a>
+<a class="sourceLine" id="cb68-4" title="4">      path<span class="op">={</span>path<span class="op">}</span></a>
+<a class="sourceLine" id="cb68-5" title="5">      exact<span class="op">={</span>exact<span class="op">}</span></a>
+<a class="sourceLine" id="cb68-6" title="6">      render<span class="op">={</span>(props) <span class="kw">=&gt;</span></a>
+<a class="sourceLine" id="cb68-7" title="7">        currentUserId <span class="op">?</span> <span class="op">&lt;</span>Redirect to<span class="op">=</span><span class="st">&quot;/&quot;</span> /&gt; : <span class="op">&lt;</span>Component <span class="op">{</span>...<span class="at">props</span><span class="op">}</span> /&gt;</a>
+<a class="sourceLine" id="cb68-8" title="8">      <span class="op">}</span></a>
+<a class="sourceLine" id="cb68-9" title="9">    /&gt;</a>
+<a class="sourceLine" id="cb68-10" title="10">  )<span class="op">;</span></a>
+<a class="sourceLine" id="cb68-11" title="11"><span class="op">};</span></a></code></pre></div>
+<p>Notice how both your <code>ProtectedRoute</code> and <code>AuthRoute</code> simply deconstruct the props that they receive to return a new <code>&lt;Route&gt;</code> that either renders a specified component (with props) or a <code>&lt;Redirect&gt;</code> to a specified path.</p>
+<p>Now that you have created your <code>ProtectedRoute</code> and <code>AuthRoute</code> components, take a moment to refactor your routes! Import your route wrapper components into your <code>App.js</code> file. Think of which routes you want to protect and which routes you want to hide from authenticated users. For example, you would use your <code>ProtectedRoute</code> to prevent your home page from being viewed by unauthenticated users:</p>
+<pre class="jsx"><code>&lt;ProtectedRoute exact path=&quot;/&quot; component={Home} /&gt;</code></pre>
+<p>Lastly, think of how might you want to order your routes within the <code>&lt;Switch&gt;</code> tags.</p>
+<p>Try navigating to your <code>Home</code> route. If you’ve set up your routes correctly, you should be redirected to the <code>/login</code> route. This is because the route’s <code>currentUserId</code> prop is null, meaning that a <code>&lt;Redirect&gt;</code> will be rendered instead of the <code>&lt;Home&gt;</code> component!</p>
+<h2 id="phase-4-use-react-context">Phase 4: Use React Context</h2>
+<p>Now that you have your <code>ProtectedRoute</code> and <code>AuthRoute</code> set up, you should easily be able to tell if your context on a current user’s login state is properly shared across the application. Users will be redirected to the <code>"/login"</code> page if they aren’t logged in, or redirected to the home <code>"/"</code> page if they are. Let’s begin by setting up a <code>UserContext</code>!</p>
+<p>Creating a <code>contexts</code> directory in your <code>src</code> directory. This folder will house the current user context. Create a <code>UserContext.js</code> file and use the <code>createContext()</code> method to generate a current user context, like so:</p>
+<div class="sourceCode" id="cb70"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb70-1" title="1"><span class="co">// ./twitter-front-end/src/contexts/UserContext.js</span></a>
+<a class="sourceLine" id="cb70-2" title="2"><span class="im">import</span> <span class="op">{</span> createContext <span class="op">}</span> <span class="im">from</span> <span class="st">&#39;react&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb70-3" title="3"></a>
+<a class="sourceLine" id="cb70-4" title="4"><span class="kw">const</span> UserContext <span class="op">=</span> <span class="at">createContext</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb70-5" title="5"></a>
+<a class="sourceLine" id="cb70-6" title="6"><span class="im">export</span> <span class="im">default</span> UserContext<span class="op">;</span></a></code></pre></div>
+<p>Now that you’ve set up a <code>UserContext</code>, you’ll need to assign components that <em>provide</em> the context and components that <em>consume</em> the context. You can do so by wrapping your components in a similar way that you wrapped your routes to create <code>AuthRoute</code> and <code>ProtectedRoute</code> components.</p>
+<h3 id="setting-up-the-parent-provider">Setting up the parent provider</h3>
+<p>Since you want your entire application to have access to whether a current user is logged in, create a wrapper component with <a href="https://reactjs.org/docs/context.html#contextprovider">Context.Provider</a> for your <code>App</code> component.</p>
+<p>Create an <code>AppWithContext.js</code> file as a sibling to your <code>App.js</code> file. You’ll be using React, the <code>UserContext</code>, and <code>App</code> component, so be sure to import each of these.</p>
+<p>Now create a new class component named <code>AppWithContext</code>:</p>
+<div class="sourceCode" id="cb71"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb71-1" title="1"><span class="kw">class</span> AppWithContext <span class="kw">extends</span> <span class="va">React</span>.<span class="at">Component</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb71-2" title="2">  <span class="at">constructor</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb71-3" title="3">    <span class="kw">super</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb71-4" title="4">    <span class="co">// </span><span class="al">TODO</span><span class="co">: Set default context</span></a>
+<a class="sourceLine" id="cb71-5" title="5">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb71-6" title="6"></a>
+<a class="sourceLine" id="cb71-7" title="7">  <span class="at">render</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb71-8" title="8">    <span class="co">// </span><span class="al">TODO</span><span class="co">: Render wrapper component</span></a>
+<a class="sourceLine" id="cb71-9" title="9">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb71-10" title="10"><span class="op">}</span></a></code></pre></div>
+<p>Be sure to export the <code>AppWithContext</code> class as the default export for the <code>AppWithContext</code> module!</p>
+<div class="sourceCode" id="cb72"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb72-1" title="1"><span class="im">export</span> <span class="im">default</span> AppWithContext<span class="op">;</span></a></code></pre></div>
+<p>Start by setting up the component’s default state, which will also be the default context. You’ll update this state with the <code>token</code> and user <code>id</code> from the registration and login fetch responses. Since you’ll be storing the <code>authToken</code> and <code>currentUserId</code> in the the cookie named <code>token</code>, you can persist user login by having the default state read and decode the cookie.</p>
+<p>First, <code>npm install</code> the cookie parsing package <code>js-cookie</code> in your frontend folder. Then import it at the top of your <code>AppWithContext.js</code> file:</p>
+<div class="sourceCode" id="cb73"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb73-1" title="1"><span class="im">import</span> Cookies <span class="im">from</span> <span class="st">&#39;js-cookie&#39;</span><span class="op">;</span></a></code></pre></div>
+<p>In your initial state, get the user id from the token if the token exists:</p>
+<div class="sourceCode" id="cb74"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb74-1" title="1"><span class="kw">let</span> authToken <span class="op">=</span> <span class="va">Cookies</span>.<span class="at">get</span>(<span class="st">&#39;token&#39;</span>)<span class="op">;</span> <span class="co">// get the cookie with the name of &#39;token&#39;</span></a>
+<a class="sourceLine" id="cb74-2" title="2"><span class="kw">let</span> currentUserId <span class="op">=</span> <span class="kw">null</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb74-3" title="3"><span class="cf">if</span> (authToken) <span class="op">{</span></a>
+<a class="sourceLine" id="cb74-4" title="4">  <span class="cf">try</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb74-5" title="5">    <span class="kw">const</span> payload <span class="op">=</span> <span class="va">authToken</span>.<span class="at">split</span>(<span class="st">&quot;.&quot;</span>)[<span class="dv">1</span>]<span class="op">;</span> <span class="co">// payload of a JWT is after the first period in the token string</span></a>
+<a class="sourceLine" id="cb74-6" title="6">    <span class="kw">const</span> decodedPayload <span class="op">=</span> <span class="at">atob</span>(payload)<span class="op">;</span> <span class="co">// payload needs to be decoded using the built-in function `atob`</span></a>
+<a class="sourceLine" id="cb74-7" title="7">    <span class="kw">const</span> payloadObj <span class="op">=</span> <span class="va">JSON</span>.<span class="at">parse</span>(decodedPayload)<span class="op">;</span> <span class="co">// convert the decoded payload into a POJO from a JSON string</span></a>
+<a class="sourceLine" id="cb74-8" title="8">    <span class="kw">const</span> <span class="op">{</span> <span class="dt">data</span><span class="op">:</span> <span class="op">{</span> id <span class="op">}}</span> <span class="op">=</span> payloadObj<span class="op">;</span> </a>
+<a class="sourceLine" id="cb74-9" title="9">    <span class="co">/* payloadObj will look like:</span></a>
+<a class="sourceLine" id="cb74-10" title="10"><span class="co">    payloadObj = {</span></a>
+<a class="sourceLine" id="cb74-11" title="11"><span class="co">      data: { id: ..., email: ... }</span></a>
+<a class="sourceLine" id="cb74-12" title="12"><span class="co">    }</span></a>
+<a class="sourceLine" id="cb74-13" title="13"><span class="co">    */</span></a>
+<a class="sourceLine" id="cb74-14" title="14">    currentUserId <span class="op">=</span> id<span class="op">;</span> <span class="co">// set currentUserId equal to the payload&#39;s user id</span></a>
+<a class="sourceLine" id="cb74-15" title="15">  <span class="op">}</span> <span class="cf">catch</span>(e) <span class="op">{</span></a>
+<a class="sourceLine" id="cb74-16" title="16">    <span class="co">// if there is an error parsing the token, then remove the &#39;token&#39; cookie</span></a>
+<a class="sourceLine" id="cb74-17" title="17">    authToken <span class="op">=</span> <span class="kw">null</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb74-18" title="18">    <span class="va">Cookies</span>.<span class="at">remove</span>(<span class="st">&#39;token&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb74-19" title="19">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb74-20" title="20"><span class="op">}</span></a>
+<a class="sourceLine" id="cb74-21" title="21"><span class="kw">this</span>.<span class="at">state</span> <span class="op">=</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb74-22" title="22">  <span class="dt">authToken</span><span class="op">:</span> authToken <span class="op">||</span> <span class="kw">null</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb74-23" title="23">  <span class="dt">currentUserId</span><span class="op">:</span> currentUserId<span class="op">,</span></a>
+<a class="sourceLine" id="cb74-24" title="24"><span class="op">};</span></a></code></pre></div>
+<p>This means that if there is an <code>authToken</code> or <code>currentUserId</code> stored in your browser’s cookie, those values will be set as the default state. If your browser’s cookie does not have an <code>authToken</code> or a <code>currentUserId</code>, then the default state will be set to <code>null</code>.</p>
+<p>Now take a moment to render your <code>&lt;App&gt;</code> component wrapped in <code>&lt;UserContext.Provider&gt;</code> tags so that your <code>UserContext</code> will be <em>provided</em> to your application:</p>
+<div class="sourceCode" id="cb75"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb75-1" title="1"><span class="at">render</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb75-2" title="2">  <span class="cf">return</span> (</a>
+<a class="sourceLine" id="cb75-3" title="3">    <span class="op">&lt;</span><span class="va">UserContext</span>.<span class="at">Provider</span> value<span class="op">={}&gt;</span></a>
+<a class="sourceLine" id="cb75-4" title="4">      <span class="op">&lt;</span>App/<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb75-5" title="5">    &lt;/<span class="va">UserContext</span>.<span class="at">Provider</span><span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb75-6" title="6">  )<span class="op">;</span></a>
+<a class="sourceLine" id="cb75-7" title="7"><span class="op">}</span></a></code></pre></div>
+<p>As a reminder, your <code>&lt;UserContext.Provider&gt;</code> component expects a <code>value</code> prop to pass to the application as context. You’ll manually pass this prop into your child components when creating the <em>consumer</em> wrapper components. Take a moment to update your <code>&lt;UserContext.Provider&gt;</code> to take in the component’s <code>state</code> as its <code>value</code> prop:</p>
+<div class="sourceCode" id="cb76"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb76-1" title="1"><span class="at">render</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb76-2" title="2">  <span class="cf">return</span> (</a>
+<a class="sourceLine" id="cb76-3" title="3">    <span class="op">&lt;</span><span class="va">UserContext</span>.<span class="at">Provider</span> value<span class="op">={</span><span class="kw">this</span>.<span class="at">state</span><span class="op">}&gt;</span></a>
+<a class="sourceLine" id="cb76-4" title="4">      <span class="op">&lt;</span>App /<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb76-5" title="5">    &lt;/<span class="va">UserContext</span>.<span class="at">Provider</span><span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb76-6" title="6">  )<span class="op">;</span></a>
+<a class="sourceLine" id="cb76-7" title="7"><span class="op">}</span></a></code></pre></div>
+<p>Now you have successfully set up the default context that can be provided to your application! However, think of where your user login and registration logic lives. The logic lives in the <code>RegistrationForm</code> and <code>LoginForm</code> components themselves. Remember that your fetch request returns a <code>token</code> and current user <code>id</code> in the response. How do you supply your application’s <code>UserContext</code> with information from the fetch response?</p>
+<p>You can set the <code>AppWithContext</code> component’s state (and therefore the <code>UserContext</code>) from your <code>RegistrationForm</code> and <code>LoginForm</code> components by passing in a method to the context value. This method will take care of updating the <code>AppWithContext</code> component’s state, which will then update the context. Since your <code>value</code> prop is set to the <code>AppWithContext</code> component’s state, updating the component’s state will update the entire application’s context.</p>
+<p>Define an <code>updateContext</code> method that takes in an <code>authToken</code> and <code>currentUserId</code>. You’ll use the method’s arguments to update the state of <code>AppWithContext</code>.</p>
+<p>The <code>setState()</code> method takes an optional callback as its second parameter so that you can have asynchronous behavior with <code>setState()</code>. Note that you can’t <code>await</code> on a <code>setState()</code> method since it doesn’t return a promise!</p>
+<p>Set an arrow function to console log <code>this.state</code> as the <code>setState()</code> method’s second parameter. This way, you can verify whether your <code>AppWithContext</code> state is actually being set when your <code>updateContext</code> method is called from a consumer component.</p>
+<p>Your <code>updateContext</code> method should look something like this:</p>
+<div class="sourceCode" id="cb77"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb77-1" title="1">updateContext <span class="op">=</span> (authToken<span class="op">,</span> currentUserId) <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb77-2" title="2">  <span class="kw">this</span>.<span class="at">setState</span>(<span class="op">{</span> authToken<span class="op">,</span> currentUserId <span class="op">},</span> () <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb77-3" title="3">    <span class="va">console</span>.<span class="at">log</span>(<span class="kw">this</span>.<span class="at">state</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb77-4" title="4">  <span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb77-5" title="5"><span class="op">}</span></a></code></pre></div>
+<p>Now whenever your <code>updateContext</code> method is called, you should see the <code>token</code> and <code>id</code> from your fetch response console logged as the state of <code>AppWithContext</code>!</p>
+<p>Registering or logging in a user will set the <code>token</code> cookie on your browser so you should be logged in upon refreshing the browser if you set the default state of <code>AppWithContext</code> correctly to extract the <code>token</code> and user’s <code>id</code> from the cookie properly. But you will only see those changes on a refresh because only the initial state reads from the cookie. That’s why the <code>updateContext</code> method is necessary so that we don’t need to force a refresh to see a user logged in right away.</p>
+<p>Take a moment to update your default state to include include your <code>updateContext</code> method, like so:</p>
+<div class="sourceCode" id="cb78"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb78-1" title="1"><span class="kw">this</span>.<span class="at">state</span> <span class="op">=</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb78-2" title="2">  <span class="dt">authToken</span><span class="op">:</span> authToken <span class="op">||</span> <span class="kw">null</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb78-3" title="3">  currentUserId<span class="op">,</span></a>
+<a class="sourceLine" id="cb78-4" title="4">  <span class="dt">updateContext</span><span class="op">:</span> <span class="kw">this</span>.<span class="at">updateContext</span></a>
+<a class="sourceLine" id="cb78-5" title="5"><span class="op">};</span></a></code></pre></div>
+<p>Great! Now your <code>AppWithContext</code> wrapper component is all set up. In your <code>index.js</code> file, replace your rendered <code>&lt;App /&gt;</code> component with the <code>&lt;AppWithContext /&gt;</code> wrapper component you just created.</p>
+<h3 id="setting-up-the-child-consumers">Setting up the child consumers</h3>
+<p>Now it’s time to create a wrapper component with <a href="https://reactjs.org/docs/context.html#contextconsumer">Context.Consumer</a> so that your <code>RegistrationForm</code> component will receive context information. In your <code>RegistrationForm.js</code> file, you’ll create a <code>RegistrationFormWithContext</code> wrapper component. Begin by importing the <code>UserContext</code> into the file.</p>
+<p>Create a <code>RegistrationFormWithContext</code> component that takes in props and returns your <code>RegistrationForm</code> wrapped with <code>&lt;UserContext.Consumer&gt;</code> tags. Remember that you passed in a <code>value</code> prop to your <code>&lt;UserContext.Provider&gt;</code> component in your <code>AppWithContext.js</code> file. <code>Context.Consumer</code> components receive this <code>value</code> prop to distribute into their rendered child components. As a reminder, <code>Context.Consumer</code> components require a <a href="https://reactjs.org/docs/render-props.html#using-props-other-than-render">function as a child</a> to pass a provided <code>value</code> prop as a <a href="https://cdb.reacttraining.com/use-a-render-prop-50de598f11ce">render prop</a>:</p>
+<div class="sourceCode" id="cb79"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb79-1" title="1"><span class="co">// MyContext.Consumer example from ReactJS docs:</span></a>
+<a class="sourceLine" id="cb79-2" title="2"></a>
+<a class="sourceLine" id="cb79-3" title="3"><span class="op">&lt;</span><span class="va">MyContext</span>.<span class="at">Consumer</span><span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb79-4" title="4">  <span class="op">{</span>value <span class="kw">=&gt;</span> <span class="co">/* render something based on the context value */</span><span class="op">}</span></a>
+<a class="sourceLine" id="cb79-5" title="5">&lt;/<span class="va">MyContext</span>.<span class="at">Consumer</span><span class="op">&gt;</span></a></code></pre></div>
+<p>In your <code>RegistrationFormWithContext</code> wrapper, you will render the <code>RegistrationForm</code> component with the <code>value.updateContext</code> method passed as an <code>updateContext</code> prop:</p>
+<div class="sourceCode" id="cb80"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb80-1" title="1"><span class="op">&lt;</span><span class="va">UserContext</span>.<span class="at">Consumer</span><span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb80-2" title="2">  <span class="op">{</span>value <span class="kw">=&gt;</span> <span class="op">&lt;</span>RegistrationForm <span class="co">/* </span><span class="al">TODO</span><span class="co">: Pass props */</span> /&gt;<span class="op">}</span></a>
+<a class="sourceLine" id="cb80-3" title="3">&lt;/<span class="va">UserContext</span>.<span class="at">Consumer</span><span class="op">&gt;</span></a></code></pre></div>
+<p>Don’t forget to also spread and pass in props received by the wrapper component (<code>{...props}</code>)! Make sure to update the <code>export default</code> statement to export the <code>RegistrationFormWithContext</code> instead of the <code>RegistrationForm</code>. Since you are using <code>export default</code>, you won’t need to manually rename component references in import statements. If a component is exported with <code>export default</code>, then that component is the only component that is actually exported from the file, no matter what their import reference is named.</p>
+<p>This means that if you use <code>export default RegistrationFormWithContext</code> instead of <code>export default RegistrationForm</code>, your <code>import RegistrationForm from './components/session/RegistrationForm'</code> statement in <code>App.js</code> will actually be importing your <code>RegistrationFormWithContext</code> component. By updating the export statement, your route will render your <code>RegistrationFormWithContext</code> wrapper component instead of the <code>RegistrationForm</code> component.</p>
+<p>Because you passed an <code>updateContext</code> prop in your wrapper component, you can now update the state of <code>AppWithContext</code> from within your <code>RegistrationForm</code> component by simply invoking <code>this.props.updateContext</code> with arguments from the fetch response (<code>token</code> and user <code>id</code>)!</p>
+<h3 id="updating-context">Updating context</h3>
+<p>Now let’s revisit the <code>registerUser</code> method in your <code>RegistrationForm</code> component. As you might remember, you last left off on accessing the <code>token</code> and <code>user.id</code> of your fetch response (after parsing it to JSON):</p>
+<div class="sourceCode" id="cb81"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb81-1" title="1"><span class="kw">const</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb81-2" title="2">  token<span class="op">,</span></a>
+<a class="sourceLine" id="cb81-3" title="3">  <span class="dt">user</span><span class="op">:</span> <span class="op">{</span> id <span class="op">},</span></a>
+<a class="sourceLine" id="cb81-4" title="4"><span class="op">}</span> <span class="op">=</span> <span class="cf">await</span> <span class="va">res</span>.<span class="at">json</span>()<span class="op">;</span></a></code></pre></div>
+<p>Now, you’ll invoke the <code>updateContext</code> method passed as a prop to update the state of <code>AppWithContext</code> so that your entire app knows that a user has been logged in.</p>
+<div class="sourceCode" id="cb82"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb82-1" title="1"><span class="kw">this</span>.<span class="va">props</span>.<span class="at">updateContext</span>(token<span class="op">,</span> id)<span class="op">;</span></a></code></pre></div>
+<p>Congratulations, you just set up a connection between the <code>App</code> and <code>RegistrationForm</code> components by using React Context! Now let’s share the <code>currentUserId</code> context with your routes so that you can test your user registration.</p>
+<h3 id="sharing-currentuserid-context-with-the-routes">Sharing currentUserId context with the routes</h3>
+<p>Let’s review the routes in your <code>App.js</code> file. At this point, your routes should either be <code>AuthRoute</code> or <code>ProtectedRoute</code> components, each with a <code>path</code> prop and a <code>component</code> prop. You’ll notice that your <code>AuthRoute</code> and <code>ProtectedRoute</code> wrapper routes expect a <code>currentUserId</code> prop. But where does this <code>currentUserId</code> prop come from? Let’s revisit your <code>AppWithContext.js</code> file to pass the <code>currentUserId</code> into <code>App</code>.</p>
+<p>Since your routes need access to the updated <code>currentUserId</code>, pass the <code>currentUserId</code> state (from your <code>AppWithContext</code> wrapper component) as a prop to your <code>App</code> component. This way your routes can simply reference <code>props.currentUserId</code> to know whether there is a <em>truthy</em> or <em>falsey</em> current user! Lastly, update your rendered routes to take in a <code>currentUserId</code> prop set to the value of the <code>App</code> component’s <code>currentUserId</code> prop.</p>
+<p>Now you can navigate to http://localhost:3000/register and create a new user. Upon successfully creating a user, you should receive a <code>201</code> status response in your backend terminal and be redirected to the home page!</p>
+<h2 id="phase-5-user-login-form">Phase 5: User login form</h2>
+<p>Creating your login form will be very similar to creating your registration form. You’ll want to render a <code>&lt;form&gt;</code> with a <code>&lt;h2&gt;</code> title of “Log In”, two input fields (email and password), and a <code>&lt;submit&gt;</code> button. You’ll also want to define the default <code>email</code> and <code>password</code> slices of state and create <code>onChange</code> handlers to set the state with input value from your login form. As a reminder, you can destructure your state into the <code>email</code> and <code>password</code> variables you need in the <code>render()</code> method:</p>
+<div class="sourceCode" id="cb83"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb83-1" title="1"><span class="at">render</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb83-2" title="2">  <span class="kw">const</span> <span class="op">{</span> email<span class="op">,</span> password <span class="op">}</span> <span class="op">=</span> <span class="kw">this</span>.<span class="at">state</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb83-3" title="3">  <span class="cf">return</span>(</a>
+<a class="sourceLine" id="cb83-4" title="4">    <span class="co">// </span><span class="al">TODO</span><span class="co">: Render form</span></a>
+<a class="sourceLine" id="cb83-5" title="5">  )</a>
+<a class="sourceLine" id="cb83-6" title="6"><span class="op">}</span></a></code></pre></div>
+<h3 id="updating-state-1">Updating state</h3>
+<p>Instead of creating two different methods to update specific slices of state, you can use interpolation with the event target’s name (<code>[e.target.name]</code>) to dynamically set the slice of state you want to update. Since you are referencing both the <code>name</code> and <code>value</code> of your event target, you can destructure those values to update state. For example, you could define and reuse the following method for all your input <code>onChange</code> handlers:</p>
+<div class="sourceCode" id="cb84"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb84-1" title="1">update <span class="op">=</span> (e) <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb84-2" title="2">  <span class="kw">const</span> <span class="op">{</span> name<span class="op">,</span> value <span class="op">}</span> <span class="op">=</span> <span class="va">e</span>.<span class="at">target</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb84-3" title="3">  <span class="kw">this</span>.<span class="at">setState</span>(<span class="op">{</span> [name]<span class="op">:</span> value <span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb84-4" title="4"><span class="op">};</span></a></code></pre></div>
+<p>Now each input field’s <code>onChange</code> prop should look something like this:</p>
+<pre class="jsx"><code>&lt;input
+  type=&quot;text&quot;
+  value={this.state.email}
+  onChange={this.update}
+  name=&quot;email&quot;
+  placeholder=&quot;Enter email&quot;
+/&gt;</code></pre>
+<p>Feel free to refactor your <code>onChange</code> handlers in your <code>RegistrationForm</code> component as well! Remember that you need to add an <code>onSubmit</code> handler to your form to invoke a <code>loginUser</code> method (like your registration form’s <code>registerUser</code> method).</p>
+<h3 id="logging-in-a-user">Logging in a user</h3>
+<p>In your <code>loginUser</code> method, make a fetch request to log in a user. You’ll do so by making a POST request to <code>/users/token</code>. You’ll use the component’s <code>email</code> and <code>password</code> state as a JSON string for your fetch request <code>body</code>. Since you’re sending a JSON string in your POST request, don’t forget to set your fetch request <code>headers</code> option to include <code>"Content-Type": "application/json"</code>.</p>
+<p>Remember that you’ll be awaiting your fetch call, so you need to make your <code>loginUser</code> method an asynchronous function. Then wrap your fetch call in a <code>try/catch</code> statement. You’ll need to throw an error within the <code>try</code> block if your response is unsuccessful (<code>!res.ok</code>). Like in your registration form, you’ll console error any unsuccessful fetch responses that were caught as errors in the <code>catch</code> block.</p>
+<p>To iterate, normally you would use your application’s global state to keep track of and render your application’s errors. But for today, you’ll simply console error any unsuccessful fetch requests.</p>
+<p>Remember that you want to use the JSON web <code>token</code> and current user <code>id</code> from your fetch response to update the <code>UserContext</code>. Take a moment to create a <code>LoginFormWithContext</code> wrapper to access <code>value</code>, the render prop of your <code>UserContext.Consumer</code> component. Make sure to spread and pass in the <code>props</code> it receives, as well as pass an <code>updateContext</code> prop with the <code>updateContext</code> method from the context <code>value</code>. Lastly, don’t forget to update the export statement in your <code>LoginForm.js</code> file.</p>
+<p>Now let’s return to your <code>loginUser</code> method. Begin by parsing your fetch response in JSON. Next you’ll want to access the <code>token</code> and <code>user.id</code> from your JSON response. Remember that you have passed an <code>updateContext</code> prop into the <code>LoginForm</code> through the <code>LoginFormWithContext</code> wrapper.</p>
+<p>You can now update the <code>UserContext</code> by invoking the <code>updateContext</code> prop with the <code>token</code> and <code>user.id</code> from the fetch response. Invoking the method will set the state of the <code>AppWithContext</code> component (so that these values can be shared across your application).</p>
+<p>Now it’s time to test your user login! Create a new user and return to the login form to verify that the login process works. You should have received a <code>200</code> status response in your backend terminal and have been redirected to the home page!</p>
+<h3 id="creating-login-and-logout-methods">Creating login and logout methods</h3>
+<p>Now that you have a successful user login through the <code>updateContext</code> method, let’s rename the method to <code>login</code> to give the method a more descriptive name. As a reminder, you can use <code>cmd + shift + f</code> to search through all of your project directory for whenever you use the <code>updateContext</code> method. Take a moment to refactor so that the <code>updateContext</code> method is renamed to be your <code>login</code> method.</p>
+<p>Now test your user login to ensure that your refactorization didn’t create any bugs. Once you have a working <code>login</code> method, you can easily create a <code>logout</code> method with similar logic! Instead of setting <code>authToken</code> and <code>currentUserId</code> values, you can reset them to be <code>null</code>. Make sure to also remove the token cookie once the setting of the state is complete (use the <code>Cookies.remove</code> method from the <code>js-cookie</code> package):</p>
+<div class="sourceCode" id="cb86"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb86-1" title="1">logout <span class="op">=</span> () <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb86-2" title="2">  <span class="kw">this</span>.<span class="at">setState</span>(<span class="op">{</span> <span class="dt">authToken</span><span class="op">:</span> <span class="kw">null</span><span class="op">,</span> <span class="dt">currentUserId</span><span class="op">:</span> <span class="kw">null</span> <span class="op">},</span> () <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb86-3" title="3">    <span class="va">console</span>.<span class="at">log</span>(<span class="kw">this</span>.<span class="at">state</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb86-4" title="4">    <span class="va">Cookies</span>.<span class="at">remove</span>(<span class="st">&#39;token&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb86-5" title="5">  <span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb86-6" title="6"><span class="op">}</span></a></code></pre></div>
+<p>Take a moment to set your <code>logout</code> method in the <code>AppWithContext</code> state to pass the method into the <code>UserContext</code> value. In the next phase, you’ll build more functionality in your home page by rendering a button that logs out a user upon click and rendering a tweets index.</p>
+<h2 id="phase-6-authenticated-home-page">Phase 6: Authenticated home page</h2>
+<p>When a user is redirected to the home page after logging in, a fetch request for all tweets should be made in the <code>componentDidMount()</code> method to update the <code>Home</code> component’s <code>tweets</code> state. Notice how your <code>componentDidMount()</code> is prefaced by the <code>async</code> keyword. This is to explicitly identify your code within the life cycle method to be asynchronous. Now take a moment to set the default <code>tweets</code> state to an empty array.</p>
+<h3 id="accessing-context-through-contexttype">Accessing context through contextType</h3>
+<p>Remember that you have created a <code>logout</code> method in your <code>AppWithContext</code> component and passed it into the <code>UserContext</code> through setting the method in the <code>AppWithContext</code> state. You also set the <code>authToken</code> as a slice of state in your <code>AppWithContext</code> component. This means that you should be able to receive the <code>logout</code> method and the <code>authToken</code> through the <code>UserContext</code>!</p>
+<p>You created wrapper components for your <code>RegistrationForm</code> and <code>LoginForm</code> components to access context. For your home page component, you’ll use the <code>static contextType</code> property to make a <code>this.context</code> object available to the class component.</p>
+<p>In your <code>Home</code> component, set the component’s context type to be the <code>UserContext</code> with the <code>static contextType</code> property:</p>
+<div class="sourceCode" id="cb87"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb87-1" title="1"><span class="co">// ./twitter-front-end/src/components/Home.js</span></a>
+<a class="sourceLine" id="cb87-2" title="2"><span class="im">import</span> React <span class="im">from</span> <span class="st">&#39;react&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb87-3" title="3"><span class="im">import</span> UserContext <span class="im">from</span> <span class="st">&#39;../contexts/UserContext&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb87-4" title="4"></a>
+<a class="sourceLine" id="cb87-5" title="5"><span class="kw">class</span> Home <span class="kw">extends</span> <span class="va">React</span>.<span class="at">Component</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb87-6" title="6">  <span class="at">constructor</span>(props) <span class="op">{</span></a>
+<a class="sourceLine" id="cb87-7" title="7">    <span class="kw">super</span>(props)<span class="op">;</span></a>
+<a class="sourceLine" id="cb87-8" title="8">    <span class="kw">this</span>.<span class="at">state</span> <span class="op">=</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb87-9" title="9">      <span class="dt">tweets</span><span class="op">:</span> []<span class="op">,</span></a>
+<a class="sourceLine" id="cb87-10" title="10">    <span class="op">}</span></a>
+<a class="sourceLine" id="cb87-11" title="11">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb87-12" title="12"></a>
+<a class="sourceLine" id="cb87-13" title="13">  <span class="kw">static</span> contextType <span class="op">=</span> UserContext<span class="op">;</span></a>
+<a class="sourceLine" id="cb87-14" title="14"></a>
+<a class="sourceLine" id="cb87-15" title="15">  <span class="kw">async</span> <span class="at">componentDidMount</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb87-16" title="16">    <span class="co">// </span><span class="al">TODO</span><span class="co">: Fetch tweets</span></a>
+<a class="sourceLine" id="cb87-17" title="17">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb87-18" title="18"></a>
+<a class="sourceLine" id="cb87-19" title="19">  <span class="at">render</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb87-20" title="20">    <span class="cf">return</span> (</a>
+<a class="sourceLine" id="cb87-21" title="21">      <span class="op">&lt;</span>div<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb87-22" title="22">        <span class="op">&lt;</span>h1<span class="op">&gt;</span>Home Page&lt;/h1<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb87-23" title="23">      &lt;/div<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb87-24" title="24">    )<span class="op">;</span></a>
+<a class="sourceLine" id="cb87-25" title="25">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb87-26" title="26"><span class="op">};</span></a>
+<a class="sourceLine" id="cb87-27" title="27"></a>
+<a class="sourceLine" id="cb87-28" title="28"><span class="im">export</span> <span class="im">default</span> Home<span class="op">;</span></a></code></pre></div>
+<p>In your <code>componentDidMount()</code> method, try console logging <code>this.context</code> to see what is available in the component’s context object. You should see <code>authToken</code> and <code>logout</code>. You’ll use the <code>authToken</code> in your fetch request’s authorization header and the <code>logout</code> method to log out users upon click of a button!</p>
+<p>Note that using the <code>static contextType</code> property is an alternative way to access context. It is still important to know how to manually pass render props through <code>Context.Consumer</code> components, as the <code>static contextType</code> property is only available for class components.</p>
+<h3 id="fetching-home-page-tweets">Fetching home page tweets</h3>
+<p>Write a <code>fetchTweets</code> method that will be invoked in your <code>componentDidMount()</code> method! If you simply made a fetch request to <code>/tweets</code> without setting request headers, the fetch call would would fail even though a current user is logged in. This is because your fetch call doesn’t know if your current user is logged in unless you explicitly set an authorization header.</p>
+<p>Think of how you can access the <code>authToken</code> from your application’s <code>UserContext</code> and set the authorization header. Set the <code>Authorization</code> header to the JSON web token that was stored in your <code>UserContext</code>, like so:</p>
+<div class="sourceCode" id="cb88"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb88-1" title="1"><span class="kw">const</span> res <span class="op">=</span> <span class="cf">await</span> <span class="at">fetch</span>(<span class="vs">`/tweets`</span>)<span class="op">;</span></a></code></pre></div>
+<h3 id="rendering-home-page-tweets">Rendering home page tweets</h3>
+<p>Upon a successful fetch, parse the response in JSON and return the <code>tweets</code> from the response. Then you can invoke and await the response of your <code>fetchTweets</code> method to set your component’s <code>tweets</code> state in your asynchronous <code>componentDidMount()</code>. Remember that setting the component’s <code>tweets</code> state will update the state before triggering a re-render. Now you can use the updated <code>tweets</code> state to render an unordered list of tweets! You should map over the <code>tweets</code> from <code>state</code> to generate the list of tweets, like so:</p>
+<div class="sourceCode" id="cb89"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb89-1" title="1"><span class="at">render</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb89-2" title="2">  <span class="cf">return</span> (</a>
+<a class="sourceLine" id="cb89-3" title="3">    <span class="op">&lt;</span>div<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb89-4" title="4">      <span class="op">&lt;</span>h1<span class="op">&gt;</span>Home Page&lt;/h1<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb89-5" title="5">      <span class="op">&lt;</span>ul<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb89-6" title="6">        <span class="op">{</span><span class="kw">this</span>.<span class="va">state</span>.<span class="va">tweets</span>.<span class="at">map</span>((tweet) <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb89-7" title="7">          <span class="kw">const</span> <span class="op">{</span> id<span class="op">,</span> message<span class="op">,</span> <span class="dt">user</span><span class="op">:</span> <span class="op">{</span> username <span class="op">}}</span> <span class="op">=</span> tweet<span class="op">;</span></a>
+<a class="sourceLine" id="cb89-8" title="8">          <span class="cf">return</span> (</a>
+<a class="sourceLine" id="cb89-9" title="9">            <span class="op">&lt;</span>li key<span class="op">={</span>id<span class="op">}&gt;</span></a>
+<a class="sourceLine" id="cb89-10" title="10">              <span class="op">&lt;</span>h3<span class="op">&gt;{</span>username<span class="op">}</span>&lt;/h3<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb89-11" title="11">              <span class="op">&lt;</span>p<span class="op">&gt;{</span>message<span class="op">}</span>&lt;/p<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb89-12" title="12">            &lt;/li<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb89-13" title="13">        )<span class="op">}</span>)<span class="op">}</span></a>
+<a class="sourceLine" id="cb89-14" title="14">      &lt;/ul<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb89-15" title="15">    &lt;/div<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb89-16" title="16">  )<span class="op">;</span></a>
+<a class="sourceLine" id="cb89-17" title="17"><span class="op">}</span></a></code></pre></div>
+<p>Think of how you would handle errors for unsuccessful fetch responses. Remember that you’ll need to manually throw responses, as the Fetch API does not throw errors of unsuccessful requests. For now, you can use <code>console.error()</code> to log any error responses. Think of what you might return in your <code>fetchTweets</code> method’s <code>catch</code> block to indicate that there were no tweets fetched.</p>
+<h3 id="logging-out-a-user">Logging out a user</h3>
+<p>Now it’s time to render a logout button! Have your application render a <code>&lt;button&gt;</code> underneath the “Home Page” header. Add an <code>onClick</code> event listener to the button. Upon a user’s click, your component should invoke the <code>this.context.logout</code> method.</p>
+<p>Once you have a logout button set up, test your application’s user login and logout flow! Once you are logged in, you should see an list of fetched tweets. Take a moment to also notice how your application does not allow you to browse to the <code>/login</code> and <code>/register</code> routes when you are logged in. This is due to the <code>AuthRoute</code> components you created to wrap those routes!</p>
+<h2 id="phase-7-user-profile-page">Phase 7: User profile page</h2>
+<p>In the profile page, you’ll want to see a user’s username as well as tweets they have written. Since you’ll be fetching information to render within a component, you’ll want to use <code>state</code>. Set a default <code>user</code> state to an empty object literal and a default <code>tweets</code> state to an empty array. Now create a wrapper component for your <code>Profile</code> component to access the <code>UserContext</code>. Make a fetch request to <code>/users/:userId/tweets</code> to fetch a specific user’s tweets. Since you’ll need authorization to make successful fetch requests for a current user and their tweets, pass the <code>authToken</code> and <code>currentUserId</code> from your context as props.</p>
+<p>In your <code>Profile</code> component, you’ll define a method to fetch the current user from the database. You’ll invoke your fetch request in the asynchronous <code>componentDidMount()</code> method. Remember that you can use the <code>match</code> prop to access your router’s <code>params</code> and receive the value of the <code>:userId</code> parameter from the <code>/users/:userId</code> URL. Then you could use the <code>:userId</code> parameter to make a fetch request to the correct route.</p>
+<p>For today, use the <code>currentUserId</code> passed from your context so that a logged in user can only see their personal profile. Make sure to include an <code>Authorization</code> header that uses the <code>authToken</code> prop passed from the <code>AppWithContext</code> wrapper component.</p>
+<p>Once you have successfully fetched the current user, you’ll want to save the user as a slice of state and render the user’s <code>username</code> in <code>&lt;h1&gt;</code> tags. The next step is to fetch all of the tweets that belong to the user. Think of how you might structure your asynchronous <code>componentDidMount()</code> method to make multiple fetch calls before updating state. You’ll want to fetch a user’s tweets only after successfully fetching a user from the database.</p>
+<p>Before moving onto the bonus phase, check that your user profile correctly fetching the current user’s data from the backend API! Console log the <code>Profile</code> component’s state as the second optional callback in the <code>this.setState()</code> call in your <code>componentDidMount()</code>:</p>
+<div class="sourceCode" id="cb90"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb90-1" title="1"><span class="kw">this</span>.<span class="at">setState</span>(</a>
+<a class="sourceLine" id="cb90-2" title="2">  <span class="op">{</span> user<span class="op">,</span> tweets <span class="op">},</span></a>
+<a class="sourceLine" id="cb90-3" title="3">  () <span class="kw">=&gt;</span> <span class="va">console</span>.<span class="at">log</span>(<span class="kw">this</span>.<span class="at">state</span>)<span class="op">,</span></a>
+<a class="sourceLine" id="cb90-4" title="4">)<span class="op">;</span></a></code></pre></div>
+<p>Once you have a <code>user</code> slice of state with fetched data successfully logged in your developer tools console, move forward to the bonus phase where you will set up a way to create and delete tweets!</p>
+<h2 id="bonus-creating-and-deleting-tweets">Bonus: Creating and deleting tweets</h2>
+<p>Great! Now after successfully fetching your current user’s tweets, you can render the tweets in an unordered list like in your <code>Home</code> component. But what about creating and deleting tweets?</p>
+<p>Create a method to make <code>createTweet</code> requests from your <code>Home</code> component. Below your home page’s navigation bar, render a form create a tweet. Think how what headers you might need to set to create tweets (hint: you’ll need not one, but two headers). The endpoint for creating a tweet is <code>/tweets</code>.</p>
+<p>After implementing tweet creation, create a method to make <code>deleteTweet</code> requests from your <code>Profile</code> component. Have your <code>Profile</code> component render a delete <code>&lt;button&gt;</code> for each tweet rendered. The endpoint for deleting a tweet is <code>/tweets/:tweetId</code>.</p>
+<p>Think of how you might update your <code>tweets</code> state upon tweet creation and deletion. What might you render if a home page or profile has no fetched tweets? After you have rendered your user profile, add a navigation link titled “My Profile” to the <code>/users/${currentUserId}</code> path. Only have the navigation link render if there is a valid current user logged in!</p>
+<p>Now test your tweet creation and deletion. The update to your <code>tweets</code> slice of state should be rendered to the <code>Profile</code> page without a manual browser refresh.</p>
+<h2 id="bonus-higher-order-components">Bonus: Higher order components</h2>
+<p>As a brief introduction, <a href="https://reactjs.org/docs/higher-order-components.html">higher order components (HOC)</a> are a pattern for reusing component logic. Ultimately, higher order components allow you to dynamically generate wrapper components. Your <code>ProtectedRoute</code> and <code>AuthRoute</code> components are higher order components that used a function to return a new wrapped <code>Route</code> component. A higher order component is just a component that takes another component as an argument.</p>
+<p>Take a moment to think of how you could refactor your context wrapper components by using the following <code>withContext</code> higher order component below:</p>
+<div class="sourceCode" id="cb91"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb91-1" title="1"><span class="co">// ./twitter-front-end/src/contexts/withContext.js</span></a>
+<a class="sourceLine" id="cb91-2" title="2"><span class="im">import</span> React <span class="im">from</span> <span class="st">&#39;react&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb91-3" title="3"><span class="im">import</span> UserContext <span class="im">from</span> <span class="st">&#39;./UserContext&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb91-4" title="4"></a>
+<a class="sourceLine" id="cb91-5" title="5"><span class="kw">const</span> withContext <span class="op">=</span> (Component) <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb91-6" title="6">  <span class="cf">return</span> <span class="kw">function</span> <span class="at">ContextComponent</span>(props) <span class="op">{</span></a>
+<a class="sourceLine" id="cb91-7" title="7">    <span class="cf">return</span> (</a>
+<a class="sourceLine" id="cb91-8" title="8">      <span class="op">&lt;</span><span class="va">UserContext</span>.<span class="at">Consumer</span><span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb91-9" title="9">        <span class="op">{</span>value <span class="kw">=&gt;</span> <span class="op">&lt;</span>Component <span class="op">{</span>...<span class="at">props</span><span class="op">}</span> value<span class="op">={</span>value<span class="op">}</span> /&gt;<span class="op">}</span></a>
+<a class="sourceLine" id="cb91-10" title="10">      &lt;/<span class="va">UserContext</span>.<span class="at">Consumer</span><span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb91-11" title="11">    )<span class="op">;</span></a>
+<a class="sourceLine" id="cb91-12" title="12">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb91-13" title="13"><span class="op">}</span></a>
+<a class="sourceLine" id="cb91-14" title="14"></a>
+<a class="sourceLine" id="cb91-15" title="15"><span class="im">export</span> <span class="im">default</span> withContext<span class="op">;</span></a></code></pre></div>
+<p>As you learn about implementing Redux with React, you’ll see more design patterns like higher order components. For example, you’ll become familiar with Redux’s <a href="https://github.com/reduxjs/react-redux/blob/master/docs/api/connect.md#connect">connect()</a> function that wraps functions to connect with your application’s Redux store.</p>
+</body>
+</html>

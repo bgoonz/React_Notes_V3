@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>sorting</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<h1 id="real-world-react-advanced">Real World React (Advanced)</h1>
+<p>We’ve covered most of React’s fundamentals, its legacy features, and techniques for maintaining applications. Now it’s time to dive into developing real-world React features. Each of the following sections will come with a task. Try to tackle these tasks without the <em>optional hints</em> first, but be aware that these are going to be challenging on your first attempt. If you need help, use the <em>optional hints</em> or follow the instructions from the section.</p>
+<h2 id="sorting">Sorting</h2>
+<p><strong>Task:</strong> Working with a list of items often includes interactions that make data more approachable by users. So far, every item was listed with each of its properties. To make it explorable, the list should enable the sorting of each property by title, author, comments, and points in ascending or descending order. Sorting in only one direction is fine, because sorting in the other direction will be part of the next task.</p>
+<p><strong>Optional Hints:</strong></p>
+<ul>
+<li>Introduce a new sort state in the App or List component.</li>
+<li>For each property (e.g. <code>title</code>, <code>author</code>, <code>points</code>, <code>num_comments</code>) implement an HTML button which sets the sort state for this property.</li>
+<li>Use the sort state to apply an appropriate sort function on the <code>list</code>.</li>
+<li>Using a utility library like <a href="https://lodash.com">Lodash</a> for its <code>sortBy</code> function is encouraged.</li>
+</ul>
+<p><img src="images/sort.png" /></p>
+<p>Okay, let’s tackle this task! We will treat the list of data like a table. Each row represents an item of the list and each column represents one property of the item. Introducing headers should provide the user more guidance about each column:</p>
+{title=“src/App.js”,lang=“javascript”} ~~~~~~~ const List = ({ list, onRemoveItem }) =&gt; (
+<ul>
+<h1 id="leanpub-start-insert">leanpub-start-insert</h1>
+&lt;li style={{ display: ‘flex’ }}&gt; &lt;span style={{ width: ‘40%’ }}&gt;Title</span> &lt;span style={{ width: ‘30%’ }}&gt;Author</span> &lt;span style={{ width: ‘10%’ }}&gt;Comments</span> &lt;span style={{ width: ‘10%’ }}&gt;Points</span> &lt;span style={{ width: ‘10%’ }}&gt;Actions</span>
+</li>
+<h1 id="leanpub-end-insert">leanpub-end-insert</h1>
+{list.map((item) =&gt; ( <Item
+        key={item.objectID}
+        item={item}
+        onRemoveItem={onRemoveItem}
+      /> ))}
+</ul>
+<p>); ~~~~~~~</p>
+<p>We are using inline style for the most basic layout. To match the layout of the header with the rows, give the rows in the Item component a layout as well:</p>
+{title=“src/App.js”,lang=“javascript”} ~~~~~~~ const Item = ({ item, onRemoveItem }) =&gt; ( # leanpub-start-insert &lt;li style={{ display: ‘flex’ }}&gt; &lt;span style={{ width: ‘40%’ }}&gt; # leanpub-end-insert <a href={item.url}>{item.title}</a> </span> # leanpub-start-insert &lt;span style={{ width: ‘30%’ }}&gt;{item.author}</span> &lt;span style={{ width: ‘10%’ }}&gt;{item.num_comments}</span> &lt;span style={{ width: ‘10%’ }}&gt;{item.points}</span> &lt;span style={{ width: ‘10%’ }}&gt; # leanpub-end-insert &lt;button type=“button” onClick={() =&gt; onRemoveItem(item)}&gt; Dismiss </button> </span>
+</li>
+<p>); ~~~~~~~</p>
+<p>In the ongoing implementation, we will remove the style attributes, because it takes up lots of space and clutters the actual implementation logic (hence extracting it into proper CSS). But I encourage you to keep it for yourself.</p>
+<p>The List component will handle the new sort state. This can also be done in the App component, but in the end, only the List component needs it, so we can lift the state directly to it. The sort state initializes with a <code>'NONE'</code> state, so the list items are displayed in the order they are fetched from the API. Furthermore, we will add a new handler to set the sort state with a sort-specific key:</p>
+<p>{title=“src/App.js”,lang=“javascript”} ~~~~~~~ # leanpub-start-insert const List = ({ list, onRemoveItem }) =&gt; { const [sort, setSort] = React.useState(‘NONE’);</p>
+<p>const handleSort = (sortKey) =&gt; { setSort(sortKey); };</p>
+<p>return ( # leanpub-end-insert … # leanpub-start-insert ); }; # leanpub-end-insert ~~~~~~~</p>
+<p>In the List component’s header, buttons can help us to set the sort state for each column/property. An inline handler is used to sneak in the sort-specific key (<code>sortKey</code>). When the button for the “Title” column is clicked, <code>'TITLE'</code> becomes the new sort state:</p>
+<p>{title=“src/App.js”,lang=“javascript”} ~~~~~~~ const List = ({ list, onRemoveItem }) =&gt; { …</p>
+return (
+<div>
+<pre><code>  &lt;div&gt;
+    &lt;span&gt;</code></pre>
+<h1 id="leanpub-start-insert-1">leanpub-start-insert</h1>
+<pre><code>      &lt;button type=&quot;button&quot; onClick={() =&gt; handleSort(&#39;TITLE&#39;)}&gt;
+        Title
+      &lt;/button&gt;</code></pre>
+<h1 id="leanpub-end-insert-1">leanpub-end-insert</h1>
+<pre><code>    &lt;/span&gt;
+    &lt;span&gt;</code></pre>
+<h1 id="leanpub-start-insert-2">leanpub-start-insert</h1>
+<pre><code>      &lt;button type=&quot;button&quot; onClick={() =&gt; handleSort(&#39;AUTHOR&#39;)}&gt;
+        Author
+      &lt;/button&gt;</code></pre>
+<h1 id="leanpub-end-insert-2">leanpub-end-insert</h1>
+<pre><code>    &lt;/span&gt;
+    &lt;span&gt;</code></pre>
+<h1 id="leanpub-start-insert-3">leanpub-start-insert</h1>
+<pre><code>      &lt;button type=&quot;button&quot; onClick={() =&gt; handleSort(&#39;COMMENT&#39;)}&gt;
+        Comments
+      &lt;/button&gt;</code></pre>
+<h1 id="leanpub-end-insert-3">leanpub-end-insert</h1>
+<pre><code>    &lt;/span&gt;
+    &lt;span&gt;</code></pre>
+<h1 id="leanpub-start-insert-4">leanpub-start-insert</h1>
+<pre><code>      &lt;button type=&quot;button&quot; onClick={() =&gt; handleSort(&#39;POINT&#39;)}&gt;
+        Points
+      &lt;/button&gt;</code></pre>
+<h1 id="leanpub-end-insert-4">leanpub-end-insert</h1>
+<pre><code>    &lt;/span&gt;
+    &lt;span&gt;Actions&lt;/span&gt;
+  &lt;/div&gt;
+
+  {list.map((item) =&gt; ... )}
+&lt;/div&gt;</code></pre>
+<p>); }; ~~~~~~~</p>
+<p>The state management for the new feature is implemented, but we don’t see anything when our buttons are clicked yet. This happens because the sorting mechanism hasn’t been applied to the actual <code>list</code>. Sorting an array with JavaScript isn’t trivial, because every JavaScript primitive (e.g. string, boolean, number) comes with edge cases when an array is sorted by its properties. We will use a library called <a href="https://lodash.com/">Lodash</a> to solve this, which comes with many JavaScript utility functions (e.g. <code>sortBy</code>). First, install it via the command line:</p>
+<p>{title=“Command Line”,lang=“text”} ~~~~~~~ npm install lodash ~~~~~~~</p>
+<p>Second, at the top of your file, import the utility function for sorting:</p>
+<p>{title=“src/App.js”,lang=“javascript”} ~~~~~~~ import * as React from ‘react’; import axios from ‘axios’; # leanpub-start-insert import { sortBy } from ‘lodash’; # leanpub-end-insert</p>
+<p>… ~~~~~~~</p>
+<p>Third, create a JavaScript object (also called dictionary in this case) with all the possible <code>sortKey</code> and sort function mappings. Each specific sort key is mapped to a function that sorts the incoming <code>list</code>. Sorting by <code>'NONE'</code> returns the unsorted list; sorting by <code>'POINT'</code> returns a list and its items sorted by the <code>points</code> property, and so on:</p>
+<p>{title=“src/App.js”,lang=“javascript”} ~~~~~~~ # leanpub-start-insert const SORTS = { NONE: (list) =&gt; list, TITLE: (list) =&gt; sortBy(list, ‘title’), AUTHOR: (list) =&gt; sortBy(list, ‘author’), COMMENT: (list) =&gt; sortBy(list, ‘num_comments’).reverse(), POINT: (list) =&gt; sortBy(list, ‘points’).reverse(), }; # leanpub-end-insert</p>
+<p>const List = ({ list, onRemoveItem }) =&gt; { … }; ~~~~~~~</p>
+<p>With the <code>sort</code> (<code>sortKey</code>) state and all possible sort variations (<code>SORTS</code>) at our disposal, we can sort the list before mapping it:</p>
+<p>{title=“src/App.js”,lang=“javascript”} ~~~~~~~ const List = ({ list, onRemoveItem }) =&gt; { const [sort, setSort] = React.useState(‘NONE’);</p>
+<p>const handleSort = (sortKey) =&gt; { setSort(sortKey); };</p>
+<h1 id="leanpub-start-insert-5">leanpub-start-insert</h1>
+<p>const sortFunction = SORTS[sort]; const sortedList = sortFunction(list); # leanpub-end-insert</p>
+return (
+<div>
+<pre><code>  ...</code></pre>
+<h1 id="leanpub-start-insert-6">leanpub-start-insert</h1>
+<pre><code>  {sortedList.map((item) =&gt; (</code></pre>
+<h1 id="leanpub-end-insert-5">leanpub-end-insert</h1>
+<pre><code>    &lt;Item
+      key={item.objectID}
+      item={item}
+      onRemoveItem={onRemoveItem}
+    /&gt;
+  ))}
+&lt;/div&gt;</code></pre>
+<p>); }; ~~~~~~~</p>
+<p>Task’s done and here comes the recap: First we extracted the sort function from the dictionary by its <code>sortKey</code> (state), then we applied the function to the list before mapping it to render each Item component. Second, we rendered HTML buttons as header columns to give our users interaction. Then, we added implementation details for each button by changing the sort state. Finally, we used the sort state to sort the actual list.</p>
+<h3 id="exercises">Exercises:</h3>
+<ul>
+<li>Confirm your <a href="https://codesandbox.io/s/github/the-road-to-learn-react/hacker-stories/tree/2021/Sort">source code</a>.
+<ul>
+<li>Confirm the <a href="https://github.com/the-road-to-learn-react/hacker-stories/compare/2021/react-modern-final...2021/Sort">changes</a>.</li>
+</ul></li>
+<li>Read more about <a href="https://lodash.com/">Lodash</a>.</li>
+<li>Why did we use numeric properties like <code>points</code> and <code>num_comments</code> for a reverse sort?</li>
+<li>Use your styling skills to give the user feedback about the current active sort. This mechanism can be as straightforward as giving the active sort button a different color.</li>
+</ul>
+</body>
+</html>
