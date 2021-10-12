@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>README</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<h1 id="how-to-contribute">How to Contribute</h1>
+<p>MDC React is an open source project, so we encourage contributions! If you are looking for a bug to fix, check out <a href="https://github.com/material-components/material-components-web-react/issues?q=is%3Aopen+is%3Aissue+label%3A%22help+wanted%22">Help Wanted Issues</a> on GitHub. Otherwise please open a <a href="https://github.com/material-components/material-components-web-react/issues/new">new issue</a>.</p>
+<p>Please follow all our <a href="https://github.com/material-components/material-components/blob/develop/CODE_OF_CONDUCT.md">Code of Conduct Guide</a>.</p>
+<h2 id="fixing-a-bug-or-adding-a-feature">Fixing a Bug or Adding a Feature</h2>
+<p>MDC React’s goal is to build in parity of <a href="https://github.com/material-components/material-components-web">MDC Web</a>. MDCR’s features should have a 1:1 mapping within the constraints of React. If there is part of the API you disagree with please open a <a href="https://github.com/material-components/material-components-web-react/issues/new">new issue</a>. Depending on the content it may fall to MDC Web’s work queue, which MDC React will add in a later release.</p>
+<p><strong>When in doubt open an issue. We’re here to <em>hear</em> you!</strong></p>
+<h3 id="add-a-feature">Add a Feature</h3>
+<p>We consider any new API to be a new feature. An API is any of the following:</p>
+<ul>
+<li>Update to React Component APIs</li>
+<li>Prop updates on React Component</li>
+<li>Adding a new component</li>
+</ul>
+<p>If changes fall under these categories or you’d like to add a new component please open an <a href="https://github.com/material-components/material-components-web-react/issues/new">issue</a> <em>first</em>. The team wants to collaborate with you before you dive head first into making changes and updates.</p>
+<blockquote>
+<p>If the changes don’t fall into the above categories, or fix an existing feature, it most likely will fall into MDC Web</p>
+</blockquote>
+<h3 id="fixing-bugs">Fixing Bugs</h3>
+<ul>
+<li>If the issue is a small doc change (READMEs, documentation, etc.) please go ahead and open a <a href="https://github.com/material-components/material-components-web-react/pulls">pull request</a>.</li>
+<li>If the changes you want to perform are under 10 - 20 lines of code, please open a <a href="https://github.com/material-components/material-components-web-react/pulls">pull request</a>.</li>
+<li>Anything larger or change to an API will require an issue to be opened first.</li>
+</ul>
+<h3 id="commit-message-format">Commit Message Format</h3>
+<p>The final commit message to the mdc-foo package, for GitHub issue 1234, should look like this:</p>
+<pre><code># for a fix to an issue
+fix(component-name): Short description of fix
+
+# for a new feature
+feat(component-name): Short description of feature
+
+# for a doc update
+docs(component-name): Short description of doc changes</code></pre>
+<p>This commit message is pulled into our CHANGELOG when we <a href="../release.md">release</a> and is based on <a href="https://github.com/angular/angular.js/blob/master/DEVELOPERS.md#commits">Angular’s Git commit guidelines</a>. If you have any difficulty, please reach out to us on <a href="https://discord.gg/material-components">Discord</a> or add a comment to the GitHub issue or PR.</p>
+<h2 id="pull-requests">Pull Requests</h2>
+<p>Pull requests should meet the following criteria:</p>
+<ul>
+<li><strong>PRs should be focused!</strong> PRs should focus on fixing one issue or an additional feature. Anything extra requires another PR.</li>
+<li>If there is an existing <a href="https://github.com/material-components/material-components-web-react/issues">issue</a> please refer to it in the description of your PR.</li>
+<li>Please also add notes/description about what your changes are trying to achieve (or anything you’ve learned). Brevity appreciated.</li>
+</ul>
+<h3 id="process">Process</h3>
+<p>Before opening a PR, it should be up to date with targeted release (rc<release_number> ie. rc0.7.0, rc0.8.0, etc.). In most cases it will never be branched from <em>master</em>.</p>
+<h4 id="checklist">Checklist:</h4>
+<ul>
+<li>[ ] all unit tests pass. Please read the <a href="./running-tests.md">tests doc</a> for further instructions.</li>
+<li>[ ] ensure you have appropriate test coverage <a href="./running-tests.md#test-coverage">tests doc</a>.</li>
+<li>[ ] lint passes, which you can read up in <a href="./running-tests.md#running-lint">tests doc</a>.</li>
+<li>[ ] screenshot tests pass. Please read <a href="../screenshot-tests.md">screenshot testing</a> for instructions.</li>
+<li>[ ] descriptions about your changes.</li>
+<li>[ ] sign your PR (comment in PR “<em>I signed it</em>”). Read <a href="https://cla.developers.google.com/a_zbout/google-individual">cla/google</a>.</li>
+</ul>
+<p>Once you have passed all checks, the process is as follows:</p>
+<ol type="1">
+<li>Ping one of the admins (<span class="citation" data-cites="bonniezhou">[@bonniezhou]</span>(https://github.com/bonniezhou), <span class="citation" data-cites="moog16">[@moog16]</span>(https://github.com/moog16)) in the PR to notify us its ready for review.</li>
+<li>We will either approve, request changes, or explain why we can’t accept these changes. And we’ll work from there.</li>
+<li>Assuming approval, one of the admins will open a new PR so that tests are run on <a href="https://travis-ci.com/material-components/material-components-web-react">TravisCI</a>.</li>
+<li>Once tests pass, an admin will close the Test PR and merge your PR.</li>
+</ol>
+</body>
+</html>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>screenshot-tests</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<h1 id="screenshot-testing">Screenshot Testing</h1>
+<p>Unit tests are great for JavaScript, but how do you test CSS? With screenshots! We use a <a href="https://chromium.googlesource.com/chromium/src/+/lkgr/headless/README.md">headless</a> instance of Chrome controlled through <a href="https://github.com/GoogleChrome/puppeteer">Puppeteer</a> to generate screenshots of our test pages. Those generated screenshots are compared through <a href="https://github.com/HuddleEng/Resemble.js">Resemble.js</a> for <a href="#about-pixel-perfect-comparison">pixel-perfect</a> accuracy. The golden screenshots (ones deemed to be correct) are then checked into the repository, ensuring we have a reference for how a component should look.</p>
+<h2 id="tech-stack">Tech Stack</h2>
+<ul>
+<li><a href="https://www.npmjs.com/package/resemblejs">resemblejs</a></li>
+<li><a href="https://github.com/mochajs/mocha">mocha</a></li>
+<li><a href="https://github.com/GoogleChrome/puppeteer">puppeteer</a></li>
+</ul>
+<h2 id="running-tests-locally">Running Tests Locally</h2>
+<blockquote>
+<p>If this is your first time using Docker, you may find it helpful to sift through the <a href="https://docs.docker.com/get-started/#images-and-containers">Getting Started Guide</a>. This <a href="http://odewahn.github.io/docker-jumpstart/building-images-with-dockerfiles.html">3rd Party Guide</a> is also a helpful quick reference for some terms.</p>
+</blockquote>
+<p>You should have docker already installed on your machine. Please follow <a href="https://docs.docker.com/install/">instructions</a> to install.</p>
+<h3 id="step-1-build-pull-the-docker-image">STEP 1: Build pull the Docker Image</h3>
+<p>If you already pulled this image before you can skip this step. If there has been a change to the <code>Dockerfile</code>, please follow <a href="#building-new-docker-image">these steps</a>.</p>
+<pre><code>docker pull mdcreact/screenshots</code></pre>
+<h3 id="step-2-run-a-docker-container">STEP 2: Run a Docker Container</h3>
+<p>Ensure that you have a <code>MDC_GCLOUD_SERVICE_ACCOUNT_KEY</code> environment variable (ie. ~/.bashrc, ~/.bash_profile). Otherwise you will need to paste it inline in the command below. You can get this off of the Google Cloud Platform Admin Tool (3rd party contributors will not be able to download/upload screenshots until this is part of the process is changed).</p>
+<pre><code>docker run -it --rm --cap-add=SYS_ADMIN -e MDC_GCLOUD_SERVICE_ACCOUNT_KEY=&quot;${MDC_GCLOUD_SERVICE_ACCOUNT_KEY}&quot; mdcreact/screenshots /bin/bash</code></pre>
+<p>This command opens a container based from the <code>mdcreact/screenshots</code> image you created in Step 1.</p>
+<h4 id="breaking-it-down">Breaking it down</h4>
+<table>
+<thead>
+<tr class="header">
+<th>Option</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>-it</code></td>
+<td>Allow CLI interaction with the container</td>
+</tr>
+<tr class="even">
+<td><code>--rm</code></td>
+<td>When the container is closed, remove it from memory</td>
+</tr>
+<tr class="odd">
+<td><code>--cap-add=SYS_ADMIN</code></td>
+<td>Run container with system admin privileges</td>
+</tr>
+<tr class="even">
+<td><code>-e MDC_...="${MDC_...}"</code></td>
+<td>Set MDC_GCLOUD_SERVICE_ACCOUNT_KEY env variable</td>
+</tr>
+</tbody>
+</table>
+<h3 id="step-3-run-tests">STEP 3: Run Tests</h3>
+<p>This Docker container is mainly designed for running the screenshot tests. The container already has 1) cloned the repo and 2) <code>npm install</code> the project dependencies.</p>
+<p>In the Docker container, start the server:</p>
+<pre><code>git pull
+git checkout --track origin/&lt;BRANCH_NAME&gt;
+npm install
+./test/screenshot/start.sh</code></pre>
+<p>Wait for about 2 - 3 minutes for the server to start up (we know the long wait is an issue). The <code>start.sh</code> script is a proxy to <code>npm start</code>, but doesn’t output to the terminal so you can run other commands.</p>
+<p>After waiting 2 - 3 minutes, run the screenshot tests:</p>
+<pre><code>npm run test:image-diff</code></pre>
+<p>You will see the regular terminal output from mocha. Most importantly, it will output two partial URLs for every screenshot test, which you will use to compare screenshots in STEP 4:</p>
+<pre><code>&lt;path&gt;/&lt;to&gt;/&lt;file&gt;.html/&lt;commit-hash&gt;/&lt;screenshot-test-id&gt;.diff.png
+&lt;path&gt;/&lt;to&gt;/&lt;file&gt;.html/&lt;commit-hash&gt;/&lt;screenshot-test-id&gt;.snapshot.png</code></pre>
+<h3 id="step-4-debug-screenshot-changes">STEP 4: Debug Screenshot Changes</h3>
+<p>A <code>*.snapshot.png</code> and a <code>*.diff.png</code> file will be generated for each screenshot test and uploaded to a Google Cloud Storage bucket. They’re publicly accessible through the following URL scheme:</p>
+<pre><code>https://storage.googleapis.com/screenshot-uploads/&lt;path&gt;/&lt;to&gt;/&lt;file&gt;.html/&lt;commit-hash&gt;/&lt;screenshot-test-id&gt;.diff.png
+https://storage.googleapis.com/screenshot-uploads/&lt;path&gt;/&lt;to&gt;/&lt;file&gt;.html/&lt;commit-hash&gt;/&lt;screenshot-test-id&gt;.snapshot.png</code></pre>
+<p>where <code>&lt;commit-hash&gt;</code> is the <a href="https://stackoverflow.com/a/5694416">short eight character hash of the commit</a> and <code>/&lt;path&gt;/&lt;to&gt;/&lt;file&gt;</code> is the path to the HTML file you wish to view, relative to the <code>/test/screenshot</code> folder. You can copy/paste the terminal output from STEP 3 to quickly go to the URL. Compare screenshots and make sure everything looks as expected.</p>
+<blockquote>
+<p><em>NOTE</em>: Neither the <code>*.snapshot.png</code> nor <code>*.diff.png</code> get checked in to the repo. This helps to keep the repo clean and makes it serve as the single source of truth for how components should look. To keep Google Cloud Storage costs low, screenshots will need to be cleaned up periodically, perhaps through a cron job.</p>
+</blockquote>
+<h3 id="step-5-commit-screenshot-goldens">STEP 5: Commit Screenshot Goldens</h3>
+<p>If you modified any of the screenshot test files, run this command inside the Docker container to update <code>test/screenshot/golden.json</code>:</p>
+<pre><code>npm run capture</code></pre>
+<p>Then commit and push this change to your PR!</p>
+<blockquote>
+<p><em>NOTE</em>: If you have two-factor authentication turned on for your GitHub account, you’ll need to use a <a href="https://help.github.com/articles/creating-a-personal-access-token-for-the-command-line/">Personal Access Token</a> to push.</p>
+</blockquote>
+<h2 id="troubleshooting">Troubleshooting</h2>
+<h3 id="building-new-docker-image">Building New Docker Image</h3>
+<p>You may need to update the Docker image. Follow these steps:</p>
+<p>From the project’s root directory run the following command:</p>
+<pre><code>docker build --no-cache -t screenshots .</code></pre>
+<p>This command builds a Docker image named <code>screenshots</code> based off the <code>Dockerfile</code> found in the root directory. Next push this to the Docker Hub for Travis tests. If you are testing you may want to use a different <a href="https://hub.docker.com/r/mdcreact/screenshots/tags/">tag</a> in the interim.</p>
+<pre><code>docker images</code></pre>
+<p>This will output a list of your local images. You will want to grab the most recent <code>IMAGE_ID</code> with the <code>REPOSITORY</code> name <code>screenshots</code> (the name you used in the <code>docker build</code> step). Next create the tag:</p>
+<pre><code>docker tag &lt;IMAGE_ID&gt; mdcreact/screenshots:&lt;YOUR_TAG_NAME&gt; # defaults to :latest</code></pre>
+<p>This will create the tag, which you can then push to Docker Hub:</p>
+<pre><code>docker push mdcreact/screenshots:&lt;YOUR_TAG_NAME&gt;</code></pre>
+<p>Now you’re ready to share the image with the world!</p>
+<h2 id="about-pixel-perfect-comparison">About pixel perfect comparison</h2>
+<p>Our screenshot comparison ignores anti-aliasing differences between the golden screenshots and your snapshots. This is to ensure that OS-level differences between how subpixels are rendered don’t cause test failures. It also ensures that we can have a single source of truth for the goldens instead of one golden per OS. You can read more about subpixel rendering <a href="https://en.wikipedia.org/wiki/Subpixel_rendering">here</a>.</p>
+</body>
+</html>

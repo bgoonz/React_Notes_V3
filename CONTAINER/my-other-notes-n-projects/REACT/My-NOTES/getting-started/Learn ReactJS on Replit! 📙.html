@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Learn ReactJS on Replit! 📙</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<h1 id="learn-reactjs">Learn ReactJS</h1>
+<blockquote>
+<p>How do I put one HTML file in another HTML file?</p>
+</blockquote>
+<p>When we create HTML files by hand, we often come across the problem of reusability. For example, we may want to reuse a <code>heading</code> component across a bunch of HTML files. Or, we have a navigation bar, and we want to avoid copying and pasting each navigation item over and over again. React helps us solve this problem.</p>
+<h2 id="fundamentals">Fundamentals</h2>
+<p>Before I show you how to do this, I’d like to share one of the fundamental concepts of React. Components. You can think of a component as a capsule that contains some HTML, CSS, and JavaScript.</p>
+<p>Let me show you some examples</p>
+<p><a href="https://storage.googleapis.com/replit/images/1561252846504_5e3cc11a92f83c5fe98fe1b11797d4e1.png"><img src="https://storage.googleapis.com/replit/images/1561252846504_5e3cc11a92f83c5fe98fe1b11797d4e1.png" /></a></p>
+<p>As you can see, each colored rectangle is a component. Rectangles that have the same color are the same component, but with a few differences. For example, all the components with the blue rectangle look the same because they all have a title, a ‘last edited’ time, and a picture. The differences are the actual numbers, and the actual text of the titles. The formatting is near-identical.</p>
+<p>I found another website, and outlined a few components. The header component is in red, and the navigation components are in yellow.</p>
+<p><a href="https://storage.googleapis.com/replit/images/1561236547119_ea1ac7638720be70487e3f3be63e6d25.png"><img src="https://storage.googleapis.com/replit/images/1561236547119_ea1ac7638720be70487e3f3be63e6d25.png" /></a></p>
+<p>From these example, you may have noticed that components are made to be reusable. That’s part of the point. 🙂 So rather than having the following in your HTML:</p>
+<pre><code>&lt;nav&gt;
+    &lt;ul&gt;
+        &lt;li&gt;
+            &lt;div class=&quot;wrapper&quot;&gt;
+                &lt;a href=&quot;/&quot;&gt;Home&lt;/a&gt;
+            &lt;/div&gt;
+        &lt;/li&gt;
+        &lt;li&gt;
+            &lt;div class=&quot;wrapper&quot;&gt;
+                &lt;a href=&quot;/about&quot;&gt;About&lt;/a&gt;
+            &lt;/div&gt;
+        &lt;/li&gt;
+        &lt;li&gt;
+            &lt;div class=&quot;wrapper&quot;&gt;
+                &lt;a href=&quot;/contact&quot;&gt;Contact&lt;/a&gt;
+            &lt;/div&gt;
+        &lt;/li&gt;
+    &lt;/ul&gt;
+&lt;/nav&gt;</code></pre>
+<p>You may want to have something like this:</p>
+<pre><code>&lt;nav&gt;
+    &lt;ul&gt;
+        &lt;NavigationItem&gt;&lt;/NavigationItem&gt;
+        &lt;NavigationItem&gt;&lt;/NavigationItem&gt;
+        &lt;NavigationItem&gt;&lt;/NavigationItem&gt;
+    &lt;/ul&gt;
+&lt;/nav&gt;</code></pre>
+<p>(Note that this is not valid HTML markup, but it’s useful to think this way when using React components)</p>
+<p>Each <code>&lt;NavigationItem&gt;</code> is a reusable component and may contain the following.</p>
+<pre><code>&lt;li&gt;
+    &lt;div&gt;
+        &lt;a href=&quot;placeholder1&quot;&gt;placeholder 2&lt;/a&gt;
+    &lt;/div&gt;
+&lt;/li&gt;</code></pre>
+<p>Although this code won’t actually run, it’s useful to have this mindset of components. If you are reusing a set of element on the page, it’s likely you can create a component out of it.</p>
+<h2 id="components-in-react">Components in React</h2>
+<p>You create components in React with something called <a href="https://reactjs.org/docs/introducing-jsx.html">JSX</a>. In a nutshell, it’s a way of writing HTML in JavaScript.</p>
+<p>Here is a classic example of JSX</p>
+<pre><code>const element = &lt;h1&gt;Hello, world!&lt;/h1&gt;;</code></pre>
+<p>With some special tools, you will be able to create HTML elements using this kind of syntax with React.</p>
+<p>Here is another example - writing JSX over multiple lines.</p>
+<pre><code>let MyComponent = (
+    &lt;div className=&quot;App&quot;&gt;
+        &lt;h1&gt;Very neat&lt;/h1&gt;
+        &lt;MyOtherComponent /&gt;
+  &lt;/div&gt;
+);</code></pre>
+<p>As you have noticed, one main difference between writing HTML and JSX, is the use of <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/class">HTML classes</a>. Because JSX is more close to JavaScript (rather than HTML), you cannot use the word <code>class</code>. It’s a reserved word (see <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes">JS Classes</a>). If we ever want to have an HTML class, we just have to write <code>className</code> instead of <code>class</code>.</p>
+<h2 id="creating-a-react-repl">Creating a React Repl 🚀</h2>
+<p>Now that we know a bit about <code>React</code>, and <code>JS</code>, let’s create a <code>React</code> repl!</p>
+<p><a href="https://storage.googleapis.com/replit/images/1561247370292_b2935d177fb4040ca76d8babde1eb169.png"><img src="https://storage.googleapis.com/replit/images/1561247370292_b2935d177fb4040ca76d8babde1eb169.png" /></a></p>
+<p>A bunch of files are already created for us. I’d recommend looking at <code>public/index.html</code>. This is the actual <code>html</code> file that’s send to your browser.</p>
+<p>You might be a little confused because there aren’t any <code>&lt;script&gt;&lt;/script&gt;</code> tags to any JavaScript files or <code>&lt;link&gt;</code> tags to any CSS files. But after “Inspect Elementing” our website, you can clearly see that someone put them there (see the bottom of the orange rectangle or underneath the red rectangle).</p>
+<p><a href="https://storage.googleapis.com/replit/images/1561323653360_acd8e1eb433c4022f2a20968f1f35f25.png"><img src="https://storage.googleapis.com/replit/images/1561323653360_acd8e1eb433c4022f2a20968f1f35f25.png" /></a></p>
+<p>Who’s putting our script tags there? The details are a bit too complicated for this tutorial, but just know that certain build tools automatically inject JavaScript and CSS files in our HTML. You don’t need to know about these tools right now. Just know they exist when you create a React repl, and that they work ✨magically ✨behind the scenes.</p>
+<p>Before we leave our <code>index.html</code> element, just take a mental note of the single HTML in our <code>&lt;body&gt;</code> tag</p>
+<pre><code>&lt;div id=&quot;root&quot;&gt;&lt;/div&gt;</code></pre>
+<p>So now let’s check out our <code>src/index.js</code> (I deleted a few lines, since some of them were not needed).</p>
+<p><a href="https://storage.googleapis.com/replit/images/1561248344033_517b2240d5a212b4297dee54fdc2002b.png"><img src="https://storage.googleapis.com/replit/images/1561248344033_517b2240d5a212b4297dee54fdc2002b.png" /></a></p>
+<p><code>index.js</code> is the start for our app. Here, we’re importing React, our global CSS, and our main <code>App</code> component.</p>
+<ul>
+<li>Our global CSS is the <code>index.css</code> file. It contains CSS for the entire page. Don’t put too much CSS in here since it can potentially override CSS in your React components</li>
+<li>Our <code>App</code> component is where all our other components will start. For example, you might have a <code>&lt;Heading /&gt;</code>, <code>&lt;BodyComponent /&gt;</code>, and <code>&lt;FooterComponent /&gt;</code> in your <code>App</code> component</li>
+</ul>
+<p>Under all the imports,, we really have one line of code on our page</p>
+<pre><code>ReactDOM.render(&lt;App /&gt;, document.getElementById(&#39;root&#39;));</code></pre>
+<p>It’s pretty self explanatory, but this makes React render our App component. It renders our App component and puts it all inside of that <code>&lt;div id="root"&gt;&lt;/div&gt;</code> element that I showed you earlier.</p>
+<p>So React is rendering our <code>App</code> component! What is inside of of it?</p>
+<p><a href="https://storage.googleapis.com/replit/images/1561238900833_754ee5ebfcc924a6612805353cb45f2b.png"><img src="https://storage.googleapis.com/replit/images/1561238900833_754ee5ebfcc924a6612805353cb45f2b.png" /></a></p>
+<p>Here, we create a class called <code>App</code>. This class is a React component. Inside this class, we are creating a render function. This function returns JSX, which will eventually get rendered on the screen.</p>
+<p>If you’re a bit confused, try looking at the render function this way:</p>
+<pre><code>class App extends Component {
+    render() {
+        let myJSX = (
+            &lt;div className=&quot;App&quot;&gt;
+                &lt;header className=&quot;App-header&quot;&gt;
+                   ...
+                &lt;/header&gt;
+            &lt;/div&gt;
+        );
+        return myJSX;
+    }
+}</code></pre>
+<p>Here, we explicitly create a variable called <code>myJSX</code>, then return it.</p>
+<h2 id="creating-our-own-components">Creating our Own Components</h2>
+<p>Now you know a bit about <code>React</code> and <code>JSX</code>, let’s create our own components. Components are usually put in a folder titled <code>components</code>.</p>
+<p><a href="https://storage.googleapis.com/replit/images/1561243541448_9344f05b43f33f43d64dba5aff6a127c.png"><img src="https://storage.googleapis.com/replit/images/1561243541448_9344f05b43f33f43d64dba5aff6a127c.png" /></a></p>
+<p>I’m going to start off by making a Heading component. I only have text in here, just to keep it simple.</p>
+<p>We want to put the <code>Heading</code> component inside our <code>App</code> component. To do this, we just have to import it inside our <code>App</code> component!</p>
+<pre><code>import Heading from &#39;./components/Heading&#39;</code></pre>
+<p>Now, anywhere in your JSX, you can add the <code>&lt;Heading /&gt;</code> element. I’m going to add it to the top.</p>
+<p><a href="https://storage.googleapis.com/replit/images/1561243568219_a4fc4c223367f3652da681f19d62ee03.png"><img src="https://storage.googleapis.com/replit/images/1561243568219_a4fc4c223367f3652da681f19d62ee03.png" /></a></p>
+<p>It’s working! However, the formatting is a bit off since there is a scrollbar. I solved this by removing everything inside of <code>&lt;header&gt;&lt;/header&gt;</code> and replacing it with my own <code>&lt;Body /&gt;</code> component. I also replaced the <code>App.css</code> file with my own <code>css</code>:</p>
+<pre><code>* {
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+  width: 100%;
+}
+
+.App {
+  height: 100%;
+}</code></pre>
+<p>If you want to see the repl up to this point, you can find it <a href="https://repl.it/@eankeen/react-tutorial">here</a>. It looks like this:</p>
+<p><a href="https://storage.googleapis.com/replit/images/1561244980323_de21ec9735cbd8c6901a408c94931069.png"><img src="https://storage.googleapis.com/replit/images/1561244980323_de21ec9735cbd8c6901a408c94931069.png" /></a></p>
+<p>Remember how I was talking about reusing components? This is where we would do it - just copy whatever element you want to be repeated!</p>
+<p><a href="https://storage.googleapis.com/replit/images/1561323934183_a7c5e512ae3688cf4a763acb425041e5.png"><img src="https://storage.googleapis.com/replit/images/1561323934183_a7c5e512ae3688cf4a763acb425041e5.png" /></a></p>
+<p>Go ahead and try to play around - create some components and add them to your <code>App</code>, <code>Heading</code>, or <code>Body</code> component!</p>
+<h2 id="props">Props</h2>
+<p>There is one more basic concept that you should know about: props. Props (which stands for properties) let us transfer data from our parent component to a child component. This might sound confusing at first, but hopefully it’ll clear up when I give an example.</p>
+<p>For this example, I’m going to be using the repl located <a href="https://repl.it/@eankeen/react-tutorial-1">here</a>.</p>
+<h3 id="example">Example</h3>
+<p>I want to transfer data from my <code>Heading</code> to each <code>NavigationItem</code>. So, the parent component is <code>Heading</code> and child component is <code>NavigationItem</code>.</p>
+<p>Inside of the parent component, I need to have my child component imported and being used.</p>
+<p><a href="https://storage.googleapis.com/replit/images/1561250249289_e3221fc9acdeb03d5a2d1cedf84b8f8f.png"><img src="https://storage.googleapis.com/replit/images/1561250249289_e3221fc9acdeb03d5a2d1cedf84b8f8f.png" /></a></p>
+<p>I already have imported the <code>NavigationItem</code> component. I’m also using it (3 times).</p>
+<p>The next step is to add the prop. Props need to have a name and a value. I’m going to name them <code>myPropName</code> and <code>myPropValue</code></p>
+<p><a href="https://storage.googleapis.com/replit/images/1561250581141_d5fb212826ef65da1bc9cbd49f30c0ff.png"><img src="https://storage.googleapis.com/replit/images/1561250581141_d5fb212826ef65da1bc9cbd49f30c0ff.png" /></a></p>
+<p>Great! We’re now sending the prop from our <code>Heading</code> component to the <code>NavigationItem</code> component! We are almost finished - now we just have to render it!</p>
+<p>The props you pass down are properties of the <code>this.props</code> object. Simply access your prop by its name (in the child component), and you’re good to go! Don’t forget to add the <code>{}</code>curly brackets!</p>
+<p><a href="https://storage.googleapis.com/replit/images/1561250630261_d5c0edc32ae9fdbd3ec459a3f34cb98b.png"><img src="https://storage.googleapis.com/replit/images/1561250630261_d5c0edc32ae9fdbd3ec459a3f34cb98b.png" /></a></p>
+<p>You can also use props when you’re dealing with HTML attribute values. Just add brackets and access the prop!</p>
+<pre><code>&lt;img src={ this.props.myImageLink } /&gt;</code></pre>
+<p>I hope this introduction to React was helpful! I remember when I was getting into JavaScript frameworks it was difficult since tutorials would gloss over the “obvious” parts. If this helped you or some parts were confusing, let me know and I’ll make it better!</p>
+<p><a href="https://repl.it/talk/learn/Learn-ReactJS-on-Replit/15980">Source</a></p>
+</body>
+</html>

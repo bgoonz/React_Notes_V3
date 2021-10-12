@@ -1,0 +1,1238 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>CHANGELOG-0.x</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<h2 id="and-newer-versions">1.0.0 and Newer Versions</h2>
+<p><strong>Please refer to <a href="./CHANGELOG-1.x.md">CHANGELOG-1.x.md</a> for the 1.x range, and <a href="CHANGELOG.md">CHANGELOG.md</a> for the newer versions.</strong></p>
+<h2 id="march-9-2017">0.9.5 (March 9, 2017)</h2>
+<h4 id="bug-bug-fix">:bug: Bug Fix</h4>
+<ul>
+<li><p><code>react-scripts</code></p>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/1783">#1783</a> <strong>Work around Node 7.7.2 bug that crashes <code>npm start</code>.</strong> (<span class="citation" data-cites="ryanwalters">[@ryanwalters]</span>(https://github.com/ryanwalters))</li>
+</ul></li>
+</ul>
+<h4 id="nail_care-enhancement">:nail_care: Enhancement</h4>
+<ul>
+<li><p><code>eslint-config-react-app</code></p>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/1773">#1773</a> Remove <code>guard-for-in</code> lint rule. (<span class="citation" data-cites="spicyj">[@spicyj]</span>(https://github.com/spicyj))</li>
+</ul></li>
+<li><code>react-scripts</code>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/1760">#1760</a> Suggest <code>serve</code> for running in production. (<span class="citation" data-cites="leo">[@leo]</span>(https://github.com/leo))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/1747">#1747</a> Display <code>yarn</code> instead of <code>yarnpkg</code> when creating a new app. (<span class="citation" data-cites="lpalmes">[@lpalmes]</span>(https://github.com/lpalmes))</li>
+</ul></li>
+</ul>
+<h4 id="memo-documentation">:memo: Documentation</h4>
+<ul>
+<li><p><code>react-scripts</code></p>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/1756">#1756</a> Add Yarn steps for adding Flow. (<span class="citation" data-cites="zertosh">[@zertosh]</span>(https://github.com/zertosh))</li>
+</ul></li>
+</ul>
+<h4 id="house-internal">:house: Internal</h4>
+<ul>
+<li><p><code>babel-preset-react-app</code></p>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/1742">#1742</a> Switch to <code>babel-preset-env</code> to remove the deprecation warning. (<span class="citation" data-cites="Timer">[@Timer]</span>(https://github.com/Timer))</li>
+</ul></li>
+</ul>
+<h4 id="committers-6">Committers: 6</h4>
+<ul>
+<li>Andres Suarez (<a href="https://github.com/zertosh">zertosh</a>)</li>
+<li>Ben Alpert (<a href="https://github.com/spicyj">spicyj</a>)</li>
+<li>Joe Haddad (<a href="https://github.com/Timer">Timer</a>)</li>
+<li>Leo Lamprecht (<a href="https://github.com/leo">leo</a>)</li>
+<li>Lorenzo Palmes (<a href="https://github.com/lpalmes">lpalmes</a>)</li>
+<li>Ryan Walters (<a href="https://github.com/ryanwalters">ryanwalters</a>)</li>
+</ul>
+<h3 id="migrating-from-0.9.4-to-0.9.5">Migrating from 0.9.4 to 0.9.5</h3>
+<p>Inside any created project that has not been ejected, run:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb1-1" title="1"><span class="ex">npm</span> install --save-dev --save-exact react-scripts@0.9.5</a></code></pre></div>
+<h2 id="march-6-2017">0.9.4 (March 6, 2017)</h2>
+<h4 id="bug-bug-fix-1">:bug: Bug Fix</h4>
+<ul>
+<li><p><code>create-react-app</code></p>
+<ul>
+<li><p><a href="https://github.com/facebook/create-react-app/pull/1706">#1706</a> Extract compressed package for package name. (<span class="citation" data-cites="Timer">[@Timer]</span>(https://github.com/Timer))</p>
+<p>You may now specify a scoped package for <code>--scripts-version</code> and obtain a working installation.</p></li>
+<li><p><a href="https://github.com/facebook/create-react-app/pull/1695">#1695</a> Print why installation was aborted. (<span class="citation" data-cites="tgig">[@tgig]</span>(https://github.com/tgig))</p></li>
+</ul></li>
+<li><p><code>react-scripts</code></p>
+<ul>
+<li><p><a href="https://github.com/facebook/create-react-app/pull/1727">#1727</a> Fix ejecting from a scoped fork. (<span class="citation" data-cites="gaearon">[@gaearon]</span>(https://github.com/gaearon))</p>
+<p>Ejecting now works within a scoped fork.</p></li>
+<li><p><a href="https://github.com/facebook/create-react-app/pull/1721">#1721</a> Fix hot reloading for WebpackDevServer after eject. (<span class="citation" data-cites="gaearon">[@gaearon]</span>(https://github.com/gaearon))</p></li>
+</ul></li>
+<li><p><code>react-dev-utils</code></p>
+<ul>
+<li><p><a href="https://github.com/facebook/create-react-app/pull/1690">#1690</a> Fix <code>openBrowser()</code> when <code>BROWSER=open</code> on macOS. (<span class="citation" data-cites="bpierre">[@bpierre]</span>(https://github.com/bpierre))</p></li>
+<li><p><a href="https://github.com/facebook/create-react-app/pull/1696">#1696</a> Improve reliability of port detection. (<span class="citation" data-cites="chrisdrackett">[@chrisdrackett]</span>(https://github.com/chrisdrackett))</p></li>
+</ul></li>
+</ul>
+<h4 id="nail_care-enhancement-1">:nail_care: Enhancement</h4>
+<ul>
+<li><p><code>eslint-config-react-app</code>, <code>react-scripts</code></p>
+<ul>
+<li><p><a href="https://github.com/facebook/create-react-app/pull/1705">#1705</a> Add support for <code>ignoreRestSiblings</code> in <code>no-unused-vars</code>. (<span class="citation" data-cites="chrisdrackett">[@chrisdrackett]</span>(https://github.com/chrisdrackett))</p>
+<p>Linter no longer warns when using rest properties to remove variables from an object.</p></li>
+<li><p><a href="https://github.com/facebook/create-react-app/pull/1542">#1542</a> Bump <code>jsx-a11y</code> version. (<span class="citation" data-cites="bondz">[@bondz]</span>(https://github.com/bondz))</p></li>
+</ul></li>
+<li><p><code>react-dev-utils</code>, <code>react-scripts</code></p>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/1726">#1726</a> Extract generic build functions into <code>react-dev-utils</code>. (<span class="citation" data-cites="viankakrisna">[@viankakrisna]</span>(https://github.com/viankakrisna))</li>
+</ul></li>
+<li><p>Other</p>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/1402">#1402</a> Stub <code>package.json</code> for e2e test. (<span class="citation" data-cites="matoilic">[@matoilic]</span>(https://github.com/matoilic))</li>
+</ul></li>
+</ul>
+<h4 id="memo-documentation-1">:memo: Documentation</h4>
+<ul>
+<li><code>react-scripts</code>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/1710">#1710</a> Update now.sh deployment instructions. (<span class="citation" data-cites="replaid">[@replaid]</span>(https://github.com/replaid))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/1717">#1717</a> Add docs for Apache client side routing. (<span class="citation" data-cites="viankakrisna">[@viankakrisna]</span>(https://github.com/viankakrisna))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/1698">#1698</a> Suggest to use <code>.env</code> for enabling polling mode. (<span class="citation" data-cites="gaearon">[@gaearon]</span>(https://github.com/gaearon))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/1687">#1687</a> Fixed missing <code>--recursive</code> flag in first <code>npm run watch-css</code> command. (<span class="citation" data-cites="mklemme">[@mklemme]</span>(https://github.com/mklemme))</li>
+</ul></li>
+</ul>
+<h4 id="house-internal-1">:house: Internal</h4>
+<ul>
+<li><code>react-scripts</code>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/1736">#1736</a> Fix eject for linked react-scripts. (<span class="citation" data-cites="tuchk4">[@tuchk4]</span>(https://github.com/tuchk4))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/1741">#1741</a> Fix internal linting setup. (<span class="citation" data-cites="gaearon">[@gaearon]</span>(https://github.com/gaearon))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/1730">#1730</a> Fix Node 4 e2e tests. (<span class="citation" data-cites="Timer">[@Timer]</span>(https://github.com/Timer))</li>
+</ul></li>
+<li><code>eslint-config-react-app</code>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/1740">#1740</a> Relax ESLint config peerDependency. (<span class="citation" data-cites="gaearon">[@gaearon]</span>(https://github.com/gaearon))</li>
+</ul></li>
+<li><code>eslint-config-react-app</code>, <code>react-dev-utils</code>, <code>react-scripts</code>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/1729">#1729</a> Lint internal scripts with <code>eslint:recommended</code>. (<span class="citation" data-cites="gaearon">[@gaearon]</span>(https://github.com/gaearon))</li>
+</ul></li>
+<li><code>react-dev-utils</code>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/1724">#1724</a> Don’t use ES6 in a file that should run on Node 4. (<span class="citation" data-cites="gaearon">[@gaearon]</span>(https://github.com/gaearon))</li>
+</ul></li>
+<li>Other
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/1723">#1723</a> Skip AppVeyor CI builds for Markdown changes. (<span class="citation" data-cites="gaearon">[@gaearon]</span>(https://github.com/gaearon))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/1707">#1707</a> Add double quotes to escape spaces in paths in e2e. (<span class="citation" data-cites="viankakrisna">[@viankakrisna]</span>(https://github.com/viankakrisna))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/1688">#1688</a> Upgrade <code>lerna</code> version. (<span class="citation" data-cites="viankakrisna">[@viankakrisna]</span>(https://github.com/viankakrisna))</li>
+</ul></li>
+</ul>
+<h4 id="committers-11">Committers: 11</h4>
+<ul>
+<li>Ade Viankakrisna Fadlil (<a href="https://github.com/viankakrisna">viankakrisna</a>)</li>
+<li>Bond (<a href="https://github.com/bondz">bondz</a>)</li>
+<li>Chris Drackett (<a href="https://github.com/chrisdrackett">chrisdrackett</a>)</li>
+<li>Dan Abramov (<a href="https://github.com/gaearon">gaearon</a>)</li>
+<li>Joe Haddad (<a href="https://github.com/Timer">Timer</a>)</li>
+<li>Mato Ilic (<a href="https://github.com/matoilic">matoilic</a>)</li>
+<li>Myk Klemme (<a href="https://github.com/mklemme">mklemme</a>)</li>
+<li>Pierre Bertet (<a href="https://github.com/bpierre">bpierre</a>)</li>
+<li>Ryan Platte (<a href="https://github.com/replaid">replaid</a>)</li>
+<li>Travis Giggy (<a href="https://github.com/tgig">tgig</a>)</li>
+<li>Valerii Sorokobatko (<a href="https://github.com/tuchk4">tuchk4</a>)</li>
+</ul>
+<h3 id="migrating-from-0.9.3-to-0.9.4">Migrating from 0.9.3 to 0.9.4</h3>
+<p>Inside any created project that has not been ejected, run:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb2-1" title="1"><span class="ex">npm</span> install --save-dev --save-exact react-scripts@0.9.4</a></code></pre></div>
+<p>You may also optionally update the global command-line utility for scoped package support:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb3-1" title="1"><span class="ex">npm</span> install -g create-react-app@1.3.0</a></code></pre></div>
+<h2 id="february-28-2017">0.9.3 (February 28, 2017)</h2>
+<h4 id="rocket-new-feature">:rocket: New Feature</h4>
+<ul>
+<li><p><code>create-react-app</code></p>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/1423">#1423</a> <strong>Fall back to Yarn offline cache when creating a new project.</strong> (<span class="citation" data-cites="voxsim">[@voxsim]</span>(https://github.com/voxsim))</li>
+</ul>
+<p>If you are using Yarn, and you have created at least one app previously, Create React App now works offline.</p>
+<p><img src="http://i.imgur.com/1FLa9Tg.gif" width="500" alt="Yarn offline installation demo"></p></li>
+</ul>
+<h4 id="bug-bug-fix-2">:bug: Bug Fix</h4>
+<ul>
+<li><p><code>react-scripts</code></p>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/1665">#1665</a> Temporarily disable ESLint caching because of a bug. (<span class="citation" data-cites="gaearon">[@gaearon]</span>(https://github.com/gaearon))</li>
+</ul></li>
+<li><code>create-react-app</code>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/1675">#1675</a> Delete project folder on failed installation on Windows. (<span class="citation" data-cites="johann-sonntagbauer">[@johann-sonntagbauer]</span>(https://github.com/johann-sonntagbauer))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/1662">#1662</a> Validate project name before creating a project. (<span class="citation" data-cites="johann-sonntagbauer">[@johann-sonntagbauer]</span>(https://github.com/johann-sonntagbauer))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/1669">#1669</a> Make sure React dependencies aren’t pinned in new projects. (<span class="citation" data-cites="johann-sonntagbauer">[@johann-sonntagbauer]</span>(https://github.com/johann-sonntagbauer))</li>
+</ul></li>
+</ul>
+<h4 id="nail_care-enhancement-2">:nail_care: Enhancement</h4>
+<ul>
+<li><p><code>react-scripts</code></p>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/1677">#1677</a> Add <code>X-FORWARDED</code> headers for proxy requests. (<span class="citation" data-cites="johann-sonntagbauer">[@johann-sonntagbauer]</span>(https://github.com/johann-sonntagbauer))</li>
+</ul></li>
+</ul>
+<h4 id="memo-documentation-2">:memo: Documentation</h4>
+<ul>
+<li><p><code>react-scripts</code></p>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/1657">#1657</a> Tweak the Visual Studio Code debugging guide. (<span class="citation" data-cites="ryansully">[@ryansully]</span>(https://github.com/ryansully))</li>
+</ul></li>
+</ul>
+<h4 id="house-internal-2">:house: Internal</h4>
+<ul>
+<li><p>End-to-end Tests</p>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/1648">#1648</a> Add Windows CI tests for better stability. (<span class="citation" data-cites="Timer">[@Timer]</span>(https://github.com/Timer))</li>
+</ul></li>
+</ul>
+<h4 id="committers-5">Committers: 5</h4>
+<ul>
+<li>Dan Abramov (<a href="https://github.com/gaearon">gaearon</a>)</li>
+<li>Joe Haddad (<a href="https://github.com/Timer">Timer</a>)</li>
+<li>Johann Hubert Sonntagbauer (<a href="https://github.com/johann-sonntagbauer">johann-sonntagbauer</a>)</li>
+<li>Ryan Sullivan (<a href="https://github.com/ryansully">ryansully</a>)</li>
+<li>Simon Vocella (<a href="https://github.com/voxsim">voxsim</a>)</li>
+</ul>
+<h3 id="migrating-from-0.9.2-to-0.9.3">Migrating from 0.9.2 to 0.9.3</h3>
+<p>Inside any created project that has not been ejected, run:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb4-1" title="1"><span class="ex">npm</span> install --save-dev --save-exact react-scripts@0.9.3</a></code></pre></div>
+<p>You may also optionally update the global command-line utility for offline Yarn cache support:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb5-1" title="1"><span class="ex">npm</span> install -g create-react-app@1.2.1</a></code></pre></div>
+<h2 id="february-26-2017">0.9.2 (February 26, 2017)</h2>
+<h4 id="nail_care-enhancement-3">:nail_care: Enhancement</h4>
+<ul>
+<li><p><code>create-react-app</code></p>
+<ul>
+<li><p><a href="https://github.com/facebook/create-react-app/pull/1253">#1253</a> <strong>Install time optimization.</strong> (<span class="citation" data-cites="n3tr">[@n3tr]</span>(https://github.com/n3tr))</p>
+<p>React, ReactDOM, and <code>react-scripts</code> are now installed in the same install instead of two different installs. This reduces app creation time by a noticeable amount.</p></li>
+<li><p><a href="https://github.com/facebook/create-react-app/pull/1512">#1512</a> <strong>Graceful error handling.</strong> (<span class="citation" data-cites="chitchu">[@chitchu]</span>(https://github.com/chitchu))</p>
+<p>If an error occurs while <code>create-react-app</code> is running, it will now clean up and not leave a broken project to reduce confusion.</p></li>
+<li><p><a href="https://github.com/facebook/create-react-app/pull/1193">#1193</a> Suggest upgrading to NPM &gt;= 3 for faster install times. (<span class="citation" data-cites="mobinni">[@mobinni]</span>(https://github.com/mobinni))</p></li>
+<li><p><a href="https://github.com/facebook/create-react-app/pull/1603">#1603</a> Allow app creation in a WebStorm project. (<span class="citation" data-cites="driquelme">[@driquelme]</span>(https://github.com/driquelme))</p></li>
+<li><p><a href="https://github.com/facebook/create-react-app/pull/1570">#1570</a> Allow git urls in <code>--scripts-version</code>. (<span class="citation" data-cites="tomconroy">[@tomconroy]</span>(https://github.com/tomconroy))</p></li>
+</ul></li>
+<li><p><code>react-scripts</code></p>
+<ul>
+<li><p><a href="https://github.com/facebook/create-react-app/pull/1578">#1578</a> Enable lint caching in development. (<span class="citation" data-cites="viankakrisna">[@viankakrisna]</span>(https://github.com/viankakrisna))</p></li>
+<li><p><a href="https://github.com/facebook/create-react-app/pull/1478">#1478</a> Update the build script message to show the correct port. (<span class="citation" data-cites="chyipin">[@chyipin]</span>(https://github.com/chyipin))</p></li>
+<li><p><a href="https://github.com/facebook/create-react-app/pull/1567">#1567</a> Remove .bin files after eject. (<span class="citation" data-cites="tuchk4">[@tuchk4]</span>(https://github.com/tuchk4))</p></li>
+<li><p><a href="https://github.com/facebook/create-react-app/pull/1560">#1560</a> Bump <code>recursive-readdir</code>. (<span class="citation" data-cites="wtgtybhertgeghgtwtg">[@wtgtybhertgeghgtwtg]</span>(https://github.com/wtgtybhertgeghgtwtg))</p></li>
+</ul></li>
+</ul>
+<h4 id="bug-bug-fix-3">:bug: Bug Fix</h4>
+<ul>
+<li><p><code>react-scripts</code></p>
+<ul>
+<li><p><a href="https://github.com/facebook/create-react-app/pull/1635">#1635</a> <strong>Fix Jest configuration.</strong> (<span class="citation" data-cites="Timer">[@Timer]</span>(https://github.com/Timer))</p>
+<p>Fixes ejecting on Windows for macOS and Linux machines.</p></li>
+<li><p><a href="https://github.com/facebook/create-react-app/pull/1356">#1356</a> Fix workflow if react-scripts package is linked via npm-link. (<span class="citation" data-cites="tuchk4">[@tuchk4]</span>(https://github.com/tuchk4))</p>
+<p>Advanced users may opt to fork <code>react-scripts</code> instead of ejecting so they still receive upstream updates.<br> <code>react-scripts</code> will now function as expected when linking to a development version.<br> Previously, you could not test changes with an existing application via linking.</p></li>
+<li><p><a href="https://github.com/facebook/create-react-app/pull/1585">#1585</a> Ensure PORT environment variable is an integer. (<span class="citation" data-cites="matoilic">[@matoilic]</span>(https://github.com/matoilic))</p></li>
+<li><p><a href="https://github.com/facebook/create-react-app/pull/1628">#1628</a> Show correct port for pushstate-server URL text. (<span class="citation" data-cites="mattccrampton">[@mattccrampton]</span>(https://github.com/mattccrampton))</p></li>
+<li><p><a href="https://github.com/facebook/create-react-app/pull/1647">#1647</a> Fix <code>npm test</code> on Windows (<span class="citation" data-cites="gaearon">[@gaearon]</span>(https://github.com/gaearon))</p></li>
+</ul></li>
+</ul>
+<h4 id="memo-documentation-3">:memo: Documentation</h4>
+<ul>
+<li>User Guides
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/1391">#1391</a> Add note how to resolve missing required files for Heroku. (<span class="citation" data-cites="sbritoig">[@sbritoig]</span>(https://github.com/sbritoig))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/1577">#1577</a> Add a how-to on <code>react-snapshot</code>. (<span class="citation" data-cites="superhighfives">[@superhighfives]</span>(https://github.com/superhighfives))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/1121">#1121</a> Add documentation for customizing Bootstrap theme. (<span class="citation" data-cites="myappincome">[@myappincome]</span>(https://github.com/myappincome))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/1540">#1540</a> Document debugging in Visual Studio Code. (<span class="citation" data-cites="bondz">[@bondz]</span>(https://github.com/bondz))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/1618">#1618</a> Add note about when to import Bootstrap CSS. (<span class="citation" data-cites="joewoodhouse">[@joewoodhouse]</span>(https://github.com/joewoodhouse))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/1518">#1518</a> Update flow configuration documentation. (<span class="citation" data-cites="SBrown52">[@SBrown52]</span>(https://github.com/SBrown52))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/1625">#1625</a> Specify that NODE_ENV is set to ‘production’ during the build step. (<span class="citation" data-cites="mderazon">[@mderazon]</span>(https://github.com/mderazon))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/1573">#1573</a> Update Jest documentation links. (<span class="citation" data-cites="mkermani144">[@mkermani144]</span>(https://github.com/mkermani144))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/1564">#1564</a> Add –recursive to Sass watch script. (<span class="citation" data-cites="aleburato">[@aleburato]</span>(https://github.com/aleburato))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/1561">#1561</a> Use https in link in documentation. (<span class="citation" data-cites="dariocravero">[@dariocravero]</span>(https://github.com/dariocravero))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/1562">#1562</a> Update <code>jest-enzyme</code> documentation. (<span class="citation" data-cites="kiranps">[@kiranps]</span>(https://github.com/kiranps))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/1543">#1543</a> Update CSS preprocessor instructions. (<span class="citation" data-cites="aleburato">[@aleburato]</span>(https://github.com/aleburato))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/1338">#1338</a> Add link to Azure deployment tutorial. (<span class="citation" data-cites="tpetrina">[@tpetrina]</span>(https://github.com/tpetrina))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/1320">#1320</a> Document how to disable autoprefix feature. (<span class="citation" data-cites="rrubas">[@rrubas]</span>(https://github.com/rrubas))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/1313">#1313</a> List features beyond ES6 supported by create-react-app. (<span class="citation" data-cites="jonathanconway">[@jonathanconway]</span>(https://github.com/jonathanconway))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/1008">#1008</a> Add Saas support documentation. (<span class="citation" data-cites="tsironis">[@tsironis]</span>(https://github.com/tsironis))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/994">#994</a> Suggest <code>jest-enzyme</code> for simplifying test matchers. (<span class="citation" data-cites="blainekasten">[@blainekasten]</span>(https://github.com/blainekasten))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/1608">#1608</a> Add note for using CHOKIDAR_USEPOLLING in virtual machines to enable HMR. (<span class="citation" data-cites="AJamesPhillips">[@AJamesPhillips]</span>(https://github.com/AJamesPhillips))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/1495">#1495</a> Add useful link to react-scripts. (<span class="citation" data-cites="pd4d10">[@pd4d10]</span>(https://github.com/pd4d10))</li>
+</ul></li>
+<li>READMEs
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/1576">#1576</a> Switch from Neo to Neutrino. (<span class="citation" data-cites="eliperelman">[@eliperelman]</span>(https://github.com/eliperelman))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/1275">#1275</a> Suggest yarn commands in addition to npm. (<span class="citation" data-cites="lifez">[@lifez]</span>(https://github.com/lifez))</li>
+</ul></li>
+</ul>
+<h4 id="house-internal-3">:house: Internal</h4>
+<ul>
+<li><code>babel-preset-react-app</code>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/1598">#1598</a> Remove redundant babel-plugin-transform-es2015-parameters. (<span class="citation" data-cites="christophehurpeau">[@christophehurpeau]</span>(https://github.com/christophehurpeau))</li>
+</ul></li>
+<li>Other
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/1534">#1534</a> Use yarn@latest in e2e. (<span class="citation" data-cites="gaearon">[@gaearon]</span>(https://github.com/gaearon))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/1295">#1295</a> Make node version check more robust in e2e. (<span class="citation" data-cites="pugnascotia">[@pugnascotia]</span>(https://github.com/pugnascotia))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/1503">#1503</a> Fix <code>test -e</code> in e2e. (<span class="citation" data-cites="igetgames">[@igetgames]</span>(https://github.com/igetgames))</li>
+</ul></li>
+</ul>
+<h4 id="committers-36">Committers: 36</h4>
+<ul>
+<li>Ade Viankakrisna Fadlil (<a href="https://github.com/viankakrisna">viankakrisna</a>)</li>
+<li>Alessandro Burato (<a href="https://github.com/aleburato">aleburato</a>)</li>
+<li>Alexander James Phillips (<a href="https://github.com/AJamesPhillips">AJamesPhillips</a>)</li>
+<li>Blaine Kasten (<a href="https://github.com/blainekasten">blainekasten</a>)</li>
+<li>Bond (<a href="https://github.com/bondz">bondz</a>)</li>
+<li>Charlie Gleason (<a href="https://github.com/superhighfives">superhighfives</a>)</li>
+<li>Christophe Hurpeau (<a href="https://github.com/christophehurpeau">christophehurpeau</a>)</li>
+<li>Dan Abramov (<a href="https://github.com/gaearon">gaearon</a>)</li>
+<li>Daniel Riquelme (<a href="https://github.com/driquelme">driquelme</a>)</li>
+<li>Darío Javier Cravero (<a href="https://github.com/dariocravero">dariocravero</a>)</li>
+<li>Dimitris Tsironis (<a href="https://github.com/tsironis">tsironis</a>)</li>
+<li>Eli Perelman (<a href="https://github.com/eliperelman">eliperelman</a>)</li>
+<li>Jirat Ki. (<a href="https://github.com/n3tr">n3tr</a>)</li>
+<li>Joe Haddad (<a href="https://github.com/Timer">Timer</a>)</li>
+<li>Joe Woodhouse (<a href="https://github.com/joewoodhouse">joewoodhouse</a>)</li>
+<li>Jonathan Conway (<a href="https://github.com/jonathanconway">jonathanconway</a>)</li>
+<li>Marcus R. Brown (<a href="https://github.com/igetgames">igetgames</a>)</li>
+<li>Mato Ilic (<a href="https://github.com/matoilic">matoilic</a>)</li>
+<li>Matt Crampton (<a href="https://github.com/mattccrampton">mattccrampton</a>)</li>
+<li>Michael DeRazon (<a href="https://github.com/mderazon">mderazon</a>)</li>
+<li>Mo Binni (<a href="https://github.com/mobinni">mobinni</a>)</li>
+<li>Mohammad Kermani (<a href="https://github.com/mkermani144">mkermani144</a>)</li>
+<li>Phawin Khongkhasawan (<a href="https://github.com/lifez">lifez</a>)</li>
+<li>Roman Rubas (<a href="https://github.com/rrubas">rrubas</a>)</li>
+<li>Rory Hunter (<a href="https://github.com/pugnascotia">pugnascotia</a>)</li>
+<li>Tom Conroy (<a href="https://github.com/tomconroy">tomconroy</a>)</li>
+<li>Toni Petrina (<a href="https://github.com/tpetrina">tpetrina</a>)</li>
+<li>Valerii Sorokobatko (<a href="https://github.com/tuchk4">tuchk4</a>)</li>
+<li>Vicente Jr Yuchitcho (<a href="https://github.com/chitchu">chitchu</a>)</li>
+<li><a href="https://github.com/SBrown52">SBrown52</a></li>
+<li><a href="https://github.com/chyipin">chyipin</a></li>
+<li><a href="https://github.com/myappincome">myappincome</a></li>
+<li><a href="https://github.com/sbritoig">sbritoig</a></li>
+<li><a href="https://github.com/wtgtybhertgeghgtwtg">wtgtybhertgeghgtwtg</a></li>
+<li>kiran ps (<a href="https://github.com/kiranps">kiranps</a>)</li>
+<li>pd4d10 (<a href="https://github.com/pd4d10">pd4d10</a>)</li>
+</ul>
+<h3 id="migrating-from-0.9.0-to-0.9.2">Migrating from 0.9.0 to 0.9.2</h3>
+<p><strong>Note:</strong> 0.9.1 had known issues so you should skip it.</p>
+<p>Inside any created project that has not been ejected, run:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb6-1" title="1"><span class="ex">npm</span> install --save-dev --save-exact react-scripts@0.9.2</a></code></pre></div>
+<p>You may also optionally update the global command-line utility for more efficient installs (thanks <span class="citation" data-cites="n3tr">[@n3tr]</span>(https://github.com/n3tr)):</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb7-1" title="1"><span class="ex">npm</span> install -g create-react-app@1.1.0</a></code></pre></div>
+<h2 id="february-25-2017"><s>0.9.1 (February 25, 2017)</s></h2>
+<p>This release has known issues and you should skip it. Update directly to 0.9.2 instead.</p>
+<h2 id="february-11-2017">0.9.0 (February 11, 2017)</h2>
+<p>Thanks to <span class="citation" data-cites="Timer">[@Timer]</span>(https://github.com/timer) for cutting this release.</p>
+<h4 id="rocket-new-feature-1">:rocket: New Feature</h4>
+<ul>
+<li><p><code>react-scripts</code></p>
+<ul>
+<li><p><a href="https://github.com/facebook/create-react-app/pull/1489">#1489</a> Support setting <code>"homepage"</code> to <code>"."</code> to generate relative asset paths. (<span class="citation" data-cites="tibdex">[@tibdex]</span>(https://github.com/tibdex))</p>
+<p>Applications that don’t use the HTML5 <code>pushState</code> API can now be built to be served from any relative URL. To enable this, specify <code>"."</code> as your <code>homepage</code> setting in <code>package.json</code>. It used to be possible before with a few known bugs, but they should be fixed now. See <a href="https://github.com/facebook/create-react-app/blob/master/packages/react-scripts/template/README.md#serving-the-same-build-from-different-paths">Serving the Same Build from Different Paths</a>.</p></li>
+<li><p><a href="https://github.com/facebook/create-react-app/pull/1504">#937</a> Add <code>PUBLIC_URL</code> environment variable for advanced use. (<span class="citation" data-cites="EnoahNetzach">[@EnoahNetzach]</span>(https://github.com/EnoahNetzach))</p>
+<p>If you use a CDN to serve the app, you can now specify <code>PUBLIC_URL</code> environment variable to override the base URL (including the hostname) for resources referenced from the built code. This new variable is mentioned in the new <a href="https://github.com/facebook/create-react-app/blob/master/packages/react-scripts/template/README.md#advanced-configuration">Advanced Configuration</a> section.</p></li>
+<li><p><a href="https://github.com/facebook/create-react-app/pull/1440">#1440</a> Make all <code>REACT_APP_*</code> environment variables accessible in <code>index.html</code>. (<span class="citation" data-cites="jihchi">[@jihchi]</span>(https://github.com/jihchi))</p>
+<p>This makes all environment variables previously available in JS, also available in the HTML file, for example <code>%REACT_APP_MY_VARIABLE%</code>. See <a href="https://github.com/facebook/create-react-app/blob/master/packages/react-scripts/template/README.md#referencing-environment-variables-in-the-html">Referencing Environment Variables in HTML</a>.</p></li>
+</ul></li>
+<li><p><code>react-dev-utils</code></p>
+<ul>
+<li><p><a href="https://github.com/facebook/create-react-app/pull/1148">#1148</a> Configure which browser to open with <code>npm start</code>. (<span class="citation" data-cites="GAumala">[@GAumala]</span>(https://github.com/GAumala))</p>
+<p>You can now disable the automatic browser launching by setting the <code>BROWSER</code> environment variable to <code>none</code>. You can also specify a different browser (or an arbitrary script) to open by default, <a href="https://github.com/sindresorhus/opn#app">as supported by <code>opn</code> command</a> that we use under the hood. See <a href="https://github.com/facebook/create-react-app/blob/master/packages/react-scripts/template/README.md#advanced-configuration">Advanced Configuration</a>.</p></li>
+</ul></li>
+</ul>
+<h4 id="boom-breaking-change">:boom: Breaking Change</h4>
+<ul>
+<li><p><code>react-scripts</code></p>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/1522">#1522</a> Upgrade dependencies. (<span class="citation" data-cites="Timer">[@Timer]</span>(https://github.com/Timer))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/1432">#1432</a> Bump Jest version. (<span class="citation" data-cites="gaearon">[@gaearon]</span>(https://github.com/gaearon))</li>
+<li><p><a href="https://github.com/facebook/create-react-app/pull/1311">#1311</a> Updated <code>babel-jest</code> and <code>jest</code> packages to 18.0.0. (<span class="citation" data-cites="lopezator">[@lopezator]</span>(https://github.com/lopezator))</p>
+<p>Jest has been updated to 18 and has introduced some <a href="https://facebook.github.io/jest/blog/2016/12/15/2016-in-jest.html">breaking changes and new features</a>.</p></li>
+</ul></li>
+<li><p><code>react-scripts</code>, <code>react-dev-utils</code></p>
+<ul>
+<li><p><a href="https://github.com/facebook/create-react-app/pull/1264">#1264</a> Remove interactive shell check when opening browser on start. (<span class="citation" data-cites="CaryLandholt">[@CaryLandholt]</span>(https://github.com/CaryLandholt))</p>
+<p>Non-interactive terminals no longer automatically disable launching of the browser. Instead, you need to <a href="https://github.com/facebook/create-react-app/blob/master/packages/react-scripts/template/README.md#advanced-configuration">specify <code>none</code> as <code>BROWSER</code> environment variable</a> if you wish to disable it.</p></li>
+</ul></li>
+</ul>
+<h4 id="bug-bug-fix-4">:bug: Bug Fix</h4>
+<ul>
+<li><p><code>react-scripts</code></p>
+<ul>
+<li><p><a href="https://github.com/facebook/create-react-app/pull/1441">#1441</a> Added <code>babel-runtime</code> dependency to deduplicate dependencies when using Yarn. (<span class="citation" data-cites="jkimbo">[@jkimbo]</span>(https://github.com/jkimbo))</p>
+<p>This works around a bug in Yarn that caused newly created projects to be over 400MB. Now they are down to 126MB, just like with npm 3.</p></li>
+<li><a href="https://github.com/facebook/create-react-app/pull/1522">#1522</a> Upgrade dependencies. (<span class="citation" data-cites="Timer">[@Timer]</span>(https://github.com/Timer))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/1458">#1458</a> Additionally remove <code>react-scripts</code> from dependencies on eject. (<span class="citation" data-cites="creynders">[@creynders]</span>(https://github.com/creynders))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/1309">#1309</a> Bump <code>babel-loader</code> version (#1009). (<span class="citation" data-cites="frontsideair">[@frontsideair]</span>(https://github.com/frontsideair))</li>
+<li><p><a href="https://github.com/facebook/create-react-app/pull/1267">#1267</a> Only gitignore directories in root, not deep. (<span class="citation" data-cites="jayphelps">[@jayphelps]</span>(https://github.com/jayphelps))</p></li>
+</ul></li>
+<li><p><code>react-dev-utils</code></p>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/1377">#1377</a> webpack-dev-server patch for ‘still-ok’ success status. (<span class="citation" data-cites="TheBlackBolt">[@TheBlackBolt]</span>(https://github.com/TheBlackBolt))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/1274">#1274</a> Downgrading to compatible version of SockJS-Client. (<span class="citation" data-cites="holloway">[@holloway]</span>(https://github.com/holloway))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/1247">#1247</a> Only open Chrome tab if BROWSER is missing or is Chrome. (<span class="citation" data-cites="gaearon">[@gaearon]</span>(https://github.com/gaearon))</li>
+</ul></li>
+</ul>
+<h4 id="nail_care-enhancement-4">:nail_care: Enhancement</h4>
+<ul>
+<li><p><code>react-scripts</code></p>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/1496">#1496</a> Make build exit with error code when interrupted. (<span class="citation" data-cites="brandones">[@brandones]</span>(https://github.com/brandones))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/1352">#1352</a> More descriptive error message for <code>env.CI = true</code> warnings causing failures. (<span class="citation" data-cites="jayphelps">[@jayphelps]</span>(https://github.com/jayphelps))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/1264">#1264</a> Remove interactive shell check when opening browser on start. (<span class="citation" data-cites="CaryLandholt">[@CaryLandholt]</span>(https://github.com/CaryLandholt))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/1311">#1311</a> Updated <code>babel-jest</code> and <code>jest</code> packages to 18.0.0. (<span class="citation" data-cites="lopezator">[@lopezator]</span>(https://github.com/lopezator))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/1432">#1432</a> Bump Jest version. (<span class="citation" data-cites="gaearon">[@gaearon]</span>(https://github.com/gaearon))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/1507">#1507</a> fix: add yarn gitignores. (<span class="citation" data-cites="adjohnson916">[@adjohnson916]</span>(https://github.com/adjohnson916))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/1510">#1510</a> Add missing <code>'\n'</code> to the end of <code>package.json</code> file. (<span class="citation" data-cites="pd4d10">[@pd4d10]</span>(https://github.com/pd4d10))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/1324">#1324</a> Use npm script hooks to avoid <code>&amp;&amp;</code> in deploy script. (<span class="citation" data-cites="zpao">[@zpao]</span>(https://github.com/zpao))</li>
+</ul></li>
+<li><p><code>create-react-app</code></p>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/1270">#1270</a> gh-1269: Enabling nested folder paths for project name. (<span class="citation" data-cites="dinukadesilva">[@dinukadesilva]</span>(https://github.com/dinukadesilva))</li>
+</ul></li>
+</ul>
+<h4 id="memo-documentation-4">:memo: Documentation</h4>
+<ul>
+<li><p>User Guide</p>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/1515">#1515</a> readme: Advanced Configuration. (<span class="citation" data-cites="Timer">[@Timer]</span>(https://github.com/Timer))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/1513">#1513</a> clarifying the use of custom environment variables. (<span class="citation" data-cites="calweb">[@calweb]</span>(https://github.com/calweb))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/1511">#1511</a> Change “OS X” references to “macOS”. (<span class="citation" data-cites="RodrigoHahn">[@RodrigoHahn]</span>(https://github.com/RodrigoHahn))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/1482">#1482</a> Edit User Guide: Add ESLint config for VS Code users. (<span class="citation" data-cites="vulong23">[@vulong23]</span>(https://github.com/vulong23))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/1483">#1483</a> Reflect websocket proxy support on README (#1013). (<span class="citation" data-cites="frontsideair">[@frontsideair]</span>(https://github.com/frontsideair))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/1453">#1453</a> Readme: Removes experimental from Jest snapshot. (<span class="citation" data-cites="frehner">[@frehner]</span>(https://github.com/frehner))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/1437">#1437</a> Added links to tutorials for integrating cra with an api backend. (<span class="citation" data-cites="alexdriaguine">[@alexdriaguine]</span>(https://github.com/alexdriaguine))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/1422">#1422</a> Add causes of dev server not detecting changes. (<span class="citation" data-cites="jetpackpony">[@jetpackpony]</span>(https://github.com/jetpackpony))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/1260">#1260</a> Heroku Deployment: Adds a note on how to resolve “File/Module Not Found Errors” . (<span class="citation" data-cites="MsUzoAgu">[@MsUzoAgu]</span>(https://github.com/MsUzoAgu))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/1256">#1256</a> Add “Changing the Page Title” to User Guide. (<span class="citation" data-cites="gaearon">[@gaearon]</span>(https://github.com/gaearon))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/1245">#1245</a> Replace the Flow documentation section. (<span class="citation" data-cites="gaearon">[@gaearon]</span>(https://github.com/gaearon))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/1514">#1514</a> corrected minor typo. (<span class="citation" data-cites="crowchirp">[@crowchirp]</span>(https://github.com/crowchirp))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/1393">#1393</a> replace two space syntax with br tag. (<span class="citation" data-cites="carlsagan21">[@carlsagan21]</span>(https://github.com/carlsagan21))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/1384">#1384</a> Document Flow support. (<span class="citation" data-cites="dschep">[@dschep]</span>(https://github.com/dschep))</li>
+</ul></li>
+<li><p>READMEs</p>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/1375">#1375</a> Change console.log for errors and warnings. (<span class="citation" data-cites="jimmyhmiller">[@jimmyhmiller]</span>(https://github.com/jimmyhmiller))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/1369">#1369</a> Add missing import in react-dev-utils README.md. (<span class="citation" data-cites="pedronauck">[@pedronauck]</span>(https://github.com/pedronauck))</li>
+</ul></li>
+</ul>
+<h4 id="house-internal-4">:house: Internal</h4>
+<ul>
+<li><p>Internal Test Suite</p>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/1519">#1519</a> Add test cases for PUBLIC_URL and relative path. (<span class="citation" data-cites="Timer">[@Timer]</span>(https://github.com/Timer))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/1484">#1484</a> Improve e2e-kitchensink and Jest coverage. (<span class="citation" data-cites="Timer">[@Timer]</span>(https://github.com/Timer))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/1463">#1463</a> Minor code style and wrong expect. (<span class="citation" data-cites="tuchk4">[@tuchk4]</span>(https://github.com/tuchk4))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/1470">#1470</a> E2e jsdom fix. (<span class="citation" data-cites="EnoahNetzach">[@EnoahNetzach]</span>(https://github.com/EnoahNetzach))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/1187">#1187</a> Use a more sophisticated template for end-to-end testing.. (<span class="citation" data-cites="EnoahNetzach">[@EnoahNetzach]</span>(https://github.com/EnoahNetzach))</li>
+</ul></li>
+<li><p>Other</p>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/1289">#1289</a> Remove path-exists from dependencies and replace it with fs.existsSync. (<span class="citation" data-cites="halfzebra">[@halfzebra]</span>(https://github.com/halfzebra))</li>
+</ul></li>
+</ul>
+<h4 id="committers-35">Committers: 35</h4>
+<ul>
+<li>Alex Driaguine (<a href="https://github.com/alexdriaguine">alexdriaguine</a>)</li>
+<li>Anders D. Johnson (<a href="https://github.com/adjohnson916">adjohnson916</a>)</li>
+<li>Anthony F. (<a href="https://github.com/frehner">frehner</a>)</li>
+<li>Brandon Istenes (<a href="https://github.com/brandones">brandones</a>)</li>
+<li>Calvin Webster (<a href="https://github.com/calweb">calweb</a>)</li>
+<li>Cary Landholt (<a href="https://github.com/CaryLandholt">CaryLandholt</a>)</li>
+<li>Chandan Rai (<a href="https://github.com/crowchirp">crowchirp</a>)</li>
+<li>Christian Raidl (<a href="https://github.com/Chris-R3">Chris-R3</a>)</li>
+<li>Dan Abramov (<a href="https://github.com/gaearon">gaearon</a>)</li>
+<li>Daniel Schep (<a href="https://github.com/dschep">dschep</a>)</li>
+<li>David (<a href="https://github.com/lopezator">lopezator</a>)</li>
+<li>Dinuka De Silva (<a href="https://github.com/dinukadesilva">dinukadesilva</a>)</li>
+<li>Eduard Kyvenko (<a href="https://github.com/halfzebra">halfzebra</a>)</li>
+<li>Fabrizio Castellarin (<a href="https://github.com/EnoahNetzach">EnoahNetzach</a>)</li>
+<li>Fatih (<a href="https://github.com/frontsideair">frontsideair</a>)</li>
+<li>Gabriel Aumala (<a href="https://github.com/GAumala">GAumala</a>)</li>
+<li>Jay Phelps (<a href="https://github.com/jayphelps">jayphelps</a>)</li>
+<li>Jih-Chi Lee (<a href="https://github.com/jihchi">jihchi</a>)</li>
+<li>Jimmy Miller (<a href="https://github.com/jimmyhmiller">jimmyhmiller</a>)</li>
+<li>Joe Haddad (<a href="https://github.com/Timer">Timer</a>)</li>
+<li>Johnny Magrippis (<a href="https://github.com/jmagrippis">jmagrippis</a>)</li>
+<li>Jonathan Kim (<a href="https://github.com/jkimbo">jkimbo</a>)</li>
+<li>MUA (<a href="https://github.com/MsUzoAgu">MsUzoAgu</a>)</li>
+<li>Matthew Holloway (<a href="https://github.com/holloway">holloway</a>)</li>
+<li>Nguyen Le Vu Long (<a href="https://github.com/vulong23">vulong23</a>)</li>
+<li>Paul O’Shannessy (<a href="https://github.com/zpao">zpao</a>)</li>
+<li>Pedro Nauck (<a href="https://github.com/pedronauck">pedronauck</a>)</li>
+<li>Robbie H (<a href="https://github.com/TheBlackBolt">TheBlackBolt</a>)</li>
+<li>Thibault Derousseaux (<a href="https://github.com/tibdex">tibdex</a>)</li>
+<li>Valerii (<a href="https://github.com/tuchk4">tuchk4</a>)</li>
+<li>Vasiliy Taranov (<a href="https://github.com/jetpackpony">jetpackpony</a>)</li>
+<li><a href="https://github.com/RodrigoHahn">RodrigoHahn</a></li>
+<li>creynders (<a href="https://github.com/creynders">creynders</a>)</li>
+<li>pd4d10 (<a href="https://github.com/pd4d10">pd4d10</a>)</li>
+<li>soo (<a href="https://github.com/carlsagan21">carlsagan21</a>)</li>
+</ul>
+<h3 id="migrating-from-0.8.5-to-0.9.0">Migrating from 0.8.5 to 0.9.0</h3>
+<p>Inside any created project that has not been ejected, run:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb8-1" title="1"><span class="ex">npm</span> install --save-dev --save-exact react-scripts@0.9.0</a></code></pre></div>
+<p>Then, run your tests. If you are affected by breaking changes from Jest 18, consult <a href="https://facebook.github.io/jest/blog/2016/12/15/2016-in-jest.html">blog post</a>, <a href="https://github.com/facebook/jest/blob/master/CHANGELOG.md#jest-1800">changelog</a>, and <a href="http://facebook.github.io/jest/docs/getting-started.html">documentation</a>. You might need to update any snapshots since their format might have changed.</p>
+<p>If you relied on the browser not starting in non-interactive terminals, you now need to explicitly specify <code>BROWSER=none</code> as an environment variable to disable it.</p>
+<h2 id="january-9-2017">0.8.5 (January 9, 2017)</h2>
+<p>Thanks to <span class="citation" data-cites="fson">[@fson]</span>(https://github.com/fson) for cutting this release.</p>
+<h4 id="bug-bug-fix-5">:bug: Bug Fix</h4>
+<ul>
+<li><p><code>create-react-app</code>, <code>react-scripts</code></p>
+<ul>
+<li><p><a href="https://github.com/facebook/create-react-app/pull/1365">#1365</a> Use yarnpkg alias to run Yarn. (<span class="citation" data-cites="fson">[@fson]</span>(https://github.com/fson))</p>
+<p>Fixes an issue where running <code>create-react-app</code> failed on systems with Apache Hadoop installed because it falsely detected Hadoop YARN executable as Yarn package manager.</p></li>
+</ul></li>
+</ul>
+<h4 id="committers-1">Committers: 1</h4>
+<ul>
+<li>Ville Immonen (<a href="https://github.com/fson">fson</a>)</li>
+</ul>
+<h3 id="migrating-from-0.8.4-to-0.8.5">Migrating from 0.8.4 to 0.8.5</h3>
+<p>Inside any created project that has not been ejected, run:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb9-1" title="1"><span class="ex">npm</span> install --save-dev --save-exact react-scripts@0.8.5</a></code></pre></div>
+<p>You may also optionally update the global command-line utility:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb10-1" title="1"><span class="ex">npm</span> install -g create-react-app@1.0.3</a></code></pre></div>
+<h2 id="december-11-2016">0.8.4 (December 11, 2016)</h2>
+<h4 id="bug-bug-fix-6">:bug: Bug Fix</h4>
+<ul>
+<li><p><code>react-scripts</code></p>
+<ul>
+<li><p><a href="https://github.com/facebook/create-react-app/pull/1233">#1233</a> Disable subresource integrity temporarily. (<span class="citation" data-cites="Timer">[@Timer]</span>(https://github.com/Timer))</p>
+<p>We added <a href="https://developer.mozilla.org/en-US/docs/Web/Security/Subresource_Integrity">Subresource Integrity</a> checks to the build output in 0.8.2 but it turns out that they may fail in browsers using special compression proxies, such as Chrome on Android, when served over HTTP. We disabled the checks until we can find a safe way to add them.</p></li>
+</ul></li>
+<li><p><code>react-dev-utils</code></p>
+<ul>
+<li><p><a href="https://github.com/facebook/create-react-app/pull/1226">#1226</a> Fix weird lint output. (<span class="citation" data-cites="n3tr">[@n3tr]</span>(https://github.com/n3tr))</p>
+<p>Fixes strange lint message formatting in some edge cases.</p></li>
+<li><p><a href="https://github.com/facebook/create-react-app/pull/1215">#1215</a> Fix - openChrome won’t open default browser (using Canary). (<span class="citation" data-cites="n3tr">[@n3tr]</span>(https://github.com/n3tr))</p>
+<p>Fixes a regression that caused stable Google Chrome to be opened even if you are using Canary as the default browser.</p></li>
+</ul></li>
+<li><p><code>create-react-app</code></p>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/1223">#1223</a> Clean up Yarn detection and install code. (<span class="citation" data-cites="fson">[@fson]</span>(https://github.com/fson))</li>
+</ul>
+<p>Fixes noisy output on Windows when Yarn is not installed.</p>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/1224">#1224</a> Exit with an error code when npm/yarn install fails. (<span class="citation" data-cites="fson">[@fson]</span>(https://github.com/fson))</li>
+</ul></li>
+</ul>
+<h4 id="nail_care-enhancement-5">:nail_care: Enhancement</h4>
+<ul>
+<li><p><code>react-scripts</code></p>
+<ul>
+<li><p><a href="https://github.com/facebook/create-react-app/pull/1237">#1237</a> Clear scrollback in test mode. (<span class="citation" data-cites="gaearon">[@gaearon]</span>(https://github.com/gaearon))</p>
+<p>Ensures test watcher clears the console before running.</p></li>
+<li><p><a href="https://github.com/facebook/create-react-app/pull/1229">#1229</a> Disable jest watch mode when –coverage flag is present [#1207]. (<span class="citation" data-cites="BenoitAverty">[@BenoitAverty]</span>(https://github.com/BenoitAverty))</p>
+<p>Since coverage doesn’t work well with watch mode, we don’t run the watcher on <code>npm test -- --coverage</code> anymore.</p></li>
+<li><p><a href="https://github.com/facebook/create-react-app/pull/1212">#1212</a> Proxy rewrites Origin header to match the target server URL. (<span class="citation" data-cites="koles">[@koles]</span>(https://github.com/koles))</p>
+<p>Makes sure more API endpoints can work with the <code>proxy</code> setting.</p></li>
+<li><p><a href="https://github.com/facebook/create-react-app/pull/1222">#1222</a> Disable gh-page setup instruction if scripts.deploy has been added. (<span class="citation" data-cites="n3tr">[@n3tr]</span>(https://github.com/n3tr))</p>
+<p>Suppresses the instructions printed at the end of <code>npm run build</code> if <code>npm run deploy</code> already exists.</p></li>
+</ul></li>
+<li><p><code>create-react-app</code></p>
+<ul>
+<li><p><a href="https://github.com/facebook/create-react-app/pull/1236">#1236</a> Tweak console messages. (<span class="citation" data-cites="gaearon">[@gaearon]</span>(https://github.com/gaearon))</p>
+<p>Makes error messages more friendly.</p></li>
+<li><p><a href="https://github.com/facebook/create-react-app/pull/1195">#1195</a> Use “commander” for cli argv handling. (<span class="citation" data-cites="EnoahNetzach">[@EnoahNetzach]</span>(https://github.com/EnoahNetzach))</p>
+<p>Adds <code>create-react-app --help</code> with a list of options.</p></li>
+</ul></li>
+<li><p><code>react-dev-utils</code></p>
+<ul>
+<li><p><a href="https://github.com/facebook/create-react-app/pull/1211">#1211</a> Use a better clear console sequence. (<span class="citation" data-cites="gaearon">[@gaearon]</span>(https://github.com/gaearon))</p>
+<p>Ensures the development server clears the terminal when files are changed.</p></li>
+</ul></li>
+</ul>
+<h4 id="memo-documentation-5">:memo: Documentation</h4>
+<ul>
+<li><p><code>react-dev-utils</code></p>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/1232">#1232</a> [documentation] fix html-dev-plugin link in react-dev-utils doc. (<span class="citation" data-cites="shogunsea">[@shogunsea]</span>(https://github.com/shogunsea))</li>
+</ul></li>
+<li><p><code>react-scripts</code></p>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/1220">#1220</a> Adding troubleshooting information about Subresource Integrity digests.. (<span class="citation" data-cites="dfbaskin">[@dfbaskin]</span>(https://github.com/dfbaskin))</li>
+</ul></li>
+</ul>
+<h4 id="house-internal-5">:house: Internal</h4>
+<ul>
+<li><p><code>react-scripts</code></p>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/1214">#1214</a> Bump babel-eslint version. (<span class="citation" data-cites="existentialism">[@existentialism]</span>(https://github.com/existentialism))</li>
+</ul></li>
+</ul>
+<h4 id="committers-10">Committers: 10</h4>
+<ul>
+<li>Benoit Averty (<a href="https://github.com/BenoitAverty">BenoitAverty</a>)</li>
+<li>Brian Ng (<a href="https://github.com/existentialism">existentialism</a>)</li>
+<li>Dan Abramov (<a href="https://github.com/gaearon">gaearon</a>)</li>
+<li>Dave Baskin (<a href="https://github.com/dfbaskin">dfbaskin</a>)</li>
+<li>Fabrizio Castellarin (<a href="https://github.com/EnoahNetzach">EnoahNetzach</a>)</li>
+<li>Jirat Ki. (<a href="https://github.com/n3tr">n3tr</a>)</li>
+<li>Joe Haddad (<a href="https://github.com/Timer">Timer</a>)</li>
+<li>Pavel Kolesnikov (<a href="https://github.com/koles">koles</a>)</li>
+<li>Shogun Sea (<a href="https://github.com/shogunsea">shogunsea</a>)</li>
+<li>Ville Immonen (<a href="https://github.com/fson">fson</a>)</li>
+</ul>
+<h3 id="migrating-from-0.8.3-to-0.8.4">Migrating from 0.8.3 to 0.8.4</h3>
+<p>Inside any created project that has not been ejected, run:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb11-1" title="1"><span class="ex">npm</span> install --save-dev --save-exact react-scripts@0.8.4</a></code></pre></div>
+<p>You may also optionally update the global command-line utility:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb12-1" title="1"><span class="ex">npm</span> install -g create-react-app@1.0.2</a></code></pre></div>
+<h2 id="december-8-2016">0.8.3 (December 8, 2016)</h2>
+<h4 id="bug-bug-fix-7">:bug: Bug Fix</h4>
+<ul>
+<li><p><code>create-react-app</code></p>
+<ul>
+<li><p><a href="https://github.com/facebook/create-react-app/pull/1204">#1204</a> Catch synchronous errors from spawning yarn. (<span class="citation" data-cites="gaearon">[@gaearon]</span>(https://github.com/gaearon))</p>
+<p>Fixes a crash when running <code>create-react-app</code> in some cases.</p></li>
+</ul></li>
+<li><p><code>react-scripts</code></p>
+<ul>
+<li><p><a href="https://github.com/facebook/create-react-app/pull/1203">#1203</a> Update webpack-subresource-integrity to fix Windows builds. (<span class="citation" data-cites="gaearon">[@gaearon]</span>(https://github.com/gaearon))</p>
+<p>Fixes a crash when running <code>npm run build</code> on Windows.</p></li>
+<li><p><a href="https://github.com/facebook/create-react-app/pull/1201">#1201</a> Instruct Jest to load native components from RNW instead of RN. (<span class="citation" data-cites="remon-georgy">[@remon-georgy]</span>(https://github.com/remon-georgy))</p>
+<p>Fixes tests for users of React Native Web.</p></li>
+</ul></li>
+</ul>
+<h4 id="memo-documentation-6">:memo: Documentation</h4>
+<ul>
+<li><p><code>react-scripts</code></p>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/806">#806</a> Add syntax highlighting configuration guide. (<span class="citation" data-cites="mareksuscak">[@mareksuscak]</span>(https://github.com/mareksuscak))</li>
+</ul></li>
+</ul>
+<h4 id="committers-3">Committers: 3</h4>
+<ul>
+<li>Dan Abramov (<a href="https://github.com/gaearon">gaearon</a>)</li>
+<li>Marek Suscak (<a href="https://github.com/mareksuscak">mareksuscak</a>)</li>
+<li>Remon Georgy (<a href="https://github.com/remon-georgy">remon-georgy</a>)</li>
+</ul>
+<h3 id="migrating-from-0.8.2-to-0.8.3">Migrating from 0.8.2 to 0.8.3</h3>
+<p>Inside any created project that has not been ejected, run:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb13-1" title="1"><span class="ex">npm</span> install --save-dev --save-exact react-scripts@0.8.3</a></code></pre></div>
+<p>You can optionally update the global CLI too:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb14-1" title="1"><span class="ex">npm</span> install -g create-react-app@1.0.1</a></code></pre></div>
+<h2 id="december-7-2016">0.8.2 (December 7, 2016)</h2>
+<h4 id="rocket-new-feature-2">:rocket: New Feature</h4>
+<ul>
+<li><p><code>react-scripts</code></p>
+<ul>
+<li><p><a href="https://github.com/facebook/create-react-app/pull/1176">#1176</a> Add Subresource Integrity support. (<span class="citation" data-cites="XVincentX">[@XVincentX]</span>(https://github.com/XVincentX))</p>
+<p>The generated HTML now includes <a href="https://developer.mozilla.org/en-US/docs/Web/Security/Subresource_Integrity">Subresource Integrity</a> attributes ensuring that your users aren’t served malicious code if your CDN gets compromised.</p></li>
+</ul></li>
+</ul>
+<h4 id="bug-bug-fix-8">:bug: Bug Fix</h4>
+<ul>
+<li><p><code>react-scripts</code></p>
+<ul>
+<li><p><a href="https://github.com/facebook/create-react-app/pull/1197">#1197</a> Let Jest handle all file types. (<span class="citation" data-cites="gaearon">[@gaearon]</span>(https://github.com/gaearon))</p>
+<p>Since 0.8.0, we started treating imports of any unknown file extensions as URLs. However, we had to revert this change for the test configuration in 0.8.1 because of a bug causing false positives. In 0.8.2, we are fixing this and making test configuration treat imports with unknown extensions the same way as we do in the browser environment.</p></li>
+<li><p><a href="https://github.com/facebook/create-react-app/pull/1194">#1194</a> Only honor relative <code>NODE_PATH</code>. (<span class="citation" data-cites="gaearon">[@gaearon]</span>(https://github.com/gaearon))</p>
+<p>Historically we have allowed specifying <code>NODE_PATH</code> environment variable as a way to allow “absolute imports”. For example, running <code>NODE_PATH=src npm start</code> in Bash or <code>set NODE_PATH=src&amp;&amp;npm start</code> in Windows Cmd would let you import anything inside <code>src</code> without specifying a relative path. However, we found a few nasty edge cases when Node.js core modules end up being in <code>NODE_PATH</code> and erroneously become bundled. As a result the build would crash on some systems when some libraries are imported. To fix this, we now only honor relative paths from <code>NODE_PATH</code> in Create React App. This means the existing use case for absolute imports is still supported (<code>src</code> in the example above is relative), but absolute paths in <code>NODE_PATH</code> (such as paths to Node.js core modules) will be ignored.</p></li>
+<li><p><a href="https://github.com/facebook/create-react-app/pull/1188">#1188</a> Update webpack to fix source map issues. (<span class="citation" data-cites="gaearon">[@gaearon]</span>(https://github.com/gaearon))</p>
+<p>Since 0.8.0, we show source maps in development instead of the compiled code. However, it has come to our attention that webpack’s source map implementation had issues interpreting Babel output, and caused source maps to be wrong and breakpoints to be unusable in some cases. webpack has released a fix for this, and we have updated the minimal version of webpack that we are using.</p></li>
+<li><p><a href="https://github.com/facebook/create-react-app/pull/1180">#1180</a> Use <code>file-loader</code> for svgs. (<span class="citation" data-cites="bogdansoare">[@bogdansoare]</span>(https://github.com/bogdansoare))</p>
+<p>Since 0.8.0, we are treating all imports with non-JS/CSS extensions the same way. Importing them gives you a string with their URL, and if their content is small enough (less than 10K), the URL is in fact an inlined <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/Data_URIs">data URI</a>. However, this doesn’t work well with SVGs in case you use them for a sprite system since fragments don’t work in data URIs, and it’s wasteful to inline the same sprite SVG many times. To fix this, we have added an exception so that SVG files never get inlined.</p></li>
+</ul></li>
+<li><p><code>react-dev-utils</code></p>
+<ul>
+<li><p><a href="https://github.com/facebook/create-react-app/pull/1165">#1165</a> Chrome ‘open tab’ reuse an empty tab when possible. (<span class="citation" data-cites="n3tr">[@n3tr]</span>(https://github.com/n3tr))</p>
+<p>Fixes an issue that caused two tabs to get opened instead of just one. It also fixes some cases where the window with the existing tab would not get activated.</p></li>
+</ul></li>
+<li><p><code>babel-preset-react-app</code></p>
+<ul>
+<li><p><a href="https://github.com/facebook/create-react-app/pull/1179">#1179</a> Fix Babel issues in tests by applying the right transforms. (<span class="citation" data-cites="gaearon">[@gaearon]</span>(https://github.com/gaearon))</p>
+<p>Fixes regressions in test environment that caused syntax errors with generators and <code>async</code> / <code>await</code>.</p></li>
+</ul></li>
+</ul>
+<h4 id="nail_care-enhancement-6">:nail_care: Enhancement</h4>
+<ul>
+<li><p><code>eslint-config-react-app</code></p>
+<ul>
+<li><p><a href="https://github.com/facebook/create-react-app/pull/1191">#1191</a> Relax peerDependencies for ESLint preset. (<span class="citation" data-cites="gaearon">[@gaearon]</span>(https://github.com/gaearon))</p>
+<p>This allows the preset to be used in more apps without peer dependency conflicts. We still pin the exact versions in apps that haven’t ejected for extra safety.</p></li>
+<li><p><a href="https://github.com/facebook/create-react-app/pull/1159">#1159</a> Make jsx-no-undef rule an error. (<span class="citation" data-cites="existentialism">[@existentialism]</span>(https://github.com/existentialism))</p>
+<p>Using an undefined type in JSX is now treated as a hard lint error because it is guaranteed to crash application at runtime.</p></li>
+</ul></li>
+<li><p><code>react-scripts</code></p>
+<ul>
+<li><p><a href="https://github.com/facebook/create-react-app/pull/1175">#1175</a> Remove path module from webpack config on eject. (<span class="citation" data-cites="harunhasdal">[@harunhasdal]</span>(https://github.com/harunhasdal))</p>
+<p>This makes the output after ejecting a bit cleaner.</p></li>
+<li><p><a href="https://github.com/facebook/create-react-app/pull/1120">#1120</a> Add <code>testURL</code> to Jest config. (<span class="citation" data-cites="spudly">[@spudly]</span>(https://github.com/spudly))</p>
+<p>This fixes an error when running tests that interact with History API in jsdom.</p></li>
+</ul></li>
+</ul>
+<h4 id="memo-documentation-7">:memo: Documentation</h4>
+<ul>
+<li><code>react-scripts</code>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/1143">#1143</a> Add deploy to Firebase CDN on template’s README (Closes <a href="https://github.com/facebook/create-react-app/issues/374">#374</a>). (<span class="citation" data-cites="guilhermebruzzi">[@guilhermebruzzi]</span>(https://github.com/guilhermebruzzi))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/1099">#1099</a> Fix minor typo/grammar. (<span class="citation" data-cites="alex-wilmer">[@alex-wilmer]</span>(https://github.com/alex-wilmer))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/1168">#1168</a> Add “npm run build silently fails” to Troubleshooting. (<span class="citation" data-cites="gaearon">[@gaearon]</span>(https://github.com/gaearon))</li>
+</ul></li>
+</ul>
+<h4 id="committers-12">Committers: 12</h4>
+<ul>
+<li>Alex Wilmer (<a href="https://github.com/alex-wilmer">alex-wilmer</a>)</li>
+<li>Bogdan Soare (<a href="https://github.com/bogdansoare">bogdansoare</a>)</li>
+<li>Brian Ng (<a href="https://github.com/existentialism">existentialism</a>)</li>
+<li>Dan Abramov (<a href="https://github.com/gaearon">gaearon</a>)</li>
+<li>Fabrizio Castellarin (<a href="https://github.com/EnoahNetzach">EnoahNetzach</a>)</li>
+<li>Guilherme Heynemann Bruzzi (<a href="https://github.com/guilhermebruzzi">guilhermebruzzi</a>)</li>
+<li>Harun (<a href="https://github.com/harunhasdal">harunhasdal</a>)</li>
+<li>James Newell (<a href="https://github.com/jameslnewell">jameslnewell</a>)</li>
+<li>Jirat Ki. (<a href="https://github.com/n3tr">n3tr</a>)</li>
+<li>Li Xuanji (<a href="https://github.com/zodiac">zodiac</a>)</li>
+<li>Stephen John Sorensen (<a href="https://github.com/spudly">spudly</a>)</li>
+<li>Vincenzo Chianese (<a href="https://github.com/XVincentX">XVincentX</a>)</li>
+</ul>
+<h3 id="migrating-from-0.8.1-to-0.8.2">Migrating from 0.8.1 to 0.8.2</h3>
+<p>Inside any created project that has not been ejected, run:</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb15-1" title="1"><span class="ex">npm</span> install --save-dev --save-exact react-scripts@0.8.2</a></code></pre></div>
+<h2 id="december-4-2016">0.8.1 (December 4, 2016)</h2>
+<p>Thanks to <span class="citation" data-cites="fson">[@fson]</span>(https://github.com/fson) for cutting this release.</p>
+<h4 id="bug-bug-fix-9">:bug: Bug Fix</h4>
+<ul>
+<li><code>react-scripts</code>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/1149">#1149</a> Fix incorrectly stubbing JavaScript files with a dot in the import path in tests. (<span class="citation" data-cites="fson">[@fson]</span>(https://github.com/fson))</li>
+</ul></li>
+</ul>
+<h3 id="migrating-from-0.8.0-to-0.8.1">Migrating from 0.8.0 to 0.8.1</h3>
+<p>Inside any created project that has not been ejected, run:</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb16-1" title="1"><span class="ex">npm</span> install --save-dev --save-exact react-scripts@0.8.1</a></code></pre></div>
+<h2 id="december-3-2016">0.8.0 (December 3, 2016)</h2>
+<p>Thanks to <span class="citation" data-cites="fson">[@fson]</span>(https://github.com/fson) for cutting this release.</p>
+<h4 id="rocket-new-feature-3">:rocket: New Feature</h4>
+<ul>
+<li><p><code>react-scripts</code></p>
+<ul>
+<li><p><a href="https://github.com/facebook/create-react-app/pull/944">#944</a> Crash the build during CI whenever linter warnings are encountered. (<span class="citation" data-cites="excitement-engineer">[@excitement-engineer]</span>(https://github.com/excitement-engineer))</p>
+<p>Linter warnings and errors are now checked during a continuous integration build (set by the <code>CI</code> environment variable) and the build will fail if any issues are found. See <a href="https://github.com/facebook/create-react-app/blob/master/packages/react-scripts/template/README.md#continuous-integration">Continuous Integration</a> for more information.</p></li>
+<li><p><a href="https://github.com/facebook/create-react-app/pull/1090">#1090</a> Enable proxying of WebSockets. (<span class="citation" data-cites="dceddia">[@dceddia]</span>(https://github.com/dceddia))</p></li>
+</ul></li>
+<li><p><code>create-react-app</code>, <code>react-scripts</code></p>
+<ul>
+<li><p><a href="https://github.com/facebook/create-react-app/pull/898">#898</a> Support Yarn. (<span class="citation" data-cites="fson">[@fson]</span>(https://github.com/fson))</p>
+<p>Yarn is a new fast, reliable and secure alternative to the <code>npm</code> client. If you have Yarn installed, <code>create-react-app</code> will use it to install packages when you create an app. It also creates a <code>yarn.lock</code> file that should be checked into source control (e.g. git). This ensures the same versions of packages will be installed each time <code>yarn install</code> is run, on any machine.</p>
+<p><code>react-scripts</code> now also displays instructions using <code>yarn</code> commands for projects using Yarn (projects having a <code>yarn.lock</code> file).</p>
+<p>To create a project using Yarn, simply install <code>yarn</code> and use <code>create-react-app</code> like before:</p>
+<pre><code>npm install -g yarn create-react-app@latest
+
+create-react-app my-app  # Packages are now installed with Yarn.</code></pre></li>
+</ul></li>
+</ul>
+<h4 id="boom-breaking-change-1">:boom: Breaking Change</h4>
+<ul>
+<li><p><code>babel-preset-react-app</code></p>
+<ul>
+<li><p><a href="https://github.com/facebook/create-react-app/pull/902">#902</a> Enable useBuiltIns option on object-rest-spread. (<span class="citation" data-cites="existentialism">[@existentialism]</span>(https://github.com/existentialism))</p>
+<p>Object rest spread and JSX now use the native <code>Object.assign()</code> method instead of Babel’s helper function. If you are using <code>babel-preset-react-app</code> directly in your project <em>and</em> targeting browsers that don’t have <code>Object.assign()</code> available, from now on you need a polyfill for it (e.g. <a href="https://www.npmjs.com/package/object-assign"><code>object-assign</code></a>).</p>
+<p><strong>Note:</strong> <code>react-scripts</code> already adds this polyfill, so no changes are necessary in Create React App projects.</p></li>
+</ul></li>
+</ul>
+<h4 id="bug-bug-fix-10">:bug: Bug Fix</h4>
+<ul>
+<li><p><code>react-scripts</code></p>
+<ul>
+<li><p><a href="https://github.com/facebook/create-react-app/pull/978">#978</a> Move the remove-on-eject-end tag at the end of the file. (<span class="citation" data-cites="EnoahNetzach">[@EnoahNetzach]</span>(https://github.com/EnoahNetzach))</p>
+<p>Fixes a bug in ejected configuration.</p></li>
+<li><p><a href="https://github.com/facebook/create-react-app/pull/1017">#1017</a> Don’t look for <code>.babelrc</code> file during test. (<span class="citation" data-cites="nhajidin">[@nhajidin]</span>(https://github.com/nhajidin))</p>
+<p>Fixes a <code>.babelrc</code> file in a parent directory interfering with the <code>npm test</code> command.</p></li>
+<li><p><a href="https://github.com/facebook/create-react-app/pull/951">#951</a> Check for presence of folders before continuing eject. (<span class="citation" data-cites="heldinz">[@heldinz]</span>(https://github.com/heldinz))</p>
+<p>Fixes a bug where <code>eject</code> failed when a <code>scripts</code> or <code>config</code> folder already existed in the project.</p></li>
+</ul></li>
+<li><p><code>react-dev-utils</code></p>
+<ul>
+<li><p><a href="https://github.com/facebook/create-react-app/pull/1035">#1035</a> Fix Chrome tab reuse. (<span class="citation" data-cites="einarlove">[@einarlove]</span>(https://github.com/einarlove))</p>
+<p>Fixes a bug with the app not opening in the existing tab in Chrome.</p></li>
+<li><p><a href="https://github.com/facebook/create-react-app/pull/964">#964</a> Catch and noop call to open web browser. (<span class="citation" data-cites="spadin">[@spadin]</span>(https://github.com/spadin))</p>
+<p>Not being able to open a browser doesn’t crash the development server now.</p></li>
+</ul></li>
+<li><code>eslint-config-react-app</code>, <code>react-scripts</code>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/953">#953</a> Fix <code>.ico</code> file extension being handled by test configuration. (<span class="citation" data-cites="vadzim">[@vadzim]</span>(https://github.com/vadzim))</li>
+</ul></li>
+</ul>
+<h4 id="nail_care-enhancement-7">:nail_care: Enhancement</h4>
+<ul>
+<li><p><code>react-scripts</code></p>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/1032">#1032</a> Add support for non-interactive terminal. (<span class="citation" data-cites="sheerun">[@sheerun]</span>(https://github.com/sheerun))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/1078">#1078</a> Upgrade Jest to 17.0. (<span class="citation" data-cites="fson">[@fson]</span>(https://github.com/fson))</li>
+<li><p><a href="https://github.com/facebook/create-react-app/pull/1059">#1059</a> Use <code>url-loader</code> with limit 10k as a default loader. (<span class="citation" data-cites="bebbi">[@bebbi]</span>(https://github.com/bebbi))</p>
+<p><code>react-scripts</code> now treats imports with any unknown file extension as a resource. Files with a size below 10 KB are inlined using a data URI and larger files copied to the build folder. This removes the need for an internal <a href="https://github.com/facebook/create-react-app/issues/667">whitelist of supported file extensions</a>. Any file that’s not JS or CSS is now handled the same way.</p></li>
+<li><a href="https://github.com/facebook/create-react-app/pull/924">#924</a> Enable JavaScript source maps in development. (<span class="citation" data-cites="ekaradon">[@ekaradon]</span>(https://github.com/ekaradon))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/1058">#1058</a> Add missing dev argument in build script message. (<span class="citation" data-cites="nhajidin">[@nhajidin]</span>(https://github.com/nhajidin))</li>
+<li><p><a href="https://github.com/facebook/create-react-app/pull/961">#961</a> Add <code>collectCoverageFrom</code> option to collect coverage on files without any tests. (<span class="citation" data-cites="pmackcode">[@pmackcode]</span>(https://github.com/pmackcode))</p>
+<p>The test script now considers all files in the project when calculating test coverage.</p></li>
+<li><p><a href="https://github.com/facebook/create-react-app/pull/968">#968</a> Enable gzip compression in the development server (#966). (<span class="citation" data-cites="frontsideair">[@frontsideair]</span>(https://github.com/frontsideair))</p></li>
+</ul></li>
+<li><p><code>react-dev-utils</code>, <code>react-scripts</code></p>
+<ul>
+<li><p><a href="https://github.com/facebook/create-react-app/pull/816">#816</a> add logging of existing default port process on start. (<span class="citation" data-cites="ianmcnally">[@ianmcnally]</span>(https://github.com/ianmcnally))</p>
+<p><code>react-scripts</code> can guess which process is running on the port 3000 when it’s not available:</p>
+<pre><code>Something is already running on port 3000. Probably:
+  my-app
+  in /Users/ian/dev/my-app
+
+Would you like to run the app on another port instead?</code></pre></li>
+</ul></li>
+<li><code>react-dev-utils</code>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/963">#963</a> Allow webpack 2 as a peerDependency in react-dev-utils. (<span class="citation" data-cites="einarlove">[@einarlove]</span>(https://github.com/einarlove))</li>
+</ul></li>
+</ul>
+<h4 id="memo-documentation-8">:memo: Documentation</h4>
+<ul>
+<li><code>react-scripts</code>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/1126">#1126</a> Add a note about vscode-jest. (<span class="citation" data-cites="orta">[@orta]</span>(https://github.com/orta))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/1080">#1080</a> Add a note for OSX users about watchman and jest. (<span class="citation" data-cites="dmr">[@dmr]</span>(https://github.com/dmr))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/1071">#1071</a> Adds to docs - deployment with S3/CloudFront. (<span class="citation" data-cites="marcgarreau">[@marcgarreau]</span>(https://github.com/marcgarreau))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/976">#976</a> Added info on using global variables. (<span class="citation" data-cites="jhorneman">[@jhorneman]</span>(https://github.com/jhorneman))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/996">#996</a> Remove redundant <code>function</code> from export statement. (<span class="citation" data-cites="gnowoel">[@gnowoel]</span>(https://github.com/gnowoel))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/959">#959</a> Always build before deploying to gh-pages. (<span class="citation" data-cites="dsernst">[@dsernst]</span>(https://github.com/dsernst))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/974">#974</a> Gently nudge users towards https by default. (<span class="citation" data-cites="Swizec">[@Swizec]</span>(https://github.com/Swizec))</li>
+</ul></li>
+<li>Other
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/1031">#1031</a> No Configuration -&gt; Convention over Configuration. (<span class="citation" data-cites="sheerun">[@sheerun]</span>(https://github.com/sheerun))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/995">#995</a> Add Gatsby to alternatives. (<span class="citation" data-cites="KyleAMathews">[@KyleAMathews]</span>(https://github.com/KyleAMathews))</li>
+</ul></li>
+</ul>
+<h4 id="house-internal-6">:house: Internal</h4>
+<ul>
+<li><code>react-scripts</code>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/1072">#1072</a> Replace rimraf with fs-extra functions. (<span class="citation" data-cites="existentialism">[@existentialism]</span>(https://github.com/existentialism))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/1068">#1068</a> Remove bundledDependencies. (<span class="citation" data-cites="fson">[@fson]</span>(https://github.com/fson))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/1057">#1057</a> Update <code>css-loader</code>. (<span class="citation" data-cites="nhajidin">[@nhajidin]</span>(https://github.com/nhajidin))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/983">#983</a> Remove custom babel-loader cache dir config. (<span class="citation" data-cites="fson">[@fson]</span>(https://github.com/fson))</li>
+</ul></li>
+<li><code>babel-preset-react-app</code>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/1052">#1052</a> Remove unnecessary transform plugins for object spread to work. (<span class="citation" data-cites="valscion">[@valscion]</span>(https://github.com/valscion))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/992">#992</a> Explain the usage of react-jsx-source &amp; react-jsx-self. (<span class="citation" data-cites="bboysathish">[@bboysathish]</span>(https://github.com/bboysathish))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/1051">#1051</a> Update babel-present-env and use node: ‘current’ as target. (<span class="citation" data-cites="valscion">[@valscion]</span>(https://github.com/valscion))</li>
+</ul></li>
+</ul>
+<h4 id="committers-27">Committers: 27</h4>
+<ul>
+<li>Adam Stankiewicz (<a href="https://github.com/sheerun">sheerun</a>)</li>
+<li>Alice Rose (<a href="https://github.com/heldinz">heldinz</a>)</li>
+<li>Arunoda Susiripala (<a href="https://github.com/arunoda">arunoda</a>)</li>
+<li>Brian Ng (<a href="https://github.com/existentialism">existentialism</a>)</li>
+<li>Daniel Rech (<a href="https://github.com/dmr">dmr</a>)</li>
+<li>Dave Ceddia (<a href="https://github.com/dceddia">dceddia</a>)</li>
+<li>David Ernst (<a href="https://github.com/dsernst">dsernst</a>)</li>
+<li>Dirk-Jan Rutten (<a href="https://github.com/excitement-engineer">excitement-engineer</a>)</li>
+<li>Einar Löve (<a href="https://github.com/einarlove">einarlove</a>)</li>
+<li>Fabrizio Castellarin (<a href="https://github.com/EnoahNetzach">EnoahNetzach</a>)</li>
+<li>Fatih (<a href="https://github.com/frontsideair">frontsideair</a>)</li>
+<li>Ian McNally (<a href="https://github.com/ianmcnally">ianmcnally</a>)</li>
+<li>Jurie Horneman (<a href="https://github.com/jhorneman">jhorneman</a>)</li>
+<li>Kyle Mathews (<a href="https://github.com/KyleAMathews">KyleAMathews</a>)</li>
+<li>Leo Wong (<a href="https://github.com/gnowoel">gnowoel</a>)</li>
+<li>Marc Garreau (<a href="https://github.com/marcgarreau">marcgarreau</a>)</li>
+<li>Nazim Hajidin (<a href="https://github.com/nhajidin">nhajidin</a>)</li>
+<li>Orta (<a href="https://github.com/orta">orta</a>)</li>
+<li>Patrick Mackinder (<a href="https://github.com/pmackcode">pmackcode</a>)</li>
+<li>Sandro Padin (<a href="https://github.com/spadin">spadin</a>)</li>
+<li>Sathish (<a href="https://github.com/bboysathish">bboysathish</a>)</li>
+<li>Stefan (<a href="https://github.com/bebbi">bebbi</a>)</li>
+<li>Swizec Teller (<a href="https://github.com/Swizec">Swizec</a>)</li>
+<li>Vadzim (<a href="https://github.com/vadzim">vadzim</a>)</li>
+<li>Vesa Laakso (<a href="https://github.com/valscion">valscion</a>)</li>
+<li>Ville Immonen (<a href="https://github.com/fson">fson</a>)</li>
+<li><a href="https://github.com/ekaradon">ekaradon</a></li>
+</ul>
+<h3 id="migrating-from-0.7.0-to-0.8.0">Migrating from 0.7.0 to 0.8.0</h3>
+<p>You may optionally update the global command (it’s not required, but it adds Yarn support for new projects):</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb19-1" title="1"><span class="ex">npm</span> install -g create-react-app@1.0.0</a></code></pre></div>
+<p>Inside any created project that has not been ejected, run:</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb20-1" title="1"><span class="ex">npm</span> install --save-dev --save-exact react-scripts@0.8.0</a></code></pre></div>
+<h2 id="october-22-2016">0.7.0 (October 22, 2016)</h2>
+<p>Thanks to <span class="citation" data-cites="fson">[@fson]</span>(https://github.com/fson) for cutting this release.</p>
+<h3 id="build-dependency-react-scripts">Build Dependency (<code>react-scripts</code>)</h3>
+<ul>
+<li>Updates Jest to <a href="http://facebook.github.io/jest/blog/2016/10/03/jest-16.html">version 16.0</a>, with an upgraded CLI, improved snapshot testing, new matchers and more. (<span class="citation" data-cites="chase">[@chase]</span>(https://github.com/chase) in <a href="https://github.com/facebook/create-react-app/pull/858">#858</a>)</li>
+<li>Test setup file <code>src/setupTests.js</code> is now called after test framework initialization to support loading custom matchers. (<span class="citation" data-cites="just-boris">[@just-boris]</span>(https://github.com/just-boris) in <a href="https://github.com/facebook/create-react-app/pull/846">#846</a>)</li>
+<li>Build command shows better instructions for deploying the app to GitHub Pages (<span class="citation" data-cites="Janpot">[@Janpot]</span>(https://github.com/Janpot) in <a href="https://github.com/facebook/create-react-app/pull/841">#841</a>)</li>
+<li>Build command now generates an asset manifest with mappings from each filename to its final output filename. (<span class="citation" data-cites="lukyth">[@lukyth]</span>(https://github.com/lukyth) in <a href="https://github.com/facebook/create-react-app/pull/891">#891</a>)</li>
+<li>Build command exits, if there are errors from UglifyJS (<span class="citation" data-cites="pdillon">[@pdillon]</span>(https://github.com/pdillon) in <a href="https://github.com/facebook/create-react-app/pull/859">#859</a>)</li>
+<li>Eject output is more beautiful now. (<span class="citation" data-cites="azakordonets">[@azakordonets]</span>(https://github.com/azakordonets) in <a href="https://github.com/facebook/create-react-app/pull/769">#769</a>)</li>
+<li>Fixes opening the app in a new tab in Chrome. (<span class="citation" data-cites="unixdev">[@unixdev]</span>(https://github.com/unixdev) in <a href="https://github.com/facebook/create-react-app/pull/831">#831</a>)</li>
+<li>Fixes environment variables not being defined as normal properties of the <code>process.env</code> object. (<span class="citation" data-cites="dvkndn">[@dvkndn]</span>(https://github.com/dvkndn) in <a href="https://github.com/facebook/create-react-app/pull/807">#807</a>)</li>
+<li>Fixes PostCSS autoprefixer not processing CSS files imported with CSS <code>@import</code> statements. (<span class="citation" data-cites="nhunzaker">[@nhunzaker]</span>(https://github.com/nhunzaker) in <a href="https://github.com/facebook/create-react-app/pull/929">#929</a>)</li>
+</ul>
+<h3 id="eslint-config-eslint-config-react-app">ESLint Config (<code>eslint-config-react-app</code>)</h3>
+<ul>
+<li>Adds <code>import/no-webpack-loader-syntax</code> rule that forbids using custom webpack specific syntax to specify webpack loaders in import statements. (<span class="citation" data-cites="fson">[@fson]</span>(https://github.com/fson) in <a href="https://github.com/facebook/create-react-app/pull/803">#803</a>)</li>
+<li><code>react/react-in-jsx-scope</code> rule (“React must be in scope”) is now an error. (<span class="citation" data-cites="gaearon">[@gaearon]</span>(https://github.com/gaearon) in <a href="https://github.com/facebook/create-react-app/pull/822">#822</a>)</li>
+<li><code>no-unused-expressions</code> rule now allows the use of short circuit and ternary expressions. (<span class="citation" data-cites="cannona">[@cannona]</span>(https://github.com/cannona) in <a href="https://github.com/facebook/create-react-app/pull/724">#724</a>)</li>
+</ul>
+<h3 id="babel-preset-babel-preset-react-app">Babel Preset (<code>babel-preset-react-app</code>)</h3>
+<ul>
+<li>The preset now detects the Node.js version in test environment and disables unnecessary ES2015 transforms using <code>babel-preset-env</code>. (<span class="citation" data-cites="shubheksha">[@shubheksha]</span>(https://github.com/shubheksha) in <a href="https://github.com/facebook/create-react-app/pull/878">#878</a>, <span class="citation" data-cites="JeffreyATW">[@JeffreyATW]</span>(https://github.com/JeffreyATW) in <a href="https://github.com/facebook/create-react-app/pull/927">#927</a>)</li>
+<li>Fixes a duplicate dependency on <code>babel-plugin-transform-regenerator</code>. (<span class="citation" data-cites="akofman">[@akofman]</span>(https://github.com/akofman) in <a href="https://github.com/facebook/create-react-app/pull/864">#864</a>)</li>
+</ul>
+<h3 id="utilities-react-dev-utils">Utilities (<code>react-dev-utils</code>)</h3>
+<ul>
+<li>The error overlay is now disposed after fixing linting errors. (<span class="citation" data-cites="jarlef">[@jarlef]</span>(https://github.com/jarlef) in <a href="https://github.com/facebook/create-react-app/pull/856">#856</a>)</li>
+<li>Adds support for webpack 2 to <code>webpackHotDevClient</code>. (<span class="citation" data-cites="michalkvasnicak">[@michalkvasnicak]</span>(https://github.com/michalkvasnicak) in <a href="https://github.com/facebook/create-react-app/pull/840">#840</a>)</li>
+</ul>
+<h3 id="global-cli-create-react-app">Global CLI (<code>create-react-app</code>)</h3>
+<ul>
+<li>Adds support for passing a scoped package name to the <code>--scripts-version</code> argument. (<span class="citation" data-cites="pdillon">[@pdillon]</span>(https://github.com/pdillon) in <a href="https://github.com/facebook/create-react-app/pull/826">#826</a>)</li>
+<li>Fixes installing pre-release versions using a tarball URL with the <code>--scripts-version</code> argument. (<span class="citation" data-cites="jihchi">[@jihchi]</span>(https://github.com/jihchi) in <a href="https://github.com/facebook/create-react-app/pull/876">#876</a>)</li>
+</ul>
+<h3 id="migrating-from-0.6.1-to-0.7.0">Migrating from 0.6.1 to 0.7.0</h3>
+<p>You may optionally update the global command (it’s not required):</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb21-1" title="1"><span class="ex">npm</span> install -g create-react-app@0.6.0</a></code></pre></div>
+<p>Inside any created project that has not been ejected, run:</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb22-1" title="1"><span class="ex">npm</span> install --save-dev --save-exact react-scripts@0.7.0</a></code></pre></div>
+<h3 id="breaking-change-in-0.7.0">Breaking Change in 0.7.0</h3>
+<h4 id="updating-snapshots">Updating Snapshots</h4>
+<p>Jest 16 includes <a href="https://facebook.github.io/jest/blog/2016/10/03/jest-16.html#snapshot-updates">improvements to snapshot testing and changes to the snapshot format</a>. If your project uses snapshot testing, you’ll need to update the snapshot files. To update the snapshots, run:</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb23-1" title="1"><span class="ex">npm</span> test -- -u</a></code></pre></div>
+<h2 id="september-27-2016">0.6.1 (September 27, 2016)</h2>
+<h3 id="build-dependency-react-scripts-1">Build Dependency (<code>react-scripts</code>)</h3>
+<ul>
+<li>Babel and ESLint configuration is now placed into <code>package.json</code> after ejecting. (<span class="citation" data-cites="montogeek">[@montogeek]</span>(https://github.com/montogeek) in <a href="https://github.com/facebook/create-react-app/pull/773">#773</a>)</li>
+</ul>
+<h3 id="utilities-react-dev-utils-1">Utilities (<code>react-dev-utils</code>)</h3>
+<ul>
+<li>Fixes the syntax error overlay padding. (<span class="citation" data-cites="fson">[@fson]</span>(https://github.com/fson) in <a href="https://github.com/facebook/create-react-app/pull/758">#758</a>)</li>
+</ul>
+<h3 id="migrating-from-0.6.0-to-0.6.1">Migrating from 0.6.0 to 0.6.1</h3>
+<p>Inside any created project that has not been ejected, run:</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb24-1" title="1"><span class="ex">npm</span> install --save-dev --save-exact react-scripts@0.6.1</a></code></pre></div>
+<h2 id="september-25-2016">0.6.0 (September 25, 2016)</h2>
+<h3 id="build-dependency-react-scripts-2">Build Dependency (<code>react-scripts</code>)</h3>
+<ul>
+<li>Adds an overlay for syntax errors in development. (<span class="citation" data-cites="gaearon">[@gaearon]</span>(https://github.com/gaearon) in <a href="https://github.com/facebook/create-react-app/pull/744">#744</a>)</li>
+</ul>
+<h3 id="utilities-react-dev-utils-2">Utilities (<code>react-dev-utils</code>)</h3>
+<ul>
+<li>Adds an alternative WebpackDevServer client that displays the error overlay. (<span class="citation" data-cites="gaearon">[@gaearon]</span>(https://github.com/gaearon) in <a href="https://github.com/facebook/create-react-app/pull/744">#744</a>)</li>
+</ul>
+<h3 id="migrating-from-0.5.1-to-0.6.0">Migrating from 0.5.1 to 0.6.0</h3>
+<p>Inside any created project that has not been ejected, run:</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb25-1" title="1"><span class="ex">npm</span> install --save-dev --save-exact react-scripts@0.6.0</a></code></pre></div>
+<p><strong>Note: If the project fails to start, remove <code>node_modules</code>, ensure <code>react-scripts</code> is <code>0.6.0</code> in your <code>package.json</code>, and run <code>npm install</code> again. There seems to be an <a href="https://github.com/npm/npm/issues/14073">npm bug</a> affecting this update.</strong></p>
+<h2 id="september-23-2016">0.5.1 (September 23, 2016)</h2>
+<h3 id="build-dependency-react-scripts-3">Build Dependency (<code>react-scripts</code>)</h3>
+<ul>
+<li>Updates <code>react-dev-utils</code> dependency</li>
+</ul>
+<h3 id="utilities-react-dev-utils-3">Utilities (<code>react-dev-utils</code>)</h3>
+<ul>
+<li>Fixes <code>%PUBLIC_URL%</code> replacement to work when specified multiple times. (<span class="citation" data-cites="fson">[@fson]</span>(https://github.com/fson) in <a href="https://github.com/facebook/create-react-app/pull/731">#731</a>)</li>
+</ul>
+<h3 id="migrating-from-0.5.0-to-0.5.1">Migrating from 0.5.0 to 0.5.1</h3>
+<p>Inside any created project that has not been ejected, run:</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb26-1" title="1"><span class="ex">npm</span> install --save-dev --save-exact react-scripts@0.5.1</a></code></pre></div>
+<h2 id="september-23-2016-1">0.5.0 (September 23, 2016)</h2>
+<h3 id="build-dependency-react-scripts-4">Build Dependency (<code>react-scripts</code>)</h3>
+<ul>
+<li>Adds <a href="https://github.com/facebook/create-react-app/blob/master/packages/react-scripts/template/README.md#using-the-public-folder">support for <code>public</code> folder</a> with arbitrary assets. (<span class="citation" data-cites="gaearon">[@gaearon]</span>(https://github.com/gaearon) in <a href="https://github.com/facebook/create-react-app/pull/703">#703</a>)</li>
+<li>You can now <a href="https://github.com/facebook/create-react-app/blob/master/packages/react-scripts/template/README.md#adding-development-environment-variables-in-env">specify defaults</a> for environment variables with <code>.env</code> file. (<span class="citation" data-cites="ayrton">[@ayrton]</span>(https://github.com/ayrton) in <a href="https://github.com/facebook/create-react-app/pull/695">#695</a>)</li>
+<li>Ejecting now generates proper <code>.babelrc</code> and <code>.eslintrc</code>. (<span class="citation" data-cites="fson">[@fson]</span>(https://github.com/fson) in <a href="https://github.com/facebook/create-react-app/pull/689">#689</a>, <span class="citation" data-cites="gaearon">[@gaearon]</span>(https://github.com/gaearon) in <a href="https://github.com/facebook/create-react-app/pull/705">#705</a>)</li>
+<li>Some React warnings now <a href="https://twitter.com/dan_abramov/status/779308833399332864">include the component stacktrace</a>. (<span class="citation" data-cites="gaearon">[@gaearon]</span>(https://github.com/gaearon) in <a href="https://github.com/facebook/create-react-app/pull/716">#716</a>)</li>
+<li><code>npm start</code> doesn’t fail in a composed Docker container. (<span class="citation" data-cites="arekkas">[@arekkas]</span>(https://github.com/arekkas) in <a href="https://github.com/facebook/create-react-app/issues/711">#711</a>)</li>
+<li>The projects generated with <code>eject</code> are now cleaner. (<span class="citation" data-cites="gaearon">[@gaearon]</span>(https://github.com/gaearon) in <a href="https://github.com/facebook/create-react-app/pull/723">#723</a>)</li>
+<li>The project is now managed as a monorepo. (<span class="citation" data-cites="ryanyogan">[@ryanyogan]</span>(https://github.com/ryanyogan) in <a href="https://github.com/facebook/create-react-app/pull/419">#419</a>, <span class="citation" data-cites="fson">[@fson]</span>(https://github.com/fson) in <a href="https://github.com/facebook/create-react-app/pull/678">#678</a>)</li>
+</ul>
+<h3 id="eslint-config-eslint-config-react-app-1">ESLint Config (<code>eslint-config-react-app</code>)</h3>
+<ul>
+<li>Published for the first time! (<span class="citation" data-cites="fson">[@fson]</span>(https://github.com/fson) in <a href="https://github.com/facebook/create-react-app/pull/689">#689</a>)</li>
+<li>Added <a href="https://github.com/yannickcr/eslint-plugin-react/blob/v6.3.0/docs/rules/no-danger-with-children.md"><code>react/no-danger-with-children</code></a> and <a href="https://github.com/yannickcr/eslint-plugin-react/blob/v6.3.0/docs/rules/style-prop-object.md"><code>react/style-prop-object</code></a> rules. (<span class="citation" data-cites="fson">[@fson]</span>(https://github.com/fson) in <a href="https://github.com/facebook/create-react-app/pull/696">#696</a>)</li>
+</ul>
+<h3 id="babel-preset-babel-preset-react-app-1">Babel Preset (<code>babel-preset-react-app</code>)</h3>
+<ul>
+<li>Published for the first time! (<span class="citation" data-cites="fson">[@fson]</span>(https://github.com/fson) in <a href="https://github.com/facebook/create-react-app/pull/701">#701</a>)</li>
+</ul>
+<h3 id="utilities-react-dev-utils-4">Utilities (<code>react-dev-utils</code>)</h3>
+<ul>
+<li>Published for the first time! (<span class="citation" data-cites="gaearon">[@gaearon]</span>(https://github.com/gaearon) in <a href="https://github.com/facebook/create-react-app/pull/723">#723</a>)</li>
+</ul>
+<h3 id="global-cli-create-react-app-1">Global CLI (<code>create-react-app</code>)</h3>
+<ul>
+<li>Added <code>README</code> to npm. There were no other changes.</li>
+</ul>
+<h3 id="migrating-from-0.4.3-to-0.5.0">Migrating from 0.4.3 to 0.5.0</h3>
+<p>Inside any created project that has not been ejected, run:</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb27-1" title="1"><span class="ex">npm</span> install --save-dev --save-exact react-scripts@0.5.0</a></code></pre></div>
+<h3 id="breaking-changes-in-0.5.0">Breaking Changes in 0.5.0</h3>
+<h4 id="global-eslint-plugin-versions">Global ESLint Plugin Versions</h4>
+<p>If you used a global ESLint installation for the editor integration, you’ll need to install <a href="https://github.com/facebook/create-react-app/blob/c092086b1b256fd081f10744f90d216dd5217e29/packages/eslint-config-react-app/package.json#L14-L19">these versions of global ESLint packages</a>.</p>
+<h4 id="moving-index.html-into-public-folder">Moving <code>index.html</code> into <code>public</code> Folder</h4>
+<p>You’ll also need to create a new folder called <code>public</code> in the root of your project. Then, move <code>index.html</code> and files it references (such as a favicon) into that folder.</p>
+<p>You can no longer reference any files from <code>./src</code> in <code>index.html</code>. Instead, <code>public/index.html</code> can now only reference files other inside of the <code>public</code> folder using a special variable called <code>%PUBLIC_URL%</code>.</p>
+<p>For example, instead of:</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode html"><code class="sourceCode html"><a class="sourceLine" id="cb28-1" title="1"><span class="kw">&lt;link</span><span class="ot"> rel=</span><span class="st">&quot;shortcut icon&quot;</span><span class="ot"> href=</span><span class="st">&quot;./src/favicon.ico&quot;</span> <span class="kw">/&gt;</span></a></code></pre></div>
+<p>You would need to move both <code>index.html</code> and <code>src/favicon.ico</code> into the <code>public</code> folder, and change <code>&lt;link&gt;</code> to look like this:</p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode html"><code class="sourceCode html"><a class="sourceLine" id="cb29-1" title="1"><span class="kw">&lt;link</span><span class="ot"> rel=</span><span class="st">&quot;shortcut icon&quot;</span><span class="ot"> href=</span><span class="st">&quot;%PUBLIC_URL%/favicon.ico&quot;</span> <span class="kw">/&gt;</span></a></code></pre></div>
+<p>This ensures it become a part of the build output, and resolves correctly both with client-side routing and non-root <code>homepage</code> in <code>package.json</code>. Read more about <a href="https://github.com/facebook/create-react-app/blob/master/packages/react-scripts/template/README.md#using-the-public-folder">using the <code>public</code> folder</a> and <a href="https://github.com/facebook/create-react-app/pull/703">why these changes were made</a>.</p>
+<h2 id="september-18-2016">0.4.3 (September 18, 2016)</h2>
+<p>This is a hotfix release for a broken package.<br> It contained no changes to the code.</p>
+<h3 id="build-dependency-react-scripts-5">Build Dependency (<code>react-scripts</code>)</h3>
+<ul>
+<li>Fixes a packaging issue that affected npm 2. (<a href="https://github.com/facebook/create-react-app/issues/676">#676</a>)</li>
+</ul>
+<h3 id="migrating-from-0.4.2-to-0.4.3">Migrating from 0.4.2 to 0.4.3</h3>
+<p>Inside any created project that has not been ejected, run:</p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb30-1" title="1"><span class="ex">npm</span> install --save-dev --save-exact react-scripts@0.4.3</a></code></pre></div>
+<h2 id="september-18-2016-1">0.4.2 (September 18, 2016)</h2>
+<h3 id="build-dependency-react-scripts-6">Build Dependency (<code>react-scripts</code>)</h3>
+<ul>
+<li>Lint output in editor is now opt-in because, due to <a href="https://github.com/eslint/eslint/issues/3458">this ESLint issue</a>, it is broken by default in Atom. (<span class="citation" data-cites="fson">[@fson]</span>(https://github.com/fson) in <a href="https://github.com/facebook/create-react-app/pull/649">#649</a>)</li>
+<li>Fixes an issue causing compile errors when project folder is inside a symlink. (<span class="citation" data-cites="motiz88">[@motiz88]</span>(https://github.com/motiz88) in <a href="https://github.com/facebook/create-react-app/pull/648">#648</a>)</li>
+<li>You can now import <code>jpeg</code>, <code>wav</code>, <code>mp3</code>, <code>m4a</code>, <code>aac</code>, and <code>oga</code>. (<span class="citation" data-cites="mareksuscak">[@mareksuscak]</span>(https://github.com/mareksuscak) in <a href="https://github.com/facebook/create-react-app/pull/624">#624</a>, <span class="citation" data-cites="danharper">[@danharper]</span>(https://github.com/danharper) in <a href="https://github.com/facebook/create-react-app/pull/665">#665</a>)</li>
+<li>Fixes false positives caused by the case sensitive import warning on Windows. (<span class="citation" data-cites="Urthen">[@Urthen]</span>(https://github.com/Urthen) in <a href="https://github.com/facebook/create-react-app/pull/593">#593</a>)</li>
+<li>With Docker, <code>*.json.gzip</code> files are no longer created in the project folder. (<span class="citation" data-cites="thangngoc89">[@thangngoc89]</span>(https://github.com/thangngoc89) in <a href="https://github.com/facebook/create-react-app/pull/620">#620</a>)</li>
+<li>Proxy network errors now abort requests instead of hanging. (<span class="citation" data-cites="cloudmu">[@cloudmu]</span>(https://github.com/cloudmu) in <a href="https://github.com/facebook/create-react-app/pull/588">#588</a>)</li>
+<li>Connection to the development server does not get interrupted in HTTPS mode. (<span class="citation" data-cites="dceddia">[@dceddia]</span>(https://github.com/dceddia) in <a href="https://github.com/facebook/create-react-app/pull/652">#652</a>)</li>
+<li>Unsupported Node versions now print a warning. (<span class="citation" data-cites="fson">[@fson]</span>(https://github.com/fson) in <a href="https://github.com/facebook/create-react-app/pull/575">#575</a>)</li>
+<li>Importing assets with special characters like <code>@</code> now works with tests. (<span class="citation" data-cites="fson">[@fson]</span>(https://github.com/fson) in <a href="https://github.com/facebook/create-react-app/pull/584">#584</a>)</li>
+<li>Undefined variable lint rule is promoted from a warning to an error. (<span class="citation" data-cites="gaearon">[@gaearon]</span>(https://github.com/gaearon) in <a href="https://github.com/facebook/create-react-app/pull/669">#669</a>)</li>
+<li>Variables starting with underscore no longer trigger the “unused variable” rule. (<span class="citation" data-cites="valscion">[@valscion]</span>(https://github.com/valscion) in <a href="https://github.com/facebook/create-react-app/pull/640">#640</a>)</li>
+<li>We now print a friendly error when required files are missing. (<span class="citation" data-cites="vnctaing">[@vnctaing]</span>(https://github.com/vnctaing) in <a href="https://github.com/facebook/create-react-app/pull/653">#653</a>)</li>
+<li>The output after creating a project is better formatted. (<span class="citation" data-cites="btnwtn">[@btnwtn]</span>(https://github.com/btnwtn) in <a href="https://github.com/facebook/create-react-app/pull/629">#629</a>)</li>
+<li>Development server logs are less noisy. (<span class="citation" data-cites="gaearon">[@gaearon]</span>(https://github.com/gaearon) in <a href="https://github.com/facebook/create-react-app/commit/1220683276dd9eb2f2719aece7f40bf2ffb397b4">122068</a>)</li>
+</ul>
+<h3 id="global-cli-create-react-app-2">Global CLI (<code>create-react-app</code>)</h3>
+<ul>
+<li>It now runs on early Node versions to print a friendly warning instead of crashing. (<span class="citation" data-cites="sotojuan">[@sotojuan]</span>(https://github.com/sotojuan) in <a href="https://github.com/facebook/create-react-app/commit/fc3ab46d2a54f142f9287ce7de9ab2fc2514487d">fc3ab4</a>)</li>
+<li>We now print a friendly message when you create a project with invalid name. (<span class="citation" data-cites="mareksuscak">[@mareksuscak]</span>(https://github.com/mareksuscak) in <a href="https://github.com/facebook/create-react-app/pull/628">#628</a>)</li>
+<li>Passing a custom fork of <code>react-scripts</code> to <code>create-react-app</code> with <code>--scripts-version</code> works again. (<span class="citation" data-cites="yesmeck">[@yesmeck]</span>(https://github.com/yesmeck) in <a href="https://github.com/facebook/create-react-app/pull/632">#632</a>)</li>
+</ul>
+<h3 id="migrating-from-0.4.1-to-0.4.2">Migrating from 0.4.1 to 0.4.2</h3>
+<p>You may optionally update the global command (it’s not required):</p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb31-1" title="1"><span class="ex">npm</span> install -g create-react-app@0.4.2</a></code></pre></div>
+<p>Inside any created project that has not been ejected, run:</p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb32-1" title="1"><span class="ex">npm</span> install --save-dev --save-exact react-scripts@0.4.2</a></code></pre></div>
+<h2 id="september-3-2016">0.4.1 (September 3, 2016)</h2>
+<h3 id="build-dependency-react-scripts-7">Build Dependency (<code>react-scripts</code>)</h3>
+<ul>
+<li>We now support (but <a href="https://github.com/facebook/create-react-app/issues/87#issuecomment-234627904">don’t recommend</a>) <code>.jsx</code> file extension. (<span class="citation" data-cites="tizmagik">[@tizmagik]</span>(https://github.com/tizmagik) in <a href="https://github.com/facebook/create-react-app/pull/563">#563</a>)</li>
+<li>Proxy request errors are now printed to the console. (<span class="citation" data-cites="cloudmu">[@cloudmu]</span>(https://github.com/cloudmu) in <a href="https://github.com/facebook/create-react-app/pull/502">#502</a>)</li>
+</ul>
+<h3 id="migrating-from-0.4.0-to-0.4.1">Migrating from 0.4.0 to 0.4.1</h3>
+<p>Inside any created project that has not been ejected, run:</p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb33-1" title="1"><span class="ex">npm</span> install --save-dev --save-exact react-scripts@0.4.1</a></code></pre></div>
+<h2 id="september-2-2016">0.4.0 (September 2, 2016)</h2>
+<h3 id="build-dependency-react-scripts-8">Build Dependency (<code>react-scripts</code>)</h3>
+<ul>
+<li><strong>Breaking Change:</strong> Disabled implicit serving of source files in development. (<span class="citation" data-cites="gaearon">[@gaearon]</span>(https://github.com/gaearon) in <a href="https://github.com/facebook/create-react-app/pull/551">#551</a>)</li>
+<li>You can use <code>NODE_PATH</code> environment variable for absolute <code>import</code> paths. (<span class="citation" data-cites="jimmyhmiller">[@jimmyhmiller]</span>(https://github.com/jimmyhmiller) in <a href="https://github.com/facebook/create-react-app/pull/476">#476</a>)</li>
+<li>If <code>src/setupTests.js</code> exists, it will be used to setup the test environment. (<span class="citation" data-cites="gaelduplessix">[@gaelduplessix]</span>(https://github.com/gaelduplessix) in <a href="https://github.com/facebook/create-react-app/pull/548">#548</a>)</li>
+<li>If <code>HTTPS</code> environment variable is set to <code>true</code>, development server will run in HTTPS mode. (<span class="citation" data-cites="dceddia">[@dceddia]</span>(https://github.com/dceddia) in <a href="https://github.com/facebook/create-react-app/pull/552">#552</a>)</li>
+</ul>
+<h3 id="migrating-from-0.3.1-to-0.4.0">Migrating from 0.3.1 to 0.4.0</h3>
+<p>Inside any created project that has not been ejected, run:</p>
+<div class="sourceCode" id="cb34"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb34-1" title="1"><span class="ex">npm</span> install --save-dev --save-exact react-scripts@0.4.0</a></code></pre></div>
+<h3 id="breaking-change-in-0.4.0">Breaking Change in 0.4.0</h3>
+<p>Paths like <code>/src/somefile.png</code> used to be served in development, but only by accident. They never worked in production builds. Since 0.4.0, we <a href="https://github.com/facebook/create-react-app/pull/551">don’t serve static files by default in development anymore either</a>. This removes a dangerous inconsistency that we never intentionally supported.</p>
+<p>If you need a static file to be part for the build, <a href="https://github.com/facebook/create-react-app/blob/master/template/README.md#adding-images-and-fonts">import it from JavaScript and you will get its filename</a>. This ensures it gets included into the production build as well, and its filename contains the content hash.</p>
+<p>If you used static files with <code>&lt;link href&gt;</code>, <a href="https://github.com/facebook/create-react-app/blob/master/template/README.md#referring-to-static-assets-from-link-href">read this new guide</a> on how to make sure these files get included into the builds. For example, you can replace <code>&lt;link href="/src/favicons/favicon-32.png"&gt;</code> with <code>&lt;link href="./src/favicons/favicon-32.png"&gt;</code>, and then webpack will recognize it and include it into the build.</p>
+<p>If you referenced some other files from <code>index.html</code>, please file an issue to discuss your use case. In the meantime, you can serve them from a separate static server until your use case is supported.</p>
+<h2 id="september-2-2016-1">0.3.1 (September 2, 2016)</h2>
+<h3 id="build-dependency-react-scripts-9">Build Dependency (<code>react-scripts</code>)</h3>
+<ul>
+<li>Bumps Jest dependency to fix a few issues discovered yesterday. (<span class="citation" data-cites="cpojer">[@cpojer]</span>(https://github.com/cpojer) in <a href="https://github.com/facebook/jest/pull/1580">facebook/jest#1580</a>, <span class="citation" data-cites="insin">[@insin]</span>(https://github.com/insin) in <a href="https://github.com/facebook/jest/pull/1574">facebook/jest#1574</a>)</li>
+</ul>
+<h3 id="migrating-from-0.3.0-to-0.3.1">Migrating from 0.3.0 to 0.3.1</h3>
+<p>Inside any created project that has not been ejected, run:</p>
+<div class="sourceCode" id="cb35"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb35-1" title="1"><span class="ex">npm</span> install --save-dev --save-exact react-scripts@0.3.1</a></code></pre></div>
+<h2 id="september-1-2016">0.3.0 (September 1, 2016)</h2>
+<h3 id="build-dependency-react-scripts-10">Build Dependency (<code>react-scripts</code>)</h3>
+<ul>
+<li>Testing is <a href="https://github.com/facebook/create-react-app/blob/master/template/README.md#running-tests">now supported</a>! (<a href="https://github.com/facebook/jest/pulls?q=is%3Apr+is%3Aclosed">Jest project contributors</a>, <span class="citation" data-cites="cpojer">[@cpojer]</span>(https://github.com/cpojer) in <a href="https://github.com/facebook/create-react-app/pull/250">#250</a>, <span class="citation" data-cites="gaearon">[@gaearon]</span>(https://github.com/gaearon) in <a href="https://github.com/facebook/create-react-app/pull/378">#378</a>, <a href="https://github.com/facebook/create-react-app/pull/530">#530</a>, <a href="https://github.com/facebook/create-react-app/pull/533">#533</a>)</li>
+<li>Static files such as CSS, images, and fonts, can now exist outside <code>src</code> directory. (<span class="citation" data-cites="fson">[@fson]</span>(https://github.com/fson) in <a href="https://github.com/facebook/create-react-app/pull/504">#504</a>)</li>
+<li><strong>Breaking Change:</strong> Local paths in <code>&lt;link href&gt;</code> in <code>index.html</code> will now be correctly resolved, so deleting <code>favicon.ico</code> is not an error anymore. (<span class="citation" data-cites="andreypopp">[@andreypopp]</span>(https://github.com/andreypopp) in <a href="https://github.com/facebook/create-react-app/pull/428">#428</a>)</li>
+<li>Removed an annoying lint rule that warned for <code>&lt;div ref={node =&gt; this.node = node}&gt;</code>. (<span class="citation" data-cites="mrscobbler">[@mrscobbler]</span>(https://github.com/mrscobbler) in <a href="https://github.com/facebook/create-react-app/pull/529">#529</a>)</li>
+<li>Temporarily disabled <code>react-constant-elements</code> Babel transform because of its bugs. (<span class="citation" data-cites="gaearon">[@gaearon]</span>(https://github.com/gaearon) in <a href="https://github.com/facebook/create-react-app/pull/534">#534</a>)</li>
+<li>Fixed a permission issue with Docker. (<span class="citation" data-cites="gaearon">[@gaearon]</span>(https://github.com/gaearon) in <a href="https://github.com/facebook/create-react-app/commit/73c940a73205d761230f8d6bf81ecfd460ba28a9">73c940</a>)</li>
+<li>Fixed an issue with generator syntax in Jest that occurred in an alpha release. (<span class="citation" data-cites="gaearon">[@gaearon]</span>(https://github.com/gaearon) in <a href="https://github.com/facebook/create-react-app/pull/535">#535</a>)</li>
+</ul>
+<h3 id="global-cli-create-react-app-3">Global CLI (<code>create-react-app</code>)</h3>
+<ul>
+<li>You can now create a project in a folder that already contains an <code>.idea</code> folder, which is necessary for future WebStorm integration. (<span class="citation" data-cites="denofevil">[@denofevil]</span>(https://github.com/denofevil) in <a href="https://github.com/facebook/create-react-app/pull/522">#522</a>)</li>
+</ul>
+<h3 id="migrating-from-0.2.3-to-0.3.0">Migrating from 0.2.3 to 0.3.0</h3>
+<p>You may optionally update the global command (it’s not required):</p>
+<div class="sourceCode" id="cb36"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb36-1" title="1"><span class="ex">npm</span> install -g create-react-app@0.3.0</a></code></pre></div>
+<p>Inside any created project that has not been ejected, run:</p>
+<div class="sourceCode" id="cb37"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb37-1" title="1"><span class="ex">npm</span> install --save-dev --save-exact react-scripts@0.3.0</a></code></pre></div>
+<h4 id="breaking-change">Breaking Change</h4>
+<p>Now <code>favicon.ico</code> is not treated specially anymore.<br> If you use it, move it to <code>src</code> and add the following line to <code>&lt;head&gt;</code> in your HTML:</p>
+<div class="sourceCode" id="cb38"><pre class="sourceCode html"><code class="sourceCode html"><a class="sourceLine" id="cb38-1" title="1"><span class="kw">&lt;link</span><span class="ot"> rel=</span><span class="st">&quot;shortcut icon&quot;</span><span class="ot"> href=</span><span class="st">&quot;./src/favicon.ico&quot;</span> <span class="kw">/&gt;</span></a></code></pre></div>
+<h4 id="new-feature">New Feature</h4>
+<p>Since 0.3.0 added a test runner, we recommend that you add it to the <code>scripts</code> section of your <code>package.json</code> like this:</p>
+<div class="sourceCode" id="cb39"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb39-1" title="1">  <span class="co">// ...</span></a>
+<a class="sourceLine" id="cb39-2" title="2">  <span class="st">&quot;scripts&quot;</span><span class="op">:</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb39-3" title="3">    <span class="co">// ...</span></a>
+<a class="sourceLine" id="cb39-4" title="4">    <span class="st">&quot;test&quot;</span><span class="op">:</span> <span class="st">&quot;react-scripts test --env=jsdom&quot;</span></a>
+<a class="sourceLine" id="cb39-5" title="5">  <span class="op">}</span></a></code></pre></div>
+<p><a href="https://github.com/facebook/create-react-app/blob/master/template/README.md#running-tests">Then read the testing guide to learn more about using it!</a></p>
+<h2 id="august-25-2016">0.2.3 (August 25, 2016)</h2>
+<h3 id="build-dependency-react-scripts-11">Build Dependency (<code>react-scripts</code>)</h3>
+<ul>
+<li>You can now <a href="https://github.com/facebook/create-react-app/blob/ef94b0561d5afb9b50b905fa5cd3f94e965c69c0/template/README.md#proxying-api-requests-in-development">proxy requests to an API server</a> without worrying about CORS. (<span class="citation" data-cites="gaearon">[@gaearon]</span>(https://github.com/gaearon) in <a href="https://github.com/facebook/create-react-app/pull/282">#282</a>)</li>
+<li>You can now <a href="https://github.com/facebook/create-react-app/blob/ef94b0561d5afb9b50b905fa5cd3f94e965c69c0/template/README.md#adding-custom-environment-variables">pass custom environment variables</a> to your application. (<span class="citation" data-cites="eliperelman">[@eliperelman]</span>(https://github.com/eliperelman) in <a href="https://github.com/facebook/create-react-app/pull/342">#342</a>)</li>
+<li>You can now <a href="https://ponyfoo.com/articles/understanding-javascript-async-await">use <code>async</code> and <code>await</code></a> syntax. (<span class="citation" data-cites="gaearon">[@gaearon]</span>(https://github.com/gaearon) in <a href="https://github.com/facebook/create-react-app/pull/327">#327</a>, <span class="citation" data-cites="fson">[@fson]</span>(https://github.com/fson) in <a href="https://github.com/facebook/create-react-app/pull/332">#332</a>)</li>
+<li>Paths with period in them now load successfully on the development server. (<span class="citation" data-cites="mxstbr">[@mxstbr]</span>(https://github.com/mxstbr) in <a href="https://github.com/facebook/create-react-app/pull/422">#422</a>)</li>
+<li>Images with <code>.webp</code> extension are now supported. (<span class="citation" data-cites="gafemoyano">[@gafemoyano]</span>(https://github.com/gafemoyano) in <a href="https://github.com/facebook/create-react-app/pull/458">#458</a>)</li>
+<li>The most recent version of React is now added to <code>package.json</code>. (<span class="citation" data-cites="wdhorton">[@wdhorton]</span>(https://github.com/wdhorton) in <a href="https://github.com/facebook/create-react-app/pull/477">#477</a>)</li>
+<li>Babel configuration is simplified. (<span class="citation" data-cites="kripod">[@kripod]</span>(https://github.com/kripod) in <a href="https://github.com/facebook/create-react-app/pull/490">#490</a>)</li>
+</ul>
+<h3 id="migrating-from-0.2.2-to-0.2.3">Migrating from 0.2.2 to 0.2.3</h3>
+<p>Update <code>react-scripts</code> to point to <code>0.2.3</code> in your <code>package.json</code> and run <code>npm install</code>. You shouldn’t need to do anything else.</p>
+<p>Newly created projects will use <code>0.2.3</code> automatically. You <strong>don’t</strong> need to update the global <code>create-react-app</code> CLI itself. It stays at <code>0.2.0</code> for now because it doesn’t have any changes.</p>
+<h2 id="august-22-2016">0.2.2 (August 22, 2016)</h2>
+<h3 id="build-dependency-react-scripts-12">Build Dependency (<code>react-scripts</code>)</h3>
+<ul>
+<li>When the bundle size changes, we now display the difference after build. (<span class="citation" data-cites="elijahmanor">[@elijahmanor]</span>(https://github.com/elijahmanor) in <a href="https://github.com/facebook/create-react-app/pull/340">#340</a>)</li>
+<li><code>npm install</code>ing a missing dependency now forces a rebuild. (<span class="citation" data-cites="gaearon">[@gaearon]</span>(https://github.com/gaearon) in <a href="https://github.com/facebook/create-react-app/pull/349">#349</a>)</li>
+<li>Autoprefixer config now includes more commonly supported browsers. (<span class="citation" data-cites="kripod">[@kripod]</span>(https://github.com/kripod) in <a href="https://github.com/facebook/create-react-app/pull/345">#345</a>)</li>
+<li>All the configuration is now documented inline so ejecting doesn’t leave you in the dark. (<span class="citation" data-cites="gaearon">[@gaearon]</span>(https://github.com/gaearon) in <a href="https://github.com/facebook/create-react-app/pull/362">#362</a>)</li>
+<li><code>Object.assign()</code> polyfill is now bundled by default. (<span class="citation" data-cites="gaearon">[@gaearon]</span>(https://github.com/gaearon) in <a href="https://github.com/facebook/create-react-app/pull/399">#399</a>)</li>
+<li><a href="https://www.smashingmagazine.com/2016/08/a-glimpse-into-the-future-with-react-native-for-web/">React Native Web</a> now works out of the box. (<span class="citation" data-cites="grigio">[@grigio]</span>(https://github.com/grigio) in <a href="https://github.com/facebook/create-react-app/pull/407">#407</a>)</li>
+<li>Same asset filenames in different folders don’t confuse the server now. (<span class="citation" data-cites="arunoda">[@arunoda]</span>(https://github.com/arunoda) in <a href="https://github.com/facebook/create-react-app/pull/446">#446</a>)</li>
+<li>The <code>otf</code> font format is now supported. (<span class="citation" data-cites="A-gambit">[@A-gambit]</span>(https://github.com/A-gambit) in <a href="https://github.com/facebook/create-react-app/pull/434">#434</a>)</li>
+<li>The <code>new-cap</code> linting rule has been disabled thanks to feedback from Immutable.js users. (<span class="citation" data-cites="rricard">[@rricard]</span>(https://github.com/rricard) in <a href="https://github.com/facebook/create-react-app/pull/470">#470</a>)</li>
+</ul>
+<h3 id="migrating-from-0.2.1-to-0.2.2">Migrating from 0.2.1 to 0.2.2</h3>
+<p>Update <code>react-scripts</code> to point to <code>0.2.2</code> in your <code>package.json</code> and run <code>npm install</code>. You shouldn’t need to do anything else.</p>
+<p>Newly created projects will use <code>0.2.2</code> automatically. You <strong>don’t</strong> need to update the global <code>create-react-app</code> CLI itself. It stays at <code>0.2.0</code> for now because it doesn’t have any changes.</p>
+<h2 id="august-1-2016">0.2.1 (August 1, 2016)</h2>
+<h3 id="build-dependency-react-scripts-13">Build Dependency (<code>react-scripts</code>)</h3>
+<ul>
+<li>Fixes an issue with <code>npm start</code> taking a very long time on OS X with Firewall enabled (<span class="citation" data-cites="gaearon">[@gaearon]</span>(https://github.com/gaearon) in <a href="https://github.com/facebook/create-react-app/pull/319">#319</a>)</li>
+<li>Fixes an issue with webpack eating a lot of CPU in some cases (<span class="citation" data-cites="dceddia">[@dceddia]</span>(https://github.com/dceddia) in <a href="https://github.com/facebook/create-react-app/pull/294">#294</a>)</li>
+<li>We now warn if you import a file with mismatched casing because this breaks the watcher (<span class="citation" data-cites="alexzherdev">[@alexzherdev]</span>(https://github.com/alexzherdev) in <a href="https://github.com/facebook/create-react-app/pull/266">#266</a>)</li>
+<li>CSS files specifying <code>?v=</code> after asset filenames, such as Font Awesome, now works correctly (<span class="citation" data-cites="alexzherdev">[@alexzherdev]</span>(https://github.com/alexzherdev) in <a href="https://github.com/facebook/create-react-app/pull/298">#298</a>)</li>
+<li>Issues with <code>npm link</code>ing <code>react-scripts</code> have been fixed (<span class="citation" data-cites="dallonf">[@dallonf]</span>(https://github.com/dallonf) in <a href="https://github.com/facebook/create-react-app/pull/277">#277</a>)</li>
+<li>We now use <code>/static</code> prefix for assets both in development and production (<span class="citation" data-cites="gaearon">[@gaearon]</span>(https://github.com/gaearon) in <a href="https://github.com/facebook/create-react-app/pull/278">#278</a>)</li>
+</ul>
+<h3 id="migrating-from-0.2.0-to-0.2.1">Migrating from 0.2.0 to 0.2.1</h3>
+<p>Update <code>react-scripts</code> to point to <code>0.2.1</code> in your <code>package.json</code> and run <code>npm install</code>. You shouldn’t need to do anything else. If you see a warning about wrong file casing next time you <code>npm start</code>, fix your imports to use the correct filename casing.</p>
+<p>Newly created projects will use <code>0.2.1</code> automatically. You <strong>don’t</strong> need to update the global <code>create-react-app</code> CLI itself. It stays at <code>0.2.0</code> for now because it doesn’t have any changes.</p>
+<h2 id="july-28-2016">0.2.0 (July 28, 2016)</h2>
+<h3 id="build-dependency-react-scripts-14">Build Dependency (<code>react-scripts</code>)</h3>
+<ul>
+<li>You can now enable deployment to GitHub Pages by adding <code>homepage</code> field to <code>package.json</code> (<span class="citation" data-cites="dhruska">[@dhruska]</span>(https://github.com/dhruska) in <a href="https://github.com/facebook/create-react-app/pull/94">#94</a>)</li>
+<li>Development server now runs on <code>0.0.0.0</code> and works with VirtualBox (<span class="citation" data-cites="JWo1F">[@JWo1F]</span>(https://github.com/JWo1F) in <a href="https://github.com/facebook/create-react-app/pull/128">#128</a>)</li>
+<li>Cloud9 and Nitrous online IDEs are now supported (<span class="citation" data-cites="gaearon">[@gaearon]</span>(http://github.com/gaearon) in <a href="https://github.com/facebook/create-react-app/commit/2fe84ecded55f1d5258d91f9c2c07698ae0d2fb4">2fe84e</a>)</li>
+<li>When <code>3000</code> port is taken, we offer to use another port (<span class="citation" data-cites="chocnut">[@chocnut]</span>(https://github.com/chocnut) in <a href="https://github.com/facebook/create-react-app/pull/101">#101</a>, <a href="https://github.com/facebook/create-react-app/commit/2edf2180f2aa6bf647807d0b1fcd95f4cfe4a558">2edf21</a>)</li>
+<li>You can now <code>import</code> CSS files from npm modules (<span class="citation" data-cites="glennreyes">[@glennreyes]</span>(https://github.com/glennreyes) in <a href="https://github.com/facebook/create-react-app/pull/105">#105</a>, <span class="citation" data-cites="breaddevil">[@breaddevil]</span>(https://github.com/breaddevil) in <a href="https://github.com/facebook/create-react-app/pull/178">#178</a>)</li>
+<li><code>fetch</code> and <code>Promise</code> polyfills are now always included (<span class="citation" data-cites="gaearon">[@gaearon]</span>(https://github.com/gaearon) in <a href="https://github.com/facebook/create-react-app/pull/235">#235</a>)</li>
+<li>Regenerator runtime is now included if you use ES6 generators (<span class="citation" data-cites="gaearon">[@gaearon]</span>(https://github.com/gaearon) in <a href="https://github.com/facebook/create-react-app/pull/238">#238</a>)</li>
+<li>Generated project now contains <code>.gitignore</code> (<span class="citation" data-cites="npverni">[@npverni]</span>(https://github.com/npverni) in <a href="https://github.com/facebook/create-react-app/pull/79">#79</a>, <span class="citation" data-cites="chibicode">[@chibicode]</span>(https://github.com/chibicode) in <a href="https://github.com/facebook/create-react-app/pull/112">#112</a>)</li>
+<li>ESLint config is now more compatible with Flow (<span class="citation" data-cites="gaearon">[@gaearon]</span>(https://github.com/gaearon) in <a href="https://github.com/facebook/create-react-app/pull/261">#261</a>)</li>
+<li>A stylistic lint rule about method naming has been removed (<span class="citation" data-cites="mxstbr">[@mxstbr]</span>(https://github.com/mxstbr) in <a href="https://github.com/facebook/create-react-app/pull/157">#152</a>)</li>
+<li>A few unobtrusive accessibility lint rules have been added (<span class="citation" data-cites="evcohen">[@evcohen]</span>(https://github.com/evcohen) in <a href="https://github.com/facebook/create-react-app/pull/175">#175</a>)</li>
+<li>A <code>.babelrc</code> in parent directory no longer causes an error (<span class="citation" data-cites="alexzherdev">[@alexzherdev]</span>(https://github.com/alexzherdev) in <a href="https://github.com/facebook/create-react-app/pull/236">#236</a>)</li>
+<li>Files with <code>.json</code> extension are now discovered (<span class="citation" data-cites="gaearon">[@gaearon]</span>(https://github.com/gaearon) in <a href="https://github.com/facebook/create-react-app/commit/a11d6a398f487f9163880dd34667b1d3e14b147a">a11d6a</a>)</li>
+<li>Bug fixes from transitive dependencies are included (<a href="https://github.com/facebook/create-react-app/issues/126">#126</a>)</li>
+<li>Linting now works with IDEs if you follow <a href="https://github.com/facebook/create-react-app/blob/master/template/README.md#display-lint-output-in-the-editor">these</a> instructions (<span class="citation" data-cites="keyanzhang">[@keyanzhang]</span>(https://github.com/keyanzhang) in <a href="https://github.com/facebook/create-react-app/pull/149">#149</a>)</li>
+<li>After building, we now print gzipped bundle size (<span class="citation" data-cites="lvwrence">[@lvwrence]</span>(https://github.com/lvwrence) in <a href="https://github.com/facebook/create-react-app/pull/229">#229</a>)</li>
+</ul>
+<h3 id="global-cli-create-react-app-4">Global CLI (<code>create-react-app</code>)</h3>
+<ul>
+<li>It enforces that you have Node &gt;= 4 (<span class="citation" data-cites="conorhastings">[@conorhastings]</span>(https://github.com/conorhastings) in <a href="https://github.com/facebook/create-react-app/pull/88">#88</a>)</li>
+<li>It handles <code>--version</code> flag correctly (<span class="citation" data-cites="mxstbr">[@mxstbr]</span>(https://github.com/mxstbr) in <a href="https://github.com/facebook/create-react-app/pull/152">#152</a>)</li>
+</ul>
+<h3 id="migrating-from-0.1.0-to-0.2.0">Migrating from 0.1.0 to 0.2.0</h3>
+<p>You may optionally update the global command (it’s not required):</p>
+<div class="sourceCode" id="cb40"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb40-1" title="1"><span class="ex">npm</span> install -g create-react-app@0.2.0</a></code></pre></div>
+<p>Inside any created project that has not been ejected, run:</p>
+<div class="sourceCode" id="cb41"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb41-1" title="1"><span class="ex">npm</span> install --save-dev --save-exact react-scripts@0.2.0</a></code></pre></div>
+<p>You may need to fix a few lint warnings about missing <code>&lt;img alt&gt;</code> tag, but everything else should work out of the box. If you intend to deploy your site to GitHub Pages, you may now <a href="https://github.com/facebook/create-react-app/blob/master/template/README.md#deploy-to-github-pages">add <code>homepage</code> field to <code>package.json</code></a>. If you had <a href="https://github.com/facebook/create-react-app/issues/124">issues with integrating editor linter plugins</a>, follow <a href="https://github.com/facebook/create-react-app/blob/master/template/README.md#display-lint-output-in-the-editor">these new instructions</a>.</p>
+<h2 id="july-22-2016">0.1.0 (July 22, 2016)</h2>
+<ul>
+<li>Initial public release</li>
+</ul>
+</body>
+</html>

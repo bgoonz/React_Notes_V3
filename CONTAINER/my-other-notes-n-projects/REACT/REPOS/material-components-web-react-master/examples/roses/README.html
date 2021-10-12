@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>README</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<h1 id="roses-example">Roses Example</h1>
+<p>This is an example of a product feedback form using only MDC React components. This also uses some MDC Web-only packages, which are just styles (<a href="https://github.com/material-components/material-components-web/tree/master/packages/mdc-typography">typography</a>, <a href="https://github.com/material-components/material-components-web/tree/master/packages/mdc-theme">theme</a>, and <a href="https://github.com/material-components/material-components-web/tree/master/packages/mdc-shape">shape</a>).</p>
+<table>
+<thead>
+<tr class="header">
+<th>MDC Web Package</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Typography</td>
+<td>- Set messaging text (font-size, line-height, etc.)</td>
+</tr>
+<tr class="even">
+<td>Theme</td>
+<td>- Set messaging ink color</td>
+</tr>
+<tr class="odd">
+<td>Shape</td>
+<td>- Set Chip corner shape</td>
+</tr>
+</tbody>
+</table>
+<h2 id="running-example">Running example</h2>
+<blockquote>
+<p>starting from root directory (<code>/material-components-web-react</code>)</p>
+</blockquote>
+<ol type="1">
+<li><code>cd ./examples/roses</code></li>
+<li><code>npm i</code></li>
+<li><code>npm start</code></li>
+<li>in web browser, head to <code>localhost:8080</code> (may be different if you have another web server running, such as the screenshot tests)</li>
+</ol>
+<blockquote>
+<p>NOTE: Ensure that you’re on at least NodeJS version 10.4.x</p>
+</blockquote>
+<h2 id="alternate-theme">Alternate theme</h2>
+<p>If you want to see MDC Web’s Themeing power in action, head to the <code>./examples/roses/index.scss</code> file, and uncomment the first line below the license (line 23):</p>
+<pre class="sass"><code>$mdc-theme-primary: #b31839; // uncomment for alternate primary theme color</code></pre>
+<p>This will update the primary color for the app. Just refresh the page and allow the Sass to recompile with #b31839 as the primary color. Feel free to experiment!x</p>
+</body>
+</html>

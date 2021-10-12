@@ -1,0 +1,1563 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>CHANGELOG-2.x</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<h2 id="and-newer-versions">3.0.0 and Newer Versions</h2>
+<p><strong>Please refer to <a href="./CHANGELOG.md">CHANGELOG.md</a> for the newer versions.</strong></p>
+<h2 id="march-7-2019">2.1.8 (March 7, 2019)</h2>
+<p>v2.1.8 is a maintenance release that reapplies the TypeScript speed improvements (<a href="https://github.com/facebook/create-react-app/pull/6406">#6406</a>) in a new major version of <code>react-dev-utils</code>.</p>
+<h3 id="migrating-from-2.1.7-to-2.1.8">Migrating from 2.1.7 to 2.1.8</h3>
+<p>Inside any created project that has not been ejected, run:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb1-1" title="1"><span class="ex">npm</span> install --save --save-exact react-scripts@2.1.8</a></code></pre></div>
+<p>or</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb2-1" title="1"><span class="ex">yarn</span> add --exact react-scripts@2.1.8</a></code></pre></div>
+<h2 id="march-7-2019-1">2.1.7 (March 7, 2019)</h2>
+<p>v2.1.7 is a maintenance release that temporarily reverts the TypeScript speed improvements (<a href="https://github.com/facebook/create-react-app/pull/6406">#6406</a>) to fix a dependency issue in <code>react-dev-utils</code>.</p>
+<h3 id="migrating-from-2.1.6-to-2.1.7">Migrating from 2.1.6 to 2.1.7</h3>
+<p>Inside any created project that has not been ejected, run:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb3-1" title="1"><span class="ex">npm</span> install --save --save-exact react-scripts@2.1.7</a></code></pre></div>
+<p>or</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb4-1" title="1"><span class="ex">yarn</span> add --exact react-scripts@2.1.7</a></code></pre></div>
+<h2 id="march-6-2019">2.1.6 (March 6, 2019)</h2>
+<p>v2.1.6 is a maintenance release that brings a few new improvements, most notably:</p>
+<ul>
+<li>:rocket: Reduced TypeScript rebuild times while running the development server. This was previously introduced in v2.1.4 but had to be reverted. Thanks to <span class="citation" data-cites="ianschmitz">[@ianschmitz]</span>(https://github.com/ianschmitz) for getting this ready.</li>
+</ul>
+<h4 id="bug-bug-fix">:bug: Bug Fix</h4>
+<ul>
+<li><code>react-dev-utils</code>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/6511">#6511</a> Fix deploy instructions to make link clickable. (<span class="citation" data-cites="sbimochan">[@sbimochan]</span>(https://github.com/sbimochan))</li>
+</ul></li>
+<li><code>react-scripts</code>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/6472">#6472</a> Revert CSS sourcemaps in development. (<span class="citation" data-cites="bugzpodder">[@bugzpodder]</span>(https://github.com/bugzpodder))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/6444">#6444</a> Revert “Switch to eval-source-map (#5060)”. (<span class="citation" data-cites="ianschmitz">[@ianschmitz]</span>(https://github.com/ianschmitz))</li>
+</ul></li>
+</ul>
+<h4 id="nail_care-enhancement">:nail_care: Enhancement</h4>
+<ul>
+<li><code>react-dev-utils</code>, <code>react-scripts</code>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/6406">#6406</a> Speed up TypeScript rebuild times in development. (<span class="citation" data-cites="ianschmitz">[@ianschmitz]</span>(https://github.com/ianschmitz))</li>
+</ul></li>
+<li><code>create-react-app</code>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/6253">#6253</a> Only use <code>yarn.lock.cached</code> if using the default Yarn registry. (<span class="citation" data-cites="hangryCat">[@hangryCat]</span>(https://github.com/hangryCat))</li>
+</ul></li>
+<li><code>react-scripts</code>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/5457">#5457</a> Add forward ref to React SVG Component. (<span class="citation" data-cites="GasimGasimzada">[@GasimGasimzada]</span>(https://github.com/GasimGasimzada))</li>
+</ul></li>
+</ul>
+<h4 id="memo-documentation">:memo: Documentation</h4>
+<ul>
+<li><code>babel-preset-react-app</code>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/6254">#6254</a> Improve Flow and TypeScript usage docs. (<span class="citation" data-cites="saranshkataria">[@saranshkataria]</span>(https://github.com/saranshkataria))</li>
+</ul></li>
+<li><code>babel-preset-react-app</code>, <code>confusing-browser-globals</code>, <code>react-app-polyfill</code>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/6419">#6419</a> Improve language used in markdown code blocks. (<span class="citation" data-cites="cherouvim">[@cherouvim]</span>(https://github.com/cherouvim))</li>
+</ul></li>
+<li><code>create-react-app</code>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/6481">#6481</a> Fix typo. (<span class="citation" data-cites="adyouri">[@adyouri]</span>(https://github.com/adyouri))</li>
+</ul></li>
+<li><code>react-dev-utils</code>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/6482">#6482</a> Fix typo. (<span class="citation" data-cites="mattfwood">[@mattfwood]</span>(https://github.com/mattfwood))</li>
+</ul></li>
+<li>Other
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/6438">#6438</a> Update <code>source-map-explorer</code> docs to analyze all chunks. (<span class="citation" data-cites="Kamahl19">[@Kamahl19]</span>(https://github.com/Kamahl19))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/6454">#6454</a> Fix typo. (<span class="citation" data-cites="DenrizSusam">[@DenrizSusam]</span>(https://github.com/DenrizSusam))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/5767">#5767</a> Add information about using custom registries in e2e testing #4488. (<span class="citation" data-cites="juanpicado">[@juanpicado]</span>(https://github.com/juanpicado))</li>
+</ul></li>
+<li><code>react-dev-utils</code>, <code>react-scripts</code>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/6239">#6239</a> Convert all bit.ly links from http to https. (<span class="citation" data-cites="leighhalliday">[@leighhalliday]</span>(https://github.com/leighhalliday))</li>
+</ul></li>
+</ul>
+<h4 id="house-internal">:house: Internal</h4>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/6493">#6493</a> Remove AppVeyor config files. (<span class="citation" data-cites="iansu">[@iansu]</span>(https://github.com/iansu))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/6474">#6474</a> Remove latest Node version from Travis config. (<span class="citation" data-cites="iansu">[@iansu]</span>(https://github.com/iansu))</li>
+</ul>
+<h4 id="hammer-underlying-tools">:hammer: Underlying Tools</h4>
+<ul>
+<li><code>react-scripts</code>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/6387">#6387</a> Use contenthash instead of chunkhash for better long-term caching. (<span class="citation" data-cites="ianschmitz">[@ianschmitz]</span>(https://github.com/ianschmitz))</li>
+</ul></li>
+<li>Other
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/6365">#6365</a> Upgrade Docusaurus and enable new features. (<span class="citation" data-cites="yangshun">[@yangshun]</span>(https://github.com/yangshun))</li>
+</ul></li>
+</ul>
+<h4 id="committers-15">Committers: 15</h4>
+<ul>
+<li>Abdelhadi Dyouri (<a href="https://github.com/adyouri">adyouri</a>)</li>
+<li>Bimochan Shrestha (<a href="https://github.com/sbimochan">sbimochan</a>)</li>
+<li>Deniz Susman (<a href="https://github.com/DenrizSusam">DenrizSusam</a>)</li>
+<li>Gasim Gasimzada (<a href="https://github.com/GasimGasimzada">GasimGasimzada</a>)</li>
+<li>Ian Schmitz (<a href="https://github.com/ianschmitz">ianschmitz</a>)</li>
+<li>Ian Sutherland (<a href="https://github.com/iansu">iansu</a>)</li>
+<li>Ioannis Cherouvim (<a href="https://github.com/cherouvim">cherouvim</a>)</li>
+<li>Jack Zhao (<a href="https://github.com/bugzpodder">bugzpodder</a>)</li>
+<li>Juan Picado <span class="citation" data-cites="jotadeveloper">@jotadeveloper</span> (<a href="https://github.com/juanpicado">juanpicado</a>)</li>
+<li>Leigh Halliday (<a href="https://github.com/leighhalliday">leighhalliday</a>)</li>
+<li>Martin Litvaj (<a href="https://github.com/Kamahl19">Kamahl19</a>)</li>
+<li>Matt Wood (<a href="https://github.com/mattfwood">mattfwood</a>)</li>
+<li>Meo H. (<a href="https://github.com/hangryCat">hangryCat</a>)</li>
+<li>Saransh Kataria (<a href="https://github.com/saranshkataria">saranshkataria</a>)</li>
+<li>Yangshun Tay (<a href="https://github.com/yangshun">yangshun</a>)</li>
+</ul>
+<h3 id="migrating-from-2.1.5-to-2.1.6">Migrating from 2.1.5 to 2.1.6</h3>
+<p>Inside any created project that has not been ejected, run:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb5-1" title="1"><span class="ex">npm</span> install --save --save-exact react-scripts@2.1.6</a></code></pre></div>
+<p>or</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb6-1" title="1"><span class="ex">yarn</span> add --exact react-scripts@2.1.6</a></code></pre></div>
+<h2 id="february-11-2019">2.1.5 (February 11, 2019)</h2>
+<p>v2.1.5 is a maintenance release that reverts the TypeScript speed improvements (<a href="https://github.com/facebook/create-react-app/pull/5903">#5903</a>) to fix a dependency issue in <code>react-dev-utils</code>.</p>
+<h3 id="migrating-from-2.1.4-to-2.1.5">Migrating from 2.1.4 to 2.1.5</h3>
+<p>Inside any created project that has not been ejected, run:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb7-1" title="1"><span class="ex">npm</span> install --save --save-exact react-scripts@2.1.5</a></code></pre></div>
+<p>or</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb8-1" title="1"><span class="ex">yarn</span> add --exact react-scripts@2.1.5</a></code></pre></div>
+<h2 id="february-10-2019">2.1.4 (February 10, 2019)</h2>
+<p>v2.1.4 is a maintenance release that brings a number of awesome improvements. A few notable ones include:</p>
+<ul>
+<li>:rocket: Reduced TypeScript rebuild times while running the development server. TypeScript is now blazing fast! Special thanks to <span class="citation" data-cites="deftomat">[@deftomat]</span>(https://github.com/deftomat) and <span class="citation" data-cites="johnnyreilly">[@johnnyreilly]</span>(https://github.com/johnnyreilly) and the other contributors for their hard work on this. (<a href="https://github.com/facebook/create-react-app/pull/5903">#5903</a>)</li>
+<li>Jest <a href="https://github.com/jest-community/jest-watch-typeahead">type ahead support</a> which provides a much nicer experience when filtering your tests using the Jest CLI (<a href="https://github.com/facebook/create-react-app/pull/5213">#5213</a>)</li>
+<li>And many more improvements!</li>
+</ul>
+<h4 id="bug-bug-fix-1">:bug: Bug Fix</h4>
+<ul>
+<li><code>react-scripts</code>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/6364">#6364</a> Use semicolons in the ProcessEnv interface. (<span class="citation" data-cites="DominikPalo">[@DominikPalo]</span>(https://github.com/DominikPalo))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/6276">#6276</a> Prevent cursor events on app-logo svg. (<span class="citation" data-cites="kostadriano">[@kostadriano]</span>(https://github.com/kostadriano))</li>
+</ul></li>
+</ul>
+<h4 id="nail_care-enhancement-1">:nail_care: Enhancement</h4>
+<ul>
+<li><code>react-scripts</code>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/5213">#5213</a> Add Jest typeahead plugin. (<span class="citation" data-cites="gaearon">[@gaearon]</span>(https://github.com/gaearon))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/5713">#5713</a> Sass source map for dev. (<span class="citation" data-cites="zhuoli99">[@zhuoli99]</span>(https://github.com/zhuoli99))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/6285">#6285</a> Allow react-scripts test –no-watch. (<span class="citation" data-cites="ricokahler">[@ricokahler]</span>(https://github.com/ricokahler))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/5060">#5060</a> Enable eval-source-map for firefox. (<span class="citation" data-cites="jasonLaster">[@jasonLaster]</span>(https://github.com/jasonLaster))</li>
+</ul></li>
+<li><code>react-dev-utils</code>, <code>react-scripts</code>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/5903">#5903</a> Speed up TypeScript projects. (<span class="citation" data-cites="deftomat">[@deftomat]</span>(https://github.com/deftomat))</li>
+</ul></li>
+</ul>
+<h4 id="memo-documentation-1">:memo: Documentation</h4>
+<ul>
+<li>Other
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/6383">#6383</a> Update docs links to prefer HTTPS for supported domains. (<span class="citation" data-cites="ianschmitz">[@ianschmitz]</span>(https://github.com/ianschmitz))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/6062">#6062</a> [docs] Warn/clarify that env vars are NOT “SECRET”. (<span class="citation" data-cites="JBallin">[@JBallin]</span>(https://github.com/JBallin))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/6359">#6359</a> Update ZEIT Now deployment instructions. (<span class="citation" data-cites="timothyis">[@timothyis]</span>(https://github.com/timothyis))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/6346">#6346</a> Minor issue in README.md. (<span class="citation" data-cites="nathanlschneider">[@nathanlschneider]</span>(https://github.com/nathanlschneider))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/6331">#6331</a> Update docs to document <code>--no-watch</code>. (<span class="citation" data-cites="ricokahler">[@ricokahler]</span>(https://github.com/ricokahler))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/6229">#6229</a> Update <code>serve</code> port flag and add example. (<span class="citation" data-cites="lyzhovnik">[@lyzhovnik]</span>(https://github.com/lyzhovnik))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/6190">#6190</a> Updating updating-to-new-releases.md for users who installed CRA globally. (<span class="citation" data-cites="carpben">[@carpben]</span>(https://github.com/carpben))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/6095">#6095</a> Changes to steps for publishing GitHub User Page. (<span class="citation" data-cites="StevenTan">[@StevenTan]</span>(https://github.com/StevenTan))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/6157">#6157</a> Add note for global install of CLI. (<span class="citation" data-cites="ianschmitz">[@ianschmitz]</span>(https://github.com/ianschmitz))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/6149">#6149</a> update link for difference between proposal stages. (<span class="citation" data-cites="loveky">[@loveky]</span>(https://github.com/loveky))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/6141">#6141</a> Remove extra table cell. (<span class="citation" data-cites="yangshun">[@yangshun]</span>(https://github.com/yangshun))</li>
+</ul></li>
+<li><code>react-scripts</code>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/6355">#6355</a> Make manifest.json description more generic. (<span class="citation" data-cites="chrisself">[@chrisself]</span>(https://github.com/chrisself))</li>
+</ul></li>
+</ul>
+<h4 id="house-internal-1">:house: Internal</h4>
+<ul>
+<li>Other
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/6050">#6050</a> Fix e2e:docker failure with “access denied”. (<span class="citation" data-cites="jamesknelson">[@jamesknelson]</span>(https://github.com/jamesknelson))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/6179">#6179</a> Update local-test.sh to return test exit code. (<span class="citation" data-cites="dallonf">[@dallonf]</span>(https://github.com/dallonf))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/6165">#6165</a> Fix CI builds. (<span class="citation" data-cites="ianschmitz">[@ianschmitz]</span>(https://github.com/ianschmitz))</li>
+</ul></li>
+<li><code>react-scripts</code>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/5798">#5798</a> Added <code>module</code> to ignored node modules list. (<span class="citation" data-cites="dotansimha">[@dotansimha]</span>(https://github.com/dotansimha))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/6022">#6022</a> TypeScript detection filtering ‘node_modules’.. (<span class="citation" data-cites="holloway">[@holloway]</span>(https://github.com/holloway))</li>
+</ul></li>
+<li><code>react-dev-utils</code>, <code>react-scripts</code>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/6150">#6150</a> dependencies: move chalk to react-dev-utils. (<span class="citation" data-cites="otaviopace">[@otaviopace]</span>(https://github.com/otaviopace))</li>
+</ul></li>
+<li><code>babel-plugin-named-asset-import</code>, <code>react-scripts</code>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/5816">#5816</a> Upgrade <span class="citation" data-cites="svgr/webpack">@svgr/webpack</span> to 4.1.0. (<span class="citation" data-cites="alaycock">[@alaycock]</span>(https://github.com/alaycock))</li>
+</ul></li>
+<li><code>react-dev-utils</code>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/6162">#6162</a> Update react-dev-util globby dependency to v8.0.2. (<span class="citation" data-cites="davidlukerice">[@davidlukerice]</span>(https://github.com/davidlukerice))</li>
+</ul></li>
+<li><code>babel-preset-react-app</code>, <code>react-app-polyfill</code>, <code>react-dev-utils</code>, <code>react-error-overlay</code>, <code>react-scripts</code>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/6137">#6137</a> Fix CI and upgrade dependencies. (<span class="citation" data-cites="Timer">[@Timer]</span>(https://github.com/Timer))</li>
+</ul></li>
+</ul>
+<h4 id="hammer-underlying-tools-1">:hammer: Underlying Tools</h4>
+<ul>
+<li><code>babel-preset-react-app</code>, <code>react-app-polyfill</code>, <code>react-dev-utils</code>, <code>react-scripts</code>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/6393">#6393</a> Upgrade dependencies. (<span class="citation" data-cites="ianschmitz">[@ianschmitz]</span>(https://github.com/ianschmitz))</li>
+</ul></li>
+<li><code>babel-preset-react-app</code>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/6307">#6307</a> Update babel-plugin-macros 2.4.4 -&gt; 2.4.5. (<span class="citation" data-cites="maniax89">[@maniax89]</span>(https://github.com/maniax89))</li>
+</ul></li>
+<li><code>eslint-config-react-app</code>, <code>react-scripts</code>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/6132">#6132</a> Bump eslint-plugin-react version and update webpack config. (<span class="citation" data-cites="ianschmitz">[@ianschmitz]</span>(https://github.com/ianschmitz))</li>
+</ul></li>
+</ul>
+<h4 id="committers-29">Committers: 29</h4>
+<ul>
+<li>Adam Laycock (<a href="https://github.com/alaycock">alaycock</a>)</li>
+<li>Adriano Costa (<a href="https://github.com/kostadriano">kostadriano</a>)</li>
+<li>Andrew Turgeon (<a href="https://github.com/maniax89">maniax89</a>)</li>
+<li>Ben Carp (<a href="https://github.com/carpben">carpben</a>)</li>
+<li>Charles Pritchard (<a href="https://github.com/Downchuck">Downchuck</a>)</li>
+<li>Chris Self (<a href="https://github.com/chrisself">chrisself</a>)</li>
+<li>Dallon Feldner (<a href="https://github.com/dallonf">dallonf</a>)</li>
+<li>Dan Abramov (<a href="https://github.com/gaearon">gaearon</a>)</li>
+<li>David Rice (<a href="https://github.com/davidlukerice">davidlukerice</a>)</li>
+<li>Dominik Palo (<a href="https://github.com/DominikPalo">DominikPalo</a>)</li>
+<li>Dotan Simha (<a href="https://github.com/dotansimha">dotansimha</a>)</li>
+<li>Ian Schmitz (<a href="https://github.com/ianschmitz">ianschmitz</a>)</li>
+<li>JBallin (<a href="https://github.com/JBallin">JBallin</a>)</li>
+<li>James George (<a href="https://github.com/jamesgeorge007">jamesgeorge007</a>)</li>
+<li>James K Nelson (<a href="https://github.com/jamesknelson">jamesknelson</a>)</li>
+<li>Jason Laster (<a href="https://github.com/jasonLaster">jasonLaster</a>)</li>
+<li>Joe Haddad (<a href="https://github.com/Timer">Timer</a>)</li>
+<li>Matthew Holloway (<a href="https://github.com/holloway">holloway</a>)</li>
+<li>Nathan Schneider (<a href="https://github.com/nathanlschneider">nathanlschneider</a>)</li>
+<li>Nikita Lyzhov (<a href="https://github.com/lyzhovnik">lyzhovnik</a>)</li>
+<li>Otávio Pace (<a href="https://github.com/otaviopace">otaviopace</a>)</li>
+<li>Rico Kahler (<a href="https://github.com/ricokahler">ricokahler</a>)</li>
+<li>Steven Tan (<a href="https://github.com/StevenTan">StevenTan</a>)</li>
+<li>Timothy (<a href="https://github.com/timothyis">timothyis</a>)</li>
+<li>Tomáš Szabo (<a href="https://github.com/deftomat">deftomat</a>)</li>
+<li>Yangshun Tay (<a href="https://github.com/yangshun">yangshun</a>)</li>
+<li><a href="https://github.com/gottfired">gottfired</a></li>
+<li><a href="https://github.com/zhuoli99">zhuoli99</a></li>
+<li>loveky (<a href="https://github.com/loveky">loveky</a>)</li>
+</ul>
+<h3 id="migrating-from-2.1.3-to-2.1.4">Migrating from 2.1.3 to 2.1.4</h3>
+<p>Inside any created project that has not been ejected, run:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb9-1" title="1"><span class="ex">npm</span> install --save --save-exact react-scripts@2.1.4</a></code></pre></div>
+<p>or</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb10-1" title="1"><span class="ex">yarn</span> add --exact react-scripts@2.1.4</a></code></pre></div>
+<h2 id="january-4-2019">2.1.3 (January 4, 2019)</h2>
+<p>v2.1.3 is a maintenance release to fix a <a href="https://www.npmjs.com/advisories/725">vulnerability in webpack-dev-server</a>.</p>
+<h4 id="memo-documentation-2">:memo: Documentation</h4>
+<ul>
+<li>Other
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/6067">#6067</a> Correct an error for documentation. (<span class="citation" data-cites="hardo">[@hardo]</span>(https://github.com/hardo))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/6110">#6110</a> Replace deprecated VSCode launch.json variable. (<span class="citation" data-cites="raiskila">[@raiskila]</span>(https://github.com/raiskila))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/5631">#5631</a> Generalize the adding bootstrap documentation. (<span class="citation" data-cites="jquense">[@jquense]</span>(https://github.com/jquense))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/6084">#6084</a> Remove outdated docs for setting up eslint in editor. (<span class="citation" data-cites="LukasWerfel">[@LukasWerfel]</span>(https://github.com/LukasWerfel))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/6061">#6061</a> Fix control comment of CSS Grid prefixing. (<span class="citation" data-cites="denexapp">[@denexapp]</span>(https://github.com/denexapp))</li>
+</ul></li>
+<li><code>react-scripts</code>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/6036">#6036</a> Fix comment typo. (<span class="citation" data-cites="shawtung">[@shawtung]</span>(https://github.com/shawtung))</li>
+</ul></li>
+</ul>
+<h4 id="house-internal-2">:house: Internal</h4>
+<ul>
+<li><code>create-react-app</code>, <code>react-error-overlay</code>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/6104">#6104</a> Typo fixes. (<span class="citation" data-cites="prashant-andani">[@prashant-andani]</span>(https://github.com/prashant-andani))</li>
+</ul></li>
+</ul>
+<h4 id="hammer-underlying-tools-2">:hammer: Underlying Tools</h4>
+<ul>
+<li><code>react-scripts</code>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/6064">#6064</a> Update webpack-dev-server 3.1.9 -&gt; 3.1.14. (<span class="citation" data-cites="Friss">[@Friss]</span>(https://github.com/Friss))</li>
+</ul></li>
+</ul>
+<h4 id="committers-8">Committers: 8</h4>
+<ul>
+<li>Denis Mukhametov (<a href="https://github.com/denexapp">denexapp</a>)</li>
+<li>Hardo (<a href="https://github.com/hardo">hardo</a>)</li>
+<li>Janne Raiskila (<a href="https://github.com/raiskila">raiskila</a>)</li>
+<li>Jason Quense (<a href="https://github.com/jquense">jquense</a>)</li>
+<li>Lukas Werfel (<a href="https://github.com/LukasWerfel">LukasWerfel</a>)</li>
+<li>Prashant Andani (<a href="https://github.com/prashant-andani">prashant-andani</a>)</li>
+<li>Zachary Friss (<a href="https://github.com/Friss">Friss</a>)</li>
+<li><a href="https://github.com/shawtung">shawtung</a></li>
+</ul>
+<h3 id="migrating-from-2.1.2-to-2.1.3">Migrating from 2.1.2 to 2.1.3</h3>
+<p>Inside any created project that has not been ejected, run:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb11-1" title="1"><span class="ex">npm</span> install --save --save-exact react-scripts@2.1.3</a></code></pre></div>
+<p>or</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb12-1" title="1"><span class="ex">yarn</span> add --exact react-scripts@2.1.3</a></code></pre></div>
+<h2 id="december-23-2018">2.1.2 (December 23, 2018)</h2>
+<p>v2.1.2 is a maintenance release including various bug fixes.</p>
+<h4 id="rocket-new-feature">:rocket: New Feature</h4>
+<ul>
+<li><code>babel-preset-react-app</code>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/5487">#5487</a> Add <code>allowESModules</code> option to <code>babel-preset-react-app</code> (<span class="citation" data-cites="Pajn">[@Pajn]</span>(https://github.com/Pajn))</li>
+</ul></li>
+</ul>
+<h4 id="bug-bug-fix-2">:bug: Bug Fix</h4>
+<ul>
+<li><code>create-react-app</code>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/5905">#5905</a> Disable copy to clipboard in <code>create-react-app --info</code> (<span class="citation" data-cites="heyimalex">[@heyimalex]</span>(https://github.com/heyimalex))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/5685">#5685</a> Update envinfo to <code>5.11.1</code> (<span class="citation" data-cites="tabrindle">[@tabrindle]</span>(https://github.com/tabrindle))</li>
+</ul></li>
+<li><code>babel-preset-react-app</code>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/5783">#5783</a> Fix TypeScript decorator support (<span class="citation" data-cites="ianschmitz">[@ianschmitz]</span>(https://github.com/ianschmitz))</li>
+</ul></li>
+<li><code>babel-plugin-named-asset-import</code>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/5573">#5573</a> Fix named-asset-import plugin to work with export-as syntax (<span class="citation" data-cites="NShahri">[@NShahri]</span>(https://github.com/NShahri))</li>
+</ul></li>
+<li><code>react-app-polyfill</code>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/5789">#5789</a> Don’t polyfill fetch for Node (<span class="citation" data-cites="gshilin">[@gshilin]</span>(https://github.com/gshilin))</li>
+</ul></li>
+<li><code>react-scripts</code>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/5721">#5721</a> Version bump <code>postcss-preset-env</code> to latest (<span class="citation" data-cites="BPScott">[@BPScott]</span>(https://github.com/BPScott))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/5701">#5701</a> Fix <code>tsconfig.json</code> lib suggested value (<span class="citation" data-cites="ianschmitz">[@ianschmitz]</span>(https://github.com/ianschmitz))</li>
+</ul></li>
+</ul>
+<h4 id="nail_care-enhancement-2">:nail_care: Enhancement</h4>
+<ul>
+<li><code>react-scripts</code>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/5698">#5698</a> Add support for <code>setupTests.ts</code> (<span class="citation" data-cites="ianschmitz">[@ianschmitz]</span>(https://github.com/ianschmitz))</li>
+</ul></li>
+</ul>
+<h4 id="memo-documentation-3">:memo: Documentation</h4>
+<ul>
+<li>Other
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/6009">#6009</a> Correct markdown to avoid comment. (<span class="citation" data-cites="souzasmatheus">[@souzasmatheus]</span>(https://github.com/souzasmatheus))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/6015">#6015</a> Add example command to create typed project. (<span class="citation" data-cites="mbelsky">[@mbelsky]</span>(https://github.com/mbelsky))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/6000">#6000</a> Make links to docs consistent in README. (<span class="citation" data-cites="iansu">[@iansu]</span>(https://github.com/iansu))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/5900">#5900</a> Add production build section to docs. (<span class="citation" data-cites="ianschmitz">[@ianschmitz]</span>(https://github.com/ianschmitz))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/5985">#5985</a> Use https for linked images to fix mixed content warnings. (<span class="citation" data-cites="iansu">[@iansu]</span>(https://github.com/iansu))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/5919">#5919</a> Docs: update localStorage mock in “Running Tests”. (<span class="citation" data-cites="phacks">[@phacks]</span>(https://github.com/phacks))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/5917">#5917</a> Add SASS_PATH instructions to Sass stylesheet docs. (<span class="citation" data-cites="jayantbh">[@jayantbh]</span>(https://github.com/jayantbh))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/5823">#5823</a> Add default values to <code>file_ext</code> note. (<span class="citation" data-cites="alaycock">[@alaycock]</span>(https://github.com/alaycock))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/5907">#5907</a> Update README.md with updated link about PWAs. (<span class="citation" data-cites="wuweiweiwu">[@wuweiweiwu]</span>(https://github.com/wuweiweiwu))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/5858">#5858</a> Some Grammar fixes. (<span class="citation" data-cites="nikhilknoldus">[@nikhilknoldus]</span>(https://github.com/nikhilknoldus))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/5883">#5883</a> Fix link to page about running tests. (<span class="citation" data-cites="wsmoak">[@wsmoak]</span>(https://github.com/wsmoak))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/5849">#5849</a> React native repository updated in <code>README.md</code>. (<span class="citation" data-cites="pavinthan">[@pavinthan]</span>(https://github.com/pavinthan))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/5806">#5806</a> Rename ‘getting started’ link to ‘docs’. (<span class="citation" data-cites="kulek1">[@kulek1]</span>(https://github.com/kulek1))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/5788">#5788</a> docs: Simplify installing Storybook with <code>npx</code> (<span class="citation" data-cites="sagirk">[@sagirk]</span>(https://github.com/sagirk))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/5779">#5779</a> docs: Change story book command to <code>sb init</code> (<span class="citation" data-cites="andys8">[@andys8]</span>(https://github.com/andys8))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/5759">#5759</a> Add PR welcoming badge (<span class="citation" data-cites="open-source-explorer">[@open-source-explorer]</span>(https://github.com/open-source-explorer))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/5730">#5730</a> Suggest Encore when not building a SPA with Symfony (<span class="citation" data-cites="dunglas">[@dunglas]</span>(https://github.com/dunglas))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/5710">#5710</a> Updated the link to firebase hosting (<span class="citation" data-cites="githubsaturn">[@githubsaturn]</span>(https://github.com/githubsaturn))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/5704">#5704</a> Fixed link to manifest.json file (<span class="citation" data-cites="m4jing">[@m4jing]</span>(https://github.com/m4jing))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/5670">#5670</a> Fix public folder documentation link (<span class="citation" data-cites="makovkastar">[@makovkastar]</span>(https://github.com/makovkastar))</li>
+</ul></li>
+<li><code>eslint-config-react-app</code>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/5990">#5990</a> Updated docs for <code>.eslintrc</code> (<span class="citation" data-cites="ManoelLobo">[@ManoelLobo]</span>(https://github.com/ManoelLobo))</li>
+</ul></li>
+<li><code>babel-preset-react-app</code>, <code>create-react-app</code>, <code>eslint-config-react-app</code>, <code>react-dev-utils</code>, <code>react-scripts</code>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/5912">#5912</a> Update links to docs in all package README files (<span class="citation" data-cites="iansu">[@iansu]</span>(https://github.com/iansu))</li>
+</ul></li>
+<li><code>react-scripts</code>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/5974">#5974</a> Improve advice in <code>verifyPackageTree.js</code> (<span class="citation" data-cites="sjalgeo">[@sjalgeo]</span>(https://github.com/sjalgeo))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/5954">#5954</a> Add pre-eject message about new features in v2 (<span class="citation" data-cites="iansu">[@iansu]</span>(https://github.com/iansu))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/5808">#5808</a> Add placeholders to template README for bit.ly links (<span class="citation" data-cites="iansu">[@iansu]</span>(https://github.com/iansu))</li>
+</ul></li>
+<li><code>react-app-polyfill</code>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/5814">#5814</a> Note that extra polyfills must be included manually (<span class="citation" data-cites="ajwann">[@ajwann]</span>(https://github.com/ajwann))</li>
+</ul></li>
+<li><code>babel-preset-react-app</code>, <code>eslint-config-react-app</code>, <code>react-error-overlay</code>, <code>react-scripts</code>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/5727">#5727</a> Fix typo (<span class="citation" data-cites="noelyoo">[@noelyoo]</span>(https://github.com/noelyoo))</li>
+</ul></li>
+</ul>
+<h4 id="house-internal-3">:house: Internal</h4>
+<ul>
+<li><code>react-scripts</code>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/5978">#5978</a> Add <code>webp</code> support for TypeScript. (<span class="citation" data-cites="dugagjin">[@dugagjin]</span>(https://github.com/dugagjin))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/5959">#5959</a> Suggest a different default for speed reasons. (<span class="citation" data-cites="Timer">[@Timer]</span>(https://github.com/Timer))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/5839">#5839</a> Run prettier on HTML files. (<span class="citation" data-cites="sibiraj-s">[@sibiraj-s]</span>(https://github.com/sibiraj-s))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/5722">#5722</a> Merge webpack configuration. (<span class="citation" data-cites="Timer">[@Timer]</span>(https://github.com/Timer))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/5694">#5694</a> Add permissive TS lib defaults. (<span class="citation" data-cites="Timer">[@Timer]</span>(https://github.com/Timer))</li>
+</ul></li>
+<li>Other
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/5988">#5988</a> Added extension to <code>.eslintrc</code> (<span class="citation" data-cites="ManoelLobo">[@ManoelLobo]</span>(https://github.com/ManoelLobo))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/5546">#5546</a> Add the latest stable node version. (<span class="citation" data-cites="noelyoo">[@noelyoo]</span>(https://github.com/noelyoo))</li>
+</ul></li>
+<li><code>react-dev-utils</code>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/5927">#5927</a> Correct some comments. (<span class="citation" data-cites="mjackson">[@mjackson]</span>(https://github.com/mjackson))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/5879">#5879</a> fix: make typescriptformatter support 0.5 of fork checker. (<span class="citation" data-cites="SimenB">[@SimenB]</span>(https://github.com/SimenB))</li>
+</ul></li>
+<li><code>react-error-overlay</code>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/5451">#5451</a> fix: add <code>sideEffects: false</code> to react-error-overlay. (<span class="citation" data-cites="SimenB">[@SimenB]</span>(https://github.com/SimenB))</li>
+</ul></li>
+<li><code>babel-preset-react-app</code>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/5487">#5487</a> Add allowESModules option to babel-preset-react-app. (<span class="citation" data-cites="Pajn">[@Pajn]</span>(https://github.com/Pajn))</li>
+</ul></li>
+<li><code>create-react-app</code>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/4605">#4605</a> ignore intellij module files when generating an app. (<span class="citation" data-cites="denofevil">[@denofevil]</span>(https://github.com/denofevil))</li>
+</ul></li>
+</ul>
+<h4 id="committers-36">Committers: 36</h4>
+<ul>
+<li>&lt;Explorer /&gt; (<a href="https://github.com/open-source-explorer">open-source-explorer</a>)</li>
+<li>Adam Laycock (<a href="https://github.com/alaycock">alaycock</a>)</li>
+<li>Adam Wanninger (<a href="https://github.com/ajwann">ajwann</a>)</li>
+<li>Alex Guerra (<a href="https://github.com/heyimalex">heyimalex</a>)</li>
+<li>Andy (<a href="https://github.com/andys8">andys8</a>)</li>
+<li>Ben Scott (<a href="https://github.com/BPScott">BPScott</a>)</li>
+<li>Dennis Ushakov (<a href="https://github.com/denofevil">denofevil</a>)</li>
+<li>Dugagjin Lashi (<a href="https://github.com/dugagjin">dugagjin</a>)</li>
+<li>Gregory Shilin (<a href="https://github.com/gshilin">gshilin</a>)</li>
+<li>Ian Schmitz (<a href="https://github.com/ianschmitz">ianschmitz</a>)</li>
+<li>Ian Sutherland (<a href="https://github.com/iansu">iansu</a>)</li>
+<li>Jayant Bhawal (<a href="https://github.com/jayantbh">jayantbh</a>)</li>
+<li>Jing Ma (<a href="https://github.com/m4jing">m4jing</a>)</li>
+<li>Joe Haddad (<a href="https://github.com/Timer">Timer</a>)</li>
+<li>Kasra Bigdeli (<a href="https://github.com/githubsaturn">githubsaturn</a>)</li>
+<li>Kévin Dunglas (<a href="https://github.com/dunglas">dunglas</a>)</li>
+<li>Manoel (<a href="https://github.com/ManoelLobo">ManoelLobo</a>)</li>
+<li>Matheus Souza (<a href="https://github.com/souzasmatheus">souzasmatheus</a>)</li>
+<li>Max Belsky (<a href="https://github.com/mbelsky">mbelsky</a>)</li>
+<li>Michael Jackson (<a href="https://github.com/mjackson">mjackson</a>)</li>
+<li>Nicolas Goutay (<a href="https://github.com/phacks">phacks</a>)</li>
+<li>Nikhil (<a href="https://github.com/nikhilknoldus">nikhilknoldus</a>)</li>
+<li>Nima Shahri (<a href="https://github.com/NShahri">NShahri</a>)</li>
+<li>Noel Yoo (<a href="https://github.com/noelyoo">noelyoo</a>)</li>
+<li>Oleksandr Melnykov (<a href="https://github.com/makovkastar">makovkastar</a>)</li>
+<li>Pavinthan (<a href="https://github.com/pavinthan">pavinthan</a>)</li>
+<li>Rasmus Eneman (<a href="https://github.com/Pajn">Pajn</a>)</li>
+<li>Sagir Khan (<a href="https://github.com/sagirk">sagirk</a>)</li>
+<li>Sibiraj (<a href="https://github.com/sibiraj-s">sibiraj-s</a>)</li>
+<li>Simen Bekkhus (<a href="https://github.com/SimenB">SimenB</a>)</li>
+<li>Stephen Algeo (<a href="https://github.com/sjalgeo">sjalgeo</a>)</li>
+<li>Trevor Brindle (<a href="https://github.com/tabrindle">tabrindle</a>)</li>
+<li>Wei-Wei Wu (<a href="https://github.com/wuweiweiwu">wuweiweiwu</a>)</li>
+<li>Wendy Smoak (<a href="https://github.com/wsmoak">wsmoak</a>)</li>
+<li><a href="https://github.com/kulek1">kulek1</a></li>
+<li>swyx (<a href="https://github.com/sw-yx">sw-yx</a>)</li>
+</ul>
+<h3 id="migrating-from-2.1.1-to-2.1.2">Migrating from 2.1.1 to 2.1.2</h3>
+<p>Inside any created project that has not been ejected, run:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb13-1" title="1"><span class="ex">npm</span> install --save --save-exact react-scripts@2.1.2</a></code></pre></div>
+<p>or</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb14-1" title="1"><span class="ex">yarn</span> add --exact react-scripts@2.1.2</a></code></pre></div>
+<h2 id="october-31-2018">2.1.1 (October 31, 2018)</h2>
+<p>Happy Halloween 🎃 👻! This spooky release brings a treat: decorator support in TypeScript files!</p>
+<h4 id="bug-bug-fix-3">:bug: Bug Fix</h4>
+<ul>
+<li><code>babel-preset-react-app</code>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/5659">#5659</a> Add support for decorators. (<span class="citation" data-cites="Timer">[@Timer]</span>(https://github.com/Timer))</li>
+</ul></li>
+<li><code>react-scripts</code>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/5621">#5621</a> fix ‘Duplicate string index signature’ in ProcessEnv. (<span class="citation" data-cites="xiaoxiangmoe">[@xiaoxiangmoe]</span>(https://github.com/xiaoxiangmoe))</li>
+</ul></li>
+</ul>
+<h4 id="nail_care-enhancement-3">:nail_care: Enhancement</h4>
+<ul>
+<li><code>babel-preset-react-app</code>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/5659">#5659</a> Add support for decorators. (<span class="citation" data-cites="Timer">[@Timer]</span>(https://github.com/Timer))</li>
+</ul></li>
+</ul>
+<h4 id="memo-documentation-4">:memo: Documentation</h4>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/5658">#5658</a> Update making-a-progressive-web-app.md. (<span class="citation" data-cites="jakeboone02">[@jakeboone02]</span>(https://github.com/jakeboone02))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/5635">#5635</a> Update minimum node version to 8.10 in README. (<span class="citation" data-cites="iansu">[@iansu]</span>(https://github.com/iansu))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/5629">#5629</a> Add link to cra-ts migration guide. (<span class="citation" data-cites="Vinnl">[@Vinnl]</span>(https://github.com/Vinnl))</li>
+</ul>
+<h4 id="house-internal-4">:house: Internal</h4>
+<ul>
+<li><code>react-error-overlay</code>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/4709">#4709</a> Expose <code>reportRuntimeError</code>. (<span class="citation" data-cites="hipstersmoothie">[@hipstersmoothie]</span>(https://github.com/hipstersmoothie))</li>
+</ul></li>
+<li><code>babel-plugin-named-asset-import</code>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/5575">#5575</a> add tests for named-asset-imports plugin. (<span class="citation" data-cites="NShahri">[@NShahri]</span>(https://github.com/NShahri))</li>
+</ul></li>
+<li><code>react-scripts</code>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/5651">#5651</a> Make serviceWorker config argument optional in typescript. (<span class="citation" data-cites="eddedd88">[@eddedd88]</span>(https://github.com/eddedd88))</li>
+</ul></li>
+</ul>
+<h4 id="committers-8-1">Committers: 8</h4>
+<ul>
+<li>Andrew Lisowski (<a href="https://github.com/hipstersmoothie">hipstersmoothie</a>)</li>
+<li>Eduardo Duran (<a href="https://github.com/eddedd88">eddedd88</a>)</li>
+<li>Ian Sutherland (<a href="https://github.com/iansu">iansu</a>)</li>
+<li>Jake Boone (<a href="https://github.com/jakeboone02">jakeboone02</a>)</li>
+<li>Joe Haddad (<a href="https://github.com/Timer">Timer</a>)</li>
+<li>Nima Shahri (<a href="https://github.com/NShahri">NShahri</a>)</li>
+<li>Vincent (<a href="https://github.com/Vinnl">Vinnl</a>)</li>
+<li>ZHAO Jinxiang (<a href="https://github.com/xiaoxiangmoe">xiaoxiangmoe</a>)</li>
+</ul>
+<h3 id="migrating-from-2.1.0-to-2.1.1">Migrating from 2.1.0 to 2.1.1</h3>
+<p>Inside any created project that has not been ejected, run:</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb15-1" title="1"><span class="ex">npm</span> install --save --save-exact react-scripts@2.1.1</a></code></pre></div>
+<p>or</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb16-1" title="1"><span class="ex">yarn</span> add --exact react-scripts@2.1.1</a></code></pre></div>
+<h2 id="october-29-2018">2.1.0 (October 29, 2018)</h2>
+<p>Create React App 2.1 adds support for TypeScript! Read <a href="https://facebook.github.io/create-react-app/docs/adding-typescript">the documentation</a> to get started.</p>
+<p>New applications can be created using TypeScript by running:</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb17-1" title="1">$ <span class="ex">npx</span> create-react-app my-app --typescript</a></code></pre></div>
+<h4 id="rocket-new-feature-1">:rocket: New Feature</h4>
+<ul>
+<li><code>create-react-app</code>, <code>react-scripts</code>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/5550">#5550</a> Add TypeScript app creation (<span class="citation" data-cites="Timer">[@Timer]</span>(https://github.com/Timer))</li>
+</ul></li>
+<li><code>babel-preset-react-app</code>, <code>react-scripts</code>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/4837">#4837</a> TypeScript support using Babel 7 (<span class="citation" data-cites="brunolemos">[@brunolemos]</span>(https://github.com/brunolemos))</li>
+</ul></li>
+</ul>
+<h4 id="bug-bug-fix-4">:bug: Bug Fix</h4>
+<ul>
+<li><code>react-scripts</code>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/5611">#5611</a> Remove react-scripts type reference on eject. (<span class="citation" data-cites="Timer">[@Timer]</span>(https://github.com/Timer))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/5614">#5614</a> Ignore json files from TypeScript type checking. (<span class="citation" data-cites="brunolemos">[@brunolemos]</span>(https://github.com/brunolemos))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/5609">#5609</a> Remove unsupported options. (<span class="citation" data-cites="Timer">[@Timer]</span>(https://github.com/Timer))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/5608">#5608</a> Ignore test files from reported type errors. (<span class="citation" data-cites="Timer">[@Timer]</span>(https://github.com/Timer))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/5589">#5589</a> Update react-app.d.ts. (<span class="citation" data-cites="brunolemos">[@brunolemos]</span>(https://github.com/brunolemos))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/5557">#5557</a> Add typings for process.env. (<span class="citation" data-cites="brunolemos">[@brunolemos]</span>(https://github.com/brunolemos))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/5532">#5532</a> Use TypeScript parser to read tsconfig.json. (<span class="citation" data-cites="brunolemos">[@brunolemos]</span>(https://github.com/brunolemos))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/5527">#5527</a> Update Workbox dependency. (<span class="citation" data-cites="jeffposnick">[@jeffposnick]</span>(https://github.com/jeffposnick))</li>
+</ul></li>
+<li><code>react-dev-utils</code>, <code>react-scripts</code>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/5549">#5549</a> Automatically setup TypeScript when detected. (<span class="citation" data-cites="Timer">[@Timer]</span>(https://github.com/Timer))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/5537">#5537</a> Respect tsconfig.json extends when validating config. (<span class="citation" data-cites="ianschmitz">[@ianschmitz]</span>(https://github.com/ianschmitz))</li>
+</ul></li>
+</ul>
+<h4 id="nail_care-enhancement-4">:nail_care: Enhancement</h4>
+<ul>
+<li><code>create-react-app</code>, <code>react-scripts</code>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/5593">#5593</a> Refine how TypeScript types are handled. (<span class="citation" data-cites="Timer">[@Timer]</span>(https://github.com/Timer))</li>
+</ul></li>
+<li><code>react-scripts</code>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/5531">#5531</a> Enable TypeScript json module resolver. (<span class="citation" data-cites="brunolemos">[@brunolemos]</span>(https://github.com/brunolemos))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/5524">#5524</a> Validate tsconfig when using TypeScript. (<span class="citation" data-cites="Timer">[@Timer]</span>(https://github.com/Timer))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/5516">#5516</a> Check for TypeScript install in preflight. (<span class="citation" data-cites="Timer">[@Timer]</span>(https://github.com/Timer))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/5515">#5515</a> Always type check TypeScript when being used. (<span class="citation" data-cites="Timer">[@Timer]</span>(https://github.com/Timer))</li>
+</ul></li>
+<li><code>react-dev-utils</code>, <code>react-scripts</code>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/5529">#5529</a> Add TypeScript error formatting. (<span class="citation" data-cites="Timer">[@Timer]</span>(https://github.com/Timer))</li>
+</ul></li>
+</ul>
+<h4 id="memo-documentation-5">:memo: Documentation</h4>
+<ul>
+<li>Other
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/5552">#5552</a> Fixing Internal Links. (<span class="citation" data-cites="ehfeng">[@ehfeng]</span>(https://github.com/ehfeng))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/5551">#5551</a> Add Algolia search bar to Docusaurus. (<span class="citation" data-cites="amyrlam">[@amyrlam]</span>(https://github.com/amyrlam))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/5533">#5533</a> Simplified TypeScript steps. (<span class="citation" data-cites="brunolemos">[@brunolemos]</span>(https://github.com/brunolemos))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/5492">#5492</a> Add “edit” feature to Docusaurus pages. (<span class="citation" data-cites="amyrlam">[@amyrlam]</span>(https://github.com/amyrlam))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/5499">#5499</a> Fix title on Safari. (<span class="citation" data-cites="yuyokk">[@yuyokk]</span>(https://github.com/yuyokk))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/5494">#5494</a> Fix typo. (<span class="citation" data-cites="noelyoo">[@noelyoo]</span>(https://github.com/noelyoo))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/5493">#5493</a> Fixed typo in getting-started. (<span class="citation" data-cites="jessepeterman">[@jessepeterman]</span>(https://github.com/jessepeterman))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/5344">#5344</a> Add some headings to the getting started section. (<span class="citation" data-cites="selbekk">[@selbekk]</span>(https://github.com/selbekk))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/5251">#5251</a> Add SoMe links to documentation. (<span class="citation" data-cites="selbekk">[@selbekk]</span>(https://github.com/selbekk))</li>
+</ul></li>
+<li><code>react-scripts</code>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/5512">#5512</a> Update doc links in template README. (<span class="citation" data-cites="iansu">[@iansu]</span>(https://github.com/iansu))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/5475">#5475</a> Fix typo. (<span class="citation" data-cites="thompk2">[@thompk2]</span>(https://github.com/thompk2))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/5449">#5449</a> Remove dot from the end of the link to fix it when using from GitHub. (<span class="citation" data-cites="ranyitz">[@ranyitz]</span>(https://github.com/ranyitz))</li>
+</ul></li>
+</ul>
+<h4 id="house-internal-5">:house: Internal</h4>
+<ul>
+<li><code>react-scripts</code>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/5607">#5607</a> Turn on certain TypeScript options. (<span class="citation" data-cites="Timer">[@Timer]</span>(https://github.com/Timer))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/5559">#5559</a> Change import syntax from typescript declaration. (<span class="citation" data-cites="brunolemos">[@brunolemos]</span>(https://github.com/brunolemos))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/5469">#5469</a> Avoid pushing .pnp folder to git. (<span class="citation" data-cites="NShahri">[@NShahri]</span>(https://github.com/NShahri))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/5527">#5527</a> Update Workbox dependency. (<span class="citation" data-cites="jeffposnick">[@jeffposnick]</span>(https://github.com/jeffposnick))</li>
+</ul></li>
+<li><code>eslint-config-react-app</code>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/5586">#5586</a> Fixing the code splitting links in the ESLint output. (<span class="citation" data-cites="jheijmans">[@jheijmans]</span>(https://github.com/jheijmans))</li>
+</ul></li>
+</ul>
+<h4 id="committers-15-1">Committers: 15</h4>
+<ul>
+<li>Amy Lam (<a href="https://github.com/amyrlam">amyrlam</a>)</li>
+<li>Bruno Lemos (<a href="https://github.com/brunolemos">brunolemos</a>)</li>
+<li>Eric Feng (<a href="https://github.com/ehfeng">ehfeng</a>)</li>
+<li>Ian Schmitz (<a href="https://github.com/ianschmitz">ianschmitz</a>)</li>
+<li>Ian Sutherland (<a href="https://github.com/iansu">iansu</a>)</li>
+<li>Iurii Kucherov (<a href="https://github.com/yuyokk">yuyokk</a>)</li>
+<li>Jeffrey Posnick (<a href="https://github.com/jeffposnick">jeffposnick</a>)</li>
+<li>Jeroen Heijmans (<a href="https://github.com/jheijmans">jheijmans</a>)</li>
+<li>Jesse Peterman (<a href="https://github.com/jessepeterman">jessepeterman</a>)</li>
+<li>Joe Haddad (<a href="https://github.com/Timer">Timer</a>)</li>
+<li>Kit Thompson (<a href="https://github.com/thompk2">thompk2</a>)</li>
+<li>Kristofer Selbekk (<a href="https://github.com/selbekk">selbekk</a>)</li>
+<li>Nima Shahri (<a href="https://github.com/NShahri">NShahri</a>)</li>
+<li>Noel Yoo (<a href="https://github.com/noelyoo">noelyoo</a>)</li>
+<li>Ran Yitzhaki (<a href="https://github.com/ranyitz">ranyitz</a>)</li>
+</ul>
+<h3 id="migrating-from-2.0.5-to-2.1.0">Migrating from 2.0.5 to 2.1.0</h3>
+<p>Inside any created project that has not been ejected, run:</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb18-1" title="1"><span class="ex">npm</span> install --save --save-exact react-scripts@2.1.0</a></code></pre></div>
+<p>or</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb19-1" title="1"><span class="ex">yarn</span> add --exact react-scripts@2.1.0</a></code></pre></div>
+<h2 id="october-14-2018">2.0.5 (October 14, 2018)</h2>
+<h4 id="bug-bug-fix-5">:bug: Bug Fix</h4>
+<ul>
+<li><p><code>react-dev-utils</code></p>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/5431">#5431</a> Fix click-to-open on Windows. (<span class="citation" data-cites="gaearon">[@gaearon]</span>(https://github.com/gaearon))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/5335">#5335</a> Fix file size report after build. (<span class="citation" data-cites="OskarPersson">[@OskarPersson]</span>(https://github.com/OskarPersson))</li>
+</ul></li>
+<li><p><code>create-react-app</code></p>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/5362">#5362</a> Fix CI: non-semver compliant Yarn versions. (<span class="citation" data-cites="Timer">[@Timer]</span>(https://github.com/Timer))</li>
+</ul></li>
+<li><code>react-scripts</code>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/5301">#5301</a> Fix TypeError when registering service workers without config. (<span class="citation" data-cites="peterbe">[@peterbe]</span>(https://github.com/peterbe))</li>
+</ul></li>
+</ul>
+<h4 id="nail_care-enhancement-5">:nail_care: Enhancement</h4>
+<ul>
+<li><p><code>babel-preset-react-app</code></p>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/4984">#4984</a> Use the correct dependency for <code>babel-plugin-dynamic-import-node</code>. (<span class="citation" data-cites="vikr01">[@vikr01]</span>(https://github.com/vikr01))</li>
+</ul></li>
+<li><code>react-scripts</code>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/5354">#5354</a> Add environment variable to optionaly disable inlining of chunks. (<span class="citation" data-cites="0xdeafcafe">[@0xdeafcafe]</span>(https://github.com/0xdeafcafe))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/5330">#5330</a> Update <code>eslint-plugin-jsx-a11y</code> version. (<span class="citation" data-cites="AlmeroSteyn">[@AlmeroSteyn]</span>(https://github.com/AlmeroSteyn))</li>
+</ul></li>
+</ul>
+<h4 id="memo-documentation-6">:memo: Documentation</h4>
+<ul>
+<li><code>react-scripts</code>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/5321">#5321</a> Added note on update to <code>.flowconfig</code> for .scss imports. (<span class="citation" data-cites="rlueder">[@rlueder]</span>(https://github.com/rlueder))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/5394">#5394</a> Correct instructions for HTTPS and PowerShell. (<span class="citation" data-cites="gavinbarron">[@gavinbarron]</span>(https://github.com/gavinbarron))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/5410">#5410</a> Updates to clarify the “waiting” SW behavior. (<span class="citation" data-cites="jeffposnick">[@jeffposnick]</span>(https://github.com/jeffposnick))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/5302">#5302</a> Update README.md. (<span class="citation" data-cites="simonCordovaByte9">[@simonCordovaByte9]</span>(https://github.com/simonCordovaByte9))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/5334">#5334</a> Update README due to deprecation of react-testing-library’s toBeInTheDOM. (<span class="citation" data-cites="rrebase">[@rrebase]</span>(https://github.com/rrebase))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/5326">#5326</a> README link fixes. (<span class="citation" data-cites="davidgilbertson">[@davidgilbertson]</span>(https://github.com/davidgilbertson))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/5327">#5327</a> Updated the URL in index.html. (<span class="citation" data-cites="behzod">[@behzod]</span>(https://github.com/behzod))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/5296">#5296</a> Adding documentation about git init. (<span class="citation" data-cites="ryancogswell">[@ryancogswell]</span>(https://github.com/ryancogswell))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/5290">#5290</a> Add react-testing-library documentation/examples (#4679). (<span class="citation" data-cites="gnapse">[@gnapse]</span>(https://github.com/gnapse))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/5286">#5286</a> Fix broken links to src/serviceWorker.js. (<span class="citation" data-cites="adambowles">[@adambowles]</span>(https://github.com/adambowles))</li>
+</ul></li>
+<li><p>Other</p>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/5374">#5374</a> Add the new SVGs feature from the template README to the root README. (<span class="citation" data-cites="neo">[@neo]</span>(https://github.com/neo))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/5371">#5371</a> Update path to serviceWorker.js in graphical folder structure. (<span class="citation" data-cites="jonscottclark">[@jonscottclark]</span>(https://github.com/jonscottclark))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/5337">#5337</a> Fix typo. (<span class="citation" data-cites="mvasin">[@mvasin]</span>(https://github.com/mvasin))</li>
+</ul></li>
+<li><code>eslint-config-react-app</code>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/5416">#5416</a> Fix eslint config docs. (<span class="citation" data-cites="ludovicofischer">[@ludovicofischer]</span>(https://github.com/ludovicofischer))</li>
+</ul></li>
+</ul>
+<h4 id="house-internal-6">:house: Internal</h4>
+<ul>
+<li><p>Other</p>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/5365">#5365</a> Clean up the behavior tests. (<span class="citation" data-cites="Timer">[@Timer]</span>(https://github.com/Timer))</li>
+</ul></li>
+<li><code>create-react-app</code>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/5362">#5362</a> Fix CI: non-semver compliant Yarn versions. (<span class="citation" data-cites="Timer">[@Timer]</span>(https://github.com/Timer))</li>
+</ul></li>
+<li><code>react-scripts</code>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/5317">#5317</a> Remove unused require for getCacheIdentifier after ejecting. (<span class="citation" data-cites="benbrandt">[@benbrandt]</span>(https://github.com/benbrandt))</li>
+</ul></li>
+</ul>
+<h4 id="committers-23">Committers: 23</h4>
+<ul>
+<li>Adam Bowles (<a href="https://github.com/adambowles">adambowles</a>)</li>
+<li>Alex Forbes-Reed (<a href="https://github.com/0xdeafcafe">0xdeafcafe</a>)</li>
+<li>Almero Steyn (<a href="https://github.com/AlmeroSteyn">AlmeroSteyn</a>)</li>
+<li>Behzod Saidov (<a href="https://github.com/behzod">behzod</a>)</li>
+<li>Ben Brandt (<a href="https://github.com/benbrandt">benbrandt</a>)</li>
+<li>Dan Abramov (<a href="https://github.com/gaearon">gaearon</a>)</li>
+<li>David Gilbertson (<a href="https://github.com/davidgilbertson">davidgilbertson</a>)</li>
+<li>Ernesto García (<a href="https://github.com/gnapse">gnapse</a>)</li>
+<li>Gavin Barron (<a href="https://github.com/gavinbarron">gavinbarron</a>)</li>
+<li>Jeffrey Posnick (<a href="https://github.com/jeffposnick">jeffposnick</a>)</li>
+<li>Joe Haddad (<a href="https://github.com/Timer">Timer</a>)</li>
+<li>Jon Clark (<a href="https://github.com/jonscottclark">jonscottclark</a>)</li>
+<li>Kristofer Selbekk (<a href="https://github.com/selbekk">selbekk</a>)</li>
+<li>Ludovico Fischer (<a href="https://github.com/ludovicofischer">ludovicofischer</a>)</li>
+<li>Mikhail Vasin (<a href="https://github.com/mvasin">mvasin</a>)</li>
+<li>Oskar Persson (<a href="https://github.com/OskarPersson">OskarPersson</a>)</li>
+<li>Peter Bengtsson (<a href="https://github.com/peterbe">peterbe</a>)</li>
+<li>Rafael Lüder (<a href="https://github.com/rlueder">rlueder</a>)</li>
+<li>Ragnar Rebase (<a href="https://github.com/rrebase">rrebase</a>)</li>
+<li>Ryan Cogswell (<a href="https://github.com/ryancogswell">ryancogswell</a>)</li>
+<li>Vikram Rangaraj (<a href="https://github.com/vikr01">vikr01</a>)</li>
+<li>Wenchen Li (<a href="https://github.com/neo">neo</a>)</li>
+<li><a href="https://github.com/simonCordovaByte9">simonCordovaByte9</a></li>
+</ul>
+<h3 id="migrating-from-2.0.4-to-2.0.5">Migrating from 2.0.4 to 2.0.5</h3>
+<p>Inside any created project that has not been ejected, run:</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb20-1" title="1"><span class="ex">npm</span> install --save --save-exact react-scripts@2.0.5</a></code></pre></div>
+<p>or</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb21-1" title="1"><span class="ex">yarn</span> add --exact react-scripts@2.0.5</a></code></pre></div>
+<h2 id="october-3-2018">2.0.4 (October 3, 2018)</h2>
+<h4 id="bug-bug-fix-6">:bug: Bug Fix</h4>
+<ul>
+<li><code>react-scripts</code>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/5281">#5281</a> Fix code minifying (<span class="citation" data-cites="Timer">[@Timer]</span>(https://github.com/Timer))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/5246">#5246</a> Fix <code>GENERATE_SOURCEMAP</code> env not working for css sourcemap (<span class="citation" data-cites="crux153">[@crux153]</span>(https://github.com/crux153))</li>
+</ul></li>
+<li><code>babel-preset-react-app</code>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/5278">#5278</a> Disable Symbol typeof transform (<span class="citation" data-cites="gaearon">[@gaearon]</span>(https://github.com/gaearon))</li>
+</ul></li>
+</ul>
+<h4 id="nail_care-enhancement-6">:nail_care: Enhancement</h4>
+<ul>
+<li><code>create-react-app</code>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/5270">#5270</a> Caches the Yarn resolution for faster installs (<span class="citation" data-cites="arcanis">[@arcanis]</span>(https://github.com/arcanis))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/5269">#5269</a> Adds a version check when using –use-pnp (<span class="citation" data-cites="arcanis">[@arcanis]</span>(https://github.com/arcanis))</li>
+</ul></li>
+<li><code>react-scripts</code>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/5258">#5258</a> Add <code>.mjs</code> support back to webpack (<span class="citation" data-cites="Timer">[@Timer]</span>(https://github.com/Timer))</li>
+</ul></li>
+</ul>
+<h4 id="memo-documentation-7">:memo: Documentation</h4>
+<ul>
+<li>Other
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/5228">#5228</a> removed create-react-app-parcel link (<span class="citation" data-cites="lockround">[@lockround]</span>(https://github.com/lockround))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/5254">#5254</a> Update README links for CSS modules and SASS (<span class="citation" data-cites="yuyokk">[@yuyokk]</span>(https://github.com/yuyokk))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/5249">#5249</a> Set the color palette to something a bit more React-y (<span class="citation" data-cites="selbekk">[@selbekk]</span>(https://github.com/selbekk))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/5244">#5244</a> Update favicon and OpenGraph images (<span class="citation" data-cites="selbekk">[@selbekk]</span>(https://github.com/selbekk))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/5242">#5242</a> 5238 Removing sample pages (<span class="citation" data-cites="selbekk">[@selbekk]</span>(https://github.com/selbekk))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/5243">#5243</a> Set the project name and owner correctly (<span class="citation" data-cites="selbekk">[@selbekk]</span>(https://github.com/selbekk))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/5239">#5239</a> 5238 removing blog from Docusaurus (<span class="citation" data-cites="selbekk">[@selbekk]</span>(https://github.com/selbekk))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/5227">#5227</a> Initial setup of Docusaurus (<span class="citation" data-cites="amyrlam">[@amyrlam]</span>(https://github.com/amyrlam))</li>
+</ul></li>
+<li><code>react-scripts</code>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/5252">#5252</a> Revert change to http-proxy-middleware docs (<span class="citation" data-cites="iansu">[@iansu]</span>(https://github.com/iansu))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/5226">#5226</a> Fix usage of http-proxy-middleware (<span class="citation" data-cites="banyan">[@banyan]</span>(https://github.com/banyan))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/5233">#5233</a> DOCS: Add Relay example (<span class="citation" data-cites="zachasme">[@zachasme]</span>(https://github.com/zachasme))</li>
+</ul></li>
+</ul>
+<h4 id="house-internal-7">:house: Internal</h4>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/5263">#5263</a> Add browser test for graphql (<span class="citation" data-cites="Timer">[@Timer]</span>(https://github.com/Timer))</li>
+</ul>
+<h4 id="committers-11">Committers: 11</h4>
+<ul>
+<li>Amy Lam (<span class="citation" data-cites="amyrlam">[@amyrlam]</span>(https://github.com/amyrlam))</li>
+<li>Crux (<span class="citation" data-cites="crux153">[@crux153]</span>(https://github.com/crux153))</li>
+<li>Dan Abramov (<span class="citation" data-cites="gaearon">[@gaearon]</span>(https://github.com/gaearon))</li>
+<li>Ian Sutherland (<span class="citation" data-cites="iansu">[@iansu]</span>(https://github.com/iansu))</li>
+<li>Iurii Kucherov (<span class="citation" data-cites="yuyokk">[@yuyokk]</span>(https://github.com/yuyokk))</li>
+<li>Joe Haddad (<span class="citation" data-cites="Timer">[@Timer]</span>(https://github.com/Timer))</li>
+<li>Kohei Hasegawa (<span class="citation" data-cites="banyan">[@banyan]</span>(https://github.com/banyan))</li>
+<li>Kristofer Selbekk (<span class="citation" data-cites="selbekk">[@selbekk]</span>(https://github.com/selbekk))</li>
+<li>Maël Nison (<span class="citation" data-cites="arcanis">[@arcanis]</span>(https://github.com/arcanis))</li>
+<li>Shubham Tiwari (<span class="citation" data-cites="lockround">[@lockround]</span>(https://github.com/lockround))</li>
+<li>Zacharias Knudsen (<span class="citation" data-cites="zachasme">[@zachasme]</span>(https://github.com/zachasme))</li>
+</ul>
+<h3 id="migrating-from-2.0.3-to-2.0.4">Migrating from 2.0.3 to 2.0.4</h3>
+<p>Inside any created project that has not been ejected, run:</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb22-1" title="1"><span class="ex">npm</span> install --save --save-exact react-scripts@2.0.4</a></code></pre></div>
+<p>or</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb23-1" title="1"><span class="ex">yarn</span> add --exact react-scripts@2.0.4</a></code></pre></div>
+<h2 id="october-1-2018">2.0.3 (October 1, 2018)</h2>
+<p>Create React App 2.0 brings a year’s worth of improvements in a single dependency update. We summarized all of the changes in a blog post!<br></p>
+<p>Check it out: <strong><a href="https://reactjs.org/blog/2018/10/01/create-react-app-v2.html">Create React App 2.0: Babel 7, Sass, and More</a></strong>.</p>
+<p>It provides a high-level overview of new features and improvements. Now let’s see how to update your app to the latest version in detail.</p>
+<h1 id="migrating-from-1.x-to-2.0.3">Migrating from 1.x to 2.0.3</h1>
+<p>Inside any created project that has not been ejected, run:</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb24-1" title="1"><span class="ex">npm</span> install --save --save-exact react-scripts@2.0.3</a></code></pre></div>
+<p>or</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb25-1" title="1"><span class="ex">yarn</span> add --exact react-scripts@2.0.3</a></code></pre></div>
+<p>If you previously ejected but now want to upgrade, one common solution is to find the commits where you ejected (and any subsequent commits changing the configuration), revert them, upgrade, and later optionally eject again. It’s also possible that the feature you ejected for (maybe Sass or CSS Modules?) is now supported out of the box. You can find a list of notable new features in the <strong><a href="https://reactjs.org/blog/2018/10/01/create-react-app-v2.html">Create React App 2.0 blog post</a></strong>.</p>
+<h2 id="breaking-changes">Breaking Changes</h2>
+<p>Like any major release, <code>react-scripts@2.0</code> contains a few breaking changes. We expect that they won’t affect every user, but we recommend to scan over these sections to see if something is relevant to you. If we missed something, please file a new issue.</p>
+<h3 id="node-6-is-no-longer-supported">Node 6 is no longer supported</h3>
+<p>Please upgrade to Node 8 (LTS) or later.</p>
+<h3 id="polyfills-for-ie-9-ie-10-and-ie-11-are-no-longer-included-by-default-but-you-can-opt-in">Polyfills for IE 9, IE 10, and IE 11 are no longer included by default (but you can opt in!)</h3>
+<p>We have dropped default support for Internet Explorer 9, 10, and 11. If you still need to support these browsers, follow the instructions below.</p>
+<p>First, install <code>react-app-polyfill</code>:</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb26-1" title="1"><span class="ex">npm</span> install react-app-polyfill</a></code></pre></div>
+<p>or</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb27-1" title="1"><span class="ex">yarn</span> add react-app-polyfill</a></code></pre></div>
+<p>Next, place one of the following lines at the very top of <code>src/index.js</code>:</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb28-1" title="1"><span class="im">import</span> <span class="st">&#39;react-app-polyfill/ie9&#39;</span><span class="op">;</span> <span class="co">// For IE 9-11 support</span></a>
+<a class="sourceLine" id="cb28-2" title="2"><span class="im">import</span> <span class="st">&#39;react-app-polyfill/ie11&#39;</span><span class="op">;</span> <span class="co">// For IE 11 support</span></a></code></pre></div>
+<p>You can read more about <a href="https://github.com/facebook/create-react-app/tree/master/packages/react-app-polyfill">these polyfills here</a>.</p>
+<h3 id="dynamic-import-of-a-commonjs-module-now-has-a-.default-property">Dynamic <code>import()</code> of a CommonJS module now has a <code>.default</code> property</h3>
+<p><a href="https://medium.com/webpack/webpack-4-import-and-commonjs-d619d626b655">webpack 4 changed the behavior of <code>import()</code></a> to be closer in line with the specification.</p>
+<p>Previously, importing a CommonJS module did not require you specify the default export. In most cases, this is now required. If you see errors in your application about <code>... is not a function</code>, you likely need to update your dynamic import, e.g.:</p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb29-1" title="1"><span class="kw">const</span> throttle <span class="op">=</span> <span class="cf">await</span> <span class="im">import</span>(<span class="st">&#39;lodash/throttle&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb29-2" title="2"><span class="co">// replace with</span></a>
+<a class="sourceLine" id="cb29-3" title="3"><span class="kw">const</span> throttle <span class="op">=</span> <span class="cf">await</span> <span class="im">import</span>(<span class="st">&#39;lodash/throttle&#39;</span>).<span class="at">then</span>(m <span class="kw">=&gt;</span> <span class="va">m</span>.<span class="at">default</span>)<span class="op">;</span></a></code></pre></div>
+<h3 id="require.ensure-is-superseded-by-dynamic-import"><code>require.ensure()</code> is superseded by dynamic <code>import()</code></h3>
+<p>We previously allowed code splitting with a webpack-specific directive, <code>require.ensure()</code>. It is now disabled in favor of <code>import()</code>. To switch to <code>import()</code>, follow the examples below:</p>
+<p><strong>Single Module</strong></p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb30-1" title="1"><span class="va">require</span>.<span class="at">ensure</span>([<span class="st">&#39;module-a&#39;</span>]<span class="op">,</span> <span class="kw">function</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb30-2" title="2">  <span class="kw">var</span> a <span class="op">=</span> <span class="at">require</span>(<span class="st">&#39;module-a&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb30-3" title="3">  <span class="co">// ...</span></a>
+<a class="sourceLine" id="cb30-4" title="4"><span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb30-5" title="5"></a>
+<a class="sourceLine" id="cb30-6" title="6"><span class="co">// Replace with:</span></a>
+<a class="sourceLine" id="cb30-7" title="7"><span class="im">import</span>(<span class="st">&#39;module-a&#39;</span>).<span class="at">then</span>(a <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb30-8" title="8">  <span class="co">// ...</span></a>
+<a class="sourceLine" id="cb30-9" title="9"><span class="op">}</span>)<span class="op">;</span></a></code></pre></div>
+<p><strong>Multiple Module</strong></p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb31-1" title="1"><span class="va">require</span>.<span class="at">ensure</span>([<span class="st">&#39;module-a&#39;</span><span class="op">,</span> <span class="st">&#39;module-b&#39;</span>]<span class="op">,</span> <span class="kw">function</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb31-2" title="2">  <span class="kw">var</span> a <span class="op">=</span> <span class="at">require</span>(<span class="st">&#39;module-a&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb31-3" title="3">  <span class="kw">var</span> b <span class="op">=</span> <span class="at">require</span>(<span class="st">&#39;module-b&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb31-4" title="4">  <span class="co">// ...</span></a>
+<a class="sourceLine" id="cb31-5" title="5"><span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb31-6" title="6"></a>
+<a class="sourceLine" id="cb31-7" title="7"><span class="co">// Replace with:</span></a>
+<a class="sourceLine" id="cb31-8" title="8"><span class="va">Promise</span>.<span class="at">all</span>([<span class="im">import</span>(<span class="st">&#39;module-a&#39;</span>)<span class="op">,</span> <span class="im">import</span>(<span class="st">&#39;module-b&#39;</span>)]).<span class="at">then</span>(([a<span class="op">,</span> b]) <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb31-9" title="9">  <span class="co">// ...</span></a>
+<a class="sourceLine" id="cb31-10" title="10"><span class="op">}</span>)<span class="op">;</span></a></code></pre></div>
+<h3 id="the-default-jest-environment-was-changed-to-jsdom">The default Jest environment was changed to <code>jsdom</code></h3>
+<p>Look at the <code>test</code> entry in the <code>scripts</code> section of your <code>package.json</code>. Here’s a table how to change it from “before” and “after”, depending on what you have there:</p>
+<table>
+<thead>
+<tr class="header">
+<th>1.x (if you have this…)</th>
+<th>2.x (…change it to this!)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>react-scripts test --env=jsdom</code></td>
+<td><code>react-scripts test</code></td>
+</tr>
+<tr class="even">
+<td><code>react-scripts test</code></td>
+<td><code>react-scripts test --env=node</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="object-proxy-configuration-is-superseded-by-srcsetupproxy.js">Object <code>proxy</code> configuration is superseded by <code>src/setupProxy.js</code></h3>
+<p>To check if action is required, look for the <code>proxy</code> key in <code>package.json</code> and follow this table:</p>
+<ol type="1">
+<li>I couldn’t find a <code>proxy</code> key in <code>package.json</code>
+<ul>
+<li>No action is required!</li>
+</ul></li>
+<li>The value of <code>proxy</code> is a string (e.g. <code>http://localhost:5000</code>)
+<ul>
+<li>No action is required!</li>
+</ul></li>
+<li>The value of <code>proxy</code> is an object
+<ul>
+<li>Follow the migration instructions below.</li>
+</ul></li>
+</ol>
+<p><strong>It’s worth highlighting: if your <code>proxy</code> field is a <code>string</code>, e.g. <code>http://localhost:5000</code>, or you don’t have it, skip this section. This feature is still supported and has the same behavior.</strong></p>
+<p>If your <code>proxy</code> is an object, that means you are using the advanced proxy configuration. It has become fully customizable so we removed the limited support for the object-style configuration. Here’s how to recreate it.</p>
+<p>First, install <code>http-proxy-middleware</code> using npm or Yarn:</p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb32-1" title="1"><span class="ex">npm</span> install http-proxy-middleware</a></code></pre></div>
+<p>or</p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb33-1" title="1"><span class="ex">yarn</span> add http-proxy-middleware</a></code></pre></div>
+<p>Next, create <code>src/setupProxy.js</code> and place the following contents in it:</p>
+<div class="sourceCode" id="cb34"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb34-1" title="1"><span class="kw">const</span> proxy <span class="op">=</span> <span class="at">require</span>(<span class="st">&#39;http-proxy-middleware&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb34-2" title="2"></a>
+<a class="sourceLine" id="cb34-3" title="3"><span class="va">module</span>.<span class="at">exports</span> <span class="op">=</span> <span class="kw">function</span>(app) <span class="op">{</span></a>
+<a class="sourceLine" id="cb34-4" title="4">  <span class="co">// ...</span></a>
+<a class="sourceLine" id="cb34-5" title="5"><span class="op">};</span></a></code></pre></div>
+<p>Now, migrate each entry in your <code>proxy</code> object one by one, e.g.:</p>
+<div class="sourceCode" id="cb35"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb35-1" title="1"><span class="er">&quot;proxy&quot;:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb35-2" title="2">  <span class="dt">&quot;/api&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb35-3" title="3">    <span class="dt">&quot;target&quot;</span><span class="fu">:</span> <span class="st">&quot;http://localhost:5000/&quot;</span></a>
+<a class="sourceLine" id="cb35-4" title="4">    <span class="fu">},</span></a>
+<a class="sourceLine" id="cb35-5" title="5">  <span class="dt">&quot;/*.svg&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb35-6" title="6">    <span class="dt">&quot;target&quot;</span><span class="fu">:</span> <span class="st">&quot;http://localhost:5000/&quot;</span></a>
+<a class="sourceLine" id="cb35-7" title="7">  <span class="fu">}</span></a>
+<a class="sourceLine" id="cb35-8" title="8"><span class="fu">}</span></a></code></pre></div>
+<p>Place entries into <code>src/setupProxy.js</code> like so:</p>
+<div class="sourceCode" id="cb36"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb36-1" title="1"><span class="kw">const</span> proxy <span class="op">=</span> <span class="at">require</span>(<span class="st">&#39;http-proxy-middleware&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb36-2" title="2"></a>
+<a class="sourceLine" id="cb36-3" title="3"><span class="va">module</span>.<span class="at">exports</span> <span class="op">=</span> <span class="kw">function</span>(app) <span class="op">{</span></a>
+<a class="sourceLine" id="cb36-4" title="4">  <span class="va">app</span>.<span class="at">use</span>(<span class="at">proxy</span>(<span class="st">&#39;/api&#39;</span><span class="op">,</span> <span class="op">{</span> <span class="dt">target</span><span class="op">:</span> <span class="st">&#39;http://localhost:5000/&#39;</span> <span class="op">}</span>))<span class="op">;</span></a>
+<a class="sourceLine" id="cb36-5" title="5">  <span class="va">app</span>.<span class="at">use</span>(<span class="at">proxy</span>(<span class="st">&#39;/*.svg&#39;</span><span class="op">,</span> <span class="op">{</span> <span class="dt">target</span><span class="op">:</span> <span class="st">&#39;http://localhost:5000/&#39;</span> <span class="op">}</span>))<span class="op">;</span></a>
+<a class="sourceLine" id="cb36-6" title="6"><span class="op">};</span></a></code></pre></div>
+<p>You can also use completely custom logic there now! This wasn’t possible before.</p>
+<h3 id="mjs-file-extension-support-is-removed"><code>.mjs</code> file extension support is removed</h3>
+<p>Change the extension of any files in your project using <code>.mjs</code> to just <code>.js</code>.</p>
+<p>It was removed because of inconsistent support from underlying tools. We will add it back after it stops being experimental, and Jest gets built-in support for it.</p>
+<h3 id="proptypes-definitions-are-now-removed-in-production"><code>PropTypes</code> definitions are now removed in production</h3>
+<p>Normally, this shouldn’t affect your logic and should make the resulting bundle smaller. However, you may be relying on PropTypes definition for production logic. This is not recommended, and will break now. If a library does it, one possible solution is to file an issue in it with a proposal to use a different field (not <code>propTypes</code>) to signal that the declaration needs to be retained.</p>
+<h3 id="anything-missing">Anything missing?</h3>
+<p>This was a large release, and we might have missed something.</p>
+<p>Please <a href="https://github.com/facebook/create-react-app/issues/new">file an issue</a> and we will try to help.</p>
+<h1 id="migrating-from-2.0.0-next.xyz">Migrating from 2.0.0-next.xyz</h1>
+<p>If you used 2.x alphas, please <a href="https://gist.github.com/gaearon/8650d1c70e436e5eff01f396dffc4114">follow these instructions</a>.</p>
+<h1 id="detailed-changelog">Detailed Changelog</h1>
+<p><strong>For a readable summary of the changes, <a href="https://reactjs.org/blog/2018/10/01/create-react-app-v2.html">check out our blog post</a>.</strong></p>
+<h4 id="rocket-new-feature-2">:rocket: New Feature</h4>
+<ul>
+<li><code>react-scripts</code>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/5218">#5218</a> Support globalSetup and globalTeardown Jest options (<span class="citation" data-cites="gaearon">[@gaearon]</span>(https://github.com/gaearon))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/5073">#5073</a> Add user defined proxy via middleware (<span class="citation" data-cites="Timer">[@Timer]</span>(https://github.com/Timer))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/3945">#3945</a> Allow bundles to be analyzed with webpack-specific tools (<span class="citation" data-cites="joshwcomeau">[@joshwcomeau]</span>(https://github.com/joshwcomeau))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/4195">#4195</a> Sass loader (<span class="citation" data-cites="Fabianopb">[@Fabianopb]</span>(https://github.com/Fabianopb))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/3909">#3909</a> Add loader for .graphql files (<span class="citation" data-cites="petetnt">[@petetnt]</span>(https://github.com/petetnt))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/1288">#1288</a> Create git repository with initial commit (<span class="citation" data-cites="mauricedb">[@mauricedb]</span>(https://github.com/mauricedb))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/3718">#3718</a> Import SVGs as React components (#1388) (<span class="citation" data-cites="iansu">[@iansu]</span>(https://github.com/iansu))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/2285">#2285</a> Add support for CSS Modules with explicit filename - [name].module.css (<span class="citation" data-cites="ro-savage">[@ro-savage]</span>(https://github.com/ro-savage))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/3804">#3804</a> Support Jest –watchAll flag (<span class="citation" data-cites="gaearon">[@gaearon]</span>(https://github.com/gaearon))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/3802">#3802</a> Add feature #3116 extended Jest config (<span class="citation" data-cites="garmeeh">[@garmeeh]</span>(https://github.com/garmeeh))</li>
+</ul></li>
+<li><code>react-dev-utils</code>, <code>react-scripts</code>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/5058">#5058</a> Inline the webpack runtime chunk (<span class="citation" data-cites="Timer">[@Timer]</span>(https://github.com/Timer))</li>
+</ul></li>
+<li><code>babel-preset-react-app</code>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/5047">#5047</a> Allow dynamic import proposal in node_modules (<span class="citation" data-cites="Timer">[@Timer]</span>(https://github.com/Timer))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/3865">#3865</a> Add opt-out for preset-flow to work with <span class="citation" data-cites="babel/preset-typescript">@babel/preset-typescript</span> (<span class="citation" data-cites="oieduardorabelo">[@oieduardorabelo]</span>(https://github.com/oieduardorabelo))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/3675">#3675</a> add experimental babel-plugin-macros support (<span class="citation" data-cites="kentcdodds">[@kentcdodds]</span>(https://github.com/kentcdodds))</li>
+</ul></li>
+<li><code>babel-preset-react-app</code>, <code>confusing-browser-globals</code>, <code>eslint-config-react-app</code>, <code>react-dev-utils</code>, <code>react-error-overlay</code>, <code>react-scripts</code>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/4077">#4077</a> webpack 4 (<span class="citation" data-cites="andriijas">[@andriijas]</span>(https://github.com/andriijas))</li>
+</ul></li>
+<li><code>create-react-app</code>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/4350">#4350</a> Support package distribution tags (<span class="citation" data-cites="miraage">[@miraage]</span>(https://github.com/miraage))</li>
+</ul></li>
+<li><code>babel-preset-react-app</code>, <code>react-scripts</code>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/3776">#3776</a> Compile dependencies with babel-preset-env (<span class="citation" data-cites="gaearon">[@gaearon]</span>(https://github.com/gaearon))</li>
+</ul></li>
+</ul>
+<h4 id="boom-breaking-change">:boom: Breaking Change</h4>
+<ul>
+<li><code>react-app-polyfill</code>, <code>react-scripts</code>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/5090">#5090</a> Drop IE 11 support by default (<span class="citation" data-cites="Timer">[@Timer]</span>(https://github.com/Timer))</li>
+</ul></li>
+<li><code>react-scripts</code>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/5074">#5074</a> Change default test environment to jsdom (<span class="citation" data-cites="Timer">[@Timer]</span>(https://github.com/Timer))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/5027">#5027</a> Remove <code>mjs</code> support (<span class="citation" data-cites="Timer">[@Timer]</span>(https://github.com/Timer))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/4009">#4009</a> Update dotenv to 5.0.0 (<span class="citation" data-cites="iansu">[@iansu]</span>(https://github.com/iansu))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/2544">#2544</a> Set the public path to the asset manifest entries (<span class="citation" data-cites="robinvdvleuten">[@robinvdvleuten]</span>(https://github.com/robinvdvleuten))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/3884">#3884</a> Don’t use app node_modules folder as a resolve fallback (<span class="citation" data-cites="gaearon">[@gaearon]</span>(https://github.com/gaearon))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/3817">#3817</a> Disable service worker by default (<span class="citation" data-cites="iansu">[@iansu]</span>(https://github.com/iansu))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/2285">#2285</a> Add support for CSS Modules with explicit filename - [name].module.css (<span class="citation" data-cites="ro-savage">[@ro-savage]</span>(https://github.com/ro-savage))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/3771">#3771</a> Add preflight check to guard against wrong versions of webpack/eslint/jest higher up the tree (<span class="citation" data-cites="gaearon">[@gaearon]</span>(https://github.com/gaearon))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/3346">#3346</a> Change the default <code>start_url</code> to <code>.</code> (<span class="citation" data-cites="evilchuck">[@evilchuck]</span>(https://github.com/evilchuck))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/3419">#3419</a> Remove the navigateFallback behavior from the generated service worker (<span class="citation" data-cites="jeffposnick">[@jeffposnick]</span>(https://github.com/jeffposnick))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/3644">#3644</a> Move browsers to cross-tool config (<span class="citation" data-cites="ai">[@ai]</span>(https://github.com/ai))</li>
+</ul></li>
+<li><code>react-dev-utils</code>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/5072">#5072</a> Drop support for advanced proxy (<span class="citation" data-cites="Timer">[@Timer]</span>(https://github.com/Timer))</li>
+</ul></li>
+<li><code>babel-preset-react-app</code>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/3818">#3818</a> Remove PropTypes from production build (#209) (<span class="citation" data-cites="iansu">[@iansu]</span>(https://github.com/iansu))</li>
+</ul></li>
+<li><code>eslint-config-react-app</code>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/2319">#2319</a> Changes no-unused-expressions lint from warning to error (<span class="citation" data-cites="amupitan">[@amupitan]</span>(https://github.com/amupitan))</li>
+</ul></li>
+<li><code>eslint-config-react-app</code>, <code>react-error-overlay</code>, <code>react-scripts</code>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/2690">#2690</a> Bump eslint-plugin-jsx-a11y version (<span class="citation" data-cites="gaearon">[@gaearon]</span>(https://github.com/gaearon))</li>
+</ul></li>
+<li><code>eslint-config-react-app</code>, <code>react-scripts</code>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/3121">#3121</a> Redisable require.ensure() (<span class="citation" data-cites="everdimension">[@everdimension]</span>(https://github.com/everdimension))</li>
+</ul></li>
+</ul>
+<h4 id="bug-bug-fix-7">:bug: Bug Fix</h4>
+<ul>
+<li><code>react-scripts</code>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/5217">#5217</a> Verify more package versions (<span class="citation" data-cites="Timer">[@Timer]</span>(https://github.com/Timer))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/5214">#5214</a> Fix absolute paths on eject (<span class="citation" data-cites="gaearon">[@gaearon]</span>(https://github.com/gaearon))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/5212">#5212</a> Don’t crash npm test when hg/git are missing (<span class="citation" data-cites="gaearon">[@gaearon]</span>(https://github.com/gaearon))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/5197">#5197</a> Treat .css and .sass/.scss as side effectful (<span class="citation" data-cites="gaearon">[@gaearon]</span>(https://github.com/gaearon))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/5196">#5196</a> Format SVG React snapshots as <svg> tag with props (<span class="citation" data-cites="gaearon">[@gaearon]</span>(https://github.com/gaearon))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/5163">#5163</a> Correctly lookup assets when using a relative build directory (<span class="citation" data-cites="Timer">[@Timer]</span>(https://github.com/Timer))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/5151">#5151</a> Toggle <code>mjs</code> files to <code>javascript/auto</code> type (<span class="citation" data-cites="Timer">[@Timer]</span>(https://github.com/Timer))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/5131">#5131</a> Output CSS sourcemaps in separate file (<span class="citation" data-cites="Timer">[@Timer]</span>(https://github.com/Timer))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/5043">#5043</a> Always lint with latest React version (<span class="citation" data-cites="Timer">[@Timer]</span>(https://github.com/Timer))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/5030">#5030</a> Disable webpack chunk coalescing (<span class="citation" data-cites="Timer">[@Timer]</span>(https://github.com/Timer))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/5027">#5027</a> Remove <code>mjs</code> support (<span class="citation" data-cites="Timer">[@Timer]</span>(https://github.com/Timer))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/4706">#4706</a> Only use safe options when packing CSS assets (<span class="citation" data-cites="bugzpodder">[@bugzpodder]</span>(https://github.com/bugzpodder))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/4562">#4562</a> Configured the thread-loader to keeping workers alive in development mode (<span class="citation" data-cites="sadkovoy">[@sadkovoy]</span>(https://github.com/sadkovoy))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/4318">#4318</a> <code>.mjs</code> should not resolve before .js files (#4085) (#4317) (<span class="citation" data-cites="hobochild">[@hobochild]</span>(https://github.com/hobochild))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/4419">#4419</a> Map (s?css|sass) modules to identity-obj-proxy in jest (<span class="citation" data-cites="kusold">[@kusold]</span>(https://github.com/kusold))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/4424">#4424</a> ensureSlash: Fix accidental string-to-NaN coercion (<span class="citation" data-cites="wchargin">[@wchargin]</span>(https://github.com/wchargin))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/4376">#4376</a> Update sass-loader (#4363) (<span class="citation" data-cites="miraage">[@miraage]</span>(https://github.com/miraage))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/4247">#4247</a> Work around Jest environment resolving bug (<span class="citation" data-cites="gaearon">[@gaearon]</span>(https://github.com/gaearon))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/4234">#4234</a> [next] Revert to use ecma 5 in uglifyOptions (<span class="citation" data-cites="danielberndt">[@danielberndt]</span>(https://github.com/danielberndt))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/2544">#2544</a> Set the public path to the asset manifest entries (<span class="citation" data-cites="robinvdvleuten">[@robinvdvleuten]</span>(https://github.com/robinvdvleuten))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/3992">#3992</a> Upgrade dotenv-expand to 4.2.0 (#3961) (<span class="citation" data-cites="iansu">[@iansu]</span>(https://github.com/iansu))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/3989">#3989</a> add default value for globPatterns (<span class="citation" data-cites="viankakrisna">[@viankakrisna]</span>(https://github.com/viankakrisna))</li>
+</ul></li>
+<li><code>react-error-overlay</code>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/5203">#5203</a> Fix IE 11 compatibility (<span class="citation" data-cites="Timer">[@Timer]</span>(https://github.com/Timer))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/5198">#5198</a> Polyfill error overlay for IE9 support (<span class="citation" data-cites="Timer">[@Timer]</span>(https://github.com/Timer))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/4024">#4024</a> Fix floating caret position incorrect while scrolling overlay (<span class="citation" data-cites="jihchi">[@jihchi]</span>(https://github.com/jihchi))</li>
+</ul></li>
+<li><code>react-dev-utils</code>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/5184">#5184</a> Still emit runtime chunk (<span class="citation" data-cites="Timer">[@Timer]</span>(https://github.com/Timer))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/5137">#5137</a> Fix displaying third party webpack plugins errors (<span class="citation" data-cites="Fer0x">[@Fer0x]</span>(https://github.com/Fer0x))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/5134">#5134</a> Lists loader-utils in the dependencies (<span class="citation" data-cites="arcanis">[@arcanis]</span>(https://github.com/arcanis))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/5025">#5025</a> Fix/file size reporter (<span class="citation" data-cites="fiddep">[@fiddep]</span>(https://github.com/fiddep))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/4420">#4420</a> Update the thread loader test in formatWebpackMessages (<span class="citation" data-cites="marcofugaro">[@marcofugaro]</span>(https://github.com/marcofugaro))</li>
+</ul></li>
+<li><code>babel-preset-react-app</code>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/5182">#5182</a> Strip flow syntax before any other transform (<span class="citation" data-cites="Timer">[@Timer]</span>(https://github.com/Timer))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/4630">#4630</a> Eliminate regenerator from preset-react-app plugins (<span class="citation" data-cites="conartist6">[@conartist6]</span>(https://github.com/conartist6))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/5110">#5110</a> Add dynamic import transformer for dependencies in test env (<span class="citation" data-cites="lixiaoyan">[@lixiaoyan]</span>(https://github.com/lixiaoyan))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/5052">#5052</a> Add Babel config sourceType: ‘unambiguous’ for dependencies (<span class="citation" data-cites="lixiaoyan">[@lixiaoyan]</span>(https://github.com/lixiaoyan))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/5046">#5046</a> Correct Babel dependency behavior (<span class="citation" data-cites="Timer">[@Timer]</span>(https://github.com/Timer))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/4248">#4248</a> Enable loose mode for <code>class-properties</code> (<span class="citation" data-cites="rgrochowicz">[@rgrochowicz]</span>(https://github.com/rgrochowicz))</li>
+</ul></li>
+<li><code>babel-preset-react-app</code>, <code>react-error-overlay</code>, <code>react-scripts</code>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/5142">#5142</a> Remove runtime alias hack (<span class="citation" data-cites="Timer">[@Timer]</span>(https://github.com/Timer))</li>
+</ul></li>
+<li><code>react-app-polyfill</code>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/5132">#5132</a> Don’t polyfill fetch for Node (<span class="citation" data-cites="Timer">[@Timer]</span>(https://github.com/Timer))</li>
+</ul></li>
+<li><code>react-error-overlay</code>, <code>react-scripts</code>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/5109">#5109</a> Prevent Babel config overridden (<span class="citation" data-cites="lixiaoyan">[@lixiaoyan]</span>(https://github.com/lixiaoyan))</li>
+</ul></li>
+<li><code>babel-preset-react-app</code>, <code>react-scripts</code>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/5078">#5078</a> Prevent the cache of files using Babel Macros (<span class="citation" data-cites="Timer">[@Timer]</span>(https://github.com/Timer))</li>
+</ul></li>
+<li><code>react-dev-utils</code>, <code>react-error-overlay</code>, <code>react-scripts</code>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/5026">#5026</a> Switch from uglifyjs to terser (<span class="citation" data-cites="Timer">[@Timer]</span>(https://github.com/Timer))</li>
+</ul></li>
+<li><code>create-react-app</code>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/4677">#4677</a> Support scoped package names for scripts-version option in create-react-app cli (<span class="citation" data-cites="bugzpodder">[@bugzpodder]</span>(https://github.com/bugzpodder))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/2705">#2705</a> Don’t delete error logs when install fails (<span class="citation" data-cites="mg">[@mg]</span>(https://github.com/mg))</li>
+</ul></li>
+<li><code>react-dev-utils</code>, <code>react-scripts</code>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/4391">#4391</a> Update getCSSModuleLocalIdent to support Sass (<span class="citation" data-cites="arianon">[@arianon]</span>(https://github.com/arianon))</li>
+</ul></li>
+<li><code>babel-plugin-named-asset-import</code>, <code>babel-preset-react-app</code>, <code>eslint-config-react-app</code>, <code>react-dev-utils</code>, <code>react-error-overlay</code>, <code>react-scripts</code>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/4159">#4159</a> Bump babel-related deps (<span class="citation" data-cites="existentialism">[@existentialism]</span>(https://github.com/existentialism))</li>
+</ul></li>
+<li><code>create-react-app</code>, <code>react-dev-utils</code>, <code>react-scripts</code>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/3997">#3997</a> Use yarn when running inside yarn workspace. (<span class="citation" data-cites="bradfordlemley">[@bradfordlemley]</span>(https://github.com/bradfordlemley))</li>
+</ul></li>
+</ul>
+<h4 id="nail_care-enhancement-7">:nail_care: Enhancement</h4>
+<ul>
+<li><code>create-react-app</code>, <code>react-scripts</code>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/5136">#5136</a> Plug’n’Play support (<span class="citation" data-cites="arcanis">[@arcanis]</span>(https://github.com/arcanis))</li>
+</ul></li>
+<li><code>react-dev-utils</code>, <code>react-scripts</code>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/5174">#5174</a> 💅 Polish webpack message output (<span class="citation" data-cites="Timer">[@Timer]</span>(https://github.com/Timer))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/5065">#5065</a> (Micro) Optimize webpack rebuild speed (<span class="citation" data-cites="Timer">[@Timer]</span>(https://github.com/Timer))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/5058">#5058</a> Inline the webpack runtime chunk (<span class="citation" data-cites="Timer">[@Timer]</span>(https://github.com/Timer))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/4192">#4192</a> Update CSS Modules localIndetName (<span class="citation" data-cites="ro-savage">[@ro-savage]</span>(https://github.com/ro-savage))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/3782">#3782</a> Tell user what browser support their application was built with (<span class="citation" data-cites="Timer">[@Timer]</span>(https://github.com/Timer))</li>
+</ul></li>
+<li><code>react-dev-utils</code>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/5150">#5150</a> Run behavioral smoke tests with Jest, add output tests (<span class="citation" data-cites="Timer">[@Timer]</span>(https://github.com/Timer))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/4623">#4623</a> Use yarn build command in predeploy script if using yarn (<span class="citation" data-cites="alexbrazier">[@alexbrazier]</span>(https://github.com/alexbrazier))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/4470">#4470</a> Adjust browser defaults (<span class="citation" data-cites="Timer">[@Timer]</span>(https://github.com/Timer))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/4001">#4001</a> Add support for new yarn workspaces config format (<span class="citation" data-cites="detrohutt">[@detrohutt]</span>(https://github.com/detrohutt))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/3980">#3980</a> Autodetect GoLand editor (<span class="citation" data-cites="ifedyukin">[@ifedyukin]</span>(https://github.com/ifedyukin))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/3808">#3808</a> Use wmic to get process list on Windows (<span class="citation" data-cites="levrik">[@levrik]</span>(https://github.com/levrik))</li>
+</ul></li>
+<li><code>react-scripts</code>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/4169">#4169</a> Workbox service worker (<span class="citation" data-cites="davejm">[@davejm]</span>(https://github.com/davejm))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/5096">#5096</a> Disable source maps for node_modules (<span class="citation" data-cites="Timer">[@Timer]</span>(https://github.com/Timer))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/4716">#4716</a> add postcss-preset-env, remove autoprefixer (<span class="citation" data-cites="heygrady">[@heygrady]</span>(https://github.com/heygrady))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/1457">#1457</a> Add eslintConfig to new projects automatically (<span class="citation" data-cites="lifeiscontent">[@lifeiscontent]</span>(https://github.com/lifeiscontent))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/5030">#5030</a> Disable webpack chunk coalescing (<span class="citation" data-cites="Timer">[@Timer]</span>(https://github.com/Timer))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/4582">#4582</a> Added thread-loader tweak for application code entry-point (<span class="citation" data-cites="sadkovoy">[@sadkovoy]</span>(https://github.com/sadkovoy))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/4562">#4562</a> Configured the thread-loader to keeping workers alive in development mode (<span class="citation" data-cites="sadkovoy">[@sadkovoy]</span>(https://github.com/sadkovoy))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/4504">#4504</a> webpack 4 scope hoisting (<span class="citation" data-cites="bugzpodder">[@bugzpodder]</span>(https://github.com/bugzpodder))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/4461">#4461</a> Update svgr (<span class="citation" data-cites="iansu">[@iansu]</span>(https://github.com/iansu))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/3867">#3867</a> Provide callbacks in serviceWorker (next) (<span class="citation" data-cites="piotr-cz">[@piotr-cz]</span>(https://github.com/piotr-cz))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/3235">#3235</a> Applies new theme and adds docs link to template (<span class="citation" data-cites="lukejacksonn">[@lukejacksonn]</span>(https://github.com/lukejacksonn))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/3512">#3512</a> Enhance Jest config error for <code>setupTestFrameworkScriptFile</code> (<span class="citation" data-cites="jackfranklin">[@jackfranklin]</span>(https://github.com/jackfranklin))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/3778">#3778</a> Compile code in parallel (<span class="citation" data-cites="Timer">[@Timer]</span>(https://github.com/Timer))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/3771">#3771</a> Add preflight check to guard against wrong versions of webpack/eslint/jest higher up the tree (<span class="citation" data-cites="gaearon">[@gaearon]</span>(https://github.com/gaearon))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/3618">#3618</a> use uglifyjs-webpack-plugin v1 (<span class="citation" data-cites="viankakrisna">[@viankakrisna]</span>(https://github.com/viankakrisna))</li>
+</ul></li>
+<li><code>babel-preset-react-app</code>, <code>react-error-overlay</code>, <code>react-scripts</code>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/5093">#5093</a> Turn on Babel <code>helpers</code> (<span class="citation" data-cites="Timer">[@Timer]</span>(https://github.com/Timer))</li>
+</ul></li>
+<li><code>react-dev-utils</code>, <code>react-error-overlay</code>, <code>react-scripts</code>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/4930">#4930</a> Switch from cheap-module-source-map eval-source-map (<span class="citation" data-cites="jasonLaster">[@jasonLaster]</span>(https://github.com/jasonLaster))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/3124">#3124</a> update jest to 22 and support watchPathIgnorePatterns configuration (<span class="citation" data-cites="aisensiy">[@aisensiy]</span>(https://github.com/aisensiy))</li>
+</ul></li>
+<li><code>confusing-browser-globals</code>, <code>react-dev-utils</code>, <code>react-error-overlay</code>, <code>react-scripts</code>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/4846">#4846</a> Update jest version (<span class="citation" data-cites="skoging">[@skoging]</span>(https://github.com/skoging))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/4362">#4362</a> Bumped jest version to 22.4.1 (<span class="citation" data-cites="CGreenburg">[@CGreenburg]</span>(https://github.com/CGreenburg))</li>
+</ul></li>
+<li><code>babel-preset-react-app</code>, <code>confusing-browser-globals</code>, <code>eslint-config-react-app</code>, <code>react-dev-utils</code>, <code>react-error-overlay</code>, <code>react-scripts</code>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/4077">#4077</a> webpack 4 (<span class="citation" data-cites="andriijas">[@andriijas]</span>(https://github.com/andriijas))</li>
+</ul></li>
+<li><code>babel-preset-react-app</code>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/4432">#4432</a> Update babel-plugin-macros to fix a bug (<span class="citation" data-cites="stereobooster">[@stereobooster]</span>(https://github.com/stereobooster))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/3818">#3818</a> Remove PropTypes from production build (#209) (<span class="citation" data-cites="iansu">[@iansu]</span>(https://github.com/iansu))</li>
+</ul></li>
+<li><code>create-react-app</code>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/4375">#4375</a> fix: update envinfo + implementation, update issue_template (<span class="citation" data-cites="tabrindle">[@tabrindle]</span>(https://github.com/tabrindle))</li>
+</ul></li>
+<li><code>eslint-config-react-app</code>, <code>react-error-overlay</code>, <code>react-scripts</code>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/4048">#4048</a> Add ESLint check for incorrect propTypes usage (#3840) (<span class="citation" data-cites="iansu">[@iansu]</span>(https://github.com/iansu))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/2690">#2690</a> Bump eslint-plugin-jsx-a11y version (<span class="citation" data-cites="gaearon">[@gaearon]</span>(https://github.com/gaearon))</li>
+</ul></li>
+<li><code>eslint-config-react-app</code>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/3844">#3844</a> remove radix eslint rule (<span class="citation" data-cites="sendilkumarn">[@sendilkumarn]</span>(https://github.com/sendilkumarn))</li>
+</ul></li>
+<li><code>create-react-app</code>, <code>react-dev-utils</code>, <code>react-scripts</code>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/3792">#3792</a> Offer to set default browsers (<span class="citation" data-cites="Timer">[@Timer]</span>(https://github.com/Timer))</li>
+</ul></li>
+<li><code>babel-preset-react-app</code>, <code>create-react-app</code>, <code>react-dev-utils</code>, <code>react-error-overlay</code>, <code>react-scripts</code>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/3785">#3785</a> Bump dependencies (<span class="citation" data-cites="gaearon">[@gaearon]</span>(https://github.com/gaearon))</li>
+</ul></li>
+<li><code>babel-preset-react-app</code>, <code>react-scripts</code>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/3770">#3770</a> Loosen Babel preset to use browserslist (<span class="citation" data-cites="Timer">[@Timer]</span>(https://github.com/Timer))</li>
+</ul></li>
+<li><code>babel-preset-react-app</code>, <code>eslint-config-react-app</code>, <code>react-dev-utils</code>, <code>react-error-overlay</code>, <code>react-scripts</code>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/3522">#3522</a> Switch to Babel 7 (<span class="citation" data-cites="clemmy">[@clemmy]</span>(https://github.com/clemmy))</li>
+</ul></li>
+</ul>
+<h4 id="memo-documentation-8">:memo: Documentation</h4>
+<ul>
+<li><code>react-scripts</code>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/5211">#5211</a> Adds instructions to README on how to customize Bootstrap with Sass (<span class="citation" data-cites="mslooten">[@mslooten]</span>(https://github.com/mslooten))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/5147">#5147</a> Document adding SVGs as React components (<span class="citation" data-cites="mareksuscak">[@mareksuscak]</span>(https://github.com/mareksuscak))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/5193">#5193</a> Fix typo in ‘Configuring the Proxy Manually’ (<span class="citation" data-cites="fabriziocucci">[@fabriziocucci]</span>(https://github.com/fabriziocucci))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/5111">#5111</a> Updates to README to reflect Workbox usage. (<span class="citation" data-cites="jeffposnick">[@jeffposnick]</span>(https://github.com/jeffposnick))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/5169">#5169</a> Add additional troubleshooting for Github Pages (<span class="citation" data-cites="dwang">[@dwang]</span>(https://github.com/dwang))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/5145">#5145</a> Mention .module.scss/sass convention (<span class="citation" data-cites="mareksuscak">[@mareksuscak]</span>(https://github.com/mareksuscak))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/5105">#5105</a> as per #5104 (<span class="citation" data-cites="sag1v">[@sag1v]</span>(https://github.com/sag1v))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/5071">#5071</a> Update usage advice of husky to 1.0 (<span class="citation" data-cites="martinlechner1">[@martinlechner1]</span>(https://github.com/martinlechner1))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/5077">#5077</a> small typo fix (<span class="citation" data-cites="tteltrab">[@tteltrab]</span>(https://github.com/tteltrab))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/5070">#5070</a> Integrating with an API Backend: add API Platform (<span class="citation" data-cites="dunglas">[@dunglas]</span>(https://github.com/dunglas))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/5064">#5064</a> fix minor typo in troubleshooting github pages (<span class="citation" data-cites="kaznovac">[@kaznovac]</span>(https://github.com/kaznovac))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/5035">#5035</a> Remove paywalled tutorial link for Storybook (<span class="citation" data-cites="imgntn">[@imgntn]</span>(https://github.com/imgntn))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/3924">#3924</a> Updates to reflect service worker registration being opt-in. (<span class="citation" data-cites="jeffposnick">[@jeffposnick]</span>(https://github.com/jeffposnick))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/4881">#4881</a> flowtype.org -&gt; flow.org (<span class="citation" data-cites="web2033">[@web2033]</span>(https://github.com/web2033))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/4825">#4825</a> Update support info for service workers (<span class="citation" data-cites="j-f1">[@j-f1]</span>(https://github.com/j-f1))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/4738">#4738</a> Fix typo (<span class="citation" data-cites="mjw56">[@mjw56]</span>(https://github.com/mjw56))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/4741">#4741</a> remove extra dot on devtool link comment (<span class="citation" data-cites="shelldandy">[@shelldandy]</span>(https://github.com/shelldandy))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/4703">#4703</a> Suggest <code>reactstrap</code> instead of <code>react-bootstrap</code> (<span class="citation" data-cites="zx6658">[@zx6658]</span>(https://github.com/zx6658))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/4566">#4566</a> Move whitespace comment closer to where it applies (<span class="citation" data-cites="mgedmin">[@mgedmin]</span>(https://github.com/mgedmin))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/4497">#4497</a> [Read Me template patch] Warn about #871 until it’s actually fixed. (<span class="citation" data-cites="saimonmoore">[@saimonmoore]</span>(https://github.com/saimonmoore))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/4205">#4205</a> Chokidar Updates (<span class="citation" data-cites="originell">[@originell]</span>(https://github.com/originell))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/4286">#4286</a> Fix some typos in README.md (<span class="citation" data-cites="apaatsio">[@apaatsio]</span>(https://github.com/apaatsio))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/4298">#4298</a> Added learnstorybook.com to Storybook links (<span class="citation" data-cites="tmeasday">[@tmeasday]</span>(https://github.com/tmeasday))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/4117">#4117</a> Document multiple build environments via <code>env-cmd</code> #4071 (<span class="citation" data-cites="jMuzsik">[@jMuzsik]</span>(https://github.com/jMuzsik))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/4197">#4197</a> Add troubleshooting for Github Pages (<span class="citation" data-cites="xnt">[@xnt]</span>(https://github.com/xnt))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/4236">#4236</a> use the lastest url of gitignore file (<span class="citation" data-cites="Plortinus">[@Plortinus]</span>(https://github.com/Plortinus))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/4239">#4239</a> Fix typo in comment and be clearer about <code>ecma</code> settings in uglifyjs options (<span class="citation" data-cites="danielberndt">[@danielberndt]</span>(https://github.com/danielberndt))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/4164">#4164</a> Fix typos in example monorepo documentation. (<span class="citation" data-cites="bradfordlemley">[@bradfordlemley]</span>(https://github.com/bradfordlemley))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/4089">#4089</a> Fix a typo in packages/react-scripts/template/README.md (<span class="citation" data-cites="nott">[@nott]</span>(https://github.com/nott))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/4101">#4101</a> Docs: Update status of Object Rest/Spread proposal (<span class="citation" data-cites="jpaquim">[@jpaquim]</span>(https://github.com/jpaquim))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/4107">#4107</a> docs: use node_js 8 in example travis.yml (<span class="citation" data-cites="nikolas2">[@nikolas2]</span>(https://github.com/nikolas2))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/3821">#3821</a> Updated react-scripts Readme.md to better document GitHub Pages (<span class="citation" data-cites="EdwaRen">[@EdwaRen]</span>(https://github.com/EdwaRen))</li>
+</ul></li>
+<li>Other
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/5102">#5102</a> Fix Troubleshooting link (<span class="citation" data-cites="gdi2290">[@gdi2290]</span>(https://github.com/gdi2290))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/4551">#4551</a> Update targeted IE version in documentation (<span class="citation" data-cites="antzshrek">[@antzshrek]</span>(https://github.com/antzshrek))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/4814">#4814</a> Update CODE_OF_CONDUCT.md (<span class="citation" data-cites="Ashleyotero">[@Ashleyotero]</span>(https://github.com/Ashleyotero))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/4638">#4638</a> Add instructions on alternative methods of app creation (<span class="citation" data-cites="RusinovAnton">[@RusinovAnton]</span>(https://github.com/RusinovAnton))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/4546">#4546</a> Update file tree view (<span class="citation" data-cites="antzshrek">[@antzshrek]</span>(https://github.com/antzshrek))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/4449">#4449</a> add create-react-app-parcel to Alternatives section in README (<span class="citation" data-cites="sw-yx">[@sw-yx]</span>(https://github.com/sw-yx))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/4294">#4294</a> documentation: added License to the README.md (<span class="citation" data-cites="thiagopaiva99">[@thiagopaiva99]</span>(https://github.com/thiagopaiva99))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/4323">#4323</a> Fix typo in e2e-simple.sh comment (<span class="citation" data-cites="bmuenzenmeyer">[@bmuenzenmeyer]</span>(https://github.com/bmuenzenmeyer))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/4134">#4134</a> fix: Minor typos (<span class="citation" data-cites="fejes713">[@fejes713]</span>(https://github.com/fejes713))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/4114">#4114</a> Update CONTRIBUTING.md (<span class="citation" data-cites="jkzing">[@jkzing]</span>(https://github.com/jkzing))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/3825">#3825</a> Add svg rendering for error example (<span class="citation" data-cites="marionebl">[@marionebl]</span>(https://github.com/marionebl))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/3810">#3810</a> Update screencast to use npx (<span class="citation" data-cites="marionebl">[@marionebl]</span>(https://github.com/marionebl))</li>
+</ul></li>
+<li><code>create-react-app</code>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/4309">#4309</a> Fix typo to word bootstrapped in condition to check for old version o… (<span class="citation" data-cites="jamesvsshark">[@jamesvsshark]</span>(https://github.com/jamesvsshark))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/4015">#4015</a> add <code>create-react-app --help</code> info for local file path <code>--scripts-version</code> support (<span class="citation" data-cites="albertstill">[@albertstill]</span>(https://github.com/albertstill))</li>
+</ul></li>
+<li><code>react-dev-utils</code>, <code>react-scripts</code>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/3836">#3836</a> Use custom bit.ly links (<span class="citation" data-cites="bondz">[@bondz]</span>(https://github.com/bondz))</li>
+</ul></li>
+</ul>
+<h4 id="house-internal-8">:house: Internal</h4>
+<ul>
+<li><code>eslint-config-react-app</code>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/5205">#5205</a> Disable react/no-deprecated rule (<span class="citation" data-cites="Timer">[@Timer]</span>(https://github.com/Timer))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/5051">#5051</a> Adjust ESLint configuration for v5 (<span class="citation" data-cites="Timer">[@Timer]</span>(https://github.com/Timer))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/4187">#4187</a> Change no-unused-vars ‘args’ from none to all to show warning on dest… (<span class="citation" data-cites="goncy">[@goncy]</span>(https://github.com/goncy))</li>
+</ul></li>
+<li><code>babel-plugin-named-asset-import</code>, <code>babel-preset-react-app</code>, <code>confusing-browser-globals</code>, <code>create-react-app</code>, <code>eslint-config-react-app</code>, <code>react-app-polyfill</code>, <code>react-dev-utils</code>, <code>react-error-overlay</code>, <code>react-scripts</code>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/5192">#5192</a> Add license file to all packages (<span class="citation" data-cites="Timer">[@Timer]</span>(https://github.com/Timer))</li>
+</ul></li>
+<li>Other
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/5183">#5183</a> Test class properties (<span class="citation" data-cites="Timer">[@Timer]</span>(https://github.com/Timer))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/5146">#5146</a> Add behavior e2e tests (<span class="citation" data-cites="Timer">[@Timer]</span>(https://github.com/Timer))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/4774">#4774</a> [internal] Use Yarn cache for travis (<span class="citation" data-cites="bugzpodder">[@bugzpodder]</span>(https://github.com/bugzpodder))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/4626">#4626</a> [internal] Fix node 10 test issue (<span class="citation" data-cites="bugzpodder">[@bugzpodder]</span>(https://github.com/bugzpodder))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/3816">#3816</a> Automate screencast recordings (<span class="citation" data-cites="marionebl">[@marionebl]</span>(https://github.com/marionebl))</li>
+</ul></li>
+<li><code>react-scripts</code>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/5180">#5180</a> Fetch Workbox from CDN (<span class="citation" data-cites="Timer">[@Timer]</span>(https://github.com/Timer))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/5170">#5170</a> Remove thread-loader (<span class="citation" data-cites="Timer">[@Timer]</span>(https://github.com/Timer))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/5157">#5157</a> Forwards args through thread-loader (<span class="citation" data-cites="arcanis">[@arcanis]</span>(https://github.com/arcanis))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/5085">#5085</a> Remove highlightCode:true because it’s now the default (<span class="citation" data-cites="marcofugaro">[@marcofugaro]</span>(https://github.com/marcofugaro))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/5098">#5098</a> [internal] remove babelrc dependency for kitchensink test (<span class="citation" data-cites="bugzpodder">[@bugzpodder]</span>(https://github.com/bugzpodder))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/5076">#5076</a> Revert “Add loader for .graphql files (#3909)” (<span class="citation" data-cites="Timer">[@Timer]</span>(https://github.com/Timer))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/5062">#5062</a> Upgrade svgr to v2 and disable Prettier &amp; SVGO (<span class="citation" data-cites="Timer">[@Timer]</span>(https://github.com/Timer))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/5059">#5059</a> Switch back to cheap-module-source-map (<span class="citation" data-cites="jasonLaster">[@jasonLaster]</span>(https://github.com/jasonLaster))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/4891">#4891</a> Move favicon.ico <link> to accommodate Chrome (<span class="citation" data-cites="thejohnfreeman">[@thejohnfreeman]</span>(https://github.com/thejohnfreeman))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/5053">#5053</a> Normalize babel caching across the board (<span class="citation" data-cites="Timer">[@Timer]</span>(https://github.com/Timer))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/4550">#4550</a> Jest 23 and tests (<span class="citation" data-cites="bugzpodder">[@bugzpodder]</span>(https://github.com/bugzpodder))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/5043">#5043</a> Always lint with latest React version (<span class="citation" data-cites="Timer">[@Timer]</span>(https://github.com/Timer))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/4955">#4955</a> Update webpack-dev-server 3.1.5 → 3.1.7 (<span class="citation" data-cites="addaleax">[@addaleax]</span>(https://github.com/addaleax))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/4776">#4776</a> Bump babel-loader to fix npm warning (<span class="citation" data-cites="frenzzy">[@frenzzy]</span>(https://github.com/frenzzy))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/4767">#4767</a> [internal] Separate out kitchensink test into two (<span class="citation" data-cites="bugzpodder">[@bugzpodder]</span>(https://github.com/bugzpodder))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/4014">#4014</a> enable manifest plugin on dev (<span class="citation" data-cites="viankakrisna">[@viankakrisna]</span>(https://github.com/viankakrisna))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/4435">#4435</a> Update paths.js, rename shadow path variable (<span class="citation" data-cites="graemecode">[@graemecode]</span>(https://github.com/graemecode))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/4331">#4331</a> Bump <code>fsevents</code>. (<span class="citation" data-cites="wtgtybhertgeghgtwtg">[@wtgtybhertgeghgtwtg]</span>(https://github.com/wtgtybhertgeghgtwtg))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/4174">#4174</a> Yarn workspace transpilation verification. (<span class="citation" data-cites="bradfordlemley">[@bradfordlemley]</span>(https://github.com/bradfordlemley))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/3842">#3842</a> fix small grammatical typo in webpack config documentation (<span class="citation" data-cites="andrewerrico">[@andrewerrico]</span>(https://github.com/andrewerrico))</li>
+</ul></li>
+<li><code>react-dev-utils</code>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/5150">#5150</a> Run behavioral smoke tests with Jest, add output tests (<span class="citation" data-cites="Timer">[@Timer]</span>(https://github.com/Timer))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/4514">#4514</a> Make Sass missing message friendlier (<span class="citation" data-cites="Timer">[@Timer]</span>(https://github.com/Timer))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/4138">#4138</a> Allow ModuleScopePlugin accecpts an array as its appSrc (<span class="citation" data-cites="froyog">[@froyog]</span>(https://github.com/froyog))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/4016">#4016</a> (chore): Alphabetize and clean files-array in react-dev-utils package.json (<span class="citation" data-cites="petetnt">[@petetnt]</span>(https://github.com/petetnt))</li>
+</ul></li>
+<li><code>babel-preset-react-app</code>, <code>react-error-overlay</code>, <code>react-scripts</code>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/5143">#5143</a> Switch back to babel-loader (<span class="citation" data-cites="iansu">[@iansu]</span>(https://github.com/iansu))</li>
+</ul></li>
+<li><code>babel-preset-react-app</code>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/5119">#5119</a> Clean up <span class="citation" data-cites="babel/plugin-transform-regenerator">@babel/plugin-transform-regenerator</span> (<span class="citation" data-cites="lixiaoyan">[@lixiaoyan]</span>(https://github.com/lixiaoyan))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/5033">#5033</a> Lock babel configuration back to IE 9 support (ES5) (<span class="citation" data-cites="Timer">[@Timer]</span>(https://github.com/Timer))</li>
+</ul></li>
+<li><code>react-dev-utils</code>, <code>react-scripts</code>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/5091">#5091</a> Allow stage 3 css transforms (<span class="citation" data-cites="Timer">[@Timer]</span>(https://github.com/Timer))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/5054">#5054</a> Ensure Babel files get purged on upgrades (<span class="citation" data-cites="Timer">[@Timer]</span>(https://github.com/Timer))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/5031">#5031</a> Upgrade <code>html-webpack-plugin</code> to fix tests (<span class="citation" data-cites="Timer">[@Timer]</span>(https://github.com/Timer))</li>
+</ul></li>
+<li><code>babel-preset-react-app</code>, <code>create-react-app</code>, <code>react-dev-utils</code>, <code>react-error-overlay</code>, <code>react-scripts</code>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/5080">#5080</a> Update tons of packages (<span class="citation" data-cites="Timer">[@Timer]</span>(https://github.com/Timer))</li>
+</ul></li>
+<li><code>react-error-overlay</code>, <code>react-scripts</code>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/5050">#5050</a> Eslint 5.6 (<span class="citation" data-cites="bugzpodder">[@bugzpodder]</span>(https://github.com/bugzpodder))</li>
+</ul></li>
+<li><code>babel-plugin-named-asset-import</code>, <code>babel-preset-react-app</code>, <code>react-dev-utils</code>, <code>react-error-overlay</code>, <code>react-scripts</code>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/5042">#5042</a> Upgrade to Babel 7 stable (<span class="citation" data-cites="Timer">[@Timer]</span>(https://github.com/Timer))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/4253">#4253</a> Upgrade Babel to <code>beta.44</code> (<span class="citation" data-cites="andriijas">[@andriijas]</span>(https://github.com/andriijas))</li>
+</ul></li>
+<li><code>confusing-browser-globals</code>, <code>react-dev-utils</code>, <code>react-error-overlay</code>, <code>react-scripts</code>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/5032">#5032</a> Upgrade <code>react-scripts</code> dependencies (<span class="citation" data-cites="Timer">[@Timer]</span>(https://github.com/Timer))</li>
+</ul></li>
+<li><code>react-dev-utils</code>, <code>react-error-overlay</code>, <code>react-scripts</code>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/5026">#5026</a> Switch from uglifyjs to terser (<span class="citation" data-cites="Timer">[@Timer]</span>(https://github.com/Timer))</li>
+</ul></li>
+<li><code>create-react-app</code>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/4383">#4383</a> Add Node 10 to Travis config and remove Node 6 (<span class="citation" data-cites="iansu">[@iansu]</span>(https://github.com/iansu))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/3853">#3853</a> pin envinfo version to 3.4.2 (<span class="citation" data-cites="bondz">[@bondz]</span>(https://github.com/bondz))</li>
+</ul></li>
+<li><code>react-error-overlay</code>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/4211">#4211</a> Revert lint-related changes made in #4193 (<span class="citation" data-cites="NMinhNguyen">[@NMinhNguyen]</span>(https://github.com/NMinhNguyen))</li>
+<li><a href="https://github.com/facebook/create-react-app/pull/4193">#4193</a> Minor fixes to CI (<span class="citation" data-cites="ro-savage">[@ro-savage]</span>(https://github.com/ro-savage))</li>
+</ul></li>
+<li><code>confusing-browser-globals</code>, <code>eslint-config-react-app</code>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/2286">#2286</a> Add restricted globals package (<span class="citation" data-cites="sidoshi">[@sidoshi]</span>(https://github.com/sidoshi))</li>
+</ul></li>
+<li><code>eslint-config-react-app</code>, <code>react-scripts</code>
+<ul>
+<li><a href="https://github.com/facebook/create-react-app/pull/3723">#3723</a> Updating ESlint to ^4.15.0 and adding new rules to config (<span class="citation" data-cites="chrislaughlin">[@chrislaughlin]</span>(https://github.com/chrislaughlin))</li>
+</ul></li>
+</ul>
+<h4 id="committers-116">Committers: 116</h4>
+<ul>
+<li>A.J. Roberts (<span class="citation" data-cites="detrohutt">[@detrohutt]</span>(https://github.com/detrohutt))</li>
+<li>Aaron Reisman (<span class="citation" data-cites="lifeiscontent">[@lifeiscontent]</span>(https://github.com/lifeiscontent))</li>
+<li>Ade Viankakrisna Fadlil (<span class="citation" data-cites="viankakrisna">[@viankakrisna]</span>(https://github.com/viankakrisna))</li>
+<li>Albert Still (<span class="citation" data-cites="albertstill">[@albertstill]</span>(https://github.com/albertstill))</li>
+<li>Alex Brazier (<span class="citation" data-cites="alexbrazier">[@alexbrazier]</span>(https://github.com/alexbrazier))</li>
+<li>Andreas Cederström (<span class="citation" data-cites="andriijas">[@andriijas]</span>(https://github.com/andriijas))</li>
+<li>Andrew (<span class="citation" data-cites="andrewerrico">[@andrewerrico]</span>(https://github.com/andrewerrico))</li>
+<li>Andrew Clark (<span class="citation" data-cites="acdlite">[@acdlite]</span>(https://github.com/acdlite))</li>
+<li>Andrew Ho (<span class="citation" data-cites="andrwh">[@andrwh]</span>(https://github.com/andrwh))</li>
+<li>Andrey Sitnik (<span class="citation" data-cites="ai">[@ai]</span>(https://github.com/ai))</li>
+<li>Anna Henningsen (<span class="citation" data-cites="addaleax">[@addaleax]</span>(https://github.com/addaleax))</li>
+<li>Anton Rusinov (<span class="citation" data-cites="RusinovAnton">[@RusinovAnton]</span>(https://github.com/RusinovAnton))</li>
+<li>Antti Ahti (<span class="citation" data-cites="apaatsio">[@apaatsio]</span>(https://github.com/apaatsio))</li>
+<li>Ashley Otero (<span class="citation" data-cites="Ashleyotero">[@Ashleyotero]</span>(https://github.com/Ashleyotero))</li>
+<li>Bond (<span class="citation" data-cites="bondz">[@bondz]</span>(https://github.com/bondz))</li>
+<li>Bradford Lemley (<span class="citation" data-cites="bradfordlemley">[@bradfordlemley]</span>(https://github.com/bradfordlemley))</li>
+<li>Brian Muenzenmeyer (<span class="citation" data-cites="bmuenzenmeyer">[@bmuenzenmeyer]</span>(https://github.com/bmuenzenmeyer))</li>
+<li>Brian Ng (<span class="citation" data-cites="existentialism">[@existentialism]</span>(https://github.com/existentialism))</li>
+<li>Chad Greenburg (<span class="citation" data-cites="CGreenburg">[@CGreenburg]</span>(https://github.com/CGreenburg))</li>
+<li>Chris Laughlin (<span class="citation" data-cites="chrislaughlin">[@chrislaughlin]</span>(https://github.com/chrislaughlin))</li>
+<li>Clement Hoang (<span class="citation" data-cites="clemmy">[@clemmy]</span>(https://github.com/clemmy))</li>
+<li>Conrad Buck (<span class="citation" data-cites="conartist6">[@conartist6]</span>(https://github.com/conartist6))</li>
+<li>Craig Mulligan (<span class="citation" data-cites="hobochild">[@hobochild]</span>(https://github.com/hobochild))</li>
+<li>Dan Abramov (<span class="citation" data-cites="gaearon">[@gaearon]</span>(https://github.com/gaearon))</li>
+<li>Daniel (<span class="citation" data-cites="danielberndt">[@danielberndt]</span>(https://github.com/danielberndt))</li>
+<li>Daniel Wang (<span class="citation" data-cites="dwang">[@dwang]</span>(https://github.com/dwang))</li>
+<li>David Moodie (<span class="citation" data-cites="davejm">[@davejm]</span>(https://github.com/davejm))</li>
+<li>Dmitriy Sadkovoy (<span class="citation" data-cites="sadkovoy">[@sadkovoy]</span>(https://github.com/sadkovoy))</li>
+<li>Eduardo Rabelo (<span class="citation" data-cites="oieduardorabelo">[@oieduardorabelo]</span>(https://github.com/oieduardorabelo))</li>
+<li>Edward Ren (Eddie) (<span class="citation" data-cites="EdwaRen">[@EdwaRen]</span>(https://github.com/EdwaRen))</li>
+<li>Ernesto García (<span class="citation" data-cites="gnapse">[@gnapse]</span>(https://github.com/gnapse))</li>
+<li>Eugene Kopich (<span class="citation" data-cites="web2033">[@web2033]</span>(https://github.com/web2033))</li>
+<li>Fabiano Brito (<span class="citation" data-cites="Fabianopb">[@Fabianopb]</span>(https://github.com/Fabianopb))</li>
+<li>Fabrizio Cucci (<span class="citation" data-cites="fabriziocucci">[@fabriziocucci]</span>(https://github.com/fabriziocucci))</li>
+<li>Fredrik Palmquist (<span class="citation" data-cites="fiddep">[@fiddep]</span>(https://github.com/fiddep))</li>
+<li>Futa Ogawa (<span class="citation" data-cites="ogawa0071">[@ogawa0071]</span>(https://github.com/ogawa0071))</li>
+<li>Gary Meehan (<span class="citation" data-cites="garmeeh">[@garmeeh]</span>(https://github.com/garmeeh))</li>
+<li>Gonzalo Pozzo (<span class="citation" data-cites="goncy">[@goncy]</span>(https://github.com/goncy))</li>
+<li>Grady Kuhnline (<span class="citation" data-cites="heygrady">[@heygrady]</span>(https://github.com/heygrady))</li>
+<li>Graeme (<span class="citation" data-cites="graemecode">[@graemecode]</span>(https://github.com/graemecode))</li>
+<li>Harry Moreno (<span class="citation" data-cites="morenoh149">[@morenoh149]</span>(https://github.com/morenoh149))</li>
+<li>Ian Sutherland (<span class="citation" data-cites="iansu">[@iansu]</span>(https://github.com/iansu))</li>
+<li>Ideveloper (<span class="citation" data-cites="zx6658">[@zx6658]</span>(https://github.com/zx6658))</li>
+<li>Igor Fedyukin (<span class="citation" data-cites="ifedyukin">[@ifedyukin]</span>(https://github.com/ifedyukin))</li>
+<li>Irvin Denzel Torcuato (<span class="citation" data-cites="identor">[@identor]</span>(https://github.com/identor))</li>
+<li>JK (<span class="citation" data-cites="jkzing">[@jkzing]</span>(https://github.com/jkzing))</li>
+<li>Jack Franklin (<span class="citation" data-cites="jackfranklin">[@jackfranklin]</span>(https://github.com/jackfranklin))</li>
+<li>Jack Zhao (<span class="citation" data-cites="bugzpodder">[@bugzpodder]</span>(https://github.com/bugzpodder))</li>
+<li>James B. Pollack (<span class="citation" data-cites="imgntn">[@imgntn]</span>(https://github.com/imgntn))</li>
+<li>James Simoes (<span class="citation" data-cites="jamesvsshark">[@jamesvsshark]</span>(https://github.com/jamesvsshark))</li>
+<li>Jason Laster (<span class="citation" data-cites="jasonLaster">[@jasonLaster]</span>(https://github.com/jasonLaster))</li>
+<li>Jed Fox (<span class="citation" data-cites="j-f1">[@j-f1]</span>(https://github.com/j-f1))</li>
+<li>Jeffrey Posnick (<span class="citation" data-cites="jeffposnick">[@jeffposnick]</span>(https://github.com/jeffposnick))</li>
+<li>Jerry (<span class="citation" data-cites="jMuzsik">[@jMuzsik]</span>(https://github.com/jMuzsik))</li>
+<li>Jih-Chi Lee (<span class="citation" data-cites="jihchi">[@jihchi]</span>(https://github.com/jihchi))</li>
+<li>Joe Haddad (<span class="citation" data-cites="Timer">[@Timer]</span>(https://github.com/Timer))</li>
+<li>Joel George V (<span class="citation" data-cites="joelgeorgev">[@joelgeorgev]</span>(https://github.com/joelgeorgev))</li>
+<li>John Freeman (<span class="citation" data-cites="thejohnfreeman">[@thejohnfreeman]</span>(https://github.com/thejohnfreeman))</li>
+<li>Joshua Comeau (<span class="citation" data-cites="joshwcomeau">[@joshwcomeau]</span>(https://github.com/joshwcomeau))</li>
+<li>João Paquim (<span class="citation" data-cites="jpaquim">[@jpaquim]</span>(https://github.com/jpaquim))</li>
+<li>Kent C. Dodds (<span class="citation" data-cites="kentcdodds">[@kentcdodds]</span>(https://github.com/kentcdodds))</li>
+<li>Kévin Dunglas (<span class="citation" data-cites="dunglas">[@dunglas]</span>(https://github.com/dunglas))</li>
+<li>Levin Rickert (<span class="citation" data-cites="levrik">[@levrik]</span>(https://github.com/levrik))</li>
+<li>Luis Nell (<span class="citation" data-cites="originell">[@originell]</span>(https://github.com/originell))</li>
+<li>Luke Jackson (<span class="citation" data-cites="lukejacksonn">[@lukejacksonn]</span>(https://github.com/lukejacksonn))</li>
+<li>Maciej Kasprzyk (<span class="citation" data-cites="maciej-ka">[@maciej-ka]</span>(https://github.com/maciej-ka))</li>
+<li>Magnús Örn Gylfason (<span class="citation" data-cites="mg">[@mg]</span>(https://github.com/mg))</li>
+<li>Marco Fugaro (<span class="citation" data-cites="marcofugaro">[@marcofugaro]</span>(https://github.com/marcofugaro))</li>
+<li>Marco Slooten (<span class="citation" data-cites="mslooten">[@mslooten]</span>(https://github.com/mslooten))</li>
+<li>Marek Suscak (<span class="citation" data-cites="mareksuscak">[@mareksuscak]</span>(https://github.com/mareksuscak))</li>
+<li>Mario Nebl (<span class="citation" data-cites="marionebl">[@marionebl]</span>(https://github.com/marionebl))</li>
+<li>Marius Gedminas (<span class="citation" data-cites="mgedmin">[@mgedmin]</span>(https://github.com/mgedmin))</li>
+<li>Marko Kaznovac (<span class="citation" data-cites="kaznovac">[@kaznovac]</span>(https://github.com/kaznovac))</li>
+<li>Martin Lechner (<span class="citation" data-cites="martinlechner1">[@martinlechner1]</span>(https://github.com/martinlechner1))</li>
+<li>Maurice de Beijer (<span class="citation" data-cites="mauricedb">[@mauricedb]</span>(https://github.com/mauricedb))</li>
+<li>Maël Nison (<span class="citation" data-cites="arcanis">[@arcanis]</span>(https://github.com/arcanis))</li>
+<li>Michaël De Boey (<span class="citation" data-cites="MichaelDeBoey">[@MichaelDeBoey]</span>(https://github.com/MichaelDeBoey))</li>
+<li>Miguel Palau (<span class="citation" data-cites="shelldandy">[@shelldandy]</span>(https://github.com/shelldandy))</li>
+<li>Mike Kusold (<span class="citation" data-cites="kusold">[@kusold]</span>(https://github.com/kusold))</li>
+<li>Mike Wilcox (<span class="citation" data-cites="mjw56">[@mjw56]</span>(https://github.com/mjw56))</li>
+<li>Mikhail Osher (<span class="citation" data-cites="miraage">[@miraage]</span>(https://github.com/miraage))</li>
+<li>Minh Nguyen (<span class="citation" data-cites="NMinhNguyen">[@NMinhNguyen]</span>(https://github.com/NMinhNguyen))</li>
+<li>Nick Bartlett (<span class="citation" data-cites="tteltrab">[@tteltrab]</span>(https://github.com/tteltrab))</li>
+<li>PatrickJS (<span class="citation" data-cites="gdi2290">[@gdi2290]</span>(https://github.com/gdi2290))</li>
+<li>Pete Nykänen (<span class="citation" data-cites="petetnt">[@petetnt]</span>(https://github.com/petetnt))</li>
+<li>Piotr (<span class="citation" data-cites="piotr-cz">[@piotr-cz]</span>(https://github.com/piotr-cz))</li>
+<li>Rami (<span class="citation" data-cites="evilchuck">[@evilchuck]</span>(https://github.com/evilchuck))</li>
+<li>Reuben Antz (<span class="citation" data-cites="antzshrek">[@antzshrek]</span>(https://github.com/antzshrek))</li>
+<li>Ro Savage (<span class="citation" data-cites="ro-savage">[@ro-savage]</span>(https://github.com/ro-savage))</li>
+<li>Rob Grochowicz (<span class="citation" data-cites="rgrochowicz">[@rgrochowicz]</span>(https://github.com/rgrochowicz))</li>
+<li>Robin van der Vleuten (<span class="citation" data-cites="robinvdvleuten">[@robinvdvleuten]</span>(https://github.com/robinvdvleuten))</li>
+<li>Sagiv ben giat (<span class="citation" data-cites="sag1v">[@sag1v]</span>(https://github.com/sag1v))</li>
+<li>Saimon Moore (<span class="citation" data-cites="saimonmoore">[@saimonmoore]</span>(https://github.com/saimonmoore))</li>
+<li>Sendil Kumar N (<span class="citation" data-cites="sendilkumarn">[@sendilkumarn]</span>(https://github.com/sendilkumarn))</li>
+<li>Siddharth Doshi (<span class="citation" data-cites="sidoshi">[@sidoshi]</span>(https://github.com/sidoshi))</li>
+<li>Stas Rudakou (<span class="citation" data-cites="nott">[@nott]</span>(https://github.com/nott))</li>
+<li>Stefan Feješ (<span class="citation" data-cites="fejes713">[@fejes713]</span>(https://github.com/fejes713))</li>
+<li>Thiago Galvani (<span class="citation" data-cites="thiagopaiva99">[@thiagopaiva99]</span>(https://github.com/thiagopaiva99))</li>
+<li>Tom Coleman (<span class="citation" data-cites="tmeasday">[@tmeasday]</span>(https://github.com/tmeasday))</li>
+<li>Tore Hammervoll (<span class="citation" data-cites="skoging">[@skoging]</span>(https://github.com/skoging))</li>
+<li>Trevor Brindle (<span class="citation" data-cites="tabrindle">[@tabrindle]</span>(https://github.com/tabrindle))</li>
+<li>Vicente Plata (<span class="citation" data-cites="xnt">[@xnt]</span>(https://github.com/xnt))</li>
+<li>Victor Amupitan (<span class="citation" data-cites="amupitan">[@amupitan]</span>(https://github.com/amupitan))</li>
+<li>Viktor Havrylin (<span class="citation" data-cites="Fer0x">[@Fer0x]</span>(https://github.com/Fer0x))</li>
+<li>Vladimir Kutepov (<span class="citation" data-cites="frenzzy">[@frenzzy]</span>(https://github.com/frenzzy))</li>
+<li>William Chargin (<span class="citation" data-cites="wchargin">[@wchargin]</span>(https://github.com/wchargin))</li>
+<li>XiaoYan Li (<span class="citation" data-cites="lixiaoyan">[@lixiaoyan]</span>(https://github.com/lixiaoyan))</li>
+<li><span class="citation" data-cites="Plortinus">[@Plortinus]</span>(https://github.com/Plortinus)</li>
+<li><span class="citation" data-cites="arianon">[@arianon]</span>(https://github.com/arianon)</li>
+<li><span class="citation" data-cites="everdimension">[@everdimension]</span>(https://github.com/everdimension)</li>
+<li><span class="citation" data-cites="nikolas2">[@nikolas2]</span>(https://github.com/nikolas2)</li>
+<li><span class="citation" data-cites="stereobooster">[@stereobooster]</span>(https://github.com/stereobooster)</li>
+<li><span class="citation" data-cites="wtgtybhertgeghgtwtg">[@wtgtybhertgeghgtwtg]</span>(https://github.com/wtgtybhertgeghgtwtg)</li>
+<li>aisensiy (<span class="citation" data-cites="aisensiy">[@aisensiy]</span>(https://github.com/aisensiy))</li>
+<li>froyog (<span class="citation" data-cites="froyog">[@froyog]</span>(https://github.com/froyog))</li>
+<li>shawn wang (<span class="citation" data-cites="sw-yx">[@sw-yx]</span>(https://github.com/sw-yx))</li>
+</ul>
+<h2 id="releases-before-2.x">Releases Before 2.x</h2>
+<p>Please refer to <a href="./CHANGELOG-1.x.md">CHANGELOG-1.x.md</a> for earlier versions.</p>
+</body>
+</html>

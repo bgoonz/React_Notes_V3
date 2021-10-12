@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Folder Structure</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Folder Structure</h1>
+</header>
+<p>After creation, your project should look like this:</p>
+<pre><code>my-app/
+  README.md
+  node_modules/
+  package.json
+  public/
+    index.html
+    favicon.ico
+  src/
+    App.css
+    App.js
+    App.test.js
+    index.css
+    index.js
+    logo.svg</code></pre>
+<p>For the project to build, <strong>these files must exist with exact filenames</strong>:</p>
+<ul>
+<li><code>public/index.html</code> is the page template;</li>
+<li><code>src/index.js</code> is the JavaScript entry point.</li>
+</ul>
+<p>You can delete or rename the other files.</p>
+<p>You may create subdirectories inside <code>src</code>. For faster rebuilds, only files inside <code>src</code> are processed by webpack. You need to <strong>put any JS and CSS files inside <code>src</code></strong>, otherwise webpack won’t see them.</p>
+<p>Only files inside <code>public</code> can be used from <code>public/index.html</code>. Read instructions below for using assets from JavaScript and HTML.</p>
+<p>You can, however, create more top-level directories. They will not be included in the production build so you can use them for things like documentation.</p>
+<p>If you have Git installed and your project is not part of a larger repository, then a new repository will be initialized resulting in an additional top-level <code>.git</code> directory.</p>
+</body>
+</html>

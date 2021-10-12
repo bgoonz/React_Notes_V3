@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>README</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<h1 id="create-react-app-end-to-end-tests">Create React App End-to-End Tests</h1>
+<h2 id="usage">Usage</h2>
+<p>These tests ensure various functionality contracts are upheld across dependency upgrades.</p>
+<p>To get started locally, run <code>cd packages/react-scripts/ &amp;&amp; yarn link; cd ../../test/ &amp;&amp; ../node_modules/.bin/jest --watchAll</code>.</p>
+<p>It’s suggested that you filter down tests to avoid re-running everything. The most common tests will be the webpack messages.<br> To only run the webpack messages, type <code>p</code> followed by <code>webpack-message</code> and press <code>[enter]</code>.</p>
+<h2 id="how-do-these-work">How do these work?</h2>
+<h3 id="fixtures"><code>fixtures/</code></h3>
+<p>Each <code>fixture/</code> gets spun up in a temporary directory and has its dependencies installed with Yarn PnP (for speed).<br> To opt-out of PnP, create a <code>.disable-pnp</code> file in the specific fixture directory.</p>
+<p>A global (<code>testSetup</code>) is created which has a few interesting properties:</p>
+<ul>
+<li><code>testSetup.testDirectory</code>: the directory containing the test application</li>
+<li><code>testSetup.scripts</code>: an object allowing you to invoke <code>react-scripts</code> commands and friends</li>
+</ul>
+<p>All tests for each <code>fixture/</code> are then ran.</p>
+<h4 id="testsetup.scripts"><code>testSetup.scripts</code></h4>
+<h5 id="start"><code>start</code></h5>
+<p>This will run the <code>start</code> command, it can be ran asynchronously or blocking if <code>{ smoke: true }</code> is used.<br> If ran asynchronously, it will return the <code>port</code> and a <code>done</code> function to clean up the process. If ran blocking, it will return the <code>stdout</code> and <code>stderr</code> of the process.</p>
+<h5 id="build"><code>build</code></h5>
+<p>This will run the <code>build</code> command and return the <code>stdout</code> and <code>stderr</code> of the process.</p>
+<h5 id="test"><code>test</code></h5>
+<p>This will run the <code>test</code> command and return the <code>stdout</code> and <code>stderr</code> of the process.</p>
+<h5 id="serve"><code>serve</code></h5>
+<p>This will run serve the application. It will return the <code>port</code> and a <code>done</code> function to clean up the process.</p>
+</body>
+</html>

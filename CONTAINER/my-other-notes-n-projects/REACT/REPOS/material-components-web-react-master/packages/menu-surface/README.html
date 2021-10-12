@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>README</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<h1 id="react-menu-surface">React Menu Surface</h1>
+<p>A React version of an <a href="https://github.com/material-components/material-components-web/tree/master/packages/mdc-menu-surface">MDC Menu Surface</a>.</p>
+<h2 id="installation">Installation</h2>
+<pre><code>npm install @material/react-menu-surface</code></pre>
+<h2 id="usage">Usage</h2>
+<h3 id="styles">Styles</h3>
+<p>with Sass:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb2-1" title="1"><span class="im">import</span> <span class="st">&#39;@material/react-menu-surface/index.scss&#39;</span><span class="op">;</span></a></code></pre></div>
+<p>with CSS:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb3-1" title="1"><span class="im">import</span> <span class="st">&#39;@material/react-menu-surface/dist/menu-surface.css&#39;</span><span class="op">;</span></a></code></pre></div>
+<h3 id="javascript-instantiation">Javascript Instantiation</h3>
+<h4 id="anchored-to-element">Anchored to Element</h4>
+<p>React Menu Surface accepts one child element. Please see the below example if you need to anchor the menu surface to a specific element. In this case, we wrapper <code>&lt;button&gt;</code> and <code>&lt;MenuSurface&gt;</code> element within the anchor, and give the <code>mdc-menu-surface--anchor</code> class to the element. You can specify a corner for the menu surface to appear from, otherwise it defaults to top-left. For a list of different anchor corner values, please see the <a href="https://github.com/material-components/material-components-web/blob/master/packages/mdc-menu-surface/constants.ts#L75">MDC Web Menu Surface constants.ts file</a>.</p>
+<blockquote>
+<p>NOTE: <code>&lt;MenuSurface&gt;</code> also has an <code>onClose</code> callback method prop, which is called when the menu closes. Use this as an opportunity to update your application’s state.</p>
+</blockquote>
+<div class="sourceCode" id="cb4"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb4-1" title="1"><span class="im">import</span> React <span class="im">from</span> <span class="st">&#39;react&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb4-2" title="2"><span class="im">import</span> MenuSurface<span class="op">,</span> <span class="op">{</span>Corner<span class="op">}</span> <span class="im">from</span> <span class="st">&#39;@material/react-menu-surface&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb4-3" title="3"><span class="im">import</span> Button <span class="im">from</span> <span class="st">&#39;@material/react-button&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb4-4" title="4"></a>
+<a class="sourceLine" id="cb4-5" title="5"><span class="kw">class</span> MyApp <span class="kw">extends</span> <span class="va">React</span>.<span class="at">Component</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb4-6" title="6">  state <span class="op">=</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb4-7" title="7">    <span class="dt">open</span><span class="op">:</span> <span class="kw">false</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb4-8" title="8">    <span class="dt">anchorElement</span><span class="op">:</span> <span class="kw">null</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb4-9" title="9">  <span class="op">};</span></a>
+<a class="sourceLine" id="cb4-10" title="10"></a>
+<a class="sourceLine" id="cb4-11" title="11">  setAnchorElement <span class="op">=</span> (element) <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb4-12" title="12">    <span class="cf">if</span> (<span class="kw">this</span>.<span class="va">state</span>.<span class="at">anchorElement</span>) <span class="op">{</span></a>
+<a class="sourceLine" id="cb4-13" title="13">      <span class="cf">return</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb4-14" title="14">    <span class="op">}</span></a>
+<a class="sourceLine" id="cb4-15" title="15">    <span class="kw">this</span>.<span class="at">setState</span>(<span class="op">{</span><span class="dt">anchorElement</span><span class="op">:</span> element<span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb4-16" title="16">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb4-17" title="17"></a>
+<a class="sourceLine" id="cb4-18" title="18">  <span class="at">render</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb4-19" title="19">    <span class="cf">return</span> (</a>
+<a class="sourceLine" id="cb4-20" title="20">      <span class="op">&lt;</span>div</a>
+<a class="sourceLine" id="cb4-21" title="21">        className<span class="op">=</span><span class="st">&#39;mdc-menu-surface--anchor&#39;</span></a>
+<a class="sourceLine" id="cb4-22" title="22">        ref<span class="op">={</span><span class="kw">this</span>.<span class="at">setAnchorElement</span><span class="op">}</span></a>
+<a class="sourceLine" id="cb4-23" title="23">      <span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb4-24" title="24">        <span class="op">&lt;</span>Button raised onClick<span class="op">={</span>() <span class="kw">=&gt;</span> <span class="kw">this</span>.<span class="at">setState</span>(<span class="op">{</span><span class="dt">open</span><span class="op">:</span> <span class="kw">true</span><span class="op">}</span>)<span class="op">}&gt;</span>Open Menu&lt;/Button<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb4-25" title="25"></a>
+<a class="sourceLine" id="cb4-26" title="26">        <span class="op">&lt;</span>MenuSurface</a>
+<a class="sourceLine" id="cb4-27" title="27">          open<span class="op">={</span><span class="kw">this</span>.<span class="va">state</span>.<span class="at">open</span><span class="op">}</span></a>
+<a class="sourceLine" id="cb4-28" title="28">          anchorCorner<span class="op">={</span><span class="va">Corner</span>.<span class="at">BOTTOM_LEFT</span><span class="op">}</span></a>
+<a class="sourceLine" id="cb4-29" title="29">          onClose<span class="op">={</span>() <span class="kw">=&gt;</span> <span class="kw">this</span>.<span class="at">setState</span>(<span class="op">{</span><span class="dt">open</span><span class="op">:</span> <span class="kw">false</span><span class="op">}</span>)<span class="op">}</span></a>
+<a class="sourceLine" id="cb4-30" title="30">          anchorElement<span class="op">={</span><span class="kw">this</span>.<span class="va">state</span>.<span class="at">anchorElement</span><span class="op">}</span></a>
+<a class="sourceLine" id="cb4-31" title="31">        <span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb4-32" title="32">          <span class="op">&lt;</span>img</a>
+<a class="sourceLine" id="cb4-33" title="33">            style<span class="op">={{</span><span class="dt">maxWidth</span><span class="op">:</span> <span class="st">&#39;20vw&#39;</span><span class="op">,</span> <span class="dt">maxHeight</span><span class="op">:</span> <span class="st">&#39;20vh&#39;</span><span class="op">}}</span></a>
+<a class="sourceLine" id="cb4-34" title="34">            src<span class="op">=</span><span class="st">&#39;http://images.my.photo.url&#39;</span> /&gt;</a>
+<a class="sourceLine" id="cb4-35" title="35">        &lt;/MenuSurface<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb4-36" title="36">      &lt;/div<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb4-37" title="37">    )<span class="op">;</span></a>
+<a class="sourceLine" id="cb4-38" title="38">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb4-39" title="39"><span class="op">}</span></a></code></pre></div>
+<h4 id="anchored-to-coordinates-right-click">Anchored to Coordinates (right-click)</h4>
+<p>You may want to anchor your menu surface to x, y coordinates. One example being a right-click contextmenu. Instead of passing an <code>anchorElement</code> you need to pass <code>coordinates</code>.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb5-1" title="1"><span class="im">import</span> React <span class="im">from</span> <span class="st">&#39;react&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb5-2" title="2"><span class="im">import</span> MenuSurface <span class="im">from</span> <span class="st">&#39;@material/react-menu-surface&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb5-3" title="3"></a>
+<a class="sourceLine" id="cb5-4" title="4"><span class="kw">class</span> MyApp <span class="kw">extends</span> <span class="va">React</span>.<span class="at">Component</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb5-5" title="5">  state <span class="op">=</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb5-6" title="6">    <span class="dt">open</span><span class="op">:</span> <span class="kw">false</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb5-7" title="7">    <span class="dt">coordinates</span><span class="op">:</span> <span class="kw">null</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb5-8" title="8">  <span class="op">};</span></a>
+<a class="sourceLine" id="cb5-9" title="9"></a>
+<a class="sourceLine" id="cb5-10" title="10">  <span class="at">componentDidMount</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb5-11" title="11">    <span class="kw">this</span>.<span class="at">rightClickCallback_</span> <span class="op">=</span> (evt) <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb5-12" title="12">      <span class="kw">this</span>.<span class="at">setState</span>(<span class="op">{</span></a>
+<a class="sourceLine" id="cb5-13" title="13">        <span class="dt">open</span><span class="op">:</span> <span class="kw">true</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb5-14" title="14">        <span class="dt">coordinates</span><span class="op">:</span> <span class="op">{</span><span class="dt">x</span><span class="op">:</span> <span class="va">evt</span>.<span class="at">clientX</span><span class="op">,</span> <span class="dt">y</span><span class="op">:</span> <span class="va">evt</span>.<span class="at">clientY</span><span class="op">},</span></a>
+<a class="sourceLine" id="cb5-15" title="15">      <span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb5-16" title="16">      <span class="va">evt</span>.<span class="at">preventDefault</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb5-17" title="17">    <span class="op">};</span></a>
+<a class="sourceLine" id="cb5-18" title="18"></a>
+<a class="sourceLine" id="cb5-19" title="19">    <span class="va">window</span>.<span class="at">addEventListener</span>(<span class="st">&#39;contextmenu&#39;</span><span class="op">,</span> <span class="kw">this</span>.<span class="at">rightClickCallback_</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb5-20" title="20">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb5-21" title="21"></a>
+<a class="sourceLine" id="cb5-22" title="22">  <span class="at">componentWillUnmount</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb5-23" title="23">    <span class="va">window</span>.<span class="at">removeEventListener</span>(<span class="st">&#39;contextmenu&#39;</span><span class="op">,</span> <span class="kw">this</span>.<span class="at">rightClickCallback_</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb5-24" title="24">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb5-25" title="25"></a>
+<a class="sourceLine" id="cb5-26" title="26">  <span class="at">render</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb5-27" title="27">    <span class="cf">return</span> (</a>
+<a class="sourceLine" id="cb5-28" title="28">      <span class="op">&lt;</span>div className<span class="op">=</span><span class="st">&#39;my-app&#39;</span><span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb5-29" title="29">        <span class="op">&lt;</span>h1<span class="op">&gt;</span>Menu Surface&lt;/h1<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb5-30" title="30"></a>
+<a class="sourceLine" id="cb5-31" title="31">        <span class="op">&lt;</span>MenuSurface</a>
+<a class="sourceLine" id="cb5-32" title="32">          open<span class="op">={</span><span class="kw">this</span>.<span class="va">state</span>.<span class="at">open</span><span class="op">}</span></a>
+<a class="sourceLine" id="cb5-33" title="33">          onClose<span class="op">={</span>() <span class="kw">=&gt;</span> <span class="kw">this</span>.<span class="at">setState</span>(<span class="op">{</span><span class="dt">open</span><span class="op">:</span> <span class="kw">false</span><span class="op">,</span> <span class="dt">coordinates</span><span class="op">:</span> <span class="kw">null</span><span class="op">}</span>)<span class="op">}</span></a>
+<a class="sourceLine" id="cb5-34" title="34">          coordinates<span class="op">={</span><span class="kw">this</span>.<span class="va">state</span>.<span class="at">coordinates</span><span class="op">}</span></a>
+<a class="sourceLine" id="cb5-35" title="35">        <span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb5-36" title="36">          <span class="op">&lt;</span>img</a>
+<a class="sourceLine" id="cb5-37" title="37">            style<span class="op">={{</span><span class="dt">maxWidth</span><span class="op">:</span> <span class="st">&#39;20vw&#39;</span><span class="op">,</span> <span class="dt">maxHeight</span><span class="op">:</span> <span class="st">&#39;20vh&#39;</span><span class="op">}}</span></a>
+<a class="sourceLine" id="cb5-38" title="38">            src<span class="op">=</span><span class="st">&#39;http://images.my.photo.url&#39;</span> /&gt;</a>
+<a class="sourceLine" id="cb5-39" title="39">        &lt;/MenuSurface<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb5-40" title="40">      &lt;/div<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb5-41" title="41">    )<span class="op">;</span></a>
+<a class="sourceLine" id="cb5-42" title="42">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb5-43" title="43"><span class="op">}</span></a></code></pre></div>
+<blockquote>
+<p>NOTE: The React menu surface component is always hoisted to the body. This is one place the component differs from MDC Web’s version, which gives the option of hoisting/not hoisting. Always hoisting the menu surface to the body allows fixes a few issues, and simplifies the component API.</p>
+</blockquote>
+<h2 id="props">Props</h2>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Prop Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>className</td>
+<td>String</td>
+<td>Classes to be applied to the root element.</td>
+</tr>
+<tr class="even">
+<td>anchorCorner</td>
+<td>Corner</td>
+<td>Sets the corner that the menu surface will be anchored to. See <a href="https://github.com/material-components/material-components-web/blob/master/packages/mdc-menu-surface/constants.js#L74">MDC Web constants.js</a>.</td>
+</tr>
+<tr class="odd">
+<td>anchorElement</td>
+<td>Element</td>
+<td>Sets the anchor element used as an anchor for <code>menu-surface</code> positioning logic. Should contain class <code>.mdc-menu-surface--anchor</code>.</td>
+</tr>
+<tr class="even">
+<td>anchorMargin</td>
+<td>Object*</td>
+<td>Sets the distance from the anchor point that the menu surface should be shown.</td>
+</tr>
+<tr class="odd">
+<td>coordinates</td>
+<td>{x: Number, y: Number}</td>
+<td>Sets the anchor coordinates when menu surface does not use anchorElement.</td>
+</tr>
+<tr class="even">
+<td>open</td>
+<td>Boolean</td>
+<td>Changing value will trigger open/close of the menu surface.</td>
+</tr>
+<tr class="odd">
+<td>quickOpen</td>
+<td>Boolean</td>
+<td>Disables the open/close animation of the menu surface, which makes the open/close instant.</td>
+</tr>
+<tr class="even">
+<td>fixed</td>
+<td>Boolean</td>
+<td>Sets the menu surface to fixed positioning.</td>
+</tr>
+<tr class="odd">
+<td>onClose</td>
+<td>Function</td>
+<td>Callback triggered after menu surface closes.</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<ul>
+<li><div class="line-block">AnchorMargin takes the form of {top: Number, bottom: Number , left: Number , right : Number}</div></li>
+</ul>
+</blockquote>
+<h2 id="sass-mixins">Sass Mixins</h2>
+<p>Sass mixins may be available to customize various aspects of the components. Please refer to the MDC Web repository for more information on what mixins are available, and how to use them.</p>
+<p><a href="https://github.com/material-components/material-components-web/blob/master/packages/mdc-menu-surface/README.md#advanced-sass-mixins">Advanced Sass Mixins</a></p>
+<h2 id="usage-with-icons">Usage with Icons</h2>
+<p>Please see our <a href="../../docs/best-practices.md#importing-font-icons">Best Practices doc</a> when importing or using icon fonts.</p>
+</body>
+</html>

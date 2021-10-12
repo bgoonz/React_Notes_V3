@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>README</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<h1 id="react-dialog">React Dialog</h1>
+<p>A React version of an <a href="https://github.com/material-components/material-components-web/tree/master/packages/mdc-dialog">MDC Dialog</a>.</p>
+<h2 id="installation">Installation</h2>
+<pre><code>npm install @material/react-dialog</code></pre>
+<h2 id="usage">Usage</h2>
+<h3 id="styles">Styles</h3>
+<p>with Sass:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb2-1" title="1"><span class="im">import</span> <span class="st">&#39;@material/react-dialog/index.scss&#39;</span><span class="op">;</span></a></code></pre></div>
+<p>with CSS:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb3-1" title="1"><span class="im">import</span> <span class="st">&quot;@material/react-dialog/dist/dialog.css&quot;</span><span class="op">;</span></a></code></pre></div>
+<h3 id="javascript-instantiation">Javascript Instantiation</h3>
+<h4 id="basic-usage">Basic Usage</h4>
+<p>Below is a basic example of a dialog. <code>&lt;MyDialogContent /&gt;</code> is not defined, but can be any element.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb4-1" title="1"><span class="im">import</span> React<span class="op">,</span> <span class="op">{</span>Component<span class="op">}</span> <span class="im">from</span> <span class="st">&#39;react&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb4-2" title="2"><span class="im">import</span> Dialog<span class="op">,</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb4-3" title="3">  DialogTitle<span class="op">,</span></a>
+<a class="sourceLine" id="cb4-4" title="4">  DialogContent<span class="op">,</span></a>
+<a class="sourceLine" id="cb4-5" title="5">  DialogFooter<span class="op">,</span></a>
+<a class="sourceLine" id="cb4-6" title="6">  DialogButton<span class="op">,</span></a>
+<a class="sourceLine" id="cb4-7" title="7"><span class="op">}</span> <span class="im">from</span> <span class="st">&#39;@material/react-dialog&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb4-8" title="8"></a>
+<a class="sourceLine" id="cb4-9" title="9"><span class="kw">class</span> MyApp <span class="kw">extends</span> Component <span class="op">{</span></a>
+<a class="sourceLine" id="cb4-10" title="10">  state <span class="op">=</span> <span class="op">{</span><span class="dt">isOpen</span><span class="op">:</span> <span class="kw">true</span><span class="op">};</span></a>
+<a class="sourceLine" id="cb4-11" title="11"></a>
+<a class="sourceLine" id="cb4-12" title="12">  <span class="at">render</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb4-13" title="13">    <span class="cf">return</span> (</a>
+<a class="sourceLine" id="cb4-14" title="14">      <span class="op">&lt;</span>Dialog open<span class="op">={</span>isOpen<span class="op">}&gt;</span></a>
+<a class="sourceLine" id="cb4-15" title="15">        <span class="op">&lt;</span>DialogTitle<span class="op">&gt;</span>My Dialog&lt;/DialogTitle<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb4-16" title="16">        <span class="op">&lt;</span>DialogContent<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb4-17" title="17">          <span class="op">&lt;</span>MyDialogContent /<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb4-18" title="18">        &lt;/DialogContent<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb4-19" title="19">        <span class="op">&lt;</span>DialogFooter<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb4-20" title="20">          <span class="op">&lt;</span>DialogButton action<span class="op">=</span><span class="st">&#39;dismiss&#39;</span><span class="op">&gt;</span>Dismiss&lt;/DialogButton<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb4-21" title="21">          <span class="op">&lt;</span>DialogButton action<span class="op">=</span><span class="st">&#39;accept&#39;</span> isDefault<span class="op">&gt;</span>Accept&lt;/DialogButton<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb4-22" title="22">        &lt;/DialogFooter<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb4-23" title="23">      &lt;/Dialog<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb4-24" title="24">    )<span class="op">;</span></a>
+<a class="sourceLine" id="cb4-25" title="25">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb4-26" title="26"><span class="op">}</span></a></code></pre></div>
+<blockquote>
+<p>NOTE: Titles cannot contain leading whitespace due to how <code>mdc-typography-baseline-top()</code> works.</p>
+</blockquote>
+<h3 id="variants">Variants</h3>
+<h3 id="alert-dialog">Alert Dialog</h3>
+<p>The Alert Dialog interrupt users with urgent information, details, or actions.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb5-1" title="1"><span class="im">import</span> React<span class="op">,</span> <span class="op">{</span>Component<span class="op">}</span> <span class="im">from</span> <span class="st">&#39;react&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb5-2" title="2"><span class="im">import</span> Dialog<span class="op">,</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb5-3" title="3">  DialogContent<span class="op">,</span></a>
+<a class="sourceLine" id="cb5-4" title="4">  DialogFooter<span class="op">,</span></a>
+<a class="sourceLine" id="cb5-5" title="5">  DialogButton<span class="op">,</span></a>
+<a class="sourceLine" id="cb5-6" title="6"><span class="op">}</span> <span class="im">from</span> <span class="st">&#39;@material/react-dialog&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb5-7" title="7"></a>
+<a class="sourceLine" id="cb5-8" title="8"><span class="kw">class</span> Alert <span class="kw">extends</span> Component <span class="op">{</span></a>
+<a class="sourceLine" id="cb5-9" title="9">  state <span class="op">=</span> <span class="op">{</span><span class="dt">isOpen</span><span class="op">:</span> <span class="kw">true</span><span class="op">,</span> <span class="dt">action</span><span class="op">:</span> <span class="st">&#39;&#39;</span><span class="op">};</span></a>
+<a class="sourceLine" id="cb5-10" title="10"></a>
+<a class="sourceLine" id="cb5-11" title="11">  <span class="at">render</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb5-12" title="12">    <span class="cf">return</span> (</a>
+<a class="sourceLine" id="cb5-13" title="13">      <span class="op">&lt;</span>Dialog</a>
+<a class="sourceLine" id="cb5-14" title="14">        onClose<span class="op">={</span>(<span class="dt">action</span><span class="op">:</span> string) <span class="kw">=&gt;</span> <span class="kw">this</span>.<span class="at">setState</span>(<span class="op">{</span><span class="dt">isOpen</span><span class="op">:</span> <span class="kw">false</span><span class="op">,</span> action<span class="op">}</span>)<span class="op">}</span></a>
+<a class="sourceLine" id="cb5-15" title="15">        open<span class="op">={</span><span class="kw">this</span>.<span class="va">state</span>.<span class="at">isOpen</span><span class="op">}&gt;</span></a>
+<a class="sourceLine" id="cb5-16" title="16">        <span class="op">&lt;</span>DialogContent<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb5-17" title="17">          <span class="op">&lt;</span>p<span class="op">&gt;</span>Discard Draft<span class="op">?</span>&lt;/p<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb5-18" title="18">        &lt;/DialogContent<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb5-19" title="19">        <span class="op">&lt;</span>DialogFooter<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb5-20" title="20">          <span class="op">&lt;</span>DialogButton action<span class="op">=</span><span class="st">&#39;dismiss&#39;</span><span class="op">&gt;</span>Cancel&lt;/DialogButton<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb5-21" title="21">          <span class="op">&lt;</span>DialogButton action<span class="op">=</span><span class="st">&#39;discard&#39;</span> isDefault<span class="op">&gt;</span>Discard&lt;/DialogButton<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb5-22" title="22">        &lt;/DialogFooter<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb5-23" title="23">      &lt;/Dialog<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb5-24" title="24">    )<span class="op">;</span></a>
+<a class="sourceLine" id="cb5-25" title="25">  }</a>
+<a class="sourceLine" id="cb5-26" title="26">}</a>
+<a class="sourceLine" id="cb5-27" title="27"></a></code></pre></div>
+<h4 id="simple-dialog">Simple Dialog</h4>
+<p>The Simple Dialog contains a list of potential actions. It does not contain buttons.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb6-1" title="1"><span class="im">import</span> React<span class="op">,</span> <span class="op">{</span>Component<span class="op">}</span> <span class="im">from</span> <span class="st">&#39;react&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb6-2" title="2"><span class="im">import</span> Dialog<span class="op">,</span> <span class="op">{</span>DialogTitle<span class="op">,</span> DialogContent<span class="op">}</span> <span class="im">from</span> <span class="st">&#39;@material/react-dialog&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb6-3" title="3"><span class="im">import</span> List<span class="op">,</span> <span class="op">{</span>ListItem<span class="op">,</span> ListItemGraphic<span class="op">,</span> ListItemText<span class="op">}</span> <span class="im">from</span> <span class="st">&#39;@material/react-list&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb6-4" title="4"><span class="im">import</span> MaterialIcon <span class="im">from</span> <span class="st">&#39;@material/react-material-icon&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb6-5" title="5"></a>
+<a class="sourceLine" id="cb6-6" title="6"><span class="kw">class</span> Simple <span class="kw">extends</span> Component <span class="op">{</span></a>
+<a class="sourceLine" id="cb6-7" title="7">  state <span class="op">=</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb6-8" title="8">    <span class="dt">isOpen</span><span class="op">:</span> <span class="kw">true</span></a>
+<a class="sourceLine" id="cb6-9" title="9">    <span class="dt">choices</span><span class="op">:</span> [<span class="st">&#39;user1@example.com&#39;</span><span class="op">,</span> <span class="st">&#39;user2@example.com&#39;</span><span class="op">,</span> <span class="st">&#39;Add Account&#39;</span>]</a>
+<a class="sourceLine" id="cb6-10" title="10">    <span class="dt">action</span><span class="op">:</span> <span class="st">&#39;&#39;</span></a>
+<a class="sourceLine" id="cb6-11" title="11">  <span class="op">};</span></a>
+<a class="sourceLine" id="cb6-12" title="12"></a>
+<a class="sourceLine" id="cb6-13" title="13">  <span class="at">render</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb6-14" title="14">    <span class="cf">return</span> (</a>
+<a class="sourceLine" id="cb6-15" title="15">      <span class="op">&lt;</span>Dialog </a>
+<a class="sourceLine" id="cb6-16" title="16">        open<span class="op">={</span>isOpen<span class="op">}</span> </a>
+<a class="sourceLine" id="cb6-17" title="17">        onClose<span class="op">={</span>(action) <span class="kw">=&gt;</span> <span class="kw">this</span>.<span class="at">setState</span>(<span class="op">{</span>action<span class="op">,</span> <span class="dt">isOpen</span><span class="op">:</span> <span class="kw">false</span><span class="op">}</span>)<span class="op">}&gt;</span></a>
+<a class="sourceLine" id="cb6-18" title="18">        <span class="op">&lt;</span>DialogTitle<span class="op">&gt;</span>Select User&lt;/DialogTitle<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb6-19" title="19">        <span class="op">&lt;</span>DialogContent<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb6-20" title="20">            <span class="op">&lt;</span>List avatarList<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb6-21" title="21">              <span class="op">{</span><span class="va">choices</span>.<span class="at">map</span>((choice<span class="op">,</span> i) <span class="kw">=&gt;</span> (</a>
+<a class="sourceLine" id="cb6-22" title="22">                <span class="op">&lt;</span>ListItem key<span class="op">={</span>i<span class="op">}</span> data<span class="op">-</span>mdc<span class="op">-</span>dialog<span class="op">-</span>action<span class="op">={</span>choice<span class="op">}&gt;</span></a>
+<a class="sourceLine" id="cb6-23" title="23">                  <span class="op">&lt;</span>ListItemGraphic graphic<span class="op">={</span></a>
+<a class="sourceLine" id="cb6-24" title="24">                    <span class="op">&lt;</span>MaterialIcon icon<span class="op">={</span><span class="va">choice</span>.<span class="at">match</span>(<span class="ss">/@/</span>) <span class="op">?</span> <span class="st">&#39;person&#39;</span> : <span class="st">&#39;add&#39;</span><span class="op">}</span>/&gt;</a>
+<a class="sourceLine" id="cb6-25" title="25">                  <span class="op">}</span>/&gt;</a>
+<a class="sourceLine" id="cb6-26" title="26">                  <span class="op">&lt;</span>ListItemText primaryText<span class="op">={</span>choice<span class="op">}</span>/&gt;</a>
+<a class="sourceLine" id="cb6-27" title="27">                &lt;/ListItem<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb6-28" title="28">              ))</a>
+<a class="sourceLine" id="cb6-29" title="29">              <span class="op">}</span></a>
+<a class="sourceLine" id="cb6-30" title="30">            &lt;/List<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb6-31" title="31">        &lt;/DialogContent<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb6-32" title="32">      &lt;/Dialog<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb6-33" title="33">    )<span class="op">;</span></a>
+<a class="sourceLine" id="cb6-34" title="34">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb6-35" title="35"><span class="op">}</span></a></code></pre></div>
+<blockquote>
+<p>NOTES: (1) the inclusion of the <code>avatarList</code>, which aligns with the Simple Dialog spec. (2) the <code>data-mdc-dialog-action</code> which singals the chosen action <code>onClose()</code></p>
+</blockquote>
+<h3 id="confirmation-dialog">Confirmation Dialog</h3>
+<p>The Confirmation Dialog contains a list of choices, and buttons to confirm or cancel. Choices are accompanied by radio buttons (indicating single selection) or checkboxes (indicating multiple selection).</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb7-1" title="1"><span class="im">import</span> React<span class="op">,</span> <span class="op">{</span>Component<span class="op">}</span> <span class="im">from</span> <span class="st">&#39;react&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb7-2" title="2"><span class="im">import</span> Dialog<span class="op">,</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb7-3" title="3">  DialogTitle<span class="op">,</span></a>
+<a class="sourceLine" id="cb7-4" title="4">  DialogContent<span class="op">,</span></a>
+<a class="sourceLine" id="cb7-5" title="5">  DialogFooter<span class="op">,</span></a>
+<a class="sourceLine" id="cb7-6" title="6">  DialogButton<span class="op">,</span></a>
+<a class="sourceLine" id="cb7-7" title="7"><span class="op">}</span> <span class="im">from</span> <span class="st">&#39;@material/react-dialog&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb7-8" title="8"><span class="im">import</span> List<span class="op">,</span> <span class="op">{</span>ListItem<span class="op">,</span> ListItemText<span class="op">}</span> <span class="im">from</span> <span class="st">&#39;@material/react-list&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb7-9" title="9"><span class="im">import</span> Radio<span class="op">,</span> <span class="op">{</span>NativeRadioControl<span class="op">}</span> <span class="im">from</span> <span class="st">&#39;@material/react-radio&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb7-10" title="10"></a>
+<a class="sourceLine" id="cb7-11" title="11"></a>
+<a class="sourceLine" id="cb7-12" title="12"><span class="kw">class</span> Confirmation <span class="kw">extends</span> Component</a>
+<a class="sourceLine" id="cb7-13" title="13">  state <span class="op">=</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb7-14" title="14">    <span class="dt">isOpen</span><span class="op">:</span> <span class="kw">false</span><span class="op">,</span> </a>
+<a class="sourceLine" id="cb7-15" title="15">    <span class="dt">action</span><span class="op">:</span> <span class="st">&#39;&#39;</span><span class="op">,</span> </a>
+<a class="sourceLine" id="cb7-16" title="16">    <span class="dt">selectedIndex</span><span class="op">:</span> <span class="dv">-1</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb7-17" title="17">    <span class="dt">choices</span><span class="op">:</span> [<span class="st">&#39;Never gonna give you up&#39;</span><span class="op">,</span> <span class="st">&#39;Host cross buns&#39;</span><span class="op">,</span> <span class="st">&#39;None&#39;</span>]<span class="op">;</span></a>
+<a class="sourceLine" id="cb7-18" title="18">   <span class="op">};</span></a>
+<a class="sourceLine" id="cb7-19" title="19"></a>
+<a class="sourceLine" id="cb7-20" title="20">  isChecked <span class="op">=</span> (i) <span class="kw">=&gt;</span> i <span class="op">===</span> <span class="kw">this</span>.<span class="va">state</span>.<span class="at">selectedIndex</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb7-21" title="21"></a>
+<a class="sourceLine" id="cb7-22" title="22">  <span class="at">render</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb7-23" title="23">    <span class="cf">return</span> (</a>
+<a class="sourceLine" id="cb7-24" title="24">      <span class="op">&lt;</span>Dialog</a>
+<a class="sourceLine" id="cb7-25" title="25">        onClose<span class="op">={</span>(action) <span class="kw">=&gt;</span> <span class="kw">this</span>.<span class="at">setState</span>(<span class="op">{</span><span class="dt">isOpen</span><span class="op">:</span> <span class="kw">false</span><span class="op">,</span> action<span class="op">}</span>)<span class="op">}</span></a>
+<a class="sourceLine" id="cb7-26" title="26">        open<span class="op">={</span><span class="kw">this</span>.<span class="va">state</span>.<span class="at">isOpen</span><span class="op">}&gt;</span></a>
+<a class="sourceLine" id="cb7-27" title="27">        <span class="op">&lt;</span>DialogTitle<span class="op">&gt;</span>Chose a Phone Ringtone&lt;/DialogTitle<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb7-28" title="28">        <span class="op">&lt;</span>DialogContent<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb7-29" title="29">          <span class="op">&lt;</span>List </a>
+<a class="sourceLine" id="cb7-30" title="30">            singleSelection </a>
+<a class="sourceLine" id="cb7-31" title="31">            handleSelect<span class="op">={</span> (selectedIndex) <span class="kw">=&gt;</span> <span class="kw">this</span>.<span class="at">setState</span>(<span class="op">{</span>selectedIndex<span class="op">}</span>)<span class="op">}</span></a>
+<a class="sourceLine" id="cb7-32" title="32">          <span class="op">&gt;{</span><span class="va">choices</span>.<span class="at">map</span>((choice<span class="op">,</span> i) <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb7-33" title="33">              <span class="kw">let</span> cleanChoice <span class="op">=</span> <span class="va">choice</span>.<span class="at">replace</span>(<span class="ss">/</span><span class="sc">\s</span><span class="ss">/g</span><span class="op">,</span> <span class="st">&#39;-&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb7-34" title="34">              <span class="cf">return</span> (</a>
+<a class="sourceLine" id="cb7-35" title="35">                <span class="op">&lt;</span>ListItem key<span class="op">={</span>i<span class="op">}&gt;</span></a>
+<a class="sourceLine" id="cb7-36" title="36">                  <span class="op">&lt;!--</span> <span class="dt">Note</span><span class="op">:</span> <span class="op">&lt;</span>ListItemGraphic/<span class="op">&gt;</span> will not work here <span class="op">--&gt;</span></a>
+<a class="sourceLine" id="cb7-37" title="37">                  <span class="op">&lt;</span>span className<span class="op">=</span><span class="st">&#39;mdc-list-item__graphic&#39;</span><span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb7-38" title="38">                    <span class="op">&lt;</span>Radio<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb7-39" title="39">                      <span class="op">&lt;</span>NativeRadioControl</a>
+<a class="sourceLine" id="cb7-40" title="40">                        name<span class="op">=</span><span class="st">&#39;ringtone&#39;</span></a>
+<a class="sourceLine" id="cb7-41" title="41">                        value<span class="op">={</span>choice<span class="op">}</span></a>
+<a class="sourceLine" id="cb7-42" title="42">                        id<span class="op">={</span>cleanChoice<span class="op">}</span></a>
+<a class="sourceLine" id="cb7-43" title="43">                        checked<span class="op">={</span><span class="kw">this</span>.<span class="at">isChecked</span>(i)<span class="op">}</span></a>
+<a class="sourceLine" id="cb7-44" title="44">                        onChange<span class="op">={</span>() <span class="kw">=&gt;</span> <span class="op">{}}</span></a>
+<a class="sourceLine" id="cb7-45" title="45">                      /&gt;</a>
+<a class="sourceLine" id="cb7-46" title="46">                    &lt;/Radio<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb7-47" title="47">                  &lt;/span<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb7-48" title="48">                  <span class="op">&lt;</span>label htmlFor<span class="op">={</span>cleanChoice<span class="op">}&gt;</span></a>
+<a class="sourceLine" id="cb7-49" title="49">                    <span class="op">&lt;</span>ListItemText primaryText<span class="op">={</span>choice<span class="op">}</span>/&gt;</a>
+<a class="sourceLine" id="cb7-50" title="50">                &lt;/label<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb7-51" title="51">                &lt;/ListItem<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb7-52" title="52">              )<span class="op">;</span></a>
+<a class="sourceLine" id="cb7-53" title="53">            <span class="op">}</span>)<span class="op">}</span></a>
+<a class="sourceLine" id="cb7-54" title="54">          &lt;/List<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb7-55" title="55">        &lt;/DialogContent<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb7-56" title="56">        <span class="op">&lt;</span>DialogFooter<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb7-57" title="57">          <span class="op">&lt;</span>DialogButton action<span class="op">=</span><span class="st">&#39;dismiss&#39;</span><span class="op">&gt;</span>Cancel&lt;/DialogButton<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb7-58" title="58">          <span class="op">&lt;</span>DialogButton action<span class="op">=</span><span class="st">&#39;confirm&#39;</span> isDefault<span class="op">&gt;</span>Ok&lt;/DialogButton<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb7-59" title="59">        &lt;/DialogFooter<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb7-60" title="60">      &lt;/Dialog<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb7-61" title="61">    )<span class="op">;</span></a>
+<a class="sourceLine" id="cb7-62" title="62">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb7-63" title="63">}</a></code></pre></div>
+<h2 id="props">Props</h2>
+<h3 id="dialog">Dialog</h3>
+<table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Prop Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>autoStackButtons</td>
+<td>Boolean</td>
+<td>reverses the buttons when applying the stacked layout.</td>
+<td><code>true</code></td>
+</tr>
+<tr class="even">
+<td>className</td>
+<td>String</td>
+<td>classes to applied to the root element</td>
+<td>n/a</td>
+</tr>
+<tr class="odd">
+<td>children</td>
+<td>Node</td>
+<td>ReactElement to render in the dialog only available children are <code>DialogTitle</code>,<code>DialogContent</code>, or <code>DialogFooter</code>.</td>
+<td>n/a</td>
+</tr>
+<tr class="even">
+<td>escapeKeyAction</td>
+<td>String</td>
+<td>the action reflected when the Escape key is pressed. Setting to <code>''</code> disables closing via the escape key</td>
+<td><code>close</code></td>
+</tr>
+<tr class="odd">
+<td>id</td>
+<td>String</td>
+<td>the id attribute placed on the root element</td>
+<td><code>mdc-dialog</code></td>
+</tr>
+<tr class="even">
+<td>onClose</td>
+<td>Function (action) =&gt; void</td>
+<td>Callback after the dialog has closed.</td>
+<td>n/a</td>
+</tr>
+<tr class="odd">
+<td>onClosing</td>
+<td>Function (action) =&gt; void</td>
+<td>Callback for when the dialog begins to close.</td>
+<td><code>() =&gt; {}</code></td>
+</tr>
+<tr class="even">
+<td>onOpen</td>
+<td>Function () =&gt; void</td>
+<td>Callback after the dialog has opened</td>
+<td>n/a</td>
+</tr>
+<tr class="odd">
+<td>onOpening</td>
+<td>Function () =&gt; void</td>
+<td>Callback for when the dialog begins to open.</td>
+<td><code>() =&gt; {}</code></td>
+</tr>
+<tr class="even">
+<td>open</td>
+<td>Boolean</td>
+<td>If true opens the dialog. If false closes the dialog</td>
+<td><code>false</code></td>
+</tr>
+<tr class="odd">
+<td>role</td>
+<td>String</td>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/dialog_role">ARIA attribute</a> that specifies the role of dialog. Must be <code>alertdialog</code> or <code>dialog</code></td>
+<td><code>alertdialog</code></td>
+</tr>
+<tr class="even">
+<td>scrimClickAction</td>
+<td>String</td>
+<td>the action reflected when the scrim is clicked. Setting to <code>''</code> disables closing via scrim click</td>
+<td><code>close</code></td>
+</tr>
+<tr class="odd">
+<td>tag</td>
+<td>String</td>
+<td>Customizes the <code>Dialog</code> tag type.</td>
+<td><code>div</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="dialogtitle">DialogTitle</h3>
+<table>
+<thead>
+<tr class="header">
+<th>Prop Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>className</td>
+<td>String</td>
+<td>the classes applied to the root element of <code>DialogTitle</code></td>
+</tr>
+<tr class="even">
+<td>id</td>
+<td>String</td>
+<td>the id attribute placed on the root element.</td>
+</tr>
+<tr class="odd">
+<td>tag</td>
+<td>String</td>
+<td>customizes the <code>DialogTitle</code> tag type. (defaults: <code>h2</code>)</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>NOTE: that <code>id</code> is also set to <code>aria-labelledby</code> on the <code>&lt;Dialog/&gt;</code> element . Additionally, if unset will default to the <code>id</code> of <code>&lt;Dialog/&gt;</code> with the suffix <code>-title</code>.</p>
+</blockquote>
+<h3 id="dialogcontent">DialogContent</h3>
+<table>
+<thead>
+<tr class="header">
+<th>Prop Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>className</td>
+<td>String</td>
+<td>the classes applied to the root element of <code>DialogContent</code></td>
+</tr>
+<tr class="even">
+<td>id</td>
+<td>String</td>
+<td>the id attribute placed on the root element.</td>
+</tr>
+<tr class="odd">
+<td>tag</td>
+<td>String</td>
+<td>customizes the <code>DialogContent</code> tag type. (defaults: <code>div</code>)</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>NOTE: that <code>id</code> value is also set to <code>aria-describedby</code> on the <code>&lt;Dialog/&gt;</code> element. Additionally, if unset will default the to <code>id</code> of <code>&lt;Dialog/&gt;</code> with the suffix <code>-content</code>.</p>
+</blockquote>
+<h3 id="dialogfooter">DialogFooter</h3>
+<table>
+<thead>
+<tr class="header">
+<th>Prop Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>className</td>
+<td>String</td>
+<td>the classes applied to the root element of <code>DialogContent</code></td>
+</tr>
+<tr class="even">
+<td>tag</td>
+<td>String</td>
+<td>customizes the <code>DialogFooter</code> tag type. (defaults: <code>footer</code>)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="dialogbutton">DialogButton</h3>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Prop Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>action</td>
+<td>String</td>
+<td>required action of the button. Returned <code>onClose</code> &amp;&amp; <code>onClosing</code> in <code>&lt;Dialog/&gt;</code></td>
+</tr>
+<tr class="even">
+<td>className</td>
+<td>String</td>
+<td>the classes applied to the root element of <code>DialogButton</code></td>
+</tr>
+<tr class="odd">
+<td>isDefault</td>
+<td>Boolean</td>
+<td>represents the default action, triggered by pressing the Enter key (defaults: <code>false</code>)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="sass-mixins">Sass Mixins</h2>
+<p>Sass mixins may be available to customize various aspects of the Components. Please refer to the MDC Web repository for more information on what mixins are available, and how to use them.</p>
+<p><a href="https://github.com/material-components/material-components-web/blob/master/packages/mdc-dialog/README.md#sass-mixins">Advanced Sass Mixins</a></p>
+</body>
+</html>

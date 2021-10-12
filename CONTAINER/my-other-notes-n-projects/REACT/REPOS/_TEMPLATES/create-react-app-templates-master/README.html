@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>README</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<h1 id="create-react-app-templates">Create React App Templates</h1>
+<p>Preconfigured templates for your next create-react-app project.</p>
+<h3 id="getting-started">Getting Started</h3>
+<ol type="1">
+<li>Use template published on NPM</li>
+</ol>
+<p>or</p>
+<ol type="1">
+<li>Fork or Clone this repository.</li>
+<li>From the directory you want to create the new application in, run the following command:</li>
+</ol>
+<pre><code>create-react-app &lt;app-name&gt; --scripts-version @reedsa/react-scripts --internal-testing-template &lt;template&gt;</code></pre>
+<ul>
+<li>Replace <code>&lt;app-name&gt;</code> with the name of your project</li>
+<li>Replace <code>&lt;template&gt;</code> with the relative path to the template (starting with <code>./</code> or <code>../</code>) or the name of the template published on NPM.</li>
+</ul>
+<blockquote>
+<p><strong>Example using NPM package:</strong></p>
+<p>Create a “beautiful-sass-app” project with the “sass” template published on NPM using this command:</p>
+</blockquote>
+<pre><code>create-react-app beautiful-sass-app --scripts-version @reedsa/react-scripts --internal-testing-template @reedsa/sass-template</code></pre>
+<blockquote>
+<p><strong>Example using local template:</strong></p>
+<p>Create a “sweet-redux-app” project alongside the create-react-app-templates project with the “accelerator” template using this command:</p>
+</blockquote>
+<pre><code>create-react-app excellent-redux-app --scripts-version @reedsa/react-scripts --internal-testing-template ./create-react-app-templates/packages/accelerator</code></pre>
+<h3 id="templates">Templates</h3>
+<p>This repository contains templates that can be used by create-react-app when bootstrapping an application.</p>
+<h5 id="default">default</h5>
+<p>This is the base template from create-react-app that any new templates should use as a starting point.</p>
+<h5 id="accelerator">Accelerator</h5>
+<p>Based on the original <a href="https://github.com/marcgarreau/accelerator">accelerator</a> starter kit for a React and Redux application. Special thanks to all the <a href="https://github.com/marcgarreau/accelerator/graphs/contributors">contributors</a> for making this possible.</p>
+<pre><code>create-react-app awesome-react-accelerator-app --scripts-version @reedsa/react-scripts --internal-testing-template @reedsa/accelerator-template</code></pre>
+<h5 id="redux">Redux</h5>
+<p>Great starting point for your next React and Redux application. Includes a few patterns such as asynchronous requests, logging in with a username and password. Requires a separate server with the proper API endpoints to respond to the requests.</p>
+<pre><code>create-react-app incredible-react-redux-app --scripts-version @reedsa/react-scripts --internal-testing-template @reedsa/redux-template</code></pre>
+<h5 id="sass">Sass</h5>
+<p>Uses the <a href="https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md#adding-a-css-preprocessor-sass-less-etc">recommended approach</a> for integrating with Sass, a CSS Preprocessor. The node-sass-chokidar package addresses some issues with node-sass.</p>
+<pre><code>create-react-app sweet-react-sass-app --scripts-version @reedsa/react-scripts --internal-testing-template @reedsa/sass-template</code></pre>
+<h5 id="more-templates">More Templates</h5>
+<p>We’re always happy to consider more templates for this project. Please review the <a href=".github/CONTRIBUTING.md">contributing guide</a> to submit a new template.</p>
+<p>Here are a few others that might be useful: * Express: Run your application on an <a href="http://expressjs.com/">express</a> server. * Flow * Material Components Web * Storybook * CircleCI configuration for automated deployments * Deployment with Heroku * Deployment with AWS</p>
+</body>
+</html>

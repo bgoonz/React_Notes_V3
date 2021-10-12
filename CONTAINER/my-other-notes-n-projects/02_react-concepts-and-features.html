@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>02_react-concepts-and-features</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<h1 id="react-concepts-and-features">React Concepts And Features</h1>
+<hr />
+<!-- @import "[TOC]" {cmd="toc" depthFrom=2 depthTo=6 orderedList=false} -->
+<!-- code_chunk_output -->
+<ul>
+<li><a href="#modularity">Modularity</a></li>
+<li><a href="#easy-to-start">Easy to start</a></li>
+<li><a href="#declarative-programming">Declarative programming</a></li>
+<li><a href="#reusability">Reusability</a></li>
+<li><a href="#one-flow-of-data">One-flow of data</a></li>
+<li><a href="#the-virtual-dom">The “virtual DOM”</a></li>
+<li><a href="#speed">Speed</a></li>
+<li><a href="#what-you-learned">What you learned</a></li>
+</ul>
+<!-- /code_chunk_output -->
+<hr />
+<p>In this article, you will gain insight into why you may want to use React for the front-end portion of your application, the part that runs in the browser, as opposed to using plain-old vanilla JavaScript, that is, just the JavaScript found in the browser.</p>
+<h2 id="modularity">Modularity</h2>
+<p>Unlike the mess of code that you can create with event listeners and template strings in your JavaScript code to manipulate the DOM by adding, updating, and removing elements from it, React provides modularity from the ground up. If you see modularity, understanding where code is that’s running, then React is for you.</p>
+<h2 id="easy-to-start">Easy to start</h2>
+<p>You don’t need any special tools to use basic React. You can just import some files and get to work using the <code>createElement</code> method that React provides to define reusable “components” for what appears in the browser. They can be as simple as a really cool button, or as complex as Facebook’s Web UI.</p>
+<p>For more complex applications, there are may tools available to you to get a fully-functioning React application running from a single command on the command line, tools such as <em>Create React App</em>. This handy tools will create a full React application with live reload, testing, and support for things like advanced CSS manipulation.</p>
+<h2 id="declarative-programming">Declarative programming</h2>
+<p>In the same way that you use HTML to <em>declare</em> what the user interface should look like, React provides the same mechanism in its element-based programming API, either through the <code>createElement</code> method or the higher-level language known as JSX.</p>
+<h2 id="reusability">Reusability</h2>
+<p>React encourages you to think in terms of reusability as you construct the user interface from elements and components that you create. It works best when you think of the page as pieces of UI working in harmony with one another. When you make a list or a button or a product card, you can then reuse those components to show different data that your UI demands to show.</p>
+<h2 id="one-flow-of-data">One-flow of data</h2>
+<p>React applications are built as a combination of parent and child components. As the names suggest, each child component has a parent and a parent component will have one or more child components. Components receive data via an argument traditionally named <code>props</code>. Parent components can decide the data that its children should show by passing only a subset of what it has to its children. Data is never passed up from the child to the parent. Because you always know which way data flows, you can more easily debug your application to determine where the data display or event handling code is.</p>
+<h2 id="the-virtual-dom">The “virtual DOM”</h2>
+<p>You may have come to the conclusion that writing things like</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb1-1" title="1"><span class="va">el</span>.<span class="at">innerHTML</span> <span class="op">=</span> <span class="vs">`</span></a>
+<a class="sourceLine" id="cb1-2" title="2"><span class="vs">  &lt;table&gt;</span></a>
+<a class="sourceLine" id="cb1-3" title="3"><span class="vs">    &lt;tbody&gt;`</span> <span class="op">+</span></a>
+<a class="sourceLine" id="cb1-4" title="4">      <span class="va">arr</span>.<span class="at">map</span>(item <span class="kw">=&gt;</span> <span class="vs">`&lt;tr&gt;&lt;td&gt;</span><span class="sc">${</span><span class="va">item</span>.<span class="at">name</span><span class="sc">}</span><span class="vs">&lt;/td&gt;&lt;/tr&gt;`</span>)</a>
+<a class="sourceLine" id="cb1-5" title="5">    <span class="op">+</span> <span class="vs">`&lt;/tbody&gt;</span></a>
+<a class="sourceLine" id="cb1-6" title="6"><span class="vs">  &lt;/table&gt;</span></a>
+<a class="sourceLine" id="cb1-7" title="7"><span class="vs">`</span><span class="op">;</span></a></code></pre></div>
+<p>is hard to debug, maintain, and use in the long run. React solves this problem by providing a virtual DOM (in memory) that acts as an agent between the developer and the real DOM. The virtual DOM is a lot more user-friendly for developers.</p>
+<h2 id="speed">Speed</h2>
+<p>Due to the use of a virtual DOM, React handles changes to a Web page more intelligently than just string manipulation. It is constantly monitors the virtual DOM for changes. It very efficiently reconciles changes in the virtual DOM with what it has already produced in the real DOM. This is what makes React one of the speediest front-end libraries available.</p>
+<h2 id="what-you-learned">What you learned</h2>
+<p>You’ll learn more about these in the upcoming videos and over the next couple of days. Happy Reacting!</p>
+<p>You found out that React has a variety of good points that encourage you to choose it as the means to build your front-end:</p>
+<ul>
+<li>React encourages modular development</li>
+<li>React is easy to use, easy to start with, and has some great tools</li>
+<li>React follows the declarative programming style</li>
+<li>React encourages reusability in your code</li>
+<li>React has one way that data flows, which makes it much easier to reason about the code</li>
+<li>React uses a “virtual DOM” to make changes to the real DOM very fast and efficient</li>
+</ul>
+</body>
+</html>

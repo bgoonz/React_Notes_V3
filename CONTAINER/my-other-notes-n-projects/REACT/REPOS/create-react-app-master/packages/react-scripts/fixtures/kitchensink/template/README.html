@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>README</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<h1 id="contributing-to-create-react-apps-e2e-tests">Contributing to Create React App’s E2E tests</h1>
+<p>This is an end to end kitchensink test suite, but has multiple usages in it.</p>
+<h2 id="running-the-test-suite">Running the test suite</h2>
+<p>Tests are automatically run by the CI tools. In order to run them locally, without having to manually install and configure everything, the <code>yarn e2e:docker</code> CLI command can be used.</p>
+<p>This is a script that runs a <strong>Docker</strong> container, where the node version, git branch to clone, test suite, and whether to run it with <code>yarn</code> or <code>npm</code> can be chosen. Run <code>yarn e2e:docker --help</code> to get additional info.</p>
+<p>If you need guidance installing <strong>Docker</strong>, you should follow their <a href="https://docs.docker.com/engine/installation/">official docs</a>.</p>
+<h2 id="writing-tests">Writing tests</h2>
+<p>Each time a new feature is added, it is advised to add at least one test covering it.</p>
+<p>Features are categorized by their scope:</p>
+<ul>
+<li><p><em>env</em>, all those which deal with environment variables (e.g. <code>NODE_PATH</code>)</p></li>
+<li><p><em>syntax</em>, all those which showcase a single EcmaScript syntax feature that is expected to be transpiled by <strong>Babel</strong></p></li>
+<li><p><em>webpack</em>, all those which make use of webpack settings, loaders or plugins</p></li>
+</ul>
+<h3 id="using-it-as-unit-tests">Using it as Unit Tests</h3>
+<p>In it’s most basic for this serve as a collection of unit tests on a single functionality.</p>
+<p>Unit tests are written in a <code>src/features/**/*.test.js</code> file located in the same folder as the feature they test, and usually consist of a <code>ReactDOM.render</code> call.</p>
+<p>These tests are run by <strong>jest</strong> and the environment is <code>test</code>, so that it resembles how a <strong>Create React App</strong> application is tested.</p>
+<h3 id="using-it-as-integration-tests">Using it as Integration Tests</h3>
+<p>This suite tests how the single features as before behave while development and in production. A local HTTP server is started, then every single feature is loaded, one by one, to be tested.</p>
+<p>Test are written in <code>integration/{env|syntax|webpack}.test.js</code>, depending on their scope.</p>
+<p>For every test case added there is only a little chore to do:</p>
+<ul>
+<li><p>a <code>case</code> statement must be added in <code>src/App.js</code>, which performs a dynamic <code>import()</code> of the feature</p></li>
+<li><p>add a test case in the appropriate integration test file, which calls and awaits <code>initDOM</code> with the previous <code>SwitchCase</code> string</p></li>
+</ul>
+<p>A usual flow for the test itself is something similar to:</p>
+<ul>
+<li><p>add an <code>id</code> attribute in a target HTML tag in the feature itself</p></li>
+<li><p>since <code>initDOM</code> returns a <code>Document</code> element, the previous <code>id</code> attribute is used to target the feature’s DOM and <code>expect</code> accordingly</p></li>
+</ul>
+</body>
+</html>

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>01_front-end-history</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<h1 id="react">React</h1>
+<hr />
+<!-- @import "[TOC]" {cmd="toc" depthFrom=2 depthTo=6 orderedList=false} -->
+<!-- code_chunk_output -->
+<ul>
+<li><a href="#react">React</a>
+<ul>
+<li><a href="#a-front-end-timeline">A front-end timeline</a></li>
+<li><a href="#react-2013">React (2013)</a></li>
+<li><a href="#using-tools-with-react">Using tools with React</a></li>
+<li><a href="#choosing-react">Choosing React</a></li>
+<li><a href="#what-youve-just-seen">What you’ve just seen</a></li>
+</ul></li>
+</ul>
+<!-- /code_chunk_output -->
+<hr />
+<p>You’ve been using what we call <em>vanilla JavaScript</em> (often referred to as <em>Vanilla.js</em>) to build your front-end applications. And, you may have noticed that it’s <em>hard</em>. Creating strings to put new DOM into the page <em>should</em> be easier.</p>
+<p>In this article, you will find out more about React and why you should consider using it as a way to build separate front-end apps.</p>
+<h2 id="a-front-end-timeline">A front-end timeline</h2>
+<p>Lots of JavaScript/CSS libraries and frameworks have been invented to ease the pain of front-end development. Here’s an abbreviated list of some of the more noteworthy ones in chronological order. Please click on each of the links and just quickly browse each of these libraries’ Web sites to get a feel for the functionality each provides you.</p>
+<ul>
+<li>[script.aculo.us]: (2005) This is one of the first libraries that started easing this by adding special effects and dynamic content for client-side development.</li>
+<li>[dojo]: (2005) This toolkit added a log of non-visual and visual components that allowed developers to rapidly develop AJAX-enabled applications.</li>
+<li>[YUI]: (2006) A full framework that provided dynamic loading of scripts, events, visual components, data binding, and a philosophy on how to build client-side applications.</li>
+<li>[Knockout]: (2010) This is a standalone JavaScript implementation of the [Model-View-ViewModel] pattern used to build very fast dynamic components for client-side applications. It is the progenitor of many other libraries, include React.</li>
+<li>[AngularJS]: (2011) This framework from Google built on the success of Knockout and introduced a full set of utilities and philosophies to build modular client-side applications. (The current version has been branded [Angular].) In the rewrite of Angular to make the idea of a component a first-order concept, many developers left and joined the React community.</li>
+<li>[Elm]: (2012) This is an entirely new <em>language</em> used to build front-end applications. You write your front-end application in Elm. Then, you “compile” it. The Elm “compiler” translates all of the source code written in Elm to highly-tuned JavaScript so that it runs really fast in your Web browser. It claims that by using Elm that your front-end code will have “no runtime exceptions” which is a bold (and mostly true) claim.</li>
+</ul>
+<h2 id="react-2013">React (2013)</h2>
+<p>In an effort to make its own Web front-end more maintainable, Facebook decided to build its own JavaScript-based library to create fast and functional front-end Web applications. Thus, React was born.</p>
+<p>React manages the <strong>creation and updating of DOM nodes in your Web page</strong>. It does not do AJAX. It does not do services. It does not do local storage. It does not provide a pretty CSS framework for you. It just dynamically renders stuff into the DOM</p>
+<p>Because of Facebook’s immense popularity as a developer-centric organization, React was quickly adopted across the software-development industry, eclipsing the use of all other front-end libraries and frameworks for many years. React is still considered the <em>standard</em> front-end library to use to build modern Web applications.</p>
+<p>React is <em>unopinionated</em> about many aspects of front-end development. It doesn’t care how you make AJAX calls. It doesn’t really care about how your page is laid out. It has a few simple rules that you must follow, and <em>It Just Works</em>. You’ll learn about those in the next article, <em>React Concepts and Features</em>.</p>
+<p>Working with plain old React became a real chore for anything non-trivial, so they invented a new language to help write React applications. That language is called JSX, or JavaScript eXtension. It looks like a mixture of JavaScript and HTML (technically, XML).</p>
+<p>Instead of writing Vanilla.js like this to create some DOM elements based on some data that comes back from an API call. Don’t worry about understanding what you see. You will get the opportunity to learn more about all of this in later articles, lectures, and projects.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb1-1" title="1"><span class="at">fetch</span>(<span class="st">&#39;https://example.com/api/people&#39;</span>)</a>
+<a class="sourceLine" id="cb1-2" title="2">  .<span class="at">then</span>(response <span class="kw">=&gt;</span> <span class="va">response</span>.<span class="at">json</span>())</a>
+<a class="sourceLine" id="cb1-3" title="3">  .<span class="at">then</span>(people <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb1-4" title="4">    <span class="kw">const</span> html <span class="op">=</span> <span class="st">&#39;&lt;ul&gt;&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb1-5" title="5">    <span class="cf">for</span> (<span class="kw">let</span> person <span class="kw">of</span> people) <span class="op">{</span></a>
+<a class="sourceLine" id="cb1-6" title="6">      html <span class="op">+=</span> <span class="vs">`&lt;li&gt;</span><span class="sc">${</span><span class="va">person</span>.<span class="at">lastName</span><span class="sc">}</span><span class="vs">, </span><span class="sc">${</span><span class="va">person</span>.<span class="at">firstName</span><span class="sc">}</span><span class="vs">&lt;/li&gt;`</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb1-7" title="7">    <span class="op">}</span></a>
+<a class="sourceLine" id="cb1-8" title="8">    html <span class="op">+=</span> <span class="st">&#39;&lt;/ul&gt;&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb1-9" title="9">    <span class="va">document</span>.<span class="at">querySelector</span>(<span class="st">&#39;#people-list&#39;</span>).<span class="at">innerHTML</span> <span class="op">=</span> html<span class="op">;</span></a>
+<a class="sourceLine" id="cb1-10" title="10">  <span class="op">}</span>)<span class="op">;</span></a></code></pre></div>
+<p>You would write something like this using JSX.</p>
+<pre class="jsx"><code>function PeopleList(props) {
+  return (
+    &lt;ul&gt;
+      {props.people.map(person =&gt; (
+        &lt;li&gt;{person.lastName}, {person.firstName}&lt;/li&gt;
+      ))}
+    &lt;/ul&gt;
+  );
+}
+
+const peopleListElement = document.querySelector(&#39;#people-list&#39;);
+fetch(&#39;https://example.com/api/people&#39;)
+  .then(response =&gt; response.json())
+  .then(people =&gt; {
+    const props = { people };
+    ReactDOM.render(&lt;PeopleList props={props}/&gt;, peopleListElement);
+  });</code></pre>
+<p>In this “simple” example, you may think, “Well, that’s like twice the code! Why would I do that?” Great question! When you start building <em>lots of components</em>, lots of different pieces of visual widgets to put together to manage a complex graphical human interface, it becomes really nice to put each of those functions (or classes) into their own files and <em>organize</em> the code so you know where everything is.</p>
+<h2 id="using-tools-with-react">Using tools with React</h2>
+<p>Oh, and the tools! Because software developers constantly look for ways to make things easier, the tools that have grown up around React are amazing. You’ll install React DevTools, a new tab in the Developer Tools that lets you see how React actually works in the browser, much like the <em>Elements</em> tab does for just HTML elements.</p>
+<p>[React DevTools]</p>
+<p>There is <code>create-react-app</code>, an extensible command-line tool that helps you generate standard React applications. We’ll show you how to use it with custom templates, too, to help remove some of the over-engineered stuff that comes with the standard template.</p>
+<p>Because browsers only understand JavaScript and not JSX, there is an extra “build step” involved with creating React-based front-end applications. There are a variety of tools that software developers use to make this happen. The most popular, right now, is to use a tool called [Webpack]. Later this week, you’ll get into some of the details about how that works.</p>
+<p>[Webpack.js]</p>
+<p>A really popular feature of modern React development is the concept of <em>hot module replacement</em> (HMR). When you make changes to your source code, right now, you must refresh your browser to see the changes. HMR sense what has changed and send the change to the browser without you having to refresh it. The changes are delivered in <em>real-time</em>, updating the UI for you as you make changes to the source code. It is almost magic what happens.</p>
+<p>After using React on their own massively complex Web interface, React developers decided they did need to have an opinion about how to architect the state of their application, that is, how to allow discretely different parts of their Web page to consume and modify data received from back-end APIs. This introduced the <em>Flux architecture</em> which you will learn about next week.</p>
+<p>[Flux]</p>
+<h2 id="choosing-react">Choosing React</h2>
+<p>Because of the tools, because of the popularity, because (seemingly) <em>everyone</em> knows React, choosing React to power your front-end is an easy choice. Hundreds of thousands of other software developes know and love React. Tens of thousands of companies use React on their Web sites and to power their Web applications.</p>
+<p>There are other viable modern alternatives to React. However, they are almost all heavily influenced by React’s design and implementation. Learning them is like learning React and different parts of its vibrant ecosystem. React has really become the stick by which all other front-end libraries are measured. And will likely continue to hold that position for the near future.</p>
+<h2 id="what-youve-just-seen">What you’ve just seen</h2>
+<p>In this article, you’ve discovered that React is one of many front-end libraries that you can use to build dynamic data-driven front-end JavaScript-based modern Web applications. You’ve seen that React has its own language, JSX, to easily write React applications. In addition to an easy-to-use language to write in, the React team and community have created a bunch of tools and utilities for you to use and add to your React application; these will help you inspect and debug your application as you build it. React is a <em>safe</em> choice because you learn about it here and in hundreds of other places.</p>
+</body>
+</html>

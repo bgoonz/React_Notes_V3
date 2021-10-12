@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>README</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<h1 id="sass">Sass</h1>
+<p>Project template for create-react-app that includes Sass.</p>
+<p>This project was bootstrapped from a template using a forked version of <a href="https://github.com/facebookincubator/create-react-app">Create React App</a>. For more information view the <a href="https://github.com/reedsa/create-react-app-templates">template</a> or the <a href="https://github.com/reedsa/create-react-app">forked Create React App</a>.</p>
+<p>You can find the most recent version of the Create React App guide <a href="https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md">here</a>.</p>
+<h2 id="getting-started">Getting Started</h2>
+<ul>
+<li><code>yarn start</code> to run the application</li>
+<li><code>yarn test</code> to run tests</li>
+<li><code>yarn lint</code> to run additional linter rules</li>
+</ul>
+<h2 id="deployment">Deployment</h2>
+<ul>
+<li><strong>Heroku</strong> - Use the create-react-app buildpack as described <a href="https://blog.heroku.com/deploying-react-with-zero-configuration">here</a>.
+<ul>
+<li>Note: If using node-sass, set the config var for most reliable results: <code>heroku config:set NODE_MODULES_CACHE=false</code>.</li>
+</ul></li>
+<li><strong>AWS (S3/CloudFront)</strong> - Follow along with this <a href="https://medium.com/@omgwtfmarc/deploying-create-react-app-to-s3-or-cloudfront-48dae4ce0af">blog post</a>.</li>
+</ul>
+<h2 id="features">Features</h2>
+<h3 id="react-and-redux">React and Redux</h3>
+<ul>
+<li><p><strong>create-react-app</strong> - Facebook’s <a href="https://github.com/facebookincubator/create-react-app">create-react-app</a> is used to get a production-ready React application quickly off the ground. It configures things like Webpack and Babel, so you don’t have to. In order to further customize this starter kit with some additional tools, like Sass, we leverage a fork of react-scripts, called <a href="https://github.com/kitze/custom-react-scripts">custom-react-scripts</a>.</p></li>
+<li><p><strong>Redux</strong> - We use <a href="https://github.com/reactjs/redux">Redux</a> to manage complex application state. In this app, you’ll find an example workflow to maintain the value for a counter.</p></li>
+</ul>
+<h3 id="testing">Testing</h3>
+<ul>
+<li><p><strong>Jest</strong> - Facebook’s <a href="https://github.com/facebook/jest/">Jest</a> is configured out of the box with create-react-app. This comprehensive testing tool is built on top of Jasmine and will satisfy most of your unit testing needs.</p></li>
+<li><p><strong>Enzyme</strong> - <a href="https://github.com/airbnb/enzyme">Enzyme</a> is pulled in to facilitate easier component testing.</p></li>
+</ul>
+<h3 id="routing">Routing</h3>
+<ul>
+<li><p><strong>React Router</strong> - The latest overhaul from <a href="https://reacttraining.com/react-router/web">React Router</a>. Please note that this library diverges significantly from previous versions.</p></li>
+<li><p><strong>react-router-redux</strong> - <a href="https://github.com/ReactTraining/react-router/tree/master/packages/react-router-redux">react-router-redux</a> also underwent an overhaul to keep up with React Router, and has been merged into the React Router codebase.</p></li>
+</ul>
+<h3 id="styling">Styling</h3>
+<ul>
+<li><p><strong>Sass</strong> - <a href="http://sass-lang.com/">Sass</a> is used as the CSS Preprocessor within the unejected create-react-app. The recommended package is <a href="https://github.com/michaelwayman/node-sass-chokidar">node-sass-chokidar</a></p></li>
+<li><p><strong>react-md</strong> - A material design (md) component library for React. View the docs <a href="https://react-md.mlaursen.com/">here</a>.</p></li>
+<li><p><strong>material-design-icons</strong> - Icons that can be used within react-md components. Available icons and docs are listed <a href="https://material.io/icons/">here</a>.</p></li>
+</ul>
+<h3 id="tooling">Tooling</h3>
+<ul>
+<li><p><strong>Prettier</strong> - <a href="https://github.com/prettier/prettier">Prettier</a> is wonderful magic that formats your JavaScript code for you. It is configured (using <a href="https://github.com/typicode/husky">Husky</a>) to format JavaScript code in a precommit hook. You may also choose to configure Prettier with your editor of choice.</p></li>
+<li><p><strong>Hot Module Replacement (HMR)</strong> - <a href="https://webpack.js.org/concepts/hot-module-replacement">Hot Module Replacement</a> updates the application on code change, without refreshing. Redux state is maintained.</p></li>
+<li><p><strong>Redux DevTools - Chrome extension</strong> - The app is configured to allow this <a href="https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd?hl=en">Chrome extension</a> to display dispatched actions and state diffs.</p></li>
+</ul>
+</body>
+</html>

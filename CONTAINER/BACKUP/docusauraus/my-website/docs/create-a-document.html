@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Create a Document</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Create a Document</h1>
+</header>
+<p>Documents are pages with a <strong>sidebar</strong>, a <strong>previous/next navigation</strong> and many other useful features.</p>
+<h2 id="create-a-document">Create a Document</h2>
+<p>Create a markdown file at <code>docs/my-doc.md</code>:</p>
+<h2 id="mdx-titledocshello.md">```mdx title=“docs/hello.md”</h2>
+<h2 id="title-hello-world">title: Hello, World!</h2>
+<h2 id="hello-world">Hello, World!</h2>
+<p>This is your first document in <strong>Docusaurus</strong>, Congratulations! ```</p>
+<p>A new document is now available at <code>http://localhost:3000/docs/hello</code>.</p>
+<h2 id="add-your-document-to-the-sidebar">Add your document to the sidebar</h2>
+<p>Add <code>hello</code> to the <code>sidebars.js</code> file:</p>
+<p><code>diff title="sidebars.js" module.exports = {   docs: [     {       type: 'category',       label: 'Docusaurus Tutorial', -     items: ['getting-started', 'create-a-doc', ...], +     items: ['getting-started', 'create-a-doc', 'hello', ...],     },   ], };</code></p>
+</body>
+</html>

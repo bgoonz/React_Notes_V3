@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Supported Browsers and Features</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Supported Browsers and Features</h1>
+</header>
+<h2 id="supported-browsers">Supported Browsers</h2>
+<p>By default, the generated project supports all modern browsers. Support for Internet Explorer 9, 10, and 11 requires polyfills. For a set of polyfills to support older browsers, use <a href="https://github.com/facebook/create-react-app/blob/master/packages/react-app-polyfill/README.md">react-app-polyfill</a>.</p>
+<h2 id="supported-language-features">Supported Language Features</h2>
+<p>This project supports a superset of the latest JavaScript standard. In addition to <a href="https://github.com/lukehoban/es6features">ES6</a> syntax features, it also supports:</p>
+<ul>
+<li><a href="https://github.com/rwaldron/exponentiation-operator">Exponentiation Operator</a> (ES2016).</li>
+<li><a href="https://github.com/tc39/ecmascript-asyncawait">Async/await</a> (ES2017).</li>
+<li><a href="https://github.com/tc39/proposal-object-rest-spread">Object Rest/Spread Properties</a> (ES2018).</li>
+<li><a href="https://github.com/tc39/proposal-dynamic-import">Dynamic import()</a> (stage 4 proposal)</li>
+<li><a href="https://github.com/tc39/proposal-class-public-fields">Class Fields and Static Properties</a> (part of stage 3 proposal).</li>
+<li><a href="https://facebook.github.io/react/docs/introducing-jsx.html">JSX</a>, <a href="./adding-flow">Flow</a> and <a href="./adding-typescript">TypeScript</a>.</li>
+</ul>
+<p>Learn more about <a href="https://tc39.github.io/process-document/">different proposal stages</a>.</p>
+<p>While we recommend using experimental proposals with some caution, Facebook heavily uses these features in the product code, so we intend to provide <a href="https://medium.com/@cpojer/effective-javascript-codemods-5a6686bb46fb">codemods</a> if any of these proposals change in the future.</p>
+<p>Note that <strong>this project includes no <a href="https://github.com/facebook/create-react-app/blob/master/packages/react-app-polyfill/README.md">polyfills</a></strong> by default.</p>
+<p>If you use any other ES6+ features that need <strong>runtime support</strong> (such as <code>Array.from()</code> or <code>Symbol</code>), make sure you are <a href="https://github.com/facebook/create-react-app/blob/master/packages/react-app-polyfill/README.md">including the appropriate polyfills manually</a>, or that the browsers you are targeting already support them.</p>
+<h2 id="configuring-supported-browsers">Configuring Supported Browsers</h2>
+<p>By default, the generated project includes a <a href="https://github.com/browserslist/browserslist"><code>browserslist</code></a> configuration in your <code>package.json</code> file to target a broad range of browsers based on global usage (<code>&gt; 0.2%</code>) for production builds, and modern browsers for development. This gives a good development experience, especially when using language features such as async/await, but still provides high compatibility with many browsers in production.</p>
+<p>The <code>browserslist</code> configuration controls the outputted JavaScript so that the emitted code will be compatible with the browsers specified. The <code>production</code> list will be used when creating a production build by running the <code>build</code> script, and the <code>development</code> list will be used when running the <code>start</code> script. You can use <a href="https://browserl.ist/?q=%3E+0.2%25%2C+not+dead%2C+not+op_mini+all">https://browserl.ist</a> to see the browsers supported by your configured <code>browserslist</code>.</p>
+<p>Here is an example <code>browserslist</code> that is specified in <code>package.json</code>:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb1-1" title="1"><span class="er">&quot;browserslist&quot;:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb1-2" title="2">  <span class="dt">&quot;production&quot;</span><span class="fu">:</span> <span class="ot">[</span></a>
+<a class="sourceLine" id="cb1-3" title="3">    <span class="st">&quot;&gt;0.2%&quot;</span><span class="ot">,</span></a>
+<a class="sourceLine" id="cb1-4" title="4">    <span class="st">&quot;not dead&quot;</span><span class="ot">,</span></a>
+<a class="sourceLine" id="cb1-5" title="5">    <span class="st">&quot;not op_mini all&quot;</span></a>
+<a class="sourceLine" id="cb1-6" title="6">  <span class="ot">]</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb1-7" title="7">  <span class="dt">&quot;development&quot;</span><span class="fu">:</span> <span class="ot">[</span></a>
+<a class="sourceLine" id="cb1-8" title="8">    <span class="st">&quot;last 1 chrome version&quot;</span><span class="ot">,</span></a>
+<a class="sourceLine" id="cb1-9" title="9">    <span class="st">&quot;last 1 firefox version&quot;</span><span class="ot">,</span></a>
+<a class="sourceLine" id="cb1-10" title="10">    <span class="st">&quot;last 1 safari version&quot;</span></a>
+<a class="sourceLine" id="cb1-11" title="11">  <span class="ot">]</span></a>
+<a class="sourceLine" id="cb1-12" title="12"><span class="fu">}</span></a></code></pre></div>
+<blockquote>
+<p>Note that this does not include polyfills automatically for you. You will still need to polyfill language features (see above) as needed based on the browsers you are supporting.</p>
+</blockquote>
+<blockquote>
+<p>When editing the <code>browserslist</code> config, you may notice that your changes don’t get picked up right away. This is due to an <a href="https://github.com/babel/babel-loader/issues/690">issue in babel-loader</a> not detecting the change in your <code>package.json</code>. A quick solution is to delete the <code>node_modules/.cache</code> folder and try again.</p>
+</blockquote>
+</body>
+</html>

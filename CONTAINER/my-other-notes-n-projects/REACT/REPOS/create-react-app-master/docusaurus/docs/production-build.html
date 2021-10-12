@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Creating a Production Build</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Creating a Production Build</h1>
+</header>
+<p><code>npm run build</code> creates a <code>build</code> directory with a production build of your app. Inside the <code>build/static</code> directory will be your JavaScript and CSS files. Each filename inside of <code>build/static</code> will contain a unique hash of the file contents. This hash in the file name enables <a href="#static-file-caching">long term caching techniques</a>.</p>
+<p>When running a production build of freshly created Create React App application, there are a number of <code>.js</code> files (called <em>chunks</em>) that are generated and placed in the <code>build/static/js</code> directory:</p>
+<p><code>main.[hash].chunk.js</code></p>
+<ul>
+<li>This is your <em>application</em> code. <code>App.js</code>, etc.</li>
+</ul>
+<p><code>[number].[hash].chunk.js</code></p>
+<ul>
+<li>These files can either be <em>vendor</em> code, or <a href="code-splitting.md">code splitting chunks</a>. <em>Vendor</em> code includes modules that you’ve imported from within <code>node_modules</code>. One of the potential advantages with splitting your <em>vendor</em> and <em>application</em> code is to enable <a href="#static-file-caching">long term caching techniques</a> to improve application loading performance. Since <em>vendor</em> code tends to change less often than the actual <em>application</em> code, the browser will be able to cache them separately, and won’t re-download them each time the app code changes.</li>
+</ul>
+<p><code>runtime-main.[hash].js</code></p>
+<ul>
+<li>This is a small chunk of <a href="https://webpack.js.org/configuration/optimization/#optimization-runtimechunk">webpack runtime</a> logic which is used to load and run your application. The contents of this will be embedded in your <code>build/index.html</code> file by default to save an additional network request. You can opt out of this by specifying <code>INLINE_RUNTIME_CHUNK=false</code> as documented in our <a href="advanced-configuration.md">advanced configuration</a>, which will load this chunk instead of embedding it in your <code>index.html</code>.</li>
+</ul>
+<p>If you’re using <a href="code-splitting.md">code splitting</a> to split up your application, this will create additional chunks in the <code>build/static</code> folder as well.</p>
+<h2 id="static-file-caching">Static File Caching</h2>
+<p>Each file inside of the <code>build/static</code> directory will have a unique hash appended to the filename that is generated based on the contents of the file, which allows you to use <a href="https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/http-caching#invalidating_and_updating_cached_responses">aggressive caching techniques</a> to avoid the browser re-downloading your assets if the file contents haven’t changed. If the contents of a file changes in a subsequent build, the filename hash that is generated will be different.</p>
+<p>To deliver the best performance to your users, it’s best practice to specify a <code>Cache-Control</code> header for <code>index.html</code>, as well as the files within <code>build/static</code>. This header allows you to control the length of time that the browser as well as CDNs will cache your static assets. If you aren’t familiar with what <code>Cache-Control</code> does, see <a href="https://jakearchibald.com/2016/caching-best-practices/">this article</a> for a great introduction.</p>
+<p>Using <code>Cache-Control: max-age=31536000</code> for your <code>build/static</code> assets, and <code>Cache-Control: no-cache</code> for everything else is a safe and effective starting point that ensures your user’s browser will always check for an updated <code>index.html</code> file, and will cache all of the <code>build/static</code> files for one year. Note that you can use the one year expiration on <code>build/static</code> safely because the file contents hash is embedded into the filename.</p>
+<h2 id="profiling">Profiling</h2>
+<p>ReactDOM automatically supports profiling in development mode for v16.5+, but since profiling adds some small additional overhead it is opt-in for production mode. You can opt-in by using the <code>--profile</code> flag. Use <code>npm run build -- --profile</code> or <code>yarn build --profile</code> to enable profiling in the production build. See the <a href="https://reactjs.org/docs/optimizing-performance.html#profiling-components-with-the-devtools-profiler">React docs</a> for details about profiling using the React DevTools.</p>
+</body>
+</html>

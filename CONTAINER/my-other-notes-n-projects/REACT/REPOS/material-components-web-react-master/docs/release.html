@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>release</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<h1 id="release">Release</h1>
+<h2 id="pre-release-process">Pre-release Process</h2>
+<h3 id="create-pr-to-merge-rc-release-candidate-branch-into-master">Create PR to merge RC (release candidate) branch into master</h3>
+<p>If this is a scheduled release most of the development is on a release candidate branch (ie. rc0.7.x, rc0.8.0). You will need to create a PR merging it into master. Have someone quickly review it – all issues should have been addressed during the regular PR process for each commit into the RC branch.</p>
+<blockquote>
+<p>The CLA may not pass since some contributors may be from outside the org. This is ok so long as the previous PRs were signed.</p>
+</blockquote>
+<p>Once merged into master, continue the process below.</p>
+<h3 id="release-steps">Release Steps</h3>
+<h4 id="setup-local-environment">Setup Local Environment</h4>
+<blockquote>
+<p>Employees are supposed to do this as part of onboarding, but we’ve put it here as a reminder.</p>
+</blockquote>
+<pre><code>npm login</code></pre>
+<p>This will log you into NPM.</p>
+<h4 id="announce">Announce</h4>
+<p>Ping the Slack announcements channel first! This will let other members of the team know NOT to merge PRs during this release process.</p>
+<h4 id="pull">Pull</h4>
+<blockquote>
+<p>Ensure you are on the master branch</p>
+</blockquote>
+<pre><code>git checkout master &amp;&amp; git pull --tags</code></pre>
+<p>This will pull the latest of master onto your git clone.</p>
+<h4 id="pre-release">Pre-Release</h4>
+<pre><code>. ./scripts/release/pre-release.sh</code></pre>
+<p>This will ensure you can publish/tag, build all release files, and ensure all tests pass prior to releasing (lerna will update versions for us in the next step).</p>
+<h4 id="release-1">Release</h4>
+<pre><code>$(npm bin)/lerna publish --skip-git</code></pre>
+<p>When lerna prompts for version, go with the next minor release (or patch if its a bug fix release).</p>
+<p>This command will update the <code>package-lock.json</code> file(maybe), <code>package.json</code> files of the updated packages, and <code>lerna.json</code>.</p>
+<h4 id="changelog">CHANGELOG</h4>
+<p>To update the CHANGELOG.md file, you will need to install (conventional-changelog-cli)[https://github.com/conventional-changelog/conventional-changelog/tree/master/packages/conventional-changelog-cli].</p>
+<pre><code>npm install -g conventional-changelog-cli</code></pre>
+<p>Once installed run:</p>
+<pre><code>conventional-changelog -p angular -i CHANGELOG.md -s -r 1</code></pre>
+<p>The <code>CHANGELOG.md</code> will also be updated with the new version’s changes. You will need to edit the header of the file at the very least. If you need to <strong>edit</strong> any other parts of the <code>CHANGELOG.md</code>, now is the time.</p>
+<h4 id="commit-changes">Commit Changes</h4>
+<pre><code>git add packages/ package-lock.json lerna.json CHANGELOG.md .travis.yml
+git commit -m &quot;chore: Publish&quot;</code></pre>
+<h4 id="create-git-tag-post-release.sh">Create Git Tag (post-release.sh)</h4>
+<pre><code>. ./scripts/release/post-release.sh</code></pre>
+<p>This script will create the new version’s Git tag.</p>
+<h4 id="push">Push</h4>
+<pre><code>git push &amp;&amp; git push --tags</code></pre>
+<p>This will ensure the commits and tags are pushed to the remote git repository.</p>
+<blockquote>
+<p>If you run into CLI errors such as:</p>
+</blockquote>
+<pre><code>remote: error: GH006: Protected branch update failed for refs/heads/master.
+remote: error: Required status check &quot;cla/google&quot; is expected. At least one approved review is required by reviewers with write access.
+To github.com:material-components/material-components-web-react.git
+! [remote rejected]   master -&gt; master (protected branch hook declined)
+You may need to update Github&#39;s master branch protection:</code></pre>
+<blockquote>
+<ol type="1">
+<li>Go to: settings page</li>
+<li>Uncheck Include administrators</li>
+<li>Click Save changes</li>
+<li>Perform git push &amp;&amp; git push –tags</li>
+<li>Don’t forget to toggle on Include administrators &amp; click Save changes</li>
+</ol>
+</blockquote>
+<h3 id="post-process">Post Process</h3>
+<p>These steps can be done anytime after the release. But should be taken care of before any new development is started.</p>
+<h4 id="create-new-rc-branch">Create new RC Branch</h4>
+<p>If it hasn’t already been done, you will need to create a new RC branch. If the next release is v0.8.0, create a branch named <code>rc0.8.0</code> and push this to the Github repository for everyone to branch from. Once complete follow the remaining checklist items:</p>
+<ul>
+<li>[ ] <a href="https://github.com/material-components/material-components-web-react/settings/branch_protection_rules/new">Add a new protection rule</a> to the RC Branch.
+<ul>
+<li>branch name should match new RC branch name.</li>
+<li>check the following:
+<ul>
+<li><code>Require pull request reviews before merging</code></li>
+<li><code>Require status checks to pass before merging</code></li>
+<li><code>Require branches to be up to date before merging</code>
+<ul>
+<li><code>Travis CI - Pull Request</code></li>
+<li><code>cla/google</code></li>
+</ul></li>
+<li><code>Include administrators</code></li>
+<li><code>Restrict who can push to matching branches</code></li>
+<li>Should look like this: <img src="https://user-images.githubusercontent.com/579873/48811016-b4814400-ece0-11e8-9a7e-1a9838ecf764.png" alt="protectionrule" /></li>
+</ul></li>
+</ul></li>
+</ul>
+</body>
+</html>
