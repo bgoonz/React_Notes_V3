@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Super Simple Intro To React</title>
+    <style>
+      * {
+        font-family: Georgia, Cambria, "Times New Roman", Times, serif;
+      }
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+      }
+      h1 {
+        font-size: 50px;
+        margin-bottom: 17px;
+        color: #333;
+      }
+      h2 {
+        font-size: 24px;
+        line-height: 1.6;
+        margin: 30px 0 0 0;
+        margin-bottom: 18px;
+        margin-top: 33px;
+        color: #333;
+      }
+      h3 {
+        font-size: 30px;
+        margin: 10px 0 20px 0;
+        color: #333;
+      }
+      header {
+        width: 640px;
+        margin: auto;
+      }
+      section {
+        width: 640px;
+        margin: auto;
+      }
+      section p {
+        margin-bottom: 27px;
+        font-size: 20px;
+        line-height: 1.6;
+        color: #333;
+      }
+      section img {
+        max-width: 640px;
+      }
+      footer {
+        padding: 0 20px;
+        margin: 50px 0;
+        text-align: center;
+        font-size: 12px;
+      }
+      .aspectRatioPlaceholder {
+        max-width: auto !important;
+        max-height: auto !important;
+      }
+      .aspectRatioPlaceholder-fill {
+        padding-bottom: 0 !important;
+      }
+      header,
+      section[data-field="subtitle"],
+      section[data-field="description"] {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <article class="h-entry">
+      <header>
+        <h1 class="p-name">Super Simple Intro To React</h1>
+      </header>
+      <section data-field="subtitle" class="p-summary">
+        This is a basic introduction for those who feel overwhelmed by the vast
+        microcosm that is the React ecosystem!
+      </section>
+      <section data-field="body" class="e-content">
+        <section name="cc7b" class="section section--body section--first">
+          <div class="section-divider"><hr class="section-divider" /></div>
+          <div class="section-content">
+            <div class="section-inner sectionLayout--insetColumn">
+              <h3
+                name="bb0f"
+                id="bb0f"
+                class="graf graf--h3 graf--leading graf--title"
+              >
+                Super Simple Intro To React
+              </h3>
+              <h4
+                name="ea6d"
+                id="ea6d"
+                class="graf graf--h4 graf-after--h3 graf--subtitle"
+              >
+                This is a basic introduction for those who feel overwhelmed by
+                the vast microcosm that is the React ecosystem!
+              </h4>
+              <figure
+                name="0d78"
+                id="0d78"
+                class="graf graf--figure graf-after--h4"
+              >
+                <img
+                  class="graf-image"
+                  data-image-id="0*3wl1cp6IklxaFuBi.gif"
+                  data-width="800"
+                  data-height="600"
+                  data-is-featured="true"
+                  src="https://cdn-images-1.medium.com/max/800/0*3wl1cp6IklxaFuBi.gif"
+                />
+              </figure>
+              <h3
+                name="9cd6"
+                id="9cd6"
+                class="graf graf--h3 graf-after--figure"
+              >
+                Here’s a sandbox for you to practice with:
+              </h3>
+              <p name="4df2" id="4df2" class="graf graf--p graf-after--h3">
+                <a
+                  href="https://codesandbox.io/s/intro-to-react-i72er"
+                  data-href="https://codesandbox.io/s/intro-to-react-i72er"
+                  class="markup--anchor markup--p-anchor"
+                  rel="nofollow noopener"
+                  target="_blank"
+                  >https://codesandbox.io/s/intro-to-react-i72er</a
+                >
+              </p>
+              <p name="f382" id="f382" class="graf graf--p graf-after--p">
+                <a
+                  href="https://codesandbox.io/s/intro-to-react-i72er"
+                  data-href="https://codesandbox.io/s/intro-to-react-i72er"
+                  class="markup--anchor markup--p-anchor"
+                  rel="nofollow noopener"
+                  target="_blank"
+                  >https://codesandbox.io/s/intro-to-react-i72er</a
+                >
+              </p>
+              <h3 name="8e3f" id="8e3f" class="graf graf--h3 graf-after--p">
+                Introduction to React
+              </h3>
+              <ul class="postList">
+                <li name="714e" id="714e" class="graf graf--li graf-after--h3">
+                  Simply a nice library that turns data into DOM.
+                </li>
+                <li name="dffd" id="dffd" class="graf graf--li graf-after--li">
+                  <code class="markup--code markup--li-code"
+                    ><strong class="markup--strong markup--li-strong"
+                      >Tree Diffing</strong
+                    ></code
+                  > : Fast comparison and patching of data by comparing the
+                  current virtual DOM and new virtual DOM - updating only the
+                  pieces that change.
+                </li>
+                <li name="d53b" id="d53b" class="graf graf--li graf-after--li">
+                  <code class="markup--code markup--li-code"
+                    >It&#39;s just a tree with some fancy diffing</code
+                  >
+                </li>
+              </ul>
+              <h3 name="049b" id="049b" class="graf graf--h3 graf-after--li">
+                Create Element
+              </h3>
+              <p name="cbcd" id="cbcd" class="graf graf--p graf-after--h3">
+                <strong class="markup--strong markup--p-strong"
+                  >From JavaScript To DOM</strong
+                >
+              </p>
+              <ul class="postList">
+                <li name="9d7c" id="9d7c" class="graf graf--li graf-after--p">
+                  The
+                  <code class="markup--code markup--li-code"
+                    >React.createElement</code
+                  >
+                  function has the following form:
+                </li>
+              </ul>
+              <pre name="9d3d" id="9d3d" class="graf graf--pre graf-after--li">
+React.createElement(type, [props], [...children]);</pre
+              >
+              <ul class="postList">
+                <li name="44e8" id="44e8" class="graf graf--li graf-after--pre">
+                  <code class="markup--code markup--li-code"
+                    ><strong class="markup--strong markup--li-strong"
+                      >Type</strong
+                    ></code
+                  > : Type of element to create, i.e. a string for an HTML
+                  element or a reference to a function or class that is a React
+                  component.
+                </li>
+                <li name="7359" id="7359" class="graf graf--li graf-after--li">
+                  <code class="markup--code markup--li-code"
+                    ><strong class="markup--strong markup--li-strong"
+                      >Props</strong
+                    ></code
+                  > : Object that contains data to render the element.
+                </li>
+                <li name="5990" id="5990" class="graf graf--li graf-after--li">
+                  <code class="markup--code markup--li-code"
+                    ><strong class="markup--strong markup--li-strong"
+                      >Children</strong
+                    ></code
+                  > : Children of the element, as many as you want.
+                </li>
+              </ul>
+              <p name="b8e6" id="b8e6" class="graf graf--p graf-after--li">
+                <strong class="markup--strong markup--p-strong"
+                  >Creating elements</strong
+                >
+              </p>
+              <ul class="postList">
+                <li name="03dd" id="03dd" class="graf graf--li graf-after--p">
+                  Our rendering goal:
+                </li>
+              </ul>
+              <pre
+                name="a600"
+                id="a600"
+                class="graf graf--pre graf-after--li"
+              >&lt;ul&gt;<br>  &lt;li class=&quot;selected&quot;&gt;<br>    &lt;a href=&quot;/pets&quot;&gt;Pets&lt;/a&gt;<br>  &lt;/li&gt;<br>  &lt;li&gt;<br>    &lt;a href=&quot;/owners&quot;&gt;Owners&lt;/a&gt;<br>  &lt;/li&gt;<br>&lt;/ul&gt;</pre>
+              <ul class="postList">
+                <li name="57a5" id="57a5" class="graf graf--li graf-after--pre">
+                  There are five tags to create:
+                </li>
+                <li name="9d1c" id="9d1c" class="graf graf--li graf-after--li">
+                  One <code class="markup--code markup--li-code">ul</code>
+                </li>
+                <li name="30d1" id="30d1" class="graf graf--li graf-after--li">
+                  Two <code class="markup--code markup--li-code">li</code>
+                </li>
+                <li name="dd2d" id="dd2d" class="graf graf--li graf-after--li">
+                  Two <code class="markup--code markup--li-code">a</code>
+                </li>
+              </ul>
+              <blockquote
+                name="0f99"
+                id="0f99"
+                class="graf graf--blockquote graf-after--li"
+              >
+                There are certain attributes we want to appear in the DOM for
+                these tags as well:
+              </blockquote>
+              <ul class="postList">
+                <li
+                  name="1bce"
+                  id="1bce"
+                  class="graf graf--li graf-after--blockquote"
+                >
+                  Each <code class="markup--code markup--li-code">li</code> has
+                  a <code class="markup--code markup--li-code">class</code> (or
+                  <code class="markup--code markup--li-code">className</code> in
+                  React)
+                </li>
+                <li name="19af" id="19af" class="graf graf--li graf-after--li">
+                  Both
+                  <code class="markup--code markup--li-code">a</code> ele&#39;s
+                  have
+                  <code class="markup--code markup--li-code">href</code>
+                  attributes
+                </li>
+                <li name="5dfe" id="5dfe" class="graf graf--li graf-after--li">
+                  Also keep in mind the parent child relationships happening
+                  between the tags.
+                </li>
+                <li name="cb9e" id="cb9e" class="graf graf--li graf-after--li">
+                  <code class="markup--code markup--li-code">ul</code> is the
+                  parent of both
+                  <code class="markup--code markup--li-code">li</code>
+                </li>
+                <li name="7a63" id="7a63" class="graf graf--li graf-after--li">
+                  Each <code class="markup--code markup--li-code">li</code> has
+                  an <code class="markup--code markup--li-code">a</code> element
+                  as a child
+                </li>
+                <li name="c0be" id="c0be" class="graf graf--li graf-after--li">
+                  Each <code class="markup--code markup--li-code">a</code> has a
+                  <code class="markup--code markup--li-code">text content</code>
+                  child
+                </li>
+              </ul>
+              <pre
+                name="ec6f"
+                id="ec6f"
+                class="graf graf--pre graf-after--li"
+              >React.createElement(<br>  &quot;ul&quot;,<br>  null,<br>  React.createElement(<br>    &quot;li&quot;,<br>    { className: &quot;selected&quot; },<br>    React.createElement(&quot;a&quot;, { href: &quot;/pets&quot; }, &quot;Pets&quot;)<br>  ),<br>  React.createElement(<br>    &quot;li&quot;,<br>    null,<br>    React.createElement(&quot;a&quot;, { href: &quot;/owners&quot; }, &quot;Owners&quot;)<br>  )<br>);</pre>
+              <p name="97a4" id="97a4" class="graf graf--p graf-after--pre">
+                <strong class="markup--strong markup--p-strong"
+                  >Converting to virtual DOM</strong
+                >
+              </p>
+              <ul class="postList">
+                <li name="9df1" id="9df1" class="graf graf--li graf-after--p">
+                  After you set up your
+                  <code class="markup--code markup--li-code"
+                    >React.createElement</code
+                  >, you use
+                  <code class="markup--code markup--li-code">React.render</code>
+                  to take the value returned from cE and a DOM node to insert
+                  into the conversion of the real DOM.
+                </li>
+              </ul>
+              <pre
+                name="0ca1"
+                id="0ca1"
+                class="graf graf--pre graf-after--li"
+              >// Put the element tree in a variable<br>const navList = React.createElement(<br>  &quot;ul&quot;,<br>  null,<br>  React.createElement(<br>    &quot;li&quot;,<br>    { className: &quot;selected&quot; },<br>    React.createElement(&quot;a&quot;, { href: &quot;/pets&quot; }, &quot;Pets&quot;)<br>  ),<br>  React.createElement(<br>    &quot;li&quot;,<br>    null,<br>    React.createElement(&quot;a&quot;, { href: &quot;/owners&quot; }, &quot;Owners&quot;)<br>  )<br>);</pre>
+              <pre
+                name="6884"
+                id="6884"
+                class="graf graf--pre graf-after--pre"
+              >// Get a DOM node for React to render to<br>const mainElement = document.querySelector(&quot;main&quot;);</pre>
+              <pre
+                name="07be"
+                id="07be"
+                class="graf graf--pre graf-after--pre"
+              >// Give React the element tree and the target<br>ReactDOM.render(navList, mainElement);</pre>
+              <blockquote
+                name="4aab"
+                id="4aab"
+                class="graf graf--pullquote graf-after--pre"
+              >
+                JS Code =&gt; Virtual DOM =&gt; Real Dom
+              </blockquote>
+              <p
+                name="a3ad"
+                id="a3ad"
+                class="graf graf--p graf-after--pullquote"
+              >
+                <strong class="markup--strong markup--p-strong">Updates</strong>
+              </p>
+              <ul class="postList">
+                <li name="8e8f" id="8e8f" class="graf graf--li graf-after--p">
+                  If you call React.render a second or multiple times it just
+                  checks the existing Virtual DOM and it knows which smaller
+                  areas to change.
+                </li>
+              </ul>
+              <p name="b5b2" id="b5b2" class="graf graf--p graf-after--li">
+                <strong class="markup--strong markup--p-strong"
+                  >Thinking in Components</strong
+                >
+              </p>
+              <ul class="postList">
+                <li name="fb8f" id="fb8f" class="graf graf--li graf-after--p">
+                  Components are pieces of reusable front-end pieces.
+                </li>
+                <li name="1f67" id="1f67" class="graf graf--li graf-after--li">
+                  Components should be Single Responsibility Principle
+                  compliant.
+                </li>
+              </ul>
+              <h3 name="4ba0" id="4ba0" class="graf graf--h3 graf-after--li">
+                Create Element
+              </h3>
+              <p name="43be" id="43be" class="graf graf--p graf-after--h3">
+                <code class="markup--code markup--p-code"
+                  ><strong class="markup--strong markup--p-strong"
+                    >React.createElement Demo</strong
+                  ></code
+                >
+              </p>
+              <ul class="postList">
+                <li name="3f55" id="3f55" class="graf graf--li graf-after--p">
+                  Can import non-local dependencies with
+                  <code class="markup--code markup--li-code"
+                    >import &#39;package-link&#39;</code
+                  >
+                </li>
+              </ul>
+              <pre name="978e" id="978e" class="graf graf--pre graf-after--li">
+const App = () =&gt; React.createElement(&quot;h1&quot;, null, &quot;Hello, Programmers!&quot;);</pre
+              >
+              <pre
+                name="3a22"
+                id="3a22"
+                class="graf graf--pre graf-after--pre"
+              >const target = document.querySelector(&quot;main&quot;);<br>const app = React.createElement(App, null);<br>// Give React the element tree and the target<br>ReactDOM.render(app, target);</pre>
+              <ul class="postList">
+                <li name="74b4" id="74b4" class="graf graf--li graf-after--pre">
+                  Remember when importing modules from other files you have to
+                  denote the file type in the import statement.
+                </li>
+              </ul>
+              <p name="4b96" id="4b96" class="graf graf--p graf-after--li">
+                <strong class="markup--strong markup--p-strong"
+                  >HTML Original</strong
+                >
+              </p>
+              <pre
+                name="9f25"
+                id="9f25"
+                class="graf graf--pre graf-after--p"
+              >&lt;section class=&quot;clue&quot;&gt;<br>  &lt;h1 class=&quot;clue__title&quot;&gt;Clue$ 268530&lt;/h1&gt;<br>  &lt;div class=&quot;clue__question&quot;&gt;<br>      2009: I dreamed a Dream<br>  &lt;/div&gt;<br>  &lt;div class=&quot;clue__category&quot;&gt;<br>      &lt;&lt;unparsed&gt;&gt;<br>  &lt;/div&gt;<br>  &lt;div class=&quot;clue__amount&quot;&gt;<br>      $800<br>  &lt;/div&gt;<br>&lt;/section&gt;</pre>
+              <p name="de64" id="de64" class="graf graf--p graf-after--pre">
+                <strong class="markup--strong markup--p-strong"
+                  >React Version</strong
+                >
+              </p>
+              <pre
+                name="553c"
+                id="553c"
+                class="graf graf--pre graf-after--p"
+              >const Clue = () =&gt;<br>  React.createElement(<br>    &quot;section&quot;,<br>    { className: &quot;clue&quot; },<br>    React.createElement(&quot;h1&quot;, { className: &quot;clue__title&quot; }, &quot;Title&quot;),<br>    React.createElement(&quot;div&quot;, { className: &quot;clue__question&quot; }, &quot;?&quot;),<br>    React.createElement(&quot;div&quot;, { className: &quot;clue__category&quot; }, &quot;Category&quot;),<br>    React.createElement(&quot;div&quot;, { className: &quot;clue__amount&quot; }, &quot;$800&quot;)<br>  );</pre>
+              <ul class="postList">
+                <li name="9fe5" id="9fe5" class="graf graf--li graf-after--pre">
+                  Because
+                  <code class="markup--code markup--li-code">class</code> is a
+                  reserved keyword in JS, in React we can use
+                  <code class="markup--code markup--li-code">className</code> to
+                  assign a class to an element.
+                </li>
+                <li name="9cb2" id="9cb2" class="graf graf--li graf-after--li">
+                  Remember the data that goes into createElement: element type,
+                  data to pass into the element, and then children.
+                </li>
+                <li name="0021" id="0021" class="graf graf--li graf-after--li">
+                  <code class="markup--code markup--li-code"
+                    ><strong class="markup--strong markup--li-strong"
+                      >props</strong
+                    ></code
+                  > : Properties;
+                </li>
+                <li name="bf4e" id="bf4e" class="graf graf--li graf-after--li">
+                  To handle certain values that are initially undefined, we can
+                  use
+                  <code class="markup--code markup--li-code">defaultProps</code
+                  >.
+                </li>
+              </ul>
+              <pre
+                name="47f4"
+                id="47f4"
+                class="graf graf--pre graf-after--li"
+              >Clue.defaultProps = {<br>  category: {},<br>};</pre>
+              <ul class="postList">
+                <li name="6dcb" id="6dcb" class="graf graf--li graf-after--pre">
+                  You can change in the devTools Network tab the internet speed
+                  to check for values that may be undefined to hangle with
+                  defaultProps.
+                </li>
+                <li name="5608" id="5608" class="graf graf--li graf-after--li">
+                  If we fetch multiple pieces of data, we can render many things
+                  by using
+                  <code class="markup--code markup--li-code">map</code>.
+                </li>
+                <li name="3ad4" id="3ad4" class="graf graf--li graf-after--li">
+                  You need to assign a unique key to each of the clues.
+                </li>
+                <li name="8b0d" id="8b0d" class="graf graf--li graf-after--li">
+                  We need to keep track of them individually so that React can
+                  easily refer to a specific one if there is an issue.<br /><code
+                    class="markup--code markup--li-code"
+                    >clue =&gt; { key:clue.id, ...clue }</code
+                  >
+                </li>
+              </ul>
+              <pre
+                name="9310"
+                id="9310"
+                class="graf graf--pre graf-after--li"
+              >const App = (props) =&gt;<br>  React.createElement(<br>    &quot;h1&quot;,<br>    null,<br>    props.clues.map((clue) =&gt;<br>      React.createElement(Clue, { key: clue.id, ...clue })<br>    )<br>  );</pre>
+              <pre name="edca" id="edca" class="graf graf--pre graf-after--pre">
+export default App;</pre
+              >
+              <ul class="postList">
+                <li name="0eb5" id="0eb5" class="graf graf--li graf-after--pre">
+                  Note: JSX is preferred over React.createElement;
+                </li>
+              </ul>
+              <h3 name="a91a" id="a91a" class="graf graf--h3 graf-after--li">
+                Notes from Hello Programmer Exercise
+              </h3>
+              <ul class="postList">
+                <li name="6f06" id="6f06" class="graf graf--li graf-after--h3">
+                  When you import modules from websites they must have CORs
+                  activated.
+                </li>
+                <li name="5934" id="5934" class="graf graf--li graf-after--li">
+                  These import statements, import
+                  <code class="markup--code markup--li-code"
+                    >global variables</code
+                  >.
+                </li>
+                <li name="905d" id="905d" class="graf graf--li graf-after--li">
+                  When we want to move our code into production we need to
+                  change the imports into the production minified versions.
+                </li>
+              </ul>
+              <pre
+                name="5fb2"
+                id="5fb2"
+                class="graf graf--pre graf-after--li"
+              >import &quot;https://unpkg.com/react@16/umd/react.production.min.js&quot;;<br>import &quot;https://unpkg.com/react-dom@16.13.1/umd/react-dom.production.min.js&quot;;</pre>
+              <ul class="postList">
+                <li name="33ca" id="33ca" class="graf graf--li graf-after--pre">
+                  While we will never actually be creating full apps with just
+                  React.createElement =&gt; it is the enginer that is running
+                  under the hood!
+                </li>
+              </ul>
+              <pre
+                name="e9d6"
+                id="e9d6"
+                class="graf graf--pre graf-after--li"
+              >import &quot;https://unpkg.com/react@16/umd/react.development.js&quot;;<br>import &quot;https://unpkg.com/react-dom@16/umd/react-dom.development.js&quot;;</pre>
+              <pre
+                name="7ed1"
+                id="7ed1"
+                class="graf graf--pre graf-after--pre"
+              >const Links = () =&gt;<br>  React.createElement(<br>    &quot;ul&quot;,<br>    { id: &quot;nav-links&quot; },<br>    React.createElement(<br>      &quot;li&quot;,<br>      { className: &quot;is-selected&quot; },<br>      React.createElement(&quot;a&quot;, { href: &quot;https://bgoonz-blog.netlify.app/&quot; }, &quot;BgoonzBlog2.0&quot;)<br>    ),<br>    React.createElement(<br>      &quot;li&quot;,<br>      null,<br>      React.createElement(&quot;a&quot;, { href: &quot;https://github.com/bgoonz/&quot; }, &quot;Github&quot;)<br>    )<br>  );</pre>
+              <pre
+                name="0648"
+                id="0648"
+                class="graf graf--pre graf-after--pre"
+              >// Set up React Element: Type, Imported Data, Child (Child is Text in this Scenario)<br>// HelloWorld is a function based component<br>const HelloWorld = () =&gt; React.createElement(&quot;h1&quot;, null, &quot;Hello, Programmers&quot;);</pre>
+              <pre
+                name="e2dd"
+                id="e2dd"
+                class="graf graf--pre graf-after--pre"
+              >const AllTogether = () =&gt;<br>  React.createElement(<br>    &quot;div&quot;,<br>    null,<br>    React.createElement(HelloWorld, null),<br>    React.createElement(Links, null)<br>  );</pre>
+              <pre
+                name="2dcf"
+                id="2dcf"
+                class="graf graf--pre graf-after--pre"
+              >// Target the Element to append new Ele<br>const target = document.querySelector(&quot;main&quot;);</pre>
+              <pre
+                name="2f13"
+                id="2f13"
+                class="graf graf--pre graf-after--pre"
+              >// Assign your &#39;App&#39; to your created Elements<br>// We are creating an element from the HelloWorld function.<br>const app = React.createElement(AllTogether, null);</pre>
+              <pre
+                name="f6e2"
+                id="f6e2"
+                class="graf graf--pre graf-after--pre"
+              >// Render from the Virtual Dom to the Actual Dom<br>ReactDOM.render(app, target);</pre>
+              <h3 name="acc4" id="acc4" class="graf graf--h3 graf-after--pre">
+                Introduction to JSX
+              </h3>
+              <ul class="postList">
+                <li name="f398" id="f398" class="graf graf--li graf-after--h3">
+                  <code class="markup--code markup--li-code"
+                    ><strong class="markup--strong markup--li-strong"
+                      >JSX</strong
+                    ></code
+                  > : Javascript Extension, a new language created by React
+                  developers to have an easier way of interacting with the React
+                  API.
+                </li>
+              </ul>
+              <p name="9987" id="9987" class="graf graf--p graf-after--li">
+                <strong class="markup--strong markup--p-strong"
+                  >How to use JSX</strong
+                >
+              </p>
+              <ul class="postList">
+                <li name="1e31" id="1e31" class="graf graf--li graf-after--p">
+                  We will use
+                  <code class="markup--code markup--li-code"
+                    ><strong class="markup--strong markup--li-strong"
+                      >babel</strong
+                    ></code
+                  >
+                  to convert version of modern JS into an older version of
+                  JS.<br /><strong class="markup--strong markup--li-strong"
+                    >React Create Element</strong
+                  >
+                </li>
+              </ul>
+              <pre
+                name="4e50"
+                id="4e50"
+                class="graf graf--pre graf-after--li"
+              >const ExampleComponent = (props) =&gt;<br>  React.createElement(<br>    React.Fragment,<br>    null,<br>    React.createElement(&quot;h1&quot;, null, &quot;Hello!&quot;),<br>    React.createElement(&quot;img&quot;, { src: &quot;https://via.placeholder.com/150&quot; }),<br>    React.createElement(&quot;a&quot;, { href: props.searchUrl }, props.searchText)<br>  );</pre>
+              <p name="a276" id="a276" class="graf graf--p graf-after--pre">
+                <strong class="markup--strong markup--p-strong"
+                  >JSX Version</strong
+                >
+              </p>
+              <pre
+                name="3714"
+                id="3714"
+                class="graf graf--pre graf-after--p"
+              >const ExampleComponent = (props) =&gt; (<br>  &lt;React.Fragment&gt;<br>    &lt;h1&gt;Hello!&lt;/h1&gt;<br>    &lt;img src=&quot;https://via.placeholder.com/150&quot; /&gt;<br>    &lt;a href={props.searchUrl}&gt;{props.searchText}&lt;/a&gt;<br>  &lt;/React.Fragment&gt;<br>);</pre>
+              <ul class="postList">
+                <li name="e8e0" id="e8e0" class="graf graf--li graf-after--pre">
+                  Keep in mind that self closing tags in React must have a
+                  <code class="markup--code markup--li-code"
+                    >forward slash</code
+                  >
+                  to close it.
+                </li>
+              </ul>
+              <h3 name="d69a" id="d69a" class="graf graf--h3 graf-after--li">
+                <strong class="markup--strong markup--h3-strong"
+                  >Properties and Data</strong
+                >
+              </h3>
+              <pre
+                name="61c7"
+                id="61c7"
+                class="graf graf--pre graf-after--h3"
+              >&lt;img src=&quot;https://via.placeholder.com/150&quot; /&gt;;<br>// becomes..<br>React.createElement(&quot;img&quot;, { src: &quot;https://via.placeholder.com/150&quot; });<br>// if we want to pass in data vs just a string literal<br>&lt;a href={props.searchUrl}&gt;{props.searchText}&lt;/a&gt;;<br>// so it becomes..<br>React.createElement(&quot;a&quot;, { href: props.searchUrl }, props.searchText);<br>// if you want the text search uppercase..<br>&lt;a href={props.searchUrl}&gt;{props.searchText.toUpperCase()}&lt;/a&gt;;</pre>
+              <ul class="postList">
+                <li name="8780" id="8780" class="graf graf--li graf-after--pre">
+                  Comments in JSX have the following syntax:
+                </li>
+              </ul>
+              <pre
+                name="366e"
+                id="366e"
+                class="graf graf--pre graf-after--li"
+              >&lt;div&gt;<br>  &lt;h2&gt;This is JSX&lt;/h2&gt;<br>  {/* This is a comment in JSX */}<br>&lt;/div&gt;</pre>
+              <h4 name="4ba8" id="4ba8" class="graf graf--h4 graf-after--pre">
+                <code class="markup--code markup--h4-code"
+                  ><strong class="markup--strong markup--h4-strong"
+                    >Property Names</strong
+                  ></code
+                >:
+              </h4>
+              <ul class="postList">
+                <li name="fcde" id="fcde" class="graf graf--li graf-after--h4">
+                  <code class="markup--code markup--li-code"
+                    ><strong class="markup--strong markup--li-strong"
+                      >checked</strong
+                    ></code
+                  > : Attribute of input components such as checkbox or radio,
+                  use it to set whether the component is checked or not.
+                </li>
+                <li name="ae4c" id="ae4c" class="graf graf--li graf-after--li">
+                  <code class="markup--code markup--li-code"
+                    ><strong class="markup--strong markup--li-strong"
+                      >className</strong
+                    ></code
+                  > : Used to specify a CSS class.
+                </li>
+                <li name="2d7b" id="2d7b" class="graf graf--li graf-after--li">
+                  <code class="markup--code markup--li-code"
+                    ><strong class="markup--strong markup--li-strong"
+                      >dangerouslySetInnerHTML</strong
+                    ></code
+                  > : React&#39;s equivalent of innerHTML because it is risky to
+                  cross-site scripting attacks.
+                </li>
+                <li name="5f13" id="5f13" class="graf graf--li graf-after--li">
+                  <code class="markup--code markup--li-code"
+                    ><strong class="markup--strong markup--li-strong"
+                      >htmlFor</strong
+                    ></code
+                  > : Because
+                  <code class="markup--code markup--li-code">for</code> is
+                  protected keyword, React elements use this instead.
+                </li>
+                <li name="5880" id="5880" class="graf graf--li graf-after--li">
+                  <code class="markup--code markup--li-code"
+                    ><strong class="markup--strong markup--li-strong"
+                      >onChange</strong
+                    ></code
+                  > : Event fired whenever a form field is changed.
+                </li>
+                <li name="fb2b" id="fb2b" class="graf graf--li graf-after--li">
+                  <code class="markup--code markup--li-code"
+                    ><strong class="markup--strong markup--li-strong"
+                      >style</strong
+                    ></code
+                  > : Accepts a JS object with camelCase properties rather than
+                  a CSS string.
+                </li>
+                <li name="8f1c" id="8f1c" class="graf graf--li graf-after--li">
+                  <code class="markup--code markup--li-code"
+                    ><strong class="markup--strong markup--li-strong"
+                      >value</strong
+                    ></code
+                  > : Supported by Input, Select, and TextArea components; use
+                  it to set the value of the component.
+                </li>
+              </ul>
+              <blockquote
+                name="57ae"
+                id="57ae"
+                class="graf graf--pullquote graf-after--li"
+              >
+                <strong class="markup--strong markup--pullquote-strong"
+                  ><em class="markup--em markup--pullquote-em"
+                    >Note: React uses camel-case!!!</em
+                  ></strong
+                >
+              </blockquote>
+              <h4
+                name="cd1e"
+                id="cd1e"
+                class="graf graf--h4 graf-after--pullquote"
+              >
+                <strong class="markup--strong markup--h4-strong"
+                  >The JSX semicolon gotcha</strong
+                >
+              </h4>
+              <ul class="postList">
+                <li name="3d60" id="3d60" class="graf graf--li graf-after--h4">
+                  We wrap what want to return in parenthesis so JS doesn’t auto
+                  add semi-colons after every line and run the code incorrectly.
+                </li>
+              </ul>
+              <pre
+                name="793b"
+                id="793b"
+                class="graf graf--pre graf-after--li"
+              >function App() {<br>  return (<br>    &lt;div&gt;<br>      &lt;h1&gt;Hello!&lt;/h1&gt;<br>      &lt;div&gt;Welcome to JSX.&lt;/div&gt;<br>    &lt;/div&gt;<br>  );<br>}</pre>
+              <h4 name="65c8" id="65c8" class="graf graf--h4 graf-after--pre">
+                <strong class="markup--strong markup--h4-strong"
+                  >create Element equivalent</strong
+                >
+              </h4>
+              <pre name="5a5a" id="5a5a" class="graf graf--pre graf-after--h4">
+is equivalent to</pre
+              >
+              <pre
+                name="02b7"
+                id="02b7"
+                class="graf graf--pre graf-after--pre"
+              >function App() {<br>  return (<br>    React.createElement(<br>      &#39;div&#39;,<br>      null,<br>      React.createElement(&#39;h1&#39;, null, &#39;Hello!&#39;),<br>      React.createElement(&#39;div&#39;, null, &#39;Welcome to JSX.&#39;),<br>    )<br>  );<br>}</pre>
+              <ul class="postList">
+                <li
+                  name="6898"
+                  id="6898"
+                  class="graf graf--li graf-after--pre graf--trailing"
+                >
+                  Just remember if you decided to use the return keyword in a
+                  function to ‘return some JSX’, then make sure you wrap the JSX
+                  in parenthesis.
+                </li>
+              </ul>
+            </div>
+          </div>
+        </section>
+        <section name="a872" class="section section--body section--last">
+          <div class="section-divider"><hr class="section-divider" /></div>
+          <div class="section-content">
+            <div class="section-inner sectionLayout--insetColumn">
+              <p name="554b" id="554b" class="graf graf--p graf--leading">
+                <code class="markup--code markup--p-code"
+                  >npx create-react-app my-app</code
+                >
+              </p>
+              <ul class="postList">
+                <li name="a3ca" id="a3ca" class="graf graf--li graf-after--p">
+                  Single line used to initiate a React application.
+                </li>
+                <li name="61c5" id="61c5" class="graf graf--li graf-after--li">
+                  React has a great toolchain where you can see changes live as
+                  you’re editing your application.
+                </li>
+                <li name="4889" id="4889" class="graf graf--li graf-after--li">
+                  React errors will be rendered directly onto the browser
+                  window.
+                </li>
+                <li name="f917" id="f917" class="graf graf--li graf-after--li">
+                  A downside is that it installs a lot of bloat files.
+                </li>
+                <li name="bdd9" id="bdd9" class="graf graf--li graf-after--li">
+                  Examples of React create Element and JSX equivalent
+                </li>
+              </ul>
+              <pre
+                name="2ede"
+                id="2ede"
+                class="graf graf--pre graf-after--li"
+              >React.createElement(<br>  &quot;a&quot;,<br>  {<br>    className: &quot;active&quot;,<br>    href: &quot;https://github.com/bgoonz/&quot;,<br>  },<br>  &quot;Github&quot;<br>);<br>// JSX Version<br>&lt;a className=&quot;active&quot; href=&quot;https://github.com/bgoonz/&quot;&gt;<br>  Github<br>&lt;/a&gt;;</pre>
+              <pre
+                name="79a2"
+                id="79a2"
+                class="graf graf--pre graf-after--pre"
+              >React.createElement(<br>  OwnerDetails,<br>  {<br>    owner: props.data.owner,<br>    number: props.index + 1,<br>  },<br>  props.name<br>);<br>// JSX Version<br>&lt;OwnerDetails owner={props.data.owner} number={props.index + 1}&gt;<br>  {props.name}<br>&lt;/OwnerDetails&gt;;</pre>
+              <p name="752a" id="752a" class="graf graf--p graf-after--pre">
+                <strong class="markup--strong markup--p-strong"
+                  >More Complex JSX Example</strong
+                >
+              </p>
+              <pre
+                name="10a3"
+                id="10a3"
+                class="graf graf--pre graf-after--p"
+              >const BookPanel = (props) =&gt; {<br>  &lt;section className=&quot;book&quot; id={`book-${props.id}`}&gt;<br>    &lt;h1 className=&quot;book__title&quot;&gt;{props.title}&lt;/h1&gt;<br>    &lt;img src={props.coverUrl} /&gt;<br>    &lt;div className=&quot;book__desc&quot;&gt;{props.description}&lt;/div&gt;<br>  &lt;/section&gt;;<br>};</pre>
+              <h3 name="c68d" id="c68d" class="graf graf--h3 graf-after--pre">
+                My Blog:
+              </h3>
+              <div
+                name="a284"
+                id="a284"
+                class="graf graf--mixtapeEmbed graf-after--h3"
+              >
+                <a
+                  href="https://master--bgoonz-blog.netlify.app/"
+                  data-href="https://master--bgoonz-blog.netlify.app/"
+                  class="markup--anchor markup--mixtapeEmbed-anchor"
+                  title="https://master--bgoonz-blog.netlify.app/"
+                  ><strong class="markup--strong markup--mixtapeEmbed-strong"
+                    >Web-Dev-Hub</strong
+                  ><br /><em class="markup--em markup--mixtapeEmbed-em"
+                    >Memoization, Tabulation, and Sorting Algorithms by Example
+                    Why is looking at runtime not a reliable method of…</em
+                  >master--bgoonz-blog.netlify.app</a
+                ><a
+                  href="https://master--bgoonz-blog.netlify.app/"
+                  class="js-mixtapeImage mixtapeImage u-ignoreBlock"
+                  data-media-id="af3fc5c5ac5465d5303dd17c7af31585"
+                  data-thumbnail-img-id="0*G_7O1SkPnyDxrlzq"
+                  style="
+                    background-image: url(https://cdn-images-1.medium.com/fit/c/160/160/0*G_7O1SkPnyDxrlzq);
+                  "
+                ></a>
+              </div>
+              <h3
+                name="0d52"
+                id="0d52"
+                class="graf graf--h3 graf-after--mixtapeEmbed"
+              >
+                Here are the React Docs In One Markdown File:
+              </h3>
+              <p
+                name="5af3"
+                id="5af3"
+                class="graf graf--p graf-after--h3 graf--trailing"
+              >
+                <a
+                  href="https://gist.github.com/bgoonz/690d80b4f8ac5d359274d98cae87366a"
+                  data-href="https://gist.github.com/bgoonz/690d80b4f8ac5d359274d98cae87366a"
+                  class="markup--anchor markup--p-anchor"
+                  rel="nofollow noopener"
+                  target="_blank"
+                  >https://gist.github.com/bgoonz/690d80b4f8ac5d359274d98cae87366a</a
+                >
+              </p>
+            </div>
+          </div>
+        </section>
+      </section>
+      <footer>
+        <p>
+          By
+          <a href="https://medium.com/@bryanguner" class="p-author h-card"
+            >Bryan Guner</a
+          >
+          on
+          <a href="https://medium.com/p/5c78e4207b7f"
+            ><time class="dt-published" datetime="2021-08-22T09:05:23.275Z"
+              >August 22, 2021</time
+            ></a
+          >.
+        </p>
+        <p>
+          <a
+            href="https://medium.com/@bryanguner/super-simple-intro-to-react-5c78e4207b7f"
+            class="p-canonical"
+            >Canonical link</a
+          >
+        </p>
+        <p>
+          Exported from <a href="https://medium.com">Medium</a> on August 31,
+          2021.
+        </p>
+      </footer>
+    </article>
+  </body>
+</html>

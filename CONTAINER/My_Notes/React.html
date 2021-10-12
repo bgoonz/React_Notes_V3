@@ -1,0 +1,1330 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>React State</title>
+    <style>
+      * {
+        font-family: Georgia, Cambria, "Times New Roman", Times, serif;
+      }
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+      }
+      h1 {
+        font-size: 50px;
+        margin-bottom: 17px;
+        color: #333;
+      }
+      h2 {
+        font-size: 24px;
+        line-height: 1.6;
+        margin: 30px 0 0 0;
+        margin-bottom: 18px;
+        margin-top: 33px;
+        color: #333;
+      }
+      h3 {
+        font-size: 30px;
+        margin: 10px 0 20px 0;
+        color: #333;
+      }
+      header {
+        width: 640px;
+        margin: auto;
+      }
+      section {
+        width: 640px;
+        margin: auto;
+      }
+      section p {
+        margin-bottom: 27px;
+        font-size: 20px;
+        line-height: 1.6;
+        color: #333;
+      }
+      section img {
+        max-width: 640px;
+      }
+      footer {
+        padding: 0 20px;
+        margin: 50px 0;
+        text-align: center;
+        font-size: 12px;
+      }
+      .aspectRatioPlaceholder {
+        max-width: auto !important;
+        max-height: auto !important;
+      }
+      .aspectRatioPlaceholder-fill {
+        padding-bottom: 0 !important;
+      }
+      header,
+      section[data-field="subtitle"],
+      section[data-field="description"] {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <article class="h-entry">
+      <header>
+        <h1 class="p-name">React State</h1>
+      </header>
+      <section data-field="subtitle" class="p-summary">Demystified</section>
+      <section data-field="body" class="e-content">
+        <section name="43bb" class="section section--body section--first">
+          <div class="section-divider"><hr class="section-divider" /></div>
+          <div class="section-content">
+            <div class="section-inner sectionLayout--insetColumn">
+              <h3
+                name="2d53"
+                id="2d53"
+                class="graf graf--h3 graf--leading graf--title"
+              >
+                React State
+              </h3>
+              <h4
+                name="cc5e"
+                id="cc5e"
+                class="graf graf--h4 graf-after--h3 graf--subtitle"
+              >
+                Demystified
+              </h4>
+              <h3 name="d130" id="d130" class="graf graf--h3 graf-after--h4">
+                Here’s a gist containing most of the below react components:
+              </h3>
+              <p name="01b0" id="01b0" class="graf graf--p graf-after--h3">
+                <a
+                  href="https://gist.github.com/bgoonz/216025f38eed1dd451df356e4085fa5a"
+                  data-href="https://gist.github.com/bgoonz/216025f38eed1dd451df356e4085fa5a"
+                  class="markup--anchor markup--p-anchor"
+                  rel="nofollow noopener"
+                  target="_blank"
+                  >https://gist.github.com/bgoonz/216025f38eed1dd451df356e4085fa5a</a
+                >
+              </p>
+              <figure
+                name="4cc3"
+                id="4cc3"
+                class="graf graf--figure graf-after--p"
+              >
+                <img
+                  class="graf-image"
+                  data-image-id="0*IzkDVQXDDiVofRlH.gif"
+                  data-width="1440"
+                  data-height="1080"
+                  data-is-featured="true"
+                  src="https://cdn-images-1.medium.com/max/800/0*IzkDVQXDDiVofRlH.gif"
+                />
+              </figure>
+              <h3
+                name="6a34"
+                id="6a34"
+                class="graf graf--h3 graf-after--figure"
+              >
+                React Class Components
+              </h3>
+              <p name="0fb5" id="0fb5" class="graf graf--p graf-after--h3">
+                <strong class="markup--strong markup--p-strong"
+                  >Class Components</strong
+                >
+              </p>
+              <ul class="postList">
+                <li name="3d48" id="3d48" class="graf graf--li graf-after--p">
+                  You can write React components using ES2015 Classes:<br /><strong
+                    class="markup--strong markup--li-strong"
+                    >Function Component</strong
+                  >
+                </li>
+              </ul>
+              <p name="b935" id="b935" class="graf graf--p graf-after--li">
+                <a
+                  href="https://gist.github.com/bgoonz/8223ee9f84bbc0fe7ad504efb3dc860d"
+                  data-href="https://gist.github.com/bgoonz/8223ee9f84bbc0fe7ad504efb3dc860d"
+                  class="markup--anchor markup--p-anchor"
+                  rel="nofollow noopener"
+                  target="_blank"
+                  >https://gist.github.com/bgoonz/8223ee9f84bbc0fe7ad504efb3dc860d</a
+                >
+              </p>
+              <p name="7b0e" id="7b0e" class="graf graf--p graf-after--p">
+                <strong class="markup--strong markup--p-strong"
+                  >ES2015 Version</strong
+                >
+              </p>
+              <pre name="888f" id="888f" class="graf graf--pre graf-after--p">
+// ./src/Message.js</pre
+              >
+              <pre name="c1bb" id="c1bb" class="graf graf--pre graf-after--pre">
+import React from &quot;react&quot;;</pre
+              >
+              <pre
+                name="ae2a"
+                id="ae2a"
+                class="graf graf--pre graf-after--pre"
+              >class Message extends React.Component {<br>  render() {<br>    return &lt;div&gt;{this.props.text}&lt;/div&gt;;<br>  }<br>}</pre>
+              <pre name="302d" id="302d" class="graf graf--pre graf-after--pre">
+export default Message;</pre
+              >
+              <ul class="postList">
+                <li name="59c4" id="59c4" class="graf graf--li graf-after--pre">
+                  We can access props within a
+                  <code class="markup--code markup--li-code"
+                    >class component</code
+                  >
+                  by using
+                  <code class="markup--code markup--li-code">this.props</code>
+                </li>
+                <li name="5e06" id="5e06" class="graf graf--li graf-after--li">
+                  Keep in mind Class Components are used just like function
+                  components.
+                </li>
+              </ul>
+              <pre name="6230" id="6230" class="graf graf--pre graf-after--li">
+// ./src/index.js</pre
+              >
+              <pre
+                name="de12"
+                id="de12"
+                class="graf graf--pre graf-after--pre"
+              >import React from &quot;react&quot;;<br>import ReactDOM from &quot;react-dom&quot;;<br>import Message from &quot;./Message&quot;;</pre>
+              <pre
+                name="351b"
+                id="351b"
+                class="graf graf--pre graf-after--pre"
+              >ReactDOM.render(<br>  &lt;React.StrictMode&gt;<br>    &lt;Message text=&quot;Hello world!&quot; /&gt;<br>  &lt;/React.StrictMode&gt;,<br>  document.getElementById(&quot;root&quot;)<br>);</pre>
+              <p name="2151" id="2151" class="graf graf--p graf-after--pre">
+                <strong class="markup--strong markup--p-strong"
+                  >Setting and accessing props</strong
+                >
+              </p>
+              <pre
+                name="eda3"
+                id="eda3"
+                class="graf graf--pre graf-after--p"
+              >class Message extends React.Component {<br>  constructor(props) {<br>    super(props);</pre>
+              <pre
+                name="07e7"
+                id="07e7"
+                class="graf graf--pre graf-after--pre"
+              >    // TODO Initialize state, etc.<br>  }</pre>
+              <pre
+                name="bdff"
+                id="bdff"
+                class="graf graf--pre graf-after--pre"
+              >  render() {<br>    return &lt;div&gt;{this.props.text}&lt;/div&gt;;<br>  }<br>}</pre>
+              <ul class="postList">
+                <li name="7853" id="7853" class="graf graf--li graf-after--pre">
+                  If we define a constructor method in our Class Component, we
+                  have to define the
+                  <code class="markup--code markup--li-code">super</code> method
+                  with
+                  <code class="markup--code markup--li-code">props</code> passed
+                  through it.
+                </li>
+                <li name="058c" id="058c" class="graf graf--li graf-after--li">
+                  Side Note: Before React used ES2015 Classes, it used
+                  <code class="markup--code markup--li-code"
+                    >React.createclass</code
+                  >
+                  function, if you ever need to use this antiquated method make
+                  sure you install a module called
+                  <code class="markup--code markup--li-code"
+                    >create-react-class</code
+                  >
+                </li>
+              </ul>
+              <p name="35f5" id="35f5" class="graf graf--p graf-after--li">
+                <strong class="markup--strong markup--p-strong"
+                  >Stateful components</strong
+                >
+              </p>
+              <ul class="postList">
+                <li name="1ecc" id="1ecc" class="graf graf--li graf-after--p">
+                  One of the major reasons why you would choose to use a
+                  <strong class="markup--strong markup--li-strong"
+                    >Class Component</strong
+                  >
+                  over a Function Component is to add and manage local or
+                  internal state to your component.
+                </li>
+                <li name="c4cd" id="c4cd" class="graf graf--li graf-after--li">
+                  Second of the major reasons is to be able to use a Class
+                  Component’s lifecycle methods.
+                </li>
+              </ul>
+              <p name="0898" id="0898" class="graf graf--p graf-after--li">
+                <strong class="markup--strong markup--p-strong"
+                  >What is state?</strong
+                >
+              </p>
+              <ul class="postList">
+                <li name="2b2a" id="2b2a" class="graf graf--li graf-after--p">
+                  Props are data that are provided by the consumer or caller of
+                  the component.
+                </li>
+                <li name="d150" id="d150" class="graf graf--li graf-after--li">
+                  Not meant to be changed by a component.
+                </li>
+                <li name="2316" id="2316" class="graf graf--li graf-after--li">
+                  State is data that is
+                  <code class="markup--code markup--li-code"
+                    ><strong class="markup--strong markup--li-strong"
+                      >internal</strong
+                    ></code
+                  >
+                  to the component.
+                </li>
+                <li name="cea0" id="cea0" class="graf graf--li graf-after--li">
+                  Intended to be updated or mutated.
+                </li>
+              </ul>
+              <p name="8a60" id="8a60" class="graf graf--p graf-after--li">
+                <strong class="markup--strong markup--p-strong"
+                  >When to use state</strong
+                >
+              </p>
+              <ul class="postList">
+                <li name="0936" id="0936" class="graf graf--li graf-after--p">
+                  <em class="markup--em markup--li-em"
+                    >Only Use State when it is absolutely necessary</em
+                  >
+                </li>
+                <li name="2052" id="2052" class="graf graf--li graf-after--li">
+                  If the data never changes, or if it’s needed through an entire
+                  application use props instead.
+                </li>
+                <li name="04ff" id="04ff" class="graf graf--li graf-after--li">
+                  State is more often used when creating components that
+                  retrieve data from APIs or render forms.
+                </li>
+                <li name="5a9f" id="5a9f" class="graf graf--li graf-after--li">
+                  <strong class="markup--strong markup--li-strong"
+                    >The general rule of thumb</strong
+                  >: If a component doesn’t need to use state or Lifecyle
+                  methods, it should be prioritized as a
+                  <code class="markup--code markup--li-code"
+                    ><strong class="markup--strong markup--li-strong"
+                      >function component</strong
+                    ></code
+                  >.
+                </li>
+                <li name="412f" id="412f" class="graf graf--li graf-after--li">
+                  Functional:Stateless || Class:Stateful
+                </li>
+              </ul>
+              <p name="0e72" id="0e72" class="graf graf--p graf-after--li">
+                <strong class="markup--strong markup--p-strong"
+                  >Initializing state</strong
+                >
+              </p>
+              <ul class="postList">
+                <li name="5783" id="5783" class="graf graf--li graf-after--p">
+                  Use a class constructor method to initialize
+                  <code class="markup--code markup--li-code">this.state</code>
+                  object.
+                </li>
+              </ul>
+              <h4 name="573a" id="573a" class="graf graf--h4 graf-after--li">
+                Application Entry Point
+              </h4>
+              <pre
+                name="7119"
+                id="7119"
+                class="graf graf--pre graf-after--h4"
+              >// ./src/index.js<br>import React from &#39;react&#39;<br>import ReactDOM from &#39;react-dom&#39;;<br>import RandomQuote from &#39;./RandomQuote&#39;;</pre>
+              <pre
+                name="d070"
+                id="d070"
+                class="graf graf--pre graf-after--pre"
+              >ReactDOM.render(<br>  &lt;React.StrictMode&gt;<br>    &lt;RandomQuote /&gt;<br>  &lt;/React.StrictMode&gt;<br>  document.getElementById(&#39;root&#39;);<br>)</pre>
+              <h4 name="68e2" id="68e2" class="graf graf--h4 graf-after--pre">
+                Class Component: RandomQuote
+              </h4>
+              <pre name="e1ad" id="e1ad" class="graf graf--pre graf-after--h4">
+import React from &quot;react&quot;;</pre
+              >
+              <pre
+                name="023c"
+                id="023c"
+                class="graf graf--pre graf-after--pre"
+              >class RandomQuote extends React.Component {<br>  constructor() {<br>    super();</pre>
+              <pre
+                name="c3c0"
+                id="c3c0"
+                class="graf graf--pre graf-after--pre"
+              >    const quotes = [<br>      &quot;May the Force be with you.&quot;,<br>      &quot;There&#39;s no place like home.&quot;,<br>      &quot;I&#39;m the king of the world!&quot;,<br>      &quot;My mama always said life was like a box of chocolates.&quot;,<br>      &quot;I&#39;ll be back.&quot;,<br>    ];</pre>
+              <pre
+                name="c08b"
+                id="c08b"
+                class="graf graf--pre graf-after--pre"
+              >    this.state = {<br>      quotes,<br>      currentQuoteIndex: this.getRandomInt(quotes.length);<br>    }<br>  }</pre>
+              <pre
+                name="6148"
+                id="6148"
+                class="graf graf--pre graf-after--pre"
+              >  getRandomInt(max) {<br>    return Math.floor(Math.random() * Math.floor(max));<br>  }</pre>
+              <pre
+                name="4869"
+                id="4869"
+                class="graf graf--pre graf-after--pre"
+              >  render() {<br>    return (<br>      &lt;div&gt;<br>        &lt;h2&gt;Random Quote&lt;/h2&gt;<br>        &lt;p&gt;{this.state.quotes[this.state.currentQuoteIndex]}&lt;/p&gt;<br>      &lt;/div&gt;<br>    )<br>  }<br>}</pre>
+              <pre name="47e2" id="47e2" class="graf graf--pre graf-after--pre">
+export default RandomQuote;</pre
+              >
+              <p name="de36" id="de36" class="graf graf--p graf-after--pre">
+                <strong class="markup--strong markup--p-strong"
+                  >Updating State</strong
+                >
+              </p>
+              <ul class="postList">
+                <li name="e560" id="e560" class="graf graf--li graf-after--p">
+                  Let’s say we want to update our state with a new quote.
+                </li>
+                <li name="ead5" id="ead5" class="graf graf--li graf-after--li">
+                  We can set up event listeners in React similarly to how we did
+                  them before.
+                </li>
+                <li name="b7c7" id="b7c7" class="graf graf--li graf-after--li">
+                  &lt;button type=”button” onClick={this.changeQuote}&gt; Change
+                  Quote &lt;/button&gt;
+                </li>
+                <li name="270b" id="270b" class="graf graf--li graf-after--li">
+                  <code class="markup--code markup--li-code">onClick</code> is
+                  the event listener.
+                </li>
+                <li name="10c4" id="10c4" class="graf graf--li graf-after--li">
+                  <code class="markup--code markup--li-code"
+                    >{this.changeQuote}</code
+                  >
+                  is the event handler method.
+                </li>
+                <li name="99e8" id="99e8" class="graf graf--li graf-after--li">
+                  Our Class Component File should now look like this with the
+                  new additions:
+                </li>
+              </ul>
+              <pre name="c513" id="c513" class="graf graf--pre graf-after--li">
+import React from &quot;react&quot;;</pre
+              >
+              <pre
+                name="e4e0"
+                id="e4e0"
+                class="graf graf--pre graf-after--pre"
+              >class RandomQuote extends React.Component {<br>  constructor() {<br>    super();</pre>
+              <pre
+                name="e341"
+                id="e341"
+                class="graf graf--pre graf-after--pre"
+              >    const quotes = [<br>      &quot;May the Force be with you.&quot;,<br>      &quot;There&#39;s no place like home.&quot;,<br>      &quot;I&#39;m the king of the world!&quot;,<br>      &quot;My mama always said life was like a box of chocolates.&quot;,<br>      &quot;I&#39;ll be back.&quot;,<br>    ];</pre>
+              <pre
+                name="739b"
+                id="739b"
+                class="graf graf--pre graf-after--pre"
+              >    this.state = {<br>      quotes,<br>      currentQuoteIndex: this.getRandomInt(quotes.length);<br>    }<br>  }</pre>
+              <pre
+                name="dc00"
+                id="dc00"
+                class="graf graf--pre graf-after--pre"
+              >  changeQuote = () =&gt; {<br>    const newIndex = this.getRandomInt(this.state.quotes.length);</pre>
+              <pre
+                name="17fd"
+                id="17fd"
+                class="graf graf--pre graf-after--pre"
+              >    // Setting the &#39;new state&#39; of currentQuoteIndex state property<br>    // to newly generated random index #.<br>    this.setState({<br>      currentQuoteIndex: newIndex;<br>    })<br>  }</pre>
+              <pre
+                name="58b2"
+                id="58b2"
+                class="graf graf--pre graf-after--pre"
+              >  getRandomInt(max) {<br>    return Math.floor(Math.random() * Math.floor(max));<br>  }</pre>
+              <pre
+                name="c689"
+                id="c689"
+                class="graf graf--pre graf-after--pre"
+              >  render() {<br>    return (<br>      &lt;div&gt;<br>        &lt;h2&gt;Random Quote&lt;/h2&gt;<br>        &lt;p&gt;{this.state.quotes[this.state.currentQuoteIndex]}&lt;/p&gt;<br>        &lt;button type=&quot;button&quot; onClick={this.changeQuote}&gt;<br>          Change Quote<br>        &lt;/button&gt;<br>      &lt;/div&gt;<br>    )<br>  }<br>}</pre>
+              <pre name="b2bd" id="b2bd" class="graf graf--pre graf-after--pre">
+export default RandomQuote;</pre
+              >
+              <p name="80dd" id="80dd" class="graf graf--p graf-after--pre">
+                <strong class="markup--strong markup--p-strong"
+                  >Don’t modify state directly</strong
+                >
+              </p>
+              <ul class="postList">
+                <li name="11e2" id="11e2" class="graf graf--li graf-after--p">
+                  It is important to
+                  <code class="markup--code markup--li-code"
+                    ><strong class="markup--strong markup--li-strong"
+                      >never</strong
+                    ></code
+                  >
+                  modify your state directly!
+                </li>
+                <li name="d085" id="d085" class="graf graf--li graf-after--li">
+                  ALWAYS use
+                  <code class="markup--code markup--li-code"
+                    >this.setState</code
+                  >
+                  method to update state.
+                </li>
+                <li name="38f9" id="38f9" class="graf graf--li graf-after--li">
+                  This is because when you only use this.state to re-assign, no
+                  re-rendering will occur =&gt; leaving our component out of
+                  sync.
+                </li>
+              </ul>
+              <p name="4d54" id="4d54" class="graf graf--p graf-after--li">
+                <strong class="markup--strong markup--p-strong"
+                  >Properly updating state from the previous state</strong
+                >
+              </p>
+              <ul class="postList">
+                <li name="839d" id="839d" class="graf graf--li graf-after--p">
+                  In our current example, the way we have
+                  <code class="markup--code markup--li-code">changeQuote</code>
+                  set up leaves us with occasionally producing the same index
+                  twice in a row.
+                </li>
+                <li name="6f45" id="6f45" class="graf graf--li graf-after--li">
+                  One solution is to design a loop but keep in mind that state
+                  updates are handled asynchronously in React (your current
+                  value is not guaranteed to be the latest)
+                </li>
+                <li name="f71d" id="f71d" class="graf graf--li graf-after--li">
+                  A safe method is to pass an anonymous method to
+                  <code class="markup--code markup--li-code"
+                    >this.setState</code
+                  >
+                  (instead of an object literal)
+                </li>
+              </ul>
+              <p name="4a8d" id="4a8d" class="graf graf--p graf-after--li">
+                <strong class="markup--strong markup--p-strong"
+                  >Previous</strong
+                >
+              </p>
+              <pre
+                name="eeaf"
+                id="eeaf"
+                class="graf graf--pre graf-after--p"
+              >changeQuote = () =&gt; {<br>    const newIndex = this.getRandomInt(this.state.quotes.length);</pre>
+              <pre
+                name="cdc5"
+                id="cdc5"
+                class="graf graf--pre graf-after--pre"
+              >    this.setState({<br>      currentQuoteIndex: newIndex;<br>    })<br>  }</pre>
+              <p name="6b3d" id="6b3d" class="graf graf--p graf-after--pre">
+                <strong class="markup--strong markup--p-strong"
+                  >Passing w/ Anon Method</strong
+                >
+              </p>
+              <pre
+                name="a243"
+                id="a243"
+                class="graf graf--pre graf-after--p"
+              >changeQuote = () =&gt; {<br>  this.setState((state, props) =&gt; {<br>    const { quotes, currentQuoteIndex } = state;</pre>
+              <pre name="63e6" id="63e6" class="graf graf--pre graf-after--pre">
+    let newIndex = -1;</pre
+              >
+              <pre
+                name="2725"
+                id="2725"
+                class="graf graf--pre graf-after--pre"
+              >    do {<br>      newIndex = this.getRandomInt(quote.length);<br>    } while (newIndex === currentQuoteIndex);</pre>
+              <pre
+                name="804f"
+                id="804f"
+                class="graf graf--pre graf-after--pre"
+              >    return {<br>      currentQuoteIndex: newIndex,<br>    };<br>  });<br>};</pre>
+              <p name="861e" id="861e" class="graf graf--p graf-after--pre">
+                <strong class="markup--strong markup--p-strong"
+                  >Providing default values for props</strong
+                >
+              </p>
+              <ul class="postList">
+                <li name="05dd" id="05dd" class="graf graf--li graf-after--p">
+                  In our current example, we pass in a static array of
+                  predefined quotes in our constructor.
+                </li>
+                <li name="29a1" id="29a1" class="graf graf--li graf-after--li">
+                  The way it is set up right now leaves our list of quotes
+                  unchanged after initialization.
+                </li>
+                <li name="733b" id="733b" class="graf graf--li graf-after--li">
+                  We can make quotes more dynamic by replacing our static array
+                  with a
+                  <code class="markup--code markup--li-code">props</code>
+                  argument passed into
+                  <code class="markup--code markup--li-code">super</code>.
+                </li>
+                <li name="8d26" id="8d26" class="graf graf--li graf-after--li">
+                  constructor(props) { super(props); }
+                </li>
+                <li name="e22e" id="e22e" class="graf graf--li graf-after--li">
+                  We can now move our quotes array to our application entry
+                  point and pass it in as a prop.
+                </li>
+              </ul>
+              <h4 name="daba" id="daba" class="graf graf--h4 graf-after--li">
+                Application Entry Point
+              </h4>
+              <pre
+                name="2580"
+                id="2580"
+                class="graf graf--pre graf-after--h4"
+              >// ./src/index.js<br>import React from &#39;react&#39;<br>import ReactDOM from &#39;react-dom&#39;;<br>import RandomQuote from &#39;./RandomQuote&#39;;</pre>
+              <pre
+                name="02dc"
+                id="02dc"
+                class="graf graf--pre graf-after--pre"
+              >// Re-assign our array here and pass it in as a prop in Render.<br>const quotes = [<br>      &quot;May the Force be with you.&quot;,<br>      &quot;There&#39;s no place like home.&quot;,<br>      &quot;I&#39;m the king of the world!&quot;,<br>      &quot;My mama always said life was like a box of chocolates.&quot;,<br>      &quot;I&#39;ll be back.&quot;,<br>      &quot;This way I can define more quotes&quot;,<br>    ];</pre>
+              <pre
+                name="4205"
+                id="4205"
+                class="graf graf--pre graf-after--pre"
+              >ReactDOM.render(<br>  &lt;React.StrictMode&gt;<br>    &lt;RandomQuote quotes={quotes}/&gt;<br>  &lt;/React.StrictMode&gt;<br>  document.getElementById(&#39;root&#39;);<br>)</pre>
+              <ul class="postList">
+                <li name="c3f2" id="c3f2" class="graf graf--li graf-after--pre">
+                  One thing to note about this workaround is that the caller of
+                  the component
+                  <em class="markup--em markup--li-em">must</em> set the quotes
+                  prop or the component will throw an error =&gt; so use
+                  <code class="markup--code markup--li-code">defaultProps</code
+                  >!
+                </li>
+              </ul>
+              <pre
+                name="7372"
+                id="7372"
+                class="graf graf--pre graf-after--li"
+              >// At the bottom of RandomQuote.js...<br>RandomQuote.defaultProps = {<br>  quotes: [<br>    &quot;May the Force be with you.&quot;,<br>    &quot;There&#39;s no place like home.&quot;,<br>    &quot;I&#39;m the king of the world!&quot;,<br>    &quot;My mama always said life was like a box of chocolates.&quot;,<br>    &quot;I&#39;ll be back.&quot;,<br>    &quot;This way I can define more quotes&quot;,<br>  ],<br>};</pre>
+              <ul class="postList">
+                <li name="8909" id="8909" class="graf graf--li graf-after--pre">
+                  A good safety net in case the consumer/caller doesn’t provide
+                  a value for the quotes array.
+                </li>
+                <li name="a254" id="a254" class="graf graf--li graf-after--li">
+                  We can even remove it from our index.js now and an error will
+                  not be thrown.
+                </li>
+              </ul>
+              <h3 name="cab0" id="cab0" class="graf graf--h3 graf-after--li">
+                Handling Events
+              </h3>
+              <ul class="postList">
+                <li name="46a0" id="46a0" class="graf graf--li graf-after--h3">
+                  To add an event listener to an element, just define a method
+                  to handle the event and associate that method with the element
+                  event you are listening for.<br /><strong
+                    class="markup--strong markup--li-strong"
+                    >Example</strong
+                  >
+                </li>
+              </ul>
+              <pre name="016f" id="016f" class="graf graf--pre graf-after--li">
+import React from &quot;react&quot;;</pre
+              >
+              <pre
+                name="0577"
+                id="0577"
+                class="graf graf--pre graf-after--pre"
+              >class AlertButton extends React.Component {<br>  showAlert = () =&gt; {<br>    window.alert(&quot;Button Clicked!&quot;);<br>  };</pre>
+              <pre
+                name="4ad9"
+                id="4ad9"
+                class="graf graf--pre graf-after--pre"
+              >  render() {<br>    return (<br>      &lt;button type=&quot;button&quot; onClick={this.showAlert}&gt;<br>        Submit<br>      &lt;/button&gt;<br>    );<br>  }<br>}</pre>
+              <ul class="postList">
+                <li name="c8ad" id="c8ad" class="graf graf--li graf-after--pre">
+                  Note that when referring the handler method in onClick we’re
+                  not invoking showAlert simply just passing a reference.
+                </li>
+              </ul>
+              <p name="5c31" id="5c31" class="graf graf--p graf-after--li">
+                <strong class="markup--strong markup--p-strong"
+                  >Preventing default behavior</strong
+                >
+              </p>
+              <ul class="postList">
+                <li name="0497" id="0497" class="graf graf--li graf-after--p">
+                  HTML Elements in the browser often have a lot of default
+                  behavior.
+                </li>
+                <li name="c546" id="c546" class="graf graf--li graf-after--li">
+                  I.E. Clicking on an
+                  <code class="markup--code markup--li-code">&lt;a&gt;</code>
+                  element navigates so a resource denoted by
+                  <code class="markup--code markup--li-code">&lt;href&gt;</code>
+                  property.
+                </li>
+                <li name="7f13" id="7f13" class="graf graf--li graf-after--li">
+                  Here is an example of where using
+                  <code class="markup--code markup--li-code"
+                    >e.preventDefault()</code
+                  >
+                  could come in handy.
+                </li>
+              </ul>
+              <pre name="4e9b" id="4e9b" class="graf graf--pre graf-after--li">
+import React from &quot;react&quot;;</pre
+              >
+              <pre
+                name="8dba"
+                id="8dba"
+                class="graf graf--pre graf-after--pre"
+              >class NoDefaultSubmitForm extends React.Component {<br>  submitForm = (e) =&gt; {<br>    e.preventDefault();<br>    window.alert(&quot;Handling form submission...&quot;);<br>  };</pre>
+              <pre
+                name="810d"
+                id="810d"
+                class="graf graf--pre graf-after--pre"
+              >  render() {<br>    return (<br>    &lt;form onSubmit={this.submitForm}&gt;<br>      &lt;button&gt;Submit&lt;/button&gt;<br>    &lt;/form&gt;;<br>    )}<br>}</pre>
+              <ul class="postList">
+                <li name="6df2" id="6df2" class="graf graf--li graf-after--pre">
+                  The button contained within the form will end up refreshing
+                  the page before
+                  <code class="markup--code markup--li-code"
+                    >this.submitForm</code
+                  >
+                  method can be completed.
+                </li>
+                <li name="e214" id="e214" class="graf graf--li graf-after--li">
+                  We can stick an
+                  <code class="markup--code markup--li-code"
+                    >e.preventDefault()</code
+                  >
+                  into the actual method to get around this problem.
+                </li>
+                <li name="bafc" id="bafc" class="graf graf--li graf-after--li">
+                  <code class="markup--code markup--li-code"
+                    ><strong class="markup--strong markup--li-strong"
+                      >e</strong
+                    ></code
+                  > : Parameter that references a
+                  <code class="markup--code markup--li-code"
+                    ><strong class="markup--strong markup--li-strong"
+                      >Synthetic Event</strong
+                    ></code
+                  >
+                  object type.
+                </li>
+              </ul>
+              <p name="eebe" id="eebe" class="graf graf--p graf-after--li">
+                <strong class="markup--strong markup--p-strong">Using </strong
+                ><code class="markup--code markup--p-code"
+                  ><strong class="markup--strong markup--p-strong"
+                    >this</strong
+                  ></code
+                ><strong class="markup--strong markup--p-strong">
+                  in event handlers</strong
+                >
+              </p>
+              <pre name="3282" id="3282" class="graf graf--pre graf-after--p">
+// ./src/AlertButton.js</pre
+              >
+              <pre name="b8c2" id="b8c2" class="graf graf--pre graf-after--pre">
+import React from &quot;react&quot;;</pre
+              >
+              <pre
+                name="6205"
+                id="6205"
+                class="graf graf--pre graf-after--pre"
+              >class AlertButton extends React.Component {<br>  showAlert = () =&gt; {<br>    window.alert(&quot;Button clicked!&quot;);<br>    console.log(this);<br>  };</pre>
+              <pre
+                name="1955"
+                id="1955"
+                class="graf graf--pre graf-after--pre"
+              >  render() {<br>    return (<br>      &lt;button type=&quot;button&quot; onClick={this.showAlert}&gt;<br>        Click Me<br>      &lt;/button&gt;<br>    );<br>  }<br>}</pre>
+              <pre name="7ad9" id="7ad9" class="graf graf--pre graf-after--pre">
+export default AlertButton;</pre
+              >
+              <ul class="postList">
+                <li name="159a" id="159a" class="graf graf--li graf-after--pre">
+                  When we console log
+                  <code class="markup--code markup--li-code">this</code> we see
+                  the AlertButton object.
+                </li>
+                <li name="9158" id="9158" class="graf graf--li graf-after--li">
+                  If we were to write the showAlert method with a regular class
+                  method like:
+                </li>
+              </ul>
+              <pre
+                name="1002"
+                id="1002"
+                class="graf graf--pre graf-after--li"
+              >showAlert() {<br>  console.log(this);<br>}</pre>
+              <ul class="postList">
+                <li name="13af" id="13af" class="graf graf--li graf-after--pre">
+                  We would get
+                  <code class="markup--code markup--li-code">undefined</code>
+                  =&gt; remember that fat arrow binds to the current context!
+                </li>
+              </ul>
+              <p name="1137" id="1137" class="graf graf--p graf-after--li">
+                <strong class="markup--strong markup--p-strong"
+                  >Reviewing class methods and the </strong
+                ><code class="markup--code markup--p-code"
+                  ><strong class="markup--strong markup--p-strong"
+                    >this</strong
+                  ></code
+                ><strong class="markup--strong markup--p-strong">
+                  keyword</strong
+                >
+              </p>
+              <blockquote
+                name="12da"
+                id="12da"
+                class="graf graf--pullquote graf-after--p"
+              >
+                Binding:
+              </blockquote>
+              <pre
+                name="1e28"
+                id="1e28"
+                class="graf graf--pre graf-after--pullquote"
+              >class Girlfriend {<br>  constructor() {<br>    this.name = &quot;JavaScript&quot;;<br>  }</pre>
+              <pre
+                name="c0d3"
+                id="c0d3"
+                class="graf graf--pre graf-after--pre"
+              >  displayName() {<br>    console.log(this.name);<br>  }<br>}</pre>
+              <pre
+                name="7355"
+                id="7355"
+                class="graf graf--pre graf-after--pre"
+              >const Ming = new Girlfriend();<br>Ming.displayName(); // =&gt; Javascript</pre>
+              <pre
+                name="9145"
+                id="9145"
+                class="graf graf--pre graf-after--pre"
+              >const displayAgain = Ming.displayName;<br>displayAgain(); // =&gt; Result in a Type Error: Cannot read property &#39;name&#39; of undefined.</pre>
+              <ul class="postList">
+                <li name="f44c" id="f44c" class="graf graf--li graf-after--pre">
+                  The first time we use our
+                  <code class="markup--code markup--li-code"
+                    >displayMethod</code
+                  >
+                  call, it is called directly on the instance of the boyfriend
+                  class, which is why
+                  <code class="markup--code markup--li-code">Javascript</code>
+                  was printed out.
+                </li>
+                <li name="5ab3" id="5ab3" class="graf graf--li graf-after--li">
+                  The second time it was called, the ref of the method is stored
+                  as a variable and method is called on that variable instead of
+                  the instance; resulting in a type error (it has lost it’s
+                  context)
+                </li>
+                <li name="f151" id="f151" class="graf graf--li graf-after--li">
+                  Remember we can use the
+                  <code class="markup--code markup--li-code"
+                    ><strong class="markup--strong markup--li-strong"
+                      >bind</strong
+                    ></code
+                  >
+                  method to rebind context!
+                </li>
+                <li name="a90b" id="a90b" class="graf graf--li graf-after--li">
+                  We can refactor to get the second call working like this:
+                </li>
+              </ul>
+              <pre name="8b75" id="8b75" class="graf graf--pre graf-after--li">
+const displayAgain = Ming.displayName.bind(Ming); displayAgain(); =&gt; //Now Javascript will be printed out.</pre
+              >
+              <ul class="postList">
+                <li name="9b5c" id="9b5c" class="graf graf--li graf-after--pre">
+                  To continue using function declarations vs fat arrow we can
+                  assign context in a constructor within a class component.
+                </li>
+              </ul>
+              <pre name="f5b9" id="f5b9" class="graf graf--pre graf-after--li">
+import React from &quot;react&quot;;</pre
+              >
+              <pre
+                name="a8ec"
+                id="a8ec"
+                class="graf graf--pre graf-after--pre"
+              >class AlertButton extends React.Component {<br>  constructor() {<br>    super();<br>    this.showAlert = this.showAlert.bind(this); // binding context<br>  }</pre>
+              <pre
+                name="ef1a"
+                id="ef1a"
+                class="graf graf--pre graf-after--pre"
+              >  showAlert() {<br>    console.log(this);<br>  }</pre>
+              <pre
+                name="e2e3"
+                id="e2e3"
+                class="graf graf--pre graf-after--pre"
+              >  render() {<br>    return (<br>      &lt;button type=&quot;button&quot; onClick={this.showAlert}&gt;<br>        Submit<br>      &lt;/button&gt;<br>    );<br>  }<br>}</pre>
+              <pre name="533b" id="533b" class="graf graf--pre graf-after--pre">
+export default AlertButton;</pre
+              >
+              <ul class="postList">
+                <li name="e397" id="e397" class="graf graf--li graf-after--pre">
+                  <code class="markup--code markup--li-code"
+                    ><strong class="markup--strong markup--li-strong"
+                      >Experimental Syntax</strong
+                    ></code
+                  > : Syntax that has been proposed to add to ECMAScript but
+                  hasn&#39;t officially been added to the language specification
+                  yet.
+                </li>
+                <li name="eb35" id="eb35" class="graf graf--li graf-after--li">
+                  It’s good to pick one approach and use it consistently,
+                  either:
+                </li>
+              </ul>
+              <ol class="postList">
+                <li name="e7c9" id="e7c9" class="graf graf--li graf-after--li">
+                  Class Properties &amp; Arrow Functions
+                </li>
+                <li name="f447" id="f447" class="graf graf--li graf-after--li">
+                  Bind Method &amp; This Keyword
+                </li>
+              </ol>
+              <p name="b215" id="b215" class="graf graf--p graf-after--li">
+                <strong class="markup--strong markup--p-strong">The </strong
+                ><code class="markup--code markup--p-code"
+                  ><strong class="markup--strong markup--p-strong"
+                    >SyntheticEvent</strong
+                  ></code
+                ><strong class="markup--strong markup--p-strong">
+                  object</strong
+                >
+              </p>
+              <ul class="postList">
+                <li name="d26e" id="d26e" class="graf graf--li graf-after--p">
+                  <strong class="markup--strong markup--li-strong"
+                    >Synthetic Event Objects</strong
+                  >: Cross Browser wrappers around the browser’s native event.
+                </li>
+                <li name="7319" id="7319" class="graf graf--li graf-after--li">
+                  Includes the use of stopPropagation() and preventDefault();
+                </li>
+                <li name="1d15" id="1d15" class="graf graf--li graf-after--li">
+                  Attributes of the Synthetic Event Object:
+                </li>
+              </ul>
+              <figure
+                name="28d7"
+                id="28d7"
+                class="graf graf--figure graf-after--li"
+              >
+                <img
+                  class="graf-image"
+                  data-image-id="1*OVA083oP8HKuRPyA-Ebpig.png"
+                  data-width="264"
+                  data-height="486"
+                  src="https://cdn-images-1.medium.com/max/800/1*OVA083oP8HKuRPyA-Ebpig.png"
+                />
+                <figcaption class="imageCaption">
+                  Attributesboolean bubblesboolean cancelableDOMEventTarget
+                  currentTargetboolean defaultPreventednumber eventPhaseboolean
+                  isTrustedDOMEvent nativeEventvoid preventDefault()boolean
+                  isDefaultPrevented()void stopPropagation()boolean
+                  isPropagationStopped()void persist()DOMEventTarget
+                  targetnumber timeStampstring type
+                </figcaption>
+              </figure>
+              <ul class="postList">
+                <li
+                  name="42b5"
+                  id="42b5"
+                  class="graf graf--li graf-after--figure"
+                >
+                  <code class="markup--code markup--li-code"
+                    ><strong class="markup--strong markup--li-strong"
+                      >nativeEvent</strong
+                    ></code
+                  > : property defined in a synthetic event object that gives
+                  you access to the underlying native browser event (rarely
+                  used!)
+                </li>
+              </ul>
+              <h3 name="8a4b" id="8a4b" class="graf graf--h3 graf-after--li">
+                Forms in React
+              </h3>
+              <p name="df9a" id="df9a" class="graf graf--p graf-after--h3">
+                <em class="markup--em markup--p-em"
+                  >Exercise being done in a separate file</em
+                >
+              </p>
+              <p name="1a85" id="1a85" class="graf graf--p graf-after--p">
+                <strong class="markup--strong markup--p-strong"
+                  >Random Notes</strong
+                >
+              </p>
+              <ul class="postList">
+                <li name="f551" id="f551" class="graf graf--li graf-after--p">
+                  <code class="markup--code markup--li-code">onChange</code> :
+                  detects when a value of an input element changes.
+                </li>
+                <li name="a180" id="a180" class="graf graf--li graf-after--li">
+                  Assigning
+                  <code class="markup--code markup--li-code">onChange</code> to
+                  our input fields makes our component&#39;s state update in
+                  real time during user input.
+                </li>
+                <li name="6814" id="6814" class="graf graf--li graf-after--li">
+                  Don’t forget to add
+                  <code class="markup--code markup--li-code"
+                    >preventDefault</code
+                  >
+                  onto form submissions to deal with the default behavior of the
+                  browser refreshing the page!
+                </li>
+                <li name="830f" id="830f" class="graf graf--li graf-after--li">
+                  <code class="markup--code markup--li-code"
+                    >submittedOn: new Date(),</code
+                  >
+                  Can be added to a form, most likely will persist into a DB.
+                </li>
+              </ul>
+              <h4 name="bf4b" id="bf4b" class="graf graf--h4 graf-after--li">
+                <strong class="markup--strong markup--h4-strong"
+                  >Controlled Components</strong
+                >
+              </h4>
+              <ul class="postList">
+                <li name="2228" id="2228" class="graf graf--li graf-after--h4">
+                  We use the
+                  <code class="markup--code markup--li-code">onChange</code>
+                  event handlers on form fields to keep our component&#39;s
+                  state as the
+                  <code class="markup--code markup--li-code"
+                    >&quot;one source of truth&quot;</code
+                  >
+                </li>
+                <li name="44e7" id="44e7" class="graf graf--li graf-after--li">
+                  Adding an
+                  <code class="markup--code markup--li-code">onChange</code>
+                  event handler to every single input can massively bloat your
+                  code.
+                </li>
+                <li name="056c" id="056c" class="graf graf--li graf-after--li">
+                  Try assigning it to it’s own method to apply everywhere.
+                </li>
+                <li name="9137" id="9137" class="graf graf--li graf-after--li">
+                  <code class="markup--code markup--li-code">textarea</code> is
+                  handled differently in react: it takes in a value property to
+                  handle what the inner text will be.
+                </li>
+              </ul>
+              <figure
+                name="85d3"
+                id="85d3"
+                class="graf graf--figure graf--iframe graf-after--li"
+              >
+                <script src="https://gist.github.com/bgoonz/8411f8a2ac46fc87e4ad65e34ed919ad.js"></script>
+              </figure>
+              <ul class="postList">
+                <li
+                  name="39ee"
+                  id="39ee"
+                  class="graf graf--li graf-after--figure"
+                >
+                  We can use validation libraries like
+                  <code class="markup--code markup--li-code">validate</code> to
+                  make our validation functions more complex.
+                </li>
+              </ul>
+              <pre name="e56e" id="e56e" class="graf graf--pre graf-after--li">
+import isEmail from &quot;validator/es/lib/isEmail&quot;;</pre
+              >
+              <pre
+                name="2eb9"
+                id="2eb9"
+                class="graf graf--pre graf-after--pre"
+              >  validate(name, email) {<br>    const validationErrors = [];</pre>
+              <pre
+                name="4a70"
+                id="4a70"
+                class="graf graf--pre graf-after--pre"
+              >    if (!name) {<br>      validationErrors.push(&quot;Please provide a Name&quot;);<br>    }</pre>
+              <pre
+                name="7eeb"
+                id="7eeb"
+                class="graf graf--pre graf-after--pre"
+              >    if (!email) {<br>      validationErrors.push(&quot;Please provide an Email&quot;);<br>    } else if (!isEmail(email)) {<br>      validationErrors.push(&quot;Please provide a valid Email&quot;);<br>    }</pre>
+              <pre
+                name="3a88"
+                id="3a88"
+                class="graf graf--pre graf-after--pre"
+              >    return validationErrors;<br>  }</pre>
+              <p name="abb8" id="abb8" class="graf graf--p graf-after--pre">
+                <strong class="markup--strong markup--p-strong"
+                  >Note About Client-side vs server-side validation</strong
+                >
+              </p>
+              <ul class="postList">
+                <li name="588f" id="588f" class="graf graf--li graf-after--p">
+                  Server-side validation is not optional.
+                </li>
+                <li name="e35c" id="e35c" class="graf graf--li graf-after--li">
+                  Tech-savvy users can manipulate client-side validations.
+                </li>
+                <li name="03da" id="03da" class="graf graf--li graf-after--li">
+                  Sometimes the ‘best approach’ is to skip implementing
+                  validations on the client-side and rely completely on the
+                  server-side validation.
+                </li>
+              </ul>
+              <h3 name="548b" id="548b" class="graf graf--h3 graf-after--li">
+                Component Lifecycle
+              </h3>
+              <figure
+                name="a13c"
+                id="a13c"
+                class="graf graf--figure graf-after--h3"
+              >
+                <img
+                  class="graf-image"
+                  data-image-id="0*6kzLSSpEJ8ypPSCM.png"
+                  data-width="1532"
+                  data-height="858"
+                  src="https://cdn-images-1.medium.com/max/800/0*6kzLSSpEJ8ypPSCM.png"
+                />
+              </figure>
+              <ul class="postList">
+                <li
+                  name="6e9c"
+                  id="6e9c"
+                  class="graf graf--li graf-after--figure"
+                >
+                  Component Lifecycle is simply a way of describing the key
+                  moments in the lifetime of a component.
+                </li>
+              </ul>
+              <ol class="postList">
+                <li name="5e9c" id="5e9c" class="graf graf--li graf-after--li">
+                  Loading (Mounting)
+                </li>
+                <li name="6930" id="6930" class="graf graf--li graf-after--li">
+                  Updating
+                </li>
+                <li name="1ec1" id="1ec1" class="graf graf--li graf-after--li">
+                  Unloading (Unmounting)
+                </li>
+              </ol>
+              <p name="54fd" id="54fd" class="graf graf--p graf-after--li">
+                <strong class="markup--strong markup--p-strong"
+                  >The lifecycle of a React component</strong
+                >
+              </p>
+              <ul class="postList">
+                <li name="b8ed" id="b8ed" class="graf graf--li graf-after--p">
+                  Each
+                  <code class="markup--code markup--li-code"
+                    >Class Component</code
+                  >
+                  has several
+                  <code class="markup--code markup--li-code"
+                    >lifecycle methods</code
+                  >
+                  that you can add to run code at specific times.
+                </li>
+                <li name="f58a" id="f58a" class="graf graf--li graf-after--li">
+                  <code class="markup--code markup--li-code"
+                    >componentDidMount</code
+                  > : Method called after your component has been added to the
+                  component tree.
+                </li>
+                <li name="adb3" id="adb3" class="graf graf--li graf-after--li">
+                  <code class="markup--code markup--li-code"
+                    >componentDidUpdate</code
+                  > : Method called after your component has been updated.
+                </li>
+                <li name="d198" id="d198" class="graf graf--li graf-after--li">
+                  <code class="markup--code markup--li-code"
+                    >componentWillUnmount</code
+                  > : Method called just before your component is removed from
+                  the component tree.
+                </li>
+              </ul>
+              <h4 name="51b6" id="51b6" class="graf graf--h4 graf-after--li">
+                <code class="markup--code markup--h4-code"
+                  ><strong class="markup--strong markup--h4-strong"
+                    >Mounting</strong
+                  ></code
+                >
+              </h4>
+              <ol class="postList">
+                <li name="4ebf" id="4ebf" class="graf graf--li graf-after--h4">
+                  <code class="markup--code markup--li-code">constructor</code>
+                  method is called
+                </li>
+                <li name="59d0" id="59d0" class="graf graf--li graf-after--li">
+                  <code class="markup--code markup--li-code">render</code>
+                  method is called
+                </li>
+                <li name="7557" id="7557" class="graf graf--li graf-after--li">
+                  React updates the
+                  <code class="markup--code markup--li-code">DOM</code>
+                </li>
+                <li name="6049" id="6049" class="graf graf--li graf-after--li">
+                  <code class="markup--code markup--li-code"
+                    >componentDidMount</code
+                  >
+                  is called
+                </li>
+              </ol>
+              <h4 name="5cdc" id="5cdc" class="graf graf--h4 graf-after--li">
+                <code class="markup--code markup--h4-code"
+                  ><strong class="markup--strong markup--h4-strong"
+                    >Updating</strong
+                  ></code
+                >
+              </h4>
+              <ul class="postList">
+                <li name="5493" id="5493" class="graf graf--li graf-after--h4">
+                  When component receives new
+                  <code class="markup--code markup--li-code">props</code>
+                </li>
+              </ul>
+              <ol class="postList">
+                <li name="3eb5" id="3eb5" class="graf graf--li graf-after--li">
+                  <code class="markup--code markup--li-code">render</code>
+                  method is called
+                </li>
+                <li name="3c59" id="3c59" class="graf graf--li graf-after--li">
+                  React updates the
+                  <code class="markup--code markup--li-code">DOM</code>
+                </li>
+                <li name="e4de" id="e4de" class="graf graf--li graf-after--li">
+                  <code class="markup--code markup--li-code"
+                    >componentDidUpdate</code
+                  >
+                  is called
+                </li>
+              </ol>
+              <p
+                name="9226"
+                id="9226"
+                class="
+                  graf graf--p graf--hasDropCapModel graf--hasDropCap
+                  graf-after--li
+                "
+              >
+                <span class="graf-dropCap">W</span>hen
+                <code class="markup--code markup--p-code">setState</code> is
+                called:
+              </p>
+              <ol class="postList">
+                <li name="6782" id="6782" class="graf graf--li graf-after--p">
+                  <code class="markup--code markup--li-code">render</code>
+                  method is called
+                </li>
+                <li name="7d8c" id="7d8c" class="graf graf--li graf-after--li">
+                  React updates the
+                  <code class="markup--code markup--li-code">DOM</code>
+                </li>
+                <li name="74b7" id="74b7" class="graf graf--li graf-after--li">
+                  <code class="markup--code markup--li-code"
+                    >componentDidUpdate</code
+                  >
+                  is called
+                </li>
+              </ol>
+              <h4 name="6d2a" id="6d2a" class="graf graf--h4 graf-after--li">
+                <code class="markup--code markup--h4-code"
+                  ><strong class="markup--strong markup--h4-strong"
+                    >Unmounting</strong
+                  ></code
+                >
+              </h4>
+              <ul class="postList">
+                <li name="3885" id="3885" class="graf graf--li graf-after--h4">
+                  The moment before a class component is removed from the
+                  component tree:
+                </li>
+                <li name="b1e8" id="b1e8" class="graf graf--li graf-after--li">
+                  <code class="markup--code markup--li-code"
+                    >componentDidMount</code
+                  >
+                  will be called.
+                </li>
+              </ul>
+              <p name="5d8e" id="5d8e" class="graf graf--p graf-after--li">
+                <strong class="markup--strong markup--p-strong"
+                  >Avoiding the legacy lifecycle methods</strong
+                >
+              </p>
+              <ul class="postList">
+                <li name="732f" id="732f" class="graf graf--li graf-after--p">
+                  Occasionally you will encounter some deprecated lifecycle
+                  methods:
+                </li>
+                <li name="fb04" id="fb04" class="graf graf--li graf-after--li">
+                  UNSAFE_componentWillMount
+                </li>
+                <li name="5f6e" id="5f6e" class="graf graf--li graf-after--li">
+                  UNSAFE_componentWillReceiveProps
+                </li>
+                <li name="b7aa" id="b7aa" class="graf graf--li graf-after--li">
+                  UNSAFE_componentWillUpdate
+                </li>
+                <li
+                  name="6277"
+                  id="6277"
+                  class="graf graf--li graf-after--li graf--trailing"
+                >
+                  Just know they will be removed soon from React’s API…☮️
+                </li>
+              </ul>
+            </div>
+          </div>
+        </section>
+        <section name="51d6" class="section section--body section--last">
+          <div class="section-divider"><hr class="section-divider" /></div>
+          <div class="section-content">
+            <div class="section-inner sectionLayout--insetColumn">
+              <h3 name="877f" id="877f" class="graf graf--h3 graf--leading">
+                React Docs:
+              </h3>
+              <p
+                name="7099"
+                id="7099"
+                class="graf graf--p graf-after--h3 graf--trailing"
+              >
+                <a
+                  href="https://gist.github.com/bgoonz/690d80b4f8ac5d359274d98cae87366a"
+                  data-href="https://gist.github.com/bgoonz/690d80b4f8ac5d359274d98cae87366a"
+                  class="markup--anchor markup--p-anchor"
+                  rel="noopener"
+                  target="_blank"
+                  >https://gist.github.com/bgoonz/216025f38eed1dd451df356e4085fa5a</a
+                >
+              </p>
+            </div>
+          </div>
+        </section>
+      </section>
+      <footer>
+        <p>
+          By
+          <a href="https://medium.com/@bryanguner" class="p-author h-card"
+            >Bryan Guner</a
+          >
+          on
+          <a href="https://medium.com/p/d8e0fc340714"
+            ><time class="dt-published" datetime="2021-08-22T07:53:16.759Z"
+              >August 22, 2021</time
+            ></a
+          >.
+        </p>
+        <p>
+          <a
+            href="https://medium.com/@bryanguner/react-state-d8e0fc340714"
+            class="p-canonical"
+            >Canonical link</a
+          >
+        </p>
+        <p>
+          Exported from <a href="https://medium.com">Medium</a> on August 31,
+          2021.
+        </p>
+      </footer>
+    </article>
+  </body>
+</html>
