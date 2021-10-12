@@ -128,7 +128,7 @@ Advanced
 
 Advanced
 
-MY\_DOCS
+MY_DOCS
 
 <a href="../../my_docs/docs.html" class="css-4rbku5 css-1dbjc4n r-1awozwy r-42olwf r-rs99b7 r-1loqt21 r-18u37iz r-15ysp7h r-ymttw5 r-1otgn73 r-1i6wzkk r-lrvibr"></a>
 
@@ -174,7 +174,7 @@ Scope
 
 <span data-key="fc9708c172b148f788801d8694dedf06"><span data-offset-key="fc9708c172b148f788801d8694dedf06:0">There are three types of scope in JavaScript: </span><span data-offset-key="fc9708c172b148f788801d8694dedf06:1"><span class="css-901oao css-16my406 r-1vckr1u r-z2wwpe r-uibjmv r-m2pi6t r-1hvjb8t">global scope</span></span><span data-offset-key="fc9708c172b148f788801d8694dedf06:2">, </span><span data-offset-key="fc9708c172b148f788801d8694dedf06:3"><span class="css-901oao css-16my406 r-1vckr1u r-z2wwpe r-uibjmv r-m2pi6t r-1hvjb8t">local scope</span></span><span data-offset-key="fc9708c172b148f788801d8694dedf06:4">, and </span><span data-offset-key="fc9708c172b148f788801d8694dedf06:5"><span class="css-901oao css-16my406 r-1vckr1u r-z2wwpe r-uibjmv r-m2pi6t r-1hvjb8t">block scope</span></span><span data-offset-key="fc9708c172b148f788801d8694dedf06:6">.</span></span>
 
-### 
+###
 
 <span data-key="9046c0a34b7449dfbe1aa0097c9b28aa"><span data-offset-key="9046c0a34b7449dfbe1aa0097c9b28aa:0">Global scope</span></span>
 
@@ -206,7 +206,7 @@ Copied!
 
 <span data-key="bad26b20d777402f9547ddbe1473775e"><span data-offset-key="bad26b20d777402f9547ddbe1473775e:0">While useful on occasion, global variables are best avoided. Every time a variable is declared on the global scope, the chance of a name collision increases. If we are unaware of the global variables in our code, we may accidentally overwrite variables.</span></span>
 
-### 
+###
 
 <span data-key="cfdfa37e35e6474782ee480b2025498e"><span data-offset-key="cfdfa37e35e6474782ee480b2025498e:0">Local scope</span></span>
 
@@ -290,7 +290,7 @@ Copied!
 
 <span data-key="4faeca37ced443d2bda06c75c5a0fb0d"><span data-offset-key="4faeca37ced443d2bda06c75c5a0fb0d:0">In the code above we are dealing with three different scopes: the global scope, </span><span data-offset-key="4faeca37ced443d2bda06c75c5a0fb0d:1"><span class="css-901oao css-16my406 r-1vckr1u r-z2wwpe r-uibjmv r-m2pi6t r-1hvjb8t">function1</span></span><span data-offset-key="4faeca37ced443d2bda06c75c5a0fb0d:2">, and </span><span data-offset-key="4faeca37ced443d2bda06c75c5a0fb0d:3"><span class="css-901oao css-16my406 r-1vckr1u r-z2wwpe r-uibjmv r-m2pi6t r-1hvjb8t">function2</span></span><span data-offset-key="4faeca37ced443d2bda06c75c5a0fb0d:4">. Since each of the </span><span data-offset-key="4faeca37ced443d2bda06c75c5a0fb0d:5"><span class="css-901oao css-16my406 r-1vckr1u r-z2wwpe r-uibjmv r-m2pi6t r-1hvjb8t">myName</span></span><span data-offset-key="4faeca37ced443d2bda06c75c5a0fb0d:6"> variables were declared in separate scopes, we </span><span data-offset-key="4faeca37ced443d2bda06c75c5a0fb0d:7"><span class="css-901oao css-16my406 r-36ujnk">are</span></span><span data-offset-key="4faeca37ced443d2bda06c75c5a0fb0d:8"> allowed to reuse variable names without any issues. This is because each of the </span><span data-offset-key="4faeca37ced443d2bda06c75c5a0fb0d:9"><span class="css-901oao css-16my406 r-1vckr1u r-z2wwpe r-uibjmv r-m2pi6t r-1hvjb8t">myName</span></span><span data-offset-key="4faeca37ced443d2bda06c75c5a0fb0d:10"> variables is bound to their respective functions.</span></span>
 
-### 
+###
 
 <span data-key="7585e712ff0c4b5eb22a0da43a0dc104"><span data-offset-key="7585e712ff0c4b5eb22a0da43a0dc104:0">Block scope</span></span>
 
@@ -340,7 +340,7 @@ Copied!
 
 Copied!
 
-### 
+###
 
 <span data-key="d1119cd654174e88ab9d59329ee884eb"><span data-offset-key="d1119cd654174e88ab9d59329ee884eb:0">Scope chaining: variables and scope</span></span>
 
@@ -490,7 +490,7 @@ Copied!
 
 Copied!
 
-### 
+###
 
 <span data-key="9b9a8d290fae43c190ce0ef44d8ae14f"><span data-offset-key="9b9a8d290fae43c190ce0ef44d8ae14f:0">Lexical scope</span></span>
 
@@ -562,7 +562,7 @@ Copied!
 
 <span data-key="c9ff00216fcd4cb7a23ef1f271c8c287"><span data-offset-key="c9ff00216fcd4cb7a23ef1f271c8c287:0">All the code you write in JavaScript is </span><span data-offset-key="c9ff00216fcd4cb7a23ef1f271c8c287:1"><span class="css-901oao css-16my406 r-36ujnk">evaluated</span></span><span data-offset-key="c9ff00216fcd4cb7a23ef1f271c8c287:2">. </span><span data-offset-key="c9ff00216fcd4cb7a23ef1f271c8c287:3"><span class="css-901oao css-16my406 r-b88u0q">A variable always evaluates to the value it contains no matter how you declare it.</span></span></span>
 
-### 
+###
 
 <span data-key="5b39183da53b4aeeb2d0ab6753d50c63"><span data-offset-key="5b39183da53b4aeeb2d0ab6753d50c63:0">The different ways to declare variables</span></span>
 
@@ -578,7 +578,7 @@ Copied!
 
 <span data-key="8311d594889c48b9bebd905983ca6cd0"><span data-offset-key="8311d594889c48b9bebd905983ca6cd0:0">Let's start by talking more about all </span><span data-offset-key="8311d594889c48b9bebd905983ca6cd0:1"><span class="css-901oao css-16my406 r-1vckr1u r-z2wwpe r-uibjmv r-m2pi6t r-1hvjb8t">const</span></span><span data-offset-key="8311d594889c48b9bebd905983ca6cd0:2">, </span><span data-offset-key="8311d594889c48b9bebd905983ca6cd0:3"><span class="css-901oao css-16my406 r-1vckr1u r-z2wwpe r-uibjmv r-m2pi6t r-1hvjb8t">let</span></span><span data-offset-key="8311d594889c48b9bebd905983ca6cd0:4">, and </span><span data-offset-key="8311d594889c48b9bebd905983ca6cd0:5"><span class="css-901oao css-16my406 r-1vckr1u r-z2wwpe r-uibjmv r-m2pi6t r-1hvjb8t">var</span></span><span data-offset-key="8311d594889c48b9bebd905983ca6cd0:6"> before we dive into why the difference of scopes and hoisting is important.</span></span>
 
-### 
+###
 
 <span data-key="b17c215c10234d3a8cc84788238d8c51"><span data-offset-key="b17c215c10234d3a8cc84788238d8c51:0">Function-scoped variables</span></span>
 
@@ -692,7 +692,7 @@ Copied!
 
 Copied!
 
-### 
+###
 
 <span data-key="235c4776c1724f86aa9c514087e378ac"><span data-offset-key="235c4776c1724f86aa9c514087e378ac:0">Block-scoped variables</span></span>
 
@@ -982,7 +982,7 @@ Copied!
 
 <span data-key="37c90704381b4e678d464345edc9ec0c"><span data-offset-key="37c90704381b4e678d464345edc9ec0c:0">In the above example we can see that inside the </span><span data-offset-key="37c90704381b4e678d464345edc9ec0c:1"><span class="css-901oao css-16my406 r-1vckr1u r-z2wwpe r-uibjmv r-m2pi6t r-1hvjb8t">if</span></span><span data-offset-key="37c90704381b4e678d464345edc9ec0c:2"> block the </span><span data-offset-key="37c90704381b4e678d464345edc9ec0c:3"><span class="css-901oao css-16my406 r-1vckr1u r-z2wwpe r-uibjmv r-m2pi6t r-1hvjb8t">let</span></span><span data-offset-key="37c90704381b4e678d464345edc9ec0c:4"> declared variable, </span><span data-offset-key="37c90704381b4e678d464345edc9ec0c:5"><span class="css-901oao css-16my406 r-1vckr1u r-z2wwpe r-uibjmv r-m2pi6t r-1hvjb8t">str</span></span><span data-offset-key="37c90704381b4e678d464345edc9ec0c:6">, throws an error. Showing that the error thrown by a </span><span data-offset-key="37c90704381b4e678d464345edc9ec0c:7"><span class="css-901oao css-16my406 r-1vckr1u r-z2wwpe r-uibjmv r-m2pi6t r-1hvjb8t">let</span></span><span data-offset-key="37c90704381b4e678d464345edc9ec0c:8"> variable in the temporal dead zone takes precedence over any scope chaining that would attempt to go to the outer scope to find a value for the </span><span data-offset-key="37c90704381b4e678d464345edc9ec0c:9"><span class="css-901oao css-16my406 r-1vckr1u r-z2wwpe r-uibjmv r-m2pi6t r-1hvjb8t">str</span></span><span data-offset-key="37c90704381b4e678d464345edc9ec0c:10"> variable.</span></span>
 
-### 
+###
 
 <span data-key="2a948523cf1a4c6a8ea723ad39af4f7c"><span data-offset-key="2a948523cf1a4c6a8ea723ad39af4f7c:0">Function scope vs. block scope</span></span>
 
@@ -1332,7 +1332,7 @@ Copied!
 
 <span data-key="1d25fb60dccf42e7bfe3832e9bda8975"><span data-offset-key="1d25fb60dccf42e7bfe3832e9bda8975:0">Let's take a look at some of the common and practical applications of closures in JavaScript.</span></span>
 
-### 
+###
 
 <span data-key="0d81030b71154108a6e76810229e4a87"><span data-offset-key="0d81030b71154108a6e76810229e4a87:0">Private State</span></span>
 
@@ -1414,7 +1414,7 @@ Copied!
 
 <span data-key="3c089e119db04ed8999a8865188641d7"><span data-offset-key="3c089e119db04ed8999a8865188641d7:0">By </span><span data-offset-key="3c089e119db04ed8999a8865188641d7:1"><span class="css-901oao css-16my406 r-b88u0q">closing over</span></span><span data-offset-key="3c089e119db04ed8999a8865188641d7:2"> (or </span><span data-offset-key="3c089e119db04ed8999a8865188641d7:3"><span class="css-901oao css-16my406 r-b88u0q">capturing</span></span><span data-offset-key="3c089e119db04ed8999a8865188641d7:4">) the </span><span data-offset-key="3c089e119db04ed8999a8865188641d7:5"><span class="css-901oao css-16my406 r-1vckr1u r-z2wwpe r-uibjmv r-m2pi6t r-1hvjb8t">count</span></span><span data-offset-key="3c089e119db04ed8999a8865188641d7:6"> variable, each function that is return from </span><span data-offset-key="3c089e119db04ed8999a8865188641d7:7"><span class="css-901oao css-16my406 r-1vckr1u r-z2wwpe r-uibjmv r-m2pi6t r-1hvjb8t">createCounter</span></span><span data-offset-key="3c089e119db04ed8999a8865188641d7:8"> has a </span><span data-offset-key="3c089e119db04ed8999a8865188641d7:9"><span class="css-901oao css-16my406 r-b88u0q">private</span></span><span data-offset-key="3c089e119db04ed8999a8865188641d7:10">, mutable state that cannot be accessed externally. There is no way any outside function beside the closure itself can access the </span><span data-offset-key="3c089e119db04ed8999a8865188641d7:11"><span class="css-901oao css-16my406 r-1vckr1u r-z2wwpe r-uibjmv r-m2pi6t r-1hvjb8t">count</span></span><span data-offset-key="3c089e119db04ed8999a8865188641d7:12"> state.</span></span>
 
-### 
+###
 
 <span data-key="cae41ae986494a13bedfb63bd08629e9"><span data-offset-key="cae41ae986494a13bedfb63bd08629e9:0">Passing Arguments Implicitly</span></span>
 
@@ -1688,7 +1688,7 @@ Copied!
 
 <span data-key="6aa27e8daa89478f8eab9834c3e4e512"><span data-offset-key="6aa27e8daa89478f8eab9834c3e4e512:0">When you run the above </span><span data-offset-key="6aa27e8daa89478f8eab9834c3e4e512:1"><span class="css-901oao css-16my406 r-1vckr1u r-z2wwpe r-uibjmv r-m2pi6t r-1hvjb8t">testMe</span></span><span data-offset-key="6aa27e8daa89478f8eab9834c3e4e512:2"> function in Node you'll see that </span><span data-offset-key="6aa27e8daa89478f8eab9834c3e4e512:3"><span class="css-901oao css-16my406 r-1vckr1u r-z2wwpe r-uibjmv r-m2pi6t r-1hvjb8t">this</span></span><span data-offset-key="6aa27e8daa89478f8eab9834c3e4e512:4"> is set to the </span><span data-offset-key="6aa27e8daa89478f8eab9834c3e4e512:5"><span class="css-901oao css-16my406 r-1vckr1u r-z2wwpe r-uibjmv r-m2pi6t r-1hvjb8t">global</span></span><span data-offset-key="6aa27e8daa89478f8eab9834c3e4e512:6"> object. To reiterate: each function you invoke will have </span><span data-offset-key="6aa27e8daa89478f8eab9834c3e4e512:7"><span class="css-901oao css-16my406 r-36ujnk">both</span></span><span data-offset-key="6aa27e8daa89478f8eab9834c3e4e512:8"> a context and a scope. So even running functions in Node that are not defined explicitly on declared objects are run using the global object as their </span><span data-offset-key="6aa27e8daa89478f8eab9834c3e4e512:9"><span class="css-901oao css-16my406 r-1vckr1u r-z2wwpe r-uibjmv r-m2pi6t r-1hvjb8t">this</span></span><span data-offset-key="6aa27e8daa89478f8eab9834c3e4e512:10"> and therefore their context.</span></span>
 
-### 
+###
 
 <span data-key="fb043653e1a240408a57b296fd899d3e"><span data-offset-key="fb043653e1a240408a57b296fd899d3e:0">When methods have an unexpected context</span></span>
 
@@ -2472,7 +2472,7 @@ Copied!
 
 <span data-key="9ccee4e44b8d44408ced107915fa42e3"><span data-offset-key="9ccee4e44b8d44408ced107915fa42e3:0">Both functions in the example above accomplish the same thing. However, the arrow syntax is a little shorter and easier to follow.</span></span>
 
-### 
+###
 
 <span data-key="cf1cbbc2fb024acdb092cfd78d7b8dfa"><span data-offset-key="cf1cbbc2fb024acdb092cfd78d7b8dfa:0">Anatomy of an arrow function</span></span>
 
@@ -2874,7 +2874,7 @@ Copied!
 
 <span data-key="207a8bca7cbe4fadbf65afa487b6c17a"><span data-offset-key="207a8bca7cbe4fadbf65afa487b6c17a:0">An arrow function will always have the same context as the function that created it - giving it access to variables available in that context (like </span><span data-offset-key="207a8bca7cbe4fadbf65afa487b6c17a:1"><span class="css-901oao css-16my406 r-1vckr1u r-z2wwpe r-uibjmv r-m2pi6t r-1hvjb8t">this.name</span></span><span data-offset-key="207a8bca7cbe4fadbf65afa487b6c17a:2"> in this case!)</span></span>
 
-### 
+###
 
 <span data-key="c8ac4f24340446758da8ea813a442251"><span data-offset-key="c8ac4f24340446758da8ea813a442251:0">No binding in arrow functions</span></span>
 

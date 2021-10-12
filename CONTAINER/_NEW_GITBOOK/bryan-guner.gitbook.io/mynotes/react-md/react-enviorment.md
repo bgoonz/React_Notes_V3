@@ -104,7 +104,7 @@ Advanced
 
 Advanced
 
-MY\_DOCS
+MY_DOCS
 
 <a href="../my_docs/docs.html" class="css-4rbku5 css-1dbjc4n r-1awozwy r-42olwf r-rs99b7 r-1loqt21 r-18u37iz r-15ysp7h r-ymttw5 r-1otgn73 r-1i6wzkk r-lrvibr"></a>
 
@@ -138,11 +138,11 @@ REACT ENVIORMENT
 
 1
 
-<span data-key="9b853e3f05854a01b0c3b0e9eac3f93c"><span data-offset-key="9b853e3f05854a01b0c3b0e9eac3f93c:0">mkdir starwars\_api</span></span>
+<span data-key="9b853e3f05854a01b0c3b0e9eac3f93c"><span data-offset-key="9b853e3f05854a01b0c3b0e9eac3f93c:0">mkdir starwars_api</span></span>
 
 2
 
-<span data-key="85dce8082cee4a4f929fc4980664541e"><span data-offset-key="85dce8082cee4a4f929fc4980664541e:0">cd starwars\_api</span></span>
+<span data-key="85dce8082cee4a4f929fc4980664541e"><span data-offset-key="85dce8082cee4a4f929fc4980664541e:0">cd starwars_api</span></span>
 
 3
 
@@ -544,7 +544,7 @@ Copied!
 
 21
 
-<span data-key="3a242f6572394c19854c68e142936f54"><span data-offset-key="3a242f6572394c19854c68e142936f54:0"> exclude: /node\_modules/,</span></span>
+<span data-key="3a242f6572394c19854c68e142936f54"><span data-offset-key="3a242f6572394c19854c68e142936f54:0"> exclude: /node_modules/,</span></span>
 
 22
 
