@@ -112,7 +112,7 @@ Advanced
 
 Advanced
 
-MY\_DOCS
+MY_DOCS
 
 <a href="../my_docs/docs.html" class="css-4rbku5 css-1dbjc4n r-1awozwy r-42olwf r-rs99b7 r-1loqt21 r-18u37iz r-15ysp7h r-ymttw5 r-1otgn73 r-1i6wzkk r-lrvibr"></a>
 
@@ -146,13 +146,13 @@ Node.js versus Next.js - A React Approach
 
 <span data-key="f0158d356e7b4db992aeba8c8098e66a"><span data-offset-key="f0158d356e7b4db992aeba8c8098e66a:0">There are two types of applications built with Node.js. The first one are utility applications which are used to enhance the performance of the main application. For example, hot-reload functionality is a utility function. While coding, the changes are made as we code along. The second type of applications built with Node.js are web servers that handle requests from other sites to provide software services.</span></span>
 
-### 
+###
 
 <span data-key="dd1c0fea3d8b4103b6ac1b28fc4ef46e"><span data-offset-key="dd1c0fea3d8b4103b6ac1b28fc4ef46e:0">Next.js</span></span>
 
 <span data-key="f1c9e6daa6604b02bbc839196afcd691"><span data-offset-key="f1c9e6daa6604b02bbc839196afcd691:0">The official website talks about why Next.js was introduced. Let us discuss the reasons in detail to get a perspective about Next.js.</span></span>
 
-### 
+###
 
 <span data-key="ab6fc5ff9f1d4c94abeeac5b426e7b0b"><span data-offset-key="ab6fc5ff9f1d4c94abeeac5b426e7b0b:0">Server Side Rendering vs. Client-Side Rendering</span></span>
 
@@ -170,7 +170,7 @@ Node.js versus Next.js - A React Approach
 
 <span data-key="0d021176f4614a309301793b5bd130da"><span data-offset-key="0d021176f4614a309301793b5bd130da:0">Node.js provides a very vast framework and includes many libraries to support every need a developer might come across. Next.js enhances the user experience by introducing server-side rendering with a lower threshold for developers. Using the existing React knowledge, developers can build SSR applications.</span></span>
 
-### 
+###
 
 <span data-key="21ecf94bf27e472ca9a5cac1c03e646c"><span data-offset-key="21ecf94bf27e472ca9a5cac1c03e646c:0">Node.js vs. Next.js</span></span>
 
@@ -184,7 +184,7 @@ Node.js versus Next.js - A React Approach
 
 3
 
-<span data-key="05998da381be4d9ca2def775125ba06f"><span data-offset-key="05998da381be4d9ca2def775125ba06f:0">├── node\_modules</span></span>
+<span data-key="05998da381be4d9ca2def775125ba06f"><span data-offset-key="05998da381be4d9ca2def775125ba06f:0">├── node_modules</span></span>
 
 4
 
@@ -272,7 +272,7 @@ Copied!
 
 4
 
-<span data-key="7a5e95e49aba477eb7b568e00081680b"><span data-offset-key="7a5e95e49aba477eb7b568e00081680b:0">├── node\_modules</span></span>
+<span data-key="7a5e95e49aba477eb7b568e00081680b"><span data-offset-key="7a5e95e49aba477eb7b568e00081680b:0">├── node_modules</span></span>
 
 5
 
@@ -332,7 +332,7 @@ Copied!
 
 <span data-key="1c2f5f0ae6c744d6847c8f88553af90c"><span data-offset-key="1c2f5f0ae6c744d6847c8f88553af90c:0"> </span><span data-offset-key="1c2f5f0ae6c744d6847c8f88553af90c:1"><span class="css-901oao css-16my406 r-36ujnk">Screenshot of the HTML rendered on Server-Side.</span></span></span>
 
-### 
+###
 
 <span data-key="ea46d13bf5414aed83e3a1b88260830f"><span data-offset-key="ea46d13bf5414aed83e3a1b88260830f:0">Conclusion</span></span>
 
@@ -340,7 +340,7 @@ Copied!
 
 <a href="../my_docs/composition-vs-inheritance.html" class="css-4rbku5 css-1dbjc4n r-1awozwy r-14lw9ot r-190qawg r-z2wwpe r-rs99b7 r-4dj0k7 r-1loqt21 r-1quu1zo r-1ro0kt6 r-18u37iz r-16y2uox r-1wbh5a2 r-nsbfu8 r-1otgn73 r-1i6wzkk r-lrvibr"></a>
 
-MY\_DOCS - Previous
+MY_DOCS - Previous
 
 Composition vs Inheritance
 

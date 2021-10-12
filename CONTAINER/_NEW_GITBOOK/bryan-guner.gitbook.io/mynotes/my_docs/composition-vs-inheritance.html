@@ -1,101 +1,654 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
-<head>
-  <meta charset="utf-8" />
-  <meta name="generator" content="pandoc" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>composition-vs-inheritance</title>
-  <style type="text/css">
-      code{white-space: pre-wrap;}
-      span.smallcaps{font-variant: small-caps;}
-      span.underline{text-decoration: underline;}
-      div.column{display: inline-block; vertical-align: top; width: 50%;}
-  </style>
-</head>
-<body>
-<p><a href="../index.html" class="css-4rbku5 css-1dbjc4n r-1awozwy r-1loqt21 r-18u37iz r-1otgn73 r-1i6wzkk r-lrvibr"></a></p>
-<p><span class="emj-objects _1f4cc" data-role="img" title="pushpin" data-aria-label="pushpin" style="transform: translate(-50%, -50%) scale(1.25)">📌</span></p>
-<p><span class="emj-objects _1f4cc" data-role="img" title="pushpin" data-aria-label="pushpin" style="transform: translate(-50%, -50%) scale(0.44)">📌</span></p>
-<p><span class="emj-objects _1f4cc" data-role="img" title="pushpin" data-aria-label="pushpin" style="transform: translate(-50%, -50%) scale(0.75)">📌</span></p>
-<p><span class="emj-objects _1f4cc" data-role="img" title="pushpin" data-aria-label="pushpin" style="transform: translate(-50%, -50%) scale(0.26)">📌</span></p>
-<p><span class="css-901oao css-16my406 css-vcwn7f" data-aria-label="React" data-rnw-int-class="243__257-9209_">React</span></p>
-<p>Search…</p>
-<p><a href="../index.html" class="css-4rbku5 css-1dbjc4n r-1awozwy r-1loqt21 r-18u37iz r-1otgn73 r-1i6wzkk r-lrvibr"></a></p>
-<p><span class="emj-objects _1f4cc" data-role="img" title="pushpin" data-aria-label="pushpin" style="
-                                    transform: translate(-50%, -50%) scale(1.25);
-                                  ">📌</span></p>
-<p><span class="emj-objects _1f4cc" data-role="img" title="pushpin" data-aria-label="pushpin" style="
-                                    transform: translate(-50%, -50%) scale(0.44);
-                                  ">📌</span></p>
-<p><span class="emj-objects _1f4cc" data-role="img" title="pushpin" data-aria-label="pushpin" style="
-                                    transform: translate(-50%, -50%) scale(0.75);
-                                  ">📌</span></p>
-<p><span class="emj-objects _1f4cc" data-role="img" title="pushpin" data-aria-label="pushpin" style="
-                                    transform: translate(-50%, -50%) scale(0.26);
-                                  ">📌</span></p>
-<p><span class="css-901oao css-16my406 css-vcwn7f" data-aria-label="React" data-rnw-int-class="243__257-9209_">React</span></p>
-<p><a href="../index.html" class="css-4rbku5 css-1dbjc4n r-1awozwy r-42olwf r-rs99b7 r-1loqt21 r-18u37iz r-15ysp7h r-ymttw5 r-1otgn73 r-1i6wzkk r-lrvibr"></a></p>
-<p>index</p>
-<p><a href="../general-notes.html" class="css-4rbku5 css-1dbjc4n r-1awozwy r-42olwf r-rs99b7 r-1loqt21 r-18u37iz r-15ysp7h r-ymttw5 r-1otgn73 r-1i6wzkk r-lrvibr"></a></p>
-<p>General Notes</p>
-<p><a href="../review-of-previous-concepts.html" class="css-4rbku5 css-1dbjc4n r-1awozwy r-42olwf r-rs99b7 r-1loqt21 r-18u37iz r-15ysp7h r-ymttw5 r-1otgn73 r-1i6wzkk r-lrvibr"></a></p>
-<p>Review-Of-Previous-Concepts</p>
-<p><a href="../reiew.html" class="css-4rbku5 css-1dbjc4n r-1awozwy r-42olwf r-rs99b7 r-1loqt21 r-18u37iz r-15ysp7h r-ymttw5 r-1otgn73 r-1i6wzkk r-lrvibr"></a></p>
-<p>Reiew</p>
-<p><a href="../understanding-by-example.html" class="css-4rbku5 css-1dbjc4n r-1awozwy r-42olwf r-rs99b7 r-1loqt21 r-18u37iz r-15ysp7h r-ymttw5 r-1otgn73 r-1i6wzkk r-lrvibr"></a></p>
-<p>Understanding By Example</p>
-<p><a href="../spread-and-rest.html" class="css-4rbku5 css-1dbjc4n r-1awozwy r-42olwf r-rs99b7 r-1loqt21 r-18u37iz r-15ysp7h r-ymttw5 r-1otgn73 r-1i6wzkk r-lrvibr"></a></p>
-<p>Spread and Rest</p>
-<p>REACT-RESOURCES</p>
-<p><a href="../react-md/appendix.html" class="css-4rbku5 css-1dbjc4n r-1awozwy r-42olwf r-rs99b7 r-1loqt21 r-18u37iz r-15ysp7h r-ymttw5 r-1otgn73 r-1i6wzkk r-lrvibr"></a></p>
-<p>index</p>
-<p><a href="../react-md/react-resources.html" class="css-4rbku5 css-1dbjc4n r-1awozwy r-42olwf r-rs99b7 r-1loqt21 r-18u37iz r-15ysp7h r-ymttw5 r-1otgn73 r-1i6wzkk r-lrvibr"></a></p>
-<p>React-Resources</p>
-<p><a href="../react-md/untitled-1.html" class="css-4rbku5 css-1dbjc4n r-1awozwy r-42olwf r-rs99b7 r-1loqt21 r-18u37iz r-15ysp7h r-ymttw5 r-1otgn73 r-1i6wzkk r-lrvibr"></a></p>
-<p>Thinking in React</p>
-<p><a href="../react-md/composition-vs-inheritance.html" class="css-4rbku5 css-1dbjc4n r-1awozwy r-42olwf r-rs99b7 r-1loqt21 r-18u37iz r-15ysp7h r-ymttw5 r-1otgn73 r-1i6wzkk r-lrvibr"></a></p>
-<p>Composition vs Inheritance</p>
-<p><a href="../react-md/using-web-components-in-react.html" class="css-4rbku5 css-1dbjc4n r-1awozwy r-42olwf r-rs99b7 r-1loqt21 r-18u37iz r-15ysp7h r-ymttw5 r-1otgn73 r-1i6wzkk r-lrvibr"></a></p>
-<p>Using Web Components in React</p>
-<p><a href="../react-md/react-enviorment.html" class="css-4rbku5 css-1dbjc4n r-1awozwy r-42olwf r-rs99b7 r-1loqt21 r-18u37iz r-15ysp7h r-ymttw5 r-1otgn73 r-1i6wzkk r-lrvibr"></a></p>
-<p>REACT ENVIORMENT</p>
-<p><a href="../react-md/hello-world.html" class="css-4rbku5 css-1dbjc4n r-1awozwy r-42olwf r-rs99b7 r-1loqt21 r-18u37iz r-15ysp7h r-ymttw5 r-1otgn73 r-1i6wzkk r-lrvibr"></a></p>
-<p>Hello World</p>
-<p><a href="../react-md/components-and-props.html" class="css-4rbku5 css-1dbjc4n r-1awozwy r-42olwf r-rs99b7 r-1loqt21 r-18u37iz r-15ysp7h r-ymttw5 r-1otgn73 r-1i6wzkk r-lrvibr"></a></p>
-<p>Components And Props</p>
-<p><a href="../react-md/jsx.html" class="css-4rbku5 css-1dbjc4n r-1awozwy r-42olwf r-rs99b7 r-1loqt21 r-18u37iz r-15ysp7h r-ymttw5 r-1otgn73 r-1i6wzkk r-lrvibr"></a></p>
-<p>JSX</p>
-<p>projects</p>
-<p><a href="../projects/project-examples.html" class="css-4rbku5 css-1dbjc4n r-1awozwy r-42olwf r-rs99b7 r-1loqt21 r-18u37iz r-15ysp7h r-ymttw5 r-1otgn73 r-1i6wzkk r-lrvibr"></a></p>
-<p>Project Examples</p>
-<p>Prerequisites</p>
-<p><a href="../prerequisites/prerequisites.html" class="css-4rbku5 css-1dbjc4n r-1awozwy r-42olwf r-rs99b7 r-1loqt21 r-18u37iz r-15ysp7h r-ymttw5 r-1otgn73 r-1i6wzkk r-lrvibr"></a></p>
-<p>Prerequisites</p>
-<p>Advanced</p>
-<p><a href="../advanced/advanced.html" class="css-4rbku5 css-1dbjc4n r-1awozwy r-42olwf r-rs99b7 r-1loqt21 r-18u37iz r-15ysp7h r-ymttw5 r-1otgn73 r-1i6wzkk r-lrvibr"></a></p>
-<p>Advanced</p>
-<p>MY_DOCS</p>
-<p><a href="docs.html" class="css-4rbku5 css-1dbjc4n r-1awozwy r-42olwf r-rs99b7 r-1loqt21 r-18u37iz r-15ysp7h r-ymttw5 r-1otgn73 r-1i6wzkk r-lrvibr"></a></p>
-<p>Docs</p>
-<p><a href="react-components.html" class="css-4rbku5 css-1dbjc4n r-1awozwy r-42olwf r-rs99b7 r-1loqt21 r-18u37iz r-15ysp7h r-ymttw5 r-1otgn73 r-1i6wzkk r-lrvibr"></a></p>
-<p>React Components</p>
-<p><a href="composition-vs-inheritance.html" class="css-4rbku5 css-1dbjc4n r-1awozwy r-14lw9ot r-156hn8l r-rs99b7 r-1loqt21 r-18u37iz r-15ysp7h r-ymttw5 r-1otgn73 r-1i6wzkk r-lrvibr"></a></p>
-<p>Composition vs Inheritance</p>
-<p>Methodologies</p>
-<p><a href="../methodologies/node.js-versus-next.js-a-react-approach.html" class="css-4rbku5 css-1dbjc4n r-1awozwy r-42olwf r-rs99b7 r-1loqt21 r-18u37iz r-15ysp7h r-ymttw5 r-1otgn73 r-1i6wzkk r-lrvibr"></a></p>
-<p>Node.js versus Next.js - A React Approach</p>
-<p>Interview</p>
-<p><a href="../interview/question-set-1.html" class="css-4rbku5 css-1dbjc4n r-1awozwy r-42olwf r-rs99b7 r-1loqt21 r-18u37iz r-15ysp7h r-ymttw5 r-1otgn73 r-1i6wzkk r-lrvibr"></a></p>
-<p>Question Set #1:</p>
-<p>Powered By <span class="css-901oao css-16my406 r-b88u0q">GitBook</span></p>
-<p>Composition vs Inheritance</p>
-<p><span data-key="initial_-MjKkZ-a6JE07fhL9wsn_text"><span data-offset-key="initial_-MjKkZ-a6JE07fhL9wsn_text:0"><span data-slate-zero-width="n">​</span></span></span></p>
-<p><a href="react-components.html" class="css-4rbku5 css-1dbjc4n r-1awozwy r-14lw9ot r-190qawg r-z2wwpe r-rs99b7 r-4dj0k7 r-1loqt21 r-1quu1zo r-1ro0kt6 r-18u37iz r-16y2uox r-1wbh5a2 r-nsbfu8 r-1otgn73 r-1i6wzkk r-lrvibr"></a></p>
-<p>MY_DOCS - Previous</p>
-<p>React Components</p>
-<p><a href="../methodologies/node.js-versus-next.js-a-react-approach.html" class="css-4rbku5 css-1dbjc4n r-1awozwy r-14lw9ot r-190qawg r-z2wwpe r-rs99b7 r-4dj0k7 r-1loqt21 r-1quu1zo r-1ro0kt6 r-18u37iz r-16y2uox r-1wbh5a2 r-nsbfu8 r-1otgn73 r-1i6wzkk r-lrvibr"></a></p>
-<p>Next - Methodologies</p>
-<p>Node.js versus Next.js - A React Approach</p>
-<p>Copy link</p>
-</body>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="generator" content="pandoc" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=yes"
+    />
+    <title>composition-vs-inheritance</title>
+    <style type="text/css">
+      code {
+        white-space: pre-wrap;
+      }
+      span.smallcaps {
+        font-variant: small-caps;
+      }
+      span.underline {
+        text-decoration: underline;
+      }
+      div.column {
+        display: inline-block;
+        vertical-align: top;
+        width: 50%;
+      }
+    </style>
+  </head>
+  <body>
+    <p>
+      <a
+        href="../index.html"
+        class="
+          css-4rbku5 css-1dbjc4n
+          r-1awozwy r-1loqt21 r-18u37iz r-1otgn73 r-1i6wzkk r-lrvibr
+        "
+      ></a>
+    </p>
+    <p>
+      <span
+        class="emj-objects _1f4cc"
+        data-role="img"
+        title="pushpin"
+        data-aria-label="pushpin"
+        style="transform: translate(-50%, -50%) scale(1.25)"
+        >📌</span
+      >
+    </p>
+    <p>
+      <span
+        class="emj-objects _1f4cc"
+        data-role="img"
+        title="pushpin"
+        data-aria-label="pushpin"
+        style="transform: translate(-50%, -50%) scale(0.44)"
+        >📌</span
+      >
+    </p>
+    <p>
+      <span
+        class="emj-objects _1f4cc"
+        data-role="img"
+        title="pushpin"
+        data-aria-label="pushpin"
+        style="transform: translate(-50%, -50%) scale(0.75)"
+        >📌</span
+      >
+    </p>
+    <p>
+      <span
+        class="emj-objects _1f4cc"
+        data-role="img"
+        title="pushpin"
+        data-aria-label="pushpin"
+        style="transform: translate(-50%, -50%) scale(0.26)"
+        >📌</span
+      >
+    </p>
+    <p>
+      <span
+        class="css-901oao css-16my406 css-vcwn7f"
+        data-aria-label="React"
+        data-rnw-int-class="243__257-9209_"
+        >React</span
+      >
+    </p>
+    <p>Search…</p>
+    <p>
+      <a
+        href="../index.html"
+        class="
+          css-4rbku5 css-1dbjc4n
+          r-1awozwy r-1loqt21 r-18u37iz r-1otgn73 r-1i6wzkk r-lrvibr
+        "
+      ></a>
+    </p>
+    <p>
+      <span
+        class="emj-objects _1f4cc"
+        data-role="img"
+        title="pushpin"
+        data-aria-label="pushpin"
+        style="transform: translate(-50%, -50%) scale(1.25)"
+        >📌</span
+      >
+    </p>
+    <p>
+      <span
+        class="emj-objects _1f4cc"
+        data-role="img"
+        title="pushpin"
+        data-aria-label="pushpin"
+        style="transform: translate(-50%, -50%) scale(0.44)"
+        >📌</span
+      >
+    </p>
+    <p>
+      <span
+        class="emj-objects _1f4cc"
+        data-role="img"
+        title="pushpin"
+        data-aria-label="pushpin"
+        style="transform: translate(-50%, -50%) scale(0.75)"
+        >📌</span
+      >
+    </p>
+    <p>
+      <span
+        class="emj-objects _1f4cc"
+        data-role="img"
+        title="pushpin"
+        data-aria-label="pushpin"
+        style="transform: translate(-50%, -50%) scale(0.26)"
+        >📌</span
+      >
+    </p>
+    <p>
+      <span
+        class="css-901oao css-16my406 css-vcwn7f"
+        data-aria-label="React"
+        data-rnw-int-class="243__257-9209_"
+        >React</span
+      >
+    </p>
+    <p>
+      <a
+        href="../index.html"
+        class="
+          css-4rbku5 css-1dbjc4n
+          r-1awozwy
+          r-42olwf
+          r-rs99b7
+          r-1loqt21
+          r-18u37iz
+          r-15ysp7h
+          r-ymttw5
+          r-1otgn73
+          r-1i6wzkk
+          r-lrvibr
+        "
+      ></a>
+    </p>
+    <p>index</p>
+    <p>
+      <a
+        href="../general-notes.html"
+        class="
+          css-4rbku5 css-1dbjc4n
+          r-1awozwy
+          r-42olwf
+          r-rs99b7
+          r-1loqt21
+          r-18u37iz
+          r-15ysp7h
+          r-ymttw5
+          r-1otgn73
+          r-1i6wzkk
+          r-lrvibr
+        "
+      ></a>
+    </p>
+    <p>General Notes</p>
+    <p>
+      <a
+        href="../review-of-previous-concepts.html"
+        class="
+          css-4rbku5 css-1dbjc4n
+          r-1awozwy
+          r-42olwf
+          r-rs99b7
+          r-1loqt21
+          r-18u37iz
+          r-15ysp7h
+          r-ymttw5
+          r-1otgn73
+          r-1i6wzkk
+          r-lrvibr
+        "
+      ></a>
+    </p>
+    <p>Review-Of-Previous-Concepts</p>
+    <p>
+      <a
+        href="../reiew.html"
+        class="
+          css-4rbku5 css-1dbjc4n
+          r-1awozwy
+          r-42olwf
+          r-rs99b7
+          r-1loqt21
+          r-18u37iz
+          r-15ysp7h
+          r-ymttw5
+          r-1otgn73
+          r-1i6wzkk
+          r-lrvibr
+        "
+      ></a>
+    </p>
+    <p>Reiew</p>
+    <p>
+      <a
+        href="../understanding-by-example.html"
+        class="
+          css-4rbku5 css-1dbjc4n
+          r-1awozwy
+          r-42olwf
+          r-rs99b7
+          r-1loqt21
+          r-18u37iz
+          r-15ysp7h
+          r-ymttw5
+          r-1otgn73
+          r-1i6wzkk
+          r-lrvibr
+        "
+      ></a>
+    </p>
+    <p>Understanding By Example</p>
+    <p>
+      <a
+        href="../spread-and-rest.html"
+        class="
+          css-4rbku5 css-1dbjc4n
+          r-1awozwy
+          r-42olwf
+          r-rs99b7
+          r-1loqt21
+          r-18u37iz
+          r-15ysp7h
+          r-ymttw5
+          r-1otgn73
+          r-1i6wzkk
+          r-lrvibr
+        "
+      ></a>
+    </p>
+    <p>Spread and Rest</p>
+    <p>REACT-RESOURCES</p>
+    <p>
+      <a
+        href="../react-md/appendix.html"
+        class="
+          css-4rbku5 css-1dbjc4n
+          r-1awozwy
+          r-42olwf
+          r-rs99b7
+          r-1loqt21
+          r-18u37iz
+          r-15ysp7h
+          r-ymttw5
+          r-1otgn73
+          r-1i6wzkk
+          r-lrvibr
+        "
+      ></a>
+    </p>
+    <p>index</p>
+    <p>
+      <a
+        href="../react-md/react-resources.html"
+        class="
+          css-4rbku5 css-1dbjc4n
+          r-1awozwy
+          r-42olwf
+          r-rs99b7
+          r-1loqt21
+          r-18u37iz
+          r-15ysp7h
+          r-ymttw5
+          r-1otgn73
+          r-1i6wzkk
+          r-lrvibr
+        "
+      ></a>
+    </p>
+    <p>React-Resources</p>
+    <p>
+      <a
+        href="../react-md/untitled-1.html"
+        class="
+          css-4rbku5 css-1dbjc4n
+          r-1awozwy
+          r-42olwf
+          r-rs99b7
+          r-1loqt21
+          r-18u37iz
+          r-15ysp7h
+          r-ymttw5
+          r-1otgn73
+          r-1i6wzkk
+          r-lrvibr
+        "
+      ></a>
+    </p>
+    <p>Thinking in React</p>
+    <p>
+      <a
+        href="../react-md/composition-vs-inheritance.html"
+        class="
+          css-4rbku5 css-1dbjc4n
+          r-1awozwy
+          r-42olwf
+          r-rs99b7
+          r-1loqt21
+          r-18u37iz
+          r-15ysp7h
+          r-ymttw5
+          r-1otgn73
+          r-1i6wzkk
+          r-lrvibr
+        "
+      ></a>
+    </p>
+    <p>Composition vs Inheritance</p>
+    <p>
+      <a
+        href="../react-md/using-web-components-in-react.html"
+        class="
+          css-4rbku5 css-1dbjc4n
+          r-1awozwy
+          r-42olwf
+          r-rs99b7
+          r-1loqt21
+          r-18u37iz
+          r-15ysp7h
+          r-ymttw5
+          r-1otgn73
+          r-1i6wzkk
+          r-lrvibr
+        "
+      ></a>
+    </p>
+    <p>Using Web Components in React</p>
+    <p>
+      <a
+        href="../react-md/react-enviorment.html"
+        class="
+          css-4rbku5 css-1dbjc4n
+          r-1awozwy
+          r-42olwf
+          r-rs99b7
+          r-1loqt21
+          r-18u37iz
+          r-15ysp7h
+          r-ymttw5
+          r-1otgn73
+          r-1i6wzkk
+          r-lrvibr
+        "
+      ></a>
+    </p>
+    <p>REACT ENVIORMENT</p>
+    <p>
+      <a
+        href="../react-md/hello-world.html"
+        class="
+          css-4rbku5 css-1dbjc4n
+          r-1awozwy
+          r-42olwf
+          r-rs99b7
+          r-1loqt21
+          r-18u37iz
+          r-15ysp7h
+          r-ymttw5
+          r-1otgn73
+          r-1i6wzkk
+          r-lrvibr
+        "
+      ></a>
+    </p>
+    <p>Hello World</p>
+    <p>
+      <a
+        href="../react-md/components-and-props.html"
+        class="
+          css-4rbku5 css-1dbjc4n
+          r-1awozwy
+          r-42olwf
+          r-rs99b7
+          r-1loqt21
+          r-18u37iz
+          r-15ysp7h
+          r-ymttw5
+          r-1otgn73
+          r-1i6wzkk
+          r-lrvibr
+        "
+      ></a>
+    </p>
+    <p>Components And Props</p>
+    <p>
+      <a
+        href="../react-md/jsx.html"
+        class="
+          css-4rbku5 css-1dbjc4n
+          r-1awozwy
+          r-42olwf
+          r-rs99b7
+          r-1loqt21
+          r-18u37iz
+          r-15ysp7h
+          r-ymttw5
+          r-1otgn73
+          r-1i6wzkk
+          r-lrvibr
+        "
+      ></a>
+    </p>
+    <p>JSX</p>
+    <p>projects</p>
+    <p>
+      <a
+        href="../projects/project-examples.html"
+        class="
+          css-4rbku5 css-1dbjc4n
+          r-1awozwy
+          r-42olwf
+          r-rs99b7
+          r-1loqt21
+          r-18u37iz
+          r-15ysp7h
+          r-ymttw5
+          r-1otgn73
+          r-1i6wzkk
+          r-lrvibr
+        "
+      ></a>
+    </p>
+    <p>Project Examples</p>
+    <p>Prerequisites</p>
+    <p>
+      <a
+        href="../prerequisites/prerequisites.html"
+        class="
+          css-4rbku5 css-1dbjc4n
+          r-1awozwy
+          r-42olwf
+          r-rs99b7
+          r-1loqt21
+          r-18u37iz
+          r-15ysp7h
+          r-ymttw5
+          r-1otgn73
+          r-1i6wzkk
+          r-lrvibr
+        "
+      ></a>
+    </p>
+    <p>Prerequisites</p>
+    <p>Advanced</p>
+    <p>
+      <a
+        href="../advanced/advanced.html"
+        class="
+          css-4rbku5 css-1dbjc4n
+          r-1awozwy
+          r-42olwf
+          r-rs99b7
+          r-1loqt21
+          r-18u37iz
+          r-15ysp7h
+          r-ymttw5
+          r-1otgn73
+          r-1i6wzkk
+          r-lrvibr
+        "
+      ></a>
+    </p>
+    <p>Advanced</p>
+    <p>MY_DOCS</p>
+    <p>
+      <a
+        href="docs.html"
+        class="
+          css-4rbku5 css-1dbjc4n
+          r-1awozwy
+          r-42olwf
+          r-rs99b7
+          r-1loqt21
+          r-18u37iz
+          r-15ysp7h
+          r-ymttw5
+          r-1otgn73
+          r-1i6wzkk
+          r-lrvibr
+        "
+      ></a>
+    </p>
+    <p>Docs</p>
+    <p>
+      <a
+        href="react-components.html"
+        class="
+          css-4rbku5 css-1dbjc4n
+          r-1awozwy
+          r-42olwf
+          r-rs99b7
+          r-1loqt21
+          r-18u37iz
+          r-15ysp7h
+          r-ymttw5
+          r-1otgn73
+          r-1i6wzkk
+          r-lrvibr
+        "
+      ></a>
+    </p>
+    <p>React Components</p>
+    <p>
+      <a
+        href="composition-vs-inheritance.html"
+        class="
+          css-4rbku5 css-1dbjc4n
+          r-1awozwy
+          r-14lw9ot
+          r-156hn8l
+          r-rs99b7
+          r-1loqt21
+          r-18u37iz
+          r-15ysp7h
+          r-ymttw5
+          r-1otgn73
+          r-1i6wzkk
+          r-lrvibr
+        "
+      ></a>
+    </p>
+    <p>Composition vs Inheritance</p>
+    <p>Methodologies</p>
+    <p>
+      <a
+        href="../methodologies/node.js-versus-next.js-a-react-approach.html"
+        class="
+          css-4rbku5 css-1dbjc4n
+          r-1awozwy
+          r-42olwf
+          r-rs99b7
+          r-1loqt21
+          r-18u37iz
+          r-15ysp7h
+          r-ymttw5
+          r-1otgn73
+          r-1i6wzkk
+          r-lrvibr
+        "
+      ></a>
+    </p>
+    <p>Node.js versus Next.js - A React Approach</p>
+    <p>Interview</p>
+    <p>
+      <a
+        href="../interview/question-set-1.html"
+        class="
+          css-4rbku5 css-1dbjc4n
+          r-1awozwy
+          r-42olwf
+          r-rs99b7
+          r-1loqt21
+          r-18u37iz
+          r-15ysp7h
+          r-ymttw5
+          r-1otgn73
+          r-1i6wzkk
+          r-lrvibr
+        "
+      ></a>
+    </p>
+    <p>Question Set #1:</p>
+    <p>
+      Powered By <span class="css-901oao css-16my406 r-b88u0q">GitBook</span>
+    </p>
+    <p>Composition vs Inheritance</p>
+    <p>
+      <span data-key="initial_-MjKkZ-a6JE07fhL9wsn_text"
+        ><span data-offset-key="initial_-MjKkZ-a6JE07fhL9wsn_text:0"
+          ><span data-slate-zero-width="n">​</span></span
+        ></span
+      >
+    </p>
+    <p>
+      <a
+        href="react-components.html"
+        class="
+          css-4rbku5 css-1dbjc4n
+          r-1awozwy
+          r-14lw9ot
+          r-190qawg
+          r-z2wwpe
+          r-rs99b7
+          r-4dj0k7
+          r-1loqt21
+          r-1quu1zo
+          r-1ro0kt6
+          r-18u37iz
+          r-16y2uox
+          r-1wbh5a2
+          r-nsbfu8
+          r-1otgn73
+          r-1i6wzkk
+          r-lrvibr
+        "
+      ></a>
+    </p>
+    <p>MY_DOCS - Previous</p>
+    <p>React Components</p>
+    <p>
+      <a
+        href="../methodologies/node.js-versus-next.js-a-react-approach.html"
+        class="
+          css-4rbku5 css-1dbjc4n
+          r-1awozwy
+          r-14lw9ot
+          r-190qawg
+          r-z2wwpe
+          r-rs99b7
+          r-4dj0k7
+          r-1loqt21
+          r-1quu1zo
+          r-1ro0kt6
+          r-18u37iz
+          r-16y2uox
+          r-1wbh5a2
+          r-nsbfu8
+          r-1otgn73
+          r-1i6wzkk
+          r-lrvibr
+        "
+      ></a>
+    </p>
+    <p>Next - Methodologies</p>
+    <p>Node.js versus Next.js - A React Approach</p>
+    <p>Copy link</p>
+  </body>
 </html>

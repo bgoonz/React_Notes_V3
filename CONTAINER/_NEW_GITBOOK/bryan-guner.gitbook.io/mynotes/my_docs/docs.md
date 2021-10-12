@@ -112,7 +112,7 @@ Advanced
 
 Advanced
 
-MY\_DOCS
+MY_DOCS
 
 <a href="docs.html" class="css-4rbku5 css-1dbjc4n r-1awozwy r-14lw9ot r-156hn8l r-rs99b7 r-1loqt21 r-18u37iz r-15ysp7h r-ymttw5 r-1otgn73 r-1i6wzkk r-lrvibr"></a>
 
@@ -152,7 +152,7 @@ Advanced
 
 <a href="react-components.html" class="css-4rbku5 css-1dbjc4n r-1awozwy r-14lw9ot r-190qawg r-z2wwpe r-rs99b7 r-4dj0k7 r-1loqt21 r-1quu1zo r-1ro0kt6 r-18u37iz r-16y2uox r-1wbh5a2 r-nsbfu8 r-1otgn73 r-1i6wzkk r-lrvibr"></a>
 
-Next - MY\_DOCS
+Next - MY_DOCS
 
 React Components
 
