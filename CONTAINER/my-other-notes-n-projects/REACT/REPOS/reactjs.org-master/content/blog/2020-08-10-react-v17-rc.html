@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="gaearon" />
+  <meta name="author" content="rachelnabors" />
+  <title>React v17.0 Release Candidate: No New Features</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">React v17.0 Release Candidate: No New Features</h1>
+<p class="author">gaearon</p>
+<p class="author">rachelnabors</p>
+</header>
+<p>Today, we are publishing the first Release Candidate for React 17. It has been two and a half years since <a href="/blog/2017/09/26/react-v16.0.html">the previous major release of React</a>, which is a long time even by our standards! In this blog post, we will describe the role of this major release, what changes you can expect in it, and how you can try this release.</p>
+<h2 id="no-new-features">No New Features</h2>
+<p>The React 17 release is unusual because it doesn’t add any new developer-facing features. Instead, this release is primarily focused on <strong>making it easier to upgrade React itself</strong>.</p>
+<p>We’re actively working on the new React features, but they’re not a part of this release. The React 17 release is a key part of our strategy to roll them out without leaving anyone behind.</p>
+<p>In particular, <strong>React 17 is a “stepping stone” release</strong> that makes it safer to embed a tree managed by one version of React inside a tree managed by a different version of React.</p>
+<h2 id="gradual-upgrades">Gradual Upgrades</h2>
+<p>For the past seven years, React upgrades have been “all-or-nothing”. Either you stay on an old version, or you upgrade your whole app to a new version. There was no in-between.</p>
+<p>This has worked out so far, but we are running into the limits of the “all-or-nothing” upgrade strategy. Some API changes, for example, deprecating the <a href="/docs/legacy-context.html">legacy context API</a>, are impossible to do in an automated way. Even though most apps written today don’t ever use them, we still support them in React. We have to choose between supporting them in React indefinitely or leaving some apps behind on an old version of React. Both of these options aren’t great.</p>
+<p>So we wanted to provide another option.</p>
+<p><strong>React 17 enables gradual React upgrades.</strong> When you upgrade from React 15 to 16 (or, soon, from React 16 to 17), you would usually upgrade your whole app at once. This works well for many apps. But it can get increasingly challenging if the codebase was written more than a few years ago and isn’t actively maintained. And while it’s possible to use two versions of React on the page, until React 17 this has been fragile and caused problems with events.</p>
+<p>We’re fixing many of those problems with React 17. This means that <strong>when React 18 and the next future versions come out, you will now have more options</strong>. The first option will be to upgrade your whole app at once, like you might have done before. But you will also have an option to upgrade your app piece by piece. For example, you might decide to migrate most of your app to React 18, but keep some lazy-loaded dialog or a subroute on React 17.</p>
+<p>This doesn’t mean you <em>have to</em> do gradual upgrades. For most apps, upgrading all at once is still the best solution. Loading two versions of React – even if one of them is loaded lazily on demand – is still not ideal. However, for larger apps that aren’t actively maintained, this option may make sense to consider, and React 17 enables those apps to not get left behind.</p>
+<p>To enable gradual updates, we’ve needed to make some changes to the React event system. React 17 is a major release because these changes are potentially breaking. In practice, we’ve only had to change fewer than twenty components out of 100,000+ so <strong>we expect that most apps can upgrade to React 17 without too much trouble</strong>. <a href="https://github.com/facebook/react/issues">Tell us</a> if you run into problems.</p>
+<h3 id="demo-of-gradual-upgrades">Demo of Gradual Upgrades</h3>
+<p>We’ve prepared an <a href="https://github.com/reactjs/react-gradual-upgrade-demo/">example repository</a> demonstrating how to lazy-load an older version of React if necessary. This demo uses Create React App, but it should be possible to follow a similar approach with any other tool. We welcome demos using other tooling as pull requests.</p>
+<blockquote>
+<p>Note</p>
+<p>We’ve <strong>postponed other changes</strong> until after React 17. The goal of this release is to enable gradual upgrades. If upgrading to React 17 were too difficult, it would defeat its purpose.</p>
+</blockquote>
+<h2 id="changes-to-event-delegation">Changes to Event Delegation</h2>
+<p>Technically, it has always been possible to nest apps developed with different versions of React. However, it was rather fragile because of how the React event system worked.</p>
+<p>In React components, you usually write event handlers inline:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb1-1" title="1"><span class="op">&lt;</span>button onClick<span class="op">={</span>handleClick<span class="op">}&gt;</span></a></code></pre></div>
+<p>The vanilla DOM equivalent to this code is something like:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb2-1" title="1"><span class="va">myButton</span>.<span class="at">addEventListener</span>(<span class="st">&#39;click&#39;</span><span class="op">,</span> handleClick)<span class="op">;</span></a></code></pre></div>
+<p>However, for most events, React doesn’t actually attach them to the DOM nodes on which you declare them. Instead, React attaches one handler per event type directly at the <code>document</code> node. This is called <a href="https://davidwalsh.name/event-delegate">event delegation</a>. In addition to its performance benefits on large application trees, it also makes it easier to add new features like <a href="https://twitter.com/dan_abramov/status/1200118229697486849">replaying events</a>.</p>
+<p>React has been doing event delegation automatically since its first release. When a DOM event fires on the document, React figures out which component to call, and then the React event “bubbles” upwards through your components. But behind the scenes, the native event has already bubbled up to the <code>document</code> level, where React installs its event handlers.</p>
+<p>However, this is a problem for gradual upgrades.</p>
+<p>If you have multiple React versions on the page, they all register event handlers at the top. This breaks <code>e.stopPropagation()</code>: if a nested tree has stopped propagation of an event, the outer tree would still receive it. This made it difficult to nest different versions of React. This concern is not hypothetical – for example, the Atom editor <a href="https://github.com/facebook/react/pull/8117">ran into this</a> four years ago.</p>
+<p>This is why we’re changing how React attaches events to the DOM under the hood.</p>
+<p><strong>In React 17, React will no longer attach event handlers at the <code>document</code> level. Instead, it will attach them to the root DOM container into which your React tree is rendered:</strong></p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb3-1" title="1"><span class="kw">const</span> rootNode <span class="op">=</span> <span class="va">document</span>.<span class="at">getElementById</span>(<span class="st">&#39;root&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb3-2" title="2"><span class="va">ReactDOM</span>.<span class="at">render</span>(<span class="op">&lt;</span>App /<span class="op">&gt;,</span> rootNode)<span class="op">;</span></a></code></pre></div>
+<p>In React 16 and earlier, React would do <code>document.addEventListener()</code> for most events. React 17 will call <code>rootNode.addEventListener()</code> under the hood instead.</p>
+<figure>
+<img src="../images/blog/react-v17-rc/react_17_delegation.png" alt="A diagram showing how React 17 attaches events to the roots rather than to the document" /><figcaption>A diagram showing how React 17 attaches events to the roots rather than to the document</figcaption>
+</figure>
+<p>Thanks to this change, <strong>it is now safer to embed a React tree managed by one version inside a tree managed by a different React version</strong>. Note that for this to work, both of the versions would need to be 17 or higher, which is why upgrading to React 17 is important. In a way, React 17 is a “stepping stone” release that makes next gradual upgrades feasible.</p>
+<p>This change also <strong>makes it easier to embed React into apps built with other technologies</strong>. For example, if the outer “shell” of your app is written in jQuery, but the newer code inside of it is written with React, <code>e.stopPropagation()</code> inside the React code would now prevent it from reaching the jQuery code – as you would expect. This also works in the other direction. If you no longer like React and want to rewrite your app – for example, in jQuery – you can start converting the outer shell from React to jQuery without breaking the event propagation.</p>
+<p>We’ve confirmed that <a href="https://github.com/facebook/react/issues/7094">numerous</a> <a href="https://github.com/facebook/react/issues/8693">problems</a> <a href="https://github.com/facebook/react/issues/12518">reported</a> <a href="https://github.com/facebook/react/issues/13451">over</a> <a href="https://github.com/facebook/react/issues/4335">the</a> <a href="https://github.com/facebook/react/issues/1691">years</a> <a href="https://github.com/facebook/react/issues/285#issuecomment-253502585">on</a> <a href="https://github.com/facebook/react/pull/8117">our</a> <a href="https://github.com/facebook/react/issues/11530">issue</a> <a href="https://github.com/facebook/react/issues/7128">tracker</a> related to integrating React with non-React code have been fixed by the new behavior.</p>
+<blockquote>
+<p>Note</p>
+<p>You might be wondering whether this breaks <a href="/docs/portals.html">Portals</a> outside of the root container. The answer is that React <em>also</em> listens to events on portal containers, so this is not an issue.</p>
+</blockquote>
+<h4 id="fixing-potential-issues">Fixing Potential Issues</h4>
+<p>As with any breaking change, it is likely some code would need to be adjusted. At Facebook, we had to adjust about 10 modules in total (out of many thousands) to work with this change.</p>
+<p>For example, if you add manual DOM listeners with <code>document.addEventListener(...)</code>, you might expect them to catch all React events. In React 16 and earlier, even if you call <code>e.stopPropagation()</code> in a React event handler, your custom <code>document</code> listeners would still receive them because the native event is <em>already</em> at the document level. With React 17, the propagation <em>would</em> stop (as requested!), so your <code>document</code> handlers would not fire:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb4-1" title="1"><span class="va">document</span>.<span class="at">addEventListener</span>(<span class="st">&#39;click&#39;</span><span class="op">,</span> <span class="kw">function</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb4-2" title="2">  <span class="co">// This custom handler will no longer receive clicks</span></a>
+<a class="sourceLine" id="cb4-3" title="3">  <span class="co">// from React components that called e.stopPropagation()</span></a>
+<a class="sourceLine" id="cb4-4" title="4"><span class="op">}</span>)<span class="op">;</span></a></code></pre></div>
+<p>You can fix code like this by converting your listener to use the <a href="https://javascript.info/bubbling-and-capturing#capturing">capture phase</a>. To do this, you can pass <code>{ capture: true }</code> as the third argument to <code>document.addEventListener</code>:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb5-1" title="1"><span class="va">document</span>.<span class="at">addEventListener</span>(<span class="st">&#39;click&#39;</span><span class="op">,</span> <span class="kw">function</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb5-2" title="2">  <span class="co">// Now this event handler uses the capture phase,</span></a>
+<a class="sourceLine" id="cb5-3" title="3">  <span class="co">// so it receives *all* click events below!</span></a>
+<a class="sourceLine" id="cb5-4" title="4"><span class="op">},</span> <span class="op">{</span> <span class="dt">capture</span><span class="op">:</span> <span class="kw">true</span> <span class="op">}</span>)<span class="op">;</span></a></code></pre></div>
+<p>Note how this strategy is more resilient overall – for example, it will probably fix existing bugs in your code that happen when <code>e.stopPropagation()</code> is called outside of a React event handler. In other words, <strong>event propagation in React 17 works closer to the regular DOM</strong>.</p>
+<h2 id="other-breaking-changes">Other Breaking Changes</h2>
+<p>We’ve kept the breaking changes in React 17 to the minimum. For example, it doesn’t remove any of the methods that have been deprecated in the previous releases. However, it does include a few other breaking changes that have been relatively safe in our experience. In total, we’ve had to adjust fewer than 20 out of 100,000+ our components because of them.</p>
+<h3 id="aligning-with-browsers">Aligning with Browsers</h3>
+<p>We’ve made a couple of smaller changes related to the event system:</p>
+<ul>
+<li>The <code>onScroll</code> event <strong>no longer bubbles</strong> to prevent <a href="https://github.com/facebook/react/issues/15723">common confusion</a>.</li>
+<li>React <code>onFocus</code> and <code>onBlur</code> events have switched to using the native <code>focusin</code> and <code>focusout</code> events under the hood, which more closely match React’s existing behavior and sometimes provide extra information.</li>
+<li>Capture phase events (e.g. <code>onClickCapture</code>) now use real browser capture phase listeners.</li>
+</ul>
+<p>These changes align React closer with the browser behavior and improve interoperability.</p>
+<blockquote>
+<p>Note</p>
+<p>Although React 17 switched from <code>focus</code> to <code>focusin</code> <em>under the hood</em> for the <code>onFocus</code> event, note that this has <strong>not</strong> affected the bubbling behavior. In React, <code>onFocus</code> event has always bubbled, and it continues to do so in React 17 because generally it is a more useful default. See <a href="https://codesandbox.io/s/strange-albattani-7tqr7?file=/src/App.js">this sandbox</a> for the different checks you can add for different particular use cases.</p>
+</blockquote>
+<h3 id="no-event-pooling">No Event Pooling</h3>
+<p>React 17 removes the “event pooling” optimization from React. It doesn’t improve performance in modern browsers and confuses even experienced React users:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb6-1" title="1"><span class="kw">function</span> <span class="at">handleChange</span>(e) <span class="op">{</span></a>
+<a class="sourceLine" id="cb6-2" title="2">  <span class="at">setData</span>(data <span class="kw">=&gt;</span> (<span class="op">{</span></a>
+<a class="sourceLine" id="cb6-3" title="3">    ...<span class="at">data</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb6-4" title="4">    <span class="co">// This crashes in React 16 and earlier:</span></a>
+<a class="sourceLine" id="cb6-5" title="5">    <span class="dt">text</span><span class="op">:</span> <span class="va">e</span>.<span class="va">target</span>.<span class="at">value</span></a>
+<a class="sourceLine" id="cb6-6" title="6">  <span class="op">}</span>))<span class="op">;</span></a>
+<a class="sourceLine" id="cb6-7" title="7"><span class="op">}</span></a></code></pre></div>
+<p>This is because React reused the event objects between different events for performance in old browsers, and set all event fields to <code>null</code> in between them. With React 16 and earlier, you have to call <code>e.persist()</code> to properly use the event, or read the property you need earlier.</p>
+<p><strong>In React 17, this code works as you would expect. The old event pooling optimization has been fully removed, so you can read the event fields whenever you need them.</strong></p>
+<p>This is a behavior change, which is why we’re marking it as breaking, but in practice we haven’t seen it break anything at Facebook. (Maybe it even fixed a few bugs!) Note that <code>e.persist()</code> is still available on the React event object, but now it doesn’t do anything.</p>
+<h3 id="effect-cleanup-timing">Effect Cleanup Timing</h3>
+<p>We are making the timing of the <code>useEffect</code> cleanup function more consistent.</p>
+<pre class="js{3-5}"><code>useEffect(() =&gt; {
+  // This is the effect itself.
+  return () =&gt; {
+    // This is its cleanup.
+  };
+});</code></pre>
+<p>Most effects don’t need to delay screen updates, so React runs them asynchronously soon after the update has been reflected on the screen. (For the rare cases where you need an effect to block paint, e.g. to measure and position a tooltip, prefer <code>useLayoutEffect</code>.)</p>
+<p>However, when a component is unmounting, effect <em>cleanup</em> functions used to run synchronously (similar to <code>componentWillUnmount</code> being synchronous in classes). We’ve found that this is not ideal for larger apps because it slows down large screen transitions (e.g. switching tabs).</p>
+<p><strong>In React 17, the effect cleanup function always runs asynchronously – for example, if the component is unmounting, the cleanup runs <em>after</em> the screen has been updated.</strong></p>
+<p>This mirrors how the effects themselves run more closely. In the rare cases where you might want to rely on the synchronous execution, you can switch to <code>useLayoutEffect</code> instead.</p>
+<blockquote>
+<p>Note</p>
+<p>You might be wondering whether this means that you’ll now be unable to fix warnings about <code>setState</code> on unmounted components. Don’t worry – React specifically checks for this case, and does <em>not</em> fire <code>setState</code> warnings in the short gap between unmounting and the cleanup. <strong>So code cancelling requests or intervals can almost always stay the same.</strong></p>
+</blockquote>
+<p>Additionally, React 17 will always execute all effect cleanup functions (for all components) before it runs any new effects. React 16 only guaranteed this ordering for effects within a component.</p>
+<h4 id="potential-issues">Potential Issues</h4>
+<p>We’ve only seen a couple of components break with this change, although reusable libraries may need to test it more thoroughly. One example of problematic code may look like this:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb8-1" title="1"><span class="at">useEffect</span>(() <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb8-2" title="2">  <span class="va">someRef</span>.<span class="va">current</span>.<span class="at">someSetupMethod</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb8-3" title="3">  <span class="cf">return</span> () <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb8-4" title="4">    <span class="va">someRef</span>.<span class="va">current</span>.<span class="at">someCleanupMethod</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb8-5" title="5">  <span class="op">};</span></a>
+<a class="sourceLine" id="cb8-6" title="6"><span class="op">}</span>)<span class="op">;</span></a></code></pre></div>
+<p>The problem is that <code>someRef.current</code> is mutable, so by the time the cleanup function runs, it may have been set to <code>null</code>. The solution is to capture any mutable values <em>inside</em> the effect:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb9-1" title="1"><span class="at">useEffect</span>(() <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb9-2" title="2">  <span class="kw">const</span> instance <span class="op">=</span> <span class="va">someRef</span>.<span class="at">current</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb9-3" title="3">  <span class="va">instance</span>.<span class="at">someSetupMethod</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb9-4" title="4">  <span class="cf">return</span> () <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb9-5" title="5">    <span class="va">instance</span>.<span class="at">someCleanupMethod</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb9-6" title="6">  <span class="op">};</span></a>
+<a class="sourceLine" id="cb9-7" title="7"><span class="op">}</span>)<span class="op">;</span></a></code></pre></div>
+<p>We don’t expect this to be a common problem because <a href="https://github.com/facebook/react/tree/master/packages/eslint-plugin-react-hooks">our <code>eslint-plugin-react-hooks/exhaustive-deps</code> lint rule</a> (make sure you use it!) has always warned about this.</p>
+<h3 id="consistent-errors-for-returning-undefined">Consistent Errors for Returning Undefined</h3>
+<p>In React 16 and earlier, returning <code>undefined</code> has always been an error:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb10-1" title="1"><span class="kw">function</span> <span class="at">Button</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb10-2" title="2">  <span class="cf">return</span><span class="op">;</span> <span class="co">// Error: Nothing was returned from render</span></a>
+<a class="sourceLine" id="cb10-3" title="3"><span class="op">}</span></a></code></pre></div>
+<p>This is in part because it’s easy to return <code>undefined</code> unintentionally:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb11-1" title="1"><span class="kw">function</span> <span class="at">Button</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb11-2" title="2">  <span class="co">// We forgot to write return, so this component returns undefined.</span></a>
+<a class="sourceLine" id="cb11-3" title="3">  <span class="co">// React surfaces this as an error instead of ignoring it.</span></a>
+<a class="sourceLine" id="cb11-4" title="4">  <span class="op">&lt;</span>button /<span class="op">&gt;;</span></a>
+<a class="sourceLine" id="cb11-5" title="5"><span class="op">}</span></a></code></pre></div>
+<p>Previously, React only did this for class and function components, but did not check the return values of <code>forwardRef</code> and <code>memo</code> components. This was due to a coding mistake.</p>
+<p><strong>In React 17, the behavior for <code>forwardRef</code> and <code>memo</code> components is consistent with regular function and class components. Returning <code>undefined</code> from them is an error.</strong></p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb12-1" title="1"><span class="kw">let</span> Button <span class="op">=</span> <span class="at">forwardRef</span>(() <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb12-2" title="2">  <span class="co">// We forgot to write return, so this component returns undefined.</span></a>
+<a class="sourceLine" id="cb12-3" title="3">  <span class="co">// React 17 surfaces this as an error instead of ignoring it.</span></a>
+<a class="sourceLine" id="cb12-4" title="4">  <span class="op">&lt;</span>button /<span class="op">&gt;;</span></a>
+<a class="sourceLine" id="cb12-5" title="5"><span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb12-6" title="6"></a>
+<a class="sourceLine" id="cb12-7" title="7"><span class="kw">let</span> Button <span class="op">=</span> <span class="at">memo</span>(() <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb12-8" title="8">  <span class="co">// We forgot to write return, so this component returns undefined.</span></a>
+<a class="sourceLine" id="cb12-9" title="9">  <span class="co">// React 17 surfaces this as an error instead of ignoring it.</span></a>
+<a class="sourceLine" id="cb12-10" title="10">  <span class="op">&lt;</span>button /<span class="op">&gt;;</span></a>
+<a class="sourceLine" id="cb12-11" title="11"><span class="op">}</span>)<span class="op">;</span></a></code></pre></div>
+<p>For the cases where you want to render nothing intentionally, return <code>null</code> instead.</p>
+<h3 id="native-component-stacks">Native Component Stacks</h3>
+<p>When you throw an error in the browser, the browser gives you a stack trace with JavaScript function names and their locations. However, JavaScript stacks are often not enough to diagnose a problem because the React tree hierarchy can be just as important. You want to know not just that a <code>Button</code> threw an error, but <em>where in the React tree</em> that <code>Button</code> is.</p>
+<p>To solve this, React 16 started printing “component stacks” when you have an error. Still, they used to be inferior to the native JavaScript stacks. In particular, they were not clickable in the console because React didn’t know where the function was declared in the source code. Additionally, they were <a href="https://github.com/facebook/react/issues/12757">mostly useless in production</a>. Unlike regular minified JavaScript stacks which can be automatically restored to the original function names with a sourcemap, with React component stacks you had to choose between production stacks and bundle size.</p>
+<p><strong>In React 17, the component stacks are generated using a different mechanism that stitches them together from the regular native JavaScript stacks. This lets you get the fully symbolicated React component stack traces in a production environment.</strong></p>
+<p>The way React implements this is somewhat unorthodox. Currently, the browsers don’t provide a way to get a function’s stack frame (source file and location). So when React catches an error, it will now <em>reconstruct</em> its component stack by throwing (and catching) a temporary error from inside each of the components above, when it is possible. This adds a small performance penalty for crashes, but it only happens once per component type.</p>
+<p>If you’re curious, you can read more details in <a href="https://github.com/facebook/react/pull/18561">this pull request</a>, but for the most part this exact mechanism shouldn’t affect your code. From your perspective, the new feature is that component stacks are now clickable (because they rely on the native browser stack frames), and that you can decode them in production like you would with regular JavaScript errors.</p>
+<p>The part that constitutes a breaking change is that for this to work, React re-executes parts of some of the React functions and React class constructors above in the stack after an error is captured. Since render functions and class constructors shouldn’t have side effects (which is also important for server rendering), this should not pose any practical problems.</p>
+<h3 id="removing-private-exports">Removing Private Exports</h3>
+<p>Finally, the last notable breaking change is that we’ve removed some React internals that were previously exposed to other projects. In particular, <a href="https://github.com/necolas/react-native-web">React Native for Web</a> used to depend on some internals of the event system, but that dependency was fragile and used to break.</p>
+<p><strong>In React 17, these private exports have been removed. As far as we’re aware, React Native for Web was the only project using them, and they have already completed a migration to a different approach that doesn’t depend on those private exports.</strong></p>
+<p>This means that the older versions of React Native for Web won’t be compatible with React 17, but the newer versions will work with it. In practice, this doesn’t change much because React Native for Web had to release new versions to adapt to internal React changes anyway.</p>
+<p>Additionally, we’ve removed the <code>ReactTestUtils.SimulateNative</code> helper methods. They have never been documented, didn’t do quite what their names implied, and didn’t work with the changes we’ve made to the event system. If you want a convenient way to fire native browser events in tests, check out the <a href="https://testing-library.com/docs/dom-testing-library/api-events">React Testing Library</a> instead.</p>
+<h2 id="installation">Installation</h2>
+<p>We encourage you to try React 17.0 Release Candidate soon and <a href="https://github.com/facebook/react/issues">raise any issues</a> for the problems you might encounter in the migration. <strong>Keep in mind that a release candidate is more likely to contain bugs than a stable release, so don’t deploy it to production yet.</strong></p>
+<p>To install React 17 RC with npm, run:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb13-1" title="1"><span class="ex">npm</span> install react@17.0.0-rc.3 react-dom@17.0.0-rc.3</a></code></pre></div>
+<p>To install React 17 RC with Yarn, run:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb14-1" title="1"><span class="ex">yarn</span> add react@17.0.0-rc.3 react-dom@17.0.0-rc.3</a></code></pre></div>
+<p>We also provide UMD builds of React via a CDN:</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode html"><code class="sourceCode html"><a class="sourceLine" id="cb15-1" title="1"><span class="kw">&lt;script</span><span class="ot"> crossorigin src=</span><span class="st">&quot;https://unpkg.com/react@17.0.0-rc.3/umd/react.production.min.js&quot;</span><span class="kw">&gt;&lt;/script&gt;</span></a>
+<a class="sourceLine" id="cb15-2" title="2"><span class="kw">&lt;script</span><span class="ot"> crossorigin src=</span><span class="st">&quot;https://unpkg.com/react-dom@17.0.0-rc.3/umd/react-dom.production.min.js&quot;</span><span class="kw">&gt;&lt;/script&gt;</span></a></code></pre></div>
+<p>Refer to the documentation for <a href="/docs/installation.html">detailed installation instructions</a>.</p>
+<h2 id="changelog">Changelog</h2>
+<h3 id="react">React</h3>
+<ul>
+<li>Add <code>react/jsx-runtime</code> and <code>react/jsx-dev-runtime</code> for the <a href="https://babeljs.io/blog/2020/03/16/7.9.0#a-new-jsx-transform-11154-https-githubcom-babel-babel-pull-11154">new JSX transform</a>. (<span class="citation" data-cites="lunaruan">[@lunaruan]</span>(https://github.com/lunaruan) in <a href="https://github.com/facebook/react/pull/18299">#18299</a>)</li>
+<li>Build component stacks from native error frames. (<span class="citation" data-cites="sebmarkbage">[@sebmarkbage]</span>(https://github.com/sebmarkbage) in <a href="https://github.com/facebook/react/pull/18561">#18561</a>)</li>
+<li>Allow to specify <code>displayName</code> on context for improved stacks. (<span class="citation" data-cites="eps1lon">[@eps1lon]</span>(https://github.com/eps1lon) in <a href="https://github.com/facebook/react/pull/18224">#18224</a>)</li>
+<li>Prevent <code>'use strict'</code> from leaking in the UMD bundles. (<span class="citation" data-cites="koba04">[@koba04]</span>(https://github.com/koba04) in <a href="https://github.com/facebook/react/pull/19614">#19614</a>)</li>
+<li>Stop using <code>fb.me</code> for redirects. (<span class="citation" data-cites="cylim">[@cylim]</span>(https://github.com/cylim) in <a href="https://github.com/facebook/react/pull/19598">#19598</a>)</li>
+</ul>
+<h3 id="react-dom">React DOM</h3>
+<ul>
+<li>Delegate events to roots instead of <code>document</code>. (<span class="citation" data-cites="trueadm">[@trueadm]</span>(https://github.com/trueadm) in <a href="https://github.com/facebook/react/pull/18195">#18195</a> and <a href="https://github.com/facebook/react/pulls?q=is%3Apr+author%3Atrueadm+modern+event+is%3Amerged">others</a>)</li>
+<li>Clean up all effects before running any next effects. (<span class="citation" data-cites="bvaughn">[@bvaughn]</span>(https://github.com/bvaughn) in <a href="https://github.com/facebook/react/pull/17947">#17947</a>)</li>
+<li>Run <code>useEffect</code> cleanup functions asynchronously. (<span class="citation" data-cites="bvaughn">[@bvaughn]</span>(https://github.com/bvaughn) in <a href="https://github.com/facebook/react/pull/17925">#17925</a>)</li>
+<li>Use browser <code>focusin</code> and <code>focusout</code> for <code>onFocus</code> and <code>onBlur</code>. (<span class="citation" data-cites="trueadm">[@trueadm]</span>(https://github.com/trueadm) in <a href="https://github.com/facebook/react/pull/19186">#19186</a>)</li>
+<li>Make all <code>Capture</code> events use the browser capture phase. (<span class="citation" data-cites="trueadm">[@trueadm]</span>(https://github.com/trueadm) in <a href="https://github.com/facebook/react/pull/19221">#19221</a>)</li>
+<li>Don’t emulate bubbling of the <code>onScroll</code> event. (<span class="citation" data-cites="gaearon">[@gaearon]</span>(https://github.com/gaearon) in <a href="https://github.com/facebook/react/pull/19464">#19464</a>)</li>
+<li>Throw if <code>forwardRef</code> or <code>memo</code> component returns <code>undefined</code>. (<span class="citation" data-cites="gaearon">[@gaearon]</span>(https://github.com/gaearon) in <a href="https://github.com/facebook/react/pull/19550">#19550</a>)</li>
+<li>Remove event pooling. (<span class="citation" data-cites="trueadm">[@trueadm]</span>(https://github.com/trueadm) in <a href="https://github.com/facebook/react/pull/18969">#18969</a>)</li>
+<li>Stop exposing internals that won’t be needed by React Native Web. (<span class="citation" data-cites="necolas">[@necolas]</span>(https://github.com/necolas) in <a href="https://github.com/facebook/react/pull/18483">#18483</a>)</li>
+<li>Attach all known event listeners when the root mounts. (<span class="citation" data-cites="gaearon">[@gaearon]</span>(https://github.com/gaearon) in <a href="https://github.com/facebook/react/pull/19659">#19659</a>)</li>
+<li>Disable <code>console</code> in the second render pass of DEV mode double render. (<span class="citation" data-cites="sebmarkbage">[@sebmarkbage]</span>(https://github.com/sebmarkbage) in <a href="https://github.com/facebook/react/pull/18547">#18547</a>)</li>
+<li>Deprecate the undocumented and misleading <code>ReactTestUtils.SimulateNative</code> API. (<span class="citation" data-cites="gaearon">[@gaearon]</span>(https://github.com/gaearon) in <a href="https://github.com/facebook/react/pull/13407">#13407</a>)</li>
+<li>Rename private field names used in the internals. (<span class="citation" data-cites="gaearon">[@gaearon]</span>(https://github.com/gaearon) in <a href="https://github.com/facebook/react/pull/18377">#18377</a>)</li>
+<li>Don’t call User Timing API in development. (<span class="citation" data-cites="gaearon">[@gaearon]</span>(https://github.com/gaearon) in <a href="https://github.com/facebook/react/pull/18417">#18417</a>)</li>
+<li>Disable console during the repeated render in Strict Mode. (<span class="citation" data-cites="sebmarkbage">[@sebmarkbage]</span>(https://github.com/sebmarkbage) in <a href="https://github.com/facebook/react/pull/18547">#18547</a>)</li>
+<li>In Strict Mode, double-render components without Hooks too. (<span class="citation" data-cites="eps1lon">[@eps1lon]</span>(https://github.com/eps1lon) in <a href="https://github.com/facebook/react/pull/18430">#18430</a>)</li>
+<li>Allow calling <code>ReactDOM.flushSync</code> during lifecycle methods (but warn). (<span class="citation" data-cites="sebmarkbage">[@sebmarkbage]</span>(https://github.com/sebmarkbage) in <a href="https://github.com/facebook/react/pull/18759">#18759</a>)</li>
+<li>Add the <code>code</code> property to the keyboard event objects. (<span class="citation" data-cites="bl00mber">[@bl00mber]</span>(https://github.com/bl00mber) in <a href="https://github.com/facebook/react/pull/18287">#18287</a>)</li>
+<li>Add the <code>disableRemotePlayback</code> property for <code>video</code> elements. (<span class="citation" data-cites="tombrowndev">[@tombrowndev]</span>(https://github.com/tombrowndev) in <a href="https://github.com/facebook/react/pull/18619">#18619</a>)</li>
+<li>Add the <code>enterKeyHint</code> property for <code>input</code> elements. (<span class="citation" data-cites="eps1lon">[@eps1lon]</span>(https://github.com/eps1lon) in <a href="https://github.com/facebook/react/pull/18634">#18634</a>)</li>
+<li>Warn when no <code>value</code> is provided to <code>&lt;Context.Provider&gt;</code>. (<span class="citation" data-cites="charlie1404">[@charlie1404]</span>(https://github.com/charlie1404) in <a href="https://github.com/facebook/react/pull/19054">#19054</a>)</li>
+<li>Warn when <code>memo</code> or <code>forwardRef</code> components return <code>undefined</code>. (<span class="citation" data-cites="bvaughn">[@bvaughn]</span>(https://github.com/bvaughn) in <a href="https://github.com/facebook/react/pull/19550">#19550</a>)</li>
+<li>Improve the error message for invalid updates. (<span class="citation" data-cites="JoviDeCroock">[@JoviDeCroock]</span>(https://github.com/JoviDeCroock) in <a href="https://github.com/facebook/react/pull/18316">#18316</a>)</li>
+<li>Exclude forwardRef and memo from stack frames. (<span class="citation" data-cites="sebmarkbage">[@sebmarkbage]</span>(https://github.com/sebmarkbage) in <a href="https://github.com/facebook/react/pull/18559">#18559</a>)</li>
+<li>Improve the error message when switching between controlled and uncontrolled inputs. (<span class="citation" data-cites="vcarl">[@vcarl]</span>(https://github.com/vcarl) in <a href="https://github.com/facebook/react/pull/17070">#17070</a>)</li>
+<li>Keep <code>onTouchStart</code>, <code>onTouchMove</code>, and <code>onWheel</code> passive. (<span class="citation" data-cites="gaearon">[@gaearon]</span>(https://github.com/gaearon) in <a href="https://github.com/facebook/react/pull/19654">#19654</a>)</li>
+<li>Fix <code>setState</code> hanging in development inside a closed iframe. (<span class="citation" data-cites="gaearon">[@gaearon]</span>(https://github.com/gaearon) in <a href="https://github.com/facebook/react/pull/19220">#19220</a>)</li>
+<li>Fix rendering bailout for lazy components with <code>defaultProps</code>. (<span class="citation" data-cites="jddxf">[@jddxf]</span>(https://github.com/jddxf) in <a href="https://github.com/facebook/react/pull/18539">#18539</a>)</li>
+<li>Fix a false positive warning when <code>dangerouslySetInnerHTML</code> is <code>undefined</code>. (<span class="citation" data-cites="eps1lon">[@eps1lon]</span>(https://github.com/eps1lon) in <a href="https://github.com/facebook/react/pull/18676">#18676</a>)</li>
+<li>Fix Test Utils with non-standard <code>require</code> implementation. (<span class="citation" data-cites="just-boris">[@just-boris]</span>(https://github.com/just-boris) in <a href="https://github.com/facebook/react/pull/18632">#18632</a>)</li>
+<li>Fix <code>onBeforeInput</code> reporting an incorrect <code>event.type</code>. (<span class="citation" data-cites="eps1lon">[@eps1lon]</span>(https://github.com/eps1lon) in <a href="https://github.com/facebook/react/pull/19561">#19561</a>)</li>
+<li>Fix <code>event.relatedTarget</code> reported as <code>undefined</code> in Firefox. (<span class="citation" data-cites="claytercek">[@claytercek]</span>(https://github.com/claytercek) in <a href="https://github.com/facebook/react/pull/19607">#19607</a>)</li>
+<li>Fix “unspecified error” in IE11. (<span class="citation" data-cites="hemakshis">[@hemakshis]</span>(https://github.com/hemakshis) in <a href="https://github.com/facebook/react/pull/19664">#19664</a>)</li>
+<li>Fix rendering into a shadow root. (<span class="citation" data-cites="Jack-Works">[@Jack-Works]</span>(https://github.com/Jack-Works) in <a href="https://github.com/facebook/react/pull/15894">#15894</a>)</li>
+<li>Fix <code>movementX/Y</code> polyfill with capture events. (<span class="citation" data-cites="gaearon">[@gaearon]</span>(https://github.com/gaearon) in <a href="https://github.com/facebook/react/pull/19672">#19672</a>)</li>
+<li>Use delegation for <code>onSubmit</code> and <code>onReset</code> events. (<span class="citation" data-cites="gaearon">[@gaearon]</span>(https://github.com/gaearon) in <a href="https://github.com/facebook/react/pull/19333">#19333</a>)</li>
+<li>Improve memory usage. (<span class="citation" data-cites="trueadm">[@trueadm]</span>(https://github.com/trueadm) in <a href="https://github.com/facebook/react/pull/18970">#18970</a>)</li>
+</ul>
+<h3 id="react-dom-server">React DOM Server</h3>
+<ul>
+<li>Make <code>useCallback</code> behavior consistent with <code>useMemo</code> for the server renderer. (<span class="citation" data-cites="alexmckenley">[@alexmckenley]</span>(https://github.com/alexmckenley) in <a href="https://github.com/facebook/react/pull/18783">#18783</a>)</li>
+<li>Fix state leaking when a function component throws. (<span class="citation" data-cites="pmaccart">[@pmaccart]</span>(https://github.com/pmaccart) in <a href="https://github.com/facebook/react/pull/19212">#19212</a>)</li>
+</ul>
+<h3 id="react-test-renderer">React Test Renderer</h3>
+<ul>
+<li>Improve <code>findByType</code> error message. (<span class="citation" data-cites="henryqdineen">[@henryqdineen]</span>(https://github.com/henryqdineen) in <a href="https://github.com/facebook/react/pull/17439">#17439</a>)</li>
+</ul>
+<h3 id="concurrent-mode-experimental">Concurrent Mode (Experimental)</h3>
+<ul>
+<li>Revamp the priority batching heuristics. (<span class="citation" data-cites="acdlite">[@acdlite]</span>(https://github.com/acdlite) in <a href="https://github.com/facebook/react/pull/18796">#18796</a>)</li>
+<li>Add the <code>unstable_</code> prefix before the experimental APIs. (<span class="citation" data-cites="acdlite">[@acdlite]</span>(https://github.com/acdlite) in <a href="https://github.com/facebook/react/pull/18825">#18825</a>)</li>
+<li>Remove <code>unstable_discreteUpdates</code> and <code>unstable_flushDiscreteUpdates</code>. (<span class="citation" data-cites="trueadm">[@trueadm]</span>(https://github.com/trueadm) in <a href="https://github.com/facebook/react/pull/18825">#18825</a>)</li>
+<li>Remove the <code>timeoutMs</code> argument. (<span class="citation" data-cites="acdlite">[@acdlite]</span>(https://github.com/acdlite) in <a href="https://github.com/facebook/react/pull/19703">#19703</a>)</li>
+<li>Disable <code>&lt;div hidden /&gt;</code> prerendering in favor of a different future API. (<span class="citation" data-cites="acdlite">[@acdlite]</span>(https://github.com/acdlite) in <a href="https://github.com/facebook/react/pull/18917">#18917</a>)</li>
+<li>Add <code>unstable_expectedLoadTime</code> to Suspense for CPU-bound trees. (<span class="citation" data-cites="acdlite">[@acdlite]</span>(https://github.com/acdlite) in <a href="https://github.com/facebook/react/pull/19936">#19936</a>)</li>
+<li>Add an experimental <code>unstable_useOpaqueIdentifier</code> Hook. (<span class="citation" data-cites="lunaruan">[@lunaruan]</span>(https://github.com/lunaruan) in <a href="https://github.com/facebook/react/pull/17322">#17322</a>)</li>
+<li>Add an experimental <code>unstable_startTransition</code> API. (<span class="citation" data-cites="rickhanlonii">[@rickhanlonii]</span>(https://github.com/rickhanlonii) in <a href="https://github.com/facebook/react/pull/19696">#19696</a>)</li>
+<li>Using <code>act</code> in the test renderer no longer flushes Suspense fallbacks. (<span class="citation" data-cites="acdlite">[@acdlite]</span>(https://github.com/acdlite) in <a href="https://github.com/facebook/react/pull/18596">#18596</a>)</li>
+<li>Use global render timeout for CPU Suspense. (<span class="citation" data-cites="sebmarkbage">[@sebmarkbage]</span>(https://github.com/sebmarkbage) in <a href="https://github.com/facebook/react/pull/19643">#19643</a>)</li>
+<li>Clear the existing root content before mounting. (<span class="citation" data-cites="bvaughn">[@bvaughn]</span>(https://github.com/bvaughn) in <a href="https://github.com/facebook/react/pull/18730">#18730</a>)</li>
+<li>Fix a bug with error boundaries. (<span class="citation" data-cites="acdlite">[@acdlite]</span>(https://github.com/acdlite) in <a href="https://github.com/facebook/react/pull/18265">#18265</a>)</li>
+<li>Fix a bug causing dropped updates in a suspended tree. (<span class="citation" data-cites="acdlite">[@acdlite]</span>(https://github.com/acdlite) in <a href="https://github.com/facebook/react/pull/18384">#18384</a> and <a href="https://github.com/facebook/react/pull/18457">#18457</a>)</li>
+<li>Fix a bug causing dropped render phase updates. (<span class="citation" data-cites="acdlite">[@acdlite]</span>(https://github.com/acdlite) in <a href="https://github.com/facebook/react/pull/18537">#18537</a>)</li>
+<li>Fix a bug in SuspenseList. (<span class="citation" data-cites="sebmarkbage">[@sebmarkbage]</span>(https://github.com/sebmarkbage) in <a href="https://github.com/facebook/react/pull/18412">#18412</a>)</li>
+<li>Fix a bug causing Suspense fallback to show too early. (<span class="citation" data-cites="acdlite">[@acdlite]</span>(https://github.com/acdlite) in <a href="https://github.com/facebook/react/pull/18411">#18411</a>)</li>
+<li>Fix a bug with class components inside SuspenseList. (<span class="citation" data-cites="sebmarkbage">[@sebmarkbage]</span>(https://github.com/sebmarkbage) in <a href="https://github.com/facebook/react/pull/18448">#18448</a>)</li>
+<li>Fix a bug with inputs that may cause updates to be dropped. (<span class="citation" data-cites="jddxf">[@jddxf]</span>(https://github.com/jddxf) in <a href="https://github.com/facebook/react/pull/18515">#18515</a> and <span class="citation" data-cites="acdlite">[@acdlite]</span>(https://github.com/acdlite) in <a href="https://github.com/facebook/react/pull/18535">#18535</a>)</li>
+<li>Fix a bug causing Suspense fallback to get stuck. (<span class="citation" data-cites="acdlite">[@acdlite]</span>(https://github.com/acdlite) in <a href="https://github.com/facebook/react/pull/18663">#18663</a>)</li>
+<li>Don’t cut off the tail of a SuspenseList if hydrating. (<span class="citation" data-cites="sebmarkbage">[@sebmarkbage]</span>(https://github.com/sebmarkbage) in <a href="https://github.com/facebook/react/pull/18854">#18854</a>)</li>
+<li>Fix a bug in <code>useMutableSource</code> that may happen when <code>getSnapshot</code> changes. (<span class="citation" data-cites="bvaughn">[@bvaughn]</span>(https://github.com/bvaughn) in <a href="https://github.com/facebook/react/pull/18297">#18297</a>)</li>
+<li>Fix a tearing bug in <code>useMutableSource</code>. (<span class="citation" data-cites="bvaughn">[@bvaughn]</span>(https://github.com/bvaughn) in <a href="https://github.com/facebook/react/pull/18912">#18912</a>)</li>
+<li>Warn if calling setState outside of render but before commit. (<span class="citation" data-cites="sebmarkbage">[@sebmarkbage]</span>(https://github.com/sebmarkbage) in <a href="https://github.com/facebook/react/pull/18838">#18838</a>)</li>
+</ul>
+</body>
+</html>

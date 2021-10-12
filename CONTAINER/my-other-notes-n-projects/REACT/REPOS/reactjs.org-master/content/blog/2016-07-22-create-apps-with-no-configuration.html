@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="gaearon" />
+  <title>Create Apps with No Configuration</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Create Apps with No Configuration</h1>
+<p class="author">gaearon</p>
+</header>
+<p><strong><a href="https://github.com/facebookincubator/create-react-app">Create React App</a></strong> is a new officially supported way to create single-page React applications. It offers a modern build setup with no configuration.</p>
+<h2 id="getting-started">Getting Started</h2>
+<h3 id="installation">Installation</h3>
+<p>First, install the global package:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb1-1" title="1"><span class="ex">npm</span> install -g create-react-app</a></code></pre></div>
+<p>Node.js 4.x or higher is required.</p>
+<h3 id="creating-an-app">Creating an App</h3>
+<p>Now you can use it to create a new app:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb2-1" title="1"><span class="ex">create-react-app</span> hello-world</a></code></pre></div>
+<p>This will take a while as npm installs the transitive dependencies, but once it’s done, you will see a list of commands you can run in the created folder:</p>
+<figure>
+<img src="../images/blog/create-apps-with-no-configuration/created-folder.png" alt="created folder" /><figcaption>created folder</figcaption>
+</figure>
+<h3 id="starting-the-server">Starting the Server</h3>
+<p>Run <code>npm start</code> to launch the development server. The browser will open automatically with the created app’s URL.</p>
+<figure>
+<img src="../images/blog/create-apps-with-no-configuration/compiled-successfully.png" alt="compiled successfully" /><figcaption>compiled successfully</figcaption>
+</figure>
+<p>Create React App uses both webpack and Babel under the hood. The console output is tuned to be minimal to help you focus on the problems:</p>
+<figure>
+<img src="../images/blog/create-apps-with-no-configuration/failed-to-compile.png" alt="failed to compile" /><figcaption>failed to compile</figcaption>
+</figure>
+<p>ESLint is also integrated so lint warnings are displayed right in the console:</p>
+<figure>
+<img src="../images/blog/create-apps-with-no-configuration/compiled-with-warnings.png" alt="compiled with warnings" /><figcaption>compiled with warnings</figcaption>
+</figure>
+<p>We only picked a small subset of lint rules that often lead to bugs.</p>
+<h3 id="building-for-production">Building for Production</h3>
+<p>To build an optimized bundle, run <code>npm run build</code>:</p>
+<figure>
+<img src="../images/blog/create-apps-with-no-configuration/npm-run-build.png" alt="npm run build" /><figcaption>npm run build</figcaption>
+</figure>
+<p>It is minified, correctly envified, and the assets include content hashes for caching.</p>
+<h3 id="one-dependency">One Dependency</h3>
+<p>Your <code>package.json</code> contains only a single build dependency and a few scripts:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb3-1" title="1"><span class="op">{</span></a>
+<a class="sourceLine" id="cb3-2" title="2">  <span class="st">&quot;name&quot;</span><span class="op">:</span> <span class="st">&quot;hello-world&quot;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb3-3" title="3">  <span class="st">&quot;dependencies&quot;</span><span class="op">:</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb3-4" title="4">    <span class="st">&quot;react&quot;</span><span class="op">:</span> <span class="st">&quot;^15.2.1&quot;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb3-5" title="5">    <span class="st">&quot;react-dom&quot;</span><span class="op">:</span> <span class="st">&quot;^15.2.1&quot;</span></a>
+<a class="sourceLine" id="cb3-6" title="6">  <span class="op">},</span></a>
+<a class="sourceLine" id="cb3-7" title="7">  <span class="st">&quot;devDependencies&quot;</span><span class="op">:</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb3-8" title="8">    <span class="st">&quot;react-scripts&quot;</span><span class="op">:</span> <span class="st">&quot;0.1.0&quot;</span></a>
+<a class="sourceLine" id="cb3-9" title="9">  <span class="op">},</span></a>
+<a class="sourceLine" id="cb3-10" title="10">  <span class="st">&quot;scripts&quot;</span><span class="op">:</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb3-11" title="11">    <span class="st">&quot;start&quot;</span><span class="op">:</span> <span class="st">&quot;react-scripts start&quot;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb3-12" title="12">    <span class="st">&quot;build&quot;</span><span class="op">:</span> <span class="st">&quot;react-scripts build&quot;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb3-13" title="13">    <span class="st">&quot;eject&quot;</span><span class="op">:</span> <span class="st">&quot;react-scripts eject&quot;</span></a>
+<a class="sourceLine" id="cb3-14" title="14">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb3-15" title="15"><span class="op">}</span></a></code></pre></div>
+<p>We take care of updating Babel, ESLint, and webpack to stable compatible versions so you can update a single dependency to get them all.</p>
+<h3 id="zero-configuration">Zero Configuration</h3>
+<p>It is worth repeating: there are no configuration files or complicated folder structures. The tool only generates the files you need to build your app.</p>
+<pre><code>hello-world/
+  README.md
+  index.html
+  favicon.ico
+  node_modules/
+  package.json
+  src/
+    App.css
+    App.js
+    index.css
+    index.js
+    logo.svg</code></pre>
+<p>All the build settings are preconfigured and can’t be changed. Some features, such as testing, are currently missing. This is an intentional limitation, and we recognize it might not work for everybody. And this brings us to the last point.</p>
+<h3 id="no-lock-in">No Lock-In</h3>
+<p>We first saw this feature in <a href="https://github.com/eanplatter/enclave">Enclave</a>, and we loved it. We talked to <a href="https://twitter.com/EanPlatter">Ean</a>, and he was excited to collaborate with us. He already sent a few pull requests!</p>
+<p>“Ejecting” lets you leave the comfort of Create React App setup at any time. You run a single command, and all the build dependencies, configs, and scripts are moved right into your project. At this point you can customize everything you want, but effectively you are forking our configuration and going your own way. If you’re experienced with build tooling and prefer to fine-tune everything to your taste, this lets you use Create React App as a boilerplate generator.</p>
+<p>We expect that at early stages, many people will “eject” for one reason or another, but as we learn from them, we will make the default setup more and more compelling while still providing no configuration.</p>
+<h2 id="try-it-out">Try It Out!</h2>
+<p>You can find <a href="https://github.com/facebookincubator/create-react-app"><strong>Create React App</strong></a> with additional instructions on GitHub.</p>
+<p>This is an experiment, and only time will tell if it becomes a popular way of creating and building React apps, or fades into obscurity.</p>
+<p>We welcome you to participate in this experiment. Help us build the React tooling that more people can use. We are always <a href="https://github.com/facebookincubator/create-react-app/issues/11">open to feedback</a>.</p>
+<h2 id="the-backstory">The Backstory</h2>
+<p>React was one of the first libraries to embrace transpiling JavaScript. As a result, even though you can <a href="https://github.com/facebook/react/blob/3fd582643ef3d222a00a0c756292c15b88f9f83c/examples/basic-jsx/index.html">learn React without any tooling</a>, the React ecosystem has commonly become associated with an overwhelming explosion of tools.</p>
+<p>Eric Clemmons called this phenomenon the “<a href="https://medium.com/@ericclemmons/javascript-fatigue-48d4011b6fc4">JavaScript Fatigue</a>”:</p>
+<blockquote>
+<p>Ultimately, the problem is that by choosing React (and inherently JSX), you’ve unwittingly opted into a confusing nest of build tools, boilerplate, linters, &amp; time-sinks to deal with before you ever get to create anything.</p>
+</blockquote>
+<p>It is tempting to write code in ES2015 and JSX. It is sensible to use a bundler to keep the codebase modular, and a linter to catch the common mistakes. It is nice to have a development server with fast rebuilds, and a command to produce optimized bundles for production.</p>
+<p>Combining these tools requires some experience with each of them. Even so, it is far too easy to get dragged into fighting small incompatibilities, unsatisfied peerDependencies, and illegible configuration files.</p>
+<p>Many of those tools are plugin platforms and don’t directly acknowledge each other’s existence. They leave it up to the users to wire them together. The tools mature and change independently, and tutorials quickly get out of date.</p>
+<blockquote class="twitter-tweet" data-lang="en">
+<p lang="en" dir="ltr">
+Marc was almost ready to implement his “hello world” React app <a href="https://t.co/ptdg4yteF1">pic.twitter.com/ptdg4yteF1</a>
+</p>
+— Thomas Fuchs (<span class="citation" data-cites="thomasfuchs">@thomasfuchs</span>) <a href="https://twitter.com/thomasfuchs/status/708675139253174273">March 12, 2016</a>
+</blockquote>
+<p>This doesn’t mean those tools aren’t great. To many of us, they have become indispensable, and we very much appreciate the effort of their maintainers. They already have too much on their plates to worry about the state of the React ecosystem.</p>
+<p>Still, we knew it was frustrating to spend days setting up a project when all you wanted was to learn React. We wanted to fix this.</p>
+<h2 id="could-we-fix-this">Could We Fix This?</h2>
+<p>We found ourselves in an unusual dilemma.</p>
+<p>So far, <a href="/docs/design-principles.html#dogfooding">our strategy</a> has been to only release the code that we are using at Facebook. This helped us ensure that every project is battle-tested and has clearly defined scope and priorities.</p>
+<p>However, tooling at Facebook is different than at many smaller companies. Linting, transpilation, and packaging are all handled by powerful remote development servers, and product engineers don’t need to configure them. While we wish we could give a dedicated server to every user of React, even Facebook cannot scale that well!</p>
+<p>The React community is very important to us. We knew that we couldn’t fix the problem within the limits of our open source philosophy. This is why we decided to make an exception, and to ship something that we didn’t use ourselves, but that we thought would be useful to the community.</p>
+<h2 id="the-quest-for-a-react-abbr-titlecommand-line-interfacecliabbr">The Quest for a React <abbr title="Command Line Interface">CLI</abbr></h2>
+<p>Having just attended <a href="http://embercamp.com/">EmberCamp</a> a week ago, I was excited about <a href="https://ember-cli.com/">Ember CLI</a>. Ember users have a great “getting started” experience thanks to a curated set of tools united under a single command-line interface. I have heard similar feedback about <a href="https://github.com/elm-lang/elm-reactor">Elm Reactor</a>.</p>
+<p>Providing a cohesive curated experience is valuable by itself, even if the user could in theory assemble those parts themselves. Kathy Sierra <a href="http://seriouspony.com/blog/2013/7/24/your-app-makes-me-fat">explains it best</a>:</p>
+<blockquote>
+<p>If your UX asks the user to make <em>choices</em>, for example, even if those choices are both clear and useful, the act of <em>deciding</em> is a cognitive drain. And not just <em>while</em> they’re deciding… even <em>after</em> we choose, an unconscious cognitive background thread is slowly consuming/leaking resources, “Was <em>that</em> the right choice?”</p>
+</blockquote>
+<p>I never tried to write a command-line tool for React apps, and neither has <a href="https://twitter.com/vjeux">Christopher</a>. We were chatting on Messenger about this idea, and we decided to work together on it for a week as a hackathon project.</p>
+<p>We knew that such projects traditionally haven’t been very successful in the React ecosystem. Christopher told me that multiple “React CLI” projects have started and failed at Facebook. The community tools with similar goals also exist, but so far they have not yet gained enough traction.</p>
+<p>Still, we decided it was worth another shot. Christopher and I created a very rough proof of concept on the weekend, and <a href="https://twitter.com/lacker">Kevin</a> soon joined us.</p>
+<p>We invited some of the community members to collaborate with us, and we have spent this week working on this tool. We hope that you’ll enjoy using it! <a href="https://github.com/facebookincubator/create-react-app/issues/11">Let us know what you think.</a></p>
+<p>We would like to express our gratitude to <a href="https://twitter.com/mxstbr">Max Stoiber</a>, <a href="https://twitter.com/jbscript">Jonny Buchanan</a>, <a href="https://twitter.com/eanplatter">Ean Platter</a>, <a href="https://github.com/tylermcginnis">Tyler McGinnis</a>, <a href="https://github.com/kentcdodds">Kent C. Dodds</a>, and <a href="https://twitter.com/ericclemmons">Eric Clemmons</a> for their early feedback, ideas, and contributions.</p>
+</body>
+</html>

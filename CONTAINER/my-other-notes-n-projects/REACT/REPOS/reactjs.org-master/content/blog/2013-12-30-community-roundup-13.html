@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="vjeux" />
+  <title>Community Round-up #13</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Community Round-up #13</h1>
+<p class="author">vjeux</p>
+</header>
+<p>Happy holidays! This blog post is a little-late Christmas present for all the React users. Hopefully it will inspire you to write awesome web apps in 2014!</p>
+<h2 id="react-touch">React Touch</h2>
+<p><a href="http://www.petehunt.net/">Pete Hunt</a> wrote three demos showing that React can be used to run 60fps native-like experiences on mobile web. A frosted glass effect, an image gallery with 3d animations and an infinite scroll view.</p>
+<figure>
+<iframe src="//player.vimeo.com/video/79659941" width="100%" height="400" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen>
+</iframe>
+</figure>
+<p><a href="https://petehunt.github.io/react-touch/">Try out the demos!</a></p>
+<h2 id="introduction-to-react">Introduction to React</h2>
+<p><a href="http://www.phpied.com/">Stoyan Stefanov</a> talked at Joe Dev On Tech about React. He goes over all the features of the library and ends with a concrete example.</p>
+<figure>
+<iframe width="650" height="315" src="//www.youtube-nocookie.com/embed/SMMRJif5QW0" frameborder="0" allowfullscreen>
+</iframe>
+</figure>
+<h2 id="jsx-e4x-the-good-parts">JSX: E4X The Good Parts</h2>
+<p>JSX is often compared to the now defunct E4X, <a href="http://blog.vjeux.com/">Vjeux</a> went over all the E4X features and explained how JSX is different and hopefully doesn’t repeat the same mistakes.</p>
+<blockquote>
+<p>E4X (ECMAScript for XML) is a JavaScript syntax extension and a runtime to manipulate XML. It was promoted by Mozilla but failed to become mainstream and is now deprecated. JSX was inspired by E4X. In this article, I’m going to go over all the features of E4X and explain the design decisions behind JSX.</p>
+<p><strong>Historical Context</strong></p>
+<p>E4X has been created in 2002 by John Schneider. This was the golden age of XML where it was being used for everything: data, configuration files, code, interfaces (DOM) … E4X was first implemented inside of Rhino, a JavaScript implementation from Mozilla written in Java.</p>
+<p><a href="http://blog.vjeux.com/2013/javascript/jsx-e4x-the-good-parts.html">Continue reading …</a></p>
+</blockquote>
+<h2 id="react--socketio">React + Socket.io</h2>
+<p><a href="http://enome.be/nl">Geert Pasteels</a> made a small experiment with Socket.io. He wrote a very small mixin that synchronizes React state with the server. Just include this mixin to your React component and it is now live!</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb1-1" title="1">changeHandler<span class="op">:</span> <span class="kw">function</span> (data) <span class="op">{</span></a>
+<a class="sourceLine" id="cb1-2" title="2">  <span class="cf">if</span> (<span class="op">!</span><span class="va">_</span>.<span class="at">isEqual</span>(<span class="va">data</span>.<span class="at">state</span><span class="op">,</span> <span class="kw">this</span>.<span class="at">state</span>) <span class="op">&amp;&amp;</span> <span class="kw">this</span>.<span class="at">path</span> <span class="op">===</span> <span class="va">data</span>.<span class="at">path</span>) <span class="op">{</span></a>
+<a class="sourceLine" id="cb1-3" title="3">    <span class="kw">this</span>.<span class="at">setState</span>(<span class="va">data</span>.<span class="at">state</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb1-4" title="4">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb1-5" title="5"><span class="op">},</span></a>
+<a class="sourceLine" id="cb1-6" title="6">componentDidMount<span class="op">:</span> <span class="kw">function</span> (root) <span class="op">{</span></a>
+<a class="sourceLine" id="cb1-7" title="7">  <span class="kw">this</span>.<span class="at">path</span> <span class="op">=</span> <span class="va">utils</span>.<span class="at">nodePath</span>(root)<span class="op">;</span></a>
+<a class="sourceLine" id="cb1-8" title="8">  <span class="va">socket</span>.<span class="at">on</span>(<span class="st">&#39;component-change&#39;</span><span class="op">,</span> <span class="kw">this</span>.<span class="at">changeHandler</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb1-9" title="9"><span class="op">},</span></a>
+<a class="sourceLine" id="cb1-10" title="10">componentWillUpdate<span class="op">:</span> <span class="kw">function</span> (props<span class="op">,</span> state) <span class="op">{</span></a>
+<a class="sourceLine" id="cb1-11" title="11">  <span class="va">socket</span>.<span class="at">emit</span>(<span class="st">&#39;component-change&#39;</span><span class="op">,</span> <span class="op">{</span> <span class="dt">path</span><span class="op">:</span> <span class="kw">this</span>.<span class="at">path</span><span class="op">,</span> <span class="dt">state</span><span class="op">:</span> state <span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb1-12" title="12"><span class="op">},</span></a>
+<a class="sourceLine" id="cb1-13" title="13">componentWillUnmount<span class="op">:</span> <span class="kw">function</span> () <span class="op">{</span></a>
+<a class="sourceLine" id="cb1-14" title="14">  <span class="va">socket</span>.<span class="at">removeListener</span>(<span class="st">&#39;component-change&#39;</span><span class="op">,</span> <span class="kw">this</span>.<span class="at">change</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb1-15" title="15"><span class="op">}</span></a></code></pre></div>
+<p><a href="https://github.com/Enome/react.io">Check it out on GitHub…</a></p>
+<h2 id="cssobjectify">cssobjectify</h2>
+<p><a href="http://andreypopp.com/">Andrey Popp</a> implemented a source transform that takes a CSS file and converts it to JSON. This integrates pretty nicely with React.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb2-1" title="1"><span class="co">/* style.css */</span></a>
+<a class="sourceLine" id="cb2-2" title="2">MyComponent <span class="op">{</span></a>
+<a class="sourceLine" id="cb2-3" title="3">  font<span class="op">-</span><span class="dt">size</span><span class="op">:</span> 12px<span class="op">;</span></a>
+<a class="sourceLine" id="cb2-4" title="4">  background<span class="op">-</span><span class="dt">color</span><span class="op">:</span> red<span class="op">;</span></a>
+<a class="sourceLine" id="cb2-5" title="5"><span class="op">}</span></a>
+<a class="sourceLine" id="cb2-6" title="6"></a>
+<a class="sourceLine" id="cb2-7" title="7"><span class="co">/* myapp.js */</span></a>
+<a class="sourceLine" id="cb2-8" title="8"><span class="kw">var</span> React <span class="op">=</span> <span class="at">require</span>(<span class="st">&#39;react-tools/build/modules/React&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb2-9" title="9"><span class="kw">var</span> Styles <span class="op">=</span> <span class="at">require</span>(<span class="st">&#39;./styles.css&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb2-10" title="10"></a>
+<a class="sourceLine" id="cb2-11" title="11"><span class="kw">var</span> MyComponent <span class="op">=</span> <span class="va">React</span>.<span class="at">createClass</span>(<span class="op">{</span></a>
+<a class="sourceLine" id="cb2-12" title="12">  <span class="dt">render</span><span class="op">:</span> <span class="kw">function</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb2-13" title="13">    <span class="cf">return</span> (</a>
+<a class="sourceLine" id="cb2-14" title="14">      <span class="op">&lt;</span>div style<span class="op">={</span><span class="va">Styles</span>.<span class="at">MyComponent</span><span class="op">}&gt;</span></a>
+<a class="sourceLine" id="cb2-15" title="15">        Hello<span class="op">,</span> world<span class="op">!</span></a>
+<a class="sourceLine" id="cb2-16" title="16">      &lt;/div<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb2-17" title="17">    )</a>
+<a class="sourceLine" id="cb2-18" title="18">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb2-19" title="19"><span class="op">}</span>)<span class="op">;</span></a></code></pre></div>
+<p><a href="https://github.com/andreypopp/cssobjectify">Check it out on GitHub…</a></p>
+<h2 id="ngreact">ngReact</h2>
+<p><a href="http://davidandsuzi.com/">David Chang</a> working at <a href="http://www.hasoffers.com/">HasOffer</a> wanted to speed up his Angular app and replaced Angular primitives by React at different layers. When using React naively it is 67% faster, but when combining it with angular’s transclusion it is 450% slower.</p>
+<blockquote>
+Rendering this takes 803ms for 10 iterations, hovering around 35 and 55ms for each data reload (that’s 67% faster). You’ll notice that the first load takes a little longer than successive loads, and the second load REALLY struggles - here, it’s 433ms, which is more than half of the total time!
+<figure>
+<a href="http://davidandsuzi.com/ngreact-react-components-in-angular/"><img src="../images/blog/ngreact.png"></a>
+</figure>
+<p><a href="http://davidandsuzi.com/ngreact-react-components-in-angular/">Read the full article…</a></p>
+</blockquote>
+<h2 id="vim-jsx">vim-jsx</h2>
+<p><a href="https://github.com/mxw">Max Wang</a> made a vim syntax highlighting and indentation plugin for vim.</p>
+<blockquote>
+<p>Syntax highlighting and indenting for JSX. JSX is a JavaScript syntax transformer which translates inline XML document fragments into JavaScript objects. It was developed by Facebook alongside React.</p>
+<p>This bundle requires pangloss’s <a href="https://github.com/pangloss/vim-javascript">vim-javascript</a> syntax highlighting.</p>
+<p>Vim support for inline XML in JS is remarkably similar to the same for PHP.</p>
+<p><a href="https://github.com/mxw/vim-jsx">View on GitHub…</a></p>
+</blockquote>
+<h2 id="random-tweet">Random Tweet</h2>
+<center>
+<blockquote class="twitter-tweet" lang="en">
+<p>
+I may be starting to get annoying with this, but ReactJS is really exciting. I truly feel the virtual DOM is a game changer.
+</p>
+— Eric Florenzano (<span class="citation" data-cites="ericflo">@ericflo</span>) <a href="https://twitter.com/ericflo/statuses/413842834974732288">December 20, 2013</a>
+</blockquote>
+</center>
+</body>
+</html>

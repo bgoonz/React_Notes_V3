@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="sebmarkbage" />
+  <title>React Chrome Developer Tools</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">React Chrome Developer Tools</h1>
+<p class="author">sebmarkbage</p>
+</header>
+<p>With the new year, we thought you’d enjoy some new tools for debugging React code. Today we’re releasing the <a href="https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi">React Developer Tools</a>, an extension to the Chrome Developer Tools. <a href="https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi">Download them from the Chrome Web Store</a>.</p>
+<figure>
+<iframe width="650" height="315" src="//www.youtube-nocookie.com/embed/Cey7BS6dE0M" frameborder="0" allowfullscreen>
+</iframe>
+</figure>
+<p>You will get a new tab titled “React” in your Chrome DevTools. This tab shows you a list of the root React Components that are rendered on the page as well as the subcomponents that each root renders.</p>
+<p>Selecting a Component in this tab allows you to view and edit its props and state in the panel on the right. In the breadcrumbs at the bottom, you can inspect the selected Component, the Component that created it, the Component that created that one, and so on.</p>
+When you inspect a DOM element using the regular Elements tab, you can switch over to the React tab and the corresponding Component will be automatically selected. The Component will also be automatically selected if you have a breakpoint within its render phase. This allows you to step through the render tree and see how one Component affects another one.
+<figure>
+<a href="https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi"><img src="../images/blog/react-dev-tools.jpg"></a>
+</figure>
+<p>We hope these tools will help your team better understand your component hierarchy and track down bugs. We’re very excited about this initial launch and appreciate any feedback you may have. As always, we also accept <a href="https://github.com/facebook/react-devtools">pull requests on GitHub</a>.</p>
+</body>
+</html>

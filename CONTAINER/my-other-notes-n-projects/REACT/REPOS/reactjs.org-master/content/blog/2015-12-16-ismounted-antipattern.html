@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="jimfb" />
+  <title>isMounted is an Antipattern</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">isMounted is an Antipattern</h1>
+<p class="author">jimfb</p>
+</header>
+<p>As we move closer to officially deprecating isMounted, it’s worth understanding why the function is an antipattern, and how to write code without the isMounted function.</p>
+<p>The primary use case for <code>isMounted()</code> is to avoid calling <code>setState()</code> after a component has unmounted, because calling <code>setState()</code> after a component has unmounted will emit a warning. The “setState warning” exists to help you catch bugs, because calling <code>setState()</code> on an unmounted component is an indication that your app/component has somehow failed to clean up properly. Specifically, calling <code>setState()</code> in an unmounted component means that your app is still holding a reference to the component after the component has been unmounted - which often indicates a memory leak!</p>
+<p>To avoid the error message, people often add lines like this:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb1-1" title="1"><span class="cf">if</span> (<span class="kw">this</span>.<span class="at">isMounted</span>()) <span class="op">{</span> <span class="co">// This is bad.</span></a>
+<a class="sourceLine" id="cb1-2" title="2">  <span class="kw">this</span>.<span class="at">setState</span>(<span class="op">{</span>...<span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb1-3" title="3"><span class="op">}</span></a></code></pre></div>
+<p>Checking <code>isMounted</code> before calling <code>setState()</code> does eliminate the warning, but it also defeats the purpose of the warning, since now you will never get the warning (even when you should!)</p>
+<p>Other uses of <code>isMounted()</code> are similarly erroneous; using <code>isMounted()</code> is a code smell because the only reason you would check is because you think you might be holding a reference after the component has unmounted.</p>
+<p>An easy migration strategy for anyone upgrading their code to avoid <code>isMounted()</code> is to track the mounted status yourself. Just set a <code>_isMounted</code> property to true in <code>componentDidMount</code> and set it to false in <code>componentWillUnmount</code>, and use this variable to check your component’s status.</p>
+<p>An optimal solution would be to find places where <code>setState()</code> might be called after a component has unmounted, and fix them. Such situations most commonly occur due to callbacks, when a component is waiting for some data and gets unmounted before the data arrives. Ideally, any callbacks should be canceled in <code>componentWillUnmount</code>, prior to unmounting.</p>
+<p>For instance, if you are using a Flux store in your component, you must unsubscribe in <code>componentWillUnmount</code>:</p>
+<pre class="javascript{9}"><code>class MyComponent extends React.Component {
+  componentDidMount() {
+    mydatastore.subscribe(this);
+  }
+  render() {
+    ...
+  }
+  componentWillUnmount() {
+    mydatastore.unsubscribe(this);
+  }
+}</code></pre>
+<p>If you use ES6 promises, you may need to wrap your promise in order to make it cancelable.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb3-1" title="1"><span class="kw">const</span> cancelablePromise <span class="op">=</span> <span class="at">makeCancelable</span>(</a>
+<a class="sourceLine" id="cb3-2" title="2">  <span class="kw">new</span> <span class="at">Promise</span>(r <span class="kw">=&gt;</span> <span class="va">component</span>.<span class="at">setState</span>(<span class="op">{</span>...<span class="op">}</span>))</a>
+<a class="sourceLine" id="cb3-3" title="3">)<span class="op">;</span></a>
+<a class="sourceLine" id="cb3-4" title="4"></a>
+<a class="sourceLine" id="cb3-5" title="5">cancelablePromise</a>
+<a class="sourceLine" id="cb3-6" title="6">  .<span class="at">promise</span></a>
+<a class="sourceLine" id="cb3-7" title="7">  .<span class="at">then</span>(() <span class="kw">=&gt;</span> <span class="va">console</span>.<span class="at">log</span>(<span class="st">&#39;resolved&#39;</span>))</a>
+<a class="sourceLine" id="cb3-8" title="8">  .<span class="at">catch</span>((reason) <span class="kw">=&gt;</span> <span class="va">console</span>.<span class="at">log</span>(<span class="st">&#39;isCanceled&#39;</span><span class="op">,</span> <span class="va">reason</span>.<span class="at">isCanceled</span>))<span class="op">;</span></a>
+<a class="sourceLine" id="cb3-9" title="9"></a>
+<a class="sourceLine" id="cb3-10" title="10"><span class="va">cancelablePromise</span>.<span class="at">cancel</span>()<span class="op">;</span> <span class="co">// Cancel the promise</span></a></code></pre></div>
+<p>Where <code>makeCancelable</code> was originally <span class="citation" data-cites="istarkov">[defined by @istarkov]</span>(https://github.com/facebook/react/issues/5465#issuecomment-157888325) as:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb4-1" title="1"><span class="kw">const</span> makeCancelable <span class="op">=</span> (promise) <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb4-2" title="2">  <span class="kw">let</span> hasCanceled_ <span class="op">=</span> <span class="kw">false</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb4-3" title="3"></a>
+<a class="sourceLine" id="cb4-4" title="4">  <span class="kw">const</span> wrappedPromise <span class="op">=</span> <span class="kw">new</span> <span class="at">Promise</span>((resolve<span class="op">,</span> reject) <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb4-5" title="5">    <span class="va">promise</span>.<span class="at">then</span>(</a>
+<a class="sourceLine" id="cb4-6" title="6">      val <span class="kw">=&gt;</span> hasCanceled_ <span class="op">?</span> <span class="at">reject</span>(<span class="op">{</span><span class="dt">isCanceled</span><span class="op">:</span> <span class="kw">true</span><span class="op">}</span>) : <span class="at">resolve</span>(val)<span class="op">,</span></a>
+<a class="sourceLine" id="cb4-7" title="7">      error <span class="kw">=&gt;</span> hasCanceled_ <span class="op">?</span> <span class="at">reject</span>(<span class="op">{</span><span class="dt">isCanceled</span><span class="op">:</span> <span class="kw">true</span><span class="op">}</span>) : <span class="at">reject</span>(error)</a>
+<a class="sourceLine" id="cb4-8" title="8">    )<span class="op">;</span></a>
+<a class="sourceLine" id="cb4-9" title="9">  <span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb4-10" title="10"></a>
+<a class="sourceLine" id="cb4-11" title="11">  <span class="cf">return</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb4-12" title="12">    <span class="dt">promise</span><span class="op">:</span> wrappedPromise<span class="op">,</span></a>
+<a class="sourceLine" id="cb4-13" title="13">    <span class="at">cancel</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb4-14" title="14">      hasCanceled_ <span class="op">=</span> <span class="kw">true</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb4-15" title="15">    <span class="op">},</span></a>
+<a class="sourceLine" id="cb4-16" title="16">  <span class="op">};</span></a>
+<a class="sourceLine" id="cb4-17" title="17"><span class="op">};</span></a></code></pre></div>
+<p>As an added bonus for getting your code cleaned up early, getting rid of <code>isMounted()</code> makes it one step easier for you to upgrade to ES6 classes, where using <code>isMounted()</code> is already prohibited. Happy coding!</p>
+</body>
+</html>

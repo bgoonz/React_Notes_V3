@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="zpao" />
+  <title>React v0.12</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">React v0.12</h1>
+<p class="author">zpao</p>
+</header>
+<p>We’re happy to announce the availability of React v0.12! After over a week of baking as the release candidate, we uncovered and fixed a few small issues. Thanks to all of you who upgraded and gave us feedback!</p>
+<p>We have talked a lot about some of the bigger changes in this release. <a href="/blog/2014/10/14/introducing-react-elements.html">We introduced new terminology</a> and changed APIs to clean up and simplify some of the concepts of React. <a href="/blog/2014/10/16/react-v0.12-rc1.html">We also made several changes to JSX</a> and deprecated a few functions. We won’t go into depth about these changes again but we encourage you to read up on these changes in the linked posts. We’ll summarize these changes and discuss some of the other changes and how they may impact you below. As always, a full changelog is also included below.</p>
+<p>The release is available for download:</p>
+<ul>
+<li><strong>React</strong><br />
+Dev build with warnings: <a href="https://fb.me/react-0.12.0.js" class="uri">https://fb.me/react-0.12.0.js</a><br />
+Minified build for production: <a href="https://fb.me/react-0.12.0.min.js" class="uri">https://fb.me/react-0.12.0.min.js</a><br />
+</li>
+<li><strong>React with Add-Ons</strong><br />
+Dev build with warnings: <a href="https://fb.me/react-with-addons-0.12.0.js" class="uri">https://fb.me/react-with-addons-0.12.0.js</a><br />
+Minified build for production: <a href="https://fb.me/react-with-addons-0.12.0.min.js" class="uri">https://fb.me/react-with-addons-0.12.0.min.js</a><br />
+</li>
+<li><strong>In-Browser JSX transformer</strong><br />
+<a href="https://fb.me/JSXTransformer-0.12.0.js" class="uri">https://fb.me/JSXTransformer-0.12.0.js</a></li>
+</ul>
+<p>We’ve also published version <code>0.12.0</code> of the <code>react</code> and <code>react-tools</code> packages on npm and the <code>react</code> package on bower.</p>
+<h2 id="new-terminology--updated-apis">New Terminology &amp; Updated APIs</h2>
+<p>v0.12 is bringing about some new terminology. <a href="/blog/2014/10/14/introducing-react-elements.html">We introduced</a> this 2 weeks ago and we’ve also documented it in <a href="/docs/glossary.html">a new section of the documentation</a>. As a part of this, we also corrected many of our top-level APIs to align with the terminology. <code>Component</code> has been removed from all of our <code>React.render*</code> methods. While at one point the argument you passed to these functions was called a Component, it no longer is. You are passing ReactElements. To align with <code>render</code> methods in your component classes, we decided to keep the top-level functions short and sweet. <code>React.renderComponent</code> is now <code>React.render</code>.</p>
+<p>We also corrected some other misnomers. <code>React.isValidComponent</code> actually determines if the argument is a ReactElement, so it has been renamed to <code>React.isValidElement</code>. In the same vein, <code>React.PropTypes.component</code> is now <code>React.PropTypes.element</code> and <code>React.PropTypes.renderable</code> is now <code>React.PropTypes.node</code>.</p>
+<p>The old methods will still work but will warn upon first use. They will be removed in v0.13.</p>
+<h2 id="jsx-changes">JSX Changes</h2>
+<p><a href="/blog/2014/10/16/react-v0.12-rc1.html#jsx-changes">We talked more in depth about these before</a>, so here are the highlights.</p>
+<ul>
+<li>No more <code>/** @jsx React.DOM */</code>!</li>
+<li>We no longer transform to a straight function call. <code>&lt;Component/&gt;</code> now becomes <code>React.createElement(Component)</code></li>
+<li>DOM components don’t make use of <code>React.DOM</code>, instead we pass the tag name directly. <code>&lt;div/&gt;</code> becomes <code>React.createElement('div')</code></li>
+<li>We introduced spread attributes as a quick way to transfer props.</li>
+</ul>
+<h2 id="devtools-improvements-no-more-__internals">DevTools Improvements, No More <code>__internals</code></h2>
+<p>For months we’ve gotten complaints about the React DevTools message. It shouldn’t have logged the up-sell message when you were already using the DevTools. Unfortunately this was because the way we implemented these tools resulted in the DevTools knowing about React, but not the reverse. We finally gave this some attention and enabled React to know if the DevTools are installed. We released an update to the devtools several weeks ago making this possible. Extensions in Chrome should auto-update so you probably already have the update installed!</p>
+<p>As a result of this update, we no longer need to expose several internal modules to the world. If you were taking advantage of this implementation detail, your code will break. <code>React.__internals</code> is no more.</p>
+<h2 id="license-change---bsd">License Change - BSD</h2>
+<p>We updated the license on React to the BSD 3-Clause license with an explicit patent grant. Previously we used the Apache 2 license. These licenses are very similar and our extra patent grant is equivalent to the grant provided in the Apache license. You can still use React with the confidence that we have granted the use of any patents covering it. This brings us in line with the same licensing we use across the majority of our open source projects at Facebook.</p>
+<p>You can read the full text of the <a href="https://github.com/facebook/react/blob/master/LICENSE">LICENSE</a> and <a href="https://github.com/facebook/react/blob/master/PATENTS"><code>PATENTS</code></a> files on GitHub.</p>
+<hr />
+<h2 id="changelog">Changelog</h2>
+<h3 id="react-core">React Core</h3>
+<h4 id="breaking-changes">Breaking Changes</h4>
+<ul>
+<li><code>key</code> and <code>ref</code> moved off props object, now accessible on the element directly</li>
+<li>React is now BSD licensed with accompanying Patents grant</li>
+<li>Default prop resolution has moved to Element creation time instead of mount time, making them effectively static</li>
+<li><code>React.__internals</code> is removed - it was exposed for DevTools which no longer needs access</li>
+<li>Composite Component functions can no longer be called directly - they must be wrapped with <code>React.createFactory</code> first. This is handled for you when using JSX.</li>
+</ul>
+<h4 id="new-features">New Features</h4>
+<ul>
+<li>Spread operator (<code>{...}</code>) introduced to deprecate <code>this.transferPropsTo</code></li>
+<li>Added support for more HTML attributes: <code>acceptCharset</code>, <code>classID</code>, <code>manifest</code></li>
+</ul>
+<h4 id="deprecations">Deprecations</h4>
+<ul>
+<li><code>React.renderComponent</code> –&gt; <code>React.render</code></li>
+<li><code>React.renderComponentToString</code> –&gt; <code>React.renderToString</code></li>
+<li><code>React.renderComponentToStaticMarkup</code> –&gt; <code>React.renderToStaticMarkup</code></li>
+<li><code>React.isValidComponent</code> –&gt; <code>React.isValidElement</code></li>
+<li><code>React.PropTypes.component</code> –&gt; <code>React.PropTypes.element</code></li>
+<li><code>React.PropTypes.renderable</code> –&gt; <code>React.PropTypes.node</code></li>
+<li><strong>DEPRECATED</strong> <code>React.isValidClass</code></li>
+<li><strong>DEPRECATED</strong> <code>instance.transferPropsTo</code></li>
+<li><strong>DEPRECATED</strong> Returning <code>false</code> from event handlers to preventDefault</li>
+<li><strong>DEPRECATED</strong> Convenience Constructor usage as function, instead wrap with <code>React.createFactory</code></li>
+<li><strong>DEPRECATED</strong> use of <code>key={null}</code> to assign implicit keys</li>
+</ul>
+<h4 id="bug-fixes">Bug Fixes</h4>
+<ul>
+<li>Better handling of events and updates in nested results, fixing value restoration in “layered” controlled components</li>
+<li>Correctly treat <code>event.getModifierState</code> as case sensitive</li>
+<li>Improved normalization of <code>event.charCode</code></li>
+<li>Better error stacks when involving autobound methods</li>
+<li>Removed DevTools message when the DevTools are installed</li>
+<li>Correctly detect required language features across browsers</li>
+<li>Fixed support for some HTML attributes:
+<ul>
+<li><code>list</code> updates correctly now</li>
+<li><code>scrollLeft</code>, <code>scrollTop</code> removed, these should not be specified as props</li>
+</ul></li>
+<li>Improved error messages</li>
+</ul>
+<h3 id="react-with-addons">React With Addons</h3>
+<h4 id="new-features-1">New Features</h4>
+<ul>
+<li><code>React.addons.batchedUpdates</code> added to API for hooking into update cycle</li>
+</ul>
+<h4 id="breaking-changes-1">Breaking Changes</h4>
+<ul>
+<li><code>React.addons.update</code> uses <code>assign</code> instead of <code>copyProperties</code> which does <code>hasOwnProperty</code> checks. Properties on prototypes will no longer be updated correctly.</li>
+</ul>
+<h4 id="bug-fixes-1">Bug Fixes</h4>
+<ul>
+<li>Fixed some issues with CSS Transitions</li>
+</ul>
+<h3 id="jsx">JSX</h3>
+<h4 id="breaking-changes-2">Breaking Changes</h4>
+<ul>
+<li>Enforced convention: lower case tag names are always treated as HTML tags, upper case tag names are always treated as composite components</li>
+<li>JSX no longer transforms to simple function calls</li>
+</ul>
+<h4 id="new-features-2">New Features</h4>
+<ul>
+<li><code>@jsx React.DOM</code> no longer required</li>
+<li>spread (<code>{...}</code>) operator introduced to allow easier use of props</li>
+</ul>
+<h4 id="bug-fixes-2">Bug Fixes</h4>
+<ul>
+<li>JSXTransformer: Make sourcemaps an option when using APIs directly (eg, for react-rails)</li>
+</ul>
+</body>
+</html>

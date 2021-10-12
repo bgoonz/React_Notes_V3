@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="zpao" />
+  <title>React v0.3.3</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">React v0.3.3</h1>
+<p class="author">zpao</p>
+</header>
+<p>We have a ton of great stuff coming in v0.4, but in the meantime we’re releasing v0.3.3. This release addresses some small issues people were having and simplifies our tools to make them easier to use.</p>
+<h2 id="react-tools">react-tools</h2>
+<ul>
+<li>Upgrade Commoner so <code>require</code> statements are no longer relativized when passing through the transformer. This was a feature needed when building React, but doesn’t translate well for other consumers of <code>bin/jsx</code>.</li>
+<li>Upgraded our dependencies on Commoner and Recast so they use a different directory for their cache.</li>
+<li>Freeze our esprima dependency.</li>
+</ul>
+<h2 id="react">React</h2>
+<ul>
+<li>Allow reusing the same DOM node to render different components. e.g. <code>React.renderComponent(&lt;div/&gt;, domNode); React.renderComponent(&lt;span/&gt;, domNode);</code> will work now.</li>
+</ul>
+<h2 id="jsxtransformer">JSXTransformer</h2>
+<ul>
+<li>Improved the in-browser transformer so that transformed scripts will execute in the expected scope. The allows components to be defined and used from separate files.</li>
+</ul>
+</body>
+</html>

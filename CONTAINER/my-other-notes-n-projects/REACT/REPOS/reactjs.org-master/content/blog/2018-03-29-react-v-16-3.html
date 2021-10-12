@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="bvaughn" />
+  <title>React v16.3.0: New lifecycles and context API</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">React v16.3.0: New lifecycles and context API</h1>
+<p class="author">bvaughn</p>
+</header>
+<p>A few days ago, we <a href="/blog/2018/03/27/update-on-async-rendering.html">wrote a post about upcoming changes to our legacy lifecycle methods</a>, including gradual migration strategies. In React 16.3.0, we are adding a few new lifecycle methods to assist with that migration. We are also introducing new APIs for long requested features: an official context API, a ref forwarding API, and an ergonomic ref API.</p>
+<p>Read on to learn more about the release.</p>
+<h2 id="official-context-api">Official Context API</h2>
+<p>For many years, React has offered an experimental API for context. Although it was a powerful tool, its use was discouraged because of inherent problems in the API, and because we always intended to replace the experimental API with a better one.</p>
+<p>Version 16.3 introduces a new context API that is more efficient and supports both static type checking and deep updates.</p>
+<blockquote>
+<p><strong>Note</strong></p>
+<p>The old context API will keep working for all React 16.x releases, so you will have time to migrate.</p>
+</blockquote>
+<p>Here is an example illustrating how you might inject a “theme” using the new context API: <code>embed:16-3-release-blog-post/context-example.js</code></p>
+<p><a href="/docs/context.html">Learn more about the new context API here.</a></p>
+<h2 id="createref-api"><code>createRef</code> API</h2>
+<p>Previously, React provided two ways of managing refs: the legacy string ref API and the callback API. Although the string ref API was the more convenient of the two, it had <a href="https://github.com/facebook/react/issues/1373">several downsides</a> and so our official recommendation was to use the callback form instead.</p>
+<p>Version 16.3 adds a new option for managing refs that offers the convenience of a string ref without any of the downsides: <code>embed:16-3-release-blog-post/create-ref-example.js</code></p>
+<blockquote>
+<p><strong>Note:</strong></p>
+<p>Callback refs will continue to be supported in addition to the new <code>createRef</code> API.</p>
+<p>You don’t need to replace callback refs in your components. They are slightly more flexible, so they will remain as an advanced feature.</p>
+</blockquote>
+<p><a href="/docs/refs-and-the-dom.html">Learn more about the new <code>createRef</code> API here.</a></p>
+<h2 id="forwardref-api"><code>forwardRef</code> API</h2>
+<p>Generally, React components are declarative, but sometimes imperative access to the component instances and the underlying DOM nodes is necessary. This is common for use cases like managing focus, selection, or animations. React provides <a href="/docs/refs-and-the-dom.html">refs</a> as a way to solve this problem. However, component encapsulation poses some challenges with refs.</p>
+<p>For example, if you replace a <code>&lt;button&gt;</code> with a custom <code>&lt;FancyButton&gt;</code> component, the <code>ref</code> attribute on it will start pointing at the wrapper component instead of the DOM node (and would be <code>null</code> for function components). While this is desirable for “application-level” components like <code>FeedStory</code> or <code>Comment</code> that need to be encapsulated, it can be annoying for “leaf” components such as <code>FancyButton</code> or <code>MyTextInput</code> that are typically used like their DOM counterparts, and might need to expose their DOM nodes.</p>
+<p>Ref forwarding is a new opt-in feature that lets some components take a <code>ref</code> they receive, and pass it further down (in other words, “forward” it) to a child. In the example below, <code>FancyButton</code> forwards its ref to a DOM <code>button</code> that it renders:</p>
+<p><code>embed:16-3-release-blog-post/fancy-button-example.js</code></p>
+<p>This way, components using <code>FancyButton</code> can get a ref to the underlying <code>button</code> DOM node and access it if necessary—just like if they used a DOM <code>button</code> directly.</p>
+<p>Ref forwarding is not limited to “leaf” components that render DOM nodes. If you write <a href="/docs/higher-order-components.html">higher order components</a>, we recommend using ref forwarding to automatically pass the ref down to the wrapped class component instances.</p>
+<p><a href="/docs/forwarding-refs.html">Learn more about the forwardRef API here.</a></p>
+<h2 id="component-lifecycle-changes">Component Lifecycle Changes</h2>
+<p>React’s class component API has been around for years with little change. However, as we add support for more advanced features (such as <a href="/docs/react-component.html#componentdidcatch">error boundaries</a> and the upcoming <a href="/blog/2018/03/01/sneak-peek-beyond-react-16.html">async rendering mode</a>) we stretch this model in ways that it was not originally intended.</p>
+<p>For example, with the current API, it is too easy to block the initial render with non-essential logic. In part this is because there are too many ways to accomplish a given task, and it can be unclear which is best. We’ve observed that the interrupting behavior of error handling is often not taken into consideration and can result in memory leaks (something that will also impact the upcoming async rendering mode). The current class component API also complicates other efforts, like our work on <a href="https://twitter.com/trueadm/status/944908776896978946">prototyping a React compiler</a>.</p>
+<p>Many of these issues are exacerbated by a subset of the component lifecycles (<code>componentWillMount</code>, <code>componentWillReceiveProps</code>, and <code>componentWillUpdate</code>). These also happen to be the lifecycles that cause the most confusion within the React community. For these reasons, we are going to deprecate those methods in favor of better alternatives.</p>
+<p>We recognize that this change will impact many existing components. Because of this, the migration path will be as gradual as possible, and will provide escape hatches. (At Facebook, we maintain more than 50,000 React components. We depend on a gradual release cycle too!)</p>
+<blockquote>
+<p><strong>Note:</strong></p>
+<p>Deprecation warnings will be enabled with a future 16.x release, <strong>but the legacy lifecycles will continue to work until version 17</strong>.</p>
+<p>Even in version 17, it will still be possible to use them, but they will be aliased with an “UNSAFE_” prefix to indicate that they might cause issues. We have also prepared an <a href="https://github.com/reactjs/react-codemod#rename-unsafe-lifecycles">automated script to rename them</a> in existing code.</p>
+</blockquote>
+<p>In addition to deprecating unsafe lifecycles, we are also adding a couple of new lifecyles: * <a href="/docs/react-component.html#static-getderivedstatefromprops"><code>getDerivedStateFromProps</code></a> is being added as a safer alternative to the legacy <code>componentWillReceiveProps</code>. (Note that <a href="/blog/2018/06/07/you-probably-dont-need-derived-state.html">in most cases you don’t need either of them</a>.) * <a href="/docs/react-component.html#getsnapshotbeforeupdate"><code>getSnapshotBeforeUpdate</code></a> is being added to support safely reading properties from e.g. the DOM before updates are made.</p>
+<p><a href="/blog/2018/03/27/update-on-async-rendering.html">Learn more about these lifecycle changes here.</a></p>
+<h2 id="strictmode-component"><code>StrictMode</code> Component</h2>
+<p><code>StrictMode</code> is a tool for highlighting potential problems in an application. Like <code>Fragment</code>, <code>StrictMode</code> does not render any visible UI. It activates additional checks and warnings for its descendants.</p>
+<blockquote>
+<p><strong>Note:</strong></p>
+<p><code>StrictMode</code> checks are run in development mode only; <em>they do not impact the production build</em>.</p>
+</blockquote>
+<p>Although it is not possible for strict mode to catch all problems (e.g. certain types of mutation), it can help with many. If you see warnings in strict mode, those things will likely cause bugs for async rendering.</p>
+<p>In version 16.3, <code>StrictMode</code> helps with: * Identifying components with unsafe lifecycles * Warning about legacy string ref API usage * Detecting unexpected side effects</p>
+<p>Additional functionality will be added with future releases of React.</p>
+<p><a href="/docs/strict-mode.html">Learn more about the <code>StrictMode</code> component here.</a></p>
+</body>
+</html>

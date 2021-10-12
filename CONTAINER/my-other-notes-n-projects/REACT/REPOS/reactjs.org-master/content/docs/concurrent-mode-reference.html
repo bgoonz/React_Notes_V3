@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Concurrent Mode API Reference (Experimental)</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Concurrent Mode API Reference (Experimental)</h1>
+</header>
+<style>
+.scary > blockquote {
+  background-color: rgba(237, 51, 21, 0.2);
+  border-left-color: #ed3315;
+}
+</style>
+<div class="scary">
+<blockquote>
+<p>Caution:</p>
+<p>This page describes <strong>experimental features that are <a href="/docs/concurrent-mode-adoption.html">not yet available</a> in a stable release</strong>. Don’t rely on experimental builds of React in production apps. These features may change significantly and without a warning before they become a part of React.</p>
+<p>This documentation is aimed at early adopters and people who are curious. <strong>If you’re new to React, don’t worry about these features</strong> – you don’t need to learn them right now.</p>
+</blockquote>
+</div>
+<p>This page is an API reference for the React <a href="/docs/concurrent-mode-intro.html">Concurrent Mode</a>. If you’re looking for a guided introduction instead, check out <a href="/docs/concurrent-mode-patterns.html">Concurrent UI Patterns</a>.</p>
+<p><strong>Note: This is a Community Preview and not the final stable version. There will likely be future changes to these APIs. Use at your own risk!</strong></p>
+<ul>
+<li><a href="#concurrent-mode">Enabling Concurrent Mode</a>
+<ul>
+<li><a href="#createroot"><code>createRoot</code></a></li>
+<li><a href="#createblockingroot"><code>createBlockingRoot</code></a></li>
+</ul></li>
+<li><a href="#suspense">Suspense</a>
+<ul>
+<li><a href="#suspensecomponent"><code>Suspense</code></a></li>
+<li><a href="#suspenselist"><code>SuspenseList</code></a></li>
+<li><a href="#usetransition"><code>useTransition</code></a></li>
+<li><a href="#usedeferredvalue"><code>useDeferredValue</code></a></li>
+</ul></li>
+</ul>
+<h2 id="concurrent-mode">Enabling Concurrent Mode</h2>
+<h3 id="createroot"><code>createRoot</code></h3>
+<div class="sourceCode" id="cb1"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb1-1" title="1"><span class="va">ReactDOM</span>.<span class="at">createRoot</span>(rootNode).<span class="at">render</span>(<span class="op">&lt;</span>App /<span class="op">&gt;</span>)<span class="op">;</span></a></code></pre></div>
+<p>Replaces <code>ReactDOM.render(&lt;App /&gt;, rootNode)</code> and enables Concurrent Mode.</p>
+<p>For more information on Concurrent Mode, check out the <a href="/docs/concurrent-mode-intro.html">Concurrent Mode documentation.</a></p>
+<h3 id="createblockingroot"><code>createBlockingRoot</code></h3>
+<div class="sourceCode" id="cb2"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb2-1" title="1"><span class="va">ReactDOM</span>.<span class="at">createBlockingRoot</span>(rootNode).<span class="at">render</span>(<span class="op">&lt;</span>App /<span class="op">&gt;</span>)</a></code></pre></div>
+<p>Replaces <code>ReactDOM.render(&lt;App /&gt;, rootNode)</code> and enables <a href="/docs/concurrent-mode-adoption.html#migration-step-blocking-mode">Blocking Mode</a>.</p>
+<p>Opting into Concurrent Mode introduces semantic changes to how React works. This means that you can’t use Concurrent Mode in just a few components. Because of this, some apps may not be able to migrate directly to Concurrent Mode.</p>
+<p>Blocking Mode only contains a small subset of Concurrent Mode features and is intended as an intermediary migration step for apps that are unable to migrate directly.</p>
+<h2 id="suspense">Suspense API</h2>
+<h3 id="suspensecomponent"><code>Suspense</code></h3>
+<div class="sourceCode" id="cb3"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb3-1" title="1"><span class="op">&lt;</span>Suspense fallback<span class="op">={&lt;</span>h1<span class="op">&gt;</span><span class="va">Loading</span>...&lt;/h1<span class="op">&gt;}&gt;</span></a>
+<a class="sourceLine" id="cb3-2" title="2">  <span class="op">&lt;</span>ProfilePhoto /<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb3-3" title="3">  <span class="op">&lt;</span>ProfileDetails /<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb3-4" title="4">&lt;/Suspense<span class="op">&gt;</span></a></code></pre></div>
+<p><code>Suspense</code> lets your components “wait” for something before they can render, showing a fallback while waiting.</p>
+<p>In this example, <code>ProfileDetails</code> is waiting for an asynchronous API call to fetch some data. While we wait for <code>ProfileDetails</code> and <code>ProfilePhoto</code>, we will show the <code>Loading...</code> fallback instead. It is important to note that until all children inside <code>&lt;Suspense&gt;</code> has loaded, we will continue to show the fallback.</p>
+<p><code>Suspense</code> takes two props: * <strong>fallback</strong> takes a loading indicator. The fallback is shown until all of the children of the <code>Suspense</code> component have finished rendering. * <strong>unstable_avoidThisFallback</strong> takes a boolean. It tells React whether to “skip” revealing this boundary during the initial load. This API will likely be removed in a future release.</p>
+<h3 id="suspenselist"><code>&lt;SuspenseList&gt;</code></h3>
+<div class="sourceCode" id="cb4"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb4-1" title="1"><span class="op">&lt;</span>SuspenseList revealOrder<span class="op">=</span><span class="st">&quot;forwards&quot;</span><span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb4-2" title="2">  <span class="op">&lt;</span>Suspense fallback<span class="op">={</span><span class="st">&#39;Loading...&#39;</span><span class="op">}&gt;</span></a>
+<a class="sourceLine" id="cb4-3" title="3">    <span class="op">&lt;</span>ProfilePicture id<span class="op">={</span><span class="dv">1</span><span class="op">}</span> /&gt;</a>
+<a class="sourceLine" id="cb4-4" title="4">  &lt;/Suspense<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb4-5" title="5">  <span class="op">&lt;</span>Suspense fallback<span class="op">={</span><span class="st">&#39;Loading...&#39;</span><span class="op">}&gt;</span></a>
+<a class="sourceLine" id="cb4-6" title="6">    <span class="op">&lt;</span>ProfilePicture id<span class="op">={</span><span class="dv">2</span><span class="op">}</span> /&gt;</a>
+<a class="sourceLine" id="cb4-7" title="7">  &lt;/Suspense<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb4-8" title="8">  <span class="op">&lt;</span>Suspense fallback<span class="op">={</span><span class="st">&#39;Loading...&#39;</span><span class="op">}&gt;</span></a>
+<a class="sourceLine" id="cb4-9" title="9">    <span class="op">&lt;</span>ProfilePicture id<span class="op">={</span><span class="dv">3</span><span class="op">}</span> /&gt;</a>
+<a class="sourceLine" id="cb4-10" title="10">  &lt;/Suspense<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb4-11" title="11">  ...</a>
+<a class="sourceLine" id="cb4-12" title="12">&lt;/SuspenseList<span class="op">&gt;</span></a></code></pre></div>
+<p><code>SuspenseList</code> helps coordinate many components that can suspend by orchestrating the order in which these components are revealed to the user.</p>
+<p>When multiple components need to fetch data, this data may arrive in an unpredictable order. However, if you wrap these items in a <code>SuspenseList</code>, React will not show an item in the list until previous items have been displayed (this behavior is adjustable).</p>
+<p><code>SuspenseList</code> takes two props: * <strong>revealOrder (forwards, backwards, together)</strong> defines the order in which the <code>SuspenseList</code> children should be revealed. * <code>together</code> reveals <em>all</em> of them when they’re ready instead of one by one. * <strong>tail (collapsed, hidden)</strong> dictates how unloaded items in a <code>SuspenseList</code> is shown. * By default, <code>SuspenseList</code> will show all fallbacks in the list. * <code>collapsed</code> shows only the next fallback in the list. * <code>hidden</code> doesn’t show any unloaded items.</p>
+<p>Note that <code>SuspenseList</code> only operates on the closest <code>Suspense</code> and <code>SuspenseList</code> components below it. It does not search for boundaries deeper than one level. However, it is possible to nest multiple <code>SuspenseList</code> components in each other to build grids.</p>
+<h3 id="usetransition"><code>useTransition</code></h3>
+<div class="sourceCode" id="cb5"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb5-1" title="1"><span class="kw">const</span> SUSPENSE_CONFIG <span class="op">=</span> <span class="op">{</span> <span class="dt">timeoutMs</span><span class="op">:</span> <span class="dv">2000</span> <span class="op">};</span></a>
+<a class="sourceLine" id="cb5-2" title="2"></a>
+<a class="sourceLine" id="cb5-3" title="3"><span class="kw">const</span> [startTransition<span class="op">,</span> isPending] <span class="op">=</span> <span class="at">useTransition</span>(SUSPENSE_CONFIG)<span class="op">;</span></a></code></pre></div>
+<p><code>useTransition</code> allows components to avoid undesirable loading states by waiting for content to load before <strong>transitioning to the next screen</strong>. It also allows components to defer slower, data fetching updates until subsequent renders so that more crucial updates can be rendered immediately.</p>
+<p>The <code>useTransition</code> hook returns two values in an array. * <code>startTransition</code> is a function that takes a callback. We can use it to tell React which state we want to defer. * <code>isPending</code> is a boolean. It’s React’s way of informing us whether we’re waiting for the transition to finish.</p>
+<p><strong>If some state update causes a component to suspend, that state update should be wrapped in a transition.</strong></p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb6-1" title="1"><span class="kw">const</span> SUSPENSE_CONFIG <span class="op">=</span> <span class="op">{</span> <span class="dt">timeoutMs</span><span class="op">:</span> <span class="dv">2000</span> <span class="op">};</span></a>
+<a class="sourceLine" id="cb6-2" title="2"></a>
+<a class="sourceLine" id="cb6-3" title="3"><span class="kw">function</span> <span class="at">App</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb6-4" title="4">  <span class="kw">const</span> [resource<span class="op">,</span> setResource] <span class="op">=</span> <span class="at">useState</span>(initialResource)<span class="op">;</span></a>
+<a class="sourceLine" id="cb6-5" title="5">  <span class="kw">const</span> [startTransition<span class="op">,</span> isPending] <span class="op">=</span> <span class="at">useTransition</span>(SUSPENSE_CONFIG)<span class="op">;</span></a>
+<a class="sourceLine" id="cb6-6" title="6">  <span class="cf">return</span> (</a>
+<a class="sourceLine" id="cb6-7" title="7">    <span class="op">&lt;&gt;</span></a>
+<a class="sourceLine" id="cb6-8" title="8">      <span class="op">&lt;</span>button</a>
+<a class="sourceLine" id="cb6-9" title="9">        disabled<span class="op">={</span>isPending<span class="op">}</span></a>
+<a class="sourceLine" id="cb6-10" title="10">        onClick<span class="op">={</span>() <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb6-11" title="11">          <span class="at">startTransition</span>(() <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb6-12" title="12">            <span class="kw">const</span> nextUserId <span class="op">=</span> <span class="at">getNextId</span>(<span class="va">resource</span>.<span class="at">userId</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb6-13" title="13">            <span class="at">setResource</span>(<span class="at">fetchProfileData</span>(nextUserId))<span class="op">;</span></a>
+<a class="sourceLine" id="cb6-14" title="14">          <span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb6-15" title="15">        <span class="op">}}</span></a>
+<a class="sourceLine" id="cb6-16" title="16">      <span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb6-17" title="17">        Next</a>
+<a class="sourceLine" id="cb6-18" title="18">      &lt;/button<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb6-19" title="19">      <span class="op">{</span>isPending <span class="op">?</span> <span class="st">&quot; Loading...&quot;</span> : <span class="kw">null</span><span class="op">}</span></a>
+<a class="sourceLine" id="cb6-20" title="20">      <span class="op">&lt;</span>Suspense fallback<span class="op">={&lt;</span>Spinner /<span class="op">&gt;}&gt;</span></a>
+<a class="sourceLine" id="cb6-21" title="21">        <span class="op">&lt;</span>ProfilePage resource<span class="op">={</span>resource<span class="op">}</span> /&gt;</a>
+<a class="sourceLine" id="cb6-22" title="22">      &lt;/Suspense<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb6-23" title="23">    &lt;/<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb6-24" title="24">  )<span class="op">;</span></a>
+<a class="sourceLine" id="cb6-25" title="25"><span class="op">}</span></a></code></pre></div>
+<p>In this code, we’ve wrapped our data fetching with <code>startTransition</code>. This allows us to start fetching the profile data right away, while deferring the render of the next profile page and its associated <code>Spinner</code> for 2 seconds (the time shown in <code>timeoutMs</code>).</p>
+<p>The <code>isPending</code> boolean lets React know that our component is transitioning, so we are able to let the user know this by showing some loading text on the previous profile page.</p>
+<p><strong>For an in-depth look at transitions, you can read <a href="/docs/concurrent-mode-patterns.html#transitions">Concurrent UI Patterns</a>.</strong></p>
+<h4 id="usetransition-config">useTransition Config</h4>
+<div class="sourceCode" id="cb7"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb7-1" title="1"><span class="kw">const</span> SUSPENSE_CONFIG <span class="op">=</span> <span class="op">{</span> <span class="dt">timeoutMs</span><span class="op">:</span> <span class="dv">2000</span> <span class="op">};</span></a></code></pre></div>
+<p><code>useTransition</code> accepts an <strong>optional Suspense Config</strong> with a <code>timeoutMs</code>. This timeout (in milliseconds) tells React how long to wait before showing the next state (the new Profile Page in the above example).</p>
+<p><strong>Note: We recommend that you share Suspense Config between different modules.</strong></p>
+<h3 id="usedeferredvalue"><code>useDeferredValue</code></h3>
+<div class="sourceCode" id="cb8"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb8-1" title="1"><span class="kw">const</span> deferredValue <span class="op">=</span> <span class="at">useDeferredValue</span>(value<span class="op">,</span> <span class="op">{</span> <span class="dt">timeoutMs</span><span class="op">:</span> <span class="dv">2000</span> <span class="op">}</span>)<span class="op">;</span></a></code></pre></div>
+<p>Returns a deferred version of the value that may “lag behind” it for at most <code>timeoutMs</code>.</p>
+<p>This is commonly used to keep the interface responsive when you have something that renders immediately based on user input and something that needs to wait for a data fetch.</p>
+<p>A good example of this is a text input.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb9-1" title="1"><span class="kw">function</span> <span class="at">App</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb9-2" title="2">  <span class="kw">const</span> [text<span class="op">,</span> setText] <span class="op">=</span> <span class="at">useState</span>(<span class="st">&quot;hello&quot;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb9-3" title="3">  <span class="kw">const</span> deferredText <span class="op">=</span> <span class="at">useDeferredValue</span>(text<span class="op">,</span> <span class="op">{</span> <span class="dt">timeoutMs</span><span class="op">:</span> <span class="dv">2000</span> <span class="op">}</span>)<span class="op">;</span> </a>
+<a class="sourceLine" id="cb9-4" title="4"></a>
+<a class="sourceLine" id="cb9-5" title="5">  <span class="cf">return</span> (</a>
+<a class="sourceLine" id="cb9-6" title="6">    <span class="op">&lt;</span>div className<span class="op">=</span><span class="st">&quot;App&quot;</span><span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb9-7" title="7">      <span class="op">{</span><span class="co">/* Keep passing the current text to the input */</span><span class="op">}</span></a>
+<a class="sourceLine" id="cb9-8" title="8">      <span class="op">&lt;</span>input value<span class="op">={</span>text<span class="op">}</span> onChange<span class="op">={</span>handleChange<span class="op">}</span> /&gt;</a>
+<a class="sourceLine" id="cb9-9" title="9">      ...</a>
+<a class="sourceLine" id="cb9-10" title="10">      <span class="op">{</span><span class="co">/* But the list is allowed to &quot;lag behind&quot; when necessary */</span><span class="op">}</span></a>
+<a class="sourceLine" id="cb9-11" title="11">      <span class="op">&lt;</span>MySlowList text<span class="op">={</span>deferredText<span class="op">}</span> /&gt;</a>
+<a class="sourceLine" id="cb9-12" title="12">    &lt;/div<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb9-13" title="13">  )<span class="op">;</span></a>
+<a class="sourceLine" id="cb9-14" title="14"> <span class="op">}</span></a></code></pre></div>
+<p>This allows us to start showing the new text for the <code>input</code> immediately, which allows the webpage to feel responsive. Meanwhile, <code>MySlowList</code> “lags behind” for up to 2 seconds according to the <code>timeoutMs</code> before updating, allowing it to render with the current text in the background.</p>
+<p><strong>For an in-depth look at deferring values, you can read <a href="/docs/concurrent-mode-patterns.html#deferring-a-value">Concurrent UI Patterns</a>.</strong></p>
+<h4 id="usedeferredvalue-config">useDeferredValue Config</h4>
+<div class="sourceCode" id="cb10"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb10-1" title="1"><span class="kw">const</span> SUSPENSE_CONFIG <span class="op">=</span> <span class="op">{</span> <span class="dt">timeoutMs</span><span class="op">:</span> <span class="dv">2000</span> <span class="op">};</span></a></code></pre></div>
+<p><code>useDeferredValue</code> accepts an <strong>optional Suspense Config</strong> with a <code>timeoutMs</code>. This timeout (in milliseconds) tells React how long the deferred value is allowed to lag behind.</p>
+<p>React will always try to use a shorter lag when network and device allows it.</p>
+</body>
+</html>

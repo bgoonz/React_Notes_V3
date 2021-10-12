@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="sebmarkbage" />
+  <title>React v0.13.0 Beta 1</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">React v0.13.0 Beta 1</h1>
+<p class="author">sebmarkbage</p>
+</header>
+<p>React 0.13 has a lot of nice features but there is one particular feature that I’m really excited about. I couldn’t wait for React.js Conf to start tomorrow morning.</p>
+<p>Maybe you’re like me and staying up late excited about the conference, or maybe you weren’t one of the lucky ones to get a ticket. Either way I figured I’d give you all something to play with until then.</p>
+<p>We just published a beta version of React v0.13.0 to <a href="https://www.npmjs.com/package/react">npm</a>! You can install it with <code>npm install react@0.13.0-beta.1</code>. Since this is a pre-release, we don’t have proper release notes ready.</p>
+<p>So what is that one feature I’m so excited about that I just couldn’t wait to share?</p>
+<h2 id="plain-javascript-classes">Plain JavaScript Classes!!</h2>
+<p>JavaScript originally didn’t have a built-in class system. Every popular framework built their own, and so did we. This means that you have a learn slightly different semantics for each framework.</p>
+<p>We figured that we’re not in the business of designing a class system. We just want to use whatever is the idiomatic JavaScript way of creating classes.</p>
+<p>In React 0.13.0 you no longer need to use <code>React.createClass</code> to create React components. If you have a transpiler you can use ES6 classes today. You can use the transpiler we ship with <code>react-tools</code> by making use of the harmony option: <code>jsx --harmony</code>.</p>
+<h3 id="es6-classes">ES6 Classes</h3>
+<div class="sourceCode" id="cb1"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">class</span> HelloMessage <span class="kw">extends</span> <span class="va">React</span>.<span class="at">Component</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb1-2" title="2">  <span class="at">render</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb1-3" title="3">    <span class="cf">return</span> <span class="op">&lt;</span>div<span class="op">&gt;</span>Hello <span class="op">{</span><span class="kw">this</span>.<span class="va">props</span>.<span class="at">name</span><span class="op">}</span>&lt;/div<span class="op">&gt;;</span></a>
+<a class="sourceLine" id="cb1-4" title="4">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb1-5" title="5"><span class="op">}</span></a>
+<a class="sourceLine" id="cb1-6" title="6"></a>
+<a class="sourceLine" id="cb1-7" title="7"><span class="va">React</span>.<span class="at">render</span>(<span class="op">&lt;</span>HelloMessage name<span class="op">=</span><span class="st">&quot;Sebastian&quot;</span> /&gt;<span class="op">,</span> mountNode)<span class="op">;</span></a></code></pre></div>
+<p>The API is mostly what you would expect, with the exception of <code>getInitialState</code>. We figured that the idiomatic way to specify class state is to just use a simple instance property. Likewise <code>getDefaultProps</code> and <code>propTypes</code> are really just properties on the constructor.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb2-1" title="1"><span class="im">export</span> <span class="kw">class</span> Counter <span class="kw">extends</span> <span class="va">React</span>.<span class="at">Component</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb2-2" title="2">  <span class="at">constructor</span>(props) <span class="op">{</span></a>
+<a class="sourceLine" id="cb2-3" title="3">    <span class="kw">super</span>(props)<span class="op">;</span></a>
+<a class="sourceLine" id="cb2-4" title="4">    <span class="kw">this</span>.<span class="at">state</span> <span class="op">=</span> <span class="op">{</span><span class="dt">count</span><span class="op">:</span> <span class="va">props</span>.<span class="at">initialCount</span><span class="op">};</span></a>
+<a class="sourceLine" id="cb2-5" title="5">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb2-6" title="6">  <span class="at">tick</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb2-7" title="7">    <span class="kw">this</span>.<span class="at">setState</span>(<span class="op">{</span><span class="dt">count</span><span class="op">:</span> <span class="kw">this</span>.<span class="va">state</span>.<span class="at">count</span> <span class="op">+</span> <span class="dv">1</span><span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb2-8" title="8">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb2-9" title="9">  <span class="at">render</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb2-10" title="10">    <span class="cf">return</span> (</a>
+<a class="sourceLine" id="cb2-11" title="11">      <span class="op">&lt;</span>div onClick<span class="op">={</span><span class="kw">this</span>.<span class="va">tick</span>.<span class="at">bind</span>(<span class="kw">this</span>)<span class="op">}&gt;</span></a>
+<a class="sourceLine" id="cb2-12" title="12">        <span class="dt">Clicks</span><span class="op">:</span> <span class="op">{</span><span class="kw">this</span>.<span class="va">state</span>.<span class="at">count</span><span class="op">}</span></a>
+<a class="sourceLine" id="cb2-13" title="13">      &lt;/div<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb2-14" title="14">    )<span class="op">;</span></a>
+<a class="sourceLine" id="cb2-15" title="15">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb2-16" title="16"><span class="op">}</span></a>
+<a class="sourceLine" id="cb2-17" title="17"><span class="va">Counter</span>.<span class="at">propTypes</span> <span class="op">=</span> <span class="op">{</span> <span class="dt">initialCount</span><span class="op">:</span> <span class="va">React</span>.<span class="va">PropTypes</span>.<span class="at">number</span> <span class="op">};</span></a>
+<a class="sourceLine" id="cb2-18" title="18"><span class="va">Counter</span>.<span class="at">defaultProps</span> <span class="op">=</span> <span class="op">{</span> <span class="dt">initialCount</span><span class="op">:</span> <span class="dv">0</span> <span class="op">};</span></a></code></pre></div>
+<h3 id="es7-property-initializers">ES7+ Property Initializers</h3>
+<p>Wait, assigning to properties seems like a very imperative way of defining classes! You’re right, however, we designed it this way because it’s idiomatic. We fully expect a more declarative syntax for property initialization to arrive in future version of JavaScript. It might look something like this:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb3-1" title="1"><span class="co">// Future Version</span></a>
+<a class="sourceLine" id="cb3-2" title="2"><span class="im">export</span> <span class="kw">class</span> Counter <span class="kw">extends</span> <span class="va">React</span>.<span class="at">Component</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb3-3" title="3">  <span class="kw">static</span> propTypes <span class="op">=</span> <span class="op">{</span> <span class="dt">initialCount</span><span class="op">:</span> <span class="va">React</span>.<span class="va">PropTypes</span>.<span class="at">number</span> <span class="op">};</span></a>
+<a class="sourceLine" id="cb3-4" title="4">  <span class="kw">static</span> defaultProps <span class="op">=</span> <span class="op">{</span> <span class="dt">initialCount</span><span class="op">:</span> <span class="dv">0</span> <span class="op">};</span></a>
+<a class="sourceLine" id="cb3-5" title="5">  state <span class="op">=</span> <span class="op">{</span> <span class="dt">count</span><span class="op">:</span> <span class="kw">this</span>.<span class="va">props</span>.<span class="at">initialCount</span> <span class="op">};</span></a>
+<a class="sourceLine" id="cb3-6" title="6">  <span class="at">tick</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb3-7" title="7">    <span class="kw">this</span>.<span class="at">setState</span>(<span class="op">{</span> <span class="dt">count</span><span class="op">:</span> <span class="kw">this</span>.<span class="va">state</span>.<span class="at">count</span> <span class="op">+</span> <span class="dv">1</span> <span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb3-8" title="8">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb3-9" title="9">  <span class="at">render</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb3-10" title="10">    <span class="cf">return</span> (</a>
+<a class="sourceLine" id="cb3-11" title="11">      <span class="op">&lt;</span>div onClick<span class="op">={</span><span class="kw">this</span>.<span class="va">tick</span>.<span class="at">bind</span>(<span class="kw">this</span>)<span class="op">}&gt;</span></a>
+<a class="sourceLine" id="cb3-12" title="12">        <span class="dt">Clicks</span><span class="op">:</span> <span class="op">{</span><span class="kw">this</span>.<span class="va">state</span>.<span class="at">count</span><span class="op">}</span></a>
+<a class="sourceLine" id="cb3-13" title="13">      &lt;/div<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb3-14" title="14">    )<span class="op">;</span></a>
+<a class="sourceLine" id="cb3-15" title="15">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb3-16" title="16"><span class="op">}</span></a></code></pre></div>
+<p>This was inspired by TypeScript’s property initializers.</p>
+<h3 id="autobinding">Autobinding</h3>
+<p><code>React.createClass</code> has a built-in magic feature that bound all methods to <code>this</code> automatically for you. This can be a little confusing for JavaScript developers that are not used to this feature in other classes, or it can be confusing when they move from React to other classes.</p>
+<p>Therefore we decided not to have this built-in into React’s class model. You can still explicitly prebind methods in your constructor if you want.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb4-1" title="1"><span class="kw">class</span> Counter <span class="kw">extends</span> <span class="va">React</span>.<span class="at">Component</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb4-2" title="2">  <span class="at">constructor</span>(props) <span class="op">{</span></a>
+<a class="sourceLine" id="cb4-3" title="3">    <span class="kw">super</span>(props)<span class="op">;</span></a>
+<a class="sourceLine" id="cb4-4" title="4">    <span class="kw">this</span>.<span class="at">tick</span> <span class="op">=</span> <span class="kw">this</span>.<span class="va">tick</span>.<span class="at">bind</span>(<span class="kw">this</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb4-5" title="5">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb4-6" title="6">  <span class="at">tick</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb4-7" title="7">    ...</a>
+<a class="sourceLine" id="cb4-8" title="8">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb4-9" title="9">  ...</a>
+<a class="sourceLine" id="cb4-10" title="10"><span class="op">}</span></a></code></pre></div>
+<p>However, when we have the future property initializers, there is a neat trick that you can use to accomplish this syntactically:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb5-1" title="1"><span class="kw">class</span> Counter <span class="kw">extends</span> <span class="va">React</span>.<span class="at">Component</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb5-2" title="2">  tick <span class="op">=</span> () <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb5-3" title="3">    ...</a>
+<a class="sourceLine" id="cb5-4" title="4">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb5-5" title="5">  ...</a>
+<a class="sourceLine" id="cb5-6" title="6"><span class="op">}</span></a></code></pre></div>
+<h3 id="mixins">Mixins</h3>
+<p>Unfortunately, we will not launch any mixin support for ES6 classes in React. That would defeat the purpose of only using idiomatic JavaScript concepts.</p>
+<p>There is no standard and universal way to define mixins in JavaScript. In fact, several features to support mixins were dropped from ES6 today. There are a lot of libraries with different semantics. We think that there should be one way of defining mixins that you can use for any JavaScript class. React just making another doesn’t help that effort.</p>
+<p>Therefore, we will keep working with the larger JS community to create a standard for mixins. We will also start designing a new compositional API that will help make common tasks easier to do without mixins. E.g. first-class subscriptions to any kind of Flux store.</p>
+<p>Luckily, if you want to keep using mixins, you can just keep using <code>React.createClass</code>.</p>
+<blockquote>
+<p><strong>Note:</strong></p>
+<p>The classic <code>React.createClass</code> style of creating classes will continue to work just fine.</p>
+</blockquote>
+<h2 id="other-languages">Other Languages!</h2>
+<p>Since these classes are just plain old JavaScript classes, you can use other languages that compile to JavaScript classes, such as TypeScript.</p>
+<p>You can also use CoffeeScript classes:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode coffeescript"><code class="sourceCode coffee"><a class="sourceLine" id="cb6-1" title="1">div <span class="kw">=</span> React<span class="kw">.</span>createFactory <span class="st">&#39;div&#39;</span></a>
+<a class="sourceLine" id="cb6-2" title="2"></a>
+<a class="sourceLine" id="cb6-3" title="3"><span class="kw">class</span> <span class="dt">Counter</span> <span class="kw">extends</span> <span class="dt">React.Component</span></a>
+<a class="sourceLine" id="cb6-4" title="4">  <span class="dt">@propTypes</span> <span class="kw">=</span> initialCount<span class="kw">:</span> React<span class="kw">.</span>PropTypes<span class="kw">.</span>number</a>
+<a class="sourceLine" id="cb6-5" title="5">  <span class="dt">@defaultProps</span> <span class="kw">=</span> initialCount<span class="kw">:</span> <span class="dv">0</span></a>
+<a class="sourceLine" id="cb6-6" title="6"></a>
+<a class="sourceLine" id="cb6-7" title="7">  <span class="kw">constructor:</span> <span class="fu">(props) -&gt;</span></a>
+<a class="sourceLine" id="cb6-8" title="8">    <span class="kw">super</span> props</a>
+<a class="sourceLine" id="cb6-9" title="9">    <span class="dt">@state</span> <span class="kw">=</span> count<span class="kw">:</span> props<span class="kw">.</span>initialCount</a>
+<a class="sourceLine" id="cb6-10" title="10"></a>
+<a class="sourceLine" id="cb6-11" title="11">  tick<span class="kw">:</span> <span class="fu">=&gt;</span></a>
+<a class="sourceLine" id="cb6-12" title="12">    <span class="dt">@setState</span> count<span class="kw">:</span> <span class="dt">@state</span><span class="kw">.</span>count <span class="kw">+</span> <span class="dv">1</span></a>
+<a class="sourceLine" id="cb6-13" title="13"></a>
+<a class="sourceLine" id="cb6-14" title="14">  render<span class="kw">:</span> <span class="fu">-&gt;</span></a>
+<a class="sourceLine" id="cb6-15" title="15">    div onClick<span class="kw">:</span> <span class="dt">@tick</span><span class="kw">,</span></a>
+<a class="sourceLine" id="cb6-16" title="16">      <span class="st">&#39;Clicks: &#39;</span></a>
+<a class="sourceLine" id="cb6-17" title="17">      <span class="dt">@state</span><span class="kw">.</span>count</a></code></pre></div>
+<p>You can even use the old ES3 module pattern if you want:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb7-1" title="1"><span class="kw">function</span> <span class="at">MyComponent</span>(initialProps) <span class="op">{</span></a>
+<a class="sourceLine" id="cb7-2" title="2">  <span class="cf">return</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb7-3" title="3">    <span class="dt">state</span><span class="op">:</span> <span class="op">{</span> <span class="dt">value</span><span class="op">:</span> <span class="va">initialProps</span>.<span class="at">initialValue</span> <span class="op">},</span></a>
+<a class="sourceLine" id="cb7-4" title="4">    <span class="dt">render</span><span class="op">:</span> <span class="kw">function</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb7-5" title="5">      <span class="cf">return</span> <span class="op">&lt;</span>span className<span class="op">={</span><span class="kw">this</span>.<span class="va">state</span>.<span class="at">value</span><span class="op">}</span> /&gt;</a>
+<a class="sourceLine" id="cb7-6" title="6">    <span class="op">}</span></a>
+<a class="sourceLine" id="cb7-7" title="7">  <span class="op">};</span></a>
+<a class="sourceLine" id="cb7-8" title="8"><span class="op">}</span></a></code></pre></div>
+</body>
+</html>

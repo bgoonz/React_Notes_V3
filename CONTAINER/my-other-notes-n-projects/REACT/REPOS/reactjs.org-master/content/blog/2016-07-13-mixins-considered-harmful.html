@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="gaearon" />
+  <title>Mixins Considered Harmful</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Mixins Considered Harmful</h1>
+<p class="author">gaearon</p>
+</header>
+<p>“How do I share the code between several components?” is one of the first questions that people ask when they learn React. Our answer has always been to use component composition for code reuse. You can define a component and use it in several other components.</p>
+<p>It is not always obvious how a certain pattern can be solved with composition. React is influenced by functional programming but it came into the field that was dominated by object-oriented libraries. It was hard for engineers both inside and outside of Facebook to give up on the patterns they were used to.</p>
+<p>To ease the initial adoption and learning, we included certain escape hatches into React. The mixin system was one of those escape hatches, and its goal was to give you a way to reuse code between components when you aren’t sure how to solve the same problem with composition.</p>
+<p>Three years passed since React was released. The landscape has changed. Multiple view libraries now adopt a component model similar to React. Using composition over inheritance to build declarative user interfaces is no longer a novelty. We are also more confident in the React component model, and we have seen many creative uses of it both internally and in the community.</p>
+<p>In this post, we will consider the problems commonly caused by mixins. Then we will suggest several alternative patterns for the same use cases. We have found those patterns to scale better with the complexity of the codebase than mixins.</p>
+<h2 id="why-mixins-are-broken">Why Mixins are Broken</h2>
+<p>At Facebook, React usage has grown from a few components to thousands of them. This gives us a window into how people use React. Thanks to declarative rendering and top-down data flow, many teams were able to fix a bunch of bugs while shipping new features as they adopted React.</p>
+<p>However it’s inevitable that some of our code using React gradually became incomprehensible. Occasionally, the React team would see groups of components in different projects that people were afraid to touch. These components were too easy to break accidentally, were confusing to new developers, and eventually became just as confusing to the people who wrote them in the first place. Much of this confusion was caused by mixins. At the time, I wasn’t working at Facebook but I came to the <a href="https://medium.com/@dan_abramov/mixins-are-dead-long-live-higher-order-components-94a0d2f9e750">same conclusions</a> after writing my fair share of terrible mixins.</p>
+<p>This doesn’t mean that mixins themselves are bad. People successfully employ them in different languages and paradigms, including some functional languages. At Facebook, we extensively use traits in Hack which are fairly similar to mixins. Nevertheless, we think that mixins are unnecessary and problematic in React codebases. Here’s why.</p>
+<h3 id="mixins-introduce-implicit-dependencies">Mixins introduce implicit dependencies</h3>
+<p>Sometimes a component relies on a certain method defined in the mixin, such as <code>getClassName()</code>. Sometimes it’s the other way around, and mixin calls a method like <code>renderHeader()</code> on the component. JavaScript is a dynamic language so it’s hard to enforce or document these dependencies.</p>
+<p>Mixins break the common and usually safe assumption that you can rename a state key or a method by searching for its occurrences in the component file. You might write a stateful component and then your coworker might add a mixin that reads this state. In a few months, you might want to move that state up to the parent component so it can be shared with a sibling. Will you remember to update the mixin to read a prop instead? What if, by now, other components also use this mixin?</p>
+<p>These implicit dependencies make it hard for new team members to contribute to a codebase. A component’s <code>render()</code> method might reference some method that isn’t defined on the class. Is it safe to remove? Perhaps it’s defined in one of the mixins. But which one of them? You need to scroll up to the mixin list, open each of those files, and look for this method. Worse, mixins can specify their own mixins, so the search can be deep.</p>
+<p>Often, mixins come to depend on other mixins, and removing one of them breaks the other. In these situations it is very tricky to tell how the data flows in and out of mixins, and what their dependency graph looks like. Unlike components, mixins don’t form a hierarchy: they are flattened and operate in the same namespace.</p>
+<h3 id="mixins-cause-name-clashes">Mixins cause name clashes</h3>
+<p>There is no guarantee that two particular mixins can be used together. For example, if <code>FluxListenerMixin</code> defines <code>handleChange()</code> and <code>WindowSizeMixin</code> defines <code>handleChange()</code>, you can’t use them together. You also can’t define a method with this name on your own component.</p>
+<p>It’s not a big deal if you control the mixin code. When you have a conflict, you can rename that method on one of the mixins. However it’s tricky because some components or other mixins may already be calling this method directly, and you need to find and fix those calls as well.</p>
+<p>If you have a name conflict with a mixin from a third party package, you can’t just rename a method on it. Instead, you have to use awkward method names on your component to avoid clashes.</p>
+<p>The situation is no better for mixin authors. Even adding a new method to a mixin is always a potentially breaking change because a method with the same name might already exist on some of the components using it, either directly or through another mixin. Once written, mixins are hard to remove or change. Bad ideas don’t get refactored away because refactoring is too risky.</p>
+<h3 id="mixins-cause-snowballing-complexity">Mixins cause snowballing complexity</h3>
+<p>Even when mixins start out simple, they tend to become complex over time. The example below is based on a real scenario I’ve seen play out in a codebase.</p>
+<p>A component needs some state to track mouse hover. To keep this logic reusable, you might extract <code>handleMouseEnter()</code>, <code>handleMouseLeave()</code> and <code>isHovering()</code> into a <code>HoverMixin</code>. Next, somebody needs to implement a tooltip. They don’t want to duplicate the logic in <code>HoverMixin</code> so they create a <code>TooltipMixin</code> that uses <code>HoverMixin</code>. <code>TooltipMixin</code> reads <code>isHovering()</code> provided by <code>HoverMixin</code> in its <code>componentDidUpdate()</code> and either shows or hides the tooltip.</p>
+<p>A few months later, somebody wants to make the tooltip direction configurable. In an effort to avoid code duplication, they add support for a new optional method called <code>getTooltipOptions()</code> to <code>TooltipMixin</code>. By this time, components that show popovers also use <code>HoverMixin</code>. However popovers need a different hover delay. To solve this, somebody adds support for an optional <code>getHoverOptions()</code> method and implements it in <code>TooltipMixin</code>. Those mixins are now tightly coupled.</p>
+<p>This is fine while there are no new requirements. However this solution doesn’t scale well. What if you want to support displaying multiple tooltips in a single component? You can’t define the same mixin twice in a component. What if the tooltips need to be displayed automatically in a guided tour instead of on hover? Good luck decoupling <code>TooltipMixin</code> from <code>HoverMixin</code>. What if you need to support the case where the hover area and the tooltip anchor are located in different components? You can’t easily hoist the state used by mixin up into the parent component. Unlike components, mixins don’t lend themselves naturally to such changes.</p>
+<p>Every new requirement makes the mixins harder to understand. Components using the same mixin become increasingly coupled with time. Any new capability gets added to all of the components using that mixin. There is no way to split a “simpler” part of the mixin without either duplicating the code or introducing more dependencies and indirection between mixins. Gradually, the encapsulation boundaries erode, and since it’s hard to change or remove the existing mixins, they keep getting more abstract until nobody understands how they work.</p>
+<p>These are the same problems we faced building apps before React. We found that they are solved by declarative rendering, top-down data flow, and encapsulated components. At Facebook, we have been migrating our code to use alternative patterns to mixins, and we are generally happy with the results. You can read about those patterns below.</p>
+<h2 id="migrating-from-mixins">Migrating from Mixins</h2>
+<p>Let’s make it clear that mixins are not technically deprecated. If you use <code>React.createClass()</code>, you may keep using them. We only say that they didn’t work well for us, and so we won’t recommend using them in the future.</p>
+<p>Every section below corresponds to a mixin usage pattern that we found in the Facebook codebase. For each of them, we describe the problem and a solution that we think works better than mixins. The examples are written in ES5 but once you don’t need mixins, you can switch to ES6 classes if you’d like.</p>
+<p>We hope that you find this list helpful. Please let us know if we missed important use cases so we can either amend the list or be proven wrong!</p>
+<h3 id="performance-optimizations">Performance Optimizations</h3>
+<p>One of the most commonly used mixins is <a href="/docs/pure-render-mixin.html"><code>PureRenderMixin</code></a>. You might be using it in some components to <a href="/docs/advanced-performance.html#shouldcomponentupdate-in-action">prevent unnecessary re-renders</a> when the props and state are shallowly equal to the previous props and state:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">var</span> PureRenderMixin <span class="op">=</span> <span class="at">require</span>(<span class="st">&#39;react-addons-pure-render-mixin&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb1-2" title="2"></a>
+<a class="sourceLine" id="cb1-3" title="3"><span class="kw">var</span> Button <span class="op">=</span> <span class="va">React</span>.<span class="at">createClass</span>(<span class="op">{</span></a>
+<a class="sourceLine" id="cb1-4" title="4">  <span class="dt">mixins</span><span class="op">:</span> [PureRenderMixin]<span class="op">,</span></a>
+<a class="sourceLine" id="cb1-5" title="5"></a>
+<a class="sourceLine" id="cb1-6" title="6">  <span class="co">// ...</span></a>
+<a class="sourceLine" id="cb1-7" title="7"></a>
+<a class="sourceLine" id="cb1-8" title="8"><span class="op">}</span>)<span class="op">;</span></a></code></pre></div>
+<h4 id="solution">Solution</h4>
+<p>To express the same without mixins, you can use the <a href="/docs/shallow-compare.html"><code>shallowCompare</code></a> function directly instead:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb2-1" title="1"><span class="kw">var</span> shallowCompare <span class="op">=</span> <span class="at">require</span>(<span class="st">&#39;react-addons-shallow-compare&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb2-2" title="2"></a>
+<a class="sourceLine" id="cb2-3" title="3"><span class="kw">var</span> Button <span class="op">=</span> <span class="va">React</span>.<span class="at">createClass</span>(<span class="op">{</span></a>
+<a class="sourceLine" id="cb2-4" title="4">  <span class="dt">shouldComponentUpdate</span><span class="op">:</span> <span class="kw">function</span>(nextProps<span class="op">,</span> nextState) <span class="op">{</span></a>
+<a class="sourceLine" id="cb2-5" title="5">    <span class="cf">return</span> <span class="at">shallowCompare</span>(<span class="kw">this</span><span class="op">,</span> nextProps<span class="op">,</span> nextState)<span class="op">;</span></a>
+<a class="sourceLine" id="cb2-6" title="6">  <span class="op">},</span></a>
+<a class="sourceLine" id="cb2-7" title="7"></a>
+<a class="sourceLine" id="cb2-8" title="8">  <span class="co">// ...</span></a>
+<a class="sourceLine" id="cb2-9" title="9"></a>
+<a class="sourceLine" id="cb2-10" title="10"><span class="op">}</span>)<span class="op">;</span></a></code></pre></div>
+<p>If you use a custom mixin implementing a <code>shouldComponentUpdate</code> function with different algorithm, we suggest exporting just that single function from a module and calling it directly from your components.</p>
+<p>We understand that more typing can be annoying. For the most common case, we plan to <a href="https://github.com/facebook/react/pull/7195">introduce a new base class</a> called <code>React.PureComponent</code> in the next minor release. It uses the same shallow comparison as <code>PureRenderMixin</code> does today.</p>
+<h3 id="subscriptions-and-side-effects">Subscriptions and Side Effects</h3>
+<p>The second most common type of mixins that we encountered are mixins that subscribe a React component to a third-party data source. Whether this data source is a Flux Store, an Rx Observable, or something else, the pattern is very similar: the subscription is created in <code>componentDidMount</code>, destroyed in <code>componentWillUnmount</code>, and the change handler calls <code>this.setState()</code>.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb3-1" title="1"><span class="kw">var</span> SubscriptionMixin <span class="op">=</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb3-2" title="2">  <span class="dt">getInitialState</span><span class="op">:</span> <span class="kw">function</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb3-3" title="3">    <span class="cf">return</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb3-4" title="4">      <span class="dt">comments</span><span class="op">:</span> <span class="va">DataSource</span>.<span class="at">getComments</span>()</a>
+<a class="sourceLine" id="cb3-5" title="5">    <span class="op">};</span></a>
+<a class="sourceLine" id="cb3-6" title="6">  <span class="op">},</span></a>
+<a class="sourceLine" id="cb3-7" title="7"></a>
+<a class="sourceLine" id="cb3-8" title="8">  <span class="dt">componentDidMount</span><span class="op">:</span> <span class="kw">function</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb3-9" title="9">    <span class="va">DataSource</span>.<span class="at">addChangeListener</span>(<span class="kw">this</span>.<span class="at">handleChange</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb3-10" title="10">  <span class="op">},</span></a>
+<a class="sourceLine" id="cb3-11" title="11"></a>
+<a class="sourceLine" id="cb3-12" title="12">  <span class="dt">componentWillUnmount</span><span class="op">:</span> <span class="kw">function</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb3-13" title="13">    <span class="va">DataSource</span>.<span class="at">removeChangeListener</span>(<span class="kw">this</span>.<span class="at">handleChange</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb3-14" title="14">  <span class="op">},</span></a>
+<a class="sourceLine" id="cb3-15" title="15"></a>
+<a class="sourceLine" id="cb3-16" title="16">  <span class="dt">handleChange</span><span class="op">:</span> <span class="kw">function</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb3-17" title="17">    <span class="kw">this</span>.<span class="at">setState</span>(<span class="op">{</span></a>
+<a class="sourceLine" id="cb3-18" title="18">      <span class="dt">comments</span><span class="op">:</span> <span class="va">DataSource</span>.<span class="at">getComments</span>()</a>
+<a class="sourceLine" id="cb3-19" title="19">    <span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb3-20" title="20">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb3-21" title="21"><span class="op">};</span></a>
+<a class="sourceLine" id="cb3-22" title="22"></a>
+<a class="sourceLine" id="cb3-23" title="23"><span class="kw">var</span> CommentList <span class="op">=</span> <span class="va">React</span>.<span class="at">createClass</span>(<span class="op">{</span></a>
+<a class="sourceLine" id="cb3-24" title="24">  <span class="dt">mixins</span><span class="op">:</span> [SubscriptionMixin]<span class="op">,</span></a>
+<a class="sourceLine" id="cb3-25" title="25"></a>
+<a class="sourceLine" id="cb3-26" title="26">  <span class="dt">render</span><span class="op">:</span> <span class="kw">function</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb3-27" title="27">    <span class="co">// Reading comments from state managed by mixin.</span></a>
+<a class="sourceLine" id="cb3-28" title="28">    <span class="kw">var</span> comments <span class="op">=</span> <span class="kw">this</span>.<span class="va">state</span>.<span class="at">comments</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb3-29" title="29">    <span class="cf">return</span> (</a>
+<a class="sourceLine" id="cb3-30" title="30">      <span class="op">&lt;</span>div<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb3-31" title="31">        <span class="op">{</span><span class="va">comments</span>.<span class="at">map</span>(<span class="kw">function</span>(comment) <span class="op">{</span></a>
+<a class="sourceLine" id="cb3-32" title="32">          <span class="cf">return</span> <span class="op">&lt;</span>Comment comment<span class="op">={</span>comment<span class="op">}</span> key<span class="op">={</span><span class="va">comment</span>.<span class="at">id</span><span class="op">}</span> /&gt;</a>
+<a class="sourceLine" id="cb3-33" title="33">        <span class="op">}</span>)<span class="op">}</span></a>
+<a class="sourceLine" id="cb3-34" title="34">      &lt;/div<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb3-35" title="35">    )</a>
+<a class="sourceLine" id="cb3-36" title="36">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb3-37" title="37"><span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb3-38" title="38"></a>
+<a class="sourceLine" id="cb3-39" title="39"><span class="va">module</span>.<span class="at">exports</span> <span class="op">=</span> CommentList<span class="op">;</span></a></code></pre></div>
+<h4 id="solution-1">Solution</h4>
+<p>If there is just one component subscribed to this data source, it is fine to embed the subscription logic right into the component. Avoid premature abstractions.</p>
+<p>If several components used this mixin to subscribe to a data source, a nice way to avoid repetition is to use a pattern called <a href="https://medium.com/@dan_abramov/mixins-are-dead-long-live-higher-order-components-94a0d2f9e750">“higher-order components”</a>. It can sound intimidating so we will take a closer look at how this pattern naturally emerges from the component model.</p>
+<h4 id="higher-order-components-explained">Higher-Order Components Explained</h4>
+<p>Let’s forget about React for a second. Consider these two functions that add and multiply numbers, logging the results as they do that:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb4-1" title="1"><span class="kw">function</span> <span class="at">addAndLog</span>(x<span class="op">,</span> y) <span class="op">{</span></a>
+<a class="sourceLine" id="cb4-2" title="2">  <span class="kw">var</span> result <span class="op">=</span> x <span class="op">+</span> y<span class="op">;</span></a>
+<a class="sourceLine" id="cb4-3" title="3">  <span class="va">console</span>.<span class="at">log</span>(<span class="st">&#39;result:&#39;</span><span class="op">,</span> result)<span class="op">;</span></a>
+<a class="sourceLine" id="cb4-4" title="4">  <span class="cf">return</span> result<span class="op">;</span></a>
+<a class="sourceLine" id="cb4-5" title="5"><span class="op">}</span></a>
+<a class="sourceLine" id="cb4-6" title="6"></a>
+<a class="sourceLine" id="cb4-7" title="7"><span class="kw">function</span> <span class="at">multiplyAndLog</span>(x<span class="op">,</span> y) <span class="op">{</span></a>
+<a class="sourceLine" id="cb4-8" title="8">  <span class="kw">var</span> result <span class="op">=</span> x <span class="op">*</span> y<span class="op">;</span></a>
+<a class="sourceLine" id="cb4-9" title="9">  <span class="va">console</span>.<span class="at">log</span>(<span class="st">&#39;result:&#39;</span><span class="op">,</span> result)<span class="op">;</span></a>
+<a class="sourceLine" id="cb4-10" title="10">  <span class="cf">return</span> result<span class="op">;</span></a>
+<a class="sourceLine" id="cb4-11" title="11"><span class="op">}</span></a></code></pre></div>
+<p>These two functions are not very useful but they help us demonstrate a pattern that we can later apply to components.</p>
+<p>Let’s say that we want to extract the logging logic out of these functions without changing their signatures. How can we do this? An elegant solution is to write a <a href="https://en.wikipedia.org/wiki/Higher-order_function">higher-order function</a>, that is, a function that takes a function as an argument and returns a function.</p>
+<p>Again, it sounds more intimidating than it really is:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb5-1" title="1"><span class="kw">function</span> <span class="at">withLogging</span>(wrappedFunction) <span class="op">{</span></a>
+<a class="sourceLine" id="cb5-2" title="2">  <span class="co">// Return a function with the same API...</span></a>
+<a class="sourceLine" id="cb5-3" title="3">  <span class="cf">return</span> <span class="kw">function</span>(x<span class="op">,</span> y) <span class="op">{</span></a>
+<a class="sourceLine" id="cb5-4" title="4">    <span class="co">// ... that calls the original function</span></a>
+<a class="sourceLine" id="cb5-5" title="5">    <span class="kw">var</span> result <span class="op">=</span> <span class="at">wrappedFunction</span>(x<span class="op">,</span> y)<span class="op">;</span></a>
+<a class="sourceLine" id="cb5-6" title="6">    <span class="co">// ... but also logs its result!</span></a>
+<a class="sourceLine" id="cb5-7" title="7">    <span class="va">console</span>.<span class="at">log</span>(<span class="st">&#39;result:&#39;</span><span class="op">,</span> result)<span class="op">;</span></a>
+<a class="sourceLine" id="cb5-8" title="8">    <span class="cf">return</span> result<span class="op">;</span></a>
+<a class="sourceLine" id="cb5-9" title="9">  <span class="op">};</span></a>
+<a class="sourceLine" id="cb5-10" title="10"><span class="op">}</span></a></code></pre></div>
+<p>The <code>withLogging</code> higher-order function lets us write <code>add</code> and <code>multiply</code> without the logging statements, and later wrap them to get <code>addAndLog</code> and <code>multiplyAndLog</code> with exactly the same signatures as before:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb6-1" title="1"><span class="kw">function</span> <span class="at">add</span>(x<span class="op">,</span> y) <span class="op">{</span></a>
+<a class="sourceLine" id="cb6-2" title="2">  <span class="cf">return</span> x <span class="op">+</span> y<span class="op">;</span></a>
+<a class="sourceLine" id="cb6-3" title="3"><span class="op">}</span></a>
+<a class="sourceLine" id="cb6-4" title="4"></a>
+<a class="sourceLine" id="cb6-5" title="5"><span class="kw">function</span> <span class="at">multiply</span>(x<span class="op">,</span> y) <span class="op">{</span></a>
+<a class="sourceLine" id="cb6-6" title="6">  <span class="cf">return</span> x <span class="op">*</span> y<span class="op">;</span></a>
+<a class="sourceLine" id="cb6-7" title="7"><span class="op">}</span></a>
+<a class="sourceLine" id="cb6-8" title="8"></a>
+<a class="sourceLine" id="cb6-9" title="9"><span class="kw">function</span> <span class="at">withLogging</span>(wrappedFunction) <span class="op">{</span></a>
+<a class="sourceLine" id="cb6-10" title="10">  <span class="cf">return</span> <span class="kw">function</span>(x<span class="op">,</span> y) <span class="op">{</span></a>
+<a class="sourceLine" id="cb6-11" title="11">    <span class="kw">var</span> result <span class="op">=</span> <span class="at">wrappedFunction</span>(x<span class="op">,</span> y)<span class="op">;</span></a>
+<a class="sourceLine" id="cb6-12" title="12">    <span class="va">console</span>.<span class="at">log</span>(<span class="st">&#39;result:&#39;</span><span class="op">,</span> result)<span class="op">;</span></a>
+<a class="sourceLine" id="cb6-13" title="13">    <span class="cf">return</span> result<span class="op">;</span></a>
+<a class="sourceLine" id="cb6-14" title="14">  <span class="op">};</span></a>
+<a class="sourceLine" id="cb6-15" title="15"><span class="op">}</span></a>
+<a class="sourceLine" id="cb6-16" title="16"></a>
+<a class="sourceLine" id="cb6-17" title="17"><span class="co">// Equivalent to writing addAndLog by hand:</span></a>
+<a class="sourceLine" id="cb6-18" title="18"><span class="kw">var</span> addAndLog <span class="op">=</span> <span class="at">withLogging</span>(add)<span class="op">;</span></a>
+<a class="sourceLine" id="cb6-19" title="19"></a>
+<a class="sourceLine" id="cb6-20" title="20"><span class="co">// Equivalent to writing multiplyAndLog by hand:</span></a>
+<a class="sourceLine" id="cb6-21" title="21"><span class="kw">var</span> multiplyAndLog <span class="op">=</span> <span class="at">withLogging</span>(multiply)<span class="op">;</span></a></code></pre></div>
+<p>Higher-order components are a very similar pattern, but applied to components in React. We will apply this transformation from mixins in two steps.</p>
+<p>As a first step, we will split our <code>CommentList</code> component in two, a child and a parent. The child will be only concerned with rendering the comments. The parent will set up the subscription and pass the up-to-date data to the child via props.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb7-1" title="1"><span class="co">// This is a child component.</span></a>
+<a class="sourceLine" id="cb7-2" title="2"><span class="co">// It only renders the comments it receives as props.</span></a>
+<a class="sourceLine" id="cb7-3" title="3"><span class="kw">var</span> CommentList <span class="op">=</span> <span class="va">React</span>.<span class="at">createClass</span>(<span class="op">{</span></a>
+<a class="sourceLine" id="cb7-4" title="4">  <span class="dt">render</span><span class="op">:</span> <span class="kw">function</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb7-5" title="5">    <span class="co">// Note: now reading from props rather than state.</span></a>
+<a class="sourceLine" id="cb7-6" title="6">    <span class="kw">var</span> comments <span class="op">=</span> <span class="kw">this</span>.<span class="va">props</span>.<span class="at">comments</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb7-7" title="7">    <span class="cf">return</span> (</a>
+<a class="sourceLine" id="cb7-8" title="8">      <span class="op">&lt;</span>div<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb7-9" title="9">        <span class="op">{</span><span class="va">comments</span>.<span class="at">map</span>(<span class="kw">function</span>(comment) <span class="op">{</span></a>
+<a class="sourceLine" id="cb7-10" title="10">          <span class="cf">return</span> <span class="op">&lt;</span>Comment comment<span class="op">={</span>comment<span class="op">}</span> key<span class="op">={</span><span class="va">comment</span>.<span class="at">id</span><span class="op">}</span> /&gt;</a>
+<a class="sourceLine" id="cb7-11" title="11">        <span class="op">}</span>)<span class="op">}</span></a>
+<a class="sourceLine" id="cb7-12" title="12">      &lt;/div<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb7-13" title="13">    )</a>
+<a class="sourceLine" id="cb7-14" title="14">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb7-15" title="15"><span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb7-16" title="16"></a>
+<a class="sourceLine" id="cb7-17" title="17"><span class="co">// This is a parent component.</span></a>
+<a class="sourceLine" id="cb7-18" title="18"><span class="co">// It subscribes to the data source and renders &lt;CommentList /&gt;.</span></a>
+<a class="sourceLine" id="cb7-19" title="19"><span class="kw">var</span> CommentListWithSubscription <span class="op">=</span> <span class="va">React</span>.<span class="at">createClass</span>(<span class="op">{</span></a>
+<a class="sourceLine" id="cb7-20" title="20">  <span class="dt">getInitialState</span><span class="op">:</span> <span class="kw">function</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb7-21" title="21">    <span class="cf">return</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb7-22" title="22">      <span class="dt">comments</span><span class="op">:</span> <span class="va">DataSource</span>.<span class="at">getComments</span>()</a>
+<a class="sourceLine" id="cb7-23" title="23">    <span class="op">};</span></a>
+<a class="sourceLine" id="cb7-24" title="24">  <span class="op">},</span></a>
+<a class="sourceLine" id="cb7-25" title="25"></a>
+<a class="sourceLine" id="cb7-26" title="26">  <span class="dt">componentDidMount</span><span class="op">:</span> <span class="kw">function</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb7-27" title="27">    <span class="va">DataSource</span>.<span class="at">addChangeListener</span>(<span class="kw">this</span>.<span class="at">handleChange</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb7-28" title="28">  <span class="op">},</span></a>
+<a class="sourceLine" id="cb7-29" title="29"></a>
+<a class="sourceLine" id="cb7-30" title="30">  <span class="dt">componentWillUnmount</span><span class="op">:</span> <span class="kw">function</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb7-31" title="31">    <span class="va">DataSource</span>.<span class="at">removeChangeListener</span>(<span class="kw">this</span>.<span class="at">handleChange</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb7-32" title="32">  <span class="op">},</span></a>
+<a class="sourceLine" id="cb7-33" title="33"></a>
+<a class="sourceLine" id="cb7-34" title="34">  <span class="dt">handleChange</span><span class="op">:</span> <span class="kw">function</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb7-35" title="35">    <span class="kw">this</span>.<span class="at">setState</span>(<span class="op">{</span></a>
+<a class="sourceLine" id="cb7-36" title="36">      <span class="dt">comments</span><span class="op">:</span> <span class="va">DataSource</span>.<span class="at">getComments</span>()</a>
+<a class="sourceLine" id="cb7-37" title="37">    <span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb7-38" title="38">  <span class="op">},</span></a>
+<a class="sourceLine" id="cb7-39" title="39"></a>
+<a class="sourceLine" id="cb7-40" title="40">  <span class="dt">render</span><span class="op">:</span> <span class="kw">function</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb7-41" title="41">    <span class="co">// We pass the current state as props to CommentList.</span></a>
+<a class="sourceLine" id="cb7-42" title="42">    <span class="cf">return</span> <span class="op">&lt;</span>CommentList comments<span class="op">={</span><span class="kw">this</span>.<span class="va">state</span>.<span class="at">comments</span><span class="op">}</span> /&gt;<span class="op">;</span></a>
+<a class="sourceLine" id="cb7-43" title="43">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb7-44" title="44"><span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb7-45" title="45"></a>
+<a class="sourceLine" id="cb7-46" title="46"><span class="va">module</span>.<span class="at">exports</span> <span class="op">=</span> CommentListWithSubscription<span class="op">;</span></a></code></pre></div>
+<p>There is just one final step left to do.</p>
+<p>Remember how we made <code>withLogging()</code> take a function and return another function wrapping it? We can apply a similar pattern to React components.</p>
+<p>We will write a new function called <code>withSubscription(WrappedComponent)</code>. Its argument could be any React component. We will pass <code>CommentList</code> as <code>WrappedComponent</code>, but we could also apply <code>withSubscription()</code> to any other component in our codebase.</p>
+<p>This function would return another component. The returned component would manage the subscription and render <code>&lt;WrappedComponent /&gt;</code> with the current data.</p>
+<p>We call this pattern a “higher-order component”.</p>
+<p>The composition happens at React rendering level rather than with a direct function call. This is why it doesn’t matter whether the wrapped component is defined with <code>createClass()</code>, as an ES6 class or a function. If <code>WrappedComponent</code> is a React component, the component created by <code>withSubscription()</code> can render it.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb8-1" title="1"><span class="co">// This function takes a component...</span></a>
+<a class="sourceLine" id="cb8-2" title="2"><span class="kw">function</span> <span class="at">withSubscription</span>(WrappedComponent) <span class="op">{</span></a>
+<a class="sourceLine" id="cb8-3" title="3">  <span class="co">// ...and returns another component...</span></a>
+<a class="sourceLine" id="cb8-4" title="4">  <span class="cf">return</span> <span class="va">React</span>.<span class="at">createClass</span>(<span class="op">{</span></a>
+<a class="sourceLine" id="cb8-5" title="5">    <span class="dt">getInitialState</span><span class="op">:</span> <span class="kw">function</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb8-6" title="6">      <span class="cf">return</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb8-7" title="7">        <span class="dt">comments</span><span class="op">:</span> <span class="va">DataSource</span>.<span class="at">getComments</span>()</a>
+<a class="sourceLine" id="cb8-8" title="8">      <span class="op">};</span></a>
+<a class="sourceLine" id="cb8-9" title="9">    <span class="op">},</span></a>
+<a class="sourceLine" id="cb8-10" title="10"></a>
+<a class="sourceLine" id="cb8-11" title="11">    <span class="dt">componentDidMount</span><span class="op">:</span> <span class="kw">function</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb8-12" title="12">      <span class="co">// ... that takes care of the subscription...</span></a>
+<a class="sourceLine" id="cb8-13" title="13">      <span class="va">DataSource</span>.<span class="at">addChangeListener</span>(<span class="kw">this</span>.<span class="at">handleChange</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb8-14" title="14">    <span class="op">},</span></a>
+<a class="sourceLine" id="cb8-15" title="15"></a>
+<a class="sourceLine" id="cb8-16" title="16">    <span class="dt">componentWillUnmount</span><span class="op">:</span> <span class="kw">function</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb8-17" title="17">      <span class="va">DataSource</span>.<span class="at">removeChangeListener</span>(<span class="kw">this</span>.<span class="at">handleChange</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb8-18" title="18">    <span class="op">},</span></a>
+<a class="sourceLine" id="cb8-19" title="19"></a>
+<a class="sourceLine" id="cb8-20" title="20">    <span class="dt">handleChange</span><span class="op">:</span> <span class="kw">function</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb8-21" title="21">      <span class="kw">this</span>.<span class="at">setState</span>(<span class="op">{</span></a>
+<a class="sourceLine" id="cb8-22" title="22">        <span class="dt">comments</span><span class="op">:</span> <span class="va">DataSource</span>.<span class="at">getComments</span>()</a>
+<a class="sourceLine" id="cb8-23" title="23">      <span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb8-24" title="24">    <span class="op">},</span></a>
+<a class="sourceLine" id="cb8-25" title="25"></a>
+<a class="sourceLine" id="cb8-26" title="26">    <span class="dt">render</span><span class="op">:</span> <span class="kw">function</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb8-27" title="27">      <span class="co">// ... and renders the wrapped component with the fresh data!</span></a>
+<a class="sourceLine" id="cb8-28" title="28">      <span class="cf">return</span> <span class="op">&lt;</span>WrappedComponent comments<span class="op">={</span><span class="kw">this</span>.<span class="va">state</span>.<span class="at">comments</span><span class="op">}</span> /&gt;<span class="op">;</span></a>
+<a class="sourceLine" id="cb8-29" title="29">    <span class="op">}</span></a>
+<a class="sourceLine" id="cb8-30" title="30">  <span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb8-31" title="31"><span class="op">}</span></a></code></pre></div>
+<p>Now we can declare <code>CommentListWithSubscription</code> by applying <code>withSubscription</code> to <code>CommentList</code>:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb9-1" title="1"><span class="kw">var</span> CommentList <span class="op">=</span> <span class="va">React</span>.<span class="at">createClass</span>(<span class="op">{</span></a>
+<a class="sourceLine" id="cb9-2" title="2">  <span class="dt">render</span><span class="op">:</span> <span class="kw">function</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb9-3" title="3">    <span class="kw">var</span> comments <span class="op">=</span> <span class="kw">this</span>.<span class="va">props</span>.<span class="at">comments</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb9-4" title="4">    <span class="cf">return</span> (</a>
+<a class="sourceLine" id="cb9-5" title="5">      <span class="op">&lt;</span>div<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb9-6" title="6">        <span class="op">{</span><span class="va">comments</span>.<span class="at">map</span>(<span class="kw">function</span>(comment) <span class="op">{</span></a>
+<a class="sourceLine" id="cb9-7" title="7">          <span class="cf">return</span> <span class="op">&lt;</span>Comment comment<span class="op">={</span>comment<span class="op">}</span> key<span class="op">={</span><span class="va">comment</span>.<span class="at">id</span><span class="op">}</span> /&gt;</a>
+<a class="sourceLine" id="cb9-8" title="8">        <span class="op">}</span>)<span class="op">}</span></a>
+<a class="sourceLine" id="cb9-9" title="9">      &lt;/div<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb9-10" title="10">    )</a>
+<a class="sourceLine" id="cb9-11" title="11">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb9-12" title="12"><span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb9-13" title="13"></a>
+<a class="sourceLine" id="cb9-14" title="14"><span class="co">// withSubscription() returns a new component that</span></a>
+<a class="sourceLine" id="cb9-15" title="15"><span class="co">// is subscribed to the data source and renders</span></a>
+<a class="sourceLine" id="cb9-16" title="16"><span class="co">// &lt;CommentList /&gt; with up-to-date data.</span></a>
+<a class="sourceLine" id="cb9-17" title="17"><span class="kw">var</span> CommentListWithSubscription <span class="op">=</span> <span class="at">withSubscription</span>(CommentList)<span class="op">;</span></a>
+<a class="sourceLine" id="cb9-18" title="18"></a>
+<a class="sourceLine" id="cb9-19" title="19"><span class="co">// The rest of the app is interested in the subscribed component</span></a>
+<a class="sourceLine" id="cb9-20" title="20"><span class="co">// so we export it instead of the original unwrapped CommentList.</span></a>
+<a class="sourceLine" id="cb9-21" title="21"><span class="va">module</span>.<span class="at">exports</span> <span class="op">=</span> CommentListWithSubscription<span class="op">;</span></a></code></pre></div>
+<h4 id="solution-revisited">Solution, Revisited</h4>
+<p>Now that we understand higher-order components better, let’s take another look at the complete solution that doesn’t involve mixins. There are a few minor changes that are annotated with inline comments:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb10-1" title="1"><span class="kw">function</span> <span class="at">withSubscription</span>(WrappedComponent) <span class="op">{</span></a>
+<a class="sourceLine" id="cb10-2" title="2">  <span class="cf">return</span> <span class="va">React</span>.<span class="at">createClass</span>(<span class="op">{</span></a>
+<a class="sourceLine" id="cb10-3" title="3">    <span class="dt">getInitialState</span><span class="op">:</span> <span class="kw">function</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb10-4" title="4">      <span class="cf">return</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb10-5" title="5">        <span class="dt">comments</span><span class="op">:</span> <span class="va">DataSource</span>.<span class="at">getComments</span>()</a>
+<a class="sourceLine" id="cb10-6" title="6">      <span class="op">};</span></a>
+<a class="sourceLine" id="cb10-7" title="7">    <span class="op">},</span></a>
+<a class="sourceLine" id="cb10-8" title="8"></a>
+<a class="sourceLine" id="cb10-9" title="9">    <span class="dt">componentDidMount</span><span class="op">:</span> <span class="kw">function</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb10-10" title="10">      <span class="va">DataSource</span>.<span class="at">addChangeListener</span>(<span class="kw">this</span>.<span class="at">handleChange</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb10-11" title="11">    <span class="op">},</span></a>
+<a class="sourceLine" id="cb10-12" title="12"></a>
+<a class="sourceLine" id="cb10-13" title="13">    <span class="dt">componentWillUnmount</span><span class="op">:</span> <span class="kw">function</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb10-14" title="14">      <span class="va">DataSource</span>.<span class="at">removeChangeListener</span>(<span class="kw">this</span>.<span class="at">handleChange</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb10-15" title="15">    <span class="op">},</span></a>
+<a class="sourceLine" id="cb10-16" title="16"></a>
+<a class="sourceLine" id="cb10-17" title="17">    <span class="dt">handleChange</span><span class="op">:</span> <span class="kw">function</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb10-18" title="18">      <span class="kw">this</span>.<span class="at">setState</span>(<span class="op">{</span></a>
+<a class="sourceLine" id="cb10-19" title="19">        <span class="dt">comments</span><span class="op">:</span> <span class="va">DataSource</span>.<span class="at">getComments</span>()</a>
+<a class="sourceLine" id="cb10-20" title="20">      <span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb10-21" title="21">    <span class="op">},</span></a>
+<a class="sourceLine" id="cb10-22" title="22"></a>
+<a class="sourceLine" id="cb10-23" title="23">    <span class="dt">render</span><span class="op">:</span> <span class="kw">function</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb10-24" title="24">      <span class="co">// Use JSX spread syntax to pass all props and state down automatically.</span></a>
+<a class="sourceLine" id="cb10-25" title="25">      <span class="cf">return</span> <span class="op">&lt;</span>WrappedComponent <span class="op">{</span>...<span class="va">this</span>.<span class="at">props</span><span class="op">}</span> <span class="op">{</span>...<span class="va">this</span>.<span class="at">state</span><span class="op">}</span> /&gt;<span class="op">;</span></a>
+<a class="sourceLine" id="cb10-26" title="26">    <span class="op">}</span></a>
+<a class="sourceLine" id="cb10-27" title="27">  <span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb10-28" title="28"><span class="op">}</span></a>
+<a class="sourceLine" id="cb10-29" title="29"></a>
+<a class="sourceLine" id="cb10-30" title="30"><span class="co">// Optional change: convert CommentList to a function component</span></a>
+<a class="sourceLine" id="cb10-31" title="31"><span class="co">// because it doesn&#39;t use lifecycle methods or state.</span></a>
+<a class="sourceLine" id="cb10-32" title="32"><span class="kw">function</span> <span class="at">CommentList</span>(props) <span class="op">{</span></a>
+<a class="sourceLine" id="cb10-33" title="33">  <span class="kw">var</span> comments <span class="op">=</span> <span class="va">props</span>.<span class="at">comments</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb10-34" title="34">  <span class="cf">return</span> (</a>
+<a class="sourceLine" id="cb10-35" title="35">    <span class="op">&lt;</span>div<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb10-36" title="36">      <span class="op">{</span><span class="va">comments</span>.<span class="at">map</span>(<span class="kw">function</span>(comment) <span class="op">{</span></a>
+<a class="sourceLine" id="cb10-37" title="37">        <span class="cf">return</span> <span class="op">&lt;</span>Comment comment<span class="op">={</span>comment<span class="op">}</span> key<span class="op">={</span><span class="va">comment</span>.<span class="at">id</span><span class="op">}</span> /&gt;</a>
+<a class="sourceLine" id="cb10-38" title="38">      <span class="op">}</span>)<span class="op">}</span></a>
+<a class="sourceLine" id="cb10-39" title="39">    &lt;/div<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb10-40" title="40">  )</a>
+<a class="sourceLine" id="cb10-41" title="41"><span class="op">}</span></a>
+<a class="sourceLine" id="cb10-42" title="42"></a>
+<a class="sourceLine" id="cb10-43" title="43"><span class="co">// Instead of declaring CommentListWithSubscription,</span></a>
+<a class="sourceLine" id="cb10-44" title="44"><span class="co">// we export the wrapped component right away.</span></a>
+<a class="sourceLine" id="cb10-45" title="45"><span class="va">module</span>.<span class="at">exports</span> <span class="op">=</span> <span class="at">withSubscription</span>(CommentList)<span class="op">;</span></a></code></pre></div>
+<p>Higher-order components are a powerful pattern. You can pass additional arguments to them if you want to further customize their behavior. After all, they are not even a feature of React. They are just functions that receive components and return components that wrap them.</p>
+<p>Like any solution, higher-order components have their own pitfalls. For example, if you heavily use <a href="/docs/more-about-refs.html">refs</a>, you might notice that wrapping something into a higher-order component changes the ref to point to the wrapping component. In practice we discourage using refs for component communication so we don’t think it’s a big issue. In the future, we might consider adding <a href="https://github.com/facebook/react/issues/4213">ref forwarding</a> to React to solve this annoyance.</p>
+<h3 id="rendering-logic">Rendering Logic</h3>
+<p>The next most common use case for mixins that we discovered in our codebase is sharing rendering logic between components.</p>
+<p>Here is a typical example of this pattern:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb11-1" title="1"><span class="kw">var</span> RowMixin <span class="op">=</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb11-2" title="2">  <span class="co">// Called by components from render()</span></a>
+<a class="sourceLine" id="cb11-3" title="3">  <span class="dt">renderHeader</span><span class="op">:</span> <span class="kw">function</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb11-4" title="4">    <span class="cf">return</span> (</a>
+<a class="sourceLine" id="cb11-5" title="5">      <span class="op">&lt;</span>div className<span class="op">=</span><span class="st">&#39;row-header&#39;</span><span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb11-6" title="6">        <span class="op">&lt;</span>h1<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb11-7" title="7">          <span class="op">{</span><span class="kw">this</span>.<span class="at">getHeaderText</span>() <span class="co">/* Defined by components */</span><span class="op">}</span></a>
+<a class="sourceLine" id="cb11-8" title="8">        &lt;/h1<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb11-9" title="9">      &lt;/div<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb11-10" title="10">    )<span class="op">;</span></a>
+<a class="sourceLine" id="cb11-11" title="11">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb11-12" title="12"><span class="op">};</span></a>
+<a class="sourceLine" id="cb11-13" title="13"></a>
+<a class="sourceLine" id="cb11-14" title="14"><span class="kw">var</span> UserRow <span class="op">=</span> <span class="va">React</span>.<span class="at">createClass</span>(<span class="op">{</span></a>
+<a class="sourceLine" id="cb11-15" title="15">  <span class="dt">mixins</span><span class="op">:</span> [RowMixin]<span class="op">,</span></a>
+<a class="sourceLine" id="cb11-16" title="16"></a>
+<a class="sourceLine" id="cb11-17" title="17">  <span class="co">// Called by RowMixin.renderHeader()</span></a>
+<a class="sourceLine" id="cb11-18" title="18">  <span class="dt">getHeaderText</span><span class="op">:</span> <span class="kw">function</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb11-19" title="19">    <span class="cf">return</span> <span class="kw">this</span>.<span class="va">props</span>.<span class="va">user</span>.<span class="at">fullName</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb11-20" title="20">  <span class="op">},</span></a>
+<a class="sourceLine" id="cb11-21" title="21"></a>
+<a class="sourceLine" id="cb11-22" title="22">  <span class="dt">render</span><span class="op">:</span> <span class="kw">function</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb11-23" title="23">    <span class="cf">return</span> (</a>
+<a class="sourceLine" id="cb11-24" title="24">      <span class="op">&lt;</span>div<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb11-25" title="25">        <span class="op">{</span><span class="kw">this</span>.<span class="at">renderHeader</span>() <span class="co">/* Defined by RowMixin */</span><span class="op">}</span></a>
+<a class="sourceLine" id="cb11-26" title="26">        <span class="op">&lt;</span>h2<span class="op">&gt;{</span><span class="kw">this</span>.<span class="va">props</span>.<span class="va">user</span>.<span class="at">biography</span><span class="op">}</span>&lt;/h2<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb11-27" title="27">      &lt;/div<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb11-28" title="28">    )</a>
+<a class="sourceLine" id="cb11-29" title="29">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb11-30" title="30"><span class="op">}</span>)<span class="op">;</span></a></code></pre></div>
+<p>Multiple components may be sharing <code>RowMixin</code> to render the header, and each of them would need to define <code>getHeaderText()</code>.</p>
+<h4 id="solution-2">Solution</h4>
+<p>If you see rendering logic inside a mixin, it’s time to extract a component!</p>
+<p>Instead of <code>RowMixin</code>, we will define a <code>&lt;RowHeader&gt;</code> component. We will also replace the convention of defining a <code>getHeaderText()</code> method with the standard mechanism of top-data flow in React: passing props.</p>
+<p>Finally, since neither of those components currently need lifecycle methods or state, we can declare them as simple functions:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb12-1" title="1"><span class="kw">function</span> <span class="at">RowHeader</span>(props) <span class="op">{</span></a>
+<a class="sourceLine" id="cb12-2" title="2">  <span class="cf">return</span> (</a>
+<a class="sourceLine" id="cb12-3" title="3">    <span class="op">&lt;</span>div className<span class="op">=</span><span class="st">&#39;row-header&#39;</span><span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb12-4" title="4">      <span class="op">&lt;</span>h1<span class="op">&gt;{</span><span class="va">props</span>.<span class="at">text</span><span class="op">}</span>&lt;/h1<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb12-5" title="5">    &lt;/div<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb12-6" title="6">  )<span class="op">;</span></a>
+<a class="sourceLine" id="cb12-7" title="7"><span class="op">}</span></a>
+<a class="sourceLine" id="cb12-8" title="8"></a>
+<a class="sourceLine" id="cb12-9" title="9"><span class="kw">function</span> <span class="at">UserRow</span>(props) <span class="op">{</span></a>
+<a class="sourceLine" id="cb12-10" title="10">  <span class="cf">return</span> (</a>
+<a class="sourceLine" id="cb12-11" title="11">    <span class="op">&lt;</span>div<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb12-12" title="12">      <span class="op">&lt;</span>RowHeader text<span class="op">={</span><span class="va">props</span>.<span class="va">user</span>.<span class="at">fullName</span><span class="op">}</span> /&gt;</a>
+<a class="sourceLine" id="cb12-13" title="13">      <span class="op">&lt;</span>h2<span class="op">&gt;{</span><span class="va">props</span>.<span class="va">user</span>.<span class="at">biography</span><span class="op">}</span>&lt;/h2<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb12-14" title="14">    &lt;/div<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb12-15" title="15">  )<span class="op">;</span></a>
+<a class="sourceLine" id="cb12-16" title="16"><span class="op">}</span></a></code></pre></div>
+<p>Props keep component dependencies explicit, easy to replace, and enforceable with tools like <a href="https://flowtype.org/">Flow</a> and <a href="https://www.typescriptlang.org/">TypeScript</a>.</p>
+<blockquote>
+<p><strong>Note:</strong></p>
+<p>Defining components as functions is not required. There is also nothing wrong with using lifecycle methods and state—they are first-class React features. We use function components in this example because they are easier to read and we didn’t need those extra features, but classes would work just as fine.</p>
+</blockquote>
+<h3 id="context">Context</h3>
+<p>Another group of mixins we discovered were helpers for providing and consuming <a href="/docs/context.html">React context</a>. Context is an experimental unstable feature, has <a href="https://github.com/facebook/react/issues/2517">certain issues</a>, and will likely change its API in the future. We don’t recommend using it unless you’re confident there is no other way of solving your problem.</p>
+<p>Nevertheless, if you already use context today, you might have been hiding its usage with mixins like this:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb13-1" title="1"><span class="kw">var</span> RouterMixin <span class="op">=</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb13-2" title="2">  <span class="dt">contextTypes</span><span class="op">:</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb13-3" title="3">    <span class="dt">router</span><span class="op">:</span> <span class="va">React</span>.<span class="va">PropTypes</span>.<span class="va">object</span>.<span class="at">isRequired</span></a>
+<a class="sourceLine" id="cb13-4" title="4">  <span class="op">},</span></a>
+<a class="sourceLine" id="cb13-5" title="5"></a>
+<a class="sourceLine" id="cb13-6" title="6">  <span class="co">// The mixin provides a method so that components</span></a>
+<a class="sourceLine" id="cb13-7" title="7">  <span class="co">// don&#39;t have to use the context API directly.</span></a>
+<a class="sourceLine" id="cb13-8" title="8">  <span class="dt">push</span><span class="op">:</span> <span class="kw">function</span>(path) <span class="op">{</span></a>
+<a class="sourceLine" id="cb13-9" title="9">    <span class="kw">this</span>.<span class="va">context</span>.<span class="va">router</span>.<span class="at">push</span>(path)</a>
+<a class="sourceLine" id="cb13-10" title="10">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb13-11" title="11"><span class="op">};</span></a>
+<a class="sourceLine" id="cb13-12" title="12"></a>
+<a class="sourceLine" id="cb13-13" title="13"><span class="kw">var</span> Link <span class="op">=</span> <span class="va">React</span>.<span class="at">createClass</span>(<span class="op">{</span></a>
+<a class="sourceLine" id="cb13-14" title="14">  <span class="dt">mixins</span><span class="op">:</span> [RouterMixin]<span class="op">,</span></a>
+<a class="sourceLine" id="cb13-15" title="15"></a>
+<a class="sourceLine" id="cb13-16" title="16">  <span class="dt">handleClick</span><span class="op">:</span> <span class="kw">function</span>(e) <span class="op">{</span></a>
+<a class="sourceLine" id="cb13-17" title="17">    <span class="va">e</span>.<span class="at">stopPropagation</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb13-18" title="18"></a>
+<a class="sourceLine" id="cb13-19" title="19">    <span class="co">// This method is defined in RouterMixin.</span></a>
+<a class="sourceLine" id="cb13-20" title="20">    <span class="kw">this</span>.<span class="at">push</span>(<span class="kw">this</span>.<span class="va">props</span>.<span class="at">to</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb13-21" title="21">  <span class="op">},</span></a>
+<a class="sourceLine" id="cb13-22" title="22"></a>
+<a class="sourceLine" id="cb13-23" title="23">  <span class="dt">render</span><span class="op">:</span> <span class="kw">function</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb13-24" title="24">    <span class="cf">return</span> (</a>
+<a class="sourceLine" id="cb13-25" title="25">      <span class="op">&lt;</span>a onClick<span class="op">={</span><span class="kw">this</span>.<span class="at">handleClick</span><span class="op">}&gt;</span></a>
+<a class="sourceLine" id="cb13-26" title="26">        <span class="op">{</span><span class="kw">this</span>.<span class="va">props</span>.<span class="at">children</span><span class="op">}</span></a>
+<a class="sourceLine" id="cb13-27" title="27">      &lt;/a<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb13-28" title="28">    )<span class="op">;</span></a>
+<a class="sourceLine" id="cb13-29" title="29">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb13-30" title="30"><span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb13-31" title="31"></a>
+<a class="sourceLine" id="cb13-32" title="32"><span class="va">module</span>.<span class="at">exports</span> <span class="op">=</span> Link<span class="op">;</span></a></code></pre></div>
+<h4 id="solution-3">Solution</h4>
+<p>We agree that hiding context usage from consuming components is a good idea until the context API stabilizes. However, we recommend using higher-order components instead of mixins for this.</p>
+<p>Let the wrapping component grab something from the context, and pass it down with props to the wrapped component:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb14-1" title="1"><span class="kw">function</span> <span class="at">withRouter</span>(WrappedComponent) <span class="op">{</span></a>
+<a class="sourceLine" id="cb14-2" title="2">  <span class="cf">return</span> <span class="va">React</span>.<span class="at">createClass</span>(<span class="op">{</span></a>
+<a class="sourceLine" id="cb14-3" title="3">    <span class="dt">contextTypes</span><span class="op">:</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb14-4" title="4">      <span class="dt">router</span><span class="op">:</span> <span class="va">React</span>.<span class="va">PropTypes</span>.<span class="va">object</span>.<span class="at">isRequired</span></a>
+<a class="sourceLine" id="cb14-5" title="5">    <span class="op">},</span></a>
+<a class="sourceLine" id="cb14-6" title="6"></a>
+<a class="sourceLine" id="cb14-7" title="7">    <span class="dt">render</span><span class="op">:</span> <span class="kw">function</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb14-8" title="8">      <span class="co">// The wrapper component reads something from the context</span></a>
+<a class="sourceLine" id="cb14-9" title="9">      <span class="co">// and passes it down as a prop to the wrapped component.</span></a>
+<a class="sourceLine" id="cb14-10" title="10">      <span class="kw">var</span> router <span class="op">=</span> <span class="kw">this</span>.<span class="va">context</span>.<span class="at">router</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb14-11" title="11">      <span class="cf">return</span> <span class="op">&lt;</span>WrappedComponent <span class="op">{</span>...<span class="va">this</span>.<span class="at">props</span><span class="op">}</span> router<span class="op">={</span>router<span class="op">}</span> /&gt;<span class="op">;</span></a>
+<a class="sourceLine" id="cb14-12" title="12">    <span class="op">}</span></a>
+<a class="sourceLine" id="cb14-13" title="13">  <span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb14-14" title="14"><span class="op">};</span></a>
+<a class="sourceLine" id="cb14-15" title="15"></a>
+<a class="sourceLine" id="cb14-16" title="16"><span class="kw">var</span> Link <span class="op">=</span> <span class="va">React</span>.<span class="at">createClass</span>(<span class="op">{</span></a>
+<a class="sourceLine" id="cb14-17" title="17">  <span class="dt">handleClick</span><span class="op">:</span> <span class="kw">function</span>(e) <span class="op">{</span></a>
+<a class="sourceLine" id="cb14-18" title="18">    <span class="va">e</span>.<span class="at">stopPropagation</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb14-19" title="19"></a>
+<a class="sourceLine" id="cb14-20" title="20">    <span class="co">// The wrapped component uses props instead of context.</span></a>
+<a class="sourceLine" id="cb14-21" title="21">    <span class="kw">this</span>.<span class="va">props</span>.<span class="va">router</span>.<span class="at">push</span>(<span class="kw">this</span>.<span class="va">props</span>.<span class="at">to</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb14-22" title="22">  <span class="op">},</span></a>
+<a class="sourceLine" id="cb14-23" title="23"></a>
+<a class="sourceLine" id="cb14-24" title="24">  <span class="dt">render</span><span class="op">:</span> <span class="kw">function</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb14-25" title="25">    <span class="cf">return</span> (</a>
+<a class="sourceLine" id="cb14-26" title="26">      <span class="op">&lt;</span>a onClick<span class="op">={</span><span class="kw">this</span>.<span class="at">handleClick</span><span class="op">}&gt;</span></a>
+<a class="sourceLine" id="cb14-27" title="27">        <span class="op">{</span><span class="kw">this</span>.<span class="va">props</span>.<span class="at">children</span><span class="op">}</span></a>
+<a class="sourceLine" id="cb14-28" title="28">      &lt;/a<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb14-29" title="29">    )<span class="op">;</span></a>
+<a class="sourceLine" id="cb14-30" title="30">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb14-31" title="31"><span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb14-32" title="32"></a>
+<a class="sourceLine" id="cb14-33" title="33"><span class="co">// Don&#39;t forget to wrap the component!</span></a>
+<a class="sourceLine" id="cb14-34" title="34"><span class="va">module</span>.<span class="at">exports</span> <span class="op">=</span> <span class="at">withRouter</span>(Link)<span class="op">;</span></a></code></pre></div>
+<p>If you’re using a third party library that only provides a mixin, we encourage you to file an issue with them linking to this post so that they can provide a higher-order component instead. In the meantime, you can create a higher-order component around it yourself in exactly the same way.</p>
+<h3 id="utility-methods">Utility Methods</h3>
+<p>Sometimes, mixins are used solely to share utility functions between components:</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb15-1" title="1"><span class="kw">var</span> ColorMixin <span class="op">=</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb15-2" title="2">  <span class="at">getLuminance</span>(color) <span class="op">{</span></a>
+<a class="sourceLine" id="cb15-3" title="3">    <span class="kw">var</span> c <span class="op">=</span> <span class="at">parseInt</span>(color<span class="op">,</span> <span class="dv">16</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb15-4" title="4">    <span class="kw">var</span> r <span class="op">=</span> (c <span class="op">&amp;</span> <span class="bn">0xFF0000</span>) <span class="op">&gt;&gt;</span> <span class="dv">16</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb15-5" title="5">    <span class="kw">var</span> g <span class="op">=</span> (c <span class="op">&amp;</span> <span class="bn">0x00FF00</span>) <span class="op">&gt;&gt;</span> <span class="dv">8</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb15-6" title="6">    <span class="kw">var</span> b <span class="op">=</span> (c <span class="op">&amp;</span> <span class="bn">0x0000FF</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb15-7" title="7">    <span class="cf">return</span> (<span class="fl">0.299</span> <span class="op">*</span> r <span class="op">+</span> <span class="fl">0.587</span> <span class="op">*</span> g <span class="op">+</span> <span class="fl">0.114</span> <span class="op">*</span> b)<span class="op">;</span></a>
+<a class="sourceLine" id="cb15-8" title="8">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb15-9" title="9"><span class="op">};</span></a>
+<a class="sourceLine" id="cb15-10" title="10"></a>
+<a class="sourceLine" id="cb15-11" title="11"><span class="kw">var</span> Button <span class="op">=</span> <span class="va">React</span>.<span class="at">createClass</span>(<span class="op">{</span></a>
+<a class="sourceLine" id="cb15-12" title="12">  <span class="dt">mixins</span><span class="op">:</span> [ColorMixin]<span class="op">,</span></a>
+<a class="sourceLine" id="cb15-13" title="13"></a>
+<a class="sourceLine" id="cb15-14" title="14">  <span class="dt">render</span><span class="op">:</span> <span class="kw">function</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb15-15" title="15">    <span class="kw">var</span> theme <span class="op">=</span> <span class="kw">this</span>.<span class="at">getLuminance</span>(<span class="kw">this</span>.<span class="va">props</span>.<span class="at">color</span>) <span class="op">&gt;</span> <span class="dv">160</span> <span class="op">?</span> <span class="st">&#39;dark&#39;</span> : <span class="st">&#39;light&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb15-16" title="16">    <span class="cf">return</span> (</a>
+<a class="sourceLine" id="cb15-17" title="17">      <span class="op">&lt;</span>div className<span class="op">={</span>theme<span class="op">}&gt;</span></a>
+<a class="sourceLine" id="cb15-18" title="18">        <span class="op">{</span><span class="kw">this</span>.<span class="va">props</span>.<span class="at">children</span><span class="op">}</span></a>
+<a class="sourceLine" id="cb15-19" title="19">      &lt;/div<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb15-20" title="20">    )</a>
+<a class="sourceLine" id="cb15-21" title="21">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb15-22" title="22"><span class="op">}</span>)<span class="op">;</span></a></code></pre></div>
+<h4 id="solution-4">Solution</h4>
+<p>Put utility functions into regular JavaScript modules and import them. This also makes it easier to test them or use them outside of your components:</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb16-1" title="1"><span class="kw">var</span> getLuminance <span class="op">=</span> <span class="at">require</span>(<span class="st">&#39;../utils/getLuminance&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb16-2" title="2"></a>
+<a class="sourceLine" id="cb16-3" title="3"><span class="kw">var</span> Button <span class="op">=</span> <span class="va">React</span>.<span class="at">createClass</span>(<span class="op">{</span></a>
+<a class="sourceLine" id="cb16-4" title="4">  <span class="dt">render</span><span class="op">:</span> <span class="kw">function</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb16-5" title="5">    <span class="kw">var</span> theme <span class="op">=</span> <span class="at">getLuminance</span>(<span class="kw">this</span>.<span class="va">props</span>.<span class="at">color</span>) <span class="op">&gt;</span> <span class="dv">160</span> <span class="op">?</span> <span class="st">&#39;dark&#39;</span> : <span class="st">&#39;light&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb16-6" title="6">    <span class="cf">return</span> (</a>
+<a class="sourceLine" id="cb16-7" title="7">      <span class="op">&lt;</span>div className<span class="op">={</span>theme<span class="op">}&gt;</span></a>
+<a class="sourceLine" id="cb16-8" title="8">        <span class="op">{</span><span class="kw">this</span>.<span class="va">props</span>.<span class="at">children</span><span class="op">}</span></a>
+<a class="sourceLine" id="cb16-9" title="9">      &lt;/div<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb16-10" title="10">    )</a>
+<a class="sourceLine" id="cb16-11" title="11">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb16-12" title="12"><span class="op">}</span>)<span class="op">;</span></a></code></pre></div>
+<h3 id="other-use-cases">Other Use Cases</h3>
+<p>Sometimes people use mixins to selectively add logging to lifecycle methods in some components. In the future, we intend to provide an <a href="https://github.com/facebook/react/issues/5306">official DevTools API</a> that would let you implement something similar without touching the components. However it’s still very much a work in progress. If you heavily depend on logging mixins for debugging, you might want to keep using those mixins for a little longer.</p>
+<p>If you can’t accomplish something with a component, a higher-order component, or a utility module, it could mean that React should provide this out of the box. <a href="https://github.com/facebook/react/issues/new">File an issue</a> to tell us about your use case for mixins, and we’ll help you consider alternatives or perhaps implement your feature request.</p>
+<p>Mixins are not deprecated in the traditional sense. You can keep using them with <code>React.createClass()</code>, as we won’t be changing it further. Eventually, as ES6 classes gain more adoption and their usability problems in React are solved, we might split <code>React.createClass()</code> into a separate package because most people wouldn’t need it. Even in that case, your old mixins would keep working.</p>
+<p>We believe that the alternatives above are better for the vast majority of cases, and we invite you to try writing React apps without using mixins.</p>
+</body>
+</html>

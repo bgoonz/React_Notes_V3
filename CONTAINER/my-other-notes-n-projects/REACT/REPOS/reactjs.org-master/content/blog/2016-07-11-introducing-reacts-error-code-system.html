@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="keyanzhang" />
+  <title>Introducing React’s Error Code System</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Introducing React’s Error Code System</h1>
+<p class="author">keyanzhang</p>
+</header>
+<p>Building a better developer experience has been one of the things that React deeply cares about, and a crucial part of it is to detect anti-patterns/potential errors early and provide helpful error messages when things (may) go wrong. However, most of these only exist in development mode; in production, we avoid having extra expensive assertions and sending down full error messages in order to reduce the number of bytes sent over the wire.</p>
+<p>Prior to this release, we stripped out error messages at build-time and this is why you might have seen this message in production:</p>
+<blockquote>
+<p>Minified exception occurred; use the non-minified dev environment for the full error message and additional helpful warnings.</p>
+</blockquote>
+<p>In order to make debugging in production easier, we’re introducing an Error Code System in <a href="https://github.com/facebook/react/releases/tag/v15.2.0">15.2.0</a>. We developed a <a href="https://github.com/facebook/react/blob/master/scripts/error-codes/extract-errors.js">script</a> that collects all of our <code>invariant</code> error messages and folds them to a <a href="https://github.com/facebook/react/blob/master/scripts/error-codes/codes.json">JSON file</a>, and at build-time Babel uses the JSON to <a href="https://github.com/facebook/react/blob/master/scripts/error-codes/transform-error-messages.js">rewrite</a> our <code>invariant</code> calls in production to reference the corresponding error IDs. Now when things go wrong in production, the error that React throws will contain a URL with an error ID and relevant information. The URL will point you to a page in our documentation where the original error message gets reassembled.</p>
+<p>While we hope you don’t see errors often, you can see how it works <a href="/docs/error-decoder.html?invariant=109&amp;args%5B%5D=Foo">here</a>. This is what the same error from above will look like:</p>
+<blockquote>
+<p>Minified React error #109; visit <a href="/docs/error-decoder.html?invariant=109&amp;args%5B%5D=Foo">https://reactjs.org/docs/error-decoder.html?invariant=109&amp;args[]=Foo</a> for the full message or use the non-minified dev environment for full errors and additional helpful warnings.</p>
+</blockquote>
+<p>We do this so that the developer experience is as good as possible, while also keeping the production bundle size as small as possible. This feature shouldn’t require any changes on your side — use the <code>min.js</code> files in production or bundle your application code with <code>process.env.NODE_ENV === 'production'</code> and you should be good to go!</p>
+</body>
+</html>

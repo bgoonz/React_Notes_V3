@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="threepointone" />
+  <title>React v16.13.0</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">React v16.13.0</h1>
+<p class="author">threepointone</p>
+</header>
+<p>Today we are releasing React 16.13.0. It contains bugfixes and new deprecation warnings to help prepare for a future major release.</p>
+<h2 id="new-warnings">New Warnings</h2>
+<h3 id="warnings-for-some-updates-during-render">Warnings for some updates during render</h3>
+<p>A React component should not cause side effects in other components during rendering.</p>
+<p>It is supported to call <code>setState</code> during render, but <a href="/docs/hooks-faq.html#how-do-i-implement-getderivedstatefromprops">only for <em>the same component</em></a>. If you call <code>setState</code> during a render on a different component, you will now see a warning:</p>
+<pre><code>Warning: Cannot update a component from inside the function body of a different component.</code></pre>
+<p><strong>This warning will help you find application bugs caused by unintentional state changes.</strong> In the rare case that you intentionally want to change the state of another component as a result of rendering, you can wrap the <code>setState</code> call into <code>useEffect</code>.</p>
+<h3 id="warnings-for-conflicting-style-rules">Warnings for conflicting style rules</h3>
+<p>When dynamically applying a <code>style</code> that contains longhand and shorthand versions of CSS properties, particular combinations of updates can cause inconsistent styling. For example:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb2-1" title="1"><span class="op">&lt;</span>div style<span class="op">={</span>toggle <span class="op">?</span> </a>
+<a class="sourceLine" id="cb2-2" title="2">  <span class="op">{</span> <span class="dt">background</span><span class="op">:</span> <span class="st">&#39;blue&#39;</span><span class="op">,</span> <span class="dt">backgroundColor</span><span class="op">:</span> <span class="st">&#39;red&#39;</span> <span class="op">}</span> : </a>
+<a class="sourceLine" id="cb2-3" title="3">  <span class="op">{</span> <span class="dt">backgroundColor</span><span class="op">:</span> <span class="st">&#39;red&#39;</span> <span class="op">}</span></a>
+<a class="sourceLine" id="cb2-4" title="4"><span class="op">}&gt;</span></a>
+<a class="sourceLine" id="cb2-5" title="5">  ...</a>
+<a class="sourceLine" id="cb2-6" title="6">&lt;/div<span class="op">&gt;</span> </a></code></pre></div>
+<p>You might expect this <code>&lt;div&gt;</code> to always have a red background, no matter the value of <code>toggle</code>. However, on alternating the value of <code>toggle</code> between <code>true</code> and <code>false</code>, the background color start as <code>red</code>, then alternates between <code>transparent</code> and <code>blue</code>, <a href="https://codesandbox.io/s/suspicious-sunset-g3jub">as you can see in this demo</a>.</p>
+<p><strong>React now detects conflicting style rules and logs a warning.</strong> To fix the issue, don’t mix shorthand and longhand versions of the same CSS property in the <code>style</code> prop.</p>
+<h3 id="warnings-for-some-deprecated-string-refs">Warnings for some deprecated string refs</h3>
+<p><a href="/docs/refs-and-the-dom.html#legacy-api-string-refs">String Refs is an old legacy API</a> which is discouraged and is going to be deprecated in the future:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb3-1" title="1"><span class="op">&lt;</span>Button ref<span class="op">=</span><span class="st">&quot;myRef&quot;</span> /&gt;</a></code></pre></div>
+<p>(Don’t confuse String Refs with refs in general, which <strong>remain fully supported</strong>.)</p>
+<p>In the future, we will provide an automated script (a “codemod”) to migrate away from String Refs. However, some rare cases can’t be migrated automatically. This release adds a new warning <strong>only for those cases</strong> in advance of the deprecation.</p>
+<p>For example, it will fire if you use String Refs together with the Render Prop pattern:</p>
+<pre class="jsx"><code>class ClassWithRenderProp extends React.Component {
+  componentDidMount() {
+    doSomething(this.refs.myRef);
+  }
+  render() {
+    return this.props.children();
+  }
+}
+
+class ClassParent extends React.Component {
+  render() {
+    return (
+      &lt;ClassWithRenderProp&gt;
+        {() =&gt; &lt;Button ref=&quot;myRef&quot; /&gt;}
+      &lt;/ClassWithRenderProp&gt;
+    );
+  }
+}</code></pre>
+<p>Code like this often indicates bugs. (You might expect the ref to be available on <code>ClassParent</code>, but instead it gets placed on <code>ClassWithRenderProp</code>).</p>
+<p><strong>You most likely don’t have code like this</strong>. If you do and it is intentional, convert it to <a href="/docs/refs-and-the-dom.html#creating-refs"><code>React.createRef()</code></a> instead:</p>
+<pre class="jsx"><code>class ClassWithRenderProp extends React.Component {
+  myRef = React.createRef();
+  componentDidMount() {
+    doSomething(this.myRef.current);
+  }
+  render() {
+    return this.props.children(this.myRef);
+  }
+}
+
+class ClassParent extends React.Component {
+  render() {
+    return (
+      &lt;ClassWithRenderProp&gt;
+        {myRef =&gt; &lt;Button ref={myRef} /&gt;}
+      &lt;/ClassWithRenderProp&gt;
+    );
+  }
+}</code></pre>
+<blockquote>
+<p>Note</p>
+<p>To see this warning, you need to have the <a href="https://babeljs.io/docs/en/babel-plugin-transform-react-jsx-self">babel-plugin-transform-react-jsx-self</a> installed in your Babel plugins. It must <em>only</em> be enabled in development mode.</p>
+<p>If you use Create React App or have the “react” preset with Babel 7+, you already have this plugin installed by default.</p>
+</blockquote>
+<h3 id="deprecating-reactcreatefactory">Deprecating <code>React.createFactory</code></h3>
+<p><a href="/docs/react-api.html#createfactory"><code>React.createFactory</code></a> is a legacy helper for creating React elements. This release adds a deprecation warning to the method. It will be removed in a future major version.</p>
+<p>Replace usages of <code>React.createFactory</code> with regular JSX. Alternately, you can copy and paste this one-line helper or publish it as a library:</p>
+<pre class="jsx"><code>let createFactory = type =&gt; React.createElement.bind(null, type);</code></pre>
+<p>It does exactly the same thing.</p>
+<h3 id="deprecating-reactdomunstable_createportal-in-favor-of-reactdomcreateportal">Deprecating <code>ReactDOM.unstable_createPortal</code> in favor of <code>ReactDOM.createPortal</code></h3>
+<p>When React 16 was released, <code>createPortal</code> became an officially supported API.</p>
+<p>However, we kept <code>unstable_createPortal</code> as a supported alias to keep the few libraries that adopted it working. We are now deprecating the unstable alias. Use <code>createPortal</code> directly instead of <code>unstable_createPortal</code>. It has exactly the same signature.</p>
+<h2 id="other-improvements">Other Improvements</h2>
+<h3 id="component-stacks-in-hydration-warnings">Component stacks in hydration warnings</h3>
+<p>React adds component stacks to its development warnings, enabling developers to isolate bugs and debug their programs. This release adds component stacks to a number of development warnings that didn’t previously have them. As an example, consider this hydration warning from the previous versions:</p>
+<figure>
+<img src="../images/blog/react-v16.13.0/hydration-warning-before.png" alt="A screenshot of the console warning, simply stating the nature of the hydration mismatch: “Warning: Expected server HTML to contain a matching div in div.”" /><figcaption>A screenshot of the console warning, simply stating the nature of the hydration mismatch: “Warning: Expected server HTML to contain a matching div in div.”</figcaption>
+</figure>
+<p>While it’s pointing out an error with the code, it’s not clear where the error exists, and what to do next. This release adds a component stack to this warning, which makes it look like this:</p>
+<figure>
+<img src="../images/blog/react-v16.13.0/hydration-warning-after.png" alt="A screenshot of the console warning, stating the nature of the hydration mismatch, but also including a component stack : “Warning: Expected server HTML to contain a matching div in div, in div (at pages/index.js:4)…”" /><figcaption>A screenshot of the console warning, stating the nature of the hydration mismatch, but also including a component stack : “Warning: Expected server HTML to contain a matching div in div, in div (at pages/index.js:4)…”</figcaption>
+</figure>
+<p>This makes it clear where the problem is, and lets you locate and fix the bug faster.</p>
+<h3 id="notable-bugfixes">Notable bugfixes</h3>
+<p>This release contains a few other notable improvements:</p>
+<ul>
+<li><p>In Strict Development Mode, React calls lifecycle methods twice to flush out any possible unwanted side effects. This release adds that behaviour to <code>shouldComponentUpdate</code>. This shouldn’t affect most code, unless you have side effects in <code>shouldComponentUpdate</code>. To fix this, move the code with side effects into <code>componentDidUpdate</code>.</p></li>
+<li><p>In Strict Development Mode, the warnings for usage of the legacy context API didn’t include the stack for the component that triggered the warning. This release adds the missing stack to the warning.</p></li>
+<li><p><code>onMouseEnter</code> now doesn’t trigger on disabled <code>&lt;button&gt;</code> elements.</p></li>
+<li><p>ReactDOM was missing a <code>version</code> export since we published v16. This release adds it back. We don’t recommend using it in your application logic, but it’s useful when debugging issues with mismatching / multiple versions of ReactDOM on the same page.</p></li>
+</ul>
+<p>We’re thankful to all the contributors who helped surface and fix these and other issues. You can find the full changelog <a href="#changelog">below</a>.</p>
+<h2 id="installation">Installation</h2>
+<h3 id="react">React</h3>
+<p>React v16.13.0 is available on the npm registry.</p>
+<p>To install React 16 with Yarn, run:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb7-1" title="1"><span class="ex">yarn</span> add react@^16.13.0 react-dom@^16.13.0</a></code></pre></div>
+<p>To install React 16 with npm, run:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb8-1" title="1"><span class="ex">npm</span> install --save react@^16.13.0 react-dom@^16.13.0</a></code></pre></div>
+<p>We also provide UMD builds of React via a CDN:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode html"><code class="sourceCode html"><a class="sourceLine" id="cb9-1" title="1"><span class="kw">&lt;script</span><span class="ot"> crossorigin src=</span><span class="st">&quot;https://unpkg.com/react@16/umd/react.production.min.js&quot;</span><span class="kw">&gt;&lt;/script&gt;</span></a>
+<a class="sourceLine" id="cb9-2" title="2"><span class="kw">&lt;script</span><span class="ot"> crossorigin src=</span><span class="st">&quot;https://unpkg.com/react-dom@16/umd/react-dom.production.min.js&quot;</span><span class="kw">&gt;&lt;/script&gt;</span></a></code></pre></div>
+<p>Refer to the documentation for <a href="/docs/installation.html">detailed installation instructions</a>.</p>
+<h2 id="changelog">Changelog</h2>
+<h3 id="react">React</h3>
+<ul>
+<li>Warn when a string ref is used in a manner that’s not amenable to a future codemod (<span class="citation" data-cites="lunaruan">[@lunaruan]</span>(https://github.com/lunaruan) in <a href="https://github.com/facebook/react/pull/17864">#17864</a>)</li>
+<li>Deprecate <code>React.createFactory()</code> (<span class="citation" data-cites="trueadm">[@trueadm]</span>(https://github.com/trueadm) in <a href="https://github.com/facebook/react/pull/17878">#17878</a>)</li>
+</ul>
+<h3 id="react-dom">React DOM</h3>
+<ul>
+<li>Warn when changes in <code>style</code> may cause an unexpected collision (<span class="citation" data-cites="sophiebits">[@sophiebits]</span>(https://github.com/sophiebits) in <a href="https://github.com/facebook/react/pull/14181">#14181</a>, <a href="https://github.com/facebook/react/pull/18002">#18002</a>)</li>
+<li>Warn when a function component is updated during another component’s render phase (<span class="citation" data-cites="acdlite">[@acdlite]</span>(&lt;(https://github.com/acdlite)&gt;) in <a href="https://github.com/facebook/react/pull/17099">#17099</a>)</li>
+<li>Deprecate <code>unstable_createPortal</code> (<span class="citation" data-cites="trueadm">[@trueadm]</span>(https://github.com/trueadm) in <a href="https://github.com/facebook/react/pull/17880">#17880</a>)</li>
+<li>Fix <code>onMouseEnter</code> being fired on disabled buttons (<span class="citation" data-cites="AlfredoGJ">[@AlfredoGJ]</span>(https://github.com/AlfredoGJ) in <a href="https://github.com/facebook/react/pull/17675">#17675</a>)</li>
+<li>Call <code>shouldComponentUpdate</code> twice when developing in <code>StrictMode</code> (<span class="citation" data-cites="bvaughn">[@bvaughn]</span>(https://github.com/bvaughn) in <a href="https://github.com/facebook/react/pull/17942">#17942</a>)</li>
+<li>Add <code>version</code> property to ReactDOM (<span class="citation" data-cites="ealush">[@ealush]</span>(https://github.com/ealush) in <a href="https://github.com/facebook/react/pull/15780">#15780</a>)</li>
+<li>Don’t call <code>toString()</code> of <code>dangerouslySetInnerHTML</code> (<span class="citation" data-cites="sebmarkbage">[@sebmarkbage]</span>(https://github.com/sebmarkbage) in <a href="https://github.com/facebook/react/pull/17773">#17773</a>)</li>
+<li>Show component stacks in more warnings (<span class="citation" data-cites="gaearon">[@gaearon]</span>(https://github.com/gaearon) in <a href="https://github.com/facebook/react/pull/17922">#17922</a>, <a href="https://github.com/facebook/react/pull/17586">#17586</a>)</li>
+</ul>
+<h3 id="concurrent-mode-experimental">Concurrent Mode (Experimental)</h3>
+<ul>
+<li>Warn for problematic usages of <code>ReactDOM.createRoot()</code> (<span class="citation" data-cites="trueadm">[@trueadm]</span>(https://github.com/trueadm) in <a href="https://github.com/facebook/react/pull/17937">#17937</a>)</li>
+<li>Remove <code>ReactDOM.createRoot()</code> callback params and added warnings on usage (<span class="citation" data-cites="bvaughn">[@bvaughn]</span>(https://github.com/bvaughn) in <a href="https://github.com/facebook/react/pull/17916">#17916</a>)</li>
+<li>Don’t group Idle/Offscreen work with other work (<span class="citation" data-cites="sebmarkbage">[@sebmarkbage]</span>(https://github.com/sebmarkbage) in <a href="https://github.com/facebook/react/pull/17456">#17456</a>)</li>
+<li>Adjust <code>SuspenseList</code> CPU bound heuristic (<span class="citation" data-cites="sebmarkbage">[@sebmarkbage]</span>(https://github.com/sebmarkbage) in <a href="https://github.com/facebook/react/pull/17455">#17455</a>)</li>
+<li>Add missing event plugin priorities (<span class="citation" data-cites="trueadm">[@trueadm]</span>(https://github.com/trueadm) in <a href="https://github.com/facebook/react/pull/17914">#17914</a>)</li>
+<li>Fix <code>isPending</code> only being true when transitioning from inside an input event (<span class="citation" data-cites="acdlite">[@acdlite]</span>(https://github.com/acdlite) in <a href="https://github.com/facebook/react/pull/17382">#17382</a>)</li>
+<li>Fix <code>React.memo</code> components dropping updates when interrupted by a higher priority update (<span class="citation" data-cites="acdlite">[@acdlite]</span>(https://github.com/acdlite) in <a href="https://github.com/facebook/react/pull/18091">#18091</a>)</li>
+<li>Don’t warn when suspending at the wrong priority (<span class="citation" data-cites="gaearon">[@gaearon]</span>(https://github.com/gaearon) in <a href="https://github.com/facebook/react/pull/17971">#17971</a>)</li>
+<li>Fix a bug with rebasing updates (<span class="citation" data-cites="acdlite">[@acdlite]</span>(https://github.com/acdlite) and <span class="citation" data-cites="sebmarkbage">[@sebmarkbage]</span>(https://github.com/sebmarkbage) in <a href="https://github.com/facebook/react/pull/17560">#17560</a>, <a href="https://github.com/facebook/react/pull/17510">#17510</a>, <a href="https://github.com/facebook/react/pull/17483">#17483</a>, <a href="https://github.com/facebook/react/pull/17480">#17480</a>)</li>
+</ul>
+</body>
+</html>

@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Components and Props</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Components and Props</h1>
+</header>
+<p>Components let you split the UI into independent, reusable pieces, and think about each piece in isolation. This page provides an introduction to the idea of components. You can find a <a href="/docs/react-component.html">detailed component API reference here</a>.</p>
+<p>Conceptually, components are like JavaScript functions. They accept arbitrary inputs (called “props”) and return React elements describing what should appear on the screen.</p>
+<h2 id="function-and-class-components">Function and Class Components</h2>
+<p>The simplest way to define a component is to write a JavaScript function:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">function</span> <span class="at">Welcome</span>(props) <span class="op">{</span></a>
+<a class="sourceLine" id="cb1-2" title="2">  <span class="cf">return</span> <span class="op">&lt;</span>h1<span class="op">&gt;</span>Hello<span class="op">,</span> <span class="op">{</span><span class="va">props</span>.<span class="at">name</span><span class="op">}</span>&lt;/h1<span class="op">&gt;;</span></a>
+<a class="sourceLine" id="cb1-3" title="3"><span class="op">}</span></a></code></pre></div>
+<p>This function is a valid React component because it accepts a single “props” (which stands for properties) object argument with data and returns a React element. We call such components “function components” because they are literally JavaScript functions.</p>
+<p>You can also use an <a href="https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Classes">ES6 class</a> to define a component:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb2-1" title="1"><span class="kw">class</span> Welcome <span class="kw">extends</span> <span class="va">React</span>.<span class="at">Component</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb2-2" title="2">  <span class="at">render</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb2-3" title="3">    <span class="cf">return</span> <span class="op">&lt;</span>h1<span class="op">&gt;</span>Hello<span class="op">,</span> <span class="op">{</span><span class="kw">this</span>.<span class="va">props</span>.<span class="at">name</span><span class="op">}</span>&lt;/h1<span class="op">&gt;;</span></a>
+<a class="sourceLine" id="cb2-4" title="4">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb2-5" title="5"><span class="op">}</span></a></code></pre></div>
+<p>The above two components are equivalent from React’s point of view.</p>
+<p>Function and Class components both have some additional features that we will discuss in the <a href="/docs/state-and-lifecycle.html">next sections</a>.</p>
+<h2 id="rendering-a-component">Rendering a Component</h2>
+<p>Previously, we only encountered React elements that represent DOM tags:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb3-1" title="1"><span class="kw">const</span> element <span class="op">=</span> <span class="op">&lt;</span>div /<span class="op">&gt;;</span></a></code></pre></div>
+<p>However, elements can also represent user-defined components:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb4-1" title="1"><span class="kw">const</span> element <span class="op">=</span> <span class="op">&lt;</span>Welcome name<span class="op">=</span><span class="st">&quot;Sara&quot;</span> /&gt;<span class="op">;</span></a></code></pre></div>
+<p>When React sees an element representing a user-defined component, it passes JSX attributes and children to this component as a single object. We call this object “props”.</p>
+<p>For example, this code renders “Hello, Sara” on the page:</p>
+<pre class="js{1,5}"><code>function Welcome(props) {
+  return &lt;h1&gt;Hello, {props.name}&lt;/h1&gt;;
+}
+
+const element = &lt;Welcome name=&quot;Sara&quot; /&gt;;
+ReactDOM.render(
+  element,
+  document.getElementById(&#39;root&#39;)
+);</code></pre>
+<p><a href="codepen://components-and-props/rendering-a-component"></a></p>
+<p>Let’s recap what happens in this example:</p>
+<ol type="1">
+<li>We call <code>ReactDOM.render()</code> with the <code>&lt;Welcome name="Sara" /&gt;</code> element.</li>
+<li>React calls the <code>Welcome</code> component with <code>{name: 'Sara'}</code> as the props.</li>
+<li>Our <code>Welcome</code> component returns a <code>&lt;h1&gt;Hello, Sara&lt;/h1&gt;</code> element as the result.</li>
+<li>React DOM efficiently updates the DOM to match <code>&lt;h1&gt;Hello, Sara&lt;/h1&gt;</code>.</li>
+</ol>
+<blockquote>
+<p><strong>Note:</strong> Always start component names with a capital letter.</p>
+<p>React treats components starting with lowercase letters as DOM tags. For example, <code>&lt;div /&gt;</code> represents an HTML div tag, but <code>&lt;Welcome /&gt;</code> represents a component and requires <code>Welcome</code> to be in scope.</p>
+<p>To learn more about the reasoning behind this convention, please read <a href="/docs/jsx-in-depth.html#user-defined-components-must-be-capitalized">JSX In Depth</a>.</p>
+</blockquote>
+<h2 id="composing-components">Composing Components</h2>
+<p>Components can refer to other components in their output. This lets us use the same component abstraction for any level of detail. A button, a form, a dialog, a screen: in React apps, all those are commonly expressed as components.</p>
+<p>For example, we can create an <code>App</code> component that renders <code>Welcome</code> many times:</p>
+<pre class="js{8-10}"><code>function Welcome(props) {
+  return &lt;h1&gt;Hello, {props.name}&lt;/h1&gt;;
+}
+
+function App() {
+  return (
+    &lt;div&gt;
+      &lt;Welcome name=&quot;Sara&quot; /&gt;
+      &lt;Welcome name=&quot;Cahal&quot; /&gt;
+      &lt;Welcome name=&quot;Edite&quot; /&gt;
+    &lt;/div&gt;
+  );
+}
+
+ReactDOM.render(
+  &lt;App /&gt;,
+  document.getElementById(&#39;root&#39;)
+);</code></pre>
+<p><a href="codepen://components-and-props/composing-components"></a></p>
+<p>Typically, new React apps have a single <code>App</code> component at the very top. However, if you integrate React into an existing app, you might start bottom-up with a small component like <code>Button</code> and gradually work your way to the top of the view hierarchy.</p>
+<h2 id="extracting-components">Extracting Components</h2>
+<p>Don’t be afraid to split components into smaller components.</p>
+<p>For example, consider this <code>Comment</code> component:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb7-1" title="1"><span class="kw">function</span> <span class="at">Comment</span>(props) <span class="op">{</span></a>
+<a class="sourceLine" id="cb7-2" title="2">  <span class="cf">return</span> (</a>
+<a class="sourceLine" id="cb7-3" title="3">    <span class="op">&lt;</span>div className<span class="op">=</span><span class="st">&quot;Comment&quot;</span><span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb7-4" title="4">      <span class="op">&lt;</span>div className<span class="op">=</span><span class="st">&quot;UserInfo&quot;</span><span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb7-5" title="5">        <span class="op">&lt;</span>img className<span class="op">=</span><span class="st">&quot;Avatar&quot;</span></a>
+<a class="sourceLine" id="cb7-6" title="6">          src<span class="op">={</span><span class="va">props</span>.<span class="va">author</span>.<span class="at">avatarUrl</span><span class="op">}</span></a>
+<a class="sourceLine" id="cb7-7" title="7">          alt<span class="op">={</span><span class="va">props</span>.<span class="va">author</span>.<span class="at">name</span><span class="op">}</span></a>
+<a class="sourceLine" id="cb7-8" title="8">        /&gt;</a>
+<a class="sourceLine" id="cb7-9" title="9">        <span class="op">&lt;</span>div className<span class="op">=</span><span class="st">&quot;UserInfo-name&quot;</span><span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb7-10" title="10">          <span class="op">{</span><span class="va">props</span>.<span class="va">author</span>.<span class="at">name</span><span class="op">}</span></a>
+<a class="sourceLine" id="cb7-11" title="11">        &lt;/div<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb7-12" title="12">      &lt;/div<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb7-13" title="13">      <span class="op">&lt;</span>div className<span class="op">=</span><span class="st">&quot;Comment-text&quot;</span><span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb7-14" title="14">        <span class="op">{</span><span class="va">props</span>.<span class="at">text</span><span class="op">}</span></a>
+<a class="sourceLine" id="cb7-15" title="15">      &lt;/div<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb7-16" title="16">      <span class="op">&lt;</span>div className<span class="op">=</span><span class="st">&quot;Comment-date&quot;</span><span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb7-17" title="17">        <span class="op">{</span><span class="at">formatDate</span>(<span class="va">props</span>.<span class="at">date</span>)<span class="op">}</span></a>
+<a class="sourceLine" id="cb7-18" title="18">      &lt;/div<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb7-19" title="19">    &lt;/div<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb7-20" title="20">  )<span class="op">;</span></a>
+<a class="sourceLine" id="cb7-21" title="21"><span class="op">}</span></a></code></pre></div>
+<p><a href="codepen://components-and-props/extracting-components"></a></p>
+<p>It accepts <code>author</code> (an object), <code>text</code> (a string), and <code>date</code> (a date) as props, and describes a comment on a social media website.</p>
+<p>This component can be tricky to change because of all the nesting, and it is also hard to reuse individual parts of it. Let’s extract a few components from it.</p>
+<p>First, we will extract <code>Avatar</code>:</p>
+<pre class="js{3-6}"><code>function Avatar(props) {
+  return (
+    &lt;img className=&quot;Avatar&quot;
+      src={props.user.avatarUrl}
+      alt={props.user.name}
+    /&gt;
+  );
+}</code></pre>
+<p>The <code>Avatar</code> doesn’t need to know that it is being rendered inside a <code>Comment</code>. This is why we have given its prop a more generic name: <code>user</code> rather than <code>author</code>.</p>
+<p>We recommend naming props from the component’s own point of view rather than the context in which it is being used.</p>
+<p>We can now simplify <code>Comment</code> a tiny bit:</p>
+<pre class="js{5}"><code>function Comment(props) {
+  return (
+    &lt;div className=&quot;Comment&quot;&gt;
+      &lt;div className=&quot;UserInfo&quot;&gt;
+        &lt;Avatar user={props.author} /&gt;
+        &lt;div className=&quot;UserInfo-name&quot;&gt;
+          {props.author.name}
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div className=&quot;Comment-text&quot;&gt;
+        {props.text}
+      &lt;/div&gt;
+      &lt;div className=&quot;Comment-date&quot;&gt;
+        {formatDate(props.date)}
+      &lt;/div&gt;
+    &lt;/div&gt;
+  );
+}</code></pre>
+<p>Next, we will extract a <code>UserInfo</code> component that renders an <code>Avatar</code> next to the user’s name:</p>
+<pre class="js{3-8}"><code>function UserInfo(props) {
+  return (
+    &lt;div className=&quot;UserInfo&quot;&gt;
+      &lt;Avatar user={props.user} /&gt;
+      &lt;div className=&quot;UserInfo-name&quot;&gt;
+        {props.user.name}
+      &lt;/div&gt;
+    &lt;/div&gt;
+  );
+}</code></pre>
+<p>This lets us simplify <code>Comment</code> even further:</p>
+<pre class="js{4}"><code>function Comment(props) {
+  return (
+    &lt;div className=&quot;Comment&quot;&gt;
+      &lt;UserInfo user={props.author} /&gt;
+      &lt;div className=&quot;Comment-text&quot;&gt;
+        {props.text}
+      &lt;/div&gt;
+      &lt;div className=&quot;Comment-date&quot;&gt;
+        {formatDate(props.date)}
+      &lt;/div&gt;
+    &lt;/div&gt;
+  );
+}</code></pre>
+<p><a href="codepen://components-and-props/extracting-components-continued"></a></p>
+<p>Extracting components might seem like grunt work at first, but having a palette of reusable components pays off in larger apps. A good rule of thumb is that if a part of your UI is used several times (<code>Button</code>, <code>Panel</code>, <code>Avatar</code>), or is complex enough on its own (<code>App</code>, <code>FeedStory</code>, <code>Comment</code>), it is a good candidate to be extracted to a separate component.</p>
+<h2 id="props-are-read-only">Props are Read-Only</h2>
+<p>Whether you declare a component <a href="#function-and-class-components">as a function or a class</a>, it must never modify its own props. Consider this <code>sum</code> function:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb12-1" title="1"><span class="kw">function</span> <span class="at">sum</span>(a<span class="op">,</span> b) <span class="op">{</span></a>
+<a class="sourceLine" id="cb12-2" title="2">  <span class="cf">return</span> a <span class="op">+</span> b<span class="op">;</span></a>
+<a class="sourceLine" id="cb12-3" title="3"><span class="op">}</span></a></code></pre></div>
+<p>Such functions are called <a href="https://en.wikipedia.org/wiki/Pure_function">“pure”</a> because they do not attempt to change their inputs, and always return the same result for the same inputs.</p>
+<p>In contrast, this function is impure because it changes its own input:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb13-1" title="1"><span class="kw">function</span> <span class="at">withdraw</span>(account<span class="op">,</span> amount) <span class="op">{</span></a>
+<a class="sourceLine" id="cb13-2" title="2">  <span class="va">account</span>.<span class="at">total</span> <span class="op">-=</span> amount<span class="op">;</span></a>
+<a class="sourceLine" id="cb13-3" title="3"><span class="op">}</span></a></code></pre></div>
+<p>React is pretty flexible but it has a single strict rule:</p>
+<p><strong>All React components must act like pure functions with respect to their props.</strong></p>
+<p>Of course, application UIs are dynamic and change over time. In the <a href="/docs/state-and-lifecycle.html">next section</a>, we will introduce a new concept of “state”. State allows React components to change their output over time in response to user actions, network responses, and anything else, without violating this rule.</p>
+</body>
+</html>

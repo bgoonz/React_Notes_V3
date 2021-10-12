@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="acdlite" />
+  <title>React v16.4.0: Pointer Events</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">React v16.4.0: Pointer Events</h1>
+<p class="author">acdlite</p>
+</header>
+<p>The latest minor release adds support for an oft-requested feature: pointer events!</p>
+<p>It also includes a bugfix for <code>getDerivedStateFromProps</code>. Check out the full <a href="#changelog">changelog</a> below.</p>
+<h2 id="pointer-events">Pointer Events</h2>
+<p>The following event types are now available in React DOM:</p>
+<ul>
+<li><code>onPointerDown</code></li>
+<li><code>onPointerMove</code></li>
+<li><code>onPointerUp</code></li>
+<li><code>onPointerCancel</code></li>
+<li><code>onGotPointerCapture</code></li>
+<li><code>onLostPointerCapture</code></li>
+<li><code>onPointerEnter</code></li>
+<li><code>onPointerLeave</code></li>
+<li><code>onPointerOver</code></li>
+<li><code>onPointerOut</code></li>
+</ul>
+<p>Please note that these events will only work in browsers that support the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Pointer_events">Pointer Events</a> specification. (At the time of this writing, this includes the latest versions of Chrome, Firefox, Edge, and Internet Explorer.) If your application depends on pointer events, we recommend using a third-party pointer events polyfill. We have opted not to include such a polyfill in React DOM, to avoid an increase in bundle size.</p>
+<p><a href="codesandbox://16-4-release-blog-post/pointer-events-example">Check out this example on CodeSandbox.</a></p>
+<p>Huge thanks to <a href="https://github.com/philipp-spiess">Philipp Spiess</a> for contributing this change!</p>
+<h2 id="bugfix-for-getderivedstatefromprops">Bugfix for <code>getDerivedStateFromProps</code></h2>
+<p><code>getDerivedStateFromProps</code> is now called every time a component is rendered, regardless of the cause of the update. Previously, it was only called if the component was re-rendered by its parent, and would not fire as the result of a local <code>setState</code>. This was an oversight in the initial implementation that has now been corrected. The previous behavior was more similar to <code>componentWillReceiveProps</code>, but the improved behavior ensures compatibility with React’s upcoming asynchronous rendering mode.</p>
+<p><strong>This bug fix will not affect most apps</strong>, but it may cause issues with a small fraction of components. The rare cases where it does matter fall into one of two categories:</p>
+<h3 id="avoid-side-effects-in-getderivedstatefromprops-1-avoid-side-effects-in-getderivedstatefromprops">1. Avoid Side Effects in <code>getDerivedStateFromProps</code> {#1-avoid-side-effects-in-getderivedstatefromprops}</h3>
+<p>Like the render method, <code>getDerivedStateFromProps</code> should be a pure function of props and state. Side effects in <code>getDerivedStateFromProps</code> were never supported, but since it now fires more often than it used to, the recent change may expose previously undiscovered bugs.</p>
+<p>Side effectful code should be moved to other methods: for example, Flux dispatches typically belong inside the originating event handler, and manual DOM mutations belong inside componentDidMount or componentDidUpdate. You can read more about this in our recent post about <a href="/blog/2018/03/27/update-on-async-rendering.html">preparing for asynchronous rendering</a>.</p>
+<h3 id="compare-incoming-props-to-previous-props-when-computing-controlled-values-2-compare-incoming-props-to-previous-props-when-computing-controlled-values">2. Compare Incoming Props to Previous Props When Computing Controlled Values {#2-compare-incoming-props-to-previous-props-when-computing-controlled-values}</h3>
+<p>The following code assumes <code>getDerivedStateFromProps</code> only fires on prop changes:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">static</span> <span class="at">getDerivedStateFromProps</span>(props<span class="op">,</span> state) <span class="op">{</span></a>
+<a class="sourceLine" id="cb1-2" title="2">  <span class="cf">if</span> (<span class="va">props</span>.<span class="at">value</span> <span class="op">!==</span> <span class="va">state</span>.<span class="at">controlledValue</span>) <span class="op">{</span></a>
+<a class="sourceLine" id="cb1-3" title="3">    <span class="cf">return</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb1-4" title="4">      <span class="co">// Since this method fires on both props and state changes, local updates</span></a>
+<a class="sourceLine" id="cb1-5" title="5">      <span class="co">// to the controlled value will be ignored, because the props version</span></a>
+<a class="sourceLine" id="cb1-6" title="6">      <span class="co">// always overrides it. Oops!</span></a>
+<a class="sourceLine" id="cb1-7" title="7">      <span class="dt">controlledValue</span><span class="op">:</span> <span class="va">props</span>.<span class="at">value</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb1-8" title="8">    <span class="op">};</span></a>
+<a class="sourceLine" id="cb1-9" title="9">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb1-10" title="10">  <span class="cf">return</span> <span class="kw">null</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb1-11" title="11"><span class="op">}</span></a></code></pre></div>
+<p>One possible way to fix this is to compare the incoming value to the previous value by storing the previous props in state:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb2-1" title="1"><span class="kw">static</span> <span class="at">getDerivedStateFromProps</span>(props<span class="op">,</span> state) <span class="op">{</span></a>
+<a class="sourceLine" id="cb2-2" title="2">  <span class="kw">const</span> prevProps <span class="op">=</span> <span class="va">state</span>.<span class="at">prevProps</span> <span class="op">||</span> <span class="op">{};</span></a>
+<a class="sourceLine" id="cb2-3" title="3">  <span class="co">// Compare the incoming prop to previous prop</span></a>
+<a class="sourceLine" id="cb2-4" title="4">  <span class="kw">const</span> controlledValue <span class="op">=</span></a>
+<a class="sourceLine" id="cb2-5" title="5">    <span class="va">prevProps</span>.<span class="at">value</span> <span class="op">!==</span> <span class="va">props</span>.<span class="at">value</span></a>
+<a class="sourceLine" id="cb2-6" title="6">      <span class="op">?</span> <span class="va">props</span>.<span class="at">value</span></a>
+<a class="sourceLine" id="cb2-7" title="7">      : <span class="va">state</span>.<span class="at">controlledValue</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb2-8" title="8">  <span class="cf">return</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb2-9" title="9">    <span class="co">// Store the previous props in state</span></a>
+<a class="sourceLine" id="cb2-10" title="10">    <span class="dt">prevProps</span><span class="op">:</span> props<span class="op">,</span></a>
+<a class="sourceLine" id="cb2-11" title="11">    controlledValue<span class="op">,</span></a>
+<a class="sourceLine" id="cb2-12" title="12">  <span class="op">};</span></a>
+<a class="sourceLine" id="cb2-13" title="13"><span class="op">}</span></a></code></pre></div>
+<p>However, <strong>code that “mirrors” props in state usually contains bugs</strong>, whether you use the newer <code>getDerivedStateFromProps</code> or the legacy <code>componentWillReceiveProps</code>. We published a follow-up blog post that explains these problems in more detail, and suggests <a href="/blog/2018/06/07/you-probably-dont-need-derived-state.html">simpler solutions that don’t involve <code>getDerivedStateFromProps()</code></a>.</p>
+<h2 id="installation">Installation</h2>
+<p>React v16.4.0 is available on the npm registry.</p>
+<p>To install React 16 with Yarn, run:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb3-1" title="1"><span class="ex">yarn</span> add react@^16.4.0 react-dom@^16.4.0</a></code></pre></div>
+<p>To install React 16 with npm, run:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb4-1" title="1"><span class="ex">npm</span> install --save react@^16.4.0 react-dom@^16.4.0</a></code></pre></div>
+<p>We also provide UMD builds of React via a CDN:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode html"><code class="sourceCode html"><a class="sourceLine" id="cb5-1" title="1"><span class="kw">&lt;script</span><span class="ot"> crossorigin src=</span><span class="st">&quot;https://unpkg.com/react@16/umd/react.production.min.js&quot;</span><span class="kw">&gt;&lt;/script&gt;</span></a>
+<a class="sourceLine" id="cb5-2" title="2"><span class="kw">&lt;script</span><span class="ot"> crossorigin src=</span><span class="st">&quot;https://unpkg.com/react-dom@16/umd/react-dom.production.min.js&quot;</span><span class="kw">&gt;&lt;/script&gt;</span></a></code></pre></div>
+<p>Refer to the documentation for <a href="/docs/installation.html">detailed installation instructions</a>.</p>
+<h2 id="changelog">Changelog</h2>
+<h3 id="react">React</h3>
+<ul>
+<li>Add a new <a href="https://github.com/reactjs/rfcs/pull/51">experimental</a> <code>React.unstable_Profiler</code> component for measuring performance. (<span class="citation" data-cites="bvaughn">[@bvaughn]</span>(https://github.com/bvaughn) in <a href="https://github.com/facebook/react/pull/12745">#12745</a>)</li>
+</ul>
+<h3 id="react-dom">React DOM</h3>
+<ul>
+<li>Add support for the Pointer Events specification. (<span class="citation" data-cites="philipp-spiess">[@philipp-spiess]</span>(https://github.com/philipp-spiess) in <a href="https://github.com/facebook/react/pull/12507">#12507</a>)</li>
+<li>Properly call <code>getDerivedStateFromProps()</code> regardless of the reason for re-rendering. (<span class="citation" data-cites="acdlite">[@acdlite]</span>(https://github.com/acdlite) in <a href="https://github.com/facebook/react/pull/12600">#12600</a> and <a href="https://github.com/facebook/react/pull/12802">#12802</a>)</li>
+<li>Fix a bug that prevented context propagation in some cases. (<span class="citation" data-cites="gaearon">[@gaearon]</span>(https://github.com/gaearon) in <a href="https://github.com/facebook/react/pull/12708">#12708</a>)</li>
+<li>Fix re-rendering of components using <code>forwardRef()</code> on a deeper <code>setState()</code>. (<span class="citation" data-cites="gaearon">[@gaearon]</span>(https://github.com/gaearon) in <a href="https://github.com/facebook/react/pull/12690">#12690</a>)</li>
+<li>Fix some attributes incorrectly getting removed from custom element nodes. (<span class="citation" data-cites="airamrguez">[@airamrguez]</span>(https://github.com/airamrguez) in <a href="https://github.com/facebook/react/pull/12702">#12702</a>)</li>
+<li>Fix context providers to not bail out on children if there’s a legacy context provider above. (<span class="citation" data-cites="gaearon">[@gaearon]</span>(https://github.com/gaearon) in <a href="https://github.com/facebook/react/pull/12586">#12586</a>)</li>
+<li>Add the ability to specify <code>propTypes</code> on a context provider component. (<span class="citation" data-cites="nicolevy">[@nicolevy]</span>(https://github.com/nicolevy) in <a href="https://github.com/facebook/react/pull/12658">#12658</a>)</li>
+<li>Fix a false positive warning when using <code>react-lifecycles-compat</code> in <code>&lt;StrictMode&gt;</code>. (<span class="citation" data-cites="bvaughn">[@bvaughn]</span>(https://github.com/bvaughn) in <a href="https://github.com/facebook/react/pull/12644">#12644</a>)</li>
+<li>Warn when the <code>forwardRef()</code> render function has <code>propTypes</code> or <code>defaultProps</code>. (<span class="citation" data-cites="bvaughn">[@bvaughn]</span>(https://github.com/bvaughn) in <a href="https://github.com/facebook/react/pull/12644">#12644</a>)</li>
+<li>Improve how <code>forwardRef()</code> and context consumers are displayed in the component stack. (<span class="citation" data-cites="sophiebits">[@sophiebits]</span>(https://github.com/sophiebits) in <a href="https://github.com/facebook/react/pull/12777">#12777</a>)</li>
+<li>Change internal event names. This can break third-party packages that rely on React internals in unsupported ways. (<span class="citation" data-cites="philipp-spiess">[@philipp-spiess]</span>(https://github.com/philipp-spiess) in <a href="https://github.com/facebook/react/pull/12629">#12629</a>)</li>
+</ul>
+<h3 id="react-test-renderer">React Test Renderer</h3>
+<ul>
+<li>Fix the <code>getDerivedStateFromProps()</code> support to match the new React DOM behavior. (<span class="citation" data-cites="koba04">[@koba04]</span>(https://github.com/koba04) in <a href="https://github.com/facebook/react/pull/12676">#12676</a>)</li>
+<li>Fix a <code>testInstance.parent</code> crash when the parent is a fragment or another special node. (<span class="citation" data-cites="gaearon">[@gaearon]</span>(https://github.com/gaearon) in <a href="https://github.com/facebook/react/pull/12813">#12813</a>)</li>
+<li><code>forwardRef()</code> components are now discoverable by the test renderer traversal methods. (<span class="citation" data-cites="gaearon">[@gaearon]</span>(https://github.com/gaearon) in <a href="https://github.com/facebook/react/pull/12725">#12725</a>)</li>
+<li>Shallow renderer now ignores <code>setState()</code> updaters that return <code>null</code> or <code>undefined</code>. (<span class="citation" data-cites="koba04">[@koba04]</span>(https://github.com/koba04) in <a href="https://github.com/facebook/react/pull/12756">#12756</a>)</li>
+</ul>
+<h3 id="react-art">React ART</h3>
+<ul>
+<li>Fix reading context provided from the tree managed by React DOM. (<span class="citation" data-cites="acdlite">[@acdlite]</span>(https://github.com/acdlite) in <a href="https://github.com/facebook/react/pull/12779">#12779</a>)</li>
+</ul>
+<h3 id="react-call-return-experimental">React Call Return (Experimental)</h3>
+<ul>
+<li>This experiment was deleted because it was affecting the bundle size and the API wasn’t good enough. It’s likely to come back in the future in some other form. (<span class="citation" data-cites="gaearon">[@gaearon]</span>(https://github.com/gaearon) in <a href="https://github.com/facebook/react/pull/12820">#12820</a>)</li>
+</ul>
+<h3 id="react-reconciler-experimental">React Reconciler (Experimental)</h3>
+<ul>
+<li>The <a href="https://github.com/facebook/react/blob/c601f7a64640290af85c9f0e33c78480656b46bc/packages/react-noop-renderer/src/createReactNoop.js#L82-L285">new host config shape</a> is flat and doesn’t use nested objects. (<span class="citation" data-cites="gaearon">[@gaearon]</span>(https://github.com/gaearon) in <a href="https://github.com/facebook/react/pull/12792">#12792</a>)</li>
+</ul>
+</body>
+</html>

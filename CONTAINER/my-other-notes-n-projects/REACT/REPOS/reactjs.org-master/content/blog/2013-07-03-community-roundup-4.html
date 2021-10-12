@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="vjeux" />
+  <title>Community Round-up #4</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Community Round-up #4</h1>
+<p class="author">vjeux</p>
+</header>
+<p>React reconciliation process appears to be very well suited to implement a text editor with a live preview as people at Khan Academy show us.</p>
+<h2 id="khan-academy">Khan Academy</h2>
+<p><a href="http://bjk5.com/">Ben Kamens</a> explains how <a href="http://sophiebits.com/">Sophie Alpert</a> and <a href="http://joelburget.com/">Joel Burget</a> are promoting React inside of <a href="https://www.khanacademy.org/">Khan Academy</a>. They now have three projects in the works using React.</p>
+<blockquote>
+<p>Recently two Khan Academy devs dropped into our team chat and said they were gonna use React to write a new feature. They even hinted that we may want to adopt it product-wide.</p>
+<p>“The library is only a week old. It’s a brand new way of thinking about things. We’re the first to use it outside of Facebook. Heck, even the React devs were surprised to hear we’re using this in production!!!”</p>
+<p><a href="http://bjk5.com/post/53742233351/getting-your-team-to-adopt-new-technology">Read the full post…</a></p>
+</blockquote>
+<p>The best part is the demo of how React reconciliation process makes live editing more user-friendly.</p>
+<blockquote>
+<p>Our renderer, post-React, is on the left. A typical math editor’s preview is on the right.</p>
+</blockquote>
+<p><a href="http://bjk5.com/post/53742233351/getting-your-team-to-adopt-new-technology"><img src="../images/blog/monkeys.gif" /></a></p>
+<h2 id="react-snippets">React Snippets</h2>
+<p>Over the past several weeks, members of our team, <a href="http://www.petehunt.net/">Pete Hunt</a> and <a href="http://zpao.com/">Paul O’Shannessy</a>, answered many questions that were asked in the <a href="https://groups.google.com/forum/#!forum/reactjs">React group</a>. They give a good overview of how to integrate React with other libraries and APIs through the use of <a href="/docs/reusable-components.html">Mixins</a> and <a href="/docs/working-with-the-browser.html">Lifecycle Methods</a>.</p>
+<blockquote>
+<p><a href="https://groups.google.com/forum/#!topic/reactjs/l6PnP8qbofk">Listening Scroll Event</a></p>
+<ul>
+<li><a href="http://jsfiddle.net/aabeL/1/">JSFiddle</a>: Basically I’ve given you two mixins. The first lets you react to global scroll events. The second is, IMO, much more useful: it gives you scroll start and scroll end events, which you can use with setState() to create components that react based on whether the user is scrolling or not.</li>
+</ul>
+<p><a href="https://groups.google.com/forum/#!topic/reactjs/RVAY_eQmdpo">Fade-in Transition</a></p>
+<ul>
+<li><a href="http://jsfiddle.net/ufe8k/1/">JSFiddle</a>: Creating a new <code>&lt;FadeInWhenAdded&gt;</code> component and using jQuery <code>.fadeIn()</code> function on the DOM node.</li>
+<li><a href="http://jsfiddle.net/R8f5L/5/">JSFiddle</a>: Using CSS transition instead.</li>
+</ul>
+<p><a href="https://groups.google.com/forum/#!topic/reactjs/pyUZBRWcHB4">Socket.IO Integration</a></p>
+<ul>
+<li><a href="https://gist.github.com/zpao/5686416">Gist</a>: The big thing to notice is that my component is pretty dumb (it doesn’t have to be but that’s how I chose to model it). All it does is render itself based on the props that are passed in. renderOrUpdate is where the “magic” happens.</li>
+<li><a href="https://gist.github.com/petehunt/5687230">Gist</a>: This example is doing everything – including the IO – inside of a single React component.</li>
+<li><a href="https://gist.github.com/petehunt/5687276">Gist</a>: One pattern that we use at Instagram a lot is to employ separation of concerns and consolidate I/O and state into components higher in the hierarchy to keep the rest of the components mostly stateless and purely display.</li>
+</ul>
+<p><a href="https://groups.google.com/forum/#!topic/reactjs/mHfBGI3Qwz4">Sortable jQuery Plugin Integration</a></p>
+<ul>
+<li><a href="http://jsfiddle.net/LQxy7/">JSFiddle</a>: Your React component simply render empty divs, and then in componentDidMount() you call React.renderComponent() on each of those divs to set up a new root React tree. Be sure to explicitly unmountAndReleaseReactRootNode() for each component in componentWillUnmount().</li>
+</ul>
+</blockquote>
+<h2 id="introduction-to-react-screencast">Introduction to React Screencast</h2>
+<p><a href="http://www.petehunt.net/">Pete Hunt</a> recorded himself implementing a simple <code>&lt;Blink&gt;</code> tag in React.</p>
+<figure>
+<iframe src="https://player.vimeo.com/video/67248575" width="100%" height="340" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen>
+</iframe>
+</figure>
+<h2 id="snake-in-react">Snake in React</h2>
+<p><a href="http://tomocchino.com/">Tom Occhino</a> implemented Snake in 150 lines with React.</p>
+<blockquote>
+<a href="https://github.com/tomocchino/react-snake/blob/master/src/snake.js">Check the source on GitHub</a>
+<figure>
+<a href="https://tomocchino.github.io/react-snake/"><img src="../images/blog/snake.png"></a>
+</figure>
+</blockquote>
+</body>
+</html>

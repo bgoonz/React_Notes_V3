@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>README</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<h1 id="react-tabs-build-status-npm-version-open-source-helpers">react-tabs <a href="https://travis-ci.org/reactjs/react-tabs"><img src="https://travis-ci.org/reactjs/react-tabs.svg?branch=master" alt="Build Status" /></a> <a href="https://www.npmjs.com/package/react-tabs"><img src="https://img.shields.io/npm/v/react-tabs.svg" alt="npm version" /></a> <a href="https://www.codetriage.com/reactjs/react-tabs"><img src="https://www.codetriage.com/reactjs/react-tabs/badges/users.svg" alt="Open Source Helpers" /></a></h1>
+<p>An accessible and easy tab component for ReactJS.</p>
+<p>https://reactcommunity.org/react-tabs/</p>
+<blockquote>
+<p>Supports React 16.3.0 or newer</p>
+</blockquote>
+<ins>
+<blockquote class="rich-diff-level-zero">
+<p class="rich-diff-level-one">
+<p>react-tabs was tested on real mobile devices and browsers with<br> <img src="https://reactcommunity.org/react-tabs/2e0bf9a22057e69b716b45a3d5bffbe7.svg" height="50" alt="Browserstack"></p>
+</p>
+</blockquote>
+</ins>
+<h2 id="installing">Installing</h2>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb1-1" title="1"><span class="ex">yarn</span> add react-tabs</a></code></pre></div>
+<p>or</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb2-1" title="1"><span class="ex">npm</span> install --save react-tabs</a></code></pre></div>
+<p>You can also use react-tabs directly as UMD build in an HTML document by adding</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode html"><code class="sourceCode html"><a class="sourceLine" id="cb3-1" title="1"><span class="kw">&lt;script</span><span class="ot"> src=</span><span class="st">&quot;https://unpkg.com/react-tabs/dist/react-tabs.development.js&quot;</span> <span class="kw">/&gt;</span></a>
+<a class="sourceLine" id="cb3-2" title="2"><span class="co">&lt;!-- or --&gt;</span></a>
+<a class="sourceLine" id="cb3-3" title="3"><span class="kw">&lt;script</span><span class="ot"> src=</span><span class="st">&quot;https://unpkg.com/react-tabs/dist/react-tabs.production.min.js&quot;</span> <span class="kw">/&gt;</span></a></code></pre></div>
+<p>For example usages of the UMD builds have a look at the <a href="./old_examples/umd/"><code>old_examples/umd</code></a> folder. The development UMD build also needs the package <code>prop-types</code> being loaded besides <code>react</code>.</p>
+<h2 id="basic-example">Basic Example</h2>
+<div class="sourceCode" id="cb4"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb4-1" title="1"><span class="im">import</span> <span class="op">{</span> Tab<span class="op">,</span> Tabs<span class="op">,</span> TabList<span class="op">,</span> TabPanel <span class="op">}</span> <span class="im">from</span> <span class="st">&#39;react-tabs&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb4-2" title="2"><span class="im">import</span> <span class="st">&#39;react-tabs/style/react-tabs.css&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb4-3" title="3"></a>
+<a class="sourceLine" id="cb4-4" title="4"><span class="im">export</span> <span class="im">default</span> () <span class="kw">=&gt;</span> (</a>
+<a class="sourceLine" id="cb4-5" title="5">  <span class="op">&lt;</span>Tabs<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb4-6" title="6">    <span class="op">&lt;</span>TabList<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb4-7" title="7">      <span class="op">&lt;</span>Tab<span class="op">&gt;</span>Title <span class="dv">1</span>&lt;/Tab<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb4-8" title="8">      <span class="op">&lt;</span>Tab<span class="op">&gt;</span>Title <span class="dv">2</span>&lt;/Tab<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb4-9" title="9">    &lt;/TabList<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb4-10" title="10"></a>
+<a class="sourceLine" id="cb4-11" title="11">    <span class="op">&lt;</span>TabPanel<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb4-12" title="12">      <span class="op">&lt;</span>h2<span class="op">&gt;</span>Any content <span class="dv">1</span>&lt;/h2<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb4-13" title="13">    &lt;/TabPanel<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb4-14" title="14">    <span class="op">&lt;</span>TabPanel<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb4-15" title="15">      <span class="op">&lt;</span>h2<span class="op">&gt;</span>Any content <span class="dv">2</span>&lt;/h2<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb4-16" title="16">    &lt;/TabPanel<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb4-17" title="17">  &lt;/Tabs<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb4-18" title="18">)<span class="op">;</span></a></code></pre></div>
+<h2 id="api">API</h2>
+<h3 id="resetidcounter-void">resetIdCounter(): void</h3>
+<p>Allows reseting the internal id counter which is used to generate unique id’s for tabs and tab panels.</p>
+<p>You should never need to use this in the browser. Only if you are running an isomorphic react app that is rendered on the server you should call <code>resetIdCounter()</code> before every page render so that the ids that get generated on the server match the ids generated in the browser.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb5-1" title="1"><span class="im">import</span> <span class="op">{</span> resetIdCounter <span class="op">}</span> <span class="im">from</span> <span class="st">&#39;react-tabs&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb5-2" title="2"></a>
+<a class="sourceLine" id="cb5-3" title="3"><span class="at">resetIdCounter</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb5-4" title="4"><span class="va">ReactDOMServer</span>.<span class="at">renderToString</span>(...)<span class="op">;</span></a></code></pre></div>
+<h2 id="components">Components</h2>
+<p>react-tabs consists of 4 components which all need to be used together.</p>
+<h3 id="tabs">&lt;Tabs /&gt;</h3>
+<p>If you specify additional props on the <code>&lt;Tabs /&gt;</code> component they will be forwarded to the rendered <code>&lt;div /&gt;</code>.</p>
+<h4 id="classname-string-arraystring-string-boolean">className: <code>string | Array&lt;string&gt; | { [string]: boolean }</code></h4>
+<blockquote>
+<p>default: <code>"react-tabs"</code></p>
+</blockquote>
+<p>Provide a custom class name for the outer <code>&lt;div /&gt;</code> of the tabs.</p>
+<blockquote>
+<p>You can also supply an array of class names or an object where the class names are the key and the value is a boolean indicating if the name should be added. See the docs of <a href="https://github.com/JedWatson/classnames#usage">classnames</a> on how to supply different class names.</p>
+</blockquote>
+<h4 id="defaultfocus-boolean">defaultFocus: <code>boolean</code></h4>
+<blockquote>
+<p>default: <code>false</code></p>
+</blockquote>
+<p>If set to <code>true</code> the tabs will be focused on initial render. This allows immediate use of keyboard keys to switch tabs after the first render.</p>
+<h4 id="defaultindex-number">defaultIndex: <code>number</code></h4>
+<blockquote>
+<p>default: <code>0</code></p>
+</blockquote>
+<p>This allows changing the tab that should be open on initial render. This is a zero-based index, so first tab is <code>0</code>, second tab is <code>1</code>, …</p>
+<blockquote>
+<p>This can only be used in uncontrolled mode when react-tabs handles the current selected tab internally and for this reason cannot be used together with <code>selectedIndex</code>. See <a href="#controlled-vs-uncontrolled-mode">here</a> for more info on modes.</p>
+</blockquote>
+<h4 id="direction-string">direction: <code>string</code></h4>
+<blockquote>
+<p>default: <code>"ltr"</code></p>
+</blockquote>
+<p>Provide the direction of the component, can be either rtl or ltr.</p>
+<h4 id="disabledtabclassname-string">disabledTabClassName: <code>string</code></h4>
+<blockquote>
+<p>default: <code>"react-tabs__tab--disabled"</code></p>
+</blockquote>
+<p>Provide a custom class name for disabled tabs.</p>
+<blockquote>
+<p>This option can also be set directly at the <code>&lt;Tab /&gt;</code> component.</p>
+</blockquote>
+<h4 id="domref-node-htmlelement-void">domRef: <code>(node: ?HTMLElement) =&gt; void</code></h4>
+<blockquote>
+<p>default: <code>null</code></p>
+</blockquote>
+<p>Register a callback that will receive the underlying DOM node for every mount. It will also receive null on unmount.</p>
+<h4 id="forcerendertabpanel-boolean">forceRenderTabPanel: <code>boolean</code></h4>
+<blockquote>
+<p>default: <code>false</code></p>
+</blockquote>
+<p>By default only the current active tab will be rendered to DOM. If set to <code>true</code> all tabs will be rendered to the DOM always.</p>
+<blockquote>
+<p>This can also be enabled for each individual <code>&lt;TabPanel /&gt;</code> component with its prop <code>forceRender</code>.</p>
+</blockquote>
+<h4 id="onselect-index-number-lastindex-number-event-event-boolean">onSelect: <code>(index: number, lastIndex: number, event: Event) =&gt; ?boolean</code></h4>
+<blockquote>
+<p>default: <code>undefined</code></p>
+</blockquote>
+<p>This event handler is called every time a tab is about to change. It will be called with the <code>index</code> that it will be changed to, the <code>lastIndex</code> which was selected before and the underlying <code>event</code> which is usually either a <code>keydown</code> or <code>click</code> event. When <code>index</code> and <code>lastIndex</code> are equal it means the user clicked on the currently active tab.</p>
+<p>The callback can optionally return <code>false</code> to cancel the change to the new tab.</p>
+<blockquote>
+<p>Returning <code>false</code> when the change to the new tab should be canceled is also important in controlled mode, as react-tabs still internally handles the focus of the tabs.</p>
+</blockquote>
+<blockquote>
+<p>In controlled mode the <code>onSelect</code> handler is a required prop.</p>
+</blockquote>
+<h4 id="selectedindex-number">selectedIndex: <code>number</code></h4>
+<blockquote>
+<p>default: <code>null</code></p>
+</blockquote>
+<p>Set the currently selected tab. This is a zero-based index, so first tab is <code>0</code>, second tab is <code>1</code>, …</p>
+<p>This enables controlled mode, which also requires <code>onSelect</code> to be set. See <a href="#controlled-vs-uncontrolled-mode">here</a> for more info on modes.</p>
+<h4 id="selectedtabclassname-string">selectedTabClassName: <code>string</code></h4>
+<blockquote>
+<p>default: <code>"react-tabs__tab--selected"</code></p>
+</blockquote>
+<p>Provide a custom class name for the active tab.</p>
+<blockquote>
+<p>This option can also be set directly at the <code>&lt;Tab /&gt;</code> component.</p>
+</blockquote>
+<h4 id="selectedtabpanelclassname-string">selectedTabPanelClassName: <code>string</code></h4>
+<blockquote>
+<p>default: <code>"react-tabs__tab-panel--selected"</code></p>
+</blockquote>
+<p>Provide a custom class name for the active tab panel.</p>
+<blockquote>
+<p>This option can also be set directly at the <code>&lt;TabPanel /&gt;</code> component.</p>
+</blockquote>
+<h3 id="tablist">&lt;TabList /&gt;</h3>
+<p>If you specify additional props on the <code>&lt;TabList /&gt;</code> component they will be forwarded to the rendered <code>&lt;ul /&gt;</code>.</p>
+<h4 id="classname-string-arraystring-string-boolean-1">className: <code>string | Array&lt;string&gt; | { [string]: boolean }</code></h4>
+<blockquote>
+<p>default: <code>"react-tabs__tab-list"</code></p>
+</blockquote>
+<p>Provide a custom class name for the <code>&lt;ul /&gt;</code>.</p>
+<blockquote>
+<p>You can also supply an array of class names or an object where the class names are the key and the value is a boolean indicating if the name should be added. See the docs of <a href="https://github.com/JedWatson/classnames#usage">classnames</a> on how to supply different class names.</p>
+</blockquote>
+<h3 id="tab">&lt;Tab /&gt;</h3>
+<p>If you specify additional props on the <code>&lt;Tab /&gt;</code> component they will be forwarded to the rendered <code>&lt;li /&gt;</code>.</p>
+<h4 id="classname-string-arraystring-string-boolean-2">className: <code>string | Array&lt;string&gt; | { [string]: boolean }</code></h4>
+<blockquote>
+<p>default: <code>"react-tabs__tab"</code></p>
+</blockquote>
+<p>Provide a custom class name for the <code>&lt;li /&gt;</code>.</p>
+<blockquote>
+<p>You can also supply an array of class names or an object where the class names are the key and the value is a boolean indicating if the name should be added. See the docs of <a href="https://github.com/JedWatson/classnames#usage">classnames</a> on how to supply different class names.</p>
+</blockquote>
+<h4 id="disabled-boolean">disabled: <code>boolean</code></h4>
+<blockquote>
+<p>default: <code>false</code></p>
+</blockquote>
+<p>Disable this tab which will make it not do anything when clicked. Also a disabled class name will be added (see <code>disabledClassName</code>)</p>
+<h4 id="disabledclassname-string">disabledClassName: <code>string</code></h4>
+<blockquote>
+<p>default: <code>"react-tabs__tab--disabled"</code></p>
+</blockquote>
+<p>Provide a custom class name for disabled tabs.</p>
+<blockquote>
+<p>This option can also be set for all <code>&lt;Tab /&gt;</code> components with the prop <code>disabledTabClassName</code> on <code>&lt;Tabs /&gt;</code>.</p>
+</blockquote>
+<h4 id="selectedclassname-string">selectedClassName: <code>string</code></h4>
+<blockquote>
+<p>default: <code>"react-tabs__tab--selected"</code></p>
+</blockquote>
+<p>Provide a custom class name for the active tab.</p>
+<blockquote>
+<p>This option can also be set for all <code>&lt;Tab /&gt;</code> components with the prop <code>selectedTabClassName</code> on <code>&lt;Tabs /&gt;</code>.</p>
+</blockquote>
+<h4 id="tabindex-string">tabIndex: <code>string</code></h4>
+<blockquote>
+<p>default: if selected <code>"0"</code> otherwise <code>null</code></p>
+</blockquote>
+<p>Overrides the tabIndex to enabled tabbing between tabs.</p>
+<h3 id="tabpanel">&lt;TabPanel /&gt;</h3>
+<p>If you specify additional props on the <code>&lt;TabPanel /&gt;</code> component they will be forwarded to the rendered <code>&lt;div /&gt;</code>.</p>
+<h4 id="classname-string-arraystring-string-boolean-3">className: <code>string | Array&lt;string&gt; | { [string]: boolean }</code></h4>
+<blockquote>
+<p>default: <code>"react-tabs__tab-panel"</code></p>
+</blockquote>
+<p>Provide a custom class name for the <code>&lt;div /&gt;</code> containing the tab content.</p>
+<blockquote>
+<p>You can also supply an array of class names or an object where the class names are the key and the value is a boolean indicating if the name should be added. See the docs of <a href="https://github.com/JedWatson/classnames#usage">classnames</a> on how to supply different class names.</p>
+</blockquote>
+<h4 id="forcerender-boolean">forceRender: <code>boolean</code></h4>
+<blockquote>
+<p>default: <code>false</code></p>
+</blockquote>
+<p>By default the tab content will only be rendered when the tab is active. If set to <code>true</code> the tab will also be rendered if inactive.</p>
+<blockquote>
+<p>This can also be enabled for all <code>&lt;TabPanel /&gt;</code> components with the prop <code>forceRenderTabPanel</code> on <code>&lt;Tabs /&gt;</code>.</p>
+</blockquote>
+<h4 id="selectedclassname-string-1">selectedClassName: <code>string</code></h4>
+<blockquote>
+<p>default: <code>"react-tabs__tab-panel--selected"</code></p>
+</blockquote>
+<p>Provide a custom class name for the active tab panel.</p>
+<blockquote>
+<p>This option can also be set for all <code>&lt;TabPanel /&gt;</code> components with the prop <code>selectedTabPanelClassName</code> on <code>&lt;Tabs /&gt;</code>.</p>
+</blockquote>
+<h2 id="controlled-vs-uncontrolled-mode">Controlled vs Uncontrolled mode</h2>
+<p>React tabs has two different modes it can operate in, which change the way how much you need to take care about the state yourself.</p>
+<h3 id="uncontrolled-mode">Uncontrolled mode</h3>
+<p>This is the default mode of react-tabs and makes the react-tabs components handle its state internally. You can change the starting tab with <code>defaultIndex</code> and you can listen for changes with <code>onSelect</code>.</p>
+<p>In this mode you cannot force a tab change during runtime.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb6-1" title="1"><span class="op">&lt;</span>Tabs defaultIndex<span class="op">={</span><span class="dv">1</span><span class="op">}</span> onSelect<span class="op">={</span>index <span class="kw">=&gt;</span> <span class="va">console</span>.<span class="at">log</span>(index)<span class="op">}&gt;</span></a>
+<a class="sourceLine" id="cb6-2" title="2">  <span class="op">&lt;</span>TabList<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb6-3" title="3">    <span class="op">&lt;</span>Tab<span class="op">&gt;</span>Title <span class="dv">1</span>&lt;/Tab<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb6-4" title="4">    <span class="op">&lt;</span>Tab<span class="op">&gt;</span>Title <span class="dv">2</span>&lt;/Tab<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb6-5" title="5">  &lt;/TabList<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb6-6" title="6">  <span class="op">&lt;</span>TabPanel<span class="op">&gt;</span>&lt;/TabPanel<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb6-7" title="7">  <span class="op">&lt;</span>TabPanel<span class="op">&gt;</span>&lt;/TabPanel<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb6-8" title="8">&lt;/Tabs<span class="op">&gt;</span></a></code></pre></div>
+<h3 id="controlled-mode">Controlled mode</h3>
+<p>This mode has to be enabled by supplying <code>selectedIndex</code> to the <code>&lt;Tabs /&gt;</code> component.</p>
+<p>In this mode react-tabs does not handle any tab selection state internally and leaves all the state management up to the outer application.</p>
+<p>This mode also enforces you to set a handler for <code>onSelect</code>. <code>defaultIndex</code> does not have any effect and will therefore throw an error.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb7-1" title="1"><span class="kw">const</span> App <span class="op">=</span> () <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb7-2" title="2">  <span class="kw">const</span> [tabIndex<span class="op">,</span> setTabIndex] <span class="op">=</span> <span class="at">useState</span>(<span class="dv">0</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb7-3" title="3"></a>
+<a class="sourceLine" id="cb7-4" title="4">  <span class="cf">return</span> (</a>
+<a class="sourceLine" id="cb7-5" title="5">    <span class="op">&lt;</span>Tabs selectedIndex<span class="op">={</span>tabIndex<span class="op">}</span> onSelect<span class="op">={</span>index <span class="kw">=&gt;</span> <span class="at">setTabIndex</span>(index)<span class="op">}&gt;</span></a>
+<a class="sourceLine" id="cb7-6" title="6">      <span class="op">&lt;</span>TabList<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb7-7" title="7">        <span class="op">&lt;</span>Tab<span class="op">&gt;</span>Title <span class="dv">1</span>&lt;/Tab<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb7-8" title="8">        <span class="op">&lt;</span>Tab<span class="op">&gt;</span>Title <span class="dv">2</span>&lt;/Tab<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb7-9" title="9">      &lt;/TabList<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb7-10" title="10">      <span class="op">&lt;</span>TabPanel<span class="op">&gt;</span>&lt;/TabPanel<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb7-11" title="11">      <span class="op">&lt;</span>TabPanel<span class="op">&gt;</span>&lt;/TabPanel<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb7-12" title="12">    &lt;/Tabs<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb7-13" title="13">  )<span class="op">;</span></a>
+<a class="sourceLine" id="cb7-14" title="14"><span class="op">};</span></a></code></pre></div>
+<h2 id="styling">Styling</h2>
+<p>react-tabs does not include any style loading by default. Default stylesheets are provided and can be included in your application if desired.</p>
+<h3 id="webpack">Webpack</h3>
+<p>When using webpack and an appropriate loader (<code>css-loader</code>, <code>sass-loader</code>, <code>less-loader</code> or <code>style-loader</code>) you can simply import the default stylesheet.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb8-1" title="1"><span class="im">import</span> <span class="st">&#39;react-tabs/style/react-tabs.css&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb8-2" title="2"><span class="co">// or</span></a>
+<a class="sourceLine" id="cb8-3" title="3"><span class="im">import</span> <span class="st">&#39;react-tabs/style/react-tabs.scss&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb8-4" title="4"><span class="co">// or</span></a>
+<a class="sourceLine" id="cb8-5" title="5"><span class="im">import</span> <span class="st">&#39;react-tabs/style/react-tabs.less&#39;</span><span class="op">;</span></a></code></pre></div>
+<h3 id="sass">SASS</h3>
+<p>When using SASS you can easily import the default styles</p>
+<pre class="scss"><code>@import &#39;../../path/to/node_modules/react-tabs/style/react-tabs.scss&#39;;</code></pre>
+<h3 id="less">LESS</h3>
+<p>When using LESS you can easily import the default styles</p>
+<pre class="scss"><code>@import &#39;../../path/to/node_modules/react-tabs/style/react-tabs.less&#39;;</code></pre>
+<h3 id="umd">UMD</h3>
+<p>When using the UMD version of react-tabs you can easily use the default styles by adding</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode html"><code class="sourceCode html"><a class="sourceLine" id="cb11-1" title="1"><span class="kw">&lt;html&gt;</span></a>
+<a class="sourceLine" id="cb11-2" title="2">  <span class="kw">&lt;head&gt;</span></a>
+<a class="sourceLine" id="cb11-3" title="3">    ...</a>
+<a class="sourceLine" id="cb11-4" title="4">    <span class="kw">&lt;link</span><span class="ot"> rel=</span><span class="st">&quot;stylesheet&quot;</span><span class="ot"> href=</span><span class="st">&quot;https://unpkg.com/react-tabs/style/react-tabs.css&quot;</span><span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb11-5" title="5">  <span class="kw">&lt;/head&gt;</span></a>
+<a class="sourceLine" id="cb11-6" title="6">  ...</a>
+<a class="sourceLine" id="cb11-7" title="7"><span class="kw">&lt;/html&gt;</span></a></code></pre></div>
+<h3 id="custom-style">Custom Style</h3>
+<p>You can also always just simply copy the default style to your own css/scss/less and modify it to your own needs. The changelog will always tell you when classes change and we also consider changes that break the styling as semver major.</p>
+<h3 id="custom-components">Custom Components</h3>
+<p>In case you want to create your own component wrapping the ones that the library provides, you have to set its <code>tabsRole</code>. This value is used inside react-tabs to check the role of a component inside <code>&lt;Tabs /&gt;</code>.</p>
+<p>Possible values for tabsRole are: * Tab * TabPanel * TabList</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb12-1" title="1"><span class="im">import</span> <span class="op">{</span> Tabs<span class="op">,</span> TabList<span class="op">,</span> Tab<span class="op">,</span> TabPanel <span class="op">}</span> <span class="im">from</span> <span class="st">&#39;react-tabs&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb12-2" title="2"></a>
+<a class="sourceLine" id="cb12-3" title="3"><span class="kw">const</span> CustomTab <span class="op">=</span> (<span class="op">{</span> children <span class="op">}</span>) <span class="kw">=&gt;</span> (</a>
+<a class="sourceLine" id="cb12-4" title="4">  <span class="op">&lt;</span>Tab<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb12-5" title="5">    <span class="op">&lt;</span>h1<span class="op">&gt;{</span>children<span class="op">}</span>&lt;/h1<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb12-6" title="6">  &lt;/Tab<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb12-7" title="7">)<span class="op">;</span></a>
+<a class="sourceLine" id="cb12-8" title="8"></a>
+<a class="sourceLine" id="cb12-9" title="9"><span class="va">CustomTab</span>.<span class="at">tabsRole</span> <span class="op">=</span> <span class="st">&#39;Tab&#39;</span><span class="op">;</span> <span class="co">// Required field to use your custom Tab</span></a>
+<a class="sourceLine" id="cb12-10" title="10"></a>
+<a class="sourceLine" id="cb12-11" title="11"><span class="kw">const</span> App <span class="op">=</span> () <span class="kw">=&gt;</span> (</a>
+<a class="sourceLine" id="cb12-12" title="12">  <span class="op">&lt;</span>Tabs<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb12-13" title="13">    <span class="op">&lt;</span>TabList<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb12-14" title="14">      <span class="op">&lt;</span>CustomTab<span class="op">&gt;</span>Custom Tab <span class="dv">1</span>&lt;/CustomTab<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb12-15" title="15">      <span class="op">&lt;</span>CustomTab<span class="op">&gt;</span>Custom Tab <span class="dv">2</span>&lt;/CustomTab<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb12-16" title="16">    &lt;/TabList<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb12-17" title="17">    <span class="op">&lt;</span>TabPanel<span class="op">&gt;</span>Panel <span class="dv">1</span>&lt;/TabPanel<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb12-18" title="18">    <span class="op">&lt;</span>TabPanel<span class="op">&gt;</span>Panel <span class="dv">2</span>&lt;/TabPanel<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb12-19" title="19">  &lt;/Tabs<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb12-20" title="20">)<span class="op">;</span></a></code></pre></div>
+<p>This works for custom tabs, but will not suffice for something like a TabPanel. Because of how react-tabs works internally (it uses cloning to opaquely control various parts of the tab state), you need to pass any incoming props to the component you’re wrapping. The easiest way to do this is to use the rest and spread operators, e.g.:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb13-1" title="1"><span class="kw">const</span> CustomTabPanel <span class="op">=</span> (<span class="op">{</span> children<span class="op">,</span> myCustomProp<span class="op">,</span> ...<span class="at">otherProps</span> <span class="op">}</span>) <span class="kw">=&gt;</span> (</a>
+<a class="sourceLine" id="cb13-2" title="2">  <span class="op">&lt;</span>TabPanel <span class="op">{</span>...<span class="at">otherProps</span><span class="op">}&gt;</span></a>
+<a class="sourceLine" id="cb13-3" title="3">    <span class="op">&lt;</span>h1<span class="op">&gt;{</span>children<span class="op">}</span>&lt;/h1<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb13-4" title="4">    <span class="op">{</span>myCustomProp <span class="op">&amp;&amp;</span> <span class="vs">`myCustomProp: </span><span class="sc">${</span>myCustomProp<span class="sc">}</span><span class="vs">`</span><span class="op">}</span></a>
+<a class="sourceLine" id="cb13-5" title="5">  &lt;/TabPanel<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb13-6" title="6">)</a>
+<a class="sourceLine" id="cb13-7" title="7"></a>
+<a class="sourceLine" id="cb13-8" title="8"><span class="va">CustomTabPanel</span>.<span class="at">tabsRole</span> <span class="op">=</span> <span class="st">&#39;TabPanel&#39;</span></a></code></pre></div>
+<h2 id="license">License</h2>
+<p>MIT</p>
+</body>
+</html>

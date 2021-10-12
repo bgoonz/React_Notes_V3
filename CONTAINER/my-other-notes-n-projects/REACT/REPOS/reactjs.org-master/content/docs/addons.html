@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Add-Ons</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Add-Ons</h1>
+</header>
+<blockquote>
+<p>Note:</p>
+<p><code>React.addons</code> entry point is deprecated as of React v15.5. The add-ons have moved to separate modules, and some of them have been deprecated.</p>
+</blockquote>
+<p>The React add-ons are a collection of useful utility modules for building React apps. <strong>These should be considered experimental</strong> and tend to change more often than the core.</p>
+<ul>
+<li><a href="/docs/create-fragment.html"><code>createFragment</code></a>, to create a set of externally-keyed children.</li>
+</ul>
+<p>The add-ons below are in the development (unminified) version of React only:</p>
+<ul>
+<li><a href="/docs/perf.html"><code>Perf</code></a>, a performance profiling tool for finding optimization opportunities.</li>
+<li><a href="/docs/test-utils.html"><code>ReactTestUtils</code></a>, simple helpers for writing test cases.</li>
+</ul>
+<h3 id="legacy-add-ons">Legacy Add-ons</h3>
+<p>The add-ons below are considered legacy and their use is discouraged. They will keep working in observable future, but there is no further development.</p>
+<ul>
+<li><a href="/docs/pure-render-mixin.html"><code>PureRenderMixin</code></a>. Use <a href="/docs/react-api.html#reactpurecomponent"><code>React.PureComponent</code></a> instead.</li>
+<li><a href="/docs/shallow-compare.html"><code>shallowCompare</code></a>, a helper function that performs a shallow comparison for props and state in a component to decide if a component should update. We recommend using <a href="/docs/react-api.html#reactpurecomponent"><code>React.PureComponent</code></a> instead.</li>
+<li><a href="/docs/update.html"><code>update</code></a>. Use <a href="https://github.com/kolodny/immutability-helper"><code>kolodny/immutability-helper</code></a> instead.</li>
+<li><a href="https://www.npmjs.com/package/react-dom-factories"><code>ReactDOMFactories</code></a>, pre-configured DOM factories to make React easier to use without JSX.</li>
+</ul>
+<h3 id="deprecated-add-ons">Deprecated Add-ons</h3>
+<ul>
+<li><a href="/docs/two-way-binding-helpers.html"><code>LinkedStateMixin</code></a> has been deprecated.</li>
+<li><a href="/docs/animation.html"><code>TransitionGroup</code> and <code>CSSTransitionGroup</code></a> have been deprecated in favor of <a href="https://github.com/reactjs/react-transition-group/tree/v1-stable">their drop-in replacements</a>.</li>
+</ul>
+<h2 id="using-react-with-add-ons">Using React with Add-ons</h2>
+<p>You can install the add-ons individually from npm (e.g. <code>npm install react-addons-create-fragment</code>) and import them:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb1-1" title="1"><span class="im">import</span> createFragment <span class="im">from</span> <span class="st">&#39;react-addons-create-fragment&#39;</span><span class="op">;</span> <span class="co">// ES6</span></a>
+<a class="sourceLine" id="cb1-2" title="2"><span class="kw">var</span> createFragment <span class="op">=</span> <span class="at">require</span>(<span class="st">&#39;react-addons-create-fragment&#39;</span>)<span class="op">;</span> <span class="co">// ES5 with npm</span></a></code></pre></div>
+<p>When using React 15 or earlier from a CDN, you can use <code>react-with-addons.js</code> instead of <code>react.js</code>:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode html"><code class="sourceCode html"><a class="sourceLine" id="cb2-1" title="1"><span class="kw">&lt;script</span><span class="ot"> src=</span><span class="st">&quot;https://unpkg.com/react@15/dist/react-with-addons.js&quot;</span><span class="kw">&gt;&lt;/script&gt;</span></a></code></pre></div>
+<p>The add-ons will be available via the <code>React.addons</code> global (e.g. <code>React.addons.TestUtils</code>).</p>
+</body>
+</html>

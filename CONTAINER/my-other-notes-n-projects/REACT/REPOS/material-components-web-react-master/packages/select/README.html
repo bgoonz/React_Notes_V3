@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>README</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<h1 id="react-select">React Select</h1>
+<p>MDC React Select is component for MDC Select. Please see <a href="https://github.com/material-components/material-components-web/tree/master/packages/mdc-select/">MDC Select</a>.</p>
+<h2 id="installation">Installation</h2>
+<pre><code>npm install @material/react-select</code></pre>
+<h2 id="usage">Usage</h2>
+<h3 id="styles">Styles</h3>
+<p>with Sass:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb2-1" title="1"><span class="im">import</span> <span class="st">&#39;@material/react-list/index.scss&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb2-2" title="2"><span class="im">import</span> <span class="st">&#39;@material/react-menu-surface/index.scss&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb2-3" title="3"><span class="im">import</span> <span class="st">&#39;@material/react-menu/index.scss&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb2-4" title="4"><span class="im">import</span> <span class="st">&#39;@material/react-select/index.scss&#39;</span><span class="op">;</span></a></code></pre></div>
+<p>with CSS:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb3-1" title="1"><span class="im">import</span> <span class="st">&#39;@material/react-list/dist/menu.css&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb3-2" title="2"><span class="im">import</span> <span class="st">&#39;@material/react-menu-surface/dist/menu.css&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb3-3" title="3"><span class="im">import</span> <span class="st">&#39;@material/react-menu/dist/menu.css&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb3-4" title="4"><span class="im">import</span> <span class="st">&#39;@material/react-select/dist/select.css&#39;</span><span class="op">;</span></a></code></pre></div>
+<h3 id="javascript-instantiation">Javascript Instantiation</h3>
+<p>React Select requires at least one <code>&lt;Option&gt;</code> element as a child and a label prop.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb4-1" title="1"><span class="im">import</span> React <span class="im">from</span> <span class="st">&#39;react&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb4-2" title="2"><span class="im">import</span> Select<span class="op">,</span> <span class="op">{</span>Option<span class="op">}</span> <span class="im">from</span> <span class="st">&#39;@material/react-select&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb4-3" title="3"></a>
+<a class="sourceLine" id="cb4-4" title="4"><span class="kw">class</span> MyApp <span class="kw">extends</span> <span class="va">React</span>.<span class="at">Component</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb4-5" title="5">  state <span class="op">=</span> <span class="op">{</span><span class="dt">value</span><span class="op">:</span> <span class="st">&#39;pomsky&#39;</span><span class="op">};</span></a>
+<a class="sourceLine" id="cb4-6" title="6"></a>
+<a class="sourceLine" id="cb4-7" title="7">  <span class="at">render</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb4-8" title="8">    <span class="cf">return</span> (</a>
+<a class="sourceLine" id="cb4-9" title="9">      <span class="op">&lt;</span>Select</a>
+<a class="sourceLine" id="cb4-10" title="10">        label<span class="op">=</span><span class="st">&#39;Choose Dog&#39;</span></a>
+<a class="sourceLine" id="cb4-11" title="11">        value<span class="op">={</span><span class="kw">this</span>.<span class="va">state</span>.<span class="at">value</span><span class="op">}</span></a>
+<a class="sourceLine" id="cb4-12" title="12">        onChange<span class="op">={</span>(evt) <span class="kw">=&gt;</span> <span class="kw">this</span>.<span class="at">setState</span>(<span class="op">{</span><span class="dt">value</span><span class="op">:</span> <span class="va">evt</span>.<span class="va">target</span>.<span class="at">value</span><span class="op">}</span>)<span class="op">}</span></a>
+<a class="sourceLine" id="cb4-13" title="13">      <span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb4-14" title="14">        <span class="op">&lt;</span>Option value<span class="op">=</span><span class="st">&#39;pomsky&#39;</span><span class="op">&gt;</span>Pomsky&lt;/Option<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb4-15" title="15">        <span class="op">&lt;</span>Option value<span class="op">=</span><span class="st">&#39;goldenDoodle&#39;</span><span class="op">&gt;</span>Golden Doodle&lt;/Option<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb4-16" title="16">      &lt;/Select<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb4-17" title="17">    )<span class="op">;</span></a>
+<a class="sourceLine" id="cb4-18" title="18">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb4-19" title="19"><span class="op">}</span></a></code></pre></div>
+<blockquote>
+<p>NOTE: In order to get access to the value, you must add an <code>onChange</code> handler, which accepts an event and updates the value of the select as shown above.</p>
+</blockquote>
+<h4 id="enhanced-select">Enhanced Select</h4>
+<p>React Select provides a Material styled select, instead of the default native drop down.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb5-1" title="1"><span class="im">import</span> React <span class="im">from</span> <span class="st">&#39;react&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb5-2" title="2"><span class="im">import</span> Select<span class="op">,</span> <span class="op">{</span>Option<span class="op">}</span> <span class="im">from</span> <span class="st">&#39;@material/react-select&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb5-3" title="3"></a>
+<a class="sourceLine" id="cb5-4" title="4"><span class="kw">class</span> MyApp <span class="kw">extends</span> <span class="va">React</span>.<span class="at">Component</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb5-5" title="5">  state <span class="op">=</span> <span class="op">{</span><span class="dt">value</span><span class="op">:</span> <span class="st">&#39;pomsky&#39;</span><span class="op">};</span></a>
+<a class="sourceLine" id="cb5-6" title="6"></a>
+<a class="sourceLine" id="cb5-7" title="7">  onEnhancedChange <span class="op">=</span> (index<span class="op">,</span> item) <span class="kw">=&gt;</span> (</a>
+<a class="sourceLine" id="cb5-8" title="8">    <span class="kw">this</span>.<span class="at">setState</span>(<span class="op">{</span><span class="dt">value</span><span class="op">:</span> <span class="va">item</span>.<span class="at">getAttribute</span>(<span class="st">&#39;data-value&#39;</span>)<span class="op">}</span>)</a>
+<a class="sourceLine" id="cb5-9" title="9">  )<span class="op">;</span></a>
+<a class="sourceLine" id="cb5-10" title="10"></a>
+<a class="sourceLine" id="cb5-11" title="11">  <span class="at">render</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb5-12" title="12">    <span class="cf">return</span> (</a>
+<a class="sourceLine" id="cb5-13" title="13">      <span class="op">&lt;</span>Select</a>
+<a class="sourceLine" id="cb5-14" title="14">        enhanced</a>
+<a class="sourceLine" id="cb5-15" title="15">        label<span class="op">=</span><span class="st">&#39;Choose Dog&#39;</span></a>
+<a class="sourceLine" id="cb5-16" title="16">        value<span class="op">={</span><span class="kw">this</span>.<span class="va">state</span>.<span class="at">value</span><span class="op">}</span></a>
+<a class="sourceLine" id="cb5-17" title="17">        onEnhancedChange<span class="op">={</span><span class="kw">this</span>.<span class="at">onEnhancedChange</span><span class="op">}</span></a>
+<a class="sourceLine" id="cb5-18" title="18">      <span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb5-19" title="19">        <span class="op">&lt;</span>Option value<span class="op">=</span><span class="st">&#39;pomsky&#39;</span><span class="op">&gt;</span>Pomsky&lt;/Option<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb5-20" title="20">        <span class="op">&lt;</span>Option value<span class="op">=</span><span class="st">&#39;goldenDoodle&#39;</span><span class="op">&gt;</span>Golden Doodle&lt;/Option<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb5-21" title="21">      &lt;/Select<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb5-22" title="22">    )<span class="op">;</span></a>
+<a class="sourceLine" id="cb5-23" title="23">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb5-24" title="24"><span class="op">}</span></a></code></pre></div>
+<h4 id="shorthand-options">Shorthand options</h4>
+<p>If the option elements do not require anything unique, you can omit passing <code>this.props.children</code> and set the <code>options</code> prop.</p>
+<p>This options shorthand is most useful when your select options come in the form of JSON. Typically, when building a select, the options will be backed by an array of objects or strings (either from an API endpoint or a JSON File). If the <code>label</code> and <code>value</code> key names exist in the array of objects, you can run a <code>map</code> function over that array as shown below.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb6-1" title="1"><span class="im">import</span> React <span class="im">from</span> <span class="st">&#39;react&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb6-2" title="2"><span class="im">import</span> Select <span class="im">from</span> <span class="st">&#39;@material/react-select&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb6-3" title="3"></a>
+<a class="sourceLine" id="cb6-4" title="4"><span class="kw">class</span> MyApp <span class="kw">extends</span> <span class="va">React</span>.<span class="at">Component</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb6-5" title="5">  state <span class="op">=</span> <span class="op">{</span><span class="dt">value</span><span class="op">:</span> <span class="st">&#39;pomsky&#39;</span><span class="op">};</span></a>
+<a class="sourceLine" id="cb6-6" title="6"></a>
+<a class="sourceLine" id="cb6-7" title="7">  <span class="at">render</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb6-8" title="8">    <span class="kw">const</span> options <span class="op">=</span> [<span class="op">{</span></a>
+<a class="sourceLine" id="cb6-9" title="9">      <span class="dt">label</span><span class="op">:</span> <span class="st">&#39;Pomsky&#39;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb6-10" title="10">      <span class="dt">value</span><span class="op">:</span> <span class="st">&#39;pomsky&#39;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb6-11" title="11">    <span class="op">},</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb6-12" title="12">      <span class="dt">label</span><span class="op">:</span> <span class="st">&#39;Golden Doodle&#39;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb6-13" title="13">      <span class="dt">value</span><span class="op">:</span> <span class="st">&#39;goldenDoodle&#39;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb6-14" title="14">      <span class="dt">disabled</span><span class="op">:</span> <span class="kw">true</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb6-15" title="15">    <span class="op">}</span>]<span class="op">;</span></a>
+<a class="sourceLine" id="cb6-16" title="16"></a>
+<a class="sourceLine" id="cb6-17" title="17">    <span class="cf">return</span> (</a>
+<a class="sourceLine" id="cb6-18" title="18">      <span class="op">&lt;</span>Select</a>
+<a class="sourceLine" id="cb6-19" title="19">        label<span class="op">=</span><span class="st">&#39;Choose Dog&#39;</span></a>
+<a class="sourceLine" id="cb6-20" title="20">        onChange<span class="op">={</span>(evt) <span class="kw">=&gt;</span> <span class="kw">this</span>.<span class="at">setState</span>(<span class="op">{</span><span class="dt">value</span><span class="op">:</span> <span class="va">evt</span>.<span class="va">target</span>.<span class="at">value</span><span class="op">}</span>)<span class="op">}</span></a>
+<a class="sourceLine" id="cb6-21" title="21">        value<span class="op">={</span><span class="kw">this</span>.<span class="va">state</span>.<span class="at">value</span><span class="op">}</span></a>
+<a class="sourceLine" id="cb6-22" title="22">        options<span class="op">={</span>options<span class="op">}</span></a>
+<a class="sourceLine" id="cb6-23" title="23">      /&gt;</a>
+<a class="sourceLine" id="cb6-24" title="24">    )<span class="op">;</span></a>
+<a class="sourceLine" id="cb6-25" title="25">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb6-26" title="26"><span class="op">}</span></a></code></pre></div>
+<blockquote>
+<p>NOTE: If you want a floating label to act as a placeholder, you will need an empty option as documented in the <a href="https://github.com/material-components/material-components-web/tree/master/packages/mdc-select/#using-the-floating-label-as-the-placeholder">MDC Web Select</a>.</p>
+</blockquote>
+<h2 id="props">Props</h2>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Prop Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>children</td>
+<td>Array{Element}/Element</td>
+<td>Array of <code>&lt;option&gt;</code> elements or a single <code>&lt;option&gt;</code> element.</td>
+</tr>
+<tr class="even">
+<td>className</td>
+<td>String</td>
+<td>An optional class added to the <code>.mdc-select</code> element.</td>
+</tr>
+<tr class="odd">
+<td>disabled</td>
+<td>Boolean</td>
+<td>Disables the select.</td>
+</tr>
+<tr class="even">
+<td>enhanced</td>
+<td>Boolean</td>
+<td>Enables the enhanced select.</td>
+</tr>
+<tr class="odd">
+<td>floatingLabelClassName</td>
+<td>String</td>
+<td>An optional class added to the floating label element.</td>
+</tr>
+<tr class="even">
+<td>id</td>
+<td>String</td>
+<td>Id of the <code>&lt;select&gt;</code> element.</td>
+</tr>
+<tr class="odd">
+<td>label</td>
+<td>String</td>
+<td>Label text that appears as the floating label.</td>
+</tr>
+<tr class="even">
+<td>lineRippleClassName</td>
+<td>String</td>
+<td>An optional class added to the line ripple element.</td>
+</tr>
+<tr class="odd">
+<td>selectClassName</td>
+<td>String</td>
+<td>An optional class added to the native <code>&lt;select&gt;</code> element.</td>
+</tr>
+<tr class="even">
+<td>notchedOutlineClassName</td>
+<td>String</td>
+<td>An optional class added to the notched outline element. Only applied if <code>props.outlined</code> is enabled.</td>
+</tr>
+<tr class="odd">
+<td>outlined</td>
+<td>Boolean</td>
+<td>Enables outlined variant.</td>
+</tr>
+<tr class="even">
+<td>options</td>
+<td>Array{String/Object}</td>
+<td>Array of strings or objects to be used as options. To be used instead of <code>&lt;option&gt;</code> elements passed as <code>this.props.children</code>. If its an array of strings, then the string value will be used as the <code>label</code> and <code>value</code> of the <code>&lt;option&gt;</code> tag.</td>
+</tr>
+<tr class="odd">
+<td>value</td>
+<td>String</td>
+<td>Optional property used to control the selected value outside of <code>&lt;Select&gt;</code> component.</td>
+</tr>
+<tr class="even">
+<td>afterChange</td>
+<td>(value: string) =&gt; void</td>
+<td>Callback for when the select value changed.</td>
+</tr>
+<tr class="odd">
+<td>onEnhancedChange</td>
+<td>(index: number, target: Element) =&gt; void</td>
+<td>Callback for when the enhanced select receives a new value.</td>
+</tr>
+<tr class="even">
+<td>onChange</td>
+<td>(evt: React.ChangeEvent<HTMLSelectElement> =&gt; void)</td>
+<td>Callback for when the native select receives a new value.</td>
+</tr>
+<tr class="odd">
+<td>helperText</td>
+<td>SelectHelperText</td>
+<td>Element to appear as helper text of the select element.</td>
+</tr>
+<tr class="even">
+<td>leadingIcon</td>
+<td>SelectIcon</td>
+<td>Element to appear as leading icon of the select element.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="option">Option</h3>
+<p>The <code>&lt;Option /&gt;</code> component is a provided component to be used for both the enhanced and native select.</p>
+<h4 id="use-with-native-select">Use with Native Select</h4>
+<p>When used in the native select, the <code>&lt;Option /&gt;</code> accepts all the same props as the native <code>&lt;option /&gt;</code> tag.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb7-1" title="1"><span class="op">&lt;</span>Option value<span class="op">=</span><span class="st">&#39;goldenDoodle&#39;</span><span class="op">&gt;</span>Golden Doodle&lt;/Option<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb7-2" title="2"><span class="op">&lt;</span>Option value<span class="op">=</span><span class="st">&#39;pomsky&#39;</span><span class="op">&gt;</span>Pomsky&lt;/Option<span class="op">&gt;</span></a></code></pre></div>
+<h4 id="use-with-enhanced-select">Use with Enhanced Select</h4>
+<p>When used in the enhanced select, the <code>&lt;Option /&gt;</code> component extends from <a href="../menu/README.md#menulistitem">MenuListItem</a>. For your convience other auxilary components of <a href="../menu">menu</a> are exported from select.</p>
+<ul>
+<li>OptionGroup (see <a href="../menu/README.md#menulistgroup">MenuListGroup</a>)</li>
+<li>OptionDivider (see <a href="../menu/README.md#menulistdivider">MenuListDivider</a>)</li>
+<li>OptionGroupSubheader (see <a href="../menu/README.md#menulistgroup">MenuListGroup</a>)</li>
+<li>OptionGraphic (see <a href="../menu/README.md#menulistitemgraphic">MenuListItemGraphic</a>)</li>
+<li>OptionMeta (see <a href="../menu/README.md#menulistitemmeta">MenuListItemMeta</a>)</li>
+<li>OptionText (see <a href="../menu/README.md#menulisttext">MenuListText</a>)</li>
+</ul>
+<h3 id="sass-mixins">Sass Mixins</h3>
+<p>Sass mixins may be available to customize various aspects of the Components. Please refer to the MDC Web repository for more information on what mixins are available, and how to use them.</p>
+<p><a href="https://github.com/material-components/material-components-web/blob/master/packages/mdc-select/README.md#sass-mixins">Advanced Sass Mixins</a></p>
+</body>
+</html>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="nhunzaker" />
+  <title>React v15.6.2</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">React v15.6.2</h1>
+<p class="author">nhunzaker</p>
+</header>
+<p>Today we’re sending out React 15.6.2. In 15.6.1, we shipped a few fixes for change events and inputs that had some unintended consequences. Those regressions have been ironed out, and we’ve also included a few more fixes to improve the stability of React across all browsers.</p>
+<p>Additionally, 15.6.2 adds support for the <a href="https://developers.google.com/web/updates/2017/03/chrome-58-media-updates#controlslist"><code>controlList</code></a> attribute, and CSS columns are no longer appended with a <code>px</code> suffix.</p>
+<h2 id="installation">Installation</h2>
+<p>We recommend using <a href="https://yarnpkg.com/">Yarn</a> or <a href="https://www.npmjs.com/">npm</a> for managing front-end dependencies. If you’re new to package managers, the <a href="https://yarnpkg.com/en/docs/getting-started">Yarn documentation</a> is a good place to get started.</p>
+<p>To install React with Yarn, run:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb1-1" title="1"><span class="ex">yarn</span> add react@^15.6.2 react-dom@^15.6.2</a></code></pre></div>
+<p>To install React with npm, run:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb2-1" title="1"><span class="ex">npm</span> install --save react@^15.6.2 react-dom@^15.6.2</a></code></pre></div>
+<p>We recommend using a bundler like <a href="https://webpack.js.org/">webpack</a> or <a href="http://browserify.org/">Browserify</a> so you can write modular code and bundle it together into small packages to optimize load time.</p>
+<p>Remember that by default, React runs extra checks and provides helpful warnings in development mode. When deploying your app, make sure to <a href="/docs/optimizing-performance.html#use-the-production-build">use the production build</a>.</p>
+<p>In case you don’t use a bundler, we also provide pre-built bundles in the npm packages which you can <a href="/docs/installation.html#using-a-cdn">include as script tags</a> on your page:</p>
+<ul>
+<li><strong>React</strong><br/> Dev build with warnings: <a href="https://unpkg.com/react@15.6.2/dist/react.js">react/dist/react.js</a><br/> Minified build for production: <a href="https://unpkg.com/react@15.6.2/dist/react.min.js">react/dist/react.min.js</a><br/></li>
+<li><strong>React with Add-Ons</strong><br/> Dev build with warnings: <a href="https://unpkg.com/react@15.6.2/dist/react-with-addons.js">react/dist/react-with-addons.js</a><br/> Minified build for production: <a href="https://unpkg.com/react@15.6.2/dist/react-with-addons.min.js">react/dist/react-with-addons.min.js</a><br/></li>
+<li><strong>React DOM</strong> (include React in the page before React DOM)<br/> Dev build with warnings: <a href="https://unpkg.com/react-dom@15.6.2/dist/react-dom.js">react-dom/dist/react-dom.js</a><br/> Minified build for production: <a href="https://unpkg.com/react-dom@15.6.2/dist/react-dom.min.js">react-dom/dist/react-dom.min.js</a><br/></li>
+<li><strong>React DOM Server</strong> (include React in the page before React DOM Server)<br/> Dev build with warnings: <a href="https://unpkg.com/react-dom@15.6.2/dist/react-dom-server.js">react-dom/dist/react-dom-server.js</a><br/> Minified build for production: <a href="https://unpkg.com/react-dom@15.6.2/dist/react-dom-server.min.js">react-dom/dist/react-dom-server.min.js</a><br/></li>
+</ul>
+<p>We’ve also published version <code>15.6.2</code> of <code>react</code> and <code>react-dom</code> on npm, and the <code>react</code> package on bower.</p>
+<hr />
+<h2 id="changelog">Changelog</h2>
+<h2 id="september-25-2017-1562-september-25-2017">15.6.2 (September 25, 2017) {#1562-september-25-2017}</h2>
+<h3 id="all-packages">All Packages</h3>
+<ul>
+<li>Switch from BSD + Patents to MIT license</li>
+</ul>
+<h3 id="react-dom">React DOM</h3>
+<ul>
+<li>Fix a bug where modifying <code>document.documentMode</code> would trigger IE detection in other browsers, breaking change events. (<span class="citation" data-cites="aweary">[@aweary]</span>(https://github.com/aweary) in <a href="https://github.com/facebook/react/pull/10032">#10032</a>)</li>
+<li>CSS Columns are treated as unitless numbers. (<span class="citation" data-cites="aweary">[@aweary]</span>(https://github.com/aweary) in <a href="https://github.com/facebook/react/pull/10115">#10115</a>)</li>
+<li>Fix bug in QtWebKit when wrapping synthetic events in proxies. (<span class="citation" data-cites="walrusfruitcake">[@walrusfruitcake]</span>(https://github.com/walrusfruitcake) in <a href="https://github.com/facebook/react/pull/10011">#10115</a>)</li>
+<li>Prevent event handlers from receiving extra argument in development. (<span class="citation" data-cites="aweary">[@aweary]</span>(https://github.com/aweary) in <a href="https://github.com/facebook/react/pull/8363">#10115</a>)</li>
+<li>Fix cases where <code>onChange</code> would not fire with <code>defaultChecked</code> on radio inputs. (<span class="citation" data-cites="jquense">[@jquense]</span>(https://github.com/jquense) in <a href="https://github.com/facebook/react/pull/10156">#10156</a>)</li>
+<li>Add support for <code>controlList</code> attribute to DOM property whitelist (<span class="citation" data-cites="nhunzaker">[@nhunzaker]</span>(https://github.com/nhunzaker) in <a href="https://github.com/facebook/react/pull/9940">#9940</a>)</li>
+<li>Fix a bug where creating an element with a ref in a constructor did not throw an error in development. (<span class="citation" data-cites="iansu">[@iansu]</span>(https://github.com/iansu) in <a href="https://github.com/facebook/react/pull/10025">#10025</a>)</li>
+</ul>
+</body>
+</html>

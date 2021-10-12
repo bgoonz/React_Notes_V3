@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="zpao" />
+  <title>React v0.11</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">React v0.11</h1>
+<p class="author">zpao</p>
+</header>
+<p><strong>Update:</strong> We missed a few important changes in our initial post and changelog. We’ve updated this post with details about <a href="#descriptors">Descriptors</a> and <a href="#prop-type-validation">Prop Type Validation</a>.</p>
+<hr />
+<p>We’re really happy to announce the availability of React v0.11. There seems to be a lot of excitement already and we appreciate everybody who gave the release candidate a try over the weekend. We made a couple small changes in response to the feedback and issues filed. We enabled the destructuring assignment transform when using <code>jsx --harmony</code>, fixed a small regression with <code>statics</code>, and made sure we actually exposed the new API we said we were shipping: <code>React.Children.count</code>.</p>
+<p>This version has been cooking for a couple months now and includes a wide array of bug fixes and features. We highlighted some of the most important changes below, along with the full changelog.</p>
+<p>The release is available for download from the CDN:</p>
+<ul>
+<li><strong>React</strong><br />
+Dev build with warnings: <a href="https://fb.me/react-0.11.0.js" class="uri">https://fb.me/react-0.11.0.js</a><br />
+Minified build for production: <a href="https://fb.me/react-0.11.0.min.js" class="uri">https://fb.me/react-0.11.0.min.js</a><br />
+</li>
+<li><strong>React with Add-Ons</strong><br />
+Dev build with warnings: <a href="https://fb.me/react-with-addons-0.11.0.js" class="uri">https://fb.me/react-with-addons-0.11.0.js</a><br />
+Minified build for production: <a href="https://fb.me/react-with-addons-0.11.0.min.js" class="uri">https://fb.me/react-with-addons-0.11.0.min.js</a><br />
+</li>
+<li><strong>In-Browser JSX transformer</strong><br />
+<a href="https://fb.me/JSXTransformer-0.11.0.js" class="uri">https://fb.me/JSXTransformer-0.11.0.js</a></li>
+</ul>
+<p>We’ve also published version <code>0.11.0</code> of the <code>react</code> and <code>react-tools</code> packages on npm and the <code>react</code> package on bower.</p>
+<p>Please try these builds out and <a href="https://github.com/facebook/react/issues/new">file an issue on GitHub</a> if you see anything awry.</p>
+<h2 id="getdefaultprops"><code>getDefaultProps</code></h2>
+<p>Starting in React 0.11, <code>getDefaultProps()</code> is called only once when <code>React.createClass()</code> is called, instead of each time a component is rendered. This means that <code>getDefaultProps()</code> can no longer vary its return value based on <code>this.props</code> and any objects will be shared across all instances. This change improves performance and will make it possible in the future to do PropTypes checks earlier in the rendering process, allowing us to give better error messages.</p>
+<h2 id="rendering-to-null">Rendering to <code>null</code></h2>
+<p>Since React’s release, people have been using work arounds to “render nothing”. Usually this means returning an empty <code>&lt;div/&gt;</code> or <code>&lt;span/&gt;</code>. Some people even got clever and started returning <code>&lt;noscript/&gt;</code> to avoid extraneous DOM nodes. We finally provided a “blessed” solution that allows developers to write meaningful code. Returning <code>null</code> is an explicit indication to React that you do not want anything rendered. Behind the scenes we make this work with a <code>&lt;noscript&gt;</code> element, though in the future we hope to not put anything in the document. In the mean time, <code>&lt;noscript&gt;</code> elements do not affect layout in any way, so you can feel safe using <code>null</code> today!</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb1-1" title="1"><span class="co">// Before</span></a>
+<a class="sourceLine" id="cb1-2" title="2">render<span class="op">:</span> <span class="kw">function</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb1-3" title="3">  <span class="cf">if</span> (<span class="op">!</span><span class="kw">this</span>.<span class="va">state</span>.<span class="at">visible</span>) <span class="op">{</span></a>
+<a class="sourceLine" id="cb1-4" title="4">    <span class="cf">return</span> <span class="op">&lt;</span>span/<span class="op">&gt;;</span></a>
+<a class="sourceLine" id="cb1-5" title="5">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb1-6" title="6">  <span class="co">// ...</span></a>
+<a class="sourceLine" id="cb1-7" title="7"><span class="op">}</span></a>
+<a class="sourceLine" id="cb1-8" title="8"></a>
+<a class="sourceLine" id="cb1-9" title="9"><span class="co">// After</span></a>
+<a class="sourceLine" id="cb1-10" title="10">render<span class="op">:</span> <span class="kw">function</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb1-11" title="11">  <span class="cf">if</span> (<span class="op">!</span><span class="kw">this</span>.<span class="va">state</span>.<span class="at">visible</span>) <span class="op">{</span></a>
+<a class="sourceLine" id="cb1-12" title="12">    <span class="cf">return</span> <span class="kw">null</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb1-13" title="13">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb1-14" title="14">  <span class="co">// ...</span></a>
+<a class="sourceLine" id="cb1-15" title="15"><span class="op">}</span></a></code></pre></div>
+<h2 id="jsx-namespacing">JSX Namespacing</h2>
+<p>Another feature request we’ve been hearing for a long time is the ability to have namespaces in JSX. Given that JSX is just JavaScript, we didn’t want to use XML namespacing. Instead we opted for a standard JS approach: object property access. Instead of assigning variables to access components stored in an object (such as a component library), you can now use the component directly as <code>&lt;Namespace.Component/&gt;</code>.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb2-1" title="1"><span class="co">// Before</span></a>
+<a class="sourceLine" id="cb2-2" title="2"><span class="kw">var</span> UI <span class="op">=</span> <span class="at">require</span>(<span class="st">&#39;UI&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb2-3" title="3"><span class="kw">var</span> UILayout <span class="op">=</span> <span class="va">UI</span>.<span class="at">Layout</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb2-4" title="4"><span class="kw">var</span> UIButton <span class="op">=</span> <span class="va">UI</span>.<span class="at">Button</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb2-5" title="5"><span class="kw">var</span> UILabel <span class="op">=</span> <span class="va">UI</span>.<span class="at">Label</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb2-6" title="6"></a>
+<a class="sourceLine" id="cb2-7" title="7">render<span class="op">:</span> <span class="kw">function</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb2-8" title="8">  <span class="cf">return</span> <span class="op">&lt;</span>UILayout<span class="op">&gt;&lt;</span>UIButton /<span class="op">&gt;&lt;</span>UILabel<span class="op">&gt;</span>text&lt;/UILabel<span class="op">&gt;</span>&lt;/UILayout<span class="op">&gt;;</span></a>
+<a class="sourceLine" id="cb2-9" title="9"><span class="op">}</span></a>
+<a class="sourceLine" id="cb2-10" title="10"></a>
+<a class="sourceLine" id="cb2-11" title="11"><span class="co">// After</span></a>
+<a class="sourceLine" id="cb2-12" title="12"><span class="kw">var</span> UI <span class="op">=</span> <span class="at">require</span>(<span class="st">&#39;UI&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb2-13" title="13"></a>
+<a class="sourceLine" id="cb2-14" title="14">render<span class="op">:</span> <span class="kw">function</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb2-15" title="15">  <span class="cf">return</span> <span class="op">&lt;</span><span class="va">UI</span>.<span class="at">Layout</span><span class="op">&gt;&lt;</span><span class="va">UI</span>.<span class="at">Button</span> /<span class="op">&gt;&lt;</span><span class="va">UI</span>.<span class="at">Label</span><span class="op">&gt;</span>text&lt;/<span class="va">UI</span>.<span class="at">Label</span><span class="op">&gt;</span>&lt;/<span class="va">UI</span>.<span class="at">Layout</span><span class="op">&gt;;</span></a>
+<a class="sourceLine" id="cb2-16" title="16"><span class="op">}</span></a></code></pre></div>
+<h2 id="improved-keyboard-event-normalization">Improved keyboard event normalization</h2>
+<p>Keyboard events now contain a normalized <code>e.key</code> value according to the <a href="http://www.w3.org/TR/DOM-Level-3-Events/#keys-special">DOM Level 3 Events spec</a>, allowing you to write simpler key handling code that works in all browsers, such as:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb3-1" title="1">handleKeyDown<span class="op">:</span> <span class="kw">function</span>(e) <span class="op">{</span></a>
+<a class="sourceLine" id="cb3-2" title="2">  <span class="cf">if</span> (<span class="va">e</span>.<span class="at">key</span> <span class="op">===</span> <span class="st">&#39;Enter&#39;</span>) <span class="op">{</span></a>
+<a class="sourceLine" id="cb3-3" title="3">    <span class="co">// Handle enter key</span></a>
+<a class="sourceLine" id="cb3-4" title="4">  <span class="op">}</span> <span class="cf">else</span> <span class="cf">if</span> (<span class="va">e</span>.<span class="at">key</span> <span class="op">===</span> <span class="st">&#39; &#39;</span>) <span class="op">{</span></a>
+<a class="sourceLine" id="cb3-5" title="5">    <span class="co">// Handle spacebar</span></a>
+<a class="sourceLine" id="cb3-6" title="6">  <span class="op">}</span> <span class="cf">else</span> <span class="cf">if</span> (<span class="va">e</span>.<span class="at">key</span> <span class="op">===</span> <span class="st">&#39;ArrowLeft&#39;</span>) <span class="op">{</span></a>
+<a class="sourceLine" id="cb3-7" title="7">    <span class="co">// Handle left arrow</span></a>
+<a class="sourceLine" id="cb3-8" title="8">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb3-9" title="9"><span class="op">},</span></a></code></pre></div>
+<p>Keyboard and mouse events also now include a normalized <code>e.getModifierState()</code> that works consistently across browsers.</p>
+<h2 id="descriptors">Descriptors</h2>
+<p>In our <a href="/blog/2014/03/21/react-v0.10.html#clone-on-mount">v0.10 release notes</a>, we called out that we were deprecating the existing behavior of the component function call (eg <code>component = MyComponent(props, ...children)</code> or <code>component = &lt;MyComponent prop={...}/&gt;</code>). Previously that would create an instance and React would modify that internally. You could store that reference and then call functions on it (eg <code>component.setProps(...)</code>). This no longer works. <code>component</code> in the above examples will be a descriptor and not an instance that can be operated on. The v0.10 release notes provide a complete example along with a migration path. The development builds also provided warnings if you called functions on descriptors.</p>
+<p>Along with this change to descriptors, <code>React.isValidComponent</code> and <code>React.PropTypes.component</code> now actually validate that the value is a descriptor. Overwhelmingly, these functions are used to validate the value of <code>MyComponent()</code>, which as mentioned is now a descriptor, not a component instance. We opted to reduce code churn and make the migration to 0.11 as easy as possible. However, we realize this is has caused some confusion and we’re working to make sure we are consistent with our terminology.</p>
+<h2 id="prop-type-validation">Prop Type Validation</h2>
+<p>Previously <code>React.PropTypes</code> validation worked by simply logging to the console. Internally, each validator was responsible for doing this itself. Additionally, you could write a custom validator and the expectation was that you would also simply <code>console.log</code> your error message. Very shortly into the 0.11 cycle we changed this so that our validators return (<em>not throw</em>) an <code>Error</code> object. We then log the <code>error.message</code> property in a central place in ReactCompositeComponent. Overall the result is the same, but this provides a clearer intent in validation. In addition, to better transition into our descriptor factory changes, we also currently run prop type validation twice in development builds. As a result, custom validators doing their own logging result in duplicate messages. To update, simply return an <code>Error</code> with your message instead.</p>
+<h2 id="changelog">Changelog</h2>
+<h3 id="react-core">React Core</h3>
+<h4 id="breaking-changes">Breaking Changes</h4>
+<ul>
+<li><code>getDefaultProps()</code> is now called once per class and shared across all instances</li>
+<li><code>MyComponent()</code> now returns a descriptor, not an instance</li>
+<li><code>React.isValidComponent</code> and <code>React.PropTypes.component</code> validate <em>descriptors</em>, not component instances.</li>
+<li>Custom <code>propType</code> validators should return an <code>Error</code> instead of logging directly</li>
+</ul>
+<h4 id="new-features">New Features</h4>
+<ul>
+<li>Rendering to <code>null</code></li>
+<li>Keyboard events include normalized <code>e.key</code> and <code>e.getModifierState()</code> properties</li>
+<li>New normalized <code>onBeforeInput</code> event</li>
+<li><code>React.Children.count</code> has been added as a helper for counting the number of children</li>
+</ul>
+<h4 id="bug-fixes">Bug Fixes</h4>
+<ul>
+<li>Re-renders are batched in more cases</li>
+<li>Events: <code>e.view</code> properly normalized</li>
+<li>Added Support for more HTML attributes (<code>coords</code>, <code>crossOrigin</code>, <code>download</code>, <code>hrefLang</code>, <code>mediaGroup</code>, <code>muted</code>, <code>scrolling</code>, <code>shape</code>, <code>srcSet</code>, <code>start</code>, <code>useMap</code>)</li>
+<li>Improved SVG support
+<ul>
+<li>Changing <code>className</code> on a mounted SVG component now works correctly</li>
+<li>Added support for elements <code>mask</code> and <code>tspan</code></li>
+<li>Added support for attributes <code>dx</code>, <code>dy</code>, <code>fillOpacity</code>, <code>fontFamily</code>, <code>fontSize</code>, <code>markerEnd</code>, <code>markerMid</code>, <code>markerStart</code>, <code>opacity</code>, <code>patternContentUnits</code>, <code>patternUnits</code>, <code>preserveAspectRatio</code>, <code>strokeDasharray</code>, <code>strokeOpacity</code></li>
+</ul></li>
+<li>CSS property names with vendor prefixes (<code>Webkit</code>, <code>ms</code>, <code>Moz</code>, <code>O</code>) are now handled properly</li>
+<li>Duplicate keys no longer cause a hard error; now a warning is logged (and only one of the children with the same key is shown)</li>
+<li><code>img</code> event listeners are now unbound properly, preventing the error “Two valid but unequal nodes with the same <code>data-reactid</code>”</li>
+<li>Added explicit warning when missing polyfills</li>
+</ul>
+<h3 id="react-with-addons">React With Addons</h3>
+<ul>
+<li>PureRenderMixin: a mixin which helps optimize “pure” components</li>
+<li>Perf: a new set of tools to help with performance analysis</li>
+<li>Update: New <code>$apply</code> command to transform values</li>
+<li>TransitionGroup bug fixes with null elements, Android</li>
+</ul>
+<h3 id="react-npm-module">React NPM Module</h3>
+<ul>
+<li>Now includes the pre-built packages under <code>dist/</code>.</li>
+<li><code>envify</code> is properly listed as a dependency instead of a peer dependency</li>
+</ul>
+<h3 id="jsx">JSX</h3>
+<ul>
+<li>Added support for namespaces, eg <code>&lt;Components.Checkbox /&gt;</code></li>
+<li>JSXTransformer
+<ul>
+<li>Enable the same <code>harmony</code> features available in the command line with <code>&lt;script type="text/jsx;harmony=true"&gt;</code></li>
+<li>Scripts are downloaded in parallel for more speed. They are still executed in order (as you would expect with normal script tags)</li>
+<li>Fixed a bug preventing sourcemaps from working in Firefox</li>
+</ul></li>
+</ul>
+<h3 id="react-tools-module">React Tools Module</h3>
+<ul>
+<li>Improved readme with usage and API information</li>
+<li>Improved ES6 transforms available with <code>--harmony</code> option</li>
+<li>Added <code>--source-map-inline</code> option to the <code>jsx</code> executable</li>
+<li>New <code>transformWithDetails</code> API which gives access to the raw sourcemap data</li>
+</ul>
+</body>
+</html>

@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Adopting Concurrent Mode (Experimental)</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Adopting Concurrent Mode (Experimental)</h1>
+</header>
+<style>
+.scary > blockquote {
+  background-color: rgba(237, 51, 21, 0.2);
+  border-left-color: #ed3315;
+}
+</style>
+<div class="scary">
+<blockquote>
+<p>Caution:</p>
+<p>This page describes <strong>experimental features that are not yet available in a stable release</strong>. Don’t rely on experimental builds of React in production apps. These features may change significantly and without a warning before they become a part of React.</p>
+<p>This documentation is aimed at early adopters and people who are curious. <strong>If you’re new to React, don’t worry about these features</strong> – you don’t need to learn them right now.</p>
+</blockquote>
+</div>
+<ul>
+<li><a href="#installation">Installation</a>
+<ul>
+<li><a href="#who-is-this-experimental-release-for">Who Is This Experimental Release For?</a></li>
+<li><a href="#enabling-concurrent-mode">Enabling Concurrent Mode</a></li>
+</ul></li>
+<li><a href="#what-to-expect">What to Expect</a>
+<ul>
+<li><a href="#migration-step-blocking-mode">Migration Step: Blocking Mode</a></li>
+<li><a href="#why-so-many-modes">Why So Many Modes?</a></li>
+<li><a href="#feature-comparison">Feature Comparison</a></li>
+</ul></li>
+</ul>
+<h2 id="installation">Installation</h2>
+<p>Concurrent Mode is only available in the <a href="/blog/2019/10/22/react-release-channels.html#experimental-channel">experimental builds</a> of React. To install them, run:</p>
+<pre><code>npm install react@experimental react-dom@experimental</code></pre>
+<p><strong>There are no semantic versioning guarantees for the experimental builds.</strong><br />
+APIs may be added, changed, or removed with any <code>@experimental</code> release.</p>
+<p><strong>Experimental releases will have frequent breaking changes.</strong></p>
+<p>You can try these builds on personal projects or in a branch, but we don’t recommend running them in production. At Facebook, we <em>do</em> run them in production, but that’s because we’re also there to fix bugs when something breaks. You’ve been warned!</p>
+<h3 id="who-is-this-experimental-release-for">Who Is This Experimental Release For?</h3>
+<p>This release is primarily aimed at early adopters, library authors, and curious people.</p>
+<p>We’re using this code in production (and it works for us) but there are still some bugs, missing features, and gaps in the documentation. We’d like to hear more about what breaks in Concurrent Mode so we can better prepare it for an official stable release in the future.</p>
+<h3 id="enabling-concurrent-mode">Enabling Concurrent Mode</h3>
+<p>Normally, when we add features to React, you can start using them immediately. Fragments, Context, and even Hooks are examples of such features. You can use them in new code without making any changes to the existing code.</p>
+<p>Concurrent Mode is different. It introduces semantic changes to how React works. Otherwise, the <a href="/docs/concurrent-mode-patterns.html">new features</a> enabled by it <em>wouldn’t be possible</em>. This is why they’re grouped into a new “mode” rather than released one by one in isolation.</p>
+<p>You can’t opt into Concurrent Mode on a per-subtree basis. Instead, to opt in, you have to do it in the place where today you call <code>ReactDOM.render()</code>.</p>
+<p><strong>This will enable Concurrent Mode for the whole <code>&lt;App /&gt;</code> tree:</strong></p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb2-1" title="1"><span class="im">import</span> ReactDOM <span class="im">from</span> <span class="st">&#39;react-dom&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb2-2" title="2"></a>
+<a class="sourceLine" id="cb2-3" title="3"><span class="co">// If you previously had:</span></a>
+<a class="sourceLine" id="cb2-4" title="4"><span class="co">//</span></a>
+<a class="sourceLine" id="cb2-5" title="5"><span class="co">// ReactDOM.render(&lt;App /&gt;, document.getElementById(&#39;root&#39;));</span></a>
+<a class="sourceLine" id="cb2-6" title="6"><span class="co">//</span></a>
+<a class="sourceLine" id="cb2-7" title="7"><span class="co">// You can opt into Concurrent Mode by writing:</span></a>
+<a class="sourceLine" id="cb2-8" title="8"></a>
+<a class="sourceLine" id="cb2-9" title="9"><span class="va">ReactDOM</span>.<span class="at">unstable_createRoot</span>(</a>
+<a class="sourceLine" id="cb2-10" title="10">  <span class="va">document</span>.<span class="at">getElementById</span>(<span class="st">&#39;root&#39;</span>)</a>
+<a class="sourceLine" id="cb2-11" title="11">).<span class="at">render</span>(<span class="op">&lt;</span>App /<span class="op">&gt;</span>)<span class="op">;</span></a></code></pre></div>
+<blockquote>
+<p>Note:</p>
+<p>Concurrent Mode APIs such as <code>createRoot</code> only exist in the experimental builds of React.</p>
+</blockquote>
+<p>In Concurrent Mode, the lifecycle methods <a href="/blog/2018/03/27/update-on-async-rendering.html">previously marked</a> as “unsafe” actually <em>are</em> unsafe, and lead to bugs even more than in today’s React. We don’t recommend trying Concurrent Mode until your app is <a href="/docs/strict-mode.html">Strict Mode</a>-compatible.</p>
+<h2 id="what-to-expect">What to Expect</h2>
+<p>If you have a large existing app, or if your app depends on a lot of third-party packages, please don’t expect that you can use the Concurrent Mode immediately. <strong>For example, at Facebook we are using Concurrent Mode for the new website, but we’re not planning to enable it on the old website.</strong> This is because our old website still uses unsafe lifecycle methods in the product code, incompatible third-party libraries, and patterns that don’t work well with the Concurrent Mode.</p>
+<p>In our experience, code that uses idiomatic React patterns and doesn’t rely on external state management solutions is the easiest to get running in the Concurrent Mode. We will describe common problems we’ve seen and the solutions to them separately in the coming weeks.</p>
+<h3 id="migration-step-blocking-mode">Migration Step: Blocking Mode</h3>
+<p>For older codebases, Concurrent Mode might be a step too far. This is why we also provide a new “Blocking Mode” in the experimental React builds. You can try it by substituting <code>createRoot</code> with <code>createBlockingRoot</code>. It only offers a <em>small subset</em> of the Concurrent Mode features, but it is closer to how React works today and can serve as a migration step.</p>
+<p>To recap:</p>
+<ul>
+<li><strong>Legacy Mode:</strong> <code>ReactDOM.render(&lt;App /&gt;, rootNode)</code>. This is what React apps use today. There are no plans to remove the legacy mode in the observable future — but it won’t be able to support these new features.</li>
+<li><strong>Blocking Mode:</strong> <code>ReactDOM.createBlockingRoot(rootNode).render(&lt;App /&gt;)</code>. It is currently experimental. It is intended as a first migration step for apps that want to get a subset of Concurrent Mode features.</li>
+<li><strong>Concurrent Mode:</strong> <code>ReactDOM.createRoot(rootNode).render(&lt;App /&gt;)</code>. It is currently experimental. In the future, after it stabilizes, we intend to make it the default React mode. This mode enables <em>all</em> the new features.</li>
+</ul>
+<h3 id="why-so-many-modes">Why So Many Modes?</h3>
+<p>We think it is better to offer a <a href="/docs/faq-versioning.html#commitment-to-stability">gradual migration strategy</a> than to make huge breaking changes — or to let React stagnate into irrelevance.</p>
+<p>In practice, we expect that most apps using Legacy Mode today should be able to migrate at least to the Blocking Mode (if not Concurrent Mode). This fragmentation can be annoying for libraries that aim to support all Modes in the short term. However, gradually moving the ecosystem away from the Legacy Mode will also <em>solve</em> problems that affect major libraries in the React ecosystem, such as <a href="https://github.com/facebook/react/issues/14536">confusing Suspense behavior when reading layout</a> and <a href="https://github.com/facebook/react/issues/15080">lack of consistent batching guarantees</a>. There’s a number of bugs that can’t be fixed in Legacy Mode without changing semantics, but don’t exist in Blocking and Concurrent Modes.</p>
+<p>You can think of the Blocking Mode as a “gracefully degraded” version of the Concurrent Mode. <strong>As a result, in longer term we should be able to converge and stop thinking about different Modes altogether.</strong> But for now, Modes are an important migration strategy. They let everyone decide when a migration is worth it, and upgrade at their own pace.</p>
+<h3 id="feature-comparison">Feature Comparison</h3>
+<style>
+  #feature-table table { border-collapse: collapse; }
+  #feature-table th { padding-right: 30px; }
+  #feature-table tr { border-bottom: 1px solid #eee; }
+</style>
+<div id="feature-table">
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th>Legacy Mode</th>
+<th>Blocking Mode</th>
+<th>Concurrent Mode</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><a href="/docs/refs-and-the-dom.html#legacy-api-string-refs">String Refs</a></td>
+<td>✅</td>
+<td>🚫**</td>
+<td>🚫**</td>
+</tr>
+<tr class="even">
+<td><a href="/docs/legacy-context.html">Legacy Context</a></td>
+<td>✅</td>
+<td>🚫**</td>
+<td>🚫**</td>
+</tr>
+<tr class="odd">
+<td><a href="/docs/strict-mode.html#warning-about-deprecated-finddomnode-usage">findDOMNode</a></td>
+<td>✅</td>
+<td>🚫**</td>
+<td>🚫**</td>
+</tr>
+<tr class="even">
+<td><a href="/docs/concurrent-mode-suspense.html#what-is-suspense-exactly">Suspense</a></td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td><a href="/docs/concurrent-mode-patterns.html#suspenselist">SuspenseList</a></td>
+<td>🚫</td>
+<td>✅</td>
+<td>✅</td>
+</tr>
+<tr class="even">
+<td>Suspense SSR + Hydration</td>
+<td>🚫</td>
+<td>✅</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td>Progressive Hydration</td>
+<td>🚫</td>
+<td>✅</td>
+<td>✅</td>
+</tr>
+<tr class="even">
+<td>Selective Hydration</td>
+<td>🚫</td>
+<td>🚫</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td>Cooperative Multitasking</td>
+<td>🚫</td>
+<td>🚫</td>
+<td>✅</td>
+</tr>
+<tr class="even">
+<td>Automatic batching of multiple setStates    </td>
+<td>🚫*</td>
+<td>✅</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td><a href="/docs/concurrent-mode-patterns.html#splitting-high-and-low-priority-state">Priority-based Rendering</a></td>
+<td>🚫</td>
+<td>🚫</td>
+<td>✅</td>
+</tr>
+<tr class="even">
+<td><a href="/docs/concurrent-mode-intro.html#interruptible-rendering">Interruptible Prerendering</a></td>
+<td>🚫</td>
+<td>🚫</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td><a href="/docs/concurrent-mode-patterns.html#transitions">useTransition</a></td>
+<td>🚫</td>
+<td>🚫</td>
+<td>✅</td>
+</tr>
+<tr class="even">
+<td><a href="/docs/concurrent-mode-patterns.html#deferring-a-value">useDeferredValue</a></td>
+<td>🚫</td>
+<td>🚫</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td><a href="/docs/concurrent-mode-patterns.html#suspense-reveal-train">Suspense Reveal “Train”</a></td>
+<td>🚫</td>
+<td>🚫</td>
+<td>✅</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>*: Legacy mode has automatic batching in React-managed events but it’s limited to one browser task. Non-React events must opt-in using <code>unstable_batchedUpdates</code>. In Blocking Mode and Concurrent Mode, all <code>setState</code>s are batched by default.</p>
+<p>**: Warns in development.</p>
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="jaredly" />
+  <title>New React Devtools Beta</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">New React Devtools Beta</h1>
+<p class="author">jaredly</p>
+</header>
+<p>We’ve made an entirely new version of the devtools, and we want you to try it out!</p>
+<figure>
+<img src="../images/blog/devtools-full.gif" alt="The full devtools gif" /><figcaption>The full devtools gif</figcaption>
+</figure>
+<h2 id="why-entirely-new">Why entirely new?</h2>
+<p>Perhaps the biggest reason was to create a defined API for dealing with internals, so that other tools could benefit as well and not have to depend on implementation details. This gives us more freedom to refactor things internally without worrying about breaking tooling.</p>
+<p>The current version of the devtools is a fork of Blink’s “Elements” pane, and is imperative, mutation-driven, and tightly integrated with Chrome-specific APIs. The new devtools are much less coupled to Chrome, and easier to reason about thanks to React.</p>
+<h2 id="what-are-the-benefits">What are the benefits?</h2>
+<ul>
+<li>100% React</li>
+<li>Firefox compatible</li>
+<li>React Native compatible</li>
+<li>more extensible &amp; hackable</li>
+</ul>
+<h2 id="are-there-any-new-features">Are there any new features?</h2>
+<p>Yeah!</p>
+<h3 id="the-tree-view">The Tree View</h3>
+<figure>
+<img src="../images/blog/devtools-tree-view.png" alt="The new tree view of the devtools" /><figcaption>The new tree view of the devtools</figcaption>
+</figure>
+<ul>
+<li>Much richer view of your props, including the contents of objects and arrays</li>
+<li>Custom components are emphasized, native components are de-emphasized</li>
+<li>Stateful components have a red collapser</li>
+<li>Improved keyboard navigation (hjkl or arrow keys)</li>
+<li>Selected component is available in the console as <code>$r</code></li>
+<li>Props that change highlight in green</li>
+<li><p>Right-click menu</p>
+<ul>
+<li>Scroll node into view</li>
+<li>Show the source for a component in the “Sources” pane</li>
+<li>Show the element in the “Elements” pane</li>
+</ul></li>
+</ul>
+<h3 id="searching">Searching</h3>
+<p>Select the search bar (or press “/”), and start searching for a component by name.</p>
+<p><img src="../images/blog/devtools-search.gif" /></p>
+<h3 id="the-side-pane">The Side Pane</h3>
+<ul>
+<li>Now shows the <code>context</code> for a component</li>
+<li>Right-click to store a prop/state value as a global variable</li>
+</ul>
+<p><img src="../images/blog/devtools-side-pane.gif" /></p>
+<h2 id="how-do-i-install-it">How do I install it?</h2>
+<p>First, disable the Chrome web store version, or it will break things. Then <a href="https://github.com/facebook/react-devtools/releases">download the .crx</a> and drag it into your <code>chrome://extensions</code> page. If it’s not working to drag it from the downloads bar, try opening your downloads folder and drag it from there.</p>
+<p>Once we’ve determined that there aren’t any major regressions, we’ll update the official web store version, and everyone will be automatically upgraded.</p>
+<h3 id="also-firefox">Also Firefox!</h3>
+<p>We also have an initial version of the devtools for Firefox, which you can download from the same <a href="https://github.com/facebook/react-devtools/releases">release page</a>.</p>
+<h2 id="feedback-welcome">Feedback welcome</h2>
+<p>Let us know what issues you run into <a href="https://github.com/facebook/react-devtools/issues">on GitHub</a>, and check out <a href="https://github.com/facebook/react-devtools/tree/devtools-next">the README</a> for more info.</p>
+<h2 id="update">Update</h2>
+<p><em>August 12, 2015</em></p>
+<p>A second beta is out, with a number of bugfixes. It is also listed on the <a href="https://github.com/facebook/react-devtools/releases">releases page</a>.</p>
+</body>
+</html>

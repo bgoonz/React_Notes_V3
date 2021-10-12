@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="steveluscher" />
+  <title>Community Round-up #24</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Community Round-up #24</h1>
+<p class="author">steveluscher</p>
+</header>
+<h2 id="keep-it-simple">Keep it Simple</h2>
+<p>Pedro Nauck (<a href="https://github.com/pedronauck">pedronauck</a>) delivered an impeccably illustrated deck at Brazil’s <em>Front in Floripa</em> conference. Watch him talk about how to keep delivering value as your app scales, by keeping your development process simple.</p>
+<script async class="speakerdeck-embed" data-id="44129b9054c901328b89221e99b278fe" data-ratio="1.33333333333333" src="//speakerdeck.com/assets/embed.js"></script>
+<p>Murilo Pereira (<a href="https://github.com/mpereira">mpereira</a>) tussles with the topic of complexity in this blog post about <a href="http://www.techsonian.net/2014/09/from-backbone-to-react-our-experience-scaling-a-web-application/">coping with scaling up</a>, where he describes how his team used React to make possible the “nearly impossible.”</p>
+<p>I (<a href="https://github.com/steveluscher">steveluscher</a>) spoke at Manning Publications’ “Powered By JavaScript” Strangeloop pre-conf in St. Louis. There, I proposed a new notation to talk about development complexity – Big-Coffee Notation ☕(n) – and spoke about the features of React that help keep our Big-Coffee from going quadratic, as our user interfaces get more complex.</p>
+<iframe width="650" height="315" src="//www.youtube-nocookie.com/embed/rI0GQc__0SM" frameborder="0" allowfullscreen>
+</iframe>
+<p>James Pearce (<a href="https://github.com/jamesgpearce">jamesgpearce</a>) carried Big-Coffee all the way to Raleigh, NC. At the <em>All Things Open</em> conference, he spoke about some of the design decisions that went into React, particularly those that lend themselves to simpler, more reliable code.</p>
+<iframe width="650" height="315" src="//www.youtube-nocookie.com/embed/m2fuO2wl_3c" frameborder="0" allowfullscreen>
+</iframe>
+<h2 id="all-about-isomorphism">All About Isomorphism</h2>
+<p>Michael Ridgway (<a href="https://github.com/mridgway">mridgway</a>) shows us how Yahoo! (who recently <a href="http://www.slideshare.net/rmsguhan/react-meetup-mailonreact">moved Yahoo! Mail to React</a>) renders their React+Flux application, server-side.</p>
+<script async class="speakerdeck-embed" data-id="87ecaa3048750132f42542ffc18c6fcf" data-ratio="1.77777777777778" src="//speakerdeck.com/assets/embed.js"></script>
+<p>Péter Márton (<a href="https://github.com/hekike">hekike</a>) helps us brew a cold one (literally) using an application that’s server-client <a href="http://blog.risingstack.com/from-angularjs-to-react-the-isomorphic-way/">isomorphic and indexable</a>. Demo and sample code included – cold ones sold separately.</p>
+<p>And, lest you think that client-server isomorphism exists in pursuit of crawalable, indexable HTML alone, watch as Nate Hunzaker (<a href="https://github.com/nhunzaker">nhunzaker</a>) <a href="http://viget.com/extend/visualization-is-for-sharing-using-react-for-portable-data-visualization">server renders data visualizations as SVG</a> with React.</p>
+<h2 id="react-router-mows-the-lawn">React Router Mows the Lawn</h2>
+<p>Ryan Florence (<a href="https://github.com/rpflorence%5D">rpflorence</a>) and Michael Jackson (<a href="https://github.com/mjackson">mjackson</a>) unveiled a new API for <a href="https://github.com/rackt/react-router">React Router</a> that solves some of its user’s problems by eliminating the problems themselves. Read all about what React Router learned from its community of users, and how they’ve <a href="https://github.com/rackt/react-router/wiki/Announcements">rolled your ideas into their latest release</a>.</p>
+<h2 id="react-in-practice">React in Practice</h2>
+<p>Jonathan Beebe (<a href="https://github.com/somethingkindawierd">somethingkindawierd</a>) spoke about how he uses React to build tools that deliver hope to those trying to make the best of a bad situation. Watch his talk from this year’s <em>Nodevember</em> conference in Nashville</p>
+<iframe width="650" height="315" src="//www.youtube-nocookie.com/embed/uZgAq1CZ1N8" frameborder="0" allowfullscreen>
+</iframe>
+<p>If you take a peek under the covers, you’ll find that React powers <a href="https://blog.carousel.com/2014/11/introducing-carousel-for-web-ipad-and-android-tablet/">Carousel</a>, Dropbox’s new photo and video gallery app.</p>
+<p>We enjoyed a cinematic/narrative experience with this React-powered, interactive story by British author William Boyd. Dive into “<a href="https://thevanishinggame.wellstoried.com">The Vanishing Game</a>” and see for yourself.</p>
+<h2 id="be-kind-rewind">Be Kind, Rewind</h2>
+<p>Spend the next 60 seconds watching Daniel Woelfel (<a href="https://github.com/dwwoelfel">dwwoelfel</a>) serialize a React app’s state as a string, then deserialize it to produce a working UI. Read about how he uses this technique to <a href="http://blog.circleci.com/local-state-global-concerns/">reproduce bugs</a> reported to him by his users.</p>
+<iframe width="650" height="315" src="//www.youtube-nocookie.com/embed/5yHFTN-_mOo" frameborder="0" allowfullscreen>
+</iframe>
+<h2 id="community-components">Community Components</h2>
+<p>Tom Chen (<a href="https://github.com/tomchentw">tomchentw</a>) brings us a <a href="https://tomchentw.github.io/react-google-maps/">react-google-maps</a> component, and a way to syntax highlight source code using Prism and the <a href="https://tomchentw.github.io/react-prism/">react-prism</a> component, for good measure.</p>
+<p>Jed Watson (<a href="https://github.com/JedWatson">jedwatson</a>) helps you manage touch, tap, and press events using the <a href="https://github.com/JedWatson/react-tappable">react-tappable</a> component.</p>
+<p>To find these, and more community-built components, consult the <a href="http://react-components.com/">React Components</a> and <a href="http://react.rocks">React Rocks</a> component directories. React Rocks recently exceeded one-hundred listed components and counting. See one missing? Add the keyword <code>react-component</code> to your <code>package.json</code> to get listed on React Components, and <a href="https://docs.google.com/forms/d/1TpnwJmLcmmGj-_TI68upu_bKBViYeiKx7Aj9uKmV6wY/viewform">submit a link to React Rocks</a>.</p>
+<h2 id="waiter-theres-a-css-in-my-javascript">Waiter, There’s a CSS In My JavaScript</h2>
+<p>The internet is abuzz with talk of styling React components using JavaScript instead of CSS. Christopher Chedeau (<a href="https://github.com/vjeux">vjeux</a>) talks about some of the <a href="https://speakerdeck.com/vjeux/react-css-in-js">fundamental style management challenges</a> we grapple with, at Facebook scale. A number of implementations of JavaScript centric style management solutions have appeared in the wild, including the React-focused <a href="https://github.com/js-next/react-style">react-style</a>.</p>
+<h2 id="test-isolation">Test Isolation</h2>
+<p>Yahoo! shows us how they make use of <code>iframe</code> elements to <a href="http://yahooeng.tumblr.com/post/102274727496/to-testutil-or-not-to-testutil">unit test React components in isolation</a>.</p>
+<h2 id="youve-got-the-hang-of-flux-now-lets-flow">You’ve Got The Hang of Flux, Now Let’s Flow</h2>
+<p>Facebook Open Source released <a href="https://code.facebook.com/posts/1505962329687926/flow-a-new-static-type-checker-for-javascript/">Flow</a> this month – a static type checker for JavaScript. Naturally, Flow supports JSX, and you can use it to <a href="https://code.facebook.com/posts/1505962329687926/flow-a-new-static-type-checker-for-javascript/#compatibility">type check React applications</a>. There’s never been a better reason to start making use of <code>propTypes</code> in your component specifications!</p>
+<h2 id="countdown-to-reactjs-conf-2014">Countdown to React.js Conf 2014</h2>
+<p>We’re counting down the days until <a href="http://conf.reactjs.com">React.js Conf</a> at Facebook’s headquarters in Menlo Park, California, on January 28th &amp; 29th, 2015. Thank you, to everyone who responded to the Call for Presenters. Mark the dates; tickets go on sale in three waves: at noon PST on November 28th, December 5th, and December 12th, 2014.</p>
+<h2 id="react-meetups-around-the-world">React Meetups Around the World</h2>
+<blockquote class="twitter-tweet" lang="en">
+<p>
+React JS meetup having pretty good turn up rate today <a href="https://twitter.com/hashtag/londonreact?src=hash">#londonreact</a> <a href="http://t.co/c360dlVVAe">pic.twitter.com/c360dlVVAe</a>
+</p>
+— Alexander Savin (<span class="citation" data-cites="karismafilms">@karismafilms</span>) <a href="https://twitter.com/karismafilms/status/535152580377468928">November 19, 2014</a>
+</blockquote>
+<div class="skinny-row">
+<div class="skinny-col">
+<pre><code>&lt;blockquote class=&quot;twitter-tweet&quot; lang=&quot;en&quot;&gt;&lt;p&gt;60+ attendees at the second React.js Utah meetup. &lt;a href=&quot;https://twitter.com/ryanflorence&quot;&gt;@ryanflorence&lt;/a&gt; doing a great job, even without the internet. &lt;a href=&quot;http://t.co/fV59AQTOyu&quot;&gt;pic.twitter.com/fV59AQTOyu&lt;/a&gt;&lt;/p&gt;&amp;mdash; ReactJS Utah (@reactjsutah) &lt;a href=&quot;https://twitter.com/reactjsutah/status/527259410020573184&quot;&gt;October 29, 2014&lt;/a&gt;&lt;/blockquote&gt;</code></pre>
+</div>
+<div class="skinny-col">
+<pre><code>&lt;blockquote class=&quot;twitter-tweet&quot; lang=&quot;en&quot;&gt;&lt;p&gt;&lt;a href=&quot;https://twitter.com/hashtag/ReactJS?src=hash&quot;&gt;#ReactJS&lt;/a&gt; meetup at &lt;a href=&quot;https://twitter.com/Yahoo&quot;&gt;@Yahoo&lt;/a&gt; ! History of &lt;a href=&quot;https://twitter.com/yahoomail&quot;&gt;@yahoomail&lt;/a&gt; and why we chose react and NodeJS &lt;a href=&quot;http://t.co/Nm4EdTv45G&quot;&gt;pic.twitter.com/Nm4EdTv45G&lt;/a&gt;&lt;/p&gt;&amp;mdash; rmsguhan (@rmsguhan) &lt;a href=&quot;https://twitter.com/rmsguhan/status/515370950427029504&quot;&gt;September 26, 2014&lt;/a&gt;&lt;/blockquote&gt;</code></pre>
+</div>
+</div>
+<div class="skinny-row">
+<div class="skinny-col">
+<pre><code>&lt;blockquote class=&quot;twitter-tweet&quot; data-cards=&quot;hidden&quot; lang=&quot;en&quot;&gt;&lt;p&gt;The very first ReactJS meetup in NYC tonight, I&amp;#39;ll be speaking about the big ideas behind Om &lt;a href=&quot;http://t.co/dvPrFqE9eP&quot;&gt;http://t.co/dvPrFqE9eP&lt;/a&gt;&lt;/p&gt;&amp;mdash; David Nolen (@swannodette) &lt;a href=&quot;https://twitter.com/swannodette/status/532190993463128064&quot;&gt;November 11, 2014&lt;/a&gt;&lt;/blockquote&gt;</code></pre>
+</div>
+<div class="skinny-col">
+<pre><code>&lt;blockquote class=&quot;twitter-tweet&quot; lang=&quot;en&quot;&gt;&lt;p&gt;If anyone in Sydney is curious about &lt;a href=&quot;https://twitter.com/reactjs&quot;&gt;@reactjs&lt;/a&gt;, I&amp;#39;m presenting at &lt;a href=&quot;https://twitter.com/sydjs&quot;&gt;@sydjs&lt;/a&gt; tonight on how to use it and why it is the future. &lt;a href=&quot;https://twitter.com/hashtag/javascript?src=hash&quot;&gt;#javascript&lt;/a&gt;&lt;/p&gt;&amp;mdash; Jed Watson (@JedWatson) &lt;a href=&quot;https://twitter.com/JedWatson/status/534943557568565248&quot;&gt;November 19, 2014&lt;/a&gt;&lt;/blockquote&gt;</code></pre>
+</div>
+</div>
+</body>
+</html>

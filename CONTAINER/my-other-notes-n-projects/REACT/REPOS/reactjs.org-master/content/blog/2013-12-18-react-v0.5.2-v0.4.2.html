@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="zpao" />
+  <title>React v0.5.2, v0.4.2</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">React v0.5.2, v0.4.2</h1>
+<p class="author">zpao</p>
+</header>
+<p>Today we’re releasing an update to address a potential XSS vulnerability that can arise when using user data as a <code>key</code>. Typically “safe” data is used for a <code>key</code>, for example, an id from your database, or a unique hash. However there are cases where it may be reasonable to use user generated content. A carefully crafted piece of content could result in arbitrary JS execution. While we make a very concerted effort to ensure all text is escaped before inserting it into the DOM, we missed one case. Immediately following the discovery of this vulnerability, we performed an audit to ensure we this was the only such vulnerability.</p>
+<p>This only affects v0.5.x and v0.4.x. Versions in the 0.3.x family are unaffected.</p>
+<p>Updated versions are available for immediate download via npm, bower, and on our <a href="/react/downloads.html">download page</a>.</p>
+<p>We take security very seriously at Facebook. For most of our products, users don’t need to know that a security issue has been fixed. But with libraries like React, we need to make sure developers using React have access to fixes to keep their users safe.</p>
+<p>While we’ve encouraged responsible disclosure as part of <a href="https://www.facebook.com/whitehat/">Facebook’s whitehat bounty program</a> since we launched, we don’t have a good process for notifying our users. Hopefully we don’t need to use it, but moving forward we’ll set up a little bit more process to ensure the safety of our users. Ember.js has <a href="http://emberjs.com/security/">an excellent policy</a> which we may use as our model.</p>
+<p>You can learn more about the vulnerability discussed here: <a href="https://groups.google.com/forum/#!topic/reactjs/OIqxlB2aGfU">CVE-2013-7035</a>.</p>
+</body>
+</html>

@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="gaearon" />
+  <meta name="author" content="bvaughn" />
+  <title>React v16.9.0 and the Roadmap Update</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">React v16.9.0 and the Roadmap Update</h1>
+<p class="author">gaearon</p>
+<p class="author">bvaughn</p>
+</header>
+<p>Today we are releasing React 16.9. It contains several new features, bugfixes, and new deprecation warnings to help prepare for a future major release.</p>
+<h2 id="new-deprecations">New Deprecations</h2>
+<h3 id="renaming-unsafe-lifecycle-methods">Renaming Unsafe Lifecycle Methods</h3>
+<p><a href="/blog/2018/03/27/update-on-async-rendering.html">Over a year ago</a>, we announced that unsafe lifecycle methods are getting renamed:</p>
+<ul>
+<li><code>componentWillMount</code> → <code>UNSAFE_componentWillMount</code></li>
+<li><code>componentWillReceiveProps</code> → <code>UNSAFE_componentWillReceiveProps</code></li>
+<li><code>componentWillUpdate</code> → <code>UNSAFE_componentWillUpdate</code></li>
+</ul>
+<p><strong>React 16.9 does not contain breaking changes, and the old names continue to work in this release.</strong> But you will now see a warning when using any of the old names:</p>
+<figure>
+<img src="https://i.imgur.com/sngxSML.png" alt="Warning: componentWillMount has been renamed, and is not recommended for use." /><figcaption>Warning: componentWillMount has been renamed, and is not recommended for use.</figcaption>
+</figure>
+<p>As the warning suggests, there are usually <a href="/blog/2018/03/27/update-on-async-rendering.html#migrating-from-legacy-lifecycles">better approaches</a> for each of the unsafe methods. However, maybe you don’t have the time to migrate or test these components. In that case, we recommend running a <a href="https://medium.com/@cpojer/effective-javascript-codemods-5a6686bb46fb">“codemod”</a> script that renames them automatically:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb1-1" title="1"><span class="bu">cd</span> your_project</a>
+<a class="sourceLine" id="cb1-2" title="2"><span class="ex">npx</span> react-codemod rename-unsafe-lifecycles</a></code></pre></div>
+<p><em>(Note that it says <code>npx</code>, not <code>npm</code>. <code>npx</code> is a utility that comes with Node 6+ by default.)</em></p>
+<p>Running this codemod will replace the old names like <code>componentWillMount</code> with the new names like <code>UNSAFE_componentWillMount</code>:</p>
+<figure>
+<img src="https://i.imgur.com/Heyvcyi.gif" alt="Codemod in action" /><figcaption>Codemod in action</figcaption>
+</figure>
+<p>The new names like <code>UNSAFE_componentWillMount</code> <strong>will keep working in both React 16.9 and in React 17.x</strong>. However, the new <code>UNSAFE_</code> prefix will help components with problematic patterns stand out during the code review and debugging sessions. (If you’d like, you can further discourage their use inside your app with the opt-in <a href="/docs/strict-mode.html">Strict Mode</a>.)</p>
+<blockquote>
+<p>Note</p>
+<p>Learn more about our <a href="/docs/faq-versioning.html#commitment-to-stability">versioning policy and commitment to stability</a>.</p>
+</blockquote>
+<h3 id="deprecating-javascript-urls">Deprecating <code>javascript:</code> URLs</h3>
+<p>URLs starting with <code>javascript:</code> are a dangerous attack surface because it’s easy to accidentally include unsanitized output in a tag like <code>&lt;a href&gt;</code> and create a security hole:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb2-1" title="1"><span class="kw">const</span> userProfile <span class="op">=</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb2-2" title="2">  <span class="dt">website</span><span class="op">:</span> <span class="st">&quot;javascript: alert(&#39;you got hacked&#39;)&quot;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb2-3" title="3"><span class="op">};</span></a>
+<a class="sourceLine" id="cb2-4" title="4"><span class="co">// This will now warn:</span></a>
+<a class="sourceLine" id="cb2-5" title="5"><span class="op">&lt;</span>a href<span class="op">={</span><span class="va">userProfile</span>.<span class="at">website</span><span class="op">}&gt;</span>Profile&lt;/a<span class="op">&gt;</span></a></code></pre></div>
+<p><strong>In React 16.9,</strong> this pattern continues to work, but it will log a warning. If you use <code>javascript:</code> URLs for logic, try to use React event handlers instead. (As a last resort, you can circumvent the protection with <a href="/docs/dom-elements.html#dangerouslysetinnerhtml"><code>dangerouslySetInnerHTML</code></a>, but it is highly discouraged and often leads to security holes.)</p>
+<p><strong>In a future major release,</strong> React will throw an error if it encounters a <code>javascript:</code> URL.</p>
+<h3 id="deprecating-factory-components">Deprecating “Factory” Components</h3>
+<p>Before compiling JavaScript classes with Babel became popular, React had support for a “factory” component that returns an object with a <code>render</code> method:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb3-1" title="1"><span class="kw">function</span> <span class="at">FactoryComponent</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb3-2" title="2">  <span class="cf">return</span> <span class="op">{</span> <span class="at">render</span>() <span class="op">{</span> <span class="cf">return</span> <span class="op">&lt;</span>div /<span class="op">&gt;;</span> <span class="op">}</span> <span class="op">}</span></a>
+<a class="sourceLine" id="cb3-3" title="3"><span class="op">}</span></a></code></pre></div>
+<p>This pattern is confusing because it looks too much like a function component — but it isn’t one. (A function component would just return the <code>&lt;div /&gt;</code> in the above example.)</p>
+<p>This pattern was almost never used in the wild, and supporting it causes React to be slightly larger and slower than necessary. So we are deprecating this pattern in 16.9 and logging a warning if it’s encountered. If you rely on it, adding <code>FactoryComponent.prototype = React.Component.prototype</code> can serve as a workaround. Alternatively, you can convert it to either a class or a function component.</p>
+<p>We don’t expect most codebases to be affected by this.</p>
+<h2 id="new-features">New Features</h2>
+<h3 id="async-act-for-testing">Async <a href="/docs/test-utils.html#act"><code>act()</code></a> for Testing</h3>
+<p><a href="/blog/2019/02/06/react-v16.8.0.html">React 16.8</a> introduced a new testing utility called <a href="/docs/test-utils.html#act"><code>act()</code></a> to help you write tests that better match the browser behavior. For example, multiple state updates inside a single <code>act()</code> get batched. This matches how React already works when handling real browser events, and helps prepare your components for the future in which React will batch updates more often.</p>
+<p>However, in 16.8 <code>act()</code> only supported synchronous functions. Sometimes, you might have seen a warning like this in a test but <a href="https://github.com/facebook/react/issues/14769">could not easily fix it</a>:</p>
+<pre><code>An update to SomeComponent inside a test was not wrapped in act(...).</code></pre>
+<p><strong>In React 16.9, <code>act()</code> also accepts asynchronous functions,</strong> and you can <code>await</code> its call:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb5-1" title="1"><span class="cf">await</span> <span class="at">act</span>(<span class="kw">async</span> () <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb5-2" title="2">  <span class="co">// ...</span></a>
+<a class="sourceLine" id="cb5-3" title="3"><span class="op">}</span>)<span class="op">;</span></a></code></pre></div>
+<p>This solves the remaining cases where you couldn’t use <code>act()</code> before, such as when the state update was inside an asynchronous function. As a result, <strong>you should be able to fix all the remaining <code>act()</code> warnings in your tests now.</strong></p>
+<p>We’ve heard there wasn’t enough information about how to write tests with <code>act()</code>. The new <a href="/docs/testing-recipes.html">Testing Recipes</a> guide describes common scenarios, and how <code>act()</code> can help you write good tests. These examples use vanilla DOM APIs, but you can also use <a href="https://testing-library.com/docs/react-testing-library/intro">React Testing Library</a> to reduce the boilerplate code. Many of its methods already use <code>act()</code> internally.</p>
+<p>Please let us know <a href="https://github.com/facebook/react/issues">on the issue tracker</a> if you bump into any other scenarios where <code>act()</code> doesn’t work well for you, and we’ll try to help.</p>
+<h3 id="performance-measurements-with-reactprofiler">Performance Measurements with <a href="/docs/profiler.html"><code>&lt;React.Profiler&gt;</code></a></h3>
+<p>In React 16.5, we introduced a new <a href="/blog/2018/09/10/introducing-the-react-profiler.html">React Profiler for DevTools</a> that helps find performance bottlenecks in your application. <strong>In React 16.9, we are also adding a <em>programmatic</em> way to gather measurements</strong> called <code>&lt;React.Profiler&gt;</code>. We expect that most smaller apps won’t use it, but it can be handy to track performance regressions over time in larger apps.</p>
+<p>The <code>&lt;Profiler&gt;</code> measures how often a React application renders and what the “cost” of rendering is. Its purpose is to help identify parts of an application that are slow and may benefit from <a href="/docs/hooks-faq.html#how-to-memoize-calculations">optimizations such as memoization</a>.</p>
+<p>A <code>&lt;Profiler&gt;</code> can be added anywhere in a React tree to measure the cost of rendering that part of the tree. It requires two props: an <code>id</code> (string) and an <a href="/docs/profiler.html#onrender-callback"><code>onRender</code> callback</a> (function) which React calls any time a component within the tree “commits” an update.</p>
+<pre class="js{2,7}"><code>render(
+  &lt;Profiler id=&quot;application&quot; onRender={onRenderCallback}&gt;
+    &lt;App&gt;
+      &lt;Navigation {...props} /&gt;
+      &lt;Main {...props} /&gt;
+    &lt;/App&gt;
+  &lt;/Profiler&gt;
+);</code></pre>
+<p>To learn more about the <code>Profiler</code> and the parameters passed to the <code>onRender</code> callback, check out <a href="/docs/profiler.html">the <code>Profiler</code> docs</a>.</p>
+<blockquote>
+<p>Note:</p>
+<p>Profiling adds some additional overhead, so <strong>it is disabled in <a href="https://reactjs.org/docs/optimizing-performance.html#use-the-production-build">the production build</a></strong>.</p>
+<p>To opt into production profiling, React provides a special production build with profiling enabled. Read more about how to use this build at <a href="https://fb.me/react-profiling">fb.me/react-profiling</a>.</p>
+</blockquote>
+<h2 id="notable-bugfixes">Notable Bugfixes</h2>
+<p>This release contains a few other notable improvements:</p>
+<ul>
+<li><p>A crash when calling <code>findDOMNode()</code> inside a <code>&lt;Suspense&gt;</code> tree <a href="https://github.com/facebook/react/pull/15312">has been fixed</a>.</p></li>
+<li><p>A memory leak caused by retaining deleted subtrees <a href="https://github.com/facebook/react/pull/16115">has been fixed</a> too.</p></li>
+<li><p>An infinite loop caused by <code>setState</code> in <code>useEffect</code> now <a href="https://github.com/facebook/react/pull/15180">logs an error</a>. (This is similar to the error you see when you call <code>setState</code> in <code>componentDidUpdate</code> in a class.)</p></li>
+</ul>
+<p>We’re thankful to all the contributors who helped surface and fix these and other issues. You can find the full changelog <a href="#changelog">below</a>.</p>
+<h2 id="an-update-to-the-roadmap">An Update to the Roadmap</h2>
+<p>In <a href="/blog/2018/11/27/react-16-roadmap.html">November 2018</a>, we have posted this roadmap for the 16.x releases:</p>
+<ul>
+<li>A minor 16.x release with React Hooks (past estimate: Q1 2019)</li>
+<li>A minor 16.x release with Concurrent Mode (past estimate: Q2 2019)</li>
+<li>A minor 16.x release with Suspense for Data Fetching (past estimate: mid 2019)</li>
+</ul>
+<p>These estimates were too optimistic, and we’ve needed to adjust them.</p>
+<p><strong>tldr:</strong> We shipped Hooks on time, but we’re regrouping Concurrent Mode and Suspense for Data Fetching into a single release that we intend to release later this year.</p>
+<p>In February, we <a href="/blog/2019/02/06/react-v16.8.0.html">shipped a stable 16.8 release</a> including React Hooks, with React Native support coming <a href="https://reactnative.dev/blog/2019/03/12/releasing-react-native-059">a month later</a>. However, we underestimated the follow-up work for this release, including the lint rules, developer tools, examples, and more documentation. This shifted the timeline by a few months.</p>
+<p>Now that React Hooks are rolled out, the work on Concurrent Mode and Suspense for Data Fetching is in full swing. The <a href="https://twitter.com/facebook/status/1123322299418124289">new Facebook website that’s currently in active development</a> is built on top of these features. Testing them with real code helped discover and address many issues before they can affect the open source users. Some of these fixes involved an internal redesign of these features, which has also caused the timeline to slip.</p>
+<p>With this new understanding, here’s what we plan to do next.</p>
+<h3 id="one-release-instead-of-two">One Release Instead of Two</h3>
+<p>Concurrent Mode and Suspense <a href="https://developers.facebook.com/videos/2019/building-the-new-facebookcom-with-react-graphql-and-relay/">power the new Facebook website</a> that’s in active development, so we are confident that they’re close to a stable state technically. We also now better understand the concrete steps before they are ready for open source adoption.</p>
+<p>Originally we thought we would split Concurrent Mode and Suspense for Data Fetching into two releases. We’ve found that this sequencing is confusing to explain because these features are more related than we thought at first. So we plan to release support for both Concurrent Mode and Suspense for Data Fetching in a single combined release instead.</p>
+<p>We don’t want to overpromise the release date again. Given that we rely on both of them in production code, we expect to provide a 16.x release with opt-in support for them this year.</p>
+<h3 id="an-update-on-data-fetching">An Update on Data Fetching</h3>
+<p>While React is not opinionated about how you fetch data, the first release of Suspense for Data Fetching will likely focus on integrating with <em>opinionated data fetching libraries</em>. For example, at Facebook we are using upcoming Relay APIs that integrate with Suspense. We will document how other opinionated libraries like Apollo can support a similar integration.</p>
+<p>In the first release, we <em>don’t</em> intend to focus on the ad-hoc “fire an HTTP request” solution we used in earlier demos (also known as “React Cache”). However, we expect that both we and the React community will be exploring that space in the months after the initial release.</p>
+<h3 id="an-update-on-server-rendering">An Update on Server Rendering</h3>
+<p>We have started the work on the <a href="/blog/2018/11/27/react-16-roadmap.html#suspense-for-server-rendering">new Suspense-capable server renderer</a>, but we <em>don’t</em> expect it to be ready for the initial release of Concurrent Mode. This release will, however, provide a temporary solution that lets the existing server renderer emit HTML for Suspense fallbacks immediately, and then render their real content on the client. This is the solution we are currently using at Facebook ourselves until the streaming renderer is ready.</p>
+<h3 id="why-is-it-taking-so-long">Why Is It Taking So Long?</h3>
+<p>We’ve shipped the individual pieces leading up to Concurrent Mode as they became stable, including <a href="/blog/2018/03/29/react-v-16-3.html">new context API</a>, <a href="/blog/2018/10/23/react-v-16-6.html">lazy loading with Suspense</a>, and <a href="/blog/2019/02/06/react-v16.8.0.html">Hooks</a>. We are also eager to release the other missing parts, but <a href="/docs/design-principles.html#dogfooding">trying them at scale</a> is an important part of the process. The honest answer is that it just took more work than we expected when we started. As always, we appreciate your questions and feedback on <a href="https://twitter.com/reactjs">Twitter</a> and in our <a href="https://github.com/facebook/react/issues">issue tracker</a>.</p>
+<h2 id="installation">Installation</h2>
+<h3 id="react">React</h3>
+<p>React v16.9.0 is available on the npm registry.</p>
+<p>To install React 16 with Yarn, run:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb7-1" title="1"><span class="ex">yarn</span> add react@^16.9.0 react-dom@^16.9.0</a></code></pre></div>
+<p>To install React 16 with npm, run:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb8-1" title="1"><span class="ex">npm</span> install --save react@^16.9.0 react-dom@^16.9.0</a></code></pre></div>
+<p>We also provide UMD builds of React via a CDN:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode html"><code class="sourceCode html"><a class="sourceLine" id="cb9-1" title="1"><span class="kw">&lt;script</span><span class="ot"> crossorigin src=</span><span class="st">&quot;https://unpkg.com/react@16/umd/react.production.min.js&quot;</span><span class="kw">&gt;&lt;/script&gt;</span></a>
+<a class="sourceLine" id="cb9-2" title="2"><span class="kw">&lt;script</span><span class="ot"> crossorigin src=</span><span class="st">&quot;https://unpkg.com/react-dom@16/umd/react-dom.production.min.js&quot;</span><span class="kw">&gt;&lt;/script&gt;</span></a></code></pre></div>
+<p>Refer to the documentation for <a href="/docs/installation.html">detailed installation instructions</a>.</p>
+<h2 id="changelog">Changelog</h2>
+<h3 id="react">React</h3>
+<ul>
+<li>Add <code>&lt;React.Profiler&gt;</code> API for gathering performance measurements programmatically. (<span class="citation" data-cites="bvaughn">[@bvaughn]</span>(https://github.com/bvaughn) in <a href="https://github.com/facebook/react/pull/15172">#15172</a>)</li>
+<li>Remove <code>unstable_ConcurrentMode</code> in favor of <code>unstable_createRoot</code>. (<span class="citation" data-cites="acdlite">[@acdlite]</span>(https://github.com/acdlite) in <a href="https://github.com/facebook/react/pull/15532">#15532</a>)</li>
+</ul>
+<h3 id="react-dom">React DOM</h3>
+<ul>
+<li>Deprecate old names for the <code>UNSAFE_*</code> lifecycle methods. (<span class="citation" data-cites="bvaughn">[@bvaughn]</span>(https://github.com/bvaughn) in <a href="https://github.com/facebook/react/pull/15186">#15186</a> and <span class="citation" data-cites="threepointone">[@threepointone]</span>(https://github.com/threepointone) in <a href="https://github.com/facebook/react/pull/16103">#16103</a>)</li>
+<li>Deprecate <code>javascript:</code> URLs as a common attack surface. (<span class="citation" data-cites="sebmarkbage">[@sebmarkbage]</span>(https://github.com/sebmarkbage) in <a href="https://github.com/facebook/react/pull/15047">#15047</a>)</li>
+<li>Deprecate uncommon “module pattern” (factory) components. (<span class="citation" data-cites="sebmarkbage">[@sebmarkbage]</span>(https://github.com/sebmarkbage) in <a href="https://github.com/facebook/react/pull/15145">#15145</a>)</li>
+<li>Add support for the <code>disablePictureInPicture</code> attribute on <code>&lt;video&gt;</code>. (<span class="citation" data-cites="eek">[@eek]</span>(https://github.com/eek) in <a href="https://github.com/facebook/react/pull/15334">#15334</a>)</li>
+<li>Add support for <code>onLoad</code> event for <code>&lt;embed&gt;</code>. (<span class="citation" data-cites="cherniavskii">[@cherniavskii]</span>(https://github.com/cherniavskii) in <a href="https://github.com/facebook/react/pull/15614">#15614</a>)</li>
+<li>Add support for editing <code>useState</code> state from DevTools. (<span class="citation" data-cites="bvaughn">[@bvaughn]</span>(https://github.com/bvaughn) in <a href="https://github.com/facebook/react/pull/14906">#14906</a>)</li>
+<li>Add support for toggling Suspense from DevTools. (<span class="citation" data-cites="gaearon">[@gaearon]</span>(https://github.com/gaearon) in <a href="https://github.com/facebook/react/pull/15232">#15232</a>)</li>
+<li>Warn when <code>setState</code> is called from <code>useEffect</code>, creating a loop. (<span class="citation" data-cites="gaearon">[@gaearon]</span>(https://github.com/gaearon) in <a href="https://github.com/facebook/react/pull/15180">#15180</a>)</li>
+<li>Fix a memory leak. (<span class="citation" data-cites="paulshen">[@paulshen]</span>(https://github.com/paulshen) in <a href="https://github.com/facebook/react/pull/16115">#16115</a>)</li>
+<li>Fix a crash inside <code>findDOMNode</code> for components wrapped in <code>&lt;Suspense&gt;</code>. (<span class="citation" data-cites="acdlite">[@acdlite]</span>(https://github.com/acdlite) in <a href="https://github.com/facebook/react/pull/15312">#15312</a>)</li>
+<li>Fix pending effects from being flushed too late. (<span class="citation" data-cites="acdlite">[@acdlite]</span>(https://github.com/acdlite) in <a href="https://github.com/facebook/react/pull/15650">#15650</a>)</li>
+<li>Fix incorrect argument order in a warning message. (<span class="citation" data-cites="brickspert">[@brickspert]</span>(https://github.com/brickspert) in <a href="https://github.com/facebook/react/pull/15345">#15345</a>)</li>
+<li>Fix hiding Suspense fallback nodes when there is an <code>!important</code> style. (<span class="citation" data-cites="acdlite">[@acdlite]</span>(https://github.com/acdlite) in <a href="https://github.com/facebook/react/pull/15861">#15861</a> and <a href="https://github.com/facebook/react/pull/15882">#15882</a>)</li>
+<li>Slightly improve hydration performance. (<span class="citation" data-cites="bmeurer">[@bmeurer]</span>(https://github.com/bmeurer) in <a href="https://github.com/facebook/react/pull/15998">#15998</a>)</li>
+</ul>
+<h3 id="react-dom-server">React DOM Server</h3>
+<ul>
+<li>Fix incorrect output for camelCase custom CSS property names. (<span class="citation" data-cites="bedakb">[@bedakb]</span>(https://github.com/bedakb) in <a href="https://github.com/facebook/react/pull/16167">#16167</a>)</li>
+</ul>
+<h3 id="react-test-utilities-and-test-renderer">React Test Utilities and Test Renderer</h3>
+<ul>
+<li>Add <code>act(async () =&gt; ...)</code> for testing asynchronous state updates. (<span class="citation" data-cites="threepointone">[@threepointone]</span>(https://github.com/threepointone) in <a href="https://github.com/facebook/react/pull/14853">#14853</a>)</li>
+<li>Add support for nesting <code>act</code> from different renderers. (<span class="citation" data-cites="threepointone">[@threepointone]</span>(https://github.com/threepointone) in <a href="https://github.com/facebook/react/pull/16039">#16039</a> and <a href="https://github.com/facebook/react/pull/16042">#16042</a>)</li>
+<li>Warn in Strict Mode if effects are scheduled outside an <code>act()</code> call. (<span class="citation" data-cites="threepointone">[@threepointone]</span>(https://github.com/threepointone) in <a href="https://github.com/facebook/react/pull/15763">#15763</a> and <a href="https://github.com/facebook/react/pull/16041">#16041</a>)</li>
+<li>Warn when using <code>act</code> from the wrong renderer. (<span class="citation" data-cites="threepointone">[@threepointone]</span>(https://github.com/threepointone) in <a href="https://github.com/facebook/react/pull/15756">#15756</a>)</li>
+</ul>
+</body>
+</html>

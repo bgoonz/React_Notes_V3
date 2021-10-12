@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="steveluscher" />
+  <title>Community Round-up #27 – Relay Edition</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Community Round-up #27 – Relay Edition</h1>
+<p class="author">steveluscher</p>
+</header>
+<p>In the weeks following the <a href="/blog/2015/08/11/relay-technical-preview.html">open-source release</a> of the Relay technical preview, the community has been abuzz with activity. We are honored to have been able to enjoy a steady stream of ideas and contributions from such a talented group of individuals. Let’s take a look at some of the things we’ve achieved, together!</p>
+<h2 id="teaching-servers-to-speak-graphql">Teaching servers to speak GraphQL</h2>
+<p>Every great Relay app starts by finding a GraphQL server to talk to. The community has spent the past few weeks teaching GraphQL to a few backend systems.</p>
+<p>Bryan Goldstein (<a href="https://github.com/brysgo">brysgo</a>) has built a tool to help you define a GraphQL schema that wraps a set of <a href="http://bookshelfjs.org/">Bookshelf.JS</a> models. Check out <a href="https://github.com/brysgo/graphql-bookshelf">graphql-bookshelf</a>.</p>
+<p>RisingStack (<a href="https://github.com/risingstack">risingstack</a>) created a GraphQL ORM called <a href="https://github.com/RisingStack/graffiti">graffiti</a> that you can plug into <a href="http://mongoosejs.com/">mongoose</a> and serve using Express, Hapi, or Koa.</p>
+<p>David Mongeau-Petitpas (<a href="https://github.com/dmongeau">dmongeau</a>) is working on a way to vend your Laravel models through a GraphQL endpoint, <a href="https://github.com/Folkloreatelier/laravel-graphql">laravel-graphql</a>.</p>
+<p>Gerald Monaco (<a href="https://github.com/devknoll">devknoll</a>) created <a href="https://github.com/devknoll/graphql-schema">graphql-schema</a> to allow the creation of JavaScript GraphQL schemas using a fluent/chainable interface.</p>
+<p>Jason Dusek (<a href="https://github.com/solidsnack">solidsnack</a>) dove deep into PostgreSQL to teach it how to respond to GraphQL query strings as though they were SQL queries. Check out <a href="https://github.com/solidsnack/GraphpostgresQL">GraphpostgresQL</a>.</p>
+<p>Espen Hovlandsdal (<a href="https://github.com/rexxars">rexxars</a>) built a <a href="https://github.com/vaffel/sql-to-graphql">sql-to-graphql</a> tool that can perform introspection on the tables of a MySQL or PostgreSQL database, and produce a queryable HTTP GraphQL endpoint out of it.</p>
+<p>Mick Hansen (<a href="https://github.com/mickhansen">mickhansen</a>) offers a set of <a href="https://github.com/mickhansen/graphql-sequelize">schema-building helpers</a> for use with the <a href="http://docs.sequelizejs.com/en/latest/">Sequelize ORM</a> for MySQL, PostgreSQL, SQLite, and MSSQL.</p>
+<h2 id="graphql-beyond-javascript">GraphQL beyond JavaScript</h2>
+<p>Robert Mosolgo (<a href="https://github.com/rmosolgo">rmosolgo</a>) brought the full set of schema-building and query execution tools to Ruby, in the form of <a href="https://github.com/rmosolgo/graphql-ruby">graphql-ruby</a> and <a href="https://github.com/rmosolgo/graphql-relay-ruby">graphql-relay-ruby</a>. Check out his <a href="https://github.com/rmosolgo/graphql-ruby-demo">Rails-based demo</a>.</p>
+<p>Andreas Marek (<a href="https://github.com/andimarek">andimarek</a>) has brewed up a Java implementation of GraphQL, <a href="https://github.com/andimarek/graphql-java">graphql-java</a>.</p>
+<p><a href="https://github.com/vladar">vladar</a> is hard at work on a PHP port of the GraphQL reference implementation, <a href="https://github.com/webonyx/graphql-php">graphql-php</a>.</p>
+<p>Taeho Kim (<a href="https://github.com/dittos">dittos</a>) is bringing GraphQL to Python, with <a href="https://github.com/dittos/graphql-py">graphql-py</a>.</p>
+<p>Oleg Ilyenko (<a href="https://github.com/OlegIlyenko">OlegIlyenko</a>) made a beautiful and <a href="http://sangria-graphql.org/">delicious-looking website</a> for a Scala implementation of GraphQL, <a href="https://github.com/sangria-graphql/sangria">sangria</a>.</p>
+<p>Joe McBride (<a href="https://github.com/joemcbride">joemcbride</a>) has an up-and-running example of GraphQL for .NET, <a href="https://github.com/joemcbride/graphql-dotnet">graphql-dotnet</a>.</p>
+<h2 id="show-me-dont-tell-me">Show me, don’t tell me</h2>
+<p>Interact with this <a href="http://sgwilym.github.io/relay-visual-learners/">visual tour of Relay’s architecture</a> by Sam Gwilym (<a href="https://github.com/sgwilym">sgwilym</a>).</p>
+<p><a href="http://sgwilym.github.io/relay-visual-learners/"> <img src="../images/blog/relay-visual-architecture-tour.png" alt="Relay for visual learners" style="max-width:100%"> </a></p>
+<p>Sam has already launched a product that leverages Relay’s data-fetching, optimistic responses, pagination, and mutations – all atop a Ruby GraphQL server: <a href="http://new.comique.co/">new.comique.co</a></p>
+<h2 id="skeletons-in-the-closet">Skeletons in the closet</h2>
+<p>Joseph Rollins (<a href="https://github.com/fortruce">fortruce</a>) created a hot-reloading, auto schema-regenerating, <a href="https://github.com/fortruce/relay-skeleton">Relay skeleton</a> that you can use to get up and running quickly.</p>
+<p>Michael Hart (<a href="https://mhart">mhart</a>) built a <a href="https://github.com/mhart/simple-relay-starter">simple-relay-starter</a> kit using Browserify.</p>
+<h2 id="routing-around">Routing around</h2>
+<p>Jimmy Jia (<a href="@taion">taion</a>) and Gerald Monaco (<a href="@devknoll">devknoll</a>) have been helping lost URLs find their way to Relay apps through their work on <a href="relay-tools/react-router-relay">react-router-relay</a>. Check out Christoph Nakazawa’s (<a href="@cpojer">cpojer</a>) <a href="medium.com/@cpojer/relay-and-routing-36b5439bad9">blog post</a> on the topic. Jimmy completed the Relay TodoMVC example with routing, which you can check out at <a href="taion/relay-todomvc">taion/relay-todomvc</a>.</p>
+<p>Chen Hung-Tu (<a href="https://github.com/transedward">transedward</a>) built a chat app atop the above mentioned router, with threaded conversations and pagination. Check it out at <a href="https://github.com/transedward/relay-chat">transedward/relay-chat</a>.</p>
+<h2 id="in-your-words">In your words</h2>
+<div class="skinny-row">
+<div class="skinny-col">
+<pre><code>&lt;blockquote class=&quot;twitter-tweet&quot; lang=&quot;en&quot;&gt;&lt;p lang=&quot;en&quot; dir=&quot;ltr&quot;&gt;Relay making good on its promise to be the &amp;quot;React.js of data fetching&amp;quot;. Rebuilding small app with it. Spectacular how fast/easy building is.&lt;/p&gt;&amp;mdash; Kyle Mathews (@kylemathews) &lt;a href=&quot;https://twitter.com/kylemathews/status/640289107122368513&quot;&gt;September 5, 2015&lt;/a&gt;&lt;/blockquote&gt;
+
+&lt;blockquote class=&quot;twitter-tweet&quot; lang=&quot;en&quot;&gt;&lt;p lang=&quot;en&quot; dir=&quot;ltr&quot;&gt;&lt;a href=&quot;https://twitter.com/hashtag/RainySundayHackathon?src=hash&quot;&gt;#RainySundayHackathon&lt;/a&gt; exploring &lt;a href=&quot;https://twitter.com/hashtag/GraphQL?src=hash&quot;&gt;#GraphQL&lt;/a&gt; &lt;a href=&quot;https://twitter.com/hashtag/RelayJS?src=hash&quot;&gt;#RelayJS&lt;/a&gt; &lt;a href=&quot;http://t.co/Mm3HlqMejJ&quot;&gt;pic.twitter.com/Mm3HlqMejJ&lt;/a&gt;&lt;/p&gt;&amp;mdash; Bastian Kistner (@passionkind) &lt;a href=&quot;https://twitter.com/passionkind/status/632846601447411712&quot;&gt;August 16, 2015&lt;/a&gt;&lt;/blockquote&gt;
+
+&lt;blockquote class=&quot;twitter-tweet&quot; lang=&quot;en&quot;&gt;&lt;p lang=&quot;en&quot; dir=&quot;ltr&quot;&gt;Friday. Time to GraphQL a MySQL database. &lt;a href=&quot;https://twitter.com/hashtag/graphql?src=hash&quot;&gt;#graphql&lt;/a&gt; &lt;a href=&quot;https://twitter.com/hashtag/relayjs?src=hash&quot;&gt;#relayjs&lt;/a&gt; &lt;a href=&quot;https://twitter.com/hashtag/reactjs?src=hash&quot;&gt;#reactjs&lt;/a&gt; &lt;a href=&quot;https://twitter.com/hashtag/webapp?src=hash&quot;&gt;#webapp&lt;/a&gt;&lt;/p&gt;&amp;mdash; xador (@xadorfr) &lt;a href=&quot;https://twitter.com/xadorfr/status/632108552765751296&quot;&gt;August 14, 2015&lt;/a&gt;&lt;/blockquote&gt;</code></pre>
+</div>
+<div class="skinny-col">
+<pre><code>&lt;blockquote class=&quot;twitter-tweet&quot; lang=&quot;en&quot;&gt;&lt;p lang=&quot;en&quot; dir=&quot;ltr&quot;&gt;Started a new &lt;a href=&quot;https://twitter.com/hashtag/RelayJS?src=hash&quot;&gt;#RelayJS&lt;/a&gt; and &lt;a href=&quot;https://twitter.com/hashtag/GraphQL?src=hash&quot;&gt;#GraphQL&lt;/a&gt; meet up group! &lt;a href=&quot;http://t.co/Vt6Cv4nNH4&quot;&gt;http://t.co/Vt6Cv4nNH4&lt;/a&gt; If you&amp;#39;re in the Bay Area, I&amp;#39;d love to have you join! &lt;a href=&quot;https://twitter.com/hashtag/ReactJS?src=hash&quot;&gt;#ReactJS&lt;/a&gt;&lt;/p&gt;&amp;mdash; Gerald Monaco (@devknoll) &lt;a href=&quot;https://twitter.com/devknoll/status/636723716123000832&quot;&gt;August 27, 2015&lt;/a&gt;&lt;/blockquote&gt;
+
+&lt;blockquote class=&quot;twitter-tweet&quot; lang=&quot;en&quot;&gt;&lt;p lang=&quot;en&quot; dir=&quot;ltr&quot;&gt;.&lt;a href=&quot;https://twitter.com/reactjs&quot;&gt;@reactjs&lt;/a&gt; &lt;a href=&quot;https://twitter.com/laneykuenzel&quot;&gt;@laneykuenzel&lt;/a&gt; &lt;a href=&quot;https://twitter.com/BhuwanKhattar&quot;&gt;@BhuwanKhattar&lt;/a&gt; these &lt;a href=&quot;https://twitter.com/hashtag/relayjs?src=hash&quot;&gt;#relayjs&lt;/a&gt; mutations. they&amp;#39;re mind-blowingly awesome. they make so much damn sense. thank you!&lt;/p&gt;&amp;mdash; Jimmy Jia (@jimmy_jia) &lt;a href=&quot;https://twitter.com/jimmy_jia/status/634204563709526016&quot;&gt;August 20, 2015&lt;/a&gt;&lt;/blockquote&gt;
+
+&lt;blockquote class=&quot;twitter-tweet&quot; lang=&quot;en&quot;&gt;&lt;p lang=&quot;en&quot; dir=&quot;ltr&quot;&gt;REST is dead, long live REST! &lt;a href=&quot;https://twitter.com/hashtag/graphql?src=hash&quot;&gt;#graphql&lt;/a&gt; &lt;a href=&quot;https://twitter.com/hashtag/relayjs?src=hash&quot;&gt;#relayjs&lt;/a&gt;&lt;/p&gt;&amp;mdash; Syrus Akbary (@syrusakbary) &lt;a href=&quot;https://twitter.com/syrusakbary/status/631531666113060864&quot;&gt;August 12, 2015&lt;/a&gt;&lt;/blockquote&gt;</code></pre>
+</div>
+</div>
+</body>
+</html>

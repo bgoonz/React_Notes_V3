@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="gaearon" />
+  <title>What’s New in Create React App</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">What’s New in Create React App</h1>
+<p class="author">gaearon</p>
+</header>
+<p>Less than a year ago, we introduced <a href="/blog/2016/07/22/create-apps-with-no-configuration.html">Create React App</a> as an officially supported way to create apps with zero configuration. The project has since enjoyed tremendous growth, with over 950 commits by more than 250 contributors.</p>
+<p>Today, we are excited to announce that many features that have been in the pipeline for the last few months are finally released.</p>
+<p>As usual with Create React App, <strong>you can enjoy these improvements in your existing non-ejected apps by updating a single dependency</strong> and following our <a href="https://github.com/facebookincubator/create-react-app/releases/tag/v1.0.0">migration instructions</a>.</p>
+<p>Newly created apps will get these improvements automatically.</p>
+<h3 id="webpack-2">webpack 2</h3>
+<blockquote>
+<p><em>This change was contributed by <span class="citation" data-cites="Timer">[@Timer]</span>(https://github.com/Timer) in <a href="https://github.com/facebookincubator/create-react-app/pull/1291">#1291</a>.</em></p>
+</blockquote>
+<p>We have upgraded to webpack 2 which has been <a href="https://medium.com/webpack/webpack-2-and-beyond-40520af9067f">officially released</a> a few months ago. It is a big upgrade with many bugfixes and general improvements. We have been testing it for a while, and now consider it stable enough to recommend it to everyone.</p>
+<p>While the Webpack configuration format has changed, Create React App users who didn’t eject don’t need to worry about it as we have updated the configuration on our side.</p>
+<p>If you had to eject your app for one reason or another, Webpack provides a <a href="https://webpack.js.org/guides/migrating/">configuration migration guide</a> that you can follow to update your apps. Note that with each release of Create React App, we are working to support more use cases out of the box so that you don’t have to eject in the future.</p>
+<p>The biggest notable webpack 2 feature is the ability to write and import <a href="http://2ality.com/2014/09/es6-modules-final.html">ES6 modules</a> directly without compiling them to CommonJS. This shouldn’t affect how you write code since you likely already use <code>import</code> and <code>export</code> statements, but it will help catch more mistakes like missing named exports at compile time:</p>
+<figure>
+<img src="../images/blog/cra-update-exports.gif" alt="Export validation" /><figcaption>Export validation</figcaption>
+</figure>
+<p>In the future, as the ecosystem around ES6 modules matures, you can expect more improvements to your app’s bundle size thanks to <a href="https://webpack.js.org/guides/tree-shaking/">tree shaking</a>.</p>
+<p>### Runtime Error Overlay {#error-overlay}</p>
+<blockquote>
+<p><em>This change was contributed by <span class="citation" data-cites="Timer">[@Timer]</span>(https://github.com/Timer) and <span class="citation" data-cites="nicinabox">[@nicinabox]</span>(https://github.com/nicinabox) in <a href="https://github.com/facebookincubator/create-react-app/pull/1101">#1101</a>, <span class="citation" data-cites="bvaughn">[@bvaughn]</span>(https://github.com/bvaughn) in <a href="https://github.com/facebookincubator/create-react-app/pull/2201">#2201</a>.</em></p>
+</blockquote>
+<p>Have you ever made a mistake in code and only realized it after the console is flooded with cryptic errors? Or worse, have you ever shipped an app with crashes in production because you accidentally missed an error in development?</p>
+<p>To address these issues, we are introducing an overlay that pops up whenever there is an uncaught error in your application. It only appears in development, and you can dismiss it by pressing Escape.</p>
+<p>A GIF is worth a thousand words:</p>
+<figure>
+<img src="../images/blog/cra-runtime-error.gif" alt="Runtime error overlay" /><figcaption>Runtime error overlay</figcaption>
+</figure>
+<p>(Yes, it integrates with your editor!)</p>
+<p>In the future, we plan to teach the runtime error overlay to understand more about your React app. For example, after React 16 we plan to show React component stacks in addition to the JavaScript stacks when an error is thrown.</p>
+<h3 id="progressive-web-apps-by-default">Progressive Web Apps by Default</h3>
+<blockquote>
+<p><em>This change was contributed by <span class="citation" data-cites="jeffposnick">[@jeffposnick]</span>(https://github.com/jeffposnick) in <a href="https://github.com/facebookincubator/create-react-app/pull/1728">#1728</a>.</em></p>
+</blockquote>
+<p>Newly created projects are built as <a href="https://developers.google.com/web/progressive-web-apps/">Progressive Web Apps</a> by default. This means that they employ <a href="https://developers.google.com/web/fundamentals/getting-started/primers/service-workers">service workers</a> with an <a href="https://developers.google.com/web/fundamentals/instant-and-offline/offline-cookbook/#cache-falling-back-to-network">offline-first caching strategy</a> to minimize the time it takes to serve the app to the users who visit it again. You can opt out of this behavior, but we recommend it both for new and existing apps, especially if you target mobile devices.</p>
+<figure>
+<img src="../images/blog/cra-pwa.png" alt="Loading assets from service worker" /><figcaption>Loading assets from service worker</figcaption>
+</figure>
+<p>New apps automatically have these features, but you can easily convert an existing project to a Progressive Web App by following <a href="https://github.com/facebookincubator/create-react-app/releases/tag/v1.0.0">our migration guide</a>.</p>
+<p>We will be adding <a href="https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md#making-a-progressive-web-app">more documentation</a> on this topic in the coming weeks. Please feel free to <a href="https://github.com/facebookincubator/create-react-app/issues/new">ask any questions</a> on the issue tracker!</p>
+<h3 id="jest-20">Jest 20</h3>
+<blockquote>
+<p><em>This change was contributed by <span class="citation" data-cites="rogeliog">[@rogeliog]</span>(https://github.com/rogeliog) in <a href="https://github.com/facebookincubator/create-react-app/pull/1614">#1614</a> and <span class="citation" data-cites="gaearon">[@gaearon]</span>(https://github.com/gaearon) in <a href="https://github.com/facebookincubator/create-react-app/pull/2171">#2171</a>.</em></p>
+</blockquote>
+<p>We are now using the latest version of Jest that includes numerous bugfixes and improvements. You can read more about the changes in <a href="https://facebook.github.io/jest/blog/2017/02/21/jest-19-immersive-watch-mode-test-platform-improvements.html">Jest 19</a> and <a href="http://facebook.github.io/jest/blog/2017/05/06/jest-20-delightful-testing-multi-project-runner.html">Jest 20</a> blog posts.</p>
+<p>Highlights include a new <a href="https://facebook.github.io/jest/blog/2017/02/21/jest-19-immersive-watch-mode-test-platform-improvements.html#immersive-watch-mode">immersive watch mode</a>, <a href="https://facebook.github.io/jest/blog/2017/02/21/jest-19-immersive-watch-mode-test-platform-improvements.html#snapshot-updates">a better snapshot format</a>, <a href="https://facebook.github.io/jest/blog/2017/02/21/jest-19-immersive-watch-mode-test-platform-improvements.html#improved-printing-of-skipped-tests">improvements to printing skipped tests</a>, and <a href="https://facebook.github.io/jest/blog/2017/05/06/jest-20-delightful-testing-multi-project-runner.html#new-improved-testing-apis">new testing APIs</a>.</p>
+<figure>
+<img src="../images/blog/cra-jest-search.gif" alt="Immersive test watcher" /><figcaption>Immersive test watcher</figcaption>
+</figure>
+<p>Additionally, Create React App now support configuring a few Jest options related to coverage reporting.</p>
+<h3 id="code-splitting-with-dynamic-import">Code Splitting with Dynamic import()</h3>
+<blockquote>
+<p><em>This change was contributed by <span class="citation" data-cites="Timer">[@Timer]</span>(https://github.com/Timer) in <a href="https://github.com/facebookincubator/create-react-app/pull/1538">#1538</a> and <span class="citation" data-cites="tharakawj">[@tharakawj]</span>(https://github.com/tharakawj) in <a href="https://github.com/facebookincubator/create-react-app/pull/1801">#1801</a>.</em></p>
+</blockquote>
+<p>It is important to keep the initial JavaScript payload of web apps down to the minimum, and <a href="https://medium.com/@addyosmani/progressive-web-apps-with-react-js-part-2-page-load-performance-33b932d97cf2">load the rest of the code on demand</a>. Although Create React App supported <a href="https://webpack.js.org/guides/code-splitting-async/">code splitting</a> using <code>require.ensure()</code> since the first release, it used a webpack-specific syntax that did not work in Jest or other environments.</p>
+<p>In this release, we are adding support for the <a href="http://2ality.com/2017/01/import-operator.html#loading-code-on-demand">dynamic <code>import()</code> proposal</a> which aligns with the future web standards. Unlike <code>require.ensure()</code>, it doesn’t break Jest tests, and should eventually become a part of JavaScript. We encourage you to use <code>import()</code> to delay loading the code for non-critical component subtrees until you need to render them.</p>
+<figure>
+<img src="../images/blog/cra-dynamic-import.gif" alt="Creating chunks with dynamic import" /><figcaption>Creating chunks with dynamic import</figcaption>
+</figure>
+<h3 id="better-console-output">Better Console Output</h3>
+<blockquote>
+<p><em>This change was contributed by <span class="citation" data-cites="gaearon">[@gaearon]</span>(https://github.com/gaearon) in <a href="https://github.com/facebookincubator/create-react-app/pull/2120">#2120</a>, <a href="https://github.com/facebookincubator/create-react-app/pull/2125">#2125</a>, and <a href="https://github.com/facebookincubator/create-react-app/pull/2161">#2161</a>.</em></p>
+</blockquote>
+<p>We have improved the console output across the board.</p>
+<p>For example, when you start the development server, we now display the LAN address in additional to the localhost address so that you can quickly access the app from a mobile device on the same network:</p>
+<figure>
+<img src="../images/blog/cra-better-output.png" alt="Better console output" /><figcaption>Better console output</figcaption>
+</figure>
+<p>When lint errors are reported, we no longer show the warnings so that you can concentrate on more critical issues. Errors and warnings in the production build output are better formatted, and the build error overlay font size now matches the browser font size more closely.</p>
+<h3 id="but-wait-theres-more">But Wait… There’s More!</h3>
+<p>You can only fit so much in a blog post, but there are other long-requested features in this release, such as <a href="https://github.com/facebookincubator/create-react-app/pull/1344">environment-specific and local <code>.env</code> files</a>, <a href="https://github.com/facebookincubator/create-react-app/pull/2130">a lint rule against confusingly named globals</a>, <a href="https://github.com/facebookincubator/create-react-app/pull/1790">support for multiple proxies in development</a>, <a href="https://github.com/facebookincubator/create-react-app/pull/1590">a customizable browser launch script</a>, and many bugfixes.</p>
+<p>You can read the full changelog and the migration guide in the <a href="https://github.com/facebookincubator/create-react-app/releases/tag/v1.0.0">v1.0.0 release notes</a>.</p>
+<h3 id="acknowledgements">Acknowledgements</h3>
+<p>This release is a result of months of work from many people in the React community. It is focused on improving both developer and end user experience, as we believe they are complementary and go hand in hand.</p>
+<p>We are grateful to <a href="https://github.com/facebookincubator/create-react-app/graphs/contributors">everyone who has offered their contributions</a>, whether in code, documentation, or by helping other people. We would like to specifically thank <a href="https://github.com/timer">Joe Haddad</a> for his invaluable help maintaining the project.</p>
+<p>We are excited to bring these improvements to everybody using Create React App, and we are looking forward to more of your feedback and contributions.</p>
+</body>
+</html>

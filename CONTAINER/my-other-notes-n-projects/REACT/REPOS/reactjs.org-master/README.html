@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>README</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<h1 id="reactjs.org">reactjs.org</h1>
+<p>This repo contains the source code and documentation powering <a href="https://reactjs.org/">reactjs.org</a>.</p>
+<h2 id="getting-started">Getting started</h2>
+<h3 id="prerequisites">Prerequisites</h3>
+<ol type="1">
+<li>Git</li>
+<li>Node: any 12.x version starting with v12.0.0 or greater</li>
+<li>Yarn: See <a href="https://yarnpkg.com/lang/en/docs/install/">Yarn website for installation instructions</a></li>
+<li>A fork of the repo (for any contributions)</li>
+<li>A clone of the <a href="https://github.com/reactjs/reactjs.org">reactjs.org repo</a> on your local machine</li>
+</ol>
+<h3 id="installation">Installation</h3>
+<ol type="1">
+<li><code>cd reactjs.org</code> to go into the project root</li>
+<li><code>yarn</code> to install the website’s npm dependencies</li>
+</ol>
+<h3 id="running-locally">Running locally</h3>
+<ol type="1">
+<li><code>yarn dev</code> to start the hot-reloading development server (powered by <a href="https://www.gatsbyjs.org">Gatsby</a>)</li>
+<li><code>open http://localhost:8000</code> to open the site in your favorite browser</li>
+</ol>
+<h2 id="contributing">Contributing</h2>
+<h3 id="guidelines">Guidelines</h3>
+<p>The documentation is divided into several sections with a different tone and purpose. If you plan to write more than a few sentences, you might find it helpful to get familiar with the <a href="https://github.com/reactjs/reactjs.org/blob/master/CONTRIBUTING.md#guidelines-for-text">contributing guidelines</a> for the appropriate sections.</p>
+<h3 id="create-a-branch">Create a branch</h3>
+<ol type="1">
+<li><code>git checkout master</code> from any folder in your local <code>reactjs.org</code> repository</li>
+<li><code>git pull origin master</code> to ensure you have the latest main code</li>
+<li><code>git checkout -b the-name-of-my-branch</code> (replacing <code>the-name-of-my-branch</code> with a suitable name) to create a branch</li>
+</ol>
+<h3 id="make-the-change">Make the change</h3>
+<ol type="1">
+<li>Follow the <a href="#running-locally">“Running locally”</a> instructions</li>
+<li>Save the files and check in the browser</li>
+<li>Changes to React components in <code>src</code> will hot-reload</li>
+<li>Changes to markdown files in <code>content</code> will hot-reload</li>
+<li>If working with plugins, you may need to remove the <code>.cache</code> directory and restart the server</li>
+</ol>
+<h3 id="test-the-change">Test the change</h3>
+<ol type="1">
+<li>If possible, test any visual changes in all latest versions of common browsers, on both desktop and mobile.</li>
+<li>Run <code>yarn check-all</code> from the project root. (This will run Prettier, ESLint, and Flow.)</li>
+</ol>
+<h3 id="push-it">Push it</h3>
+<ol type="1">
+<li><code>git add -A &amp;&amp; git commit -m "My message"</code> (replacing <code>My message</code> with a commit message, such as <code>Fix header logo on Android</code>) to stage and commit your changes</li>
+<li><code>git push my-fork-name the-name-of-my-branch</code></li>
+<li>Go to the <a href="https://github.com/reactjs/reactjs.org">reactjs.org repo</a> and you should see recently pushed branches.</li>
+<li>Follow GitHub’s instructions.</li>
+<li>If possible, include screenshots of visual changes. A Netlify build will also be automatically created once you make your PR so other people can see your change.</li>
+</ol>
+<h2 id="translation">Translation</h2>
+<p>If you are interested in translating <code>reactjs.org</code>, please see the current translation efforts at <a href="https://www.isreacttranslatedyet.com/">isreacttranslatedyet.com</a>.</p>
+<p>If your language does not have a translation and you would like to create one, please follow the instructions at <a href="https://github.com/reactjs/reactjs.org-translation#translating-reactjsorg">reactjs.org Translations</a>.</p>
+<h2 id="troubleshooting">Troubleshooting</h2>
+<ul>
+<li><code>yarn reset</code> to clear the local cache</li>
+</ul>
+<h2 id="license">License</h2>
+<p>Content submitted to <a href="https://reactjs.org/">reactjs.org</a> is CC-BY-4.0 licensed, as found in the <a href="https://github.com/open-source-explorer/reactjs.org/blob/master/LICENSE-DOCS.md">LICENSE-DOCS.md</a> file.</p>
+</body>
+</html>

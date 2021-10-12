@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="lunaruan" />
+  <title>Introducing the New JSX Transform</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Introducing the New JSX Transform</h1>
+<p class="author">lunaruan</p>
+</header>
+<p>Although React 17 <a href="/blog/2020/08/10/react-v17-rc.html">doesn’t contain new features</a>, it will provide support for a new version of the JSX transform. In this post, we will describe what it is and how to try it.</p>
+<h2 id="whats-a-jsx-transform">What’s a JSX Transform?</h2>
+<p>Browsers don’t understand JSX out of the box, so most React users rely on a compiler like Babel or TypeScript to <strong>transform JSX code into regular JavaScript</strong>. Many preconfigured toolkits like Create React App or Next.js also include a JSX transform under the hood.</p>
+<p>Together with the React 17 release, we’ve wanted to make a few improvements to the JSX transform, but we didn’t want to break existing setups. This is why we <a href="https://babeljs.io/blog/2020/03/16/7.9.0#a-new-jsx-transform-11154httpsgithubcombabelbabelpull11154">worked with Babel</a> to <strong>offer a new, rewritten version of the JSX transform</strong> for people who would like to upgrade.</p>
+<p>Upgrading to the new transform is completely optional, but it has a few benefits:</p>
+<ul>
+<li>With the new transform, you can <strong>use JSX without importing React</strong>.</li>
+<li>Depending on your setup, its compiled output may <strong>slightly improve the bundle size</strong>.</li>
+<li>It will enable future improvements that <strong>reduce the number of concepts</strong> you need to learn React.</li>
+</ul>
+<p><strong>This upgrade will not change the JSX syntax and is not required.</strong> The old JSX transform will keep working as usual, and there are no plans to remove the support for it.</p>
+<p><a href="/blog/2020/08/10/react-v17-rc.html">React 17 RC</a> already includes support for the new transform, so go give it a try! To make it easier to adopt, <strong>we’ve also backported its support</strong> to React 16.14.0, React 15.7.0, and React 0.14.10. You can find the upgrade instructions for different tools <a href="#how-to-upgrade-to-the-new-jsx-transform">below</a>.</p>
+<p>Now let’s take a closer look at the differences between the old and the new transform.</p>
+<h2 id="whats-different-in-the-new-transform">What’s Different in the New Transform?</h2>
+<p>When you use JSX, the compiler transforms it into React function calls that the browser can understand. <strong>The old JSX transform</strong> turned JSX into <code>React.createElement(...)</code> calls.</p>
+<p>For example, let’s say your source code looks like this:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb1-1" title="1"><span class="im">import</span> React <span class="im">from</span> <span class="st">&#39;react&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb1-2" title="2"></a>
+<a class="sourceLine" id="cb1-3" title="3"><span class="kw">function</span> <span class="at">App</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb1-4" title="4">  <span class="cf">return</span> <span class="op">&lt;</span>h1<span class="op">&gt;</span>Hello World&lt;/h1<span class="op">&gt;;</span></a>
+<a class="sourceLine" id="cb1-5" title="5"><span class="op">}</span></a></code></pre></div>
+<p>Under the hood, the old JSX transform turns it into regular JavaScript:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb2-1" title="1"><span class="im">import</span> React <span class="im">from</span> <span class="st">&#39;react&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb2-2" title="2"></a>
+<a class="sourceLine" id="cb2-3" title="3"><span class="kw">function</span> <span class="at">App</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb2-4" title="4">  <span class="cf">return</span> <span class="va">React</span>.<span class="at">createElement</span>(<span class="st">&#39;h1&#39;</span><span class="op">,</span> <span class="kw">null</span><span class="op">,</span> <span class="st">&#39;Hello world&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb2-5" title="5"><span class="op">}</span></a></code></pre></div>
+<blockquote>
+<p>Note</p>
+<p><strong>Your source code doesn’t need to change in any way.</strong> We’re describing how the JSX transform turns your JSX source code into the JavaScript code a browser can understand.</p>
+</blockquote>
+<p>However, this is not perfect:</p>
+<ul>
+<li>Because JSX was compiled into <code>React.createElement</code>, <code>React</code> needed to be in scope if you used JSX.</li>
+<li>There are some <a href="https://github.com/reactjs/rfcs/blob/createlement-rfc/text/0000-create-element-changes.md#motivation">performance improvements and simplifications</a> that <code>React.createElement</code> does not allow.</li>
+</ul>
+<p>To solve these issues, React 17 introduces two new entry points to the React package that are intended to only be used by compilers like Babel and TypeScript. Instead of transforming JSX to <code>React.createElement</code>, <strong>the new JSX transform</strong> automatically imports special functions from those new entry points in the React package and calls them.</p>
+<p>Let’s say that your source code looks like this:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb3-1" title="1"><span class="kw">function</span> <span class="at">App</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb3-2" title="2">  <span class="cf">return</span> <span class="op">&lt;</span>h1<span class="op">&gt;</span>Hello World&lt;/h1<span class="op">&gt;;</span></a>
+<a class="sourceLine" id="cb3-3" title="3"><span class="op">}</span></a></code></pre></div>
+<p>This is what the new JSX transform compiles it to:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb4-1" title="1"><span class="co">// Inserted by a compiler (don&#39;t import it yourself!)</span></a>
+<a class="sourceLine" id="cb4-2" title="2"><span class="im">import</span> <span class="op">{</span>jsx <span class="im">as</span> _jsx<span class="op">}</span> <span class="im">from</span> <span class="st">&#39;react/jsx-runtime&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb4-3" title="3"></a>
+<a class="sourceLine" id="cb4-4" title="4"><span class="kw">function</span> <span class="at">App</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb4-5" title="5">  <span class="cf">return</span> <span class="at">_jsx</span>(<span class="st">&#39;h1&#39;</span><span class="op">,</span> <span class="op">{</span> <span class="dt">children</span><span class="op">:</span> <span class="st">&#39;Hello world&#39;</span> <span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb4-6" title="6"><span class="op">}</span></a></code></pre></div>
+<p>Note how our original code <strong>did not need to import React</strong> to use JSX anymore! (But we would still need to import React in order to use Hooks or other exports that React provides.)</p>
+<p><strong>This change is fully compatible with all of the existing JSX code</strong>, so you won’t have to change your components. If you’re curious, you can check out the <a href="https://github.com/reactjs/rfcs/blob/createlement-rfc/text/0000-create-element-changes.md#detailed-design">technical RFC</a> for more details about how the new transform works.</p>
+<blockquote>
+<p>Note</p>
+<p>The functions inside <code>react/jsx-runtime</code> and <code>react/jsx-dev-runtime</code> must only be used by the compiler transform. If you need to manually create elements in your code, you should keep using <code>React.createElement</code>. It will continue to work and is not going away.</p>
+</blockquote>
+<h2 id="how-to-upgrade-to-the-new-jsx-transform">How to Upgrade to the New JSX Transform</h2>
+<p>If you aren’t ready to upgrade to the new JSX transform or if you are using JSX for another library, don’t worry. The old transform will not be removed and will continue to be supported.</p>
+<p>If you want to upgrade, you will need two things:</p>
+<ul>
+<li><strong>A version of React that supports the new transform</strong> (<a href="/blog/2020/08/10/react-v17-rc.html">React 17 RC</a> and higher supports it, but we’ve also released React 16.14.0, React 15.7.0, and React 0.14.10 for people who are still on the older major versions).</li>
+<li><strong>A compatible compiler</strong> (see instructions for different tools below).</li>
+</ul>
+<p>Since the new JSX transform doesn’t require React to be in scope, <a href="#removing-unused-react-imports">we’ve also prepared an automated script</a> that will remove the unnecessary imports from your codebase.</p>
+<h3 id="create-react-app">Create React App</h3>
+<p>Create React App <a href="https://github.com/facebook/create-react-app/releases/tag/v4.0.0">4.0.0</a>+ uses the new transform for compatible React versions.</p>
+<h3 id="nextjs">Next.js</h3>
+<p>Next.js <a href="https://github.com/vercel/next.js/releases/tag/v9.5.3">v9.5.3</a>+ uses the new transform for compatible React versions.</p>
+<h3 id="gatsby">Gatsby</h3>
+<p>Gatsby <a href="https://github.com/gatsbyjs/gatsby/blob/master/packages/gatsby/CHANGELOG.md#22452-2020-08-28">v2.24.5</a>+ uses the new transform for compatible React versions.</p>
+<blockquote>
+<p>Note</p>
+<p>If you get <a href="https://github.com/gatsbyjs/gatsby/issues/26979">this Gatsby error</a> after upgrading to React 17 RC, run <code>npm update</code> to fix it.</p>
+</blockquote>
+<h3 id="manual-babel-setup">Manual Babel Setup</h3>
+<p>Support for the new JSX transform is available in Babel <a href="https://babeljs.io/blog/2020/03/16/7.9.0">v7.9.0</a> and above.</p>
+<p>First, you’ll need to update to the latest Babel and plugin transform.</p>
+<p>If you are using <code>@babel/plugin-transform-react-jsx</code>:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb5-1" title="1"><span class="co"># for npm users</span></a>
+<a class="sourceLine" id="cb5-2" title="2"><span class="ex">npm</span> update @babel/core @babel/plugin-transform-react-jsx</a></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb6-1" title="1"><span class="co"># for yarn users</span></a>
+<a class="sourceLine" id="cb6-2" title="2"><span class="ex">yarn</span> upgrade @babel/core @babel/plugin-transform-react-jsx</a></code></pre></div>
+<p>If you are using <code>@babel/preset-react</code>:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb7-1" title="1"><span class="co"># for npm users</span></a>
+<a class="sourceLine" id="cb7-2" title="2"><span class="ex">npm</span> update @babel/core @babel/preset-react</a></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb8-1" title="1"><span class="co"># for yarn users</span></a>
+<a class="sourceLine" id="cb8-2" title="2"><span class="ex">yarn</span> upgrade @babel/core @babel/preset-react</a></code></pre></div>
+<p>Currently, the old transform <code>{"runtime": "classic"}</code> is the default option. To enable the new transform, you can pass <code>{"runtime": "automatic"}</code> as an option to <code>@babel/plugin-transform-react-jsx</code> or <code>@babel/preset-react</code>:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb9-1" title="1"><span class="co">// If you are using @babel/preset-react</span></a>
+<a class="sourceLine" id="cb9-2" title="2"><span class="op">{</span></a>
+<a class="sourceLine" id="cb9-3" title="3">  <span class="st">&quot;presets&quot;</span><span class="op">:</span> [</a>
+<a class="sourceLine" id="cb9-4" title="4">    [<span class="st">&quot;@babel/preset-react&quot;</span><span class="op">,</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb9-5" title="5">      <span class="st">&quot;runtime&quot;</span><span class="op">:</span> <span class="st">&quot;automatic&quot;</span></a>
+<a class="sourceLine" id="cb9-6" title="6">    <span class="op">}</span>]</a>
+<a class="sourceLine" id="cb9-7" title="7">  ]</a>
+<a class="sourceLine" id="cb9-8" title="8"><span class="op">}</span></a></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb10-1" title="1"><span class="co">// If you&#39;re using @babel/plugin-transform-react-jsx</span></a>
+<a class="sourceLine" id="cb10-2" title="2"><span class="op">{</span></a>
+<a class="sourceLine" id="cb10-3" title="3">  <span class="st">&quot;plugins&quot;</span><span class="op">:</span> [</a>
+<a class="sourceLine" id="cb10-4" title="4">    [<span class="st">&quot;@babel/plugin-transform-react-jsx&quot;</span><span class="op">,</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb10-5" title="5">      <span class="st">&quot;runtime&quot;</span><span class="op">:</span> <span class="st">&quot;automatic&quot;</span></a>
+<a class="sourceLine" id="cb10-6" title="6">    <span class="op">}</span>]</a>
+<a class="sourceLine" id="cb10-7" title="7">  ]</a>
+<a class="sourceLine" id="cb10-8" title="8"><span class="op">}</span></a></code></pre></div>
+<p>Starting from Babel 8, <code>"automatic"</code> will be the default runtime for both plugins. For more information, check out the Babel documentation for <span class="citation" data-cites="babel/plugin-transform-react-jsx">[@babel/plugin-transform-react-jsx]</span>(https://babeljs.io/docs/en/babel-plugin-transform-react-jsx) and <span class="citation" data-cites="babel/preset-react">[@babel/preset-react]</span>(https://babeljs.io/docs/en/babel-preset-react).</p>
+<blockquote>
+<p>Note</p>
+<p>If you use JSX with a library other than React, you can use <a href="https://babeljs.io/docs/en/babel-preset-react#importsource">the <code>importSource</code> option</a> to import from that library instead – as long as it provides the necessary entry points. Alternatively, you can keep using the classic transform which will continue to be supported.</p>
+<p>If you’re a library author and you are implementing the <code>/jsx-runtime</code> entry point for your library, keep in mind that <a href="https://github.com/facebook/react/issues/20031#issuecomment-710346866">there is a case</a> in which even the new transform has to fall back to <code>createElement</code> for backwards compatibility. In that case, it will auto-import <code>createElement</code> directly from the <em>root</em> entry point specified by <code>importSource</code>.</p>
+</blockquote>
+<h3 id="eslint">ESLint</h3>
+<p>If you are using <a href="https://github.com/yannickcr/eslint-plugin-react">eslint-plugin-react</a>, the <code>react/jsx-uses-react</code> and <code>react/react-in-jsx-scope</code> rules are no longer necessary and can be turned off or removed.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb11-1" title="1"><span class="op">{</span></a>
+<a class="sourceLine" id="cb11-2" title="2">  <span class="co">// ...</span></a>
+<a class="sourceLine" id="cb11-3" title="3">  <span class="st">&quot;rules&quot;</span><span class="op">:</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb11-4" title="4">    <span class="co">// ...</span></a>
+<a class="sourceLine" id="cb11-5" title="5">    <span class="st">&quot;react/jsx-uses-react&quot;</span><span class="op">:</span> <span class="st">&quot;off&quot;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb11-6" title="6">    <span class="st">&quot;react/react-in-jsx-scope&quot;</span><span class="op">:</span> <span class="st">&quot;off&quot;</span></a>
+<a class="sourceLine" id="cb11-7" title="7">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb11-8" title="8"><span class="op">}</span></a></code></pre></div>
+<h3 id="typescript">TypeScript</h3>
+<p>TypeScript supports the new JSX transform in <a href="https://devblogs.microsoft.com/typescript/announcing-typescript-4-1/#jsx-factories">v4.1</a> and up.</p>
+<h3 id="flow">Flow</h3>
+<p>Flow supports the new JSX transform in <a href="https://github.com/facebook/flow/releases/tag/v0.126.0">v0.126.0</a> and up, by adding <code>react.runtime=automatic</code> to your Flow configuration options.</p>
+<h2 id="removing-unused-react-imports">Removing Unused React Imports</h2>
+<p>Because the new JSX transform will automatically import the necessary <code>react/jsx-runtime</code> functions, React will no longer need to be in scope when you use JSX. This might lead to unused React imports in your code. It doesn’t hurt to keep them, but if you’d like to remove them, we recommend running a <a href="https://medium.com/@cpojer/effective-javascript-codemods-5a6686bb46fb">“codemod”</a> script to remove them automatically:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb12-1" title="1"><span class="bu">cd</span> your_project</a>
+<a class="sourceLine" id="cb12-2" title="2"><span class="ex">npx</span> react-codemod update-react-imports</a></code></pre></div>
+<blockquote>
+<p>Note</p>
+<p>If you’re getting errors when running the codemod, try specifying a different JavaScript dialect when <code>npx react-codemod update-react-imports</code> asks you to choose one. In particular, at this moment the “JavaScript with Flow” setting supports newer syntax than the “JavaScript” setting even if you don’t use Flow. <a href="https://github.com/reactjs/react-codemod/issues">File an issue</a> if you run into problems.</p>
+<p>Keep in mind that the codemod output will not always match your project’s coding style, so you might want to run <a href="https://prettier.io/">Prettier</a> after the codemod finishes for consistent formatting.</p>
+</blockquote>
+<p>Running this codemod will:</p>
+<ul>
+<li>Remove all unused React imports as a result of upgrading to the new JSX transform.</li>
+<li>Change all default React imports (i.e. <code>import React from "react"</code>) to destructured named imports (ex. <code>import { useState } from "react"</code>) which is the preferred style going into the future. This codemod <strong>will not</strong> affect the existing namespace imports (i.e. <code>import * as React from "react"</code>) which is also a valid style. The default imports will keep working in React 17, but in the longer term we encourage moving away from them.</li>
+</ul>
+<p>For example,</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb13-1" title="1"><span class="im">import</span> React <span class="im">from</span> <span class="st">&#39;react&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb13-2" title="2"></a>
+<a class="sourceLine" id="cb13-3" title="3"><span class="kw">function</span> <span class="at">App</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb13-4" title="4">  <span class="cf">return</span> <span class="op">&lt;</span>h1<span class="op">&gt;</span>Hello World&lt;/h1<span class="op">&gt;;</span></a>
+<a class="sourceLine" id="cb13-5" title="5"><span class="op">}</span></a></code></pre></div>
+<p>will be replaced with</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb14-1" title="1"><span class="kw">function</span> <span class="at">App</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb14-2" title="2">  <span class="cf">return</span> <span class="op">&lt;</span>h1<span class="op">&gt;</span>Hello World&lt;/h1<span class="op">&gt;;</span></a>
+<a class="sourceLine" id="cb14-3" title="3"><span class="op">}</span></a></code></pre></div>
+<p>If you use some other import from React — for example, a Hook — then the codemod will convert it to a named import.</p>
+<p>For example,</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb15-1" title="1"><span class="im">import</span> React <span class="im">from</span> <span class="st">&#39;react&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb15-2" title="2"></a>
+<a class="sourceLine" id="cb15-3" title="3"><span class="kw">function</span> <span class="at">App</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb15-4" title="4">  <span class="kw">const</span> [text<span class="op">,</span> setText] <span class="op">=</span> <span class="va">React</span>.<span class="at">useState</span>(<span class="st">&#39;Hello World&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb15-5" title="5">  <span class="cf">return</span> <span class="op">&lt;</span>h1<span class="op">&gt;{</span>text<span class="op">}</span>&lt;/h1<span class="op">&gt;;</span></a>
+<a class="sourceLine" id="cb15-6" title="6"><span class="op">}</span></a></code></pre></div>
+<p>will be replaced with</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb16-1" title="1"><span class="im">import</span> <span class="op">{</span> useState <span class="op">}</span> <span class="im">from</span> <span class="st">&#39;react&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb16-2" title="2"></a>
+<a class="sourceLine" id="cb16-3" title="3"><span class="kw">function</span> <span class="at">App</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb16-4" title="4">  <span class="kw">const</span> [text<span class="op">,</span> setText] <span class="op">=</span> <span class="at">useState</span>(<span class="st">&#39;Hello World&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb16-5" title="5">  <span class="cf">return</span> <span class="op">&lt;</span>h1<span class="op">&gt;{</span>text<span class="op">}</span>&lt;/h1<span class="op">&gt;;</span></a>
+<a class="sourceLine" id="cb16-6" title="6"><span class="op">}</span></a></code></pre></div>
+<p>In addition to cleaning up unused imports, this will also help you prepare for a future major version of React (not React 17) which will support ES Modules and not have a default export.</p>
+<h2 id="thanks">Thanks</h2>
+<p>We’d like to thank Babel, TypeScript, Create React App, Next.js, Gatsby, ESLint, and Flow maintainers for their help implementing and integrating the new JSX transform. We also want to thank the React community for their feedback and discussion on the related <a href="https://github.com/reactjs/rfcs/pull/107">technical RFC</a>.</p>
+</body>
+</html>

@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Animation Add-Ons</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Animation Add-Ons</h1>
+</header>
+<blockquote>
+<p>Note:</p>
+<p><code>ReactTransitionGroup</code> and <code>ReactCSSTransitionGroup</code> have been moved to the <a href="https://github.com/reactjs/react-transition-group/tree/v1-stable"><code>react-transition-group</code></a> package that is maintained by the community. Its 1.x branch is completely API-compatible with the existing addons. Please file bugs and feature requests in the <a href="https://github.com/reactjs/react-transition-group/tree/v1-stable">new repository</a>.</p>
+</blockquote>
+<p>The <a href="#low-level-api-reacttransitiongroup"><code>ReactTransitionGroup</code></a> add-on component is a low-level API for animation, and <a href="#high-level-api-reactcsstransitiongroup"><code>ReactCSSTransitionGroup</code></a> is an add-on component for easily implementing basic CSS animations and transitions.</p>
+<h2 id="high-level-api-reactcsstransitiongroup">High-level API: ReactCSSTransitionGroup</h2>
+<p><code>ReactCSSTransitionGroup</code> is a high-level API based on <a href="#low-level-api-reacttransitiongroup"><code>ReactTransitionGroup</code></a> and is an easy way to perform CSS transitions and animations when a React component enters or leaves the DOM. It’s inspired by the excellent <a href="https://docs.angularjs.org/api/ngAnimate">ng-animate</a> library.</p>
+<p><strong>Importing</strong></p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb1-1" title="1"><span class="im">import</span> ReactCSSTransitionGroup <span class="im">from</span> <span class="st">&#39;react-transition-group&#39;</span><span class="op">;</span> <span class="co">// ES6</span></a>
+<a class="sourceLine" id="cb1-2" title="2"><span class="kw">var</span> ReactCSSTransitionGroup <span class="op">=</span> <span class="at">require</span>(<span class="st">&#39;react-transition-group&#39;</span>)<span class="op">;</span> <span class="co">// ES5 with npm</span></a></code></pre></div>
+<pre class="javascript{31-36}"><code>class TodoList extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {items: [&#39;hello&#39;, &#39;world&#39;, &#39;click&#39;, &#39;me&#39;]};
+    this.handleAdd = this.handleAdd.bind(this);
+  }
+
+  handleAdd() {
+    const newItems = this.state.items.concat([
+      prompt(&#39;Enter some text&#39;)
+    ]);
+    this.setState({items: newItems});
+  }
+
+  handleRemove(i) {
+    let newItems = this.state.items.slice();
+    newItems.splice(i, 1);
+    this.setState({items: newItems});
+  }
+
+  render() {
+    const items = this.state.items.map((item, i) =&gt; (
+      &lt;div key={i} onClick={() =&gt; this.handleRemove(i)}&gt;
+        {item}
+      &lt;/div&gt;
+    ));
+
+    return (
+      &lt;div&gt;
+        &lt;button onClick={this.handleAdd}&gt;Add Item&lt;/button&gt;
+        &lt;ReactCSSTransitionGroup
+          transitionName=&quot;example&quot;
+          transitionEnterTimeout={500}
+          transitionLeaveTimeout={300}&gt;
+          {items}
+        &lt;/ReactCSSTransitionGroup&gt;
+      &lt;/div&gt;
+    );
+  }
+}</code></pre>
+<blockquote>
+<p>Note:</p>
+<p>You must provide <a href="/docs/lists-and-keys.html#keys">the <code>key</code> attribute</a> for all children of <code>ReactCSSTransitionGroup</code>, even when only rendering a single item. This is how React will determine which children have entered, left, or stayed.</p>
+</blockquote>
+<p>In this component, when a new item is added to <code>ReactCSSTransitionGroup</code> it will get the <code>example-enter</code> CSS class and the <code>example-enter-active</code> CSS class added in the next tick. This is a convention based on the <code>transitionName</code> prop.</p>
+<p>You can use these classes to trigger a CSS animation or transition. For example, try adding this CSS and adding a new list item:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode css"><code class="sourceCode css"><a class="sourceLine" id="cb3-1" title="1"><span class="fu">.example-enter</span> {</a>
+<a class="sourceLine" id="cb3-2" title="2">  <span class="kw">opacity</span>: <span class="dv">0.01</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb3-3" title="3">}</a>
+<a class="sourceLine" id="cb3-4" title="4"></a>
+<a class="sourceLine" id="cb3-5" title="5"><span class="fu">.example-enter.example-enter-active</span> {</a>
+<a class="sourceLine" id="cb3-6" title="6">  <span class="kw">opacity</span>: <span class="dv">1</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb3-7" title="7">  <span class="kw">transition</span>: opacity <span class="dv">500</span><span class="dt">ms</span> <span class="dv">ease-in</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb3-8" title="8">}</a>
+<a class="sourceLine" id="cb3-9" title="9"></a>
+<a class="sourceLine" id="cb3-10" title="10"><span class="fu">.example-leave</span> {</a>
+<a class="sourceLine" id="cb3-11" title="11">  <span class="kw">opacity</span>: <span class="dv">1</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb3-12" title="12">}</a>
+<a class="sourceLine" id="cb3-13" title="13"></a>
+<a class="sourceLine" id="cb3-14" title="14"><span class="fu">.example-leave.example-leave-active</span> {</a>
+<a class="sourceLine" id="cb3-15" title="15">  <span class="kw">opacity</span>: <span class="dv">0.01</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb3-16" title="16">  <span class="kw">transition</span>: opacity <span class="dv">300</span><span class="dt">ms</span> <span class="dv">ease-in</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb3-17" title="17">}</a></code></pre></div>
+<p>You’ll notice that animation durations need to be specified in both the CSS and the render method; this tells React when to remove the animation classes from the element and – if it’s leaving – when to remove the element from the DOM.</p>
+<h3 id="animate-initial-mounting">Animate Initial Mounting</h3>
+<p><code>ReactCSSTransitionGroup</code> provides the optional prop <code>transitionAppear</code>, to add an extra transition phase at the initial mount of the component. There is generally no transition phase at the initial mount as the default value of <code>transitionAppear</code> is <code>false</code>. The following is an example which passes the prop <code>transitionAppear</code> with the value <code>true</code>.</p>
+<pre class="javascript{5-6}"><code>render() {
+  return (
+    &lt;ReactCSSTransitionGroup
+      transitionName=&quot;example&quot;
+      transitionAppear={true}
+      transitionAppearTimeout={500}
+      transitionEnter={false}
+      transitionLeave={false}&gt;
+      &lt;h1&gt;Fading at Initial Mount&lt;/h1&gt;
+    &lt;/ReactCSSTransitionGroup&gt;
+  );
+}</code></pre>
+<p>During the initial mount <code>ReactCSSTransitionGroup</code> will get the <code>example-appear</code> CSS class and the <code>example-appear-active</code> CSS class added in the next tick.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode css"><code class="sourceCode css"><a class="sourceLine" id="cb5-1" title="1"><span class="fu">.example-appear</span> {</a>
+<a class="sourceLine" id="cb5-2" title="2">  <span class="kw">opacity</span>: <span class="dv">0.01</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb5-3" title="3">}</a>
+<a class="sourceLine" id="cb5-4" title="4"></a>
+<a class="sourceLine" id="cb5-5" title="5"><span class="fu">.example-appear.example-appear-active</span> {</a>
+<a class="sourceLine" id="cb5-6" title="6">  <span class="kw">opacity</span>: <span class="dv">1</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb5-7" title="7">  <span class="kw">transition</span>: opacity <span class="dv">.5</span><span class="dt">s</span> <span class="dv">ease-in</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb5-8" title="8">}</a></code></pre></div>
+<p>At the initial mount, all children of the <code>ReactCSSTransitionGroup</code> will <code>appear</code> but not <code>enter</code>. However, all children later added to an existing <code>ReactCSSTransitionGroup</code> will <code>enter</code> but not <code>appear</code>.</p>
+<blockquote>
+<p>Note:</p>
+<p>The prop <code>transitionAppear</code> was added to <code>ReactCSSTransitionGroup</code> in version <code>0.13</code>. To maintain backwards compatibility, the default value is set to <code>false</code>.</p>
+<p>However, the default values of <code>transitionEnter</code> and <code>transitionLeave</code> are <code>true</code> so you must specify <code>transitionEnterTimeout</code> and <code>transitionLeaveTimeout</code> by default. If you don’t need either enter or leave animations, pass <code>transitionEnter={false}</code> or <code>transitionLeave={false}</code>.</p>
+</blockquote>
+<h3 id="custom-classes">Custom Classes</h3>
+<p>It is also possible to use custom class names for each of the steps in your transitions. Instead of passing a string into transitionName you can pass an object containing either the <code>enter</code> and <code>leave</code> class names, or an object containing the <code>enter</code>, <code>enter-active</code>, <code>leave-active</code>, and <code>leave</code> class names. If only the enter and leave classes are provided, the enter-active and leave-active classes will be determined by appending ‘-active’ to the end of the class name. Here are two examples using custom classes:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb6-1" title="1"><span class="co">// ...</span></a>
+<a class="sourceLine" id="cb6-2" title="2"><span class="op">&lt;</span>ReactCSSTransitionGroup</a>
+<a class="sourceLine" id="cb6-3" title="3">  transitionName<span class="op">={</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb6-4" title="4">    <span class="dt">enter</span><span class="op">:</span> <span class="st">&#39;enter&#39;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb6-5" title="5">    <span class="dt">enterActive</span><span class="op">:</span> <span class="st">&#39;enterActive&#39;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb6-6" title="6">    <span class="dt">leave</span><span class="op">:</span> <span class="st">&#39;leave&#39;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb6-7" title="7">    <span class="dt">leaveActive</span><span class="op">:</span> <span class="st">&#39;leaveActive&#39;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb6-8" title="8">    <span class="dt">appear</span><span class="op">:</span> <span class="st">&#39;appear&#39;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb6-9" title="9">    <span class="dt">appearActive</span><span class="op">:</span> <span class="st">&#39;appearActive&#39;</span></a>
+<a class="sourceLine" id="cb6-10" title="10">  <span class="op">}</span> <span class="op">}&gt;</span></a>
+<a class="sourceLine" id="cb6-11" title="11">  <span class="op">{</span>item<span class="op">}</span></a>
+<a class="sourceLine" id="cb6-12" title="12">&lt;/ReactCSSTransitionGroup<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb6-13" title="13"></a>
+<a class="sourceLine" id="cb6-14" title="14"><span class="op">&lt;</span>ReactCSSTransitionGroup</a>
+<a class="sourceLine" id="cb6-15" title="15">  transitionName<span class="op">={</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb6-16" title="16">    <span class="dt">enter</span><span class="op">:</span> <span class="st">&#39;enter&#39;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb6-17" title="17">    <span class="dt">leave</span><span class="op">:</span> <span class="st">&#39;leave&#39;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb6-18" title="18">    <span class="dt">appear</span><span class="op">:</span> <span class="st">&#39;appear&#39;</span></a>
+<a class="sourceLine" id="cb6-19" title="19">  <span class="op">}</span> <span class="op">}&gt;</span></a>
+<a class="sourceLine" id="cb6-20" title="20">  <span class="op">{</span>item2<span class="op">}</span></a>
+<a class="sourceLine" id="cb6-21" title="21">&lt;/ReactCSSTransitionGroup<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb6-22" title="22"><span class="co">// ...</span></a></code></pre></div>
+<h3 id="animation-group-must-be-mounted-to-work">Animation Group Must Be Mounted To Work</h3>
+<p>In order for it to apply transitions to its children, the <code>ReactCSSTransitionGroup</code> must already be mounted in the DOM or the prop <code>transitionAppear</code> must be set to <code>true</code>.</p>
+<p>The example below would <strong>not</strong> work, because the <code>ReactCSSTransitionGroup</code> is being mounted along with the new item, instead of the new item being mounted within it. Compare this to the <a href="#getting-started">Getting Started</a> section above to see the difference.</p>
+<pre class="javascript{4,6,13}"><code>render() {
+  const items = this.state.items.map((item, i) =&gt; (
+    &lt;div key={item} onClick={() =&gt; this.handleRemove(i)}&gt;
+      &lt;ReactCSSTransitionGroup transitionName=&quot;example&quot;&gt;
+        {item}
+      &lt;/ReactCSSTransitionGroup&gt;
+    &lt;/div&gt;
+  ));
+
+  return (
+    &lt;div&gt;
+      &lt;button onClick={this.handleAdd}&gt;Add Item&lt;/button&gt;
+      {items}
+    &lt;/div&gt;
+  );
+}</code></pre>
+<h3 id="animating-one-or-zero-items">Animating One or Zero Items</h3>
+<p>In the example above, we rendered a list of items into <code>ReactCSSTransitionGroup</code>. However, the children of <code>ReactCSSTransitionGroup</code> can also be one or zero items. This makes it possible to animate a single element entering or leaving. Similarly, you can animate a new element replacing the current element. For example, we can implement a simple image carousel like this:</p>
+<pre class="javascript{10}"><code>import ReactCSSTransitionGroup from &#39;react-transition-group&#39;;
+
+function ImageCarousel(props) {
+  return (
+    &lt;div&gt;
+      &lt;ReactCSSTransitionGroup
+        transitionName=&quot;carousel&quot;
+        transitionEnterTimeout={300}
+        transitionLeaveTimeout={300}&gt;
+        &lt;img src={props.imageSrc} key={props.imageSrc} /&gt;
+      &lt;/ReactCSSTransitionGroup&gt;
+    &lt;/div&gt;
+  );
+}</code></pre>
+<h3 id="disabling-animations">Disabling Animations</h3>
+<p>You can disable animating <code>enter</code> or <code>leave</code> animations if you want. For example, sometimes you may want an <code>enter</code> animation and no <code>leave</code> animation, but <code>ReactCSSTransitionGroup</code> waits for an animation to complete before removing your DOM node. You can add <code>transitionEnter={false}</code> or <code>transitionLeave={false}</code> props to <code>ReactCSSTransitionGroup</code> to disable these animations.</p>
+<blockquote>
+<p>Note:</p>
+<p>When using <code>ReactCSSTransitionGroup</code>, there’s no way for your components to be notified when a transition has ended or to perform any more complex logic around animation. If you want more fine-grained control, you can use the lower-level <code>ReactTransitionGroup</code> API which provides the hooks you need to do custom transitions.</p>
+</blockquote>
+<hr />
+<h2 id="low-level-api-reacttransitiongroup">Low-level API: ReactTransitionGroup</h2>
+<p><strong>Importing</strong></p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb9-1" title="1"><span class="im">import</span> ReactTransitionGroup <span class="im">from</span> <span class="st">&#39;react-addons-transition-group&#39;</span> <span class="co">// ES6</span></a>
+<a class="sourceLine" id="cb9-2" title="2"><span class="kw">var</span> ReactTransitionGroup <span class="op">=</span> <span class="at">require</span>(<span class="st">&#39;react-addons-transition-group&#39;</span>) <span class="co">// ES5 with npm</span></a></code></pre></div>
+<p><code>ReactTransitionGroup</code> is the basis for animations. When children are declaratively added or removed from it (as in the <a href="#getting-started">example above</a>), special lifecycle methods are called on them.</p>
+<ul>
+<li><a href="#componentwillappear"><code>componentWillAppear()</code></a></li>
+<li><a href="#componentdidappear"><code>componentDidAppear()</code></a></li>
+<li><a href="#componentwillenter"><code>componentWillEnter()</code></a></li>
+<li><a href="#componentdidenter"><code>componentDidEnter()</code></a></li>
+<li><a href="#componentwillleave"><code>componentWillLeave()</code></a></li>
+<li><a href="#componentdidleave"><code>componentDidLeave()</code></a></li>
+</ul>
+<h4 id="rendering-a-different-component">Rendering a Different Component</h4>
+<p><code>ReactTransitionGroup</code> renders as a <code>span</code> by default. You can change this behavior by providing a <code>component</code> prop. For example, here’s how you would render a <code>&lt;ul&gt;</code>:</p>
+<pre class="javascript{1}"><code>&lt;ReactTransitionGroup component=&quot;ul&quot;&gt;
+  {/* ... */}
+&lt;/ReactTransitionGroup&gt;</code></pre>
+<p>Any additional, user-defined, properties will become properties of the rendered component. For example, here’s how you would render a <code>&lt;ul&gt;</code> with CSS class:</p>
+<pre class="javascript{1}"><code>&lt;ReactTransitionGroup component=&quot;ul&quot; className=&quot;animated-list&quot;&gt;
+  {/* ... */}
+&lt;/ReactTransitionGroup&gt;</code></pre>
+<p>Every DOM component that React can render is available for use. However, <code>component</code> does not need to be a DOM component. It can be any React component you want; even ones you’ve written yourself! Just write <code>component={List}</code> and your component will receive <code>this.props.children</code>.</p>
+<h4 id="rendering-a-single-child">Rendering a Single Child</h4>
+<p>People often use <code>ReactTransitionGroup</code> to animate mounting and unmounting of a single child such as a collapsible panel. Normally <code>ReactTransitionGroup</code> wraps all its children in a <code>span</code> (or a custom <code>component</code> as described above). This is because any React component has to return a single root element, and <code>ReactTransitionGroup</code> is no exception to this rule.</p>
+<p>However if you only need to render a single child inside <code>ReactTransitionGroup</code>, you can completely avoid wrapping it in a <code>&lt;span&gt;</code> or any other DOM component. To do this, create a custom component that renders the first child passed to it directly:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb12-1" title="1"><span class="kw">function</span> <span class="at">FirstChild</span>(props) <span class="op">{</span></a>
+<a class="sourceLine" id="cb12-2" title="2">  <span class="kw">const</span> childrenArray <span class="op">=</span> <span class="va">React</span>.<span class="va">Children</span>.<span class="at">toArray</span>(<span class="va">props</span>.<span class="at">children</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb12-3" title="3">  <span class="cf">return</span> childrenArray[<span class="dv">0</span>] <span class="op">||</span> <span class="kw">null</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb12-4" title="4"><span class="op">}</span></a></code></pre></div>
+<p>Now you can specify <code>FirstChild</code> as the <code>component</code> prop in <code>&lt;ReactTransitionGroup&gt;</code> props and avoid any wrappers in the result DOM:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb13-1" title="1"><span class="op">&lt;</span>ReactTransitionGroup component<span class="op">={</span>FirstChild<span class="op">}&gt;</span></a>
+<a class="sourceLine" id="cb13-2" title="2">  <span class="op">{</span>someCondition <span class="op">?</span> <span class="op">&lt;</span>MyComponent /<span class="op">&gt;</span> : <span class="kw">null</span><span class="op">}</span></a>
+<a class="sourceLine" id="cb13-3" title="3">&lt;/ReactTransitionGroup<span class="op">&gt;</span></a></code></pre></div>
+<p>This only works when you are animating a single child in and out, such as a collapsible panel. This approach wouldn’t work when animating multiple children or replacing the single child with another child, such as an image carousel. For an image carousel, while the current image is animating out, another image will animate in, so <code>&lt;ReactTransitionGroup&gt;</code> needs to give them a common DOM parent. You can’t avoid the wrapper for multiple children, but you can customize the wrapper with the <code>component</code> prop as described above.</p>
+<hr />
+<h2 id="reference">Reference</h2>
+<h3 id="componentwillappear"><code>componentWillAppear()</code></h3>
+<div class="sourceCode" id="cb14"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb14-1" title="1"><span class="at">componentWillAppear</span>(callback)</a></code></pre></div>
+<p>This is called at the same time as <code>componentDidMount()</code> for components that are initially mounted in a <code>TransitionGroup</code>. It will block other animations from occurring until <code>callback</code> is called. It is only called on the initial render of a <code>TransitionGroup</code>.</p>
+<hr />
+<h3 id="componentdidappear"><code>componentDidAppear()</code></h3>
+<div class="sourceCode" id="cb15"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb15-1" title="1"><span class="at">componentDidAppear</span>()</a></code></pre></div>
+<p>This is called after the <code>callback</code> function that was passed to <code>componentWillAppear</code> is called.</p>
+<hr />
+<h3 id="componentwillenter"><code>componentWillEnter()</code></h3>
+<div class="sourceCode" id="cb16"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb16-1" title="1"><span class="at">componentWillEnter</span>(callback)</a></code></pre></div>
+<p>This is called at the same time as <code>componentDidMount()</code> for components added to an existing <code>TransitionGroup</code>. It will block other animations from occurring until <code>callback</code> is called. It will not be called on the initial render of a <code>TransitionGroup</code>.</p>
+<hr />
+<h3 id="componentdidenter"><code>componentDidEnter()</code></h3>
+<div class="sourceCode" id="cb17"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb17-1" title="1"><span class="at">componentDidEnter</span>()</a></code></pre></div>
+<p>This is called after the <code>callback</code> function that was passed to <a href="#componentwillenter"><code>componentWillEnter()</code></a> is called.</p>
+<hr />
+<h3 id="componentwillleave"><code>componentWillLeave()</code></h3>
+<div class="sourceCode" id="cb18"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb18-1" title="1"><span class="at">componentWillLeave</span>(callback)</a></code></pre></div>
+<p>This is called when the child has been removed from the <code>ReactTransitionGroup</code>. Though the child has been removed, <code>ReactTransitionGroup</code> will keep it in the DOM until <code>callback</code> is called.</p>
+<hr />
+<h3 id="componentdidleave"><code>componentDidLeave()</code></h3>
+<div class="sourceCode" id="cb19"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb19-1" title="1"><span class="at">componentDidLeave</span>()</a></code></pre></div>
+<p>This is called when the <code>willLeave</code> <code>callback</code> is called (at the same time as <code>componentWillUnmount()</code>).</p>
+</body>
+</html>

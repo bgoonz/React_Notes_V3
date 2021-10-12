@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="vjeux" />
+  <title>Community Round-up #5</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Community Round-up #5</h1>
+<p class="author">vjeux</p>
+</header>
+<p>We launched the <a href="https://www.facebook.com/react">React Facebook Page</a> along with the React v0.4 launch. 700 people already liked it to get updated on the project :)</p>
+<h2 id="cross-browser-onchange">Cross-browser onChange</h2>
+<p><a href="http://sophiebits.com/">Sophie Alpert</a> from <a href="https://www.khanacademy.org/">Khan Academy</a> worked on a cross-browser implementation of <code>onChange</code> event that landed in v0.4. She wrote a blog post explaining the various browser quirks she had to deal with.</p>
+<blockquote>
+<p>First off, what is the input event? If you have an <code>&lt;input&gt;</code> element and want to receive events whenever the value changes, the most obvious thing to do is to listen to the change event. Unfortunately, change fires only after the text field is defocused, rather than on each keystroke. The next obvious choice is the keyup event, which is triggered whenever a key is released. Unfortunately, keyup doesn’t catch input that doesn’t involve the keyboard (e.g., pasting from the clipboard using the mouse) and only fires once if a key is held down, rather than once per inserted character.</p>
+<p>Both keydown and keypress do fire repeatedly when a key is held down, but both fire immediately before the value changes, so to read the new value you have to defer the handler to the next event loop using <code>setTimeout(fn, 0)</code> or similar, which slows down your app. Of course, like keyup, neither keydown nor keypress fires for non-keyboard input events, and all three can fire in cases where the value doesn’t change at all (such as when pressing the arrow keys).</p>
+<p><a href="http://sophiebits.com/2013/06/18/a-near-perfect-oninput-shim-for-ie-8-and-9.html">Read the full post…</a></p>
+</blockquote>
+<h2 id="react-samples">React Samples</h2>
+<p>Learning a new library is always easier when you have working examples you can play with. <a href="https://github.com/jhw">jwh</a> put many of them on his <a href="https://github.com/jhw/react-samples">react-samples GitHub repo</a>.</p>
+<blockquote>
+<p>Some simple examples with Facebook’s React framework</p>
+<ul>
+<li>Bootstrap action bar, modal and table <a href="https://rawgithub.com/jhw/react-samples/master/html/actionbar.html">#1</a>, <a href="https://rawgithub.com/jhw/react-samples/master/html/bootstrap_actionbar.html">#2</a>, <a href="https://rawgithub.com/jhw/react-samples/master/html/bootstrap_modal.html">#3</a>, <a href="https://rawgithub.com/jhw/react-samples/master/html/bootstrap_striped_table.html">#4</a></li>
+<li>Comments <a href="https://rawgithub.com/jhw/react-samples/master/html/comments1.html">#1</a>, <a href="https://rawgithub.com/jhw/react-samples/master/html/comments2.html">#2</a></li>
+<li>Data Table <a href="https://rawgithub.com/jhw/react-samples/master/html/datatable.html">#1</a>, <a href="https://rawgithub.com/jhw/react-samples/master/html/datatable2.html">#2</a>, <a href="https://rawgithub.com/jhw/react-samples/master/html/datatable3.html">#3</a>, <a href="https://rawgithub.com/jhw/react-samples/master/html/datatable4.html">#4</a>, <a href="https://rawgithub.com/jhw/react-samples/master/html/datatable5.html">#5</a></li>
+<li>Filter Bar <a href="https://rawgithub.com/jhw/react-samples/master/html/filterbar.html">#1</a>, <a href="https://rawgithub.com/jhw/react-samples/master/html/filterbar2.html">#2</a>, <a href="https://rawgithub.com/jhw/react-samples/master/html/filterbar3.html">#3</a>, <a href="https://rawgithub.com/jhw/react-samples/master/html/filterbar4.html">#4</a>, <a href="https://rawgithub.com/jhw/react-samples/master/html/filterbar5.html">#5</a></li>
+<li>Fundoo Rating <a href="https://rawgithub.com/jhw/react-samples/master/html/fundoo.html">#1</a></li>
+<li>Line Char: <a href="https://rawgithub.com/jhw/react-samples/master/html/linechart.html">#1</a>, <a href="https://rawgithub.com/jhw/react-samples/master/html/linechart2.html">#2</a></li>
+<li>Multi tabs <a href="https://rawgithub.com/jhw/react-samples/master/html/multitabs.html">#1</a></li>
+<li>Select <a href="https://rawgithub.com/jhw/react-samples/master/html/select.html">#1</a></li>
+<li>Simple Tabs <a href="https://rawgithub.com/jhw/react-samples/master/html/simpletabs.html">#1</a>, <a href="https://rawgithub.com/jhw/react-samples/master/html/simpletabs2.html">#2</a>, <a href="https://rawgithub.com/jhw/react-samples/master/html/simpletabs3.html">#3</a>, <a href="https://rawgithub.com/jhw/react-samples/master/html/simpletabs4.html">#4</a></li>
+<li>Toggle <a href="https://rawgithub.com/jhw/react-samples/master/html/toggle.html">#1</a></li>
+</ul>
+</blockquote>
+<h2 id="react-chosen-wrapper">React Chosen Wrapper</h2>
+<p><a href="https://github.com/chenglou">Cheng Lou</a> wrote a wrapper for the <a href="https://harvesthq.github.io/chosen/">Chosen</a> input library called <a href="https://github.com/chenglou/react-chosen">react-chosen</a>. It took just 25 lines to be able to use jQuery component as a React one.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb1-1" title="1"><span class="va">React</span>.<span class="at">renderComponent</span>(</a>
+<a class="sourceLine" id="cb1-2" title="2">  <span class="op">&lt;</span>Chosen noResultsText<span class="op">=</span><span class="st">&quot;No result&quot;</span> value<span class="op">=</span><span class="st">&quot;Harvest&quot;</span> onChange<span class="op">={</span>doSomething<span class="op">}&gt;</span></a>
+<a class="sourceLine" id="cb1-3" title="3">    <span class="op">&lt;</span>option value<span class="op">=</span><span class="st">&quot;Facebook&quot;</span><span class="op">&gt;</span>Facebook&lt;/option<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb1-4" title="4">    <span class="op">&lt;</span>option value<span class="op">=</span><span class="st">&quot;Harvest&quot;</span><span class="op">&gt;</span>Harvest&lt;/option<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb1-5" title="5">  &lt;/Chosen<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb1-6" title="6"><span class="op">,</span> <span class="va">document</span>.<span class="at">getElementById</span>(<span class="st">&#39;example&#39;</span>))<span class="op">;</span></a></code></pre></div>
+<h2 id="jsx-and-es6-template-strings">JSX and ES6 Template Strings</h2>
+<p><a href="http://domenicdenicola.com/">Domenic Denicola</a> wrote a slide deck about the great applications of ES6 features and one slide shows how we could use Template Strings to compile JSX at run-time without the need for a pre-processing phase.</p>
+<figure>
+<iframe src="https://www.slideshare.net/slideshow/embed_code/24187146?rel=0&amp;startSlide=36" width="100%" height="356" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC;border-width:1px 1px 0;margin-bottom:5px" allowfullscreen webkitallowfullscreen mozallowfullscreen>
+</iframe>
+</figure>
+<h2 id="react-presentation">React Presentation</h2>
+<p><a href="http://tomocchino.com/">Tom Occhino</a> and <a href="https://github.com/jordwalke">Jordan Walke</a>, React developers, did a presentation of React at Facebook Seattle’s office. Check out the first 25 minutes for the presentation and the remaining 45 for a Q&amp;A. I highly recommend you watching this video.</p>
+<figure>
+<iframe width="650" height="400" src="//www.youtube-nocookie.com/embed/XxVg_s8xAms" frameborder="0" allowfullscreen>
+</iframe>
+</figure>
+<h2 id="docs">Docs</h2>
+<p><a href="http://www.petehunt.net/">Pete Hunt</a> rewrote the entirety of the docs for v0.4. The goal was to add more explanation about why we built React and what the best practices are.</p>
+<blockquote>
+<p>Guides</p>
+<ul>
+<li><a href="/docs/why-react.html">Why React?</a></li>
+<li><a href="/docs/displaying-data.html">Displaying Data</a>
+<ul>
+<li><a href="/docs/jsx-in-depth.html">JSX in Depth</a></li>
+<li><a href="/docs/jsx-gotchas.html">JSX Gotchas</a></li>
+</ul></li>
+<li><a href="/docs/interactivity-and-dynamic-uis.html">Interactivity and Dynamic UIs</a></li>
+<li><a href="/docs/multiple-components.html">Multiple Components</a></li>
+<li><a href="/docs/reusable-components.html">Reusable Components</a></li>
+<li><a href="/docs/forms.html">Forms</a></li>
+<li><a href="/docs/working-with-the-browser.html">Working With the Browser</a>
+<ul>
+<li><a href="/docs/more-about-refs.html">More About Refs</a></li>
+</ul></li>
+<li><a href="/docs/tooling-integration.html">Tooling integration</a></li>
+<li><a href="/docs/top-level-api.html">Reference</a></li>
+</ul>
+</blockquote>
+</body>
+</html>

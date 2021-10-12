@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="zpao" />
+  <title>React v0.14.2</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">React v0.14.2</h1>
+<p class="author">zpao</p>
+</header>
+<p>We have a quick update following the release of 0.14.1 last week. It turns out we broke a couple things in the development build of React when using Internet Explorer. Luckily it was only the development build, so your production applications were unaffected. This release is mostly to address those issues. There is one notable change if consuming React from npm. For the <code>react-dom</code> package, we moved <code>react</code> from a regular dependency to a peer dependency. This will impact very few people as these two are typically installed together at the top level, but it will fix some issues with dependencies of installed components also using <code>react</code> as a peer dependency.</p>
+<p>The release is now available for download:</p>
+<ul>
+<li><strong>React</strong><br />
+Dev build with warnings: <a href="https://fb.me/react-0.14.2.js" class="uri">https://fb.me/react-0.14.2.js</a><br />
+Minified build for production: <a href="https://fb.me/react-0.14.2.min.js" class="uri">https://fb.me/react-0.14.2.min.js</a><br />
+</li>
+<li><strong>React with Add-Ons</strong><br />
+Dev build with warnings: <a href="https://fb.me/react-with-addons-0.14.2.js" class="uri">https://fb.me/react-with-addons-0.14.2.js</a><br />
+Minified build for production: <a href="https://fb.me/react-with-addons-0.14.2.min.js" class="uri">https://fb.me/react-with-addons-0.14.2.min.js</a><br />
+</li>
+<li><strong>React DOM</strong> (include React in the page before React DOM)<br />
+Dev build with warnings: <a href="https://fb.me/react-dom-0.14.2.js" class="uri">https://fb.me/react-dom-0.14.2.js</a><br />
+Minified build for production: <a href="https://fb.me/react-dom-0.14.2.min.js" class="uri">https://fb.me/react-dom-0.14.2.min.js</a></li>
+</ul>
+<p>We’ve also published version <code>0.14.2</code> of the <code>react</code>, <code>react-dom</code>, and addons packages on npm and the <code>react</code> package on bower.</p>
+<hr />
+<h2 id="changelog">Changelog</h2>
+<h3 id="react-dom">React DOM</h3>
+<ul>
+<li>Fixed bug with development build preventing events from firing in some versions of Internet Explorer &amp; Edge</li>
+<li>Fixed bug with development build when using es5-sham in older versions of Internet Explorer</li>
+<li>Added support for <code>integrity</code> attribute</li>
+<li>Fixed bug resulting in <code>children</code> prop being coerced to a string for custom elements, which was not the desired behavior.</li>
+<li>Moved <code>react</code> from <code>dependencies</code> to <code>peerDependencies</code> to match expectations and align with <code>react-addons-*</code> packages</li>
+</ul>
+</body>
+</html>

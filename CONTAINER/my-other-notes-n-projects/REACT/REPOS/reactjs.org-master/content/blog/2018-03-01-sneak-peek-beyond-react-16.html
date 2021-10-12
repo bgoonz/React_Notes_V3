@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="sophiebits" />
+  <title>Sneak Peek: Beyond React 16</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Sneak Peek: Beyond React 16</h1>
+<p class="author">sophiebits</p>
+</header>
+<p><a href="https://twitter.com/dan_abramov">Dan Abramov</a> from our team just spoke at <a href="https://2018.jsconf.is/">JSConf Iceland 2018</a> with a preview of some new features we’ve been working on in React. The talk opens with a question: “With vast differences in computing power and network speed, how do we deliver the best user experience for everyone?”</p>
+<p>Here’s the video courtesy of JSConf Iceland:</p>
+<p><br></p>
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/nLF0n9SACd4?rel=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen>
+</iframe>
+<p>I think you’ll enjoy the talk more if you stop reading here and just watch the video. If you don’t have time to watch, a (very) brief summary follows.</p>
+<h2 id="about-the-two-demos">About the Two Demos</h2>
+<p>On the first demo, Dan says: “We’ve built a generic way to ensure that high-priority updates don’t get blocked by a low-priority update, called <strong>time slicing</strong>. If my device is fast enough, it feels almost like it’s synchronous; if my device is slow, the app still feels responsive. It adapts to the device thanks to the <a href="https://developers.google.com/web/updates/2015/08/using-requestidlecallback">requestIdleCallback</a> API. Notice that only the final state was displayed; the rendered screen is always consistent and we don’t see visual artifacts of slow rendering causing a janky user experience.”</p>
+<p>On the second demo, Dan explains: “We’ve built a generic way for components to suspend rendering while they load async data, which we call <strong>suspense</strong>. You can pause any state update until the data is ready, and you can add async loading to any component deep in the tree without plumbing all the props and state through your app and hoisting the logic. On a fast network, updates appear very fluid and instantaneous without a jarring cascade of spinners that appear and disappear. On a slow network, you can intentionally design which loading states the user should see and how granular or coarse they should be, instead of showing spinners based on how the code is written. The app stays responsive throughout.”</p>
+<p>“Importantly, this is still the React you know. This is still the declarative component paradigm that you probably like about React.”</p>
+<p>We can’t wait to release these new async rendering features later this year. Follow this blog and <span class="citation" data-cites="reactjs">[@reactjs on Twitter]</span>(https://twitter.com/reactjs) for updates.</p>
+</body>
+</html>

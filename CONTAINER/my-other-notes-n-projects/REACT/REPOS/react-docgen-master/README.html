@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>README</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<h1 id="react-docgen-build-status">react-docgen <a href="https://travis-ci.org/reactjs/react-docgen"><img src="https://travis-ci.org/reactjs/react-docgen.svg?branch=master" alt="Build Status" /></a></h1>
+<p><code>react-docgen</code> is a CLI and toolbox to help extracting information from <a href="http://facebook.github.io/react/">React</a> components, and generate documentation from it.</p>
+<p>It uses <a href="https://github.com/benjamn/ast-types">ast-types</a> and <span class="citation" data-cites="babel/parser">[@babel/parser]</span>[] to parse the source into an AST and provides methods to process this AST to extract the desired information. The output / return value is a JSON blob / JavaScript object.</p>
+<p>It provides a default implementation for React components defined via <code>React.createClass</code>, [ES2015 class definitions][classes] or functions (stateless components). These component definitions must follow certain guidelines in order to be analyzable (see below for more info).</p>
+<blockquote>
+<p>react-docgen is a low level tool to extract information about react components. If you are searching for a more high level styleguide with nice interface try <a href="https://github.com/styleguidist/react-styleguidist">react-styleguidist</a> or any of the other tools listed in the <a href="https://github.com/reactjs/react-docgen/wiki">wiki</a>.</p>
+</blockquote>
+<h2 id="install">Install</h2>
+<p>Install the module with yarn or npm:</p>
+<pre><code>yarn add react-docgen --dev</code></pre>
+<pre><code>npm install --save-dev react-docgen</code></pre>
+<h2 id="cli">CLI</h2>
+<p>Installing the module adds a <code>react-docgen</code> executable which allows you to convert a single file, multiple files or an input stream. We are trying to make the executable as versatile as possible so that it can be integrated into many workflows.</p>
+<pre><code>Usage: react-docgen [path]... [options]
+
+path     A component file or directory. If no path is provided it reads from stdin.
+
+Options:
+   -o FILE, --out FILE   store extracted information in FILE
+   --pretty              pretty print JSON
+   -x, --extension       File extensions to consider. Repeat to define multiple extensions. Default:  [js,jsx]
+   -e, --exclude         Filename pattern to exclude. Default:  []
+   -i, --ignore          Folders to ignore. Default:  [node_modules,__tests__,__mocks__]
+   --resolver RESOLVER   Resolver name (findAllComponentDefinitions, findExportedComponentDefinition) or
+      path to a module that exports a resolver.  [findExportedComponentDefinition]
+
+Extract meta information from React components.
+If a directory is passed, it is recursively traversed.</code></pre>
+<p>By default, <code>react-docgen</code> will look for the exported component created through <code>React.createClass</code>, a class definition or a function (stateless component) in each file. You can change that behavior with the <code>--resolver</code> option, which either expects the name of a built-in resolver or a path to JavaScript module exporting a resolver function. Have a look below for <a href="#resolver">more information about resolvers</a>.</p>
+<p>Have a look at <code>example/</code> for an example of how to use the result to generate a markdown version of the documentation.</p>
+<p><code>react-docgen</code> will look for a babel configuration and use it if available. If no config file is found it will fallback to a default configuration, enabling all <a href="https://babeljs.io/docs/en/babel-parser#plugins">syntax extension</a> of the babel-parser.</p>
+<h2 id="api">API</h2>
+<p>The tool can be used programmatically to extract component information and customize the extraction process:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb4-1" title="1"><span class="kw">var</span> reactDocs <span class="op">=</span> <span class="at">require</span>(<span class="st">&#39;react-docgen&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb4-2" title="2"><span class="kw">var</span> componentInfo <span class="op">=</span> <span class="va">reactDocs</span>.<span class="at">parse</span>(src)<span class="op">;</span></a></code></pre></div>
+<p>As with the CLI, this will look for the exported component created through <code>React.createClass</code> or a class definition in the provided source. The whole process of analyzing the source code is separated into two parts:</p>
+<ul>
+<li>Locating/finding the nodes in the AST which define the component</li>
+<li>Extracting information from those nodes</li>
+</ul>
+<p><code>parse</code> accepts more arguments with which this behavior can be customized.</p>
+<h3 id="parsesource-resolver-handlers-options">parse(source [, resolver [, handlers [, options]]])</h3>
+<h4 id="source">source</h4>
+<p>Type: <code>string | Buffer</code></p>
+<p>The source text that react-docgen will try to extract the documentation from.</p>
+<h4 id="resolver">resolver</h4>
+<p>Type: <code>(ast: ASTNode, parser: { parse: (string) =&gt; ASTNode }) =&gt; (NodePath | Array&lt;NodePath&gt;)</code></p>
+<p>Given an AST and a reference to the parser, it returns an (array of) NodePath which represents the component definition.</p>
+<p><em>Built-in resolvers are available under the <code>resolver</code> property, e.g. <code>reactDocs.parse(src, reactDocgen.resolver.findAllComponentDefinitions)</code></em></p>
+<h4 id="handlers">handlers</h4>
+<p>Type: <code>Array&lt;(documentation: Documentation, definition: NodePath, parser: { parse: (string) =&gt; ASTNode }) =&gt; void&gt;</code></p>
+<p>Each function is called with a <code>Documentation</code> object, a reference to the component definition as returned by a <code>resolver</code> and a reference to the parser. Handlers extract relevant information from the definition and augment <code>documentation</code>.</p>
+<h4 id="options">options</h4>
+<h5 id="filename">∙ filename</h5>
+<p>Type: <code>string</code></p>
+<p>The absolute path to the file associated with the code currently being parsed, if there is one. This is used to search for the correct babel config.</p>
+<p>This option is optional, but it is highly recommended to set it when integrating <code>react-docgen</code>.</p>
+<h5 id="cwd">∙ cwd</h5>
+<p>Type: <code>string</code> Default: <code>process.cwd()</code></p>
+<p>The working directory that babel configurations will be searched in.</p>
+<h5 id="babelrc-babelrcroots-root-rootmode-configfile-envname">∙ babelrc, babelrcRoots, root, rootMode, configFile, envName</h5>
+<p>Type: <code>boolean</code> Default: <code>true</code></p>
+<p>These options, will be passed directly to <code>babel</code> for locating and resolving a local config or babelrc. To see documentation for each option consult the <a href="https://babeljs.io/docs/en/options#config-loading-options">babel website</a>.</p>
+<h5 id="parseroptions">∙ parserOptions</h5>
+<p>Type: <code>BabelParserOptions</code></p>
+<p>This options will be directly supplied to <code>@babel/parser</code>. To see a list of supported options head over to the <a href="https://babeljs.io/docs/en/babel-parser#options">babel website</a> and have a look.</p>
+<h4 id="resolver-1">resolver</h4>
+<p>The resolver’s task is to extract those parts from the source code which the handlers can analyze. For example, the <code>findExportedComponentDefinition</code> resolver inspects the AST to find</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb5-1" title="1"><span class="kw">var</span> Component <span class="op">=</span> <span class="va">React</span>.<span class="at">createClass</span>(<span class="op">&lt;</span>def<span class="op">&gt;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb5-2" title="2"><span class="va">module</span>.<span class="at">exports</span> <span class="op">=</span> Component<span class="op">;</span></a>
+<a class="sourceLine" id="cb5-3" title="3"></a>
+<a class="sourceLine" id="cb5-4" title="4"><span class="co">// or</span></a>
+<a class="sourceLine" id="cb5-5" title="5"></a>
+<a class="sourceLine" id="cb5-6" title="6"><span class="kw">class</span> Component <span class="kw">extends</span> <span class="va">React</span>.<span class="at">Component</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb5-7" title="7">  <span class="co">// ...</span></a>
+<a class="sourceLine" id="cb5-8" title="8"><span class="op">}</span></a>
+<a class="sourceLine" id="cb5-9" title="9"><span class="va">module</span>.<span class="at">exports</span> <span class="op">=</span> Component<span class="op">;</span></a></code></pre></div>
+<p>and returns the ObjectExpression to which <code>&lt;def&gt;</code> resolves to, or the class declaration itself.</p>
+<p><code>findAllComponentDefinitions</code> works similarly, but finds <em>all</em> <code>React.createClass</code> calls and class definitions, not only the one that is exported.</p>
+<p>This makes it easy, together with the utility methods created to analyze the AST, to introduce new or custom resolver methods. For example, a resolver could look for plain ObjectExpressions with a <code>render</code> method.</p>
+<h4 id="handlers-1">handlers</h4>
+<p>Handlers do the actual work and extract the desired information from the result the resolver returned. Like the resolver, they try to delegate as much work as possible to the reusable utility functions.</p>
+<p>For example, while the <code>propTypesHandler</code> expects the prop types definition to be an ObjectExpression and be available as <code>propTypes</code> in the component definition, most of the work is actually performed by the <code>getPropType</code> utility function.</p>
+<blockquote>
+<p>There are some community created handlers available. Have a look at the wiki for a list: https://github.com/reactjs/react-docgen/wiki</p>
+</blockquote>
+<h2 id="guidelines-for-default-resolvers-and-handlers">Guidelines for default resolvers and handlers</h2>
+<ul>
+<li>Modules have to export a single component, and only that component is analyzed.</li>
+<li>When using <code>React.createClass</code>, the component definition (the value passed to it) must resolve to an object literal.</li>
+<li>When using classes, the class must either <code>extend React.Component</code> <em>or</em> define a <code>render()</code> method.</li>
+<li><code>propTypes</code> must be an object literal or resolve to an object literal in the same file.</li>
+<li>The <code>return</code> statement in <code>getDefaultProps</code> must contain an object literal.</li>
+</ul>
+<h2 id="proptypes">PropTypes</h2>
+<h3 id="example">Example</h3>
+<p>For the following component</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb6-1" title="1"><span class="im">import</span> React<span class="op">,</span> <span class="op">{</span> Component <span class="op">}</span> <span class="im">from</span> <span class="st">&#39;react&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb6-2" title="2"><span class="im">import</span> PropTypes <span class="im">from</span> <span class="st">&#39;prop-types&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb6-3" title="3"></a>
+<a class="sourceLine" id="cb6-4" title="4"><span class="co">/**</span></a>
+<a class="sourceLine" id="cb6-5" title="5"><span class="co"> * General component description.</span></a>
+<a class="sourceLine" id="cb6-6" title="6"><span class="co"> */</span></a>
+<a class="sourceLine" id="cb6-7" title="7"><span class="kw">class</span> MyComponent <span class="kw">extends</span> Component <span class="op">{</span></a>
+<a class="sourceLine" id="cb6-8" title="8">  <span class="at">render</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb6-9" title="9">    <span class="co">// ...</span></a>
+<a class="sourceLine" id="cb6-10" title="10">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb6-11" title="11"><span class="op">}</span></a>
+<a class="sourceLine" id="cb6-12" title="12"></a>
+<a class="sourceLine" id="cb6-13" title="13"><span class="va">MyComponent</span>.<span class="at">propTypes</span> <span class="op">=</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb6-14" title="14">  <span class="co">/**</span></a>
+<a class="sourceLine" id="cb6-15" title="15"><span class="co">   * Description of prop &quot;foo&quot;.</span></a>
+<a class="sourceLine" id="cb6-16" title="16"><span class="co">   */</span></a>
+<a class="sourceLine" id="cb6-17" title="17">  <span class="dt">foo</span><span class="op">:</span> <span class="va">PropTypes</span>.<span class="va">number</span>.<span class="at">isRequired</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb6-18" title="18">  <span class="co">/**</span></a>
+<a class="sourceLine" id="cb6-19" title="19"><span class="co">   * Description of prop &quot;bar&quot; (a custom validation function).</span></a>
+<a class="sourceLine" id="cb6-20" title="20"><span class="co">   */</span></a>
+<a class="sourceLine" id="cb6-21" title="21">  <span class="dt">bar</span><span class="op">:</span> <span class="kw">function</span>(props<span class="op">,</span> propName<span class="op">,</span> componentName) <span class="op">{</span></a>
+<a class="sourceLine" id="cb6-22" title="22">    <span class="co">// ...</span></a>
+<a class="sourceLine" id="cb6-23" title="23">  <span class="op">},</span></a>
+<a class="sourceLine" id="cb6-24" title="24">  <span class="dt">baz</span><span class="op">:</span> <span class="va">PropTypes</span>.<span class="at">oneOfType</span>([<span class="va">PropTypes</span>.<span class="at">number</span><span class="op">,</span> <span class="va">PropTypes</span>.<span class="at">string</span>])<span class="op">,</span></a>
+<a class="sourceLine" id="cb6-25" title="25"><span class="op">};</span></a>
+<a class="sourceLine" id="cb6-26" title="26"></a>
+<a class="sourceLine" id="cb6-27" title="27"><span class="va">MyComponent</span>.<span class="at">defaultProps</span> <span class="op">=</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb6-28" title="28">  <span class="dt">bar</span><span class="op">:</span> <span class="dv">21</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb6-29" title="29"><span class="op">};</span></a>
+<a class="sourceLine" id="cb6-30" title="30"></a>
+<a class="sourceLine" id="cb6-31" title="31"><span class="im">export</span> <span class="im">default</span> MyComponent<span class="op">;</span></a></code></pre></div>
+<p>we are getting this output:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb7-1" title="1"><span class="fu">{</span></a>
+<a class="sourceLine" id="cb7-2" title="2">  <span class="dt">&quot;props&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb7-3" title="3">    <span class="dt">&quot;foo&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb7-4" title="4">      <span class="dt">&quot;type&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb7-5" title="5">        <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;number&quot;</span></a>
+<a class="sourceLine" id="cb7-6" title="6">      <span class="fu">},</span></a>
+<a class="sourceLine" id="cb7-7" title="7">      <span class="dt">&quot;required&quot;</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb7-8" title="8">      <span class="dt">&quot;description&quot;</span><span class="fu">:</span> <span class="st">&quot;Description of prop </span><span class="ch">\&quot;</span><span class="st">foo</span><span class="ch">\&quot;</span><span class="st">.&quot;</span></a>
+<a class="sourceLine" id="cb7-9" title="9">    <span class="fu">},</span></a>
+<a class="sourceLine" id="cb7-10" title="10">    <span class="dt">&quot;bar&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb7-11" title="11">      <span class="dt">&quot;type&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb7-12" title="12">        <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;custom&quot;</span></a>
+<a class="sourceLine" id="cb7-13" title="13">      <span class="fu">},</span></a>
+<a class="sourceLine" id="cb7-14" title="14">      <span class="dt">&quot;required&quot;</span><span class="fu">:</span> <span class="kw">false</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb7-15" title="15">      <span class="dt">&quot;description&quot;</span><span class="fu">:</span> <span class="st">&quot;Description of prop </span><span class="ch">\&quot;</span><span class="st">bar</span><span class="ch">\&quot;</span><span class="st"> (a custom validation function).&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb7-16" title="16">      <span class="dt">&quot;defaultValue&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb7-17" title="17">        <span class="dt">&quot;value&quot;</span><span class="fu">:</span> <span class="st">&quot;21&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb7-18" title="18">        <span class="dt">&quot;computed&quot;</span><span class="fu">:</span> <span class="kw">false</span></a>
+<a class="sourceLine" id="cb7-19" title="19">      <span class="fu">}</span></a>
+<a class="sourceLine" id="cb7-20" title="20">    <span class="fu">},</span></a>
+<a class="sourceLine" id="cb7-21" title="21">    <span class="dt">&quot;baz&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb7-22" title="22">      <span class="dt">&quot;type&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb7-23" title="23">        <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;union&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb7-24" title="24">        <span class="dt">&quot;value&quot;</span><span class="fu">:</span> <span class="ot">[</span></a>
+<a class="sourceLine" id="cb7-25" title="25">          <span class="fu">{</span></a>
+<a class="sourceLine" id="cb7-26" title="26">            <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;number&quot;</span></a>
+<a class="sourceLine" id="cb7-27" title="27">          <span class="fu">}</span><span class="ot">,</span></a>
+<a class="sourceLine" id="cb7-28" title="28">          <span class="fu">{</span></a>
+<a class="sourceLine" id="cb7-29" title="29">            <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;string&quot;</span></a>
+<a class="sourceLine" id="cb7-30" title="30">          <span class="fu">}</span></a>
+<a class="sourceLine" id="cb7-31" title="31">        <span class="ot">]</span></a>
+<a class="sourceLine" id="cb7-32" title="32">      <span class="fu">},</span></a>
+<a class="sourceLine" id="cb7-33" title="33">      <span class="dt">&quot;required&quot;</span><span class="fu">:</span> <span class="kw">false</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb7-34" title="34">      <span class="dt">&quot;description&quot;</span><span class="fu">:</span> <span class="st">&quot;&quot;</span></a>
+<a class="sourceLine" id="cb7-35" title="35">    <span class="fu">}</span></a>
+<a class="sourceLine" id="cb7-36" title="36">  <span class="fu">},</span></a>
+<a class="sourceLine" id="cb7-37" title="37">  <span class="dt">&quot;description&quot;</span><span class="fu">:</span> <span class="st">&quot;General component description.&quot;</span></a>
+<a class="sourceLine" id="cb7-38" title="38"><span class="fu">}</span></a></code></pre></div>
+<h2 id="flow-and-typescript-support">Flow and TypeScript support</h2>
+<p>If you are using <a href="http://flowtype.org/">flow</a> or <a href="http://typescriptlang.org/">typescript</a> then react-docgen can also extract the type annotations. As flow and typescript have way more advanced and fine granular type systems, the returned types from react-docgen are different in comparison when using <code>React.PropTypes</code>.</p>
+<blockquote>
+<p><strong>Note</strong>: react-docgen will not be able to grab the type definition if the type is imported or declared in a different file.</p>
+</blockquote>
+<h3 id="example-1">Example</h3>
+<p>For the following component with Flow types</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb8-1" title="1"><span class="im">import</span> React<span class="op">,</span> <span class="op">{</span> Component <span class="op">}</span> <span class="im">from</span> <span class="st">&#39;react&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb8-2" title="2"></a>
+<a class="sourceLine" id="cb8-3" title="3">type Props <span class="op">=</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb8-4" title="4">  <span class="co">/** Description of prop &quot;foo&quot;. */</span></a>
+<a class="sourceLine" id="cb8-5" title="5">  <span class="dt">primitive</span><span class="op">:</span> number<span class="op">,</span></a>
+<a class="sourceLine" id="cb8-6" title="6">  <span class="co">/** Description of prop &quot;bar&quot;. */</span></a>
+<a class="sourceLine" id="cb8-7" title="7">  <span class="dt">literalsAndUnion</span><span class="op">:</span> <span class="st">&#39;string&#39;</span> <span class="op">|</span> <span class="st">&#39;otherstring&#39;</span> <span class="op">|</span> number<span class="op">,</span></a>
+<a class="sourceLine" id="cb8-8" title="8">  <span class="dt">arr</span><span class="op">:</span> Array<span class="op">&lt;</span>any<span class="op">&gt;,</span></a>
+<a class="sourceLine" id="cb8-9" title="9">  func<span class="op">?</span>: (<span class="dt">value</span><span class="op">:</span> string) <span class="kw">=&gt;</span> <span class="kw">void</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb8-10" title="10">  noParameterName<span class="op">?</span>: string <span class="kw">=&gt;</span> <span class="kw">void</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb8-11" title="11">  obj<span class="op">?</span>: <span class="op">{</span> <span class="dt">subvalue</span><span class="op">:</span> <span class="op">?</span>boolean }<span class="op">,</span></a>
+<a class="sourceLine" id="cb8-12" title="12">}<span class="op">;</span></a>
+<a class="sourceLine" id="cb8-13" title="13"></a>
+<a class="sourceLine" id="cb8-14" title="14"><span class="co">/**</span></a>
+<a class="sourceLine" id="cb8-15" title="15"><span class="co"> * General component description.</span></a>
+<a class="sourceLine" id="cb8-16" title="16"><span class="co"> */</span></a>
+<a class="sourceLine" id="cb8-17" title="17"><span class="im">export</span> <span class="im">default</span> <span class="kw">class</span> MyComponent <span class="kw">extends</span> Component<span class="op">&lt;</span><span class="kw">void</span><span class="op">,</span> Props<span class="op">,</span> <span class="kw">void</span><span class="op">&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb8-18" title="18">  <span class="dt">props</span><span class="op">:</span> Props<span class="op">;</span></a>
+<a class="sourceLine" id="cb8-19" title="19"></a>
+<a class="sourceLine" id="cb8-20" title="20">  <span class="at">render</span>()<span class="op">:</span> <span class="op">?</span>ReactElement <span class="op">{</span></a>
+<a class="sourceLine" id="cb8-21" title="21">    <span class="co">// ...</span></a>
+<a class="sourceLine" id="cb8-22" title="22">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb8-23" title="23">}</a></code></pre></div>
+<p>we are getting this output:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb9-1" title="1"><span class="fu">{</span></a>
+<a class="sourceLine" id="cb9-2" title="2">  <span class="dt">&quot;description&quot;</span><span class="fu">:</span> <span class="st">&quot;General component description.&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb9-3" title="3">  <span class="dt">&quot;props&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb9-4" title="4">    <span class="dt">&quot;primitive&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb9-5" title="5">      <span class="dt">&quot;flowType&quot;</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;number&quot;</span> <span class="fu">},</span></a>
+<a class="sourceLine" id="cb9-6" title="6">      <span class="dt">&quot;required&quot;</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb9-7" title="7">      <span class="dt">&quot;description&quot;</span><span class="fu">:</span> <span class="st">&quot;Description of prop </span><span class="ch">\&quot;</span><span class="st">foo</span><span class="ch">\&quot;</span><span class="st">.&quot;</span></a>
+<a class="sourceLine" id="cb9-8" title="8">    <span class="fu">},</span></a>
+<a class="sourceLine" id="cb9-9" title="9">    <span class="dt">&quot;literalsAndUnion&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb9-10" title="10">      <span class="dt">&quot;flowType&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb9-11" title="11">        <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;union&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb9-12" title="12">        <span class="dt">&quot;raw&quot;</span><span class="fu">:</span> <span class="st">&quot;&#39;string&#39; | &#39;otherstring&#39; | number&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb9-13" title="13">        <span class="dt">&quot;elements&quot;</span><span class="fu">:</span> <span class="ot">[</span></a>
+<a class="sourceLine" id="cb9-14" title="14">          <span class="fu">{</span> <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;literal&quot;</span><span class="fu">,</span> <span class="dt">&quot;value&quot;</span><span class="fu">:</span> <span class="st">&quot;&#39;string&#39;&quot;</span> <span class="fu">}</span><span class="ot">,</span></a>
+<a class="sourceLine" id="cb9-15" title="15">          <span class="fu">{</span> <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;literal&quot;</span><span class="fu">,</span> <span class="dt">&quot;value&quot;</span><span class="fu">:</span> <span class="st">&quot;&#39;otherstring&#39;&quot;</span> <span class="fu">}</span><span class="ot">,</span></a>
+<a class="sourceLine" id="cb9-16" title="16">          <span class="fu">{</span> <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;number&quot;</span> <span class="fu">}</span></a>
+<a class="sourceLine" id="cb9-17" title="17">        <span class="ot">]</span></a>
+<a class="sourceLine" id="cb9-18" title="18">      <span class="fu">},</span></a>
+<a class="sourceLine" id="cb9-19" title="19">      <span class="dt">&quot;required&quot;</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb9-20" title="20">      <span class="dt">&quot;description&quot;</span><span class="fu">:</span> <span class="st">&quot;Description of prop </span><span class="ch">\&quot;</span><span class="st">bar</span><span class="ch">\&quot;</span><span class="st">.&quot;</span></a>
+<a class="sourceLine" id="cb9-21" title="21">    <span class="fu">},</span></a>
+<a class="sourceLine" id="cb9-22" title="22">    <span class="dt">&quot;arr&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb9-23" title="23">      <span class="dt">&quot;flowType&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb9-24" title="24">        <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;Array&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb9-25" title="25">        <span class="dt">&quot;elements&quot;</span><span class="fu">:</span> <span class="ot">[</span><span class="fu">{</span> <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;any&quot;</span> <span class="fu">}</span><span class="ot">]</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb9-26" title="26">        <span class="dt">&quot;raw&quot;</span><span class="fu">:</span> <span class="st">&quot;Array&lt;any&gt;&quot;</span></a>
+<a class="sourceLine" id="cb9-27" title="27">      <span class="fu">},</span></a>
+<a class="sourceLine" id="cb9-28" title="28">      <span class="dt">&quot;required&quot;</span><span class="fu">:</span> <span class="kw">true</span></a>
+<a class="sourceLine" id="cb9-29" title="29">    <span class="fu">},</span></a>
+<a class="sourceLine" id="cb9-30" title="30">    <span class="dt">&quot;func&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb9-31" title="31">      <span class="dt">&quot;flowType&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb9-32" title="32">        <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;signature&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb9-33" title="33">        <span class="dt">&quot;type&quot;</span><span class="fu">:</span> <span class="st">&quot;function&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb9-34" title="34">        <span class="dt">&quot;raw&quot;</span><span class="fu">:</span> <span class="st">&quot;(value: string) =&gt; void&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb9-35" title="35">        <span class="dt">&quot;signature&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb9-36" title="36">          <span class="dt">&quot;arguments&quot;</span><span class="fu">:</span> <span class="ot">[</span><span class="fu">{</span> <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;value&quot;</span><span class="fu">,</span> <span class="dt">&quot;type&quot;</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;string&quot;</span> <span class="fu">}</span> <span class="fu">}</span><span class="ot">]</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb9-37" title="37">          <span class="dt">&quot;return&quot;</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;void&quot;</span> <span class="fu">}</span></a>
+<a class="sourceLine" id="cb9-38" title="38">        <span class="fu">}</span></a>
+<a class="sourceLine" id="cb9-39" title="39">      <span class="fu">},</span></a>
+<a class="sourceLine" id="cb9-40" title="40">      <span class="dt">&quot;required&quot;</span><span class="fu">:</span> <span class="kw">false</span></a>
+<a class="sourceLine" id="cb9-41" title="41">    <span class="fu">},</span></a>
+<a class="sourceLine" id="cb9-42" title="42">    <span class="dt">&quot;noParameterName&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb9-43" title="43">      <span class="dt">&quot;flowType&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb9-44" title="44">        <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;signature&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb9-45" title="45">        <span class="dt">&quot;type&quot;</span><span class="fu">:</span> <span class="st">&quot;function&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb9-46" title="46">        <span class="dt">&quot;raw&quot;</span><span class="fu">:</span> <span class="st">&quot;string =&gt; void&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb9-47" title="47">        <span class="dt">&quot;signature&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb9-48" title="48">          <span class="dt">&quot;arguments&quot;</span><span class="fu">:</span> <span class="ot">[</span><span class="fu">{</span> <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;&quot;</span><span class="fu">,</span> <span class="dt">&quot;type&quot;</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;string&quot;</span> <span class="fu">}</span> <span class="fu">}</span><span class="ot">]</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb9-49" title="49">          <span class="dt">&quot;return&quot;</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;void&quot;</span> <span class="fu">}</span></a>
+<a class="sourceLine" id="cb9-50" title="50">        <span class="fu">}</span></a>
+<a class="sourceLine" id="cb9-51" title="51">      <span class="fu">},</span></a>
+<a class="sourceLine" id="cb9-52" title="52">      <span class="dt">&quot;required&quot;</span><span class="fu">:</span> <span class="kw">false</span></a>
+<a class="sourceLine" id="cb9-53" title="53">    <span class="fu">},</span></a>
+<a class="sourceLine" id="cb9-54" title="54">    <span class="dt">&quot;obj&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb9-55" title="55">      <span class="dt">&quot;flowType&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb9-56" title="56">        <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;signature&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb9-57" title="57">        <span class="dt">&quot;type&quot;</span><span class="fu">:</span> <span class="st">&quot;object&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb9-58" title="58">        <span class="dt">&quot;raw&quot;</span><span class="fu">:</span> <span class="st">&quot;{ subvalue: ?boolean }&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb9-59" title="59">        <span class="dt">&quot;signature&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb9-60" title="60">          <span class="dt">&quot;properties&quot;</span><span class="fu">:</span> <span class="ot">[</span></a>
+<a class="sourceLine" id="cb9-61" title="61">            <span class="fu">{</span></a>
+<a class="sourceLine" id="cb9-62" title="62">              <span class="dt">&quot;key&quot;</span><span class="fu">:</span> <span class="st">&quot;subvalue&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb9-63" title="63">              <span class="dt">&quot;value&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb9-64" title="64">                <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;boolean&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb9-65" title="65">                <span class="dt">&quot;nullable&quot;</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb9-66" title="66">                <span class="dt">&quot;required&quot;</span><span class="fu">:</span> <span class="kw">true</span></a>
+<a class="sourceLine" id="cb9-67" title="67">              <span class="fu">}</span></a>
+<a class="sourceLine" id="cb9-68" title="68">            <span class="fu">}</span></a>
+<a class="sourceLine" id="cb9-69" title="69">          <span class="ot">]</span></a>
+<a class="sourceLine" id="cb9-70" title="70">        <span class="fu">}</span></a>
+<a class="sourceLine" id="cb9-71" title="71">      <span class="fu">},</span></a>
+<a class="sourceLine" id="cb9-72" title="72">      <span class="dt">&quot;required&quot;</span><span class="fu">:</span> <span class="kw">false</span></a>
+<a class="sourceLine" id="cb9-73" title="73">    <span class="fu">}</span></a>
+<a class="sourceLine" id="cb9-74" title="74">  <span class="fu">}</span></a>
+<a class="sourceLine" id="cb9-75" title="75"><span class="fu">}</span></a></code></pre></div>
+<h3 id="types">Types</h3>
+<p>Here is a list of all the available types and its result structure.</p>
+<table>
+<colgroup>
+<col style="width: 8%" />
+<col style="width: 35%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>Examples</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Simple</td>
+<td><code>let x: string;</code><br /><code>let x: number;</code><br /><code>let x: boolean;</code><br /><code>let x: any;</code><br /><code>let x: void;</code><br /><code>let x: Object;</code><br /><code>let x: String;</code><br /><code>let x: MyClass;</code></td>
+<td><code>{ "name": "&lt;type&gt;" }</code></td>
+</tr>
+<tr class="even">
+<td>Literals</td>
+<td><code>let x: 'foo';</code><br /><code>let x: 1;</code><br /><code>let x: true;</code></td>
+<td><code>{ "name": "literal", "value": "&lt;rawvalue&gt;" }</code></td>
+</tr>
+<tr class="odd">
+<td>Typed Classes</td>
+<td><code>let x: Array&lt;foo&gt;;</code><br /><code>let x: Class&lt;foo&gt;;</code><br /><code>let x: MyClass&lt;bar&gt;;</code></td>
+<td><code>{ "name": "&lt;type&gt;", "elements": [{ &lt;element-type&gt; }, ...] }</code></td>
+</tr>
+<tr class="even">
+<td>Object Signature</td>
+<td><code>let x: { foo: string, bar?: mixed };</code><br /><code>let x: { [key: string]: string, foo: number };</code></td>
+<td><code>{ "name": "signature", "type": "object", "raw": "&lt;raw-signature&gt;", "signature": { "properties": [{ "key": "&lt;property-name&gt;"\|{ &lt;property-key-type&gt; }, "value": { &lt;property-type&gt;, "required": &lt;true/false&gt; } }, ...] } }</code></td>
+</tr>
+<tr class="odd">
+<td>Function Signature</td>
+<td><code>let x: (x: string) =&gt; void;</code></td>
+<td><code>{ "name": "signature", "type": "function", "raw": "&lt;raw-signature&gt;", "signature": { "arguments": [{ "name": "&lt;argument-name&gt;", "type": { &lt;argument-type&gt; } }, ...], "return": { &lt;return-type&gt; } } }</code></td>
+</tr>
+<tr class="even">
+<td>Callable-Object/Function-Object Signature</td>
+<td><code>let x: { (x: string): void, prop: string };</code></td>
+<td><code>{ "name": "signature", "type": "object", "raw": "&lt;raw-signature&gt;", "signature": { "properties": [{ "key": "&lt;property-name&gt;"\|{ &lt;property-key-type&gt; }, "value": { &lt;property-type&gt;, "required": &lt;true/false&gt; } }, ...], "constructor": { &lt;function-signature&gt; } } }</code></td>
+</tr>
+<tr class="odd">
+<td>Tuple</td>
+<td><code>let x: [foo, "value", number];</code></td>
+<td><code>{ "name": "tuple", "raw": "&lt;raw-signature&gt;", "elements": [{ &lt;element-type&gt; }, ...] }</code></td>
+</tr>
+<tr class="even">
+<td>Union</td>
+<td><code>let x: number \| string;</code></td>
+<td><code>{ "name": "union", "raw": "&lt;raw-signature&gt;", "elements": [{ &lt;element-type&gt; }, ...] }</code></td>
+</tr>
+<tr class="odd">
+<td>Intersect</td>
+<td><code>let x: number &amp; string;</code></td>
+<td><code>{ "name": "intersect", "raw": "&lt;raw-signature&gt;", "elements": [{ &lt;element-type&gt; }, ...] }</code></td>
+</tr>
+<tr class="even">
+<td>Nullable modifier</td>
+<td><code>let x: ?number;</code></td>
+<td><code>{ "name": "number", "nullable": true }</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="result-data-structure">Result data structure</h2>
+<p>The structure of the JSON blob / JavaScript object is as follows:</p>
+<pre><code>{
+  [&quot;description&quot;: string,]
+  [&quot;props&quot;: {
+    &quot;&lt;propName&gt;&quot;: {
+      &quot;type&quot;: {
+        &quot;name&quot;: &quot;&lt;typeName&gt;&quot;,
+        [&quot;value&quot;: &lt;typeValue&gt;]
+        [&quot;raw&quot;: string]
+      },
+      &quot;flowType&quot;: &lt;flowType&gt;,
+      &quot;tsType&quot;: &lt;tsType&gt;,
+      &quot;required&quot;: boolean,
+      &quot;description&quot;: string,
+      [&quot;defaultValue&quot;: {
+        &quot;value&quot;: string,
+        &quot;computed&quot;: boolean
+      }]
+    },
+    ...
+  },]
+  [&quot;composes&quot;: &lt;componentNames&gt;]
+}</code></pre>
+<p>(<code>[...]</code> means the property may not exist if such information was not found in the component definition)</p>
+<ul>
+<li><code>&lt;propName&gt;</code>: For each prop that was found, there will be an entry in <code>props</code> under the same name.</li>
+<li><code>&lt;typeName&gt;</code>: The name of the type, which is usually corresponds to the function name in <code>React.PropTypes</code>. However, for types define with <code>oneOf</code>, we use <code>"enum"</code> and for <code>oneOfType</code> we use <code>"union"</code>. If a custom function is provided or the type cannot be resolved to anything of <code>React.PropTypes</code>, we use <code>"custom"</code>.</li>
+<li><code>&lt;typeValue&gt;</code>: Some types accept parameters which define the type in more detail (such as <code>arrayOf</code>, <code>instanceOf</code>, <code>oneOf</code>, etc). Those are stored in <code>&lt;typeValue&gt;</code>. The data type of <code>&lt;typeValue&gt;</code> depends on the type definition.</li>
+<li><code>&lt;flowType&gt;</code>: If using flow type this property contains the parsed flow type as can be seen in the table above.</li>
+<li><code>&lt;tsType&gt;</code>: If using TypeScript type this property contains the parsed TypeScript type as can be seen in the table above.</li>
+</ul>
+<p><span class="citation" data-cites="babel/parser">[@babel/parser]</span>: https://github.com/babel/babel/tree/master/packages/babel-parser [classes]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes</p>
+</body>
+</html>

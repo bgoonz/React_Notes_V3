@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="LoukaN" />
+  <title>Community Round-up #23</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Community Round-up #23</h1>
+<p class="author">LoukaN</p>
+</header>
+<p>This round-up is a special edition on <a href="https://facebook.github.io/flux/">Flux</a>. If you expect to see diagrams showing arrows that all point in the same direction, you won’t be disappointed!</p>
+<h2 id="react-and-flux-at-forwardjs">React And Flux at ForwardJS</h2>
+<p>Facebook engineers <a href="https://github.com/jingc">Jing Chen</a> and <a href="https://github.com/fisherwebdev">Bill Fisher</a> gave a talk about Flux and React at <a href="http://forwardjs.com/">ForwardJS</a>, and how using an application architecture with a unidirectional data flow helped solve recurring bugs.</p>
+<iframe width="650" height="315" src="//www.youtube-nocookie.com/embed/i__969noyAM" frameborder="0" allowfullscreen>
+</iframe>
+<h1 id="yahoo">Yahoo</h1>
+<p>Yahoo is converting Yahoo Mail to React and Flux and in the process, they open sourced several components. This will help you get an isomorphic application up and running.</p>
+<ul>
+<li><a href="https://github.com/yahoo/flux-router-component">Flux Router Component</a></li>
+<li><a href="https://github.com/yahoo/dispatchr">Dispatchr</a></li>
+<li><a href="https://github.com/yahoo/fetchr">Fetchr</a></li>
+<li><a href="https://github.com/yahoo/flux-examples">Flux Examples</a></li>
+</ul>
+<h2 id="reflux">Reflux</h2>
+<p><a href="https://spoike.ghost.io/">Mikael Brassman</a> wrote <a href="https://github.com/spoike/refluxjs">Reflux</a>, a library that implements Flux concepts. Note that it diverges significantly from the way we use Flux at Facebook. He explains <a href="https://spoike.ghost.io/deconstructing-reactjss-flux/">the reasons why in a blog post</a>.</p>
+<center>
+<a href="https://spoike.ghost.io/deconstructing-reactjss-flux/"><img src="../images/blog/reflux-flux.png" width="400" /></a>
+</center>
+<h2 id="react-and-flux-interview">React and Flux Interview</h2>
+<p><a href="http://ianobermiller.com/">Ian Obermiller</a>, engineer at Facebook, <a href="http://ianobermiller.com/blog/2014/09/15/react-and-flux-interview/">made a lengthy interview</a> on the experience of using React and Flux in order to build probably the biggest React application ever written so far.</p>
+<blockquote>
+<p>I’ve actually said this many times to my team too, I love React. It’s really great for making these complex applications. One thing that really surprised me with it is that React combined with a sane module system like CommonJS, and making sure that you actually modulize your stuff properly has scaled really well to a team of almost 10 developers working on hundreds of files and tens of thousands of lines of code.</p>
+<p>Really, a fairly large code base… stuff just works. You don’t have to worry about mutating, and the state of the DOM just really makes stuff easy. Just conceptually it’s easier just to think about here’s what I have, here’s my data, here’s how it renders, I don’t care about anything else. For most cases that is really simplifying and makes it really fast to do stuff.</p>
+<p><a href="http://ianobermiller.com/blog/2014/09/15/react-and-flux-interview/">Read the full interview…</a></p>
+</blockquote>
+<h2 id="adobes-brackets-project-tree">Adobe’s Brackets Project Tree</h2>
+<p><a href="http://www.kevindangoor.com/">Kevin Dangoor</a> is converting the project tree of <a href="http://brackets.io/">Adobe’s Bracket text editor</a> to React and Flux. He wrote about his experience <a href="http://www.kevindangoor.com/2014/09/intro-to-the-new-brackets-project-tree/">using Flux</a>.</p>
+<center>
+<a href="http://www.kevindangoor.com/2014/09/intro-to-the-new-brackets-project-tree/"><img src="../images/blog/flux-diagram.png" width="400" /></a>
+</center>
+<h2 id="async-requests-with-flux-revisited">Async Requests with Flux Revisited</h2>
+<p><a href="http://www.code-experience.com/the-code-experience/">Reto Schläpfer</a> came back to a Flux project he hasn’t worked on for a month and <a href="http://www.code-experience.com/async-requests-with-react-js-and-flux-revisited/">saw many ways to improve the way he implemented Flux</a>. He summarized his learnings in a blog post.</p>
+<blockquote>
+<p>The smarter way is to call the Web Api directly from an Action Creator and then make the Api dispatch an event with the request result as a payload. The Store(s) can choose to listen on those request actions and change their state accordingly.</p>
+<p>Before I show some updated code snippets, let me explain why this is superior:</p>
+<ul>
+<li><p>There should be only one channel for all state changes: The Dispatcher. This makes debugging easy because it just requires a single console.log in the dispatcher to observe every single state change trigger.</p></li>
+<li><p>Asynchronously executed callbacks should not leak into Stores. The consequences of it are just too hard to fully foresee. This leads to elusive bugs. Stores should only execute synchronous code. Otherwise they are too hard to understand.</p></li>
+<li><p>Avoiding actions firing other actions makes your app simple. We use the newest Dispatcher implementation from Facebook that does not allow a new dispatch while dispatching. It forces you to do things right.</p></li>
+</ul>
+<p><a href="http://www.code-experience.com/async-requests-with-react-js-and-flux-revisited/">Read the full article…</a></p>
+</blockquote>
+<h2 id="undo-redo-with-immutable-data-structures">Undo-Redo with Immutable Data Structures</h2>
+<p><a href="https://github.com/ameyakarve">Ameya Karve</a> explained how to use <a href="https://github.com/swannodette/mori">Mori</a>, a library that provides immutable data structures, in order to <a href="http://ameyakarve.com/jekyll/update/2014/02/06/Undo-React-Flux-Mori.html">implement undo-redo</a>. This usually very challenging feature only takes a few lines of code with Flux!</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb1-1" title="1">undo<span class="op">:</span> <span class="kw">function</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb1-2" title="2">  <span class="kw">this</span>.<span class="at">redoStates</span> <span class="op">=</span> <span class="va">Mori</span>.<span class="at">conj</span>(<span class="kw">this</span>.<span class="at">redoStates</span><span class="op">,</span> <span class="va">Mori</span>.<span class="at">first</span>(<span class="kw">this</span>.<span class="at">undoStates</span>))<span class="op">;</span></a>
+<a class="sourceLine" id="cb1-3" title="3">  <span class="kw">this</span>.<span class="at">undoStates</span> <span class="op">=</span> <span class="va">Mori</span>.<span class="at">drop</span>(<span class="dv">1</span><span class="op">,</span> <span class="kw">this</span>.<span class="at">undoStates</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb1-4" title="4">  <span class="kw">this</span>.<span class="at">todosState</span> <span class="op">=</span> <span class="va">Mori</span>.<span class="at">first</span>(<span class="kw">this</span>.<span class="at">undoStates</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb1-5" title="5">  <span class="kw">this</span>.<span class="at">canUndo</span> <span class="op">=</span> <span class="va">Mori</span>.<span class="at">count</span>(<span class="kw">this</span>.<span class="at">undoStates</span>) <span class="op">&gt;</span> <span class="dv">1</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb1-6" title="6">  <span class="kw">this</span>.<span class="at">canRedo</span> <span class="op">=</span> <span class="kw">true</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb1-7" title="7">  <span class="cf">if</span> (<span class="va">Mori</span>.<span class="at">count</span>(<span class="kw">this</span>.<span class="at">undoStates</span>) <span class="op">&gt;</span> <span class="dv">1</span>) <span class="op">{</span></a>
+<a class="sourceLine" id="cb1-8" title="8">    <span class="kw">this</span>.<span class="at">todos</span> <span class="op">=</span> <span class="va">JSON</span>.<span class="at">parse</span>(<span class="kw">this</span>.<span class="at">todosState</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb1-9" title="9">  <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb1-10" title="10">    <span class="kw">this</span>.<span class="at">todos</span> <span class="op">=</span> []<span class="op">;</span></a>
+<a class="sourceLine" id="cb1-11" title="11">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb1-12" title="12">  <span class="kw">this</span>.<span class="at">emit</span>(<span class="st">&#39;change&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb1-13" title="13"><span class="op">},</span></a></code></pre></div>
+<h2 id="flux-in-practice">Flux in practice</h2>
+<p><a href="https://twitter.com/garychambers108">Gary Chambers</a> wrote a <a href="https://medium.com/@garychambers108/flux-in-practice-ec08daa9041a">guide to get started with Flux</a>. This is a very practical introduction to Flux.</p>
+<blockquote>
+<p>So, what does it actually mean to write an application in the Flux way? At that moment of inspiration, when faced with an empty text editor, how should you begin? This post follows the process of building a Flux-compliant application from scratch.</p>
+<p><a href="https://medium.com/@garychambers108/flux-in-practice-ec08daa9041a">Read the full guide…</a></p>
+</blockquote>
+<h2 id="components-react-and-flux">Components, React and Flux</h2>
+<p><a href="https://twitter.com/dan_abramov">Dan Abramov</a> working at Stampsy made a talk about React and Flux. It’s a very good overview of the concepts at play.</p>
+<iframe src="//slides.com/danabramov/components-react-flux-wip/embed" width="100%" height="315" scrolling="no" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen>
+</iframe>
+<h2 id="react-and-flux">React and Flux</h2>
+<p><a href="https://github.com/christianalfoni">Christian Alfoni</a> wrote an article where <a href="https://christianalfoni.github.io/javascript/2014/08/20/react-js-and-flux.html">he compares Backbone, Angular and Flux</a> on a simple example that’s representative of a real project he worked on.</p>
+<blockquote>
+<p>Wow, that was a bit more code! Well, try to think of it like this. In the above examples, if we were to do any changes to the application we would probably have to move things around. In the FLUX example we have considered that from the start.</p>
+<p>Any changes to the application is adding, not moving things around. If you need a new store, just add it and make components dependant of it. If you need more views, create a component and use it inside any other component without affecting their current “parent controller or models”.</p>
+<p><a href="https://christianalfoni.github.io/javascript/2014/08/20/react-js-and-flux.html">Read the full article…</a></p>
+</blockquote>
+<h2 id="flux-step-by-step-approach">Flux: Step by Step approach</h2>
+<p><a href="https://github.com/durdn">Nicola Paolucci</a> from Atlassian wrote a great guide to help your getting understand <a href="https://blogs.atlassian.com/2014/08/flux-architecture-step-by-step/">Flux step by step</a>.</p>
+<center>
+<a href="https://blogs.atlassian.com/2014/08/flux-architecture-step-by-step/"><img src="../images/blog/flux-chart.png" width="400" /></a>
+</center>
+<h2 id="delorean-back-to-the-future">DeLorean: Back to the future!</h2>
+<p><a href="https://github.com/deloreanjs/delorean">DeLorean</a> is a tiny Flux pattern implementation developed by <a href="https://github.com/f">Fatih Kadir Akin</a>.</p>
+<blockquote>
+<ul>
+<li>Unidirectional data flow, it makes your app logic simpler than MVC</li>
+<li>Automatically listens to data changes and keeps your data updated</li>
+<li>Makes data more consistent across your whole application</li>
+<li>It’s framework agnostic, completely. There’s no view framework dependency</li>
+<li>Very small, just 4K gzipped</li>
+<li>Built-in React.js integration, easy to use with Flight.js and Ractive.js and probably all others</li>
+<li>Improve your UI/data consistency using rollbacks</li>
+</ul>
+</blockquote>
+<h2 id="facebooks-ios-infrastructure">Facebook’s iOS Infrastructure</h2>
+<p>Last but not least, Flux and React ideas are not limited to JavaScript inside of the browser. The iOS team at Facebook re-implemented Newsfeed using very similar patterns.</p>
+<iframe width="650" height="315" src="//www.youtube-nocookie.com/embed/XhXC4SKOGfQ" frameborder="0" allowfullscreen>
+</iframe>
+<h2 id="random-tweet">Random Tweet</h2>
+<blockquote class="twitter-tweet" lang="en">
+<p>
+If you build your app with flux, you can swap out React for a canvas or svg view layer and keep 85% of your code. (or the thing after React)
+</p>
+— Ryan Florence (<span class="citation" data-cites="ryanflorence">@ryanflorence</span>) <a href="https://twitter.com/ryanflorence/status/507309645372076034">September 3, 2014</a>
+</blockquote>
+</body>
+</html>

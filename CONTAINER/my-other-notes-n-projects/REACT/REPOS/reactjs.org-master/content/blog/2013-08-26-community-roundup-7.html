@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="vjeux" />
+  <title>Community Round-up #7</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Community Round-up #7</h1>
+<p class="author">vjeux</p>
+</header>
+<p>It’s been three months since we open sourced React and it is going well. Some stats so far:</p>
+<ul>
+<li>114 285 unique visitors on this website</li>
+<li><a href="https://github.com/facebook/react/stargazers">1933 stars</a> and <a href="https://github.com/facebook/react/network/members">210 forks</a></li>
+<li><a href="https://groups.google.com/forum/#!forum/reactjs">226 posts on Google Group</a></li>
+<li><a href="https://gist.github.com/vjeux/6335762">76 GitHub projects using React</a></li>
+<li><a href="https://github.com/facebook/react/graphs/contributors">30 contributors</a></li>
+<li><a href="/blog/">15 blog posts</a></li>
+<li>2 early adopters: <a href="http://sophiebits.com/2013/06/09/using-react-to-speed-up-khan-academy.html">Khan Academy</a> and <a href="http://usepropeller.com/blog/posts/from-backbone-to-react/">Propeller</a></li>
+</ul>
+<h2 id="wolfenstein-rendering-engine-ported-to-react">Wolfenstein Rendering Engine Ported to React</h2>
+<a href="http://www.petehunt.net/">Pete Hunt</a> ported the render code of the web version of Wolfenstein 3D to React. Check out <a href="http://www.petehunt.net/wolfenstein3D-react/wolf3d.html">the demo</a> and <a href="https://github.com/petehunt/wolfenstein3D-react/blob/master/js/renderer.js#L183">render.js</a> file for the implementation.
+<figure>
+<a href="http://www.petehunt.net/wolfenstein3D-react/wolf3d.html"><img src="../images/blog/wolfenstein_react.png"></a>
+</figure>
+<h2 id="react--meteor">React &amp; Meteor</h2>
+<p><a href="https://twitter.com/benjamn">Ben Newman</a> made a <a href="https://github.com/benjamn/meteor-react/blob/master/lib/mixin.js">13-lines wrapper</a> to use React and Meteor together. <a href="http://www.meteor.com/">Meteor</a> handles the real-time data synchronization between client and server. React provides the declarative way to write the interface and only updates the parts of the UI that changed.</p>
+<blockquote>
+<p>This repository defines a Meteor package that automatically integrates the React rendering framework on both the client and the server, to complement or replace the default Handlebars templating system.</p>
+<p>The React core is officially agnostic about how you fetch and update your data, so it is far from obvious which approach is the best. This package provides one answer to that question (use Meteor!), and I hope you will find it a compelling combination.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">var</span> MyComponent <span class="op">=</span> <span class="va">React</span>.<span class="at">createClass</span>(<span class="op">{</span></a>
+<a class="sourceLine" id="cb1-2" title="2"> <span class="dt">mixins</span><span class="op">:</span> [MeteorMixin]<span class="op">,</span></a>
+<a class="sourceLine" id="cb1-3" title="3"></a>
+<a class="sourceLine" id="cb1-4" title="4"> <span class="dt">getMeteorState</span><span class="op">:</span> <span class="kw">function</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb1-5" title="5">   <span class="cf">return</span> <span class="op">{</span> <span class="dt">foo</span><span class="op">:</span> <span class="va">Session</span>.<span class="at">get</span>(<span class="st">&#39;foo&#39;</span>) <span class="op">};</span></a>
+<a class="sourceLine" id="cb1-6" title="6"> <span class="op">},</span></a>
+<a class="sourceLine" id="cb1-7" title="7"></a>
+<a class="sourceLine" id="cb1-8" title="8"> <span class="dt">render</span><span class="op">:</span> <span class="kw">function</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb1-9" title="9">   <span class="cf">return</span> <span class="op">&lt;</span>div<span class="op">&gt;{</span><span class="kw">this</span>.<span class="va">state</span>.<span class="at">foo</span><span class="op">}</span>&lt;/div<span class="op">&gt;;</span></a>
+<a class="sourceLine" id="cb1-10" title="10"> <span class="op">}</span></a>
+<a class="sourceLine" id="cb1-11" title="11"><span class="op">}</span>)<span class="op">;</span></a></code></pre></div>
+<p>Dependencies will be registered for any data accesses performed by getMeteorState so that the component can be automatically re-rendered whenever the data changes.</p>
+<p><a href="https://github.com/benjamn/meteor-react">Read more …</a></p>
+</blockquote>
+<h2 id="react-page">React Page</h2>
+<p><a href="https://github.com/jordwalke">Jordan Walke</a> implemented a complete React project creator called <a href="https://github.com/facebook/react-page/">react-page</a>. It supports both server-side and client-side rendering, source transform and packaging JSX files using CommonJS modules, and instant reload.</p>
+<blockquote>
+Easy Application Development with React JavaScript
+<figure>
+<a href="https://github.com/facebook/react-page/"><img src="../images/blog/react-page.png"></a>
+</figure>
+<p><strong>Why Server Rendering?</strong></p>
+<ul>
+<li>Faster initial page speed:
+<ul>
+<li>Markup displayed before downloading large JavaScript.</li>
+<li>Markup can be generated more quickly on a fast server than low power client devices.</li>
+</ul></li>
+<li>Faster Development and Prototyping:
+<ul>
+<li>Instantly refresh your app without waiting for any watch scripts or bundlers.</li>
+</ul></li>
+<li>Easy deployment of static content pages/blogs: just archive using recursive wget.</li>
+<li>SEO benefits of indexability and perf.</li>
+</ul>
+<p><strong>How Does Server Rendering Work?</strong></p>
+<ul>
+<li><code>react-page</code> computes page markup on the server, sends it to the client so the user can see it quickly.</li>
+<li>The corresponding JavaScript is then packaged and sent.</li>
+<li>The browser runs that JavaScript, so that all of the event handlers, interactions and update code will run seamlessly on top of the server generated markup.</li>
+<li>From the developer’s (and the user’s) perspective, it’s just as if the rendering occurred on the client, only faster.</li>
+</ul>
+<p><a href="https://github.com/facebook/react-page/">Try it out …</a></p>
+</blockquote>
+</body>
+</html>

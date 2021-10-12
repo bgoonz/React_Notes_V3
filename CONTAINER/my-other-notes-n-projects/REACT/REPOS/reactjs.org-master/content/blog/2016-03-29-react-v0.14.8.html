@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="gaearon" />
+  <title>React v0.14.8</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">React v0.14.8</h1>
+<p class="author">gaearon</p>
+</header>
+<p>We have already released two release candidates for React 15, and the final version is coming soon.</p>
+<p>However <a href="https://github.com/iancmyers">Ian Christian Myers</a> discovered a memory leak related to server rendering in React 0.14 and <a href="https://github.com/facebook/react/pull/6060">contributed a fix</a>. While this memory leak has already been fixed in a different way in the React 15 release candidates, we decided to cut another 0.14 release that contains just this fix.</p>
+<p>The release is now available for download:</p>
+<ul>
+<li><strong>React</strong><br />
+Dev build with warnings: <a href="https://fb.me/react-0.14.8.js" class="uri">https://fb.me/react-0.14.8.js</a><br />
+Minified build for production: <a href="https://fb.me/react-0.14.8.min.js" class="uri">https://fb.me/react-0.14.8.min.js</a><br />
+</li>
+<li><strong>React with Add-Ons</strong><br />
+Dev build with warnings: <a href="https://fb.me/react-with-addons-0.14.8.js" class="uri">https://fb.me/react-with-addons-0.14.8.js</a><br />
+Minified build for production: <a href="https://fb.me/react-with-addons-0.14.8.min.js" class="uri">https://fb.me/react-with-addons-0.14.8.min.js</a><br />
+</li>
+<li><strong>React DOM</strong> (include React in the page before React DOM)<br />
+Dev build with warnings: <a href="https://fb.me/react-dom-0.14.8.js" class="uri">https://fb.me/react-dom-0.14.8.js</a><br />
+Minified build for production: <a href="https://fb.me/react-dom-0.14.8.min.js" class="uri">https://fb.me/react-dom-0.14.8.min.js</a><br />
+</li>
+<li><strong>React DOM Server</strong> (include React in the page before React DOM Server)<br />
+Dev build with warnings: <a href="https://fb.me/react-dom-server-0.14.8.js" class="uri">https://fb.me/react-dom-server-0.14.8.js</a><br />
+Minified build for production: <a href="https://fb.me/react-dom-server-0.14.8.min.js" class="uri">https://fb.me/react-dom-server-0.14.8.min.js</a></li>
+</ul>
+<p>We’ve also published version <code>0.14.8</code> of the <code>react</code>, <code>react-dom</code>, and addons packages on npm and the <code>react</code> package on bower.</p>
+<hr />
+<h2 id="changelog">Changelog</h2>
+<h3 id="react">React</h3>
+<ul>
+<li>Fixed memory leak when rendering on the server</li>
+</ul>
+</body>
+</html>

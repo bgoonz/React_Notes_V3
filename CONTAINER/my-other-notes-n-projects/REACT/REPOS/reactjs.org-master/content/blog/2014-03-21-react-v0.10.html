@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="zpao" />
+  <title>React v0.10</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">React v0.10</h1>
+<p class="author">zpao</p>
+</header>
+<p>Hot on the heels of the <a href="/blog/2014/03/19/react-v0.10-rc1.html">release candidate earlier this week</a>, we’re ready to call v0.10 done. The only major issue we discovered had to do with the <code>react-tools</code> package, which has been updated. We’ve copied over the changelog from the RC with some small clarifying changes.</p>
+<p>The release is available for download from the CDN:</p>
+<ul>
+<li><strong>React</strong><br />
+Dev build with warnings: <a href="https://fb.me/react-0.10.0.js" class="uri">https://fb.me/react-0.10.0.js</a><br />
+Minified build for production: <a href="https://fb.me/react-0.10.0.min.js" class="uri">https://fb.me/react-0.10.0.min.js</a><br />
+</li>
+<li><strong>React with Add-Ons</strong><br />
+Dev build with warnings: <a href="https://fb.me/react-with-addons-0.10.0.js" class="uri">https://fb.me/react-with-addons-0.10.0.js</a><br />
+Minified build for production: <a href="https://fb.me/react-with-addons-0.10.0.min.js" class="uri">https://fb.me/react-with-addons-0.10.0.min.js</a><br />
+</li>
+<li><strong>In-Browser JSX transformer</strong><br />
+<a href="https://fb.me/JSXTransformer-0.10.0.js" class="uri">https://fb.me/JSXTransformer-0.10.0.js</a></li>
+</ul>
+<p>We’ve also published version <code>0.10.0</code> of the <code>react</code> and <code>react-tools</code> packages on npm and the <code>react</code> package on bower.</p>
+<p>Please try these builds out and <a href="https://github.com/facebook/react/issues/new">file an issue on GitHub</a> if you see anything awry.</p>
+<h2 id="clone-on-mount">Clone On Mount</h2>
+<p>The main purpose of this release is to provide a smooth upgrade path as we evolve some of the implementation of core. In v0.9 we started warning in cases where you called methods on unmounted components. This is part of an effort to enforce the idea that the return value of a component (<code>React.DOM.div()</code>, <code>MyComponent()</code>) is in fact not a reference to the component instance React uses in the virtual DOM. The return value is instead a light-weight object that React knows how to use. Since the return value currently is a reference to the same object React uses internally, we need to make this transition in stages as many people have come to depend on this implementation detail.</p>
+<p>In 0.10, we’re adding more warnings to catch a similar set of patterns. When a component is mounted we clone it and use that object for our internal representation. This allows us to capture calls you think you’re making to a mounted component. We’ll forward them on to the right object, but also warn you that this is breaking. See “Access to the Mounted Instance” on <a href="https://fb.me/react-warning-descriptors">this page</a>. Most of the time you can solve your pattern by using refs.</p>
+<p>Storing a reference to your top level component is a pattern touched upon on that page, but another examples that demonstrates what we see a lot of:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb1-1" title="1"><span class="co">// This is a common pattern. However instance here really refers to a</span></a>
+<a class="sourceLine" id="cb1-2" title="2"><span class="co">// &quot;descriptor&quot;, not necessarily the mounted instance.</span></a>
+<a class="sourceLine" id="cb1-3" title="3"><span class="kw">var</span> instance <span class="op">=</span> <span class="op">&lt;</span>MyComponent/<span class="op">&gt;;</span></a>
+<a class="sourceLine" id="cb1-4" title="4"><span class="va">React</span>.<span class="at">renderComponent</span>(instance)<span class="op">;</span></a>
+<a class="sourceLine" id="cb1-5" title="5"><span class="co">// ...</span></a>
+<a class="sourceLine" id="cb1-6" title="6"><span class="va">instance</span>.<span class="at">setProps</span>(...)<span class="op">;</span></a>
+<a class="sourceLine" id="cb1-7" title="7"></a>
+<a class="sourceLine" id="cb1-8" title="8"><span class="co">// The change here is very simple. The return value of renderComponent will be</span></a>
+<a class="sourceLine" id="cb1-9" title="9"><span class="co">// the mounted instance.</span></a>
+<a class="sourceLine" id="cb1-10" title="10"><span class="kw">var</span> instance <span class="op">=</span> <span class="va">React</span>.<span class="at">renderComponent</span>(<span class="op">&lt;</span>MyComponent/<span class="op">&gt;</span>)</a>
+<a class="sourceLine" id="cb1-11" title="11"><span class="co">// ...</span></a>
+<a class="sourceLine" id="cb1-12" title="12"><span class="va">instance</span>.<span class="at">setProps</span>(...)<span class="op">;</span></a></code></pre></div>
+<p>These warnings and method forwarding are only enabled in the development build. The production builds continue to work as they did in v0.9. We strongly encourage you to use the development builds to catch these warnings and fix the call sites.</p>
+<p>The plan for v0.11 is that we will go fully to “descriptors”. Method calls on the return value of <code>MyComponent()</code> will fail hard.</p>
+<h2 id="changelog">Changelog</h2>
+<h3 id="react-core">React Core</h3>
+<h4 id="new-features">New Features</h4>
+<ul>
+<li>Added warnings to help migrate towards descriptors</li>
+<li>Made it possible to server render without React-related markup (<code>data-reactid</code>, <code>data-react-checksum</code>). This DOM will not be mountable by React. <a href="/docs/top-level-api.html#react.rendercomponenttostaticmarkup">Read the docs for <code>React.renderComponentToStaticMarkup</code></a></li>
+<li>Added support for more attributes:
+<ul>
+<li><code>srcSet</code> for <code>&lt;img&gt;</code> to specify images at different pixel ratios</li>
+<li><code>textAnchor</code> for SVG</li>
+</ul></li>
+</ul>
+<h4 id="bug-fixes">Bug Fixes</h4>
+<ul>
+<li>Ensure all void elements don’t insert a closing tag into the markup.</li>
+<li>Ensure <code>className={false}</code> behaves consistently</li>
+<li>Ensure <code>this.refs</code> is defined, even if no refs are specified.</li>
+</ul>
+<h3 id="addons">Addons</h3>
+<ul>
+<li><code>update</code> function to deal with immutable data. <a href="/docs/update.html">Read the docs</a></li>
+</ul>
+<h3 id="react-tools">react-tools</h3>
+<ul>
+<li>Added an option argument to <code>transform</code> function. The only option supported is <code>harmony</code>, which behaves the same as <code>jsx --harmony</code> on the command line. This uses the ES6 transforms from <a href="https://github.com/facebook/jstransform">jstransform</a>.</li>
+</ul>
+</body>
+</html>

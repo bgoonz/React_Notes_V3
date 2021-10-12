@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="gaearon" />
+  <title>React v15.4.0</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">React v15.4.0</h1>
+<p class="author">gaearon</p>
+</header>
+<p>Today we are releasing React 15.4.0.</p>
+<p>We didn’t announce the <a href="https://github.com/facebook/react/blob/master/CHANGELOG.md#1510-may-20-2016">previous</a> <a href="https://github.com/facebook/react/blob/master/CHANGELOG.md#1520-july-1-2016">minor</a> <a href="https://github.com/facebook/react/blob/master/CHANGELOG.md#1530-july-29-2016">releases</a> on the blog because most of the changes were bug fixes. However, 15.4.0 is a special release, and we would like to highlight a few notable changes in it.</p>
+<h3 id="separating-react-and-react-dom">Separating React and React DOM</h3>
+<p><a href="/blog/2015/09/10/react-v0.14-rc1.html#two-packages-react-and-react-dom">More than a year ago</a>, we started separating React and React DOM into separate packages. We deprecated <code>React.render()</code> in favor of <code>ReactDOM.render()</code> in React 0.14, and removed DOM-specific APIs from <code>React</code> completely in React 15. However, the React DOM implementation still <a href="https://www.reddit.com/r/javascript/comments/3m6wyu/found_this_line_in_the_react_codebase_made_me/cvcyo4a/">secretly lived inside the React package</a>.</p>
+<p>In React 15.4.0, we are finally moving React DOM implementation to the React DOM package. The React package will now contain only the renderer-agnostic code such as <code>React.Component</code> and <code>React.createElement()</code>.</p>
+<p>This solves a few long-standing issues, such as <a href="https://github.com/facebook/react/issues/7386">errors</a> when you import React DOM in the same file as the <a href="https://facebook.github.io/jest/blog/2016/07/27/jest-14.html">snapshot testing</a> renderer.</p>
+<p><strong>If you only use the official and documented React APIs you won’t need to change anything in your application.</strong></p>
+<p>However, there is a possibility that you imported private APIs from <code>react/lib/*</code>, or that a package you rely on might use them. We would like to remind you that this was never supported, and that your apps should not rely on internal APIs. The React internals will keep changing as we work to make React better.</p>
+<p>Another thing to watch out for is that React DOM Server is now about the same size as React DOM since it contains its own copy of the React reconciler. We don’t recommend using React DOM Server on the client in most cases.</p>
+<h3 id="profiling-components-with-chrome-timeline">Profiling Components with Chrome Timeline</h3>
+<p>You can now visualize React components in the Chrome Timeline. This lets you see which components exactly get mounted, updated, and unmounted, how much time they take relative to each other.</p>
+<p><img src="../images/blog/react-perf-chrome-timeline.png" width="651" height="228" alt="React components in Chrome timeline" /></p>
+<p>To use it:</p>
+<ol type="1">
+<li><p>Load your app with <code>?react_perf</code> in the query string (for example, <code>http://localhost:3000/?react_perf</code>).</p></li>
+<li><p>Open the Chrome DevTools <strong>Timeline</strong> tab and press <strong>Record</strong>.</p></li>
+<li><p>Perform the actions you want to profile. Don’t record more than 20 seconds or Chrome might hang.</p></li>
+<li><p>Stop recording.</p></li>
+<li><p>React events will be grouped under the <strong>User Timing</strong> label.</p></li>
+</ol>
+<p>Note that the numbers are relative so components will render faster in production. Still, this should help you realize when unrelated UI gets updated by mistake, and how deep and how often your UI updates occur.</p>
+<p>Currently Chrome, Edge, and IE are the only browsers supporting this feature, but we use the standard <a href="https://developer.mozilla.org/en-US/docs/Web/API/User_Timing_API">User Timing API</a> so we expect more browsers to add support for it.</p>
+<h3 id="mocking-refs-for-snapshot-testing">Mocking Refs for Snapshot Testing</h3>
+<p>If you’re using Jest <a href="https://facebook.github.io/jest/blog/2016/07/27/jest-14.html">snapshot testing</a>, you might have had <a href="https://github.com/facebook/react/issues/7371">issues</a> with components that rely on refs. With React 15.4.0, we introduce a way to provide mock refs to the test renderer. For example, consider this component using a ref in <code>componentDidMount</code>:</p>
+<pre class="js{5,11}"><code>import React from &#39;react&#39;;
+
+export default class MyInput extends React.Component {
+  componentDidMount() {
+    this.input.focus();
+  }
+
+  render() {
+    return (
+      &lt;input
+        ref={node =&gt; this.input = node}
+      /&gt;
+    );
+  }
+}</code></pre>
+<p>With snapshot renderer, <code>this.input</code> will be <code>null</code> because there is no DOM. React 15.4.0 lets us avoid such crashes by passing a custom <code>createNodeMock</code> function to the snapshot renderer in an <code>options</code> argument:</p>
+<pre class="js{5-12,16}"><code>import React from &#39;react&#39;;
+import MyInput from &#39;./MyInput&#39;;
+import renderer from &#39;react-test-renderer&#39;;
+
+function createNodeMock(element) {
+  if (element.type === &#39;input&#39;) {
+    return {
+      focus() {},
+    };
+  }
+  return null;
+}
+
+it(&#39;renders correctly&#39;, () =&gt; {
+  const options = {createNodeMock};
+  const tree = renderer.create(&lt;MyInput /&gt;, options);
+  expect(tree).toMatchSnapshot();
+});</code></pre>
+<p>We would like to thank <a href="https://github.com/Aweary">Brandon Dail</a> for implementing this feature.</p>
+<p>You can learn more about snapshot testing in <a href="https://facebook.github.io/jest/blog/2016/07/27/jest-14.html">this Jest blog post</a>.</p>
+<hr />
+<h2 id="installation">Installation</h2>
+<p>We recommend using <a href="https://yarnpkg.com/">Yarn</a> or <a href="https://www.npmjs.com/">npm</a> for managing front-end dependencies. If you’re new to package managers, the <a href="https://yarnpkg.com/en/docs/getting-started">Yarn documentation</a> is a good place to get started.</p>
+<p>To install React with Yarn, run:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb3-1" title="1"><span class="ex">yarn</span> add react@15.4.0 react-dom@15.4.0</a></code></pre></div>
+<p>To install React with npm, run:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb4-1" title="1"><span class="ex">npm</span> install --save react@15.4.0 react-dom@15.4.0</a></code></pre></div>
+<p>We recommend using a bundler like <a href="https://webpack.js.org/">webpack</a> or <a href="http://browserify.org/">Browserify</a> so you can write modular code and bundle it together into small packages to optimize load time.</p>
+<p>Remember that by default, React runs extra checks and provides helpful warnings in development mode. When deploying your app, make sure to <a href="/docs/installation.html#development-and-production-versions">compile it in production mode</a>.</p>
+<p>In case you don’t use a bundler, we also provide pre-built bundles in the npm packages which you can <a href="/docs/installation.html#using-a-cdn">include as script tags</a> on your page:</p>
+<ul>
+<li><strong>React</strong><br />
+Dev build with warnings: <a href="https://unpkg.com/react@15.4.0/dist/react.js">react/dist/react.js</a><br />
+Minified build for production: <a href="https://unpkg.com/react@15.4.0/dist/react.min.js">react/dist/react.min.js</a><br />
+</li>
+<li><strong>React with Add-Ons</strong><br />
+Dev build with warnings: <a href="https://unpkg.com/react@15.4.0/dist/react-with-addons.js">react/dist/react-with-addons.js</a><br />
+Minified build for production: <a href="https://unpkg.com/react@15.4.0/dist/react-with-addons.min.js">react/dist/react-with-addons.min.js</a><br />
+</li>
+<li><strong>React DOM</strong> (include React in the page before React DOM)<br />
+Dev build with warnings: <a href="https://unpkg.com/react-dom@15.4.0/dist/react-dom.js">react-dom/dist/react-dom.js</a><br />
+Minified build for production: <a href="https://unpkg.com/react-dom@15.4.0/dist/react-dom.min.js">react-dom/dist/react-dom.min.js</a><br />
+</li>
+<li><strong>React DOM Server</strong> (include React in the page before React DOM Server)<br />
+Dev build with warnings: <a href="https://unpkg.com/react-dom@15.4.0/dist/react-dom-server.js">react-dom/dist/react-dom-server.js</a><br />
+Minified build for production: <a href="https://unpkg.com/react-dom@15.4.0/dist/react-dom-server.min.js">react-dom/dist/react-dom-server.min.js</a></li>
+</ul>
+<p>We’ve also published version <code>15.4.0</code> of the <code>react</code>, <code>react-dom</code>, and addons packages on npm and the <code>react</code> package on bower.</p>
+<hr />
+<h2 id="changelog">Changelog</h2>
+<h3 id="react">React</h3>
+<ul>
+<li>React package and browser build no longer “secretly” includes React DOM.<br />
+<small>(<span class="citation" data-cites="sebmarkbage">[@sebmarkbage]</span>(https://github.com/sebmarkbage) in <a href="https://github.com/facebook/react/pull/7164">#7164</a> and <a href="https://github.com/facebook/react/pull/7168">#7168</a>)</small></li>
+<li>Required PropTypes now fail with specific messages for null and undefined.<br />
+<small>(<span class="citation" data-cites="chenglou">[@chenglou]</span>(https://github.com/chenglou) in <a href="https://github.com/facebook/react/pull/7291">#7291</a>)</small></li>
+<li>Improved development performance by freezing children instead of copying.<br />
+<small>(<span class="citation" data-cites="keyanzhang">[@keyanzhang]</span>(https://github.com/keyanzhang) in <a href="https://github.com/facebook/react/pull/7455">#7455</a>)</small></li>
+</ul>
+<h3 id="react-dom">React DOM</h3>
+<ul>
+<li>Fixed occasional test failures when React DOM is used together with shallow renderer.<br />
+<small>(<span class="citation" data-cites="goatslacker">[@goatslacker]</span>(https://github.com/goatslacker) in <a href="https://github.com/facebook/react/pull/8097">#8097</a>)</small></li>
+<li>Added a warning for invalid <code>aria-</code> attributes.<br />
+<small>(<span class="citation" data-cites="jessebeach">[@jessebeach]</span>(https://github.com/jessebeach) in <a href="https://github.com/facebook/react/pull/7744">#7744</a>)</small></li>
+<li>Added a warning for using <code>autofocus</code> rather than <code>autoFocus</code>.<br />
+<small>(<span class="citation" data-cites="hkal">[@hkal]</span>(https://github.com/hkal) in <a href="https://github.com/facebook/react/pull/7694">#7694</a>)</small></li>
+<li>Removed an unnecessary warning about polyfilling <code>String.prototype.split</code>.<br />
+<small>(<span class="citation" data-cites="nhunzaker">[@nhunzaker]</span>(https://github.com/nhunzaker) in <a href="https://github.com/facebook/react/pull/7629">#7629</a>)</small></li>
+<li>Clarified the warning about not calling PropTypes manually.<br />
+<small>(<span class="citation" data-cites="jedwards1211">[@jedwards1211]</span>(https://github.com/jedwards1211) in <a href="https://github.com/facebook/react/pull/7777">#7777</a>)</small></li>
+<li>The unstable <code>batchedUpdates</code> API now passes the wrapped function’s return value through.<br />
+<small>(<span class="citation" data-cites="bgnorlov">[@bgnorlov]</span>(https://github.com/bgnorlov) in <a href="https://github.com/facebook/react/pull/7444">#7444</a>)</small></li>
+<li>Fixed a bug with updating text in IE 8.<br />
+<small>(<span class="citation" data-cites="mnpenner">[@mnpenner]</span>(https://github.com/mnpenner) in <a href="https://github.com/facebook/react/pull/7832">#7832</a>)</small></li>
+</ul>
+<h3 id="react-perf">React Perf</h3>
+<ul>
+<li>When ReactPerf is started, you can now view the relative time spent in components as a chart in Chrome Timeline.<br />
+<small>(<span class="citation" data-cites="gaearon">[@gaearon]</span>(https://github.com/gaearon) in <a href="https://github.com/facebook/react/pull/7549">#7549</a>)</small></li>
+</ul>
+<h3 id="react-test-utils">React Test Utils</h3>
+<ul>
+<li>If you call <code>Simulate.click()</code> on a <code>&lt;input disabled onClick={foo} /&gt;</code> then <code>foo</code> will get called whereas it didn’t before.<br />
+<small>(<span class="citation" data-cites="nhunzaker">[@nhunzaker]</span>(https://github.com/nhunzaker) in <a href="https://github.com/facebook/react/pull/7642">#7642</a>)</small></li>
+</ul>
+<h3 id="react-test-renderer">React Test Renderer</h3>
+<ul>
+<li>Due to packaging changes, it no longer crashes when imported together with React DOM in the same file.<br />
+<small>(<span class="citation" data-cites="sebmarkbage">[@sebmarkbage]</span>(https://github.com/sebmarkbage) in <a href="https://github.com/facebook/react/pull/7164">#7164</a> and <a href="https://github.com/facebook/react/pull/7168">#7168</a>)</small></li>
+<li><code>ReactTestRenderer.create()</code> now accepts <code>{createNodeMock: element =&gt; mock}</code> as an optional argument so you can mock refs with snapshot testing.<br />
+<small>(<span class="citation" data-cites="Aweary">[@Aweary]</span>(https://github.com/Aweary) in <a href="https://github.com/facebook/react/pull/7649">#7649</a> and <a href="https://github.com/facebook/react/pull/8261">#8261</a>)</small></li>
+</ul>
+</body>
+</html>

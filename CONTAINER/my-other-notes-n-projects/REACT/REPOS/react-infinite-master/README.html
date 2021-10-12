@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>README</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<h1 id="react-infinite">React Infinite</h1>
+<p><a href="https://travis-ci.org/seatgeek/react-infinite"><img src="https://travis-ci.org/seatgeek/react-infinite.svg?branch=master" alt="Build Status" /></a> <a href="https://coveralls.io/r/seatgeek/react-infinite"><img src="https://coveralls.io/repos/seatgeek/react-infinite/badge.svg" alt="Coverage Status" /></a> <a href="http://badge.fury.io/js/react-infinite"><img src="https://badge.fury.io/js/react-infinite.svg" alt="npm version" /></a> <a href="https://www.bithound.io/github/seatgeek/react-infinite"><img src="https://www.bithound.io/github/seatgeek/react-infinite/badges/score.svg" alt="bitHound Score" /></a></p>
+<p><strong>A browser-ready efficient scrolling container based on UITableView.</strong></p>
+<p><strong>React Infinite 0.7.1 only supports React 0.14 and above. Please pin your package to 0.6.0 for React 0.13 support.</strong></p>
+<ul>
+<li>Support for both static and <a href="https://github.com/seatgeek/react-infinite#elements-of-varying-heights">variable element heights</a></li>
+<li>Built-in support for <a href="https://github.com/seatgeek/react-infinite#number-infiniteloadbeginedgeoffset">infinite loading</a> of upcoming pages</li>
+<li>Ability to use the <a href="https://github.com/seatgeek/react-infinite#bool-usewindowasscrollcontainer">window as the scroll container</a></li>
+<li>Ability to be used as a <a href="https://github.com/seatgeek/react-infinite#bool-displaybottomupwards">chat/messaging-style display</a></li>
+<li><a href="https://coveralls.io/github/seatgeek/react-infinite">94% test coverage with Jest</a> and typechecked with Facebook’s Flow</li>
+<li><a href="https://github.com/seatgeek/react-infinite/tree/master/examples">Examples are available</a> for experimentation</li>
+</ul>
+<p>When a long list of DOM elements are placed in a scrollable container, all of them are kept in the DOM even when they are out the user’s view. This is highly inefficient, especially in cases when scrolling lists can be tens or hundreds of thousands of items long. React Infinite solves this by rendering only DOM nodes that the user is able to see or might soon see. Other DOM nodes are clustered and rendered as a single blank node.</p>
+<h2 id="installation">Installation</h2>
+<h3 id="in-the-browser">In the Browser</h3>
+<p>The relevant files are <code>dist/react-infinite.js</code> and <code>dist/react-infinite.min.js</code>. You <strong>must</strong> have React available as a global variable named <code>React</code> on the <code>window</code>. Including either file, through concatenation or a script tag, will produce a global variable named <strong><code>Infinite</code></strong> representing the component.</p>
+<h3 id="in-npm">In NPM</h3>
+<p>React Infinite uses a Universal Module Definition so you can use it in NPM as well. <code>npm install</code> this package and</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">var</span> Infinite <span class="op">=</span> <span class="at">require</span>(<span class="st">&#39;react-infinite&#39;</span>)<span class="op">;</span></a></code></pre></div>
+<h3 id="in-browserify">In Browserify</h3>
+<p>If you want to use the source with Browserify, the ES5-compiled source is directly requirable from the <code>/build</code> folder off NPM.</p>
+<p>Otherwise, you can follow the instructions for NPM.</p>
+<h2 id="basic-use">Basic Use</h2>
+<h3 id="elements-of-equal-height">Elements of Equal Height</h3>
+<p>To use React Infinite with a list of elements you want to make scrollable, provide them to React Infinite as children.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode xml"><code class="sourceCode xml"><a class="sourceLine" id="cb2-1" title="1"><span class="kw">&lt;Infinite</span><span class="ot"> containerHeight=</span><span class="er">{200}</span> <span class="er">elementHeight={40}&gt;</span></a>
+<a class="sourceLine" id="cb2-2" title="2">    <span class="er">&lt;div</span> <span class="er">className=</span><span class="st">&quot;one&quot;</span><span class="kw">/&gt;</span></a>
+<a class="sourceLine" id="cb2-3" title="3">    <span class="kw">&lt;div</span><span class="ot"> className=</span><span class="st">&quot;two&quot;</span><span class="kw">/&gt;</span></a>
+<a class="sourceLine" id="cb2-4" title="4">    <span class="kw">&lt;div</span><span class="ot"> className=</span><span class="st">&quot;three&quot;</span><span class="kw">/&gt;</span></a>
+<a class="sourceLine" id="cb2-5" title="5"><span class="er">&lt;</span>/Infinite&gt;</a></code></pre></div>
+<h3 id="elements-of-varying-heights">Elements of Varying Heights</h3>
+<p>If not all of the children have the same height, you must provide an array of integers to the <code>elementHeight</code> prop instead.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode xml"><code class="sourceCode xml"><a class="sourceLine" id="cb3-1" title="1"><span class="kw">&lt;Infinite</span><span class="ot"> containerHeight=</span><span class="er">{200}</span> <span class="er">elementHeight={[111,</span> <span class="er">252,</span> <span class="er">143]}&gt;</span></a>
+<a class="sourceLine" id="cb3-2" title="2">    <span class="er">&lt;div</span> <span class="er">className=</span><span class="st">&quot;111-px&quot;</span><span class="kw">/&gt;</span></a>
+<a class="sourceLine" id="cb3-3" title="3">    <span class="kw">&lt;div</span><span class="ot"> className=</span><span class="st">&quot;252-px&quot;</span><span class="kw">/&gt;</span></a>
+<a class="sourceLine" id="cb3-4" title="4">    <span class="kw">&lt;div</span><span class="ot"> className=</span><span class="st">&quot;143-px&quot;</span><span class="kw">/&gt;</span></a>
+<a class="sourceLine" id="cb3-5" title="5"><span class="er">&lt;</span>/Infinite&gt;</a></code></pre></div>
+<h3 id="using-the-window-to-scroll-usewindowasscrollcontainer-mode">Using the Window to Scroll (<code>useWindowAsScrollContainer</code> mode)</h3>
+<p>To use the entire window as a scroll container instead of just a single <code>div</code> (thus using <code>window.scrollY</code> instead of a DOM element’s <code>scrollTop</code>), add the <code>useWindowAsScrollContainer</code> prop.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode xml"><code class="sourceCode xml"><a class="sourceLine" id="cb4-1" title="1"><span class="kw">&lt;Infinite</span><span class="ot"> containerHeight=</span><span class="er">{200}</span> <span class="er">elementHeight={[111,</span> <span class="er">252,</span> <span class="er">143]}</span></a>
+<a class="sourceLine" id="cb4-2" title="2">          <span class="er">useWindowAsScrollContainer&gt;</span></a>
+<a class="sourceLine" id="cb4-3" title="3">    <span class="er">&lt;div</span> <span class="er">className=</span><span class="st">&quot;111-px&quot;</span><span class="kw">/&gt;</span></a>
+<a class="sourceLine" id="cb4-4" title="4">    <span class="kw">&lt;div</span><span class="ot"> className=</span><span class="st">&quot;252-px&quot;</span><span class="kw">/&gt;</span></a>
+<a class="sourceLine" id="cb4-5" title="5">    <span class="kw">&lt;div</span><span class="ot"> className=</span><span class="st">&quot;143-px&quot;</span><span class="kw">/&gt;</span></a>
+<a class="sourceLine" id="cb4-6" title="6"><span class="er">&lt;</span>/Infinite&gt;</a></code></pre></div>
+<h3 id="as-a-chat-or-message-box-displaybottomupwards-mode">As A Chat or Message Box (<code>displayBottomUpwards</code> mode)</h3>
+<p>React Infinite now supports being used as a chat box, i.e. appended elements appear at the bottom when added, and the loading of the next page occurs when the user scrolls to the top of the container. To do so, simply add the <code>displayBottomUpwards</code> prop. A <a href="https://github.com/seatgeek/react-infinite/blob/master/examples/chat.jsx">sample implementation</a> can be consulted for more information - run <code>gulp develop</code> to compile the example files.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode xml"><code class="sourceCode xml"><a class="sourceLine" id="cb5-1" title="1"><span class="kw">&lt;Infinite</span><span class="ot"> containerHeight=</span><span class="er">{200}</span> <span class="er">elementHeight={[111,</span> <span class="er">252,</span> <span class="er">143]}</span></a>
+<a class="sourceLine" id="cb5-2" title="2">          <span class="er">displayBottomUpwards&gt;</span></a>
+<a class="sourceLine" id="cb5-3" title="3">    <span class="er">//</span> <span class="er">insert</span> <span class="er">messages</span> <span class="er">for</span> <span class="er">subsequent</span> <span class="er">pages</span> <span class="er">at</span> <span class="er">this</span> <span class="er">point</span></a>
+<a class="sourceLine" id="cb5-4" title="4">    <span class="er">&lt;div</span> <span class="er">className=</span><span class="st">&quot;third-latest-chat&quot;</span><span class="kw">/&gt;</span></a>
+<a class="sourceLine" id="cb5-5" title="5">    <span class="kw">&lt;div</span><span class="ot"> className=</span><span class="st">&quot;second-latest-chat&quot;</span><span class="kw">/&gt;</span></a>
+<a class="sourceLine" id="cb5-6" title="6">    <span class="kw">&lt;div</span><span class="ot"> className=</span><span class="st">&quot;latest-chat-message&quot;</span><span class="kw">/&gt;</span></a>
+<a class="sourceLine" id="cb5-7" title="7"><span class="er">&lt;</span>/Infinite&gt;</a></code></pre></div>
+<h3 id="note-on-smooth-scrolling">Note on Smooth Scrolling</h3>
+<p>A wrapper <code>div</code> is applied that disables pointer events on the children for a default of 150 milliseconds after the last user scroll action for browsers with inertial scrolling. To configure this, set <code>timeScrollStateLastsForAfterUserScrolls</code>.</p>
+<h2 id="static-methods">Static Methods</h2>
+<h4 id="function-infinite.containerheightscalefactornumber-number"><strong>Function</strong> <code>Infinite.containerHeightScaleFactor(Number number)</code></h4>
+<p>This function allows a value to be specified for <code>preloadBatchSize</code> and <code>preloadAdditionalHeight</code> that is a relative to the container height. Please see the documentation for those two configuration options for further information on how to use it.</p>
+<h2 id="configuration-options">Configuration Options</h2>
+<h4 id="children">Children</h4>
+<p>The children of the <code>&lt;Infinite&gt;</code> element are the components you want to render. This gives you as much flexibility as you need in the presentation of those components. Each child can be a different component if you desire. If you wish to render a set of children not all of which have the same height, you must map each component in the children array to an number representing its height and pass it in as the <code>elementHeight</code> prop.</p>
+<h3 id="major-display-modes">Major Display Modes</h3>
+<p>By default, React Infinite renders a single element with the provided <code>containerHeight</code>, and the list sticks to the top like a regular table. However, you can choose to use the entire window as the scroll container or make React Infinite like a chatbox with the following options. They can be used together if you wish.</p>
+<h4 id="bool-usewindowasscrollcontainer">Bool <code>useWindowAsScrollContainer</code></h4>
+<p>Defaults to <code>false</code>. This option allows the window to be used as the scroll container, instead of an arbitrary <code>div</code>, when it is set to <code>true</code>. This means that scroll position is detected by <code>window.scrollY</code> instead of the <code>scrollTop</code> of the <code>div</code> that React Infinite creates. Using this option is a way of achieving smoother scrolling on mobile before the problem is solved for container <code>div</code>s.</p>
+<h4 id="bool-displaybottomupwards">Bool <code>displayBottomUpwards</code></h4>
+<p>Defaults to <code>false</code>. This allows React Infinite to be used as a chatbox. This means that the scroll is stuck to the bottom by default, and the user scrolls up to the top of the container to load the next page. The <code>children</code> are displayed in the same order.</p>
+<h3 id="configuration-options-1">Configuration Options</h3>
+<h4 id="required-number-number-elementheight">(Required) Number | [Number] <code>elementHeight</code></h4>
+<p>If each child element has the same height, you can pass a number representing that height as the <code>elementHeight</code> prop. If the children do not all have the same height, you can pass an array which is a map the children to numbers representing their heights to the <code>elementHeight</code> prop.</p>
+<h4 id="number-containerheight"><strong>Number</strong> <code>containerHeight</code></h4>
+<p>The height of the scrolling container in pixels. This is a <strong>required</strong> prop if <code>useWindowAsScrollContainer</code> is not set to <code>true</code>.</p>
+<h4 id="number-object-preloadbatchsize">Number | Object <code>preloadBatchSize</code></h4>
+<p>Defaults to <code>this.props.containerHeight * 0.5</code>. Imagine the total height of the scrollable divs. Now divide this equally into blocks <code>preloadBatchSize</code> pixels high. Every time the container’s scrollTop enters each of these blocks the set of elements rendered in full are those contained within the block and elements that are within <code>preloadAdditionalHeight</code> above and below it.</p>
+<p>When working with the window as the scroll container, it is sometimes useful to specify a scale factor relative to the container height as the batch size, so your code does not need to know anything about the <code>window</code>. To do this, use <code>Infinite.containerHeightScaleFactor</code>. So, for example, if you want the preloaded batch size to be twice the container height, write <code>preloadBatchSize={Infinite.containerHeightScaleFactor(2)}</code>.</p>
+<h4 id="number-object-preloadadditionalheight">Number | Object <code>preloadAdditionalHeight</code></h4>
+<p>Defaults to <code>this.props.containerHeight</code>. The total height of the area in which elements are rendered in full is height of the current scroll block (see <code>preloadBatchSize</code>) as well as <code>preloadAdditionalHeight</code> above and below it.</p>
+<p>When working with the window as the scroll container, it is sometimes useful to specify this relative to the container height. If you want the preloaded additional height to be twice the container height, write <code>preloadAdditionalHeight={Infinite.containerHeightScaleFactor(2)}</code>. Please see <code>preloadBatchSize</code> for more details.</p>
+<h4 id="function-handlescrolldomnode-node"><strong>Function</strong> <code>handleScroll(DOMNode node)</code></h4>
+<p>Defaults to <code>function(){}</code>. A function that is called when the container is scrolled, i.e. when the <code>onScroll</code> event of the infinite scrolling container is fired. The only argument passed to it is the native DOM <a href="https://developer.mozilla.org/en-US/docs/Web/API/Node">Node</a> of the scrolling container.</p>
+<h4 id="number-infiniteloadbeginedgeoffset"><strong>Number</strong> <code>infiniteLoadBeginEdgeOffset</code></h4>
+<p>Defaults to <code>undefined</code>, which means that infinite loading is disabled. To disable infinite loading, do not provide this property or set it to undefined.</p>
+<p><strong>Regular Mode</strong> When the user reaches this number of pixels from the bottom, the infinite load sequence will be triggered by showing the infinite load spinner delegate and calling the function <code>onInfiniteLoad</code>.</p>
+<p><strong><code>displayBottomUpwards</code> mode</strong> When the user reaches this number of pixels from the top of the container, the infinite load sequence will be triggered by showing the infinite loading spinner delegate at the top of the container and calling <code>onInfiniteLoad</code>.</p>
+<h4 id="function-oninfiniteload">Function <code>onInfiniteLoad()</code></h4>
+<p>Defaults to <code>function(){}</code>. This function is called when the scroll exceeds <code>infiniteLoadBeginEdgeOffset</code>. Before this function is called, <strong>the infinite loading spinner is automatically turned on</strong>. You can set up infinite scrolling with this function like this:</p>
+<ol type="1">
+<li>Fetch a new page of records from the appropriate API</li>
+<li>When the AJAX call returns, send the new list of elements (with the items that were just fetched) back as the children of React Infinite.</li>
+<li>Set React Infinite’s <code>isInfiniteLoading</code> prop to <code>false</code> to hide the loading spinner display</li>
+</ol>
+<p><code>onInfiniteLoad</code> relies heavily on passing props as a means of communication in the style of idiomatic React.</p>
+<h4 id="react-node-loadingspinnerdelegate">React Node <code>loadingSpinnerDelegate</code></h4>
+<p>Defaults to <code>&lt;div/&gt;</code>. The element that is provided is used to render the loading view when React Infinite’s <code>isInfiniteLoading</code> property is set to <code>true</code>. A React Node is anything that satisfies <code>React.PropTypes.node</code>.</p>
+<h4 id="bool-isinfiniteloading">Bool <code>isInfiniteLoading</code></h4>
+<p>Defaults to <code>false</code>. This property determines whether the infinite spinner is showing.</p>
+<h4 id="number-timescrollstatelastsforafteruserscrolls">Number <code>timeScrollStateLastsForAfterUserScrolls</code></h4>
+<p>Defaults to <code>150</code> (in milliseconds). On Apple and some other devices, scroll is inertial. This means that the window continues to scroll for several hundred milliseconds after an <code>onScroll</code> event is fired. To prevent janky behavior, we do not want <code>pointer-events</code> to reactivate before the window has finished moving. Setting this parameter causes the <code>Infinite</code> component to think that the user is still scrolling for the specified number of milliseconds after the last <code>onScroll</code> event is received.</p>
+<h4 id="string-classname">String <code>className</code></h4>
+<p>Allows a CSS class to be set on the scrollable container.</p>
+<h2 id="sample-code">Sample Code</h2>
+<p>Code samples are now available in the <code>/examples</code> directory for your perusal. Two examples are provided, one for constant height with infinite loading and another with random variable heights with infinite loading. To generate the files necessary for the examples, execute <code>npm install &amp;&amp; gulp build -E</code>. You may need to first install <code>gulp</code> with <code>npm install -g gulp</code>.</p>
+<p>To get you started, here is some sample code that implements an infinite scroll with an simulated delay of 2.5 seconds. A <a href="http://chairnerd.seatgeek.com/react-infinite-a-browser-ready-efficient-scrolling-container-based-on-uitableview/">live demo of this example is available</a> on our blog.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb6-1" title="1"><span class="kw">var</span> createReactClass <span class="op">=</span> <span class="at">require</span>(<span class="st">&#39;create-react-class&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb6-2" title="2"></a>
+<a class="sourceLine" id="cb6-3" title="3"><span class="kw">var</span> ListItem <span class="op">=</span> <span class="at">createReactClass</span>(<span class="op">{</span></a>
+<a class="sourceLine" id="cb6-4" title="4">    <span class="dt">render</span><span class="op">:</span> <span class="kw">function</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb6-5" title="5">        <span class="cf">return</span> <span class="op">&lt;</span>div className<span class="op">=</span><span class="st">&quot;infinite-list-item&quot;</span><span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb6-6" title="6">        List Item <span class="op">{</span><span class="kw">this</span>.<span class="va">props</span>.<span class="at">num</span><span class="op">}</span></a>
+<a class="sourceLine" id="cb6-7" title="7">        &lt;/div<span class="op">&gt;;</span></a>
+<a class="sourceLine" id="cb6-8" title="8">    <span class="op">}</span></a>
+<a class="sourceLine" id="cb6-9" title="9"><span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb6-10" title="10"></a>
+<a class="sourceLine" id="cb6-11" title="11"><span class="kw">var</span> InfiniteList <span class="op">=</span> <span class="at">createReactClass</span>(<span class="op">{</span></a>
+<a class="sourceLine" id="cb6-12" title="12">    <span class="dt">getInitialState</span><span class="op">:</span> <span class="kw">function</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb6-13" title="13">        <span class="cf">return</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb6-14" title="14">            <span class="dt">elements</span><span class="op">:</span> <span class="kw">this</span>.<span class="at">buildElements</span>(<span class="dv">0</span><span class="op">,</span> <span class="dv">20</span>)<span class="op">,</span></a>
+<a class="sourceLine" id="cb6-15" title="15">            <span class="dt">isInfiniteLoading</span><span class="op">:</span> <span class="kw">false</span></a>
+<a class="sourceLine" id="cb6-16" title="16">        <span class="op">}</span></a>
+<a class="sourceLine" id="cb6-17" title="17">    <span class="op">},</span></a>
+<a class="sourceLine" id="cb6-18" title="18"></a>
+<a class="sourceLine" id="cb6-19" title="19">    <span class="dt">buildElements</span><span class="op">:</span> <span class="kw">function</span>(start<span class="op">,</span> end) <span class="op">{</span></a>
+<a class="sourceLine" id="cb6-20" title="20">        <span class="kw">var</span> elements <span class="op">=</span> []<span class="op">;</span></a>
+<a class="sourceLine" id="cb6-21" title="21">        <span class="cf">for</span> (<span class="kw">var</span> i <span class="op">=</span> start<span class="op">;</span> i <span class="op">&lt;</span> end<span class="op">;</span> i<span class="op">++</span>) <span class="op">{</span></a>
+<a class="sourceLine" id="cb6-22" title="22">            <span class="va">elements</span>.<span class="at">push</span>(<span class="op">&lt;</span>ListItem key<span class="op">={</span>i<span class="op">}</span> num<span class="op">={</span>i<span class="op">}</span>/&gt;)</a>
+<a class="sourceLine" id="cb6-23" title="23">        <span class="op">}</span></a>
+<a class="sourceLine" id="cb6-24" title="24">        <span class="cf">return</span> elements<span class="op">;</span></a>
+<a class="sourceLine" id="cb6-25" title="25">    <span class="op">},</span></a>
+<a class="sourceLine" id="cb6-26" title="26"></a>
+<a class="sourceLine" id="cb6-27" title="27">    <span class="dt">handleInfiniteLoad</span><span class="op">:</span> <span class="kw">function</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb6-28" title="28">        <span class="kw">var</span> that <span class="op">=</span> <span class="kw">this</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb6-29" title="29">        <span class="kw">this</span>.<span class="at">setState</span>(<span class="op">{</span></a>
+<a class="sourceLine" id="cb6-30" title="30">            <span class="dt">isInfiniteLoading</span><span class="op">:</span> <span class="kw">true</span></a>
+<a class="sourceLine" id="cb6-31" title="31">        <span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb6-32" title="32">        <span class="at">setTimeout</span>(<span class="kw">function</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb6-33" title="33">            <span class="kw">var</span> elemLength <span class="op">=</span> <span class="va">that</span>.<span class="va">state</span>.<span class="va">elements</span>.<span class="at">length</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb6-34" title="34">                newElements <span class="op">=</span> <span class="va">that</span>.<span class="at">buildElements</span>(elemLength<span class="op">,</span> elemLength <span class="op">+</span> <span class="dv">1000</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb6-35" title="35">            <span class="va">that</span>.<span class="at">setState</span>(<span class="op">{</span></a>
+<a class="sourceLine" id="cb6-36" title="36">                <span class="dt">isInfiniteLoading</span><span class="op">:</span> <span class="kw">false</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb6-37" title="37">                <span class="dt">elements</span><span class="op">:</span> <span class="va">that</span>.<span class="va">state</span>.<span class="va">elements</span>.<span class="at">concat</span>(newElements)</a>
+<a class="sourceLine" id="cb6-38" title="38">            <span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb6-39" title="39">        <span class="op">},</span> <span class="dv">2500</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb6-40" title="40">    <span class="op">},</span></a>
+<a class="sourceLine" id="cb6-41" title="41"></a>
+<a class="sourceLine" id="cb6-42" title="42">    <span class="dt">elementInfiniteLoad</span><span class="op">:</span> <span class="kw">function</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb6-43" title="43">        <span class="cf">return</span> <span class="op">&lt;</span>div className<span class="op">=</span><span class="st">&quot;infinite-list-item&quot;</span><span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb6-44" title="44">            <span class="va">Loading</span>...</a>
+<a class="sourceLine" id="cb6-45" title="45">        &lt;/div<span class="op">&gt;;</span></a>
+<a class="sourceLine" id="cb6-46" title="46">    <span class="op">},</span></a>
+<a class="sourceLine" id="cb6-47" title="47"></a>
+<a class="sourceLine" id="cb6-48" title="48">    <span class="dt">render</span><span class="op">:</span> <span class="kw">function</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb6-49" title="49">        <span class="cf">return</span> <span class="op">&lt;</span>Infinite elementHeight<span class="op">={</span><span class="dv">40</span><span class="op">}</span></a>
+<a class="sourceLine" id="cb6-50" title="50">                         containerHeight<span class="op">={</span><span class="dv">250</span><span class="op">}</span></a>
+<a class="sourceLine" id="cb6-51" title="51">                         infiniteLoadBeginEdgeOffset<span class="op">={</span><span class="dv">200</span><span class="op">}</span></a>
+<a class="sourceLine" id="cb6-52" title="52">                         onInfiniteLoad<span class="op">={</span><span class="kw">this</span>.<span class="at">handleInfiniteLoad</span><span class="op">}</span></a>
+<a class="sourceLine" id="cb6-53" title="53">                         loadingSpinnerDelegate<span class="op">={</span><span class="kw">this</span>.<span class="at">elementInfiniteLoad</span>()<span class="op">}</span></a>
+<a class="sourceLine" id="cb6-54" title="54">                         isInfiniteLoading<span class="op">={</span><span class="kw">this</span>.<span class="va">state</span>.<span class="at">isInfiniteLoading</span><span class="op">}</span></a>
+<a class="sourceLine" id="cb6-55" title="55">                         <span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb6-56" title="56">            <span class="op">{</span><span class="kw">this</span>.<span class="va">state</span>.<span class="at">elements</span><span class="op">}</span></a>
+<a class="sourceLine" id="cb6-57" title="57">        &lt;/Infinite<span class="op">&gt;;</span></a>
+<a class="sourceLine" id="cb6-58" title="58">    <span class="op">}</span></a>
+<a class="sourceLine" id="cb6-59" title="59"><span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb6-60" title="60"></a>
+<a class="sourceLine" id="cb6-61" title="61"><span class="va">ReactDOM</span>.<span class="at">render</span>(<span class="op">&lt;</span>InfiniteList/<span class="op">&gt;,</span> <span class="va">document</span>.<span class="at">getElementById</span>(<span class="st">&#39;react-example-one&#39;</span>))<span class="op">;</span></a></code></pre></div>
+<p>SeatGeek also currently uses React Infinite in production on our event pages; because we only have pages for events in the future, a link would not be appropriate. To see one, head to one of our team pages for the <a href="https://seatgeek.com/new-york-giants-tickets">New York Giants</a>, or the <a href="https://seatgeek.com/new-york-mets-tickets">New York Mets</a>, or the <a href="https://seatgeek.com/new-york-knicks-tickets">New York Knicks</a>, and click on the green button for an event to see them in action in the Omnibox.</p>
+<p><img src="http://cl.ly/image/0y0L04220U2T/Screen%20Shot%202014-10-16%20at%2010.56.19%20AM.png" /></p>
+<h1 id="contributing-to-react-infinite">Contributing to React Infinite</h1>
+<p>Useful notes for <a href="https://github.com/seatgeek/react-infinite/blob/master/docs/developing.md">how to contribute</a> are available.</p>
+</body>
+</html>
