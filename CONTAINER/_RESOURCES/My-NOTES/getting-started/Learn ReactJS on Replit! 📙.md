@@ -1,11 +1,10 @@
-# Learn ReactJS 
+# Learn ReactJS
 
 > How do I put one HTML file in another HTML file?
 
 When we create HTML files by hand, we often come across the problem of reusability. For example, we may want to reuse a `heading` component across a bunch of HTML files. Or, we have a navigation bar, and we want to avoid copying and pasting each navigation item over and over again. React helps us solve this problem.
 
-Fundamentals
-------------
+## Fundamentals
 
 Before I show you how to do this, I'd like to share one of the fundamental concepts of React. Components. You can think of a component as a capsule that contains some HTML, CSS, and JavaScript.
 
@@ -63,8 +62,7 @@ Each `<NavigationItem>` is a reusable component and may contain the following.
 
 Although this code won't actually run, it's useful to have this mindset of components. If you are reusing a set of element on the page, it's likely you can create a component out of it.
 
-Components in React
--------------------
+## Components in React
 
 You create components in React with something called [JSX](https://reactjs.org/docs/introducing-jsx.html). In a nutshell, it's a way of writing HTML in JavaScript.
 
@@ -85,8 +83,7 @@ Here is another example - writing JSX over multiple lines.
 
 As you have noticed, one main difference between writing HTML and JSX, is the use of [HTML classes](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/class). Because JSX is more close to JavaScript (rather than HTML), you cannot use the word `class`. It's a reserved word (see [JS Classes](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes)). If we ever want to have an HTML class, we just have to write `className` instead of `class`.
 
-Creating a React Repl 🚀
-------------------------
+## Creating a React Repl 🚀
 
 Now that we know a bit about `React`, and `JS`, let's create a `React` repl!
 
@@ -110,8 +107,8 @@ So now let's check out our `src/index.js` (I deleted a few lines, since some of 
 
 `index.js` is the start for our app. Here, we're importing React, our global CSS, and our main `App` component.
 
-*   Our global CSS is the `index.css` file. It contains CSS for the entire page. Don't put too much CSS in here since it can potentially override CSS in your React components
-*   Our `App` component is where all our other components will start. For example, you might have a `<Heading />`, `<BodyComponent />`, and `<FooterComponent />` in your `App` component
+- Our global CSS is the `index.css` file. It contains CSS for the entire page. Don't put too much CSS in here since it can potentially override CSS in your React components
+- Our `App` component is where all our other components will start. For example, you might have a `<Heading />`, `<BodyComponent />`, and `<FooterComponent />` in your `App` component
 
 Under all the imports,, we really have one line of code on our page
 
@@ -142,8 +139,7 @@ If you're a bit confused, try looking at the render function this way:
 
 Here, we explicitly create a variable called `myJSX`, then return it.
 
-Creating our Own Components
----------------------------
+## Creating our Own Components
 
 Now you know a bit about `React` and `JSX`, let's create our own components. Components are usually put in a folder titled `components`.
 
@@ -165,12 +161,12 @@ It's working! However, the formatting is a bit off since there is a scrollbar. I
       margin: 0;
       padding: 0;
     }
-    
+
     html, body {
       height: 100%;
       width: 100%;
     }
-    
+
     .App {
       height: 100%;
     }
@@ -185,8 +181,7 @@ Remember how I was talking about reusing components? This is where we would do i
 
 Go ahead and try to play around - create some components and add them to your `App`, `Heading`, or `Body` component!
 
-Props
------
+## Props
 
 There is one more basic concept that you should know about: props. Props (which stands for properties) let us transfer data from our parent component to a child component. This might sound confusing at first, but hopefully it'll clear up when I give an example.
 
@@ -217,6 +212,5 @@ You can also use props when you're dealing with HTML attribute values. Just add 
     <img src={ this.props.myImageLink } />
 
 I hope this introduction to React was helpful! I remember when I was getting into JavaScript frameworks it was difficult since tutorials would gloss over the "obvious" parts. If this helped you or some parts were confusing, let me know and I'll make it better!
-
 
 [Source](https://repl.it/talk/learn/Learn-ReactJS-on-Replit/15980)
