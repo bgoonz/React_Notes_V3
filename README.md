@@ -3,35 +3,35 @@
 
 
 
-### React
+##  React
 
 > JavaScript Library for building User Interfaces
 
-#### React General Resources
+## # React General Resources
 
 - [React Official Website](https://reactjs.org/)
 - [React Documentation](https://reactjs.org/docs)
 - [React GitHub](https://github.com/facebook/react)
 
-#### React Community
+## # React Community
 
 - [Reactiflux Discord Channel](http://www.reactiflux.com/)
 - [React StackOverflow](http://stackoverflow.com/questions/tagged/reactjs)
 - [React Twitter](https://twitter.com/reactjs)
 
-#### React Online Playgrounds
+## # React Online Playgrounds
 
 - [CodePen](https://reactjs.org/redirect-to-codepen/hello-world)
 - [CodeSandbox](https://codesandbox.io/s/new)
 - [JSFiddle](https://jsfiddle.net/boilerplate/react-jsx)
 
-#### Another Awesome Lists
+## # Another Awesome Lists
 
 - [React/Redux Links](https://github.com/markerikson/react-redux-links)
 
-#### React Tutorials
+## # React Tutorials
 
-##### React General Tutorials
+## ## React General Tutorials
 
 - [React Official Tutorial](https://reactjs.org/tutorial/tutorial.html)
 - [Using React in Visual Studio Code](https://code.visualstudio.com/docs/nodejs/reactjs-tutorial)
@@ -41,7 +41,7 @@
 - [React Patterns](https://reactpatterns.com/)
 - [Setup Flow with React](https://flow.org/en/docs/react/)
 
-##### React Hooks
+## ## React Hooks
 
 - [React Hooks](https://reactjs.org/docs/hooks-intro.html)
 - [Awesome React Hooks](https://github.com/rehooks/awesome-react-hooks)
@@ -52,14 +52,14 @@
 - [Easy to understand React Hook recipes](https://usehooks.com/)
 - [React Hooks Video Tutorial](https://www.youtube.com/playlist?list=PLN3n1USn4xlmyw3ebYuZmGp60mcENitdM)
 
-##### React and TypeScript
+## ## React and TypeScript
 
 - [TypeScript, React and Webpack](https://www.typescriptlang.org/docs/handbook/react-&-webpack.html)
 - [JSX in TypeScript](https://www.typescriptlang.org/docs/handbook/jsx.html)
 - [Cheatsheets for experienced React developers getting started with TypeScript](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet)
 - [React by Example](https://reactbyexample.github.io/)
 
-##### React Performance
+## ## React Performance
 
 - [React Optimizing Performance](https://reactjs.org/docs/optimizing-performance.html)
 - [Introducing the React Profiler](https://reactjs.org/blog/2018/09/10/introducing-the-react-profiler.html)
@@ -71,7 +71,7 @@
 - [React is Slow, React is Fast: Optimizing react Apps in Practice](https://medium.com/dailyjs/react-is-slow-react-is-fast-optimizing-react-apps-in-practice-394176a11fba)
 - [Rendering large lists with react-window](https://addyosmani.com/blog/react-window/)
 
-##### React Internals
+## ## React Internals
 
 - [Reconciliation](https://reactjs.org/docs/reconciliation.html)
 - [React Fiber Architecture](https://github.com/acdlite/react-fiber-architecture)
@@ -79,15 +79,15 @@
 - [Inside Fiber: In-depth overview of the new reconciliation algorithm in React](https://medium.com/react-in-depth/inside-fiber-in-depth-overview-of-the-new-reconciliation-algorithm-in-react-e1c04700ef6e)
 - [Entire React code base explanation by visual block schemes](https://github.com/Bogdan-Lyashenko/Under-the-hood-ReactJS)
 
-##### React Interview Questions
+## ## React Interview Questions
 
 - [13 Essential React Interview Questions](https://www.toptal.com/react/interview-questions)
 - [List of React interview Questions and Answers](https://github.com/sudheerj/reactjs-interview-questions)
 - [React Coding Challenges](https://github.com/alexgurr/react-coding-challenges/)
 
-#### React Tools
+## # React Tools
 
-##### React Development Tools
+## ## React Development Tools
 
 - [react-devtools](https://github.com/facebook/react-devtools) - Inspection of React component hierarchy in the Chrome and Firefox Developer Tools
 - [react-hot-loader](https://github.com/gaearon/react-hot-loader) - Tweak React components in real time
@@ -106,7 +106,7 @@
 - [Divjoy](https://divjoy.com) - React codebase and UI generator to speed up development (paid)
 - [Plasmic](https://www.plasmic.app/) - Powerful design tool for building your React components visually.
 
-##### React Starter Kits and Toolchains
+## ## React Starter Kits and Toolchains
 
 - [create-react-app](https://github.com/facebook/create-react-app) - Set up a modern Web app by running one command
 - [Razzle](https://razzlejs.org/) - Build production ready React applications. Razzle is toolchain for modern static and dynamic websites and web applications
@@ -115,7 +115,7 @@
 - [create-react-library](https://github.com/transitive-bullshit/create-react-library) - CLI for creating reusable, modern React libraries using Rollup and create-react-app.
 - [tsdx](https://tsdx.io/) - Zero-config CLI for TypeScript package development
 
-##### React Frameworks
+## ## React Frameworks
 
 - [next.js](https://github.com/vercel/next.js) - The React Framework
 - [gatsby.js](https://github.com/gatsbyjs/gatsby) - Free and open source framework based on React
@@ -124,7 +124,7 @@
 - [Blitz](https://blitzjs.com) - The Fullstack React Framework
 - [aleph.js](https://github.com/alephjs/aleph.js) - The React Framework in Deno
 
-##### React Styling
+## ## React Styling
 
 - [styled-components](https://github.com/styled-components/styled-components) - Visual primitives for the component age
 - [emotion](https://github.com/emotion-js/emotion) - Library designed for writing CSS styles with JavaScript
@@ -132,7 +132,7 @@
 - [jss](https://github.com/cssinjs/jss) - Authoring tool for CSS
 - [aphrodite](https://github.com/Khan/aphrodite) - Framework-agnostic CSS-in-JS with support for server-side rendering, browser prefixing, and minimum CSS generation
 
-##### React Routing
+## ## React Routing
 
 - [react-router](https://github.com/ReactTraining/react-router) - Declarative routing for React
 - [navi](https://github.com/frontarm/navi) - Declarative, asynchronous routing for React
@@ -141,7 +141,7 @@
 - [universal-router](https://github.com/kriasoft/universal-router) - A simple middleware-style router for isomorphic JavaScript web apps
 - [wouter](https://github.com/molefrog/wouter) - A minimalist-friendly ~1.3KB routing library
 
-##### React Component Libraries
+## ## React Component Libraries
 
 - [material-ui](https://github.com/mui-org/material-ui) - React components for faster and easier web development
 - [blueprint](https://github.com/palantir/blueprint) - A React-based UI toolkit for the webs
@@ -167,7 +167,7 @@
 - [trunx](https://github.com/fibo/trunx) - Super Saiyan React components, son of awesome Bulma, implemented in TypeScript
 - [bumbag-ui](https://github.com/bumbag/bumbag-ui) - Build accessible & themeable React applications with your Bumbag
 
-##### React Awesome Components
+## ## React Awesome Components
 
 - [Awesome React Components list](https://github.com/brillout/awesome-react-components)
 - [react-select](https://github.com/JedWatson/react-select) - The Select Component for React
@@ -218,7 +218,7 @@
 - [cleave.js](https://github.com/nosir/cleave.js) - Format input text content when you are typing
 - [react-fontawesome](https://github.com/FortAwesome/react-fontawesome) - Font Awesome 5 React component
 
-##### React Testing
+## ## React Testing
 
 - [jest](https://github.com/facebook/jest) - Delightful JavaScript Testing Framework
 - [enzyme](https://github.com/airbnb/enzyme) - JavaScript Testing utilities for React
@@ -226,7 +226,7 @@
 - [react-hooks-testing-library](https://github.com/mpeyper/react-hooks-testing-library) - React hooks testing utilities that encourage good testing practices
 - [majestic](https://github.com/Raathigesh/majestic) - Zero config GUI for Jest
 
-##### React Libraries
+## ## React Libraries
 
 - [react-border-wrapper](https://github.com/Metroxe/react-border-wrapper) - A wrapper for placing elements along div borders in React.
 - [react-magic](https://github.com/reactjs/react-magic) - Automatically AJAXify plain HTML with the power of React
@@ -260,7 +260,7 @@
 - [react-aria](https://react-spectrum.adobe.com/react-aria/index.html) - Adobe's library of React Hooks that provides accessible UI primitives for your design system
 - [react-uploady](https://github.com/rpldy/react-uploady) - Modern file-upload components & hooks for React.
 
-##### React Integration
+## ## React Integration
 
 - [ReasonReact](https://reasonml.github.io/reason-react/)
 - [React Rails](https://github.com/reactjs/react-rails)
@@ -313,7 +313,7 @@
 - [reaptcha](https://github.com/sarneeh/reaptcha) - Clean, modern and simple React wrapper for Google reCAPTCHA
 - [react-recaptcha-that-works](https://github.com/douglasjunior/react-recaptcha-that-works) - A reCAPTCHA bridge for React that works
 
-##### React State Management
+## ## React State Management
 
 - [redux](#redux) - Predictable State Container for JavaScript Apps
 - [mobx](https://github.com/mobxjs/mobx) - Simple, scalable state management
@@ -327,11 +327,11 @@
 - [effector](https://github.com/zerobias/effector) - Fast and powerful reactive state manager
 - [reactn](https://github.com/CharlesStover/reactn) - React, but with built-in global state management
 
-##### React AR and VR
+## ## React AR and VR
 
 - [Viro React](https://viromedia.com/viroreact/) - Platform for rapidly building AR/VR applications using React Native
 
-##### React Renderers
+## ## React Renderers
 
 - [react-three-fiber](https://github.com/pmndrs/react-three-fiber) - A React renderer for Three.js
 - [react-pdf](https://github.com/diegomura/react-pdf) - Create PDF files using React
@@ -342,7 +342,7 @@
 - [react-nil](https://github.com/pmndrs/react-nil) - A react null renderer
 - [remotion](https://github.com/JonnyBurger/remotion) - Create videos programmatically in React
 
-##### Forms
+## ## Forms
 
 - [formik](https://github.com/jaredpalmer/formik) - Build forms in React, without the tears
 - [react-hook-form](https://github.com/react-hook-form/react-hook-form) - React Hooks for forms validation
@@ -354,7 +354,7 @@
 - [formsy-react](https://github.com/formsy/formsy-react/) - A form input builder and validator for React
 - [react-formal](https://github.com/jquense/react-formal) - Sophisticated HTML form management for React
 
-##### Autocomplete
+## ## Autocomplete
 
 - [react-autocomplete by @rackt](https://github.com/rackt/react-autocomplete) - WAI-ARIA compliant React autocomplete (Archived, read-only)
 - [react-autosuggest by @moroshko](https://github.com/moroshko/react-autosuggest) - WAI-ARIA compliant React autosuggest component
@@ -364,7 +364,7 @@
 - [downshift](https://github.com/paypal/downshift) - 🏎 Primitives to build simple, flexible, WAI-ARIA compliant enhanced input React components
 - [React Bootstrap Typeahead](https://github.com/ericgio/react-bootstrap-typeahead) - A React-based typeahead that relies on Bootstrap for styling and was originally inspired by Twitter's typeahead.js.
 
-##### Graphics
+## ## Graphics
 
 - [react-art](https://github.com/facebook/react-art) - React Bridge to the ART Drawing Library
 - [react-canvas](https://github.com/Flipboard/react-canvas) - High performance `<canvas>` rendering for React components
@@ -374,7 +374,7 @@
 - [react-hooks-svgdrawing](https://github.com/kmkzt/react-hooks-svgdrawing) - SVG Drawing with React hooks
 - [react-svg-pan-zoom](https://github.com/chrvadala/react-svg-pan-zoom) - A React component that adds pan and zoom features to SVG.
 
-##### Data Managing
+## ## Data Managing
 
 - [immer](https://github.com/immerjs/immer) - Create the next immutable state by mutating the current one
 - [ReSub](https://github.com/Microsoft/ReSub) - A library for writing better React components and data stores
@@ -384,7 +384,7 @@
 - [RxDB](https://github.com/pubkey/rxdb) - A realtime Database for JavaScript Applications
 
 
-##### Maps
+## ## Maps
 
 - [react-googlemaps](https://github.com/pieterv/react-googlemaps) - React interface to Google maps
 - [react-maps](https://github.com/matnel/react-maps) - A map component for React
@@ -398,7 +398,7 @@
 - [react-geo](https://github.com/terrestris/react-geo) - A set of geo-related components using react, antd, and ol
 - [pigeon-maps](https://github.com/mariusandra/pigeon-maps) - ReactJS maps without external dependencies
 
-##### Charts
+## ## Charts
 
 - [vx](https://github.com/airbnb/visx) - Visualization components
 - [victory](https://github.com/FormidableLabs/victory) - A collection of composable React components for building interactive data visualizations
@@ -411,11 +411,11 @@
 
 ---
 
-### React Native
+##  React Native
 
 > Framework for building native apps using React
 
-#### React Native General Resources
+## # React Native General Resources
 
 - [React Native Official Site](https://facebook.github.io/react-native/)
 - [React Native GitHub](https://github.com/facebook/react-native)
@@ -425,7 +425,7 @@
 - [React Native StackOverflow](http://stackoverflow.com/questions/tagged/react-native)
 - [React Native Radio](https://devchat.tv/react-native-radio/)
 
-#### React Native Tutorials
+## # React Native Tutorials
 
 - [React Native Tutorial](https://facebook.github.io/react-native/docs/tutorial.html)
 - [Introducing React Native: Building Apps with JavaScript](http://www.raywenderlich.com/99473/introducing-react-native-building-apps-javascript)
@@ -439,11 +439,11 @@
 - [Test driving react native applications](http://www.multunus.com/blog/2016/07/test-driving-react-native-applications/)
 - [Using React Native With TypeScript](https://medium.com/@jan.hesters/using-typescript-with-react-native-946aa4b4ae6f)
 
-#### React Native Development Tools
+## # React Native Development Tools
 
 - [react-native-code-push](https://github.com/microsoft/react-native-code-push) - React Native module for CodePush
 
-#### React Native Sample Apps
+## # React Native Sample Apps
 
 - [HackerNews](https://github.com/iSimar/HackerNews-React-Native)
 - [Ziliun](https://github.com/sonnylazuardi/ziliun-react-native)
@@ -452,12 +452,12 @@
 - [NBAreact](https://github.com/jbkuczma/NBAreact)
 - [Bus Timetable](https://github.com/EarlGeorge/timetable)
 
-#### React Native Boilerplates
+## # React Native Boilerplates
 
 - [Create React Native App](https://github.com/react-community/create-react-native-app) - Create React Native apps that run on iOS, Android, and web
 - [Ignite](https://github.com/infinitered/ignite) - The hottest CLI for React Native, boilerplates, plugins, generators, and more!
 
-#### React Native Awesome Components
+## # React Native Awesome Components
 
 - [Expo](https://expo.io/) - The Expo platform for making cross-platform mobile apps
 - [react-navigation](https://reactnavigation.org/) - Routing and navigation for your React Native apps
@@ -476,7 +476,7 @@
 - [react-native-gesture-handler](https://github.com/software-mansion/react-native-gesture-handler) - Declarative API exposing platform native touch and gesture system to React Native
 - [rn-placeholder](https://github.com/mfrachet/rn-placeholder) - Display some placeholder stuff before rendering your text or media content in React Native
 
-#### React Native Libraries
+## # React Native Libraries
 
 - [sentry-react-native](https://github.com/getsentry/sentry-react-native) - Real-time crash reporting for your web apps, mobile apps, and games.
 - [realm-js](https://github.com/realm/realm-js) - Realm is a mobile database: an alternative to SQLite & key-value stores
@@ -484,17 +484,17 @@
 - [react-native-react-bridge](https://github.com/inokawa/react-native-react-bridge) - A toolset to run React web app in React Native and handle communication between them.
 - [uncompress-react-native](https://github.com/didisouzacosta/uncompress-react-native) - Simple library to decompress files .zip, .rar, .cbz, .cbr in React Native.
 
-### Redux
+##  Redux
 
 > Predictable State Container for JavaScript Apps
 
-#### Redux General Resources
+## # Redux General Resources
 
 - [Redux GitHub](https://github.com/reduxjs/redux)
 - [Redux Official Site](http://redux.js.org/)
 - [Awesome Redux List](https://github.com/xgrommx/awesome-redux)
 
-#### Redux Tools
+## # Redux Tools
 
 - [react-redux](https://github.com/reduxjs/react-redux) - Official React bindings for Redux
 - [redux-toolkit](https://github.com/reduxjs/redux-toolkit) - The official, opinionated, batteries-included toolset for efficient Redux development
@@ -509,7 +509,7 @@
 - [redux-undo](https://github.com/omnidan/redux-undo) - Higher order reducer to add undo/redo functionality to redux state containers
 - [redux-persist](https://github.com/rt2zz/redux-persist) - Persist and rehydrate a redux store
 
-#### Redux Tutorials
+## # Redux Tutorials
 
 - [Redux Essentials](https://redux.js.org/tutorials/essentials/part-1-overview-concepts)
 - [Redux Fundamentals](https://redux.js.org/tutorials/fundamentals/part-1-overview)
@@ -518,29 +518,29 @@
 
 ---
 
-### GraphQL
+##  GraphQL
 
 > A query language for your API
 
-#### GraphQL General Resources
+## # GraphQL General Resources
 
 - [GraphQL Official Site](http://graphql.org/)
 - [GraphQL Specification](https://github.com/graphql/graphql-spec)
 - [GraphQL Specification Repository](https://github.com/facebook/graphql)
 
-#### GraphQL Tools
+## # GraphQL Tools
 
 - [graphql-js](https://github.com/graphql/graphql-js) - A reference implementation of GraphQL for **JavaScript**
 - [express-graphql](https://github.com/graphql/express-graphql) - Create a GraphQL HTTP server with **Express**
 - [Apollo](https://www.apollographql.com/) - Industry-standard GraphQL implementation
 - [GraphQL Playground - GraphQL IDE for better development workflows](https://github.com/graphql/graphql-playground)
 
-#### GraphQL Tutorials
+## # GraphQL Tutorials
 
 - [GraphQL Introduction](http://facebook.github.io/react/blog/2015/05/01/graphql-introduction.html)
 - [How to Graphql - The Fullstack Tutorial for GraphQL](https://howtographql.com/)
 
-#### GraphQL Implementations
+## # GraphQL Implementations
 
 - [graphql-ruby](https://github.com/rmosolgo/graphql-ruby) - **Ruby** implementation of GraphQL
 - [graphql-java](https://github.com/graphql-java/graphql-java) - GraphQL **Java** implementation
@@ -551,7 +551,7 @@
 - [graphql-go](https://github.com/graphql-go/graphql) - GraphQL for **Go**
 - [juniper](https://github.com/graphql-rust/juniper) - GraphQL server library for **Rust**
 
-#### Database Integration
+## # Database Integration
 
 - [Hasura](https://hasura.io/) - Instant GraphQL for all your data
 - [Prisma](https://www.prisma.io/) - Next-generation ORM
@@ -560,23 +560,23 @@ for Node.js and TypeScript
 
 ---
 
-### Relay
+##  Relay
 
 > Data-Driven React Applications
 
-#### Relay General Resources
+## # Relay General Resources
 
 - [Relay Offical Site](https://relay.dev/)
 - [Relay GitHub](https://github.com/facebook/relay)
 
-#### Relay Tutorials
+## # Relay Tutorials
 
 - [Official Relay Getting Started](https://facebook.github.io/relay/docs/en/introduction-to-relay.html)
 - [Relay for Visual Learners](http://sgwilym.github.io/relay-visual-learners/)
 - [Getting Started with Relay](https://auth0.com/blog/2015/10/06/getting-started-with-relay/)
 - [Relay and Routing](https://medium.com/@cpojer/relay-and-routing-36b5439bad9)
 
-#### Relay Tools
+## # Relay Tools
 
 - [graphql-relay-js](https://github.com/graphql/graphql-relay-js) - A library to help construct a graphql-js server supporting react-relay
 - [react-router-relay](https://github.com/relay-tools/react-router-relay) - Relay integration for React Router
@@ -585,11 +585,11 @@ for Node.js and TypeScript
 
 ---
 
-### Videos
+##  Videos
 
-#### [reactjsvideos.com](https://www.reactjsvideos.com)
+## # [reactjsvideos.com](https://www.reactjsvideos.com)
 
-#### Important Talks
+## # Important Talks
 
 - [Pete Hunt: React: Rethinking best practices - JSConf EU 2013](https://www.youtube.com/watch?v=x7cQ3mrcKaY)
 - [Pete Hunt: React: Rethinking Best Practices (updated) - JSConf.Asia 2013](https://www.youtube.com/watch?v=DgVS-zXgMTk)
@@ -612,37 +612,37 @@ for Node.js and TypeScript
 - [React Videos](https://reactjs.org/community/videos.html)
 - [Awesome React Talks](https://github.com/tiaanduplessis/awesome-react-talks)
 
-#### [React.js Conf 2015 Playlist](https://www.youtube.com/playlist?list=PLb0IAmt7-GS1cbw4qonlQztYV1TAW0sCr)
+## # [React.js Conf 2015 Playlist](https://www.youtube.com/playlist?list=PLb0IAmt7-GS1cbw4qonlQztYV1TAW0sCr)
 
-#### [ReactEurope Conf 2015 Day 1 Playlist](https://www.youtube.com/playlist?list=PLCC436JpVnK0Phxld2dD4tM4xPMxJCiRD)
+## # [ReactEurope Conf 2015 Day 1 Playlist](https://www.youtube.com/playlist?list=PLCC436JpVnK0Phxld2dD4tM4xPMxJCiRD)
 
-#### [ReactEurope Conf 2015 Day 2 Playlist](https://www.youtube.com/playlist?list=PLCC436JpVnK3HvUSAHpt-LRJkIK8pQG6R)
+## # [ReactEurope Conf 2015 Day 2 Playlist](https://www.youtube.com/playlist?list=PLCC436JpVnK3HvUSAHpt-LRJkIK8pQG6R)
 
-#### [ReactRally Conf 2015 Playlist](https://www.youtube.com/playlist?list=PLUD4kD-wL_zZhHy-G8hPNZTvx_M35loXQ)
+## # [ReactRally Conf 2015 Playlist](https://www.youtube.com/playlist?list=PLUD4kD-wL_zZhHy-G8hPNZTvx_M35loXQ)
 
-#### [React.js Conf 2016 Playlist](https://www.youtube.com/playlist?list=PLb0IAmt7-GS0M8Q95RIc2lOM6nc77q1IY)
+## # [React.js Conf 2016 Playlist](https://www.youtube.com/playlist?list=PLb0IAmt7-GS0M8Q95RIc2lOM6nc77q1IY)
 
-#### [React Amsterdam 2016 Playlist](https://www.youtube.com/playlist?list=PLNBNS7NRGKMG3uLrm5fgY02hJ87Wzb4IU)
+## # [React Amsterdam 2016 Playlist](https://www.youtube.com/playlist?list=PLNBNS7NRGKMG3uLrm5fgY02hJ87Wzb4IU)
 
-#### [ReactEurope Conf 2016 Day 1 Playlist](https://www.youtube.com/playlist?list=PLCC436JpVnK09bZeayg-KeLuHfHgc-tDa)
+## # [ReactEurope Conf 2016 Day 1 Playlist](https://www.youtube.com/playlist?list=PLCC436JpVnK09bZeayg-KeLuHfHgc-tDa)
 
-#### [ReactEurope Conf 2016 Day 2 Playlist](https://www.youtube.com/playlist?list=PLCC436JpVnK0LTDKW3O_BGTZnrZ8dBAof)
+## # [ReactEurope Conf 2016 Day 2 Playlist](https://www.youtube.com/playlist?list=PLCC436JpVnK0LTDKW3O_BGTZnrZ8dBAof)
 
-#### [ReactRally Conf 2016 Playlist](https://www.youtube.com/playlist?list=PLUD4kD-wL_zYSfU3tIYsb4WqfFQzO_EjQ)
+## # [ReactRally Conf 2016 Playlist](https://www.youtube.com/playlist?list=PLUD4kD-wL_zYSfU3tIYsb4WqfFQzO_EjQ)
 
-#### [React Conf 2017 Playlist](https://www.youtube.com/playlist?list=PLb0IAmt7-GS3fZ46IGFirdqKTIxlws7e0)
+## # [React Conf 2017 Playlist](https://www.youtube.com/playlist?list=PLb0IAmt7-GS3fZ46IGFirdqKTIxlws7e0)
 
-#### [React.js Amsterdam 2018 Playlist](https://www.youtube.com/playlist?list=PLNBNS7NRGKMFi_glL49hsoyqu7dHTMnNm)
+## # [React.js Amsterdam 2018 Playlist](https://www.youtube.com/playlist?list=PLNBNS7NRGKMFi_glL49hsoyqu7dHTMnNm)
 
-#### [React Amsterdam 2019 Playlist](https://www.youtube.com/playlist?list=PLNBNS7NRGKMHLTeH4qfD3F320GXfj97kc)
+## # [React Amsterdam 2019 Playlist](https://www.youtube.com/playlist?list=PLNBNS7NRGKMHLTeH4qfD3F320GXfj97kc)
 
-#### Video Tutorials
+## # Video Tutorials
 
 - [Trying React Hooks for the first time with Dan Abramov](https://www.youtube.com/watch?v=G-aO5hzo1aw)
 
 ---
 
-### Demo React Apps
+##  Demo React Apps
 
 - [hackernews-react-graphql](https://github.com/clintonwoo/hackernews-react-graphql) - Hacker News clone rewritten with universal JavaScript, using React and GraphQL
 - [react-reduction](https://github.com/reduction-admin/react-reduction) - Free Admin Template Built with React and Bootstrap4
@@ -651,7 +651,7 @@ for Node.js and TypeScript
 
 ---
 
-### Real React Apps
+##  Real React Apps
 
 - [kibana](https://github.com/elastic/kibana) - Your window into the Elastic Stack
 - [firefox debugger](https://github.com/firefox-devtools/debugger) - The Firefox debugger that works anywhere
@@ -3053,7 +3053,7 @@ This is hidden away by JSX, the markup language React uses. Strip away JSX and R
 
 Let's look at each part individually.
 
-### [](#a-component-is-a-function-that-returns-jsx)A component is a function that returns JSX
+##  [](#a-component-is-a-function-that-returns-jsx)A component is a function that returns JSX
 
 React is used with JSX—JavaScript XML—a way to write what seems as HTML with all of JavaScript's power. JSX offers a great applied mental model for using nested functions in a way that feels intuitive.
 
@@ -3106,7 +3106,7 @@ Now, notice how each component is a function calling another function, and each 
 
 An important feature of React is that a component can have many children but only one parent. I found this a confusing until I realized it's the same logic HTML has, where each element must be inside other elements, and can have many children. You can notice this in the code above, where there's only one parent `div` containing all the children.
 
-### [](#components-props-are-the-same-as-a-functions-arguments)component's props are the same as a function's arguments
+##  [](#components-props-are-the-same-as-a-functions-arguments)component's props are the same as a function's arguments
 
 When using a function we can use arguments to share information with that function. For React components we call these arguments `props` (funny story, I didn't realize props is short for _properties_ for a long time).
 
@@ -3160,7 +3160,7 @@ While the closure itself is a box, any closure will be inside bigger boxes, with
 
 >The window object encapsulates everything else
 
-### [](#but-what-is-a-closure)But what _is_ a closure?
+##  [](#but-what-is-a-closure)But what _is_ a closure?
 
 A closure is a feature of JavaScript functions. If you're using a function, you're using a closure.
 
@@ -3176,7 +3176,7 @@ Each function can only access its own information and the parent's
 
 Closures are important because they can be exploited to create some powerful mechanics and React takes full advantage of this.
 
-### [](#closures-in-react)Closures in React
+##  [](#closures-in-react)Closures in React
 
 Each React component is also a closure. Within components, you can only pass props down from parent to child and the parent cannot see what's inside the child, this is an intended feature to make our app's data flow simpler to trace. To find where data comes from, we usually need to go up the tree to find which parent is sending it down.
 
