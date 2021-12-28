@@ -1,2 +1,0 @@
-# Generating React Project
-
